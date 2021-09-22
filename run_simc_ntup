@@ -1,4 +1,5 @@
-./simc << endofinput > runout/$1.out
+cd src
+./simc << endofinput > ../log/$1.log
 $1
 endofinput
 cd util/ntuple
@@ -7,5 +8,4 @@ $1
 endofinput
 cd ../..
 rm worksim/$1.bin
-
 

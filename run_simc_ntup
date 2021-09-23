@@ -1,8 +1,10 @@
 cd src
+make
 ./simc << endofinput > ../log/$1.log
 $1
 endofinput
 cd util/ntuple
+make
 ./make_ntuple << endofinput
 $1
 endofinput

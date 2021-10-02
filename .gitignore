@@ -4,6 +4,7 @@
 # Objects and executable
 *.o
 *.d
+*.log
 simc
 CTP/O.Linux
 

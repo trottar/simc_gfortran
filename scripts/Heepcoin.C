@@ -25,7 +25,7 @@
 #include <TTreeReaderArray.h>
 
 // Input should be the input root file name (including suffix) and an output file name string (without any suffix)
-void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string OutFilename = "")
+void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InSIMCFilename = "", string OutFilename = "")
 {
   TString Hostname = gSystem->HostName();
   TString User = (gSystem->GetUserInfo())->fUser;
@@ -33,21 +33,23 @@ void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string Out
   TString ROOTfilePath;
   TString OutPath;
   TString rootFile;
+  TString rootFile_Dummy;
   TString rootFile_SIMC;
 
   gStyle->SetPalette(55);
-
 
   // Set paths depending on system you're running on
   if(Hostname.Contains("farm")){
     Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
     // Output path for root file
-    ROOTfilePath = Replaypath+"/UTIL_KAONLT/scripts/HeepCoinStudy/ROOTfiles";
-    OutPath = Replaypath+"/UTIL_KAONLT/scripts/HeepCoinStudy/OUTPUT";
+    ROOTfilePath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/HeeP";
+    OutPath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/HeeP";
   }
   else if(Hostname.Contains("qcd")){
     Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
-    OutPath = Replaypath+"/UTIL_KAONLT/scripts/CoinTimePeak/OUTPUT";
+    // Output path for root file
+    ROOTfilePath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/HeeP";
+    OutPath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/HeeP";
   }
   else if (Hostname.Contains("phys.uregina.ca")){
     ROOTfilePath = "/home/vijay/work/HeepCoinStudy/";
@@ -60,6 +62,11 @@ void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string Out
     cin >> InDATAFilename;
   }  
 
+  if(InDUMMYFilename == "") {
+    cout << "Enter a DUMMY ROOT Filename to analyse: ";
+    cin >> InDUMMYFilename;
+  }  
+
   if(InSIMCFilename == "") {
     cout << "Enter a SIMC ROOT Filename to analyse: ";
     cin >> InSIMCFilename;
@@ -69,12 +76,21 @@ void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string Out
     cout << "Enter a Filename to output to: ";
     cin >> OutFilename;
   }
+
   TString TInDATAFilename = InDATAFilename ;
+  TString TInDUMMYFilename = InDUMMYFilename ;
   TString TInSIMCFilename = InSIMCFilename ;
   rootFile = ROOTfilePath+"/"+TInDATAFilename;
+  rootFile_Dummy = ROOTfilePath+"/"+TInDUMMYFilename;
   rootFile_SIMC = ROOTfilePath+"/"+TInSIMCFilename;
+
   if (gSystem->AccessPathName(rootFile) == kTRUE){
     cerr << "!!!!! ERROR !!!!! " << endl <<rootFile <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
+    exit;
+  }
+
+  if (gSystem->AccessPathName(rootFile_Dummy) == kTRUE){
+    cerr << "!!!!! ERROR !!!!! " << endl <<rootFile_Dummy <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
     exit;
   }
 
@@ -84,6 +100,7 @@ void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string Out
   }
 
   TFile *InFile = new TFile(rootFile, "READ");
+  TFile *InFile_Dummy = new TFile(rootFile_Dummy, "READ");
   TFile *InFile_SIMC = new TFile(rootFile_SIMC, "READ");
   TString TOutFilename = OutFilename;
 
@@ -94,8 +111,10 @@ void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string Out
   //#################################################################### 
 
   TTree* TBRANCH  = (TTree*)InFile->Get("Uncut_Proton_Events");Long64_t nEntries_TBRANCH  = (Long64_t)TBRANCH->GetEntries();  
+
+  TTree* TBRANCH_Dummy  = (TTree*)InFile->Get("Uncut_Proton_Events");Long64_t nEntries_TBRANCH_Dummy  = (Long64_t)TBRANCH_Dummy->GetEntries();  
  
-  TTree* TBRANCH_SIMC  = (TTree*)InFile_SIMC->Get("h10");Long64_t nEntries_TBRANCH_SIMC  = (Long64_t)TBRANCH_SIMC->GetEntries();  
+  TTree* TBRANCH_SIMC  = (TTree*)InFile_SIMC->Get("h10");Long64_t nEntries_TBRANCH_SIMC  = (Long64_t)TBRANCH_SIMC->GetEntries();
   
   //SIMC variables
   //HMS
@@ -189,85 +208,175 @@ void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string Out
   Double_t  pmiss_y;TBRANCH->SetBranchAddress("pmiss_y", &pmiss_y);   
   Double_t  pmiss_z;TBRANCH->SetBranchAddress("pmiss_z", &pmiss_z);   
 
+  //DUMMY variables
+  Double_t  CTime_ePiCoinTime_ROC1_Dummy;TBRANCH_Dummy->SetBranchAddress("CTime_ePiCoinTime_ROC1", &CTime_ePiCoinTime_ROC1);
+  Double_t  CTime_eKCoinTime_ROC1_Dummy;TBRANCH_Dummy->SetBranchAddress("CTime_eKCoinTime_ROC1", &CTime_eKCoinTime_ROC1);
+  Double_t  CTime_epCoinTime_ROC1_Dummy;TBRANCH_Dummy->SetBranchAddress("CTime_epCoinTime_ROC1", &CTime_epCoinTime_ROC1);
+  Double_t  P_RF_tdcTime_Dummy;TBRANCH_Dummy->SetBranchAddress("P_RF_tdcTime", &P_RF_tdcTime);
+  Double_t  P_hod_fpHitsTime_Dummy;TBRANCH_Dummy->SetBranchAddress("P_hod_fpHitsTime", &P_hod_fpHitsTime);
+  Double_t  H_RF_Dist_Dummy;TBRANCH_Dummy->SetBranchAddress("H_RF_Dist", &H_RF_Dist);
+  Double_t  P_RF_Dist_Dummy;TBRANCH_Dummy->SetBranchAddress("P_RF_Dist", &P_RF_Dist);
+  Double_t  P_dc_InsideDipoleExit_Dummy;TBRANCH_Dummy->SetBranchAddress("P_dc_InsideDipoleExit", &P_dc_InsideDipoleExit);
+  Double_t  P_hod_betanotrack_Dummy;TBRANCH_Dummy->SetBranchAddress("P_hod_betanotrack", &P_hod_betanotrack);
+ 
+  //HMS Info 
+  Double_t  H_hod_goodscinhit_Dummy;TBRANCH_Dummy->SetBranchAddress("H_hod_goodscinhit", &H_hod_goodscinhit);
+  Double_t  H_hod_goodstarttime_Dummy;TBRANCH_Dummy->SetBranchAddress("H_hod_goodstarttime", &H_hod_goodstarttime);
+  Double_t  H_dc_x_fp_Dummy;TBRANCH_Dummy->SetBranchAddress("H_dc_x_fp", &H_dc_x_fp);   
+  Double_t  H_dc_y_fp_Dummy;TBRANCH_Dummy->SetBranchAddress("H_dc_y_fp", &H_dc_y_fp);   
+  Double_t  H_dc_xp_fp_Dummy;TBRANCH_Dummy->SetBranchAddress("H_dc_xp_fp", &H_dc_xp_fp);   
+  Double_t  H_dc_yp_fp_Dummy;TBRANCH_Dummy->SetBranchAddress("H_dc_yp_fp", &H_dc_yp_fp);   
+  Double_t  H_gtr_beta_Dummy;TBRANCH_Dummy->SetBranchAddress("H_gtr_beta", &H_gtr_beta);
+  Double_t  H_gtr_xptar_Dummy;TBRANCH_Dummy->SetBranchAddress("H_gtr_xp", &H_gtr_xptar);   
+  Double_t  H_gtr_yptar_Dummy;TBRANCH_Dummy->SetBranchAddress("H_gtr_yp", &H_gtr_yptar);   
+  Double_t  H_gtr_dp_Dummy;TBRANCH_Dummy->SetBranchAddress("H_gtr_dp", &H_gtr_dp);   
+  Double_t  H_gtr_p_Dummy;TBRANCH_Dummy->SetBranchAddress("H_gtr_p", &H_gtr_p);   
+  Double_t  H_cal_etotnorm_Dummy;TBRANCH_Dummy->SetBranchAddress("H_cal_etotnorm", &H_cal_etotnorm);   
+  Double_t  H_cal_etottracknorm_Dummy;TBRANCH_Dummy->SetBranchAddress("H_cal_etottracknorm", &H_cal_etottracknorm);   
+  Double_t  H_cer_npeSum_Dummy;TBRANCH_Dummy->SetBranchAddress("H_cer_npeSum", &H_cer_npeSum);   
+
+  //SHMS Info
+  Double_t  P_hod_goodscinhit_Dummy;TBRANCH_Dummy->SetBranchAddress("P_hod_goodscinhit", &P_hod_goodscinhit);   
+  Double_t  P_hod_goodstarttime_Dummy;TBRANCH_Dummy->SetBranchAddress("P_hod_goodstarttime", &P_hod_goodstarttime);   
+  Double_t  P_dc_x_fp_Dummy;TBRANCH_Dummy->SetBranchAddress("P_dc_x_fp", &P_dc_x_fp);   
+  Double_t  P_dc_y_fp_Dummy;TBRANCH_Dummy->SetBranchAddress("P_dc_y_fp", &P_dc_y_fp);   
+  Double_t  P_dc_xp_fp_Dummy;TBRANCH_Dummy->SetBranchAddress("P_dc_xp_fp", &P_dc_xp_fp);   
+  Double_t  P_dc_yp_fp_Dummy;TBRANCH_Dummy->SetBranchAddress("P_dc_yp_fp", &P_dc_yp_fp);   
+  Double_t  P_gtr_beta_Dummy;TBRANCH_Dummy->SetBranchAddress("P_gtr_beta", &P_gtr_beta);   
+  Double_t  P_gtr_xptar_Dummy;TBRANCH_Dummy->SetBranchAddress("P_gtr_xp", &P_gtr_xptar);   
+  Double_t  P_gtr_yptar_Dummy;TBRANCH_Dummy->SetBranchAddress("P_gtr_yp", &P_gtr_yptar);   
+  Double_t  P_gtr_p_Dummy;TBRANCH_Dummy->SetBranchAddress("P_gtr_p", &P_gtr_p);   
+  Double_t  P_gtr_dp_Dummy;TBRANCH_Dummy->SetBranchAddress("P_gtr_dp", &P_gtr_dp);   
+  Double_t  P_cal_etotnorm_Dummy;TBRANCH_Dummy->SetBranchAddress("P_cal_etotnorm", &P_cal_etotnorm);   
+  Double_t  P_cal_etottracknorm_Dummy;TBRANCH_Dummy->SetBranchAddress("P_cal_etottracknorm", &P_cal_etottracknorm);   
+  Double_t  P_aero_npeSum_Dummy;TBRANCH_Dummy->SetBranchAddress("P_aero_npeSum", &P_aero_npeSum);   
+  Double_t  P_aero_xAtAero_Dummy;TBRANCH_Dummy->SetBranchAddress("P_aero_xAtAero", &P_aero_xAtAero);   
+  Double_t  P_aero_yAtAero_Dummy;TBRANCH_Dummy->SetBranchAddress("P_aero_yAtAero", &P_aero_yAtAero);   
+  Double_t  P_hgcer_npeSum_Dummy;TBRANCH_Dummy->SetBranchAddress("P_hgcer_npeSum", &P_hgcer_npeSum);   
+  Double_t  P_hgcer_xAtCer_Dummy;TBRANCH_Dummy->SetBranchAddress("P_hgcer_xAtCer", &P_hgcer_xAtCer);   
+  Double_t  P_hgcer_yAtCer_Dummy;TBRANCH_Dummy->SetBranchAddress("P_hgcer_yAtCer", &P_hgcer_yAtCer);   
+
+  // Kinematic quantitites 
+  Double_t  Q2_Dummy;TBRANCH_Dummy->SetBranchAddress("Q2", &Q2);   
+  Double_t  W_Dummy;TBRANCH_Dummy->SetBranchAddress("W", &W);   
+  Double_t  epsilon_Dummy;TBRANCH_Dummy->SetBranchAddress("epsilon", &epsilon);   
+  Double_t  ph_q_Dummy;TBRANCH_Dummy->SetBranchAddress("ph_q", &ph_q);   
+  Double_t  emiss_Dummy;TBRANCH_Dummy->SetBranchAddress("emiss", &emiss);   
+  Double_t  pmiss_Dummy;TBRANCH_Dummy->SetBranchAddress("pmiss", &pmiss);   
+  Double_t  MMpi_Dummy;TBRANCH_Dummy->SetBranchAddress("MMpi", &MMpi);   
+  Double_t  MMK_Dummy;TBRANCH_Dummy->SetBranchAddress("MMK", &MMK);   
+  Double_t  MMp_Dummy;TBRANCH_Dummy->SetBranchAddress("MMp", &MMp);   
+  Double_t  MandelT_Dummy;TBRANCH_Dummy->SetBranchAddress("MandelT", &MandelT);   
+  Double_t  pmiss_x_Dummy;TBRANCH_Dummy->SetBranchAddress("pmiss_x", &pmiss_x);   
+  Double_t  pmiss_y_Dummy;TBRANCH_Dummy->SetBranchAddress("pmiss_y", &pmiss_y);   
+  Double_t  pmiss_z_Dummy;TBRANCH_Dummy->SetBranchAddress("pmiss_z", &pmiss_z);   
+
+
 
   //##############################################################################
 
   TH1D *H_hsdelta_DATA  = new TH1D("H_hsdelta_DATA","HMS Delta; hsdelta;", 300, -20.0, 20.0);
+  TH1D *H_hsdelta_DUMMY  = new TH1D("H_hsdelta_DUMMY","HMS Delta; hsdelta_Dummy;", 300, -20.0, 20.0);
   TH1D *H_hsdelta_SIMC  = new TH1D("H_hsdelta_SIMC","HMS Delta; hsdelta;", 300, -20.0, 20.0);
 
   TH1D *H_hsxptar_DATA  = new TH1D("H_hsxptar_DATA","HMS xptar; hsxptar;", 300, -0.1, 0.1);
+  TH1D *H_hsxptar_DUMMY  = new TH1D("H_hsxptar_DUMMY","HMS xptar; hsxptar_Dummy;", 300, -0.1, 0.1);
   TH1D *H_hsxptar_SIMC  = new TH1D("H_hsxptar_SIMC","HMS xptar; hsxptar;", 300, -0.1, 0.1);
 
   TH1D *H_hsyptar_DATA  = new TH1D("H_hsyptar_DATA","HMS yptar; hsyptar;", 300, -0.05, 0.05);
+  TH1D *H_hsyptar_DUMMY  = new TH1D("H_hsyptar_DUMMY","HMS yptar; hsyptar_Dummy;", 300, -0.05, 0.05);
   TH1D *H_hsyptar_SIMC  = new TH1D("H_hsyptar_SIMC","HMS yptar; hsyptar;", 300, -0.05, 0.05);
 
   TH1D *H_ssxfp_DATA    = new TH1D("H_ssxfp_DATA","SHMS xfp; ssxfp;", 300, -20.0, 20.0);
+  TH1D *H_ssxfp_DUMMY    = new TH1D("H_ssxfp_DUMMY","SHMS xfp; ssxfp_Dummy;", 300, -20.0, 20.0);
   TH1D *H_ssxfp_SIMC    = new TH1D("H_ssxfp_SIMC","SHMS xfp; ssxfp;", 300, -20.0, 20.0);
 
   TH1D *H_ssyfp_DATA    = new TH1D("H_ssyfp_DATA","SHMS yfp; ssyfp;", 300, -20.0, 20.0);
+  TH1D *H_ssyfp_DUMMY    = new TH1D("H_ssyfp_DUMMY","SHMS yfp; ssyfp_Dummy;", 300, -20.0, 20.0);
   TH1D *H_ssyfp_SIMC    = new TH1D("H_ssyfp_SIMC","SHMS yfp; ssyfp;", 300, -20.0, 20.0);
 
   TH1D *H_ssxpfp_DATA   = new TH1D("H_ssxpfp_DATA","SHMS xpfp; ssxpfp;", 300, -0.09, 0.05);
+  TH1D *H_ssxpfp_DUMMY   = new TH1D("H_ssxpfp_DUMMY","SHMS xpfp; ssxpfp_Dummy;", 300, -0.09, 0.05);
   TH1D *H_ssxpfp_SIMC   = new TH1D("H_ssxpfp_SIMC","SHMS xpfp; ssxpfp;", 300, -0.09, 0.05);
 
   TH1D *H_ssypfp_DATA   = new TH1D("H_ssypfp_DATA","SHMS ypfp; ssypfp;", 300, -0.05, 0.04);
+  TH1D *H_ssypfp_DUMMY   = new TH1D("H_ssypfp_DUMMY","SHMS ypfp; ssypfp_Dummy;", 300, -0.05, 0.04);
   TH1D *H_ssypfp_SIMC   = new TH1D("H_ssypfp_SIMC","SHMS ypfp; ssypfp;", 300, -0.05, 0.04);
 
   TH1D *H_hsxfp_DATA    = new TH1D("H_hsxfp_DATA","HMS xfp; hsxfp;", 300, -40.0, 40.0);
+  TH1D *H_hsxfp_DUMMY    = new TH1D("H_hsxfp_DUMMY","HMS xfp; hsxfp_Dummy;", 300, -40.0, 40.0);
   TH1D *H_hsxfp_SIMC    = new TH1D("H_hsxfp_SIMC","HMS xfp; hsxfp;", 300, -40.0, 40.0);
 
   TH1D *H_hsyfp_DATA    = new TH1D("H_hsyfp_DATA","HMS yfp; hsyfp;", 300, -20.0, 20.0);
+  TH1D *H_hsyfp_DUMMY    = new TH1D("H_hsyfp_DUMMY","HMS yfp; hsyfp_Dummy;", 300, -20.0, 20.0);
   TH1D *H_hsyfp_SIMC    = new TH1D("H_hsyfp_SIMC","HMS yfp; hsyfp;", 300, -20.0, 20.0);
 
   TH1D *H_hsxpfp_DATA   = new TH1D("H_hsxpfp_DATA","HMS xpfp; hsxpfp;", 300, -0.09, 0.05);
+  TH1D *H_hsxpfp_DUMMY   = new TH1D("H_hsxpfp_DUMMY","HMS xpfp; hsxpfp_Dummy;", 300, -0.09, 0.05);
   TH1D *H_hsxpfp_SIMC   = new TH1D("H_hsxpfp_SIMC","HMS xpfp; hsxpfp;", 300, -0.09, 0.05);
  
   TH1D *H_hsypfp_DATA   = new TH1D("H_hsypfp_DATA","HMS ypfp; hsypfp;", 300, -0.05, 0.04);
+  TH1D *H_hsypfp_DUMMY   = new TH1D("H_hsypfp_DUMMY","HMS ypfp; hsypfp_Dummy;", 300, -0.05, 0.04);
   TH1D *H_hsypfp_SIMC   = new TH1D("H_hsypfp_SIMC","HMS ypfp; hsypfp;", 300, -0.05, 0.04);
 
   TH1D *H_ssdelta_DATA  = new TH1D("H_ssdelta_DATA","SHMS delta; ssdelta;", 300, -20.0, 20.0);
+  TH1D *H_ssdelta_DUMMY  = new TH1D("H_ssdelta_DUMMY","SHMS delta; ssdelta_Dummy;", 300, -20.0, 20.0);
   TH1D *H_ssdelta_SIMC  = new TH1D("H_ssdelta_SIMC","SHMS delta; ssdelta;", 300, -20.0, 20.0);
 
   TH1D *H_ssxptar_DATA  = new TH1D("H_ssxptar_DATA","SHMS xptar; ssxptar;", 300, -0.05, 0.05);
+  TH1D *H_ssxptar_DUMMY  = new TH1D("H_ssxptar_DUMMY","SHMS xptar; ssxptar_Dummy;", 300, -0.05, 0.05);
   TH1D *H_ssxptar_SIMC  = new TH1D("H_ssxptar_SIMC","SHMS xptar; ssxptar;", 300, -0.05, 0.05);
 
   TH1D *H_ssyptar_DATA  = new TH1D("H_ssyptar_DATA","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
+  TH1D *H_ssyptar_DUMMY  = new TH1D("H_ssyptar_DUMMY","SHMS yptar; ssyptar_Dummy;", 300, -0.04, 0.04);
   TH1D *H_ssyptar_SIMC  = new TH1D("H_ssyptar_SIMC","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
 
   TH1D *H_q_DATA        = new TH1D("H_q_DATA","q; q;", 300, 5.0, 7.0);
+  TH1D *H_q_DUMMY        = new TH1D("H_q_DUMMY","q; q_Dummy;", 300, 5.0, 7.0);
   TH1D *H_q_SIMC        = new TH1D("H_q_SIMC","q; q;", 300, 5.0, 7.0);
 
   TH1D *H_Q2_DATA       = new TH1D("H_Q2_DATA","Q2; Q2;", 300, 2.0, 5.0);  
+  TH1D *H_Q2_DUMMY       = new TH1D("H_Q2_DUMMY","Q2; Q2_Dummy;", 300, 2.0, 5.0);  
   TH1D *H_Q2_SIMC       = new TH1D("H_Q2_SIMC","Q2; Q2;", 300, 2.0, 5.0);  
 
   TH1D *H_epsilon_DATA  = new TH1D("H_epsilon_DATA","epsilon; epsilon;", 300, 0.5, 1.0);
+  TH1D *H_epsilon_DUMMY  = new TH1D("H_epsilon_DUMMY","epsilon; epsilon_Dummy;", 300, 0.5, 1.0);
   TH1D *H_epsilon_SIMC  = new TH1D("H_epsilon_SIMC","epsilon; epsilon;", 300, 0.5, 1.0);
 
   TH1D *H_MMp_DATA  = new TH1D("H_MMp_DATA","MMp ; MMp;", 300, -0.01, 0.01);
+  TH1D *H_MMp_DUMMY  = new TH1D("H_MMp_DUMMY","MMp ; MMp_Dummy;", 300, -0.01, 0.01);
   TH1D *H_MMp_SIMC  = new TH1D("H_MMp_SIMC","MMp ; MMp;", 300, -0.01, 0.01);
  
   TH1D *H_th_DATA  = new TH1D("H_th_DATA","X' tar; P_gtr_xp;", 300, -0.1, 0.1);
+  TH1D *H_th_DUMMY  = new TH1D("H_th_DUMMY","X' tar; P_gtr_xp_Dummy;", 300, -0.1, 0.1);
   TH1D *H_th_SIMC  = new TH1D("H_th_SIMC","H_th_simc; ssxptar;", 300, -0.1, 0.1);
 
   TH1D *H_ph_DATA  = new TH1D("H_ph_DATA","Y' tar; P_gtr_yp;", 300, -0.1, 0.1);
+  TH1D *H_ph_DUMMY  = new TH1D("H_ph_DUMMY","Y' tar; P_gtr_yp_Dummy;", 300, -0.1, 0.1);
   TH1D *H_ph_SIMC  = new TH1D("H_ph_SIMC","H_ph_simc; ssyptar;", 300, -0.1, 0.1);
 
   TH1D *H_pmiss_DATA  = new TH1D("H_pmiss_DATA","pmiss; Pm;", 300, -0.1, 0.4);
+  TH1D *H_pmiss_DUMMY  = new TH1D("H_pmiss_DUMMY","pmiss; Pm_Dummy;", 300, -0.1, 0.4);
   TH1D *H_pmiss_SIMC  = new TH1D("H_pmiss_SIMC","pmiss; Pm;", 300, -0.1, 0.4);
 
   TH1D *H_emiss_DATA  = new TH1D("H_emiss_DATA","emiss; emiss;", 300, -0.1, 0.4);
+  TH1D *H_emiss_DUMMY  = new TH1D("H_emiss_DUMMY","emiss; emiss_Dummy;", 300, -0.1, 0.4);
   TH1D *H_emiss_SIMC  = new TH1D("H_emiss_SIMC","emiss; emiss;", 300, -0.1, 0.4);
  
   TH1D *H_pmx_DATA  = new TH1D("H_pmx_DATA","Pmx; Pmx;", 300, -0.2, 0.2);
+  TH1D *H_pmx_DUMMY  = new TH1D("H_pmx_DUMMY","Pmx; Pmx_Dummy;", 300, -0.2, 0.2);
   TH1D *H_pmx_SIMC  = new TH1D("H_pmx_SIMC","Pmx; Pmx;", 300, -0.2, 0.2);
 
   TH1D *H_pmy_DATA  = new TH1D("H_pmy_DATA","Pmy ; Pmy;", 300, -0.2, 0.2);
+  TH1D *H_pmy_DUMMY  = new TH1D("H_pmy_DUMMY","Pmy ; Pmy_Dummy;", 300, -0.2, 0.2);
   TH1D *H_pmy_SIMC  = new TH1D("H_pmy_SIMC","Pmy; Pmy;", 300, -0.2, 0.2);
 
   TH1D *H_pmz_DATA  = new TH1D("H_pmz_DATA","Pmz; Pmz;", 300, -0.2, 0.2);
+  TH1D *H_pmz_DUMMY  = new TH1D("H_pmz_DUMMY","Pmz; Pmz_Dummy;", 300, -0.2, 0.2);
   TH1D *H_pmz_SIMC  = new TH1D("H_pmz_SIMC","Pmz; Pmz;", 300, -0.2, 0.2);
 
   TH1D *H_W_DATA  = new TH1D("H_W_DATA","W ; W;", 300, -0.5, 1.5);
+  TH1D *H_W_DUMMY  = new TH1D("H_W_DUMMY","W ; W_Dummy;", 300, -0.5, 1.5);
   TH1D *H_W_SIMC  = new TH1D("H_W_SIMC","W; W;", 300, -0.5, 1.5);
  
   // Hist for ROOT file
@@ -360,6 +469,63 @@ void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string Out
       H_W_DATA->Fill(W);
 	  
     }
+
+
+  for(Long64_t i = 0; i < nEntries_TBRANCH_Dummy; i++)
+    {
+      TBRANCH_Dummy->GetEntry(i);   
+      
+      H_ssxfp_DUMMY->Fill(P_dc_x_fp);
+      H_ssyfp_DUMMY->Fill(P_dc_y_fp);
+      H_ssxpfp_DUMMY->Fill(P_dc_xp_fp);
+      H_ssypfp_DUMMY->Fill(P_dc_yp_fp);
+      H_hsxfp_DUMMY->Fill(H_dc_x_fp);
+      H_hsyfp_DUMMY->Fill(H_dc_y_fp);
+      H_hsxpfp_DUMMY->Fill(H_dc_xp_fp);
+      H_hsypfp_DUMMY->Fill(H_dc_yp_fp);
+      H_ssxptar_DUMMY->Fill(P_gtr_xptar);
+      H_ssyptar_DUMMY->Fill(P_gtr_yptar);
+      H_hsxptar_DUMMY->Fill(H_gtr_xptar);	
+      H_hsyptar_DUMMY->Fill(H_gtr_yptar);	
+      H_ssdelta_DUMMY->Fill(P_gtr_dp);
+      H_hsdelta_DUMMY->Fill(H_gtr_dp);	
+      H_Q2_DUMMY->Fill(Q2);
+      H_epsilon_DUMMY->Fill(epsilon);
+      H_MMp_DUMMY->Fill(pow(emiss, 2) - pow(pmiss, 2));  
+      H_pmiss_DUMMY->Fill(pmiss);
+      H_emiss_DUMMY->Fill(emiss);	
+      H_pmx_DUMMY->Fill(pmiss_x); 
+      H_pmy_DUMMY->Fill(pmiss_y); 
+      H_pmz_DUMMY->Fill(pmiss_z); 
+      H_W_DUMMY->Fill(W);
+	  
+    }
+
+
+  // Dummy Subtraction
+  H_ssxfp_DATA->Add(H_ssxfp_DUMMY,-1);
+  H_ssyfp_DATA->Add(H_ssyfp_DUMMY,-1);
+  H_ssxpfp_DATA->Add(H_ssxpfp_DUMMY,-1);
+  H_ssypfp_DATA->Add(H_ssypfp_DUMMY,-1);
+  H_hsxfp_DATA->Add(H_hsxfp_DUMMY,-1);
+  H_hsyfp_DATA->Add(H_hsyfp_DUMMY,-1);
+  H_hsxpfp_DATA->Add(H_hsxpfp_DUMMY,-1);
+  H_hsypfp_DATA->Add(H_hsypfp_DUMMY,-1);
+  H_ssxptar_DATA->Add(H_ssxptar_DUMMY,-1);
+  H_ssyptar_DATA->Add(H_ssyptar_DUMMY,-1);
+  H_hsxptar_DATA->Add(H_hsxptar_DUMMY,-1);
+  H_hsyptar_DATA->Add(H_hsyptar_DUMMY,-1);
+  H_ssdelta_DATA->Add(H_ssdelta_DUMMY,-1);
+  H_hsdelta_DATA->Add(H_hsdelta_DUMMY,-1);
+  H_Q2_DATA->Add(H_Q2_DATA,-1);
+  H_epsilon_DATA->Add(H_epsilon_DUMMY,-1);
+  H_MMp_DATA->Add(H_MMp_DUMMY,-1);
+  H_pmiss_DATA->Add(H_pmiss_DUMMY,-1);
+  H_emiss_DATA->Add(H_emiss_DUMMY,-1);
+  H_pmx_DATA->Add(H_pmx_DUMMY,-1);
+  H_pmy_DATA->Add(H_pmy_DUMMY,-1);
+  H_pmz_DATA->Add(H_pmz_DUMMY,-1);
+  H_W_DATA->Add(H_W_DUMMY,-1);
   
   //...................................................................
 
@@ -501,7 +667,7 @@ void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string Out
 
   CMMp->Print(outputpdf);
 
-  TCanvas *Cpmiss = new TCanvas("Cpmiss", "pmiss information");
+  TCanvas *Cpmiss = new TCanvas("Cpmiss", "pmiss");
   H_pmiss_DATA->SetLineColor(kRed);
 
   H_MMp_SIMC->Draw("");
@@ -509,7 +675,7 @@ void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string Out
 
   Cpmiss->Print(outputpdf);
 
-  TCanvas *Cemiss = new TCanvas("Cemiss", "emiss information");
+  TCanvas *Cemiss = new TCanvas("Cemiss", "emiss");
   H_emiss_DATA->SetLineColor(kRed);
 
   H_emiss_SIMC->Draw("");
@@ -517,14 +683,14 @@ void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string Out
 
   Cemiss->Print(outputpdf);
 
-  TCanvas *Cpmiss_x = new TCanvas("Cpmiss_x", "pmiss_x information");
+  TCanvas *Cpmiss_x = new TCanvas("Cpmiss_x", "pmiss_x");
   H_pmx_DATA->SetLineColor(kRed);
 
   H_pmx_SIMC->Draw("");
   H_pmx_DATA->Draw("same");
   Cpmiss_x->Print(outputpdf);
 
-  TCanvas *Cpmiss_y = new TCanvas("Cpmiss_y", "pmiss_y information");
+  TCanvas *Cpmiss_y = new TCanvas("Cpmiss_y", "pmiss_y");
   H_pmy_DATA->SetLineColor(kRed);
 
   H_pmy_SIMC->Draw("");
@@ -532,7 +698,7 @@ void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string Out
 
   Cpmiss_y->Print(outputpdf);
 
-  TCanvas *Cpmiss_z = new TCanvas("Cpmiss_z", "pmiss_z information");
+  TCanvas *Cpmiss_z = new TCanvas("Cpmiss_z", "pmiss_z");
   H_pmz_DATA->SetLineColor(kRed);
 
   H_pmz_SIMC->Draw("");
@@ -540,7 +706,7 @@ void Heepcoin(string InDATAFilename = "", string InSIMCFilename = "", string Out
 
   Cpmiss_z->Print(outputpdf);
 
-  TCanvas *CW = new TCanvas("CW", "W information");
+  TCanvas *CW = new TCanvas("CW", "W");
   H_W_DATA->SetLineColor(kRed);
 
   H_W_SIMC->Draw("");

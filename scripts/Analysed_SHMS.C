@@ -124,10 +124,31 @@ void Analysed_SHMS(string InDATAFilename = "", string OutFilename = "")
   TH1D *H_etotnorm  = new TH1D("H_etotnorm"," H_cal_etotnorm ; H_cal_etotnorm;", 300, 0.0, 2);
   TH1D *H_npeSum  = new TH1D("H_npeSum","H_hgcer_npeSum ; H_hgcer_npeSum;", 300, 0.0, 30);
 
-  // Fill data events 
+  //for progress bar
+  double progress=0.0;
 
+  // Fill data events 
+  cout << "\nApplying cuts and filling histograms...(will take a while)" << endl;
   for(Long64_t i = 0; i < nEntries_TBRANCH; i++)
     {
+
+      // Progress bar
+      if(i%1000==0) {	    
+	int barWidth = 70;
+	progress = ((double)i/(double)nEntries_TBRANCH);	    
+	// cout<<i<<"/"<<NEvts<<endl;
+	// cout << progress << endl;
+	std::cout << "[";
+	double pos = barWidth * progress;
+	for (double i = 0.; i < barWidth; ++i) {
+	  if (i < pos) std::cout << "=";
+	  else if (i == pos) std::cout << ">";
+	  else std::cout << " ";
+	}
+	std::cout << "] " << int(progress * 100.0) << " %\r";
+	std::cout.flush();
+      }	 
+
       TBRANCH->GetEntry(i);
     
       //......... Define Cuts.................

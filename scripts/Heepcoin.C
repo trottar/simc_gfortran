@@ -99,8 +99,8 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
     exit;
   }
 
-  TFile *InFile = new TFile(rootFile, "OPEN");
-  InFile->GetListOfKeys()->Print();
+  TFile *InFile_DATA = new TFile(rootFile, "OPEN");
+  InFile_DATA->GetListOfKeys()->Print();
   TFile *InFile_DUMMY = new TFile(rootFile_DUMMY, "OPEN");
   TFile *InFile_SIMC = new TFile(rootFile_SIMC, "READ");
   TString TOutFilename = OutFilename;
@@ -111,10 +111,8 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
    
   //#################################################################### 
   
-  //TTree* TBRANCH  = (TTree*)InFile->Get("hist");Long64_t nEntries_TBRANCH  = (Long64_t)TBRANCH->GetEntries();  
-  
-  //TTree* TBRANCH_DUMMY  = (TTree*)InFile_DUMMY->Get("hist");Long64_t nEntries_TBRANCH_DUMMY  = (Long64_t)TBRANCH_DUMMY->GetEntries();  
-  
+  TTree* TBRANCH_DATA  = (TTree*)InFile_DATA->Get("hist");Long64_t nEntries_TBRANCH_DATA  = (Long64_t)TBRANCH_DATA->GetEntries();  
+  TTree* TBRANCH_DUMMY  = (TTree*)InFile_DUMMY->Get("hist");Long64_t nEntries_TBRANCH_DUMMY  = (Long64_t)TBRANCH_DUMMY->GetEntries();  
   TTree* TBRANCH_SIMC  = (TTree*)InFile_SIMC->Get("h10");Long64_t nEntries_TBRANCH_SIMC  = (Long64_t)TBRANCH_SIMC->GetEntries();
   
   //SIMC variables
@@ -145,177 +143,201 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
   Float_t Em;TBRANCH_SIMC->SetBranchAddress("Em", &Em);
   Float_t Pm;TBRANCH_SIMC->SetBranchAddress("Pm", &Pm);
   Float_t Weight;TBRANCH_SIMC->SetBranchAddress("Weight", &Weight);
-  
-  //##############################################################################
-  
-  TH1F *H_hsdelta_DATA  = new TH1F("H_hsdelta_DATA","HMS Delta; hsdelta;", 300, -20.0, 20.0);
-  TH1F *H_hsdelta_DUMMY  = new TH1F("H_hsdelta_DUMMY","HMS Delta; hsdelta;", 300, -20.0, 20.0);
-  TH1F *H_hsdelta_SIMC  = new TH1F("H_hsdelta_SIMC","HMS Delta; hsdelta;", 300, -20.0, 20.0);
-
-  TH1F *H_hsxptar_DATA  = new TH1F("H_hsxptar_DATA","HMS xptar; hsxptar;", 300, -0.1, 0.1);
-  TH1F *H_hsxptar_DUMMY  = new TH1F("H_hsxptar_DUMMY","HMS xptar; hsxptar;", 300, -0.1, 0.1);
-  TH1F *H_hsxptar_SIMC  = new TH1F("H_hsxptar_SIMC","HMS xptar; hsxptar;", 300, -0.1, 0.1);
-
-  TH1F *H_hsyptar_DATA  = new TH1F("H_hsyptar_DATA","HMS yptar; hsyptar;", 300, -0.05, 0.05);
-  TH1F *H_hsyptar_DUMMY  = new TH1F("H_hsyptar_DUMMY","HMS yptar; hsyptar;", 300, -0.05, 0.05);
-  TH1F *H_hsyptar_SIMC  = new TH1F("H_hsyptar_SIMC","HMS yptar; hsyptar;", 300, -0.05, 0.05);
-
-  TH1F *H_ssxfp_DATA    = new TH1F("H_ssxfp_DATA","SHMS xfp; ssxfp;", 300, -20.0, 20.0);
-  TH1F *H_ssxfp_DUMMY    = new TH1F("H_ssxfp_DUMMY","SHMS xfp; ssxfp;", 300, -20.0, 20.0);
-  TH1F *H_ssxfp_SIMC    = new TH1F("H_ssxfp_SIMC","SHMS xfp; ssxfp;", 300, -20.0, 20.0);
-
-  TH1F *H_ssyfp_DATA    = new TH1F("H_ssyfp_DATA","SHMS yfp; ssyfp;", 300, -20.0, 20.0);
-  TH1F *H_ssyfp_DUMMY    = new TH1F("H_ssyfp_DUMMY","SHMS yfp; ssyfp;", 300, -20.0, 20.0);
-  TH1F *H_ssyfp_SIMC    = new TH1F("H_ssyfp_SIMC","SHMS yfp; ssyfp;", 300, -20.0, 20.0);
-
-  TH1F *H_ssxpfp_DATA   = new TH1F("H_ssxpfp_DATA","SHMS xpfp; ssxpfp;", 300, -0.09, 0.05);
-  TH1F *H_ssxpfp_DUMMY   = new TH1F("H_ssxpfp_DUMMY","SHMS xpfp; ssxpfp;", 300, -0.09, 0.05);
-  TH1F *H_ssxpfp_SIMC   = new TH1F("H_ssxpfp_SIMC","SHMS xpfp; ssxpfp;", 300, -0.09, 0.05);
-
-  TH1F *H_ssypfp_DATA   = new TH1F("H_ssypfp_DATA","SHMS ypfp; ssypfp;", 300, -0.05, 0.04);
-  TH1F *H_ssypfp_DUMMY   = new TH1F("H_ssypfp_DUMMY","SHMS ypfp; ssypfp;", 300, -0.05, 0.04);
-  TH1F *H_ssypfp_SIMC   = new TH1F("H_ssypfp_SIMC","SHMS ypfp; ssypfp;", 300, -0.05, 0.04);
-
-  TH1F *H_hsxfp_DATA    = new TH1F("H_hsxfp_DATA","HMS xfp; hsxfp;", 300, -40.0, 40.0);
-  TH1F *H_hsxfp_DUMMY    = new TH1F("H_hsxfp_DUMMY","HMS xfp; hsxfp;", 300, -40.0, 40.0);
-  TH1F *H_hsxfp_SIMC    = new TH1F("H_hsxfp_SIMC","HMS xfp; hsxfp;", 300, -40.0, 40.0);
-
-  TH1F *H_hsyfp_DATA    = new TH1F("H_hsyfp_DATA","HMS yfp; hsyfp;", 300, -20.0, 20.0);
-  TH1F *H_hsyfp_DUMMY    = new TH1F("H_hsyfp_DUMMY","HMS yfp; hsyfp;", 300, -20.0, 20.0);
-  TH1F *H_hsyfp_SIMC    = new TH1F("H_hsyfp_SIMC","HMS yfp; hsyfp;", 300, -20.0, 20.0);
-
-  TH1F *H_hsxpfp_DATA   = new TH1F("H_hsxpfp_DATA","HMS xpfp; hsxpfp;", 300, -0.09, 0.05);
-  TH1F *H_hsxpfp_DUMMY   = new TH1F("H_hsxpfp_DUMMY","HMS xpfp; hsxpfp;", 300, -0.09, 0.05);
-  TH1F *H_hsxpfp_SIMC   = new TH1F("H_hsxpfp_SIMC","HMS xpfp; hsxpfp;", 300, -0.09, 0.05);
- 
-  TH1F *H_hsypfp_DATA   = new TH1F("H_hsypfp_DATA","HMS ypfp; hsypfp;", 300, -0.05, 0.04);
-  TH1F *H_hsypfp_DUMMY   = new TH1F("H_hsypfp_DUMMY","HMS ypfp; hsypfp;", 300, -0.05, 0.04);
-  TH1F *H_hsypfp_SIMC   = new TH1F("H_hsypfp_SIMC","HMS ypfp; hsypfp;", 300, -0.05, 0.04);
-
-  TH1F *H_ssdelta_DATA  = new TH1F("H_ssdelta_DATA","SHMS delta; ssdelta;", 300, -20.0, 20.0);
-  TH1F *H_ssdelta_DUMMY  = new TH1F("H_ssdelta_DUMMY","SHMS delta; ssdelta;", 300, -20.0, 20.0);
-  TH1F *H_ssdelta_SIMC  = new TH1F("H_ssdelta_SIMC","SHMS delta; ssdelta;", 300, -20.0, 20.0);
-
-  TH1F *H_ssxptar_DATA  = new TH1F("H_ssxptar_DATA","SHMS xptar; ssxptar;", 300, -0.05, 0.05);
-  TH1F *H_ssxptar_DUMMY  = new TH1F("H_ssxptar_DUMMY","SHMS xptar; ssxptar;", 300, -0.05, 0.05);
-  TH1F *H_ssxptar_SIMC  = new TH1F("H_ssxptar_SIMC","SHMS xptar; ssxptar;", 300, -0.05, 0.05);
-
-  TH1F *H_ssyptar_DATA  = new TH1F("H_ssyptar_DATA","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
-  TH1F *H_ssyptar_DUMMY  = new TH1F("H_ssyptar_DUMMY","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
-  TH1F *H_ssyptar_SIMC  = new TH1F("H_ssyptar_SIMC","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
-
-  TH1F *H_q_DATA        = new TH1F("H_q_DATA","q; q;", 300, 5.0, 7.0);
-  TH1F *H_q_DUMMY        = new TH1F("H_q_DUMMY","q; q;", 300, 5.0, 7.0);
-  TH1F *H_q_SIMC        = new TH1F("H_q_SIMC","q; q;", 300, 5.0, 7.0);
-
-  TH1F *H_Q2_DATA       = new TH1F("H_Q2_DATA","Q2; Q2;", 300, 2.0, 5.0);  
-  TH1F *H_Q2_DUMMY       = new TH1F("H_Q2_DUMMY","Q2; Q2;", 300, 2.0, 5.0);  
-  TH1F *H_Q2_SIMC       = new TH1F("H_Q2_SIMC","Q2; Q2;", 300, 2.0, 5.0);  
-
-  TH1F *H_epsilon_DATA  = new TH1F("H_epsilon_DATA","epsilon; epsilon;", 300, 0.5, 1.0);
-  TH1F *H_epsilon_DUMMY  = new TH1F("H_epsilon_DUMMY","epsilon; epsilon;", 300, 0.5, 1.0);
-  TH1F *H_epsilon_SIMC  = new TH1F("H_epsilon_SIMC","epsilon; epsilon;", 300, 0.5, 1.0);
-
-  TH1F *H_MMp_DATA  = new TH1F("H_MMp_DATA","MMp ; MMp;", 300, -0.01, 0.01);
-  TH1F *H_MMp_DUMMY  = new TH1F("H_MMp_DUMMY","MMp ; MMp;", 300, -0.01, 0.01);
-  TH1F *H_MMp_SIMC  = new TH1F("H_MMp_SIMC","MMp ; MMp;", 300, -0.01, 0.01);
- 
-  TH1F *H_th_DATA  = new TH1F("H_th_DATA","X' tar; P_gtr_xp;", 300, -0.1, 0.1);
-  TH1F *H_th_DUMMY  = new TH1F("H_th_DUMMY","X' tar; P_gtr_xp;", 300, -0.1, 0.1);
-  TH1F *H_th_SIMC  = new TH1F("H_th_SIMC","H_th_simc; ssxptar;", 300, -0.1, 0.1);
-
-  TH1F *H_ph_DATA  = new TH1F("H_ph_DATA","Y' tar; P_gtr_yp;", 300, -0.1, 0.1);
-  TH1F *H_ph_DUMMY  = new TH1F("H_ph_DUMMY","Y' tar; P_gtr_yp;", 300, -0.1, 0.1);
-  TH1F *H_ph_SIMC  = new TH1F("H_ph_SIMC","H_ph_simc; ssyptar;", 300, -0.1, 0.1);
-
-  TH1F *H_pmiss_DATA  = new TH1F("H_pmiss_DATA","pmiss; Pm;", 300, -0.1, 0.4);
-  TH1F *H_pmiss_DUMMY  = new TH1F("H_pmiss_DUMMY","pmiss; Pm;", 300, -0.1, 0.4);
-  TH1F *H_pmiss_SIMC  = new TH1F("H_pmiss_SIMC","pmiss; Pm;", 300, -0.1, 0.4);
-
-  TH1F *H_emiss_DATA  = new TH1F("H_emiss_DATA","emiss; emiss;", 300, -0.1, 0.4);
-  TH1F *H_emiss_DUMMY  = new TH1F("H_emiss_DUMMY","emiss; emiss;", 300, -0.1, 0.4);
-  TH1F *H_emiss_SIMC  = new TH1F("H_emiss_SIMC","emiss; emiss;", 300, -0.1, 0.4);
- 
-  TH1F *H_pmx_DATA  = new TH1F("H_pmx_DATA","Pmx; Pmx;", 300, -0.2, 0.2);
-  TH1F *H_pmx_DUMMY  = new TH1F("H_pmx_DUMMY","Pmx; Pmx;", 300, -0.2, 0.2);
-  TH1F *H_pmx_SIMC  = new TH1F("H_pmx_SIMC","Pmx; Pmx;", 300, -0.2, 0.2);
-
-  TH1F *H_pmy_DATA  = new TH1F("H_pmy_DATA","Pmy ; Pmy;", 300, -0.2, 0.2);
-  TH1F *H_pmy_DUMMY  = new TH1F("H_pmy_DUMMY","Pmy ; Pmy;", 300, -0.2, 0.2);
-  TH1F *H_pmy_SIMC  = new TH1F("H_pmy_SIMC","Pmy; Pmy;", 300, -0.2, 0.2);
-
-  TH1F *H_pmz_DATA  = new TH1F("H_pmz_DATA","Pmz; Pmz;", 300, -0.2, 0.2);
-  TH1F *H_pmz_DUMMY  = new TH1F("H_pmz_DUMMY","Pmz; Pmz;", 300, -0.2, 0.2);
-  TH1F *H_pmz_SIMC  = new TH1F("H_pmz_SIMC","Pmz; Pmz;", 300, -0.2, 0.2);
-
-  TH1F *H_W_DATA  = new TH1F("H_W_DATA","W ; W;", 300, -0.5, 1.5);
-  TH1F *H_W_DUMMY  = new TH1F("H_W_DUMMY","W ; W;", 300, -0.5, 1.5);
-  TH1F *H_W_SIMC  = new TH1F("H_W_SIMC","W; W;", 300, -0.5, 1.5);
 
   //DATA variables
   //HMS
-  //InFile->Get("hist/H_hsdelta",H_hsdelta_DATA);
-  H_hsdelta_DATA = (TH1F*)InFile->Get("hist/H_hsdelta");
-  // Checks if histogram is empty
-  if (!H_hsdelta_DATA){
-    cout << "ERROR!!!\n\n\n" << endl;
-    return;
-  }
-  H_hsxptar_DATA = (TH1F*)InFile->Get("hist/H_hsxptar");
-  H_hsyptar_DATA = (TH1F*)InFile->Get("hist/H_hsyptar");
-  H_hsxfp_DATA = (TH1F*)InFile->Get("hist/H_hsxfp");
-  H_hsyfp_DATA = (TH1F*)InFile->Get("hist/H_hsyfp");
-  H_hsxpfp_DATA = (TH1F*)InFile->Get("hist/H_hsxpfp");
-  H_hsypfp_DATA = (TH1F*)InFile->Get("hist/H_hsypfp");
+  Double_t hsdelta_data;TBRANCH_DATA->SetBranchAddress("hsdelta", &hsdelta_data);
+  Double_t hsxptar_data;TBRANCH_DATA->SetBranchAddress("hsxptar", &hsxptar_data);
+  Double_t hsyptar_data;TBRANCH_DATA->SetBranchAddress("hsyptar", &hsyptar_data);
+  Double_t hsxfp_data;TBRANCH_DATA->SetBranchAddress("hsxfp", &hsxfp_data);
+  Double_t hsyfp_data;TBRANCH_DATA->SetBranchAddress("hsyfp", &hsyfp_data);
+  Double_t hsxpfp_data;TBRANCH_DATA->SetBranchAddress("hsxpfp", &hsxpfp_data);
+  Double_t hsypfp_data;TBRANCH_DATA->SetBranchAddress("hsypfp", &hsypfp_data);
   //SHMS
-  H_ssdelta_DATA = (TH1F*)InFile->Get("hist/H_ssdelta");
-  H_ssxptar_DATA = (TH1F*)InFile->Get("hist/H_ssxptar");
-  H_ssyptar_DATA = (TH1F*)InFile->Get("hist/H_ssyptar");
-  H_ssxfp_DATA = (TH1F*)InFile->Get("hist/H_ssxfp");
-  H_ssyfp_DATA = (TH1F*)InFile->Get("hist/H_ssyfp");
-  H_ssxpfp_DATA = (TH1F*)InFile->Get("hist/H_ssxpfp");
-  H_ssypfp_DATA = (TH1F*)InFile->Get("hist/H_ssypfp");
+  Double_t ssdelta_data;TBRANCH_DATA->SetBranchAddress("ssdelta", &ssdelta_data);
+  Double_t ssxptar_data;TBRANCH_DATA->SetBranchAddress("ssxptar", &ssxptar_data);
+  Double_t ssyptar_data;TBRANCH_DATA->SetBranchAddress("ssyptar", &ssyptar_data);
+  Double_t ssxfp_data;TBRANCH_DATA->SetBranchAddress("ssxfp", &ssxfp_data);
+  Double_t ssyfp_data;TBRANCH_DATA->SetBranchAddress("ssyfp", &ssyfp_data);
+  Double_t ssxpfp_data;TBRANCH_DATA->SetBranchAddress("ssxpfp", &ssxpfp_data);
+  Double_t ssypfp_data;TBRANCH_DATA->SetBranchAddress("ssypfp", &ssypfp_data);
  
-  H_q_DATA = (TH1F*)InFile->Get("hist/H_q");
-  H_Q2_DATA = (TH1F*)InFile->Get("hist/H_Q2");
-  H_W_DATA = (TH1F*)InFile->Get("hist/H_W");
-  H_epsilon_DATA = (TH1F*)InFile->Get("hist/H_epsilon");
-  H_pmx_DATA = (TH1F*)InFile->Get("hist/H_pmx");
-  H_pmy_DATA = (TH1F*)InFile->Get("hist/H_pmy");
-  H_pmz_DATA = (TH1F*)InFile->Get("hist/H_pmz");
-  H_emiss_DATA = (TH1F*)InFile->Get("hist/H_emiss");
-  H_pmiss_DATA = (TH1F*)InFile->Get("hist/H_pmiss");
+  Double_t Q2_data;TBRANCH_DATA->SetBranchAddress("Q2", &Q2_data);
+  Double_t W_data;TBRANCH_DATA->SetBranchAddress("W", &W_data);
+  Double_t epsilon_data;TBRANCH_DATA->SetBranchAddress("epsilon", &epsilon_data);
+  Double_t pmx_data;TBRANCH_DATA->SetBranchAddress("pmx", &pmx_data);
+  Double_t pmy_data;TBRANCH_DATA->SetBranchAddress("pmy", &pmy_data);
+  Double_t pmz_data;TBRANCH_DATA->SetBranchAddress("pmz", &pmz_data);
+  Double_t em_data;TBRANCH_DATA->SetBranchAddress("emiss", &em_data);
+  Double_t pm_data;TBRANCH_DATA->SetBranchAddress("pmiss", &pm_data);
+  Double_t MMp_data;TBRANCH_DATA->SetBranchAddress("MMp", &MMp_data);
 
-  // H_MMp_DATA = (Em_data*Em_data - Pm_data*Pm_data);
+  Double_t  P_hod_goodstarttime_data;TBRANCH_DATA->SetBranchAddress("P_hod_goodstarttime", &P_hod_goodstarttime_data);   
+  Double_t  P_dc_InsideDipoleExit_data;TBRANCH_DATA->SetBranchAddress("P_dc_InsideDipoleExit", &P_dc_InsideDipoleExit_data);
+  Double_t  P_gtr_xptar_data;TBRANCH_DATA->SetBranchAddress("P_gtr_xptar", &P_gtr_xptar_data);   
+  Double_t  P_gtr_dp_data;TBRANCH_DATA->SetBranchAddress("P_gtr_dp", &P_gtr_dp_data); 
+  Double_t  P_gtr_yptar_data;TBRANCH_DATA->SetBranchAddress("P_gtr_yptar", &P_gtr_yptar_data);     
+  Double_t  P_cal_etottracknorm_data;TBRANCH_DATA->SetBranchAddress("P_cal_etottracknorm", &P_cal_etottracknorm_data);   
+
+  Double_t  H_hod_goodscinhit_data;TBRANCH_DATA->SetBranchAddress("H_hod_goodscinhit", &H_hod_goodscinhit_data);   
+  Double_t  H_hod_goodstarttime_data;TBRANCH_DATA->SetBranchAddress("H_hod_goodstarttime", &H_hod_goodstarttime_data);   
+  Double_t  H_dc_InsideDipoleExit_data;TBRANCH_DATA->SetBranchAddress("H_dc_InsideDipoleExit", &H_dc_InsideDipoleExit_data);
+  Double_t  H_gtr_dp_data;TBRANCH_DATA->SetBranchAddress("H_gtr_dp", &H_gtr_dp_data);   
+  Double_t  H_gtr_xptar_data;TBRANCH_DATA->SetBranchAddress("H_gtr_xptar", &H_gtr_xptar_data);   
+  Double_t  H_gtr_yptar_data;TBRANCH_DATA->SetBranchAddress("H_gtr_yptar", &H_gtr_yptar_data);   
+  Double_t  H_cer_npeSum_data;TBRANCH_DATA->SetBranchAddress("H_cer_npeSum", &H_cer_npeSum_data);
+  Double_t  H_cal_etotnorm_data;TBRANCH_DATA->SetBranchAddress("H_cal_etotnorm", &H_cal_etotnorm_data);   
 
   //DUMMY variables
   //HMS
-  H_hsdelta_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_hsdelta");
-  H_hsxptar_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_hsxptar");
-  H_hsyptar_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_hsyptar");
-  H_hsxfp_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_hsxfp");
-  H_hsyfp_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_hsyfp");
-  H_hsxpfp_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_hsxpfp");
-  H_hsypfp_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_hsypfp");
+  Double_t hsdelta_dummy;TBRANCH_DUMMY->SetBranchAddress("hsdelta", &hsdelta_dummy);
+  Double_t hsxptar_dummy;TBRANCH_DUMMY->SetBranchAddress("hsxptar", &hsxptar_dummy);
+  Double_t hsyptar_dummy;TBRANCH_DUMMY->SetBranchAddress("hsyptar", &hsyptar_dummy);
+  Double_t hsxfp_dummy;TBRANCH_DUMMY->SetBranchAddress("hsxfp", &hsxfp_dummy);
+  Double_t hsyfp_dummy;TBRANCH_DUMMY->SetBranchAddress("hsyfp", &hsyfp_dummy);
+  Double_t hsxpfp_dummy;TBRANCH_DUMMY->SetBranchAddress("hsxpfp", &hsxpfp_dummy);
+  Double_t hsypfp_dummy;TBRANCH_DUMMY->SetBranchAddress("hsypfp", &hsypfp_dummy);
   //SHMS
-  H_ssdelta_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_ssdelta");
-  H_ssxptar_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_ssxptar");
-  H_ssyptar_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_ssyptar");
-  H_ssxfp_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_ssxfp");
-  H_ssyfp_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_ssyfp");
-  H_ssxpfp_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_ssxpfp");
-  H_ssypfp_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_ssypfp");
+  Double_t ssdelta_dummy;TBRANCH_DUMMY->SetBranchAddress("ssdelta", &ssdelta_dummy);
+  Double_t ssxptar_dummy;TBRANCH_DUMMY->SetBranchAddress("ssxptar", &ssxptar_dummy);
+  Double_t ssyptar_dummy;TBRANCH_DUMMY->SetBranchAddress("ssyptar", &ssyptar_dummy);
+  Double_t ssxfp_dummy;TBRANCH_DUMMY->SetBranchAddress("ssxfp", &ssxfp_dummy);
+  Double_t ssyfp_dummy;TBRANCH_DUMMY->SetBranchAddress("ssyfp", &ssyfp_dummy);
+  Double_t ssxpfp_dummy;TBRANCH_DUMMY->SetBranchAddress("ssxpfp", &ssxpfp_dummy);
+  Double_t ssypfp_dummy;TBRANCH_DUMMY->SetBranchAddress("ssypfp", &ssypfp_dummy);
  
-  H_q_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_q");
-  H_Q2_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_Q2");
-  H_W_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_W");
-  H_epsilon_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_epsilon");
-  H_pmx_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_pmx");
-  H_pmy_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_pmy");
-  H_pmz_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_pmz");
-  H_emiss_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_emiss");
-  H_pmiss_DUMMY = (TH1F*)InFile_DUMMY->Get("hist/H_pmiss");
+  Double_t Q2_dummy;TBRANCH_DUMMY->SetBranchAddress("Q2", &Q2_dummy);
+  Double_t W_dummy;TBRANCH_DUMMY->SetBranchAddress("W", &W_dummy);
+  Double_t epsilon_dummy;TBRANCH_DUMMY->SetBranchAddress("epsilon", &epsilon_dummy);
+  Double_t pmx_dummy;TBRANCH_DUMMY->SetBranchAddress("pmx", &pmx_dummy);
+  Double_t pmy_dummy;TBRANCH_DUMMY->SetBranchAddress("pmy", &pmy_dummy);
+  Double_t pmz_dummy;TBRANCH_DUMMY->SetBranchAddress("pmz", &pmz_dummy);
+  Double_t em_dummy;TBRANCH_DUMMY->SetBranchAddress("emiss", &em_dummy);
+  Double_t pm_dummy;TBRANCH_DUMMY->SetBranchAddress("pmiss", &pm_dummy);
+  Double_t MMp_dummy;TBRANCH_DUMMY->SetBranchAddress("MMp", &MMp_dummy);
 
+  Double_t  P_hod_goodstarttime_dummy;TBRANCH_DUMMY->SetBranchAddress("P_hod_goodstarttime", &P_hod_goodstarttime_dummy);   
+  Double_t  P_dc_InsideDipoleExit_dummy;TBRANCH_DUMMY->SetBranchAddress("P_dc_InsideDipoleExit", &P_dc_InsideDipoleExit_dummy);
+  Double_t  P_gtr_xptar_dummy;TBRANCH_DUMMY->SetBranchAddress("P_gtr_xptar", &P_gtr_xptar_dummy);   
+  Double_t  P_gtr_dp_dummy;TBRANCH_DUMMY->SetBranchAddress("P_gtr_dp", &P_gtr_dp_dummy); 
+  Double_t  P_gtr_yptar_dummy;TBRANCH_DUMMY->SetBranchAddress("P_gtr_yptar", &P_gtr_yptar_dummy);     
+  Double_t  P_cal_etottracknorm_dummy;TBRANCH_DUMMY->SetBranchAddress("P_cal_etottracknorm", &P_cal_etottracknorm_dummy);   
+
+  Double_t  H_hod_goodscinhit_dummy;TBRANCH_DUMMY->SetBranchAddress("H_hod_goodscinhit", &H_hod_goodscinhit_dummy);   
+  Double_t  H_hod_goodstarttime_dummy;TBRANCH_DUMMY->SetBranchAddress("H_hod_goodstarttime", &H_hod_goodstarttime_dummy);   
+  Double_t  H_dc_InsideDipoleExit_dummy;TBRANCH_DUMMY->SetBranchAddress("H_dc_InsideDipoleExit", &H_dc_InsideDipoleExit_dummy);
+  Double_t  H_gtr_dp_dummy;TBRANCH_DUMMY->SetBranchAddress("H_gtr_dp", &H_gtr_dp_dummy);   
+  Double_t  H_gtr_xptar_dummy;TBRANCH_DUMMY->SetBranchAddress("H_gtr_xptar", &H_gtr_xptar_dummy);   
+  Double_t  H_gtr_yptar_dummy;TBRANCH_DUMMY->SetBranchAddress("H_gtr_yptar", &H_gtr_yptar_dummy);   
+  Double_t  H_cer_npeSum_dummy;TBRANCH_DUMMY->SetBranchAddress("H_cer_npeSum", &H_cer_npeSum_dummy);
+  Double_t  H_cal_etotnorm_dummy;TBRANCH_DUMMY->SetBranchAddress("H_cal_etotnorm", &H_cal_etotnorm_dummy);   
+
+  //##############################################################################
+  
+  TH1D *H_hsdelta_DATA  = new TH1D("H_hsdelta_DATA","HMS Delta; hsdelta;", 300, -20.0, 20.0);
+  TH1D *H_hsdelta_DUMMY  = new TH1D("H_hsdelta_DUMMY","HMS Delta; hsdelta;", 300, -20.0, 20.0);
+  TH1D *H_hsdelta_SIMC  = new TH1D("H_hsdelta_SIMC","HMS Delta; hsdelta;", 300, -20.0, 20.0);
+
+  TH1D *H_hsxptar_DATA  = new TH1D("H_hsxptar_DATA","HMS xptar; hsxptar;", 300, -0.1, 0.1);
+  TH1D *H_hsxptar_DUMMY  = new TH1D("H_hsxptar_DUMMY","HMS xptar; hsxptar;", 300, -0.1, 0.1);
+  TH1D *H_hsxptar_SIMC  = new TH1D("H_hsxptar_SIMC","HMS xptar; hsxptar;", 300, -0.1, 0.1);
+
+  TH1D *H_hsyptar_DATA  = new TH1D("H_hsyptar_DATA","HMS yptar; hsyptar;", 300, -0.1, 0.1);
+  TH1D *H_hsyptar_DUMMY  = new TH1D("H_hsyptar_DUMMY","HMS yptar; hsyptar;", 300, -0.1, 0.1);
+  TH1D *H_hsyptar_SIMC  = new TH1D("H_hsyptar_SIMC","HMS yptar; hsyptar;", 300, -0.1, 0.1);
+
+  TH1D *H_ssxfp_DATA    = new TH1D("H_ssxfp_DATA","SHMS xfp; ssxfp;", 300, -20.0, 20.0);
+  TH1D *H_ssxfp_DUMMY    = new TH1D("H_ssxfp_DUMMY","SHMS xfp; ssxfp;", 300, -20.0, 20.0);
+  TH1D *H_ssxfp_SIMC    = new TH1D("H_ssxfp_SIMC","SHMS xfp; ssxfp;", 300, -20.0, 20.0);
+
+  TH1D *H_ssyfp_DATA    = new TH1D("H_ssyfp_DATA","SHMS yfp; ssyfp;", 300, -20.0, 20.0);
+  TH1D *H_ssyfp_DUMMY    = new TH1D("H_ssyfp_DUMMY","SHMS yfp; ssyfp;", 300, -20.0, 20.0);
+  TH1D *H_ssyfp_SIMC    = new TH1D("H_ssyfp_SIMC","SHMS yfp; ssyfp;", 300, -20.0, 20.0);
+
+  TH1D *H_ssxpfp_DATA   = new TH1D("H_ssxpfp_DATA","SHMS xpfp; ssxpfp;", 300, -0.09, 0.05);
+  TH1D *H_ssxpfp_DUMMY   = new TH1D("H_ssxpfp_DUMMY","SHMS xpfp; ssxpfp;", 300, -0.09, 0.05);
+  TH1D *H_ssxpfp_SIMC   = new TH1D("H_ssxpfp_SIMC","SHMS xpfp; ssxpfp;", 300, -0.09, 0.05);
+
+  TH1D *H_ssypfp_DATA   = new TH1D("H_ssypfp_DATA","SHMS ypfp; ssypfp;", 300, -0.05, 0.04);
+  TH1D *H_ssypfp_DUMMY   = new TH1D("H_ssypfp_DUMMY","SHMS ypfp; ssypfp;", 300, -0.05, 0.04);
+  TH1D *H_ssypfp_SIMC   = new TH1D("H_ssypfp_SIMC","SHMS ypfp; ssypfp;", 300, -0.05, 0.04);
+
+  TH1D *H_hsxfp_DATA    = new TH1D("H_hsxfp_DATA","HMS xfp; hsxfp;", 300, -40.0, 40.0);
+  TH1D *H_hsxfp_DUMMY    = new TH1D("H_hsxfp_DUMMY","HMS xfp; hsxfp;", 300, -40.0, 40.0);
+  TH1D *H_hsxfp_SIMC    = new TH1D("H_hsxfp_SIMC","HMS xfp; hsxfp;", 300, -40.0, 40.0);
+
+  TH1D *H_hsyfp_DATA    = new TH1D("H_hsyfp_DATA","HMS yfp; hsyfp;", 300, -20.0, 20.0);
+  TH1D *H_hsyfp_DUMMY    = new TH1D("H_hsyfp_DUMMY","HMS yfp; hsyfp;", 300, -20.0, 20.0);
+  TH1D *H_hsyfp_SIMC    = new TH1D("H_hsyfp_SIMC","HMS yfp; hsyfp;", 300, -20.0, 20.0);
+
+  TH1D *H_hsxpfp_DATA   = new TH1D("H_hsxpfp_DATA","HMS xpfp; hsxpfp;", 300, -0.09, 0.05);
+  TH1D *H_hsxpfp_DUMMY   = new TH1D("H_hsxpfp_DUMMY","HMS xpfp; hsxpfp;", 300, -0.09, 0.05);
+  TH1D *H_hsxpfp_SIMC   = new TH1D("H_hsxpfp_SIMC","HMS xpfp; hsxpfp;", 300, -0.09, 0.05);
+ 
+  TH1D *H_hsypfp_DATA   = new TH1D("H_hsypfp_DATA","HMS ypfp; hsypfp;", 300, -0.05, 0.04);
+  TH1D *H_hsypfp_DUMMY   = new TH1D("H_hsypfp_DUMMY","HMS ypfp; hsypfp;", 300, -0.05, 0.04);
+  TH1D *H_hsypfp_SIMC   = new TH1D("H_hsypfp_SIMC","HMS ypfp; hsypfp;", 300, -0.05, 0.04);
+
+  TH1D *H_ssdelta_DATA  = new TH1D("H_ssdelta_DATA","SHMS delta; ssdelta;", 300, -20.0, 20.0);
+  TH1D *H_ssdelta_DUMMY  = new TH1D("H_ssdelta_DUMMY","SHMS delta; ssdelta;", 300, -20.0, 20.0);
+  TH1D *H_ssdelta_SIMC  = new TH1D("H_ssdelta_SIMC","SHMS delta; ssdelta;", 300, -20.0, 20.0);
+
+  TH1D *H_ssxptar_DATA  = new TH1D("H_ssxptar_DATA","SHMS xptar; ssxptar;", 300, -0.05, 0.05);
+  TH1D *H_ssxptar_DUMMY  = new TH1D("H_ssxptar_DUMMY","SHMS xptar; ssxptar;", 300, -0.05, 0.05);
+  TH1D *H_ssxptar_SIMC  = new TH1D("H_ssxptar_SIMC","SHMS xptar; ssxptar;", 300, -0.05, 0.05);
+
+  TH1D *H_ssyptar_DATA  = new TH1D("H_ssyptar_DATA","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
+  TH1D *H_ssyptar_DUMMY  = new TH1D("H_ssyptar_DUMMY","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
+  TH1D *H_ssyptar_SIMC  = new TH1D("H_ssyptar_SIMC","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
+
+  TH1D *H_q_DATA        = new TH1D("H_q_DATA","q; q;", 300, 5.0, 7.0);
+  TH1D *H_q_DUMMY        = new TH1D("H_q_DUMMY","q; q;", 300, 5.0, 7.0);
+  TH1D *H_q_SIMC        = new TH1D("H_q_SIMC","q; q;", 300, 5.0, 7.0);
+
+  TH1D *H_Q2_DATA       = new TH1D("H_Q2_DATA","Q2; Q2;", 300, 2.0, 5.0);  
+  TH1D *H_Q2_DUMMY       = new TH1D("H_Q2_DUMMY","Q2; Q2;", 300, 2.0, 5.0);  
+  TH1D *H_Q2_SIMC       = new TH1D("H_Q2_SIMC","Q2; Q2;", 300, 2.0, 5.0);  
+
+  TH1D *H_epsilon_DATA  = new TH1D("H_epsilon_DATA","epsilon; epsilon;", 300, 0.5, 1.0);
+  TH1D *H_epsilon_DUMMY  = new TH1D("H_epsilon_DUMMY","epsilon; epsilon;", 300, 0.5, 1.0);
+  TH1D *H_epsilon_SIMC  = new TH1D("H_epsilon_SIMC","epsilon; epsilon;", 300, 0.5, 1.0);
+
+  TH1D *H_MMp_DATA  = new TH1D("H_MMp_DATA","MMp ; MMp;", 300, -0.005, 0.005);
+  TH1D *H_MMp_DUMMY  = new TH1D("H_MMp_DUMMY","MMp ; MMp;", 300, -0.005, 0.005);
+  TH1D *H_MMp_SIMC  = new TH1D("H_MMp_SIMC","MMp ; MMp;", 300, -0.005, 0.005);
+ 
+  TH1D *H_th_DATA  = new TH1D("H_th_DATA","X' tar; P_gtr_xp;", 300, -0.1, 0.1);
+  TH1D *H_th_DUMMY  = new TH1D("H_th_DUMMY","X' tar; P_gtr_xp;", 300, -0.1, 0.1);
+  TH1D *H_th_SIMC  = new TH1D("H_th_SIMC","H_th_simc; ssxptar;", 300, -0.1, 0.1);
+
+  TH1D *H_ph_DATA  = new TH1D("H_ph_DATA","Y' tar; P_gtr_yp;", 300, -0.1, 0.1);
+  TH1D *H_ph_DUMMY  = new TH1D("H_ph_DUMMY","Y' tar; P_gtr_yp;", 300, -0.1, 0.1);
+  TH1D *H_ph_SIMC  = new TH1D("H_ph_SIMC","H_ph_simc; ssyptar;", 300, -0.1, 0.1);
+
+  TH1D *H_pmiss_DATA  = new TH1D("H_pmiss_DATA","pmiss; pm;", 300, -0.1, 0.4);
+  TH1D *H_pmiss_DUMMY  = new TH1D("H_pmiss_DUMMY","pmiss; pm;", 300, -0.1, 0.4);
+  TH1D *H_pmiss_SIMC  = new TH1D("H_pmiss_SIMC","pmiss; pm;", 300, -0.1, 0.4);
+
+  TH1D *H_emiss_DATA  = new TH1D("H_emiss_DATA","emiss; emiss;", 300, -0.1, 0.4);
+  TH1D *H_emiss_DUMMY  = new TH1D("H_emiss_DUMMY","emiss; emiss;", 300, -0.1, 0.4);
+  TH1D *H_emiss_SIMC  = new TH1D("H_emiss_SIMC","emiss; emiss;", 300, -0.1, 0.4);
+ 
+  TH1D *H_pmx_DATA  = new TH1D("H_pmx_DATA","pmx; pmx;", 300, -0.2, 0.2);
+  TH1D *H_pmx_DUMMY  = new TH1D("H_pmx_DUMMY","pmx; pmx;", 300, -0.2, 0.2);
+  TH1D *H_pmx_SIMC  = new TH1D("H_pmx_SIMC","pmx; pmx;", 300, -0.2, 0.2);
+
+  TH1D *H_pmy_DATA  = new TH1D("H_pmy_DATA","pmy ; pmy;", 300, -0.2, 0.2);
+  TH1D *H_pmy_DUMMY  = new TH1D("H_pmy_DUMMY","pmy ; pmy;", 300, -0.2, 0.2);
+  TH1D *H_pmy_SIMC  = new TH1D("H_pmy_SIMC","pmy; pmy;", 300, -0.2, 0.2);
+
+  TH1D *H_pmz_DATA  = new TH1D("H_pmz_DATA","pmz; pmz;", 300, -0.2, 0.2);
+  TH1D *H_pmz_DUMMY  = new TH1D("H_pmz_DUMMY","pmz; pmz;", 300, -0.2, 0.2);
+  TH1D *H_pmz_SIMC  = new TH1D("H_pmz_SIMC","pmz; pmz;", 300, -0.2, 0.2);
+
+  TH1D *H_W_DATA  = new TH1D("H_W_DATA","W ; W;", 300, 0.5, 1.5);
+  TH1D *H_W_DUMMY  = new TH1D("H_W_DUMMY","W ; W;", 300, 0.5, 1.5);
+  TH1D *H_W_SIMC  = new TH1D("H_W_SIMC","W; W;", 300, 0.5, 1.5);
+  
   for(Long64_t i = 0; i < nEntries_TBRANCH_SIMC; i++)
     {
       TBRANCH_SIMC->GetEntry(i);
@@ -369,7 +391,136 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
 	  H_MMp_SIMC->Fill((pow(Em, 2) - pow(Pm, 2)));  
 	}
     }
-  
+
+  for(Long64_t i = 0; i < nEntries_TBRANCH_DATA; i++)
+    {
+      TBRANCH_DATA->GetEntry(i);
+
+      //......... Define Cuts.................
+      Double_t SHMS_FixCut;             
+      Double_t SHMS_Acceptance;
+      Double_t epcointime;             
+      Double_t PION_PID;                   
+      Double_t KAON_PID;            
+      Double_t SHMS_ELECTRON_PID;
+
+      Double_t HMS_FixCut;             
+      Double_t HMS_Acceptance;
+      Double_t HMS_ELECTRON_PID;
+
+      //CUTs Definations 
+      SHMS_FixCut = P_hod_goodstarttime_data == 1&&P_dc_InsideDipoleExit_data == 1; // && P_hod_betanotrack_data > 0.5 && P_hod_betanotrack_data < 1.4;
+      SHMS_Acceptance = P_gtr_dp_data>=-10.0 && P_gtr_dp_data<=20.0&&P_gtr_xptar_data>=-0.06&&P_gtr_xptar_data<=0.06&&P_gtr_yptar_data>=-0.04&&P_gtr_yptar_data<=0.04;
+      SHMS_ELECTRON_PID = P_cal_etottracknorm_data >= 0.85 && P_cal_etottracknorm_data <= 1.2; // P_hgcer_npeSum_data >=0.5 && P_aero_npeSum_data >=0.5;
+
+      HMS_FixCut = H_hod_goodscinhit_data == 1 && H_hod_goodstarttime_data == 1&&H_dc_InsideDipoleExit_data == 1;
+      HMS_Acceptance = H_gtr_dp_data>=-8.0 && H_gtr_dp_data<=8.0&&H_gtr_xptar_data>=-0.08&&H_gtr_xptar_data<=0.08&&H_gtr_yptar_data>=-0.045&&H_gtr_yptar_data<=0.045;       
+      HMS_ELECTRON_PID = H_cer_npeSum_data >=0.5 && H_cal_etotnorm_data >=0.8 && H_cal_etotnorm_data <=1.2;
+ 
+      //........................................
+
+      //if(SHMS_FixCut && SHMS_Acceptance && SHMS_ELECTRON_PID) 
+      if(SHMS_FixCut && SHMS_Acceptance) 
+	{
+	  H_ssxfp_DATA->Fill(ssxfp_data);
+	  H_ssyfp_DATA->Fill(ssyfp_data);
+	  H_ssxpfp_DATA->Fill(ssxpfp_data);
+	  H_ssypfp_DATA->Fill(ssypfp_data);
+	  H_ssdelta_DATA->Fill(ssdelta_data);
+	  H_ssxptar_DATA->Fill(ssxptar_data);
+	  H_ssyptar_DATA->Fill(ssyptar_data);
+
+	}
+
+      //if(HMS_FixCut && HMS_Acceptance && HMS_ELECTRON_PID)
+      if(HMS_FixCut && HMS_Acceptance)
+	{
+	  H_pmiss_DATA->Fill(pm_data);	
+	  H_emiss_DATA->Fill(em_data);	
+	  H_pmx_DATA->Fill(pmx_data);
+	  H_pmy_DATA->Fill(pmy_data);
+	  H_pmz_DATA->Fill(pmz_data);
+	  H_Q2_DATA->Fill(Q2_data);
+	  H_W_DATA->Fill(W_data);
+	  H_epsilon_DATA->Fill(epsilon_data);
+	  H_MMp_DATA->Fill((pow(em_data, 2) - pow(pm_data, 2)));  
+	  //H_MMp_DATA->Fill(MMp_data);  
+
+	  H_hsxfp_DATA->Fill(hsxfp_data);
+	  H_hsyfp_DATA->Fill(hsyfp_data);
+	  H_hsxpfp_DATA->Fill(hsxpfp_data);
+	  H_hsypfp_DATA->Fill(hsypfp_data);
+	  H_hsdelta_DATA->Fill(hsdelta_data);
+	  H_hsxptar_DATA->Fill(hsxptar_data);	
+	  H_hsyptar_DATA->Fill(hsyptar_data);
+	}
+
+    }
+
+  for(Long64_t i = 0; i < nEntries_TBRANCH_DUMMY; i++)
+    {
+      TBRANCH_DUMMY->GetEntry(i);
+
+      //......... Define Cuts.................
+      Double_t SHMS_FixCut;             
+      Double_t SHMS_Acceptance;
+      Double_t epcointime;             
+      Double_t PION_PID;                   
+      Double_t KAON_PID;            
+      Double_t SHMS_ELECTRON_PID;
+
+      Double_t HMS_FixCut;             
+      Double_t HMS_Acceptance;
+      Double_t HMS_ELECTRON_PID;
+
+      //CUTs Definations 
+      SHMS_FixCut = P_hod_goodstarttime_dummy == 1&&P_dc_InsideDipoleExit_dummy == 1; // && P_hod_betanotrack_dummy > 0.5 && P_hod_betanotrack_dummy < 1.4;
+      SHMS_Acceptance = P_gtr_dp_dummy>=-10.0 && P_gtr_dp_dummy<=20.0&&P_gtr_xptar_dummy>=-0.06&&P_gtr_xptar_dummy<=0.06&&P_gtr_yptar_dummy>=-0.04&&P_gtr_yptar_dummy<=0.04;
+      SHMS_ELECTRON_PID = P_cal_etottracknorm_dummy >= 0.85 && P_cal_etottracknorm_dummy <= 1.2; // P_hgcer_npeSum_dummy >=0.5 && P_aero_npeSum_dummy >=0.5;
+
+      HMS_FixCut = H_hod_goodscinhit_dummy == 1 && H_hod_goodstarttime_dummy == 1&&H_dc_InsideDipoleExit_dummy == 1;
+      HMS_Acceptance = H_gtr_dp_dummy>=-8.0 && H_gtr_dp_dummy<=8.0&&H_gtr_xptar_dummy>=-0.08&&H_gtr_xptar_dummy<=0.08&&H_gtr_yptar_dummy>=-0.045&&H_gtr_yptar_dummy<=0.045;       
+      HMS_ELECTRON_PID = H_cer_npeSum_dummy >=0.5 && H_cal_etotnorm_dummy >=0.8 && H_cal_etotnorm_dummy <=1.2;
+ 
+      //........................................
+
+      //if(SHMS_FixCut && SHMS_Acceptance && SHMS_ELECTRON_PID) 
+      if(SHMS_FixCut && SHMS_Acceptance) 
+	{
+	  H_ssxfp_DUMMY->Fill(ssxfp_dummy);
+	  H_ssyfp_DUMMY->Fill(ssyfp_dummy);
+	  H_ssxpfp_DUMMY->Fill(ssxpfp_dummy);
+	  H_ssypfp_DUMMY->Fill(ssypfp_dummy);
+	  H_ssdelta_DUMMY->Fill(ssdelta_dummy);
+	  H_ssxptar_DUMMY->Fill(ssxptar_dummy);
+	  H_ssyptar_DUMMY->Fill(ssyptar_dummy);
+
+	}
+
+      //if(HMS_FixCut && HMS_Acceptance && HMS_ELECTRON_PID)
+      if(HMS_FixCut && HMS_Acceptance)
+	{
+	  H_pmiss_DUMMY->Fill(pm_dummy);	
+	  H_emiss_DUMMY->Fill(em_dummy);	
+	  H_pmx_DUMMY->Fill(pmx_dummy);
+	  H_pmy_DUMMY->Fill(pmy_dummy);
+	  H_pmz_DUMMY->Fill(pmz_dummy);
+	  H_Q2_DUMMY->Fill(Q2_dummy);
+	  H_W_DUMMY->Fill(W_dummy);
+	  H_epsilon_DUMMY->Fill(epsilon_dummy);
+	  H_MMp_DUMMY->Fill((pow(em_dummy, 2) - pow(pm_dummy, 2)));  
+	  //H_MMp_DUMMY->Fill(MMp_dummy);  
+
+	  H_hsxfp_DUMMY->Fill(hsxfp_dummy);
+	  H_hsyfp_DUMMY->Fill(hsyfp_dummy);
+	  H_hsxpfp_DUMMY->Fill(hsxpfp_dummy);
+	  H_hsypfp_DUMMY->Fill(hsypfp_dummy);
+	  H_hsdelta_DUMMY->Fill(hsdelta_dummy);
+	  H_hsxptar_DUMMY->Fill(hsxptar_dummy);	
+	  H_hsyptar_DUMMY->Fill(hsyptar_dummy);
+	}
+
+    }
   
   // Dummy Subtraction
   H_ssxfp_DATA->Add(H_ssxfp_DUMMY,-1);
@@ -539,7 +690,7 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
   TCanvas *Cpmiss = new TCanvas("Cpmiss", "pmiss");
   H_pmiss_DATA->SetLineColor(kRed);
 
-  H_MMp_SIMC->Draw("");
+  H_pmiss_SIMC->Draw("");
   H_pmiss_DATA->Draw("same");
 
   Cpmiss->Print(outputpdf);

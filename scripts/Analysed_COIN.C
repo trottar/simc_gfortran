@@ -37,10 +37,15 @@ void Analysed_COIN(string InDATAFilename = "", string OutFilename = "")
 
   // Set paths depending on system you're running on
   if(Hostname.Contains("farm")){
-    Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
+    //    Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
     // Output path for root file
-    ROOTfilePath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/HeeP";
-    OutPath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/HeeP";
+    //    ROOTfilePath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/HeeP";
+    //    OutPath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/HeeP";
+
+    Replaypath = "/group/c-kaonlt/USERS/"+User+"/simc_gfortran";
+    // Output path for root file
+    ROOTfilePath = Replaypath+"/OUTPUTS/";
+    OutPath = Replaypath+"/OUTPUTS/";
   }
   else if(Hostname.Contains("qcd")){
     Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
@@ -51,6 +56,11 @@ void Analysed_COIN(string InDATAFilename = "", string OutFilename = "")
   else if (Hostname.Contains("phys.uregina.ca")){
     ROOTfilePath = "/home/vijay/work/HeepCoinStudy/";
     OutPath = "/home/vijay/work/HeepCoinStudy/";
+  }
+
+  if(InDATAFilename == "") {
+    cout << "Enter a input File: ";
+    cin >> InDATAFilename; 
   }
 
   if(OutFilename == "") {

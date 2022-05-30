@@ -40,10 +40,15 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
 
   // Set paths depending on system you're running on
   if(Hostname.Contains("farm")){
-    Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
+    //    Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
     // Output path for root file
-    ROOTfilePath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/HeeP";
-    OutPath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/HeeP";
+    //    ROOTfilePath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/HeeP";
+    //    OutPath = Replaypath+"/UTIL_KAONLT/OUTPUT/Analysis/HeeP";
+
+    Replaypath = "/group/c-kaonlt/USERS/"+User+"/simc_gfortran";
+    // Output path for root filw
+    ROOTfilePath = Replaypath+"/OUTPUTS/";
+    OutPath = Replaypath+"/OUTPUTS/";
   }
   else if(Hostname.Contains("qcd")){
     Replaypath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt";
@@ -254,9 +259,9 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
   TH1D *H_ssyfp_DUMMY    = new TH1D("H_ssyfp_DUMMY","SHMS yfp; ssyfp;", 300, -20.0, 20.0);
   TH1D *H_ssyfp_SIMC    = new TH1D("H_ssyfp_SIMC","SHMS yfp; ssyfp;", 300, -20.0, 20.0);
 
-  TH1D *H_ssxpfp_DATA   = new TH1D("H_ssxpfp_DATA","SHMS xpfp; ssxpfp;", 300, -0.09, 0.05);
-  TH1D *H_ssxpfp_DUMMY   = new TH1D("H_ssxpfp_DUMMY","SHMS xpfp; ssxpfp;", 300, -0.09, 0.05);
-  TH1D *H_ssxpfp_SIMC   = new TH1D("H_ssxpfp_SIMC","SHMS xpfp; ssxpfp;", 300, -0.09, 0.05);
+  TH1D *H_ssxpfp_DATA   = new TH1D("H_ssxpfp_DATA","SHMS xpfp; ssxpfp;", 300, -0.09, 0.09);
+  TH1D *H_ssxpfp_DUMMY   = new TH1D("H_ssxpfp_DUMMY","SHMS xpfp; ssxpfp;", 300, -0.09, 0.09);
+  TH1D *H_ssxpfp_SIMC   = new TH1D("H_ssxpfp_SIMC","SHMS xpfp; ssxpfp;", 300, -0.09, 0.09);
 
   TH1D *H_ssypfp_DATA   = new TH1D("H_ssypfp_DATA","SHMS ypfp; ssypfp;", 300, -0.05, 0.04);
   TH1D *H_ssypfp_DUMMY   = new TH1D("H_ssypfp_DUMMY","SHMS ypfp; ssypfp;", 300, -0.05, 0.04);
@@ -282,9 +287,9 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
   TH1D *H_ssdelta_DUMMY  = new TH1D("H_ssdelta_DUMMY","SHMS delta; ssdelta;", 300, -20.0, 20.0);
   TH1D *H_ssdelta_SIMC  = new TH1D("H_ssdelta_SIMC","SHMS delta; ssdelta;", 300, -20.0, 20.0);
 
-  TH1D *H_ssxptar_DATA  = new TH1D("H_ssxptar_DATA","SHMS xptar; ssxptar;", 300, -0.05, 0.05);
-  TH1D *H_ssxptar_DUMMY  = new TH1D("H_ssxptar_DUMMY","SHMS xptar; ssxptar;", 300, -0.05, 0.05);
-  TH1D *H_ssxptar_SIMC  = new TH1D("H_ssxptar_SIMC","SHMS xptar; ssxptar;", 300, -0.05, 0.05);
+  TH1D *H_ssxptar_DATA  = new TH1D("H_ssxptar_DATA","SHMS xptar; ssxptar;", 300, -0.1, 0.1);
+  TH1D *H_ssxptar_DUMMY  = new TH1D("H_ssxptar_DUMMY","SHMS xptar; ssxptar;", 300, -0.1, 0.1);
+  TH1D *H_ssxptar_SIMC  = new TH1D("H_ssxptar_SIMC","SHMS xptar; ssxptar;", 300, -0.1, 0.1);
 
   TH1D *H_ssyptar_DATA  = new TH1D("H_ssyptar_DATA","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
   TH1D *H_ssyptar_DUMMY  = new TH1D("H_ssyptar_DUMMY","SHMS yptar; ssyptar;", 300, -0.04, 0.04);
@@ -294,9 +299,9 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
   TH1D *H_q_DUMMY        = new TH1D("H_q_DUMMY","q; q;", 300, 5.0, 7.0);
   TH1D *H_q_SIMC        = new TH1D("H_q_SIMC","q; q;", 300, 5.0, 7.0);
 
-  TH1D *H_Q2_DATA       = new TH1D("H_Q2_DATA","Q2; Q2;", 300, 2.0, 5.0);  
-  TH1D *H_Q2_DUMMY       = new TH1D("H_Q2_DUMMY","Q2; Q2;", 300, 2.0, 5.0);  
-  TH1D *H_Q2_SIMC       = new TH1D("H_Q2_SIMC","Q2; Q2;", 300, 2.0, 5.0);  
+  TH1D *H_Q2_DATA       = new TH1D("H_Q2_DATA","Q2; Q2;", 300, 1.5, 8.0);  
+  TH1D *H_Q2_DUMMY       = new TH1D("H_Q2_DUMMY","Q2; Q2;", 300, 1.5, 8.0);  
+  TH1D *H_Q2_SIMC       = new TH1D("H_Q2_SIMC","Q2; Q2;", 300, 1.5, 8.0);  
 
   TH1D *H_epsilon_DATA  = new TH1D("H_epsilon_DATA","epsilon; epsilon;", 300, 0.5, 1.0);
   TH1D *H_epsilon_DUMMY  = new TH1D("H_epsilon_DUMMY","epsilon; epsilon;", 300, 0.5, 1.0);
@@ -366,29 +371,29 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
 
       if(CUT1 && CUT2 && CUT3 && CUT4 && CUT5 && CUT6)
 	{
-	  H_ssxfp_SIMC->Fill(ssxfp);
-	  H_ssyfp_SIMC->Fill(ssyfp);
-	  H_ssxpfp_SIMC->Fill(ssxpfp);
-	  H_ssypfp_SIMC->Fill(ssypfp);
-	  H_hsxfp_SIMC->Fill(hsxfp);
-	  H_hsyfp_SIMC->Fill(hsyfp);
-	  H_hsxpfp_SIMC->Fill(hsxpfp);
-	  H_hsypfp_SIMC->Fill(hsypfp);
-	  H_ssdelta_SIMC->Fill(ssdelta); 
-	  H_hsdelta_SIMC->Fill(hsdelta);	
-	  H_ssxptar_SIMC->Fill(ssxptar);
-	  H_ssyptar_SIMC->Fill(ssyptar);
-	  H_hsxptar_SIMC->Fill(hsxptar);	
-	  H_hsyptar_SIMC->Fill(hsyptar);	
-	  H_pmiss_SIMC->Fill(Pm);	
-	  H_emiss_SIMC->Fill(Em);	
-	  H_pmx_SIMC->Fill(Pmx);
-	  H_pmy_SIMC->Fill(Pmy);
-	  H_pmz_SIMC->Fill(Pmz);
-	  H_Q2_SIMC->Fill(Q2_simc);
-	  H_W_SIMC->Fill(W_simc);
-	  H_epsilon_SIMC->Fill(epsilon_simc);
-	  H_MMp_SIMC->Fill((pow(Em, 2) - pow(Pm, 2)));  
+	  H_ssxfp_SIMC->Fill(ssxfp, Weight);
+	  H_ssyfp_SIMC->Fill(ssyfp, Weight);
+	  H_ssxpfp_SIMC->Fill(ssxpfp, Weight);
+	  H_ssypfp_SIMC->Fill(ssypfp, Weight);
+	  H_hsxfp_SIMC->Fill(hsxfp, Weight);
+	  H_hsyfp_SIMC->Fill(hsyfp, Weight);
+	  H_hsxpfp_SIMC->Fill(hsxpfp, Weight);
+	  H_hsypfp_SIMC->Fill(hsypfp, Weight);
+	  H_ssdelta_SIMC->Fill(ssdelta, Weight); 
+	  H_hsdelta_SIMC->Fill(hsdelta, Weight);	
+	  H_ssxptar_SIMC->Fill(ssxptar, Weight);
+	  H_ssyptar_SIMC->Fill(ssyptar, Weight);
+	  H_hsxptar_SIMC->Fill(hsxptar, Weight);	
+	  H_hsyptar_SIMC->Fill(hsyptar, Weight);	
+	  H_pmiss_SIMC->Fill(Pm, Weight);	
+	  H_emiss_SIMC->Fill(Em, Weight);	
+	  H_pmx_SIMC->Fill(Pmx, Weight);
+	  H_pmy_SIMC->Fill(Pmy, Weight);
+	  H_pmz_SIMC->Fill(Pmz, Weight);
+	  H_Q2_SIMC->Fill(Q2_simc, Weight);
+	  H_W_SIMC->Fill(W_simc, Weight);
+	  H_epsilon_SIMC->Fill(epsilon_simc, Weight);
+	  H_MMp_SIMC->Fill((pow(Em, 2) - pow(Pm, 2)), Weight);  
 	}
     }
 
@@ -521,7 +526,91 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
 	}
 
     }
-  
+
+  //  Double_t simc_wgt = 0.131105E-04;
+  Double_t simc_normfactor = 0.830037E+07;
+  Double_t simc_nevents = 200000;
+  Double_t normfac_simc = (simc_normfactor)/(simc_nevents);
+
+  H_ssxfp_SIMC->Scale(normfac_simc);                                                                                                                                   
+  H_ssyfp_SIMC->Scale(normfac_simc);                                                                                                                                  
+  H_ssxpfp_SIMC->Scale(normfac_simc);                                                                                                                              
+  H_ssypfp_SIMC->Scale(normfac_simc);                                                                                                                                      
+  H_hsxfp_SIMC->Scale(normfac_simc);                                                                                                                                              
+  H_hsyfp_SIMC->Scale(normfac_simc);                                                                                                                                               
+  H_hsxpfp_SIMC->Scale(normfac_simc);                                                                                                                                                                    
+  H_hsypfp_SIMC->Scale(normfac_simc);                                                                                                                                                                    
+  H_ssdelta_SIMC->Scale(normfac_simc);                                                                                                                                                                  
+  H_hsdelta_SIMC->Scale(normfac_simc);                                                                                                                                                                  
+  H_ssxptar_SIMC->Scale(normfac_simc);                                                                                                                                                                  
+  H_ssyptar_SIMC->Scale(normfac_simc);                                                                                                                                                                  
+  H_hsxptar_SIMC->Scale(normfac_simc);                                                                                                                                                                  
+  H_hsyptar_SIMC->Scale(normfac_simc);                                                                                                                                                                  
+  H_pmiss_SIMC->Scale(normfac_simc);                                                                                                                                        
+  H_emiss_SIMC->Scale(normfac_simc);                                                                                                                                            
+  H_pmx_SIMC->Scale(normfac_simc);                                                                                                                                                
+  H_pmy_SIMC->Scale(normfac_simc);                                                                                                                                                
+  H_pmz_SIMC->Scale(normfac_simc);                                                                                                                                                
+  H_Q2_SIMC->Scale(normfac_simc);                                                                                                                                                 
+  H_W_SIMC->Scale(normfac_simc);                                                                                                                                                         
+  H_epsilon_SIMC->Scale(normfac_simc);                                                                                                                                                    
+  H_MMp_SIMC->Scale(normfac_simc);
+
+  Double_t dummy_charge = 42.096;
+  Double_t dummy_target_corr = 4.8579;
+  Double_t normfac_dummy = 1/(dummy_charge*dummy_target_corr);
+
+  H_ssxfp_DUMMY->Scale(normfac_dummy);
+  H_ssyfp_DUMMY->Scale(normfac_dummy);
+  H_ssxpfp_DUMMY->Scale(normfac_dummy);
+  H_ssypfp_DUMMY->Scale(normfac_dummy);
+  H_hsxfp_DUMMY->Scale(normfac_dummy);
+  H_hsyfp_DUMMY->Scale(normfac_dummy);
+  H_hsxpfp_DUMMY->Scale(normfac_dummy);
+  H_hsypfp_DUMMY->Scale(normfac_dummy);
+  H_ssxptar_DUMMY->Scale(normfac_dummy);
+  H_ssyptar_DUMMY->Scale(normfac_dummy);
+  H_hsxptar_DUMMY->Scale(normfac_dummy);
+  H_hsyptar_DUMMY->Scale(normfac_dummy);
+  H_ssdelta_DUMMY->Scale(normfac_dummy);
+  H_hsdelta_DUMMY->Scale(normfac_dummy);
+  H_Q2_DUMMY->Scale(normfac_dummy);
+  H_epsilon_DUMMY->Scale(normfac_dummy);
+  H_MMp_DUMMY->Scale(normfac_dummy);
+  H_pmiss_DUMMY->Scale(normfac_dummy);
+  H_emiss_DUMMY->Scale(normfac_dummy);
+  H_pmx_DUMMY->Scale(normfac_dummy);
+  H_pmy_DUMMY->Scale(normfac_dummy);
+  H_pmz_DUMMY->Scale(normfac_dummy);
+  H_W_DUMMY->Scale(normfac_dummy);
+
+  Double_t data_charge = 542.499;
+  Double_t normfac_data = 1/(data_charge);
+
+  H_ssxfp_DATA->Scale(normfac_data);
+  H_ssyfp_DATA->Scale(normfac_data);
+  H_ssxpfp_DATA->Scale(normfac_data);
+  H_ssypfp_DATA->Scale(normfac_data);
+  H_hsxfp_DATA->Scale(normfac_data);
+  H_hsyfp_DATA->Scale(normfac_data);
+  H_hsxpfp_DATA->Scale(normfac_data);
+  H_hsypfp_DATA->Scale(normfac_data);
+  H_ssxptar_DATA->Scale(normfac_data);
+  H_ssyptar_DATA->Scale(normfac_data);
+  H_hsxptar_DATA->Scale(normfac_data);
+  H_hsyptar_DATA->Scale(normfac_data);
+  H_ssdelta_DATA->Scale(normfac_data);
+  H_hsdelta_DATA->Scale(normfac_data);
+  H_Q2_DATA->Scale(normfac_data);
+  H_epsilon_DATA->Scale(normfac_data);
+  H_MMp_DATA->Scale(normfac_data);
+  H_pmiss_DATA->Scale(normfac_data);
+  H_emiss_DATA->Scale(normfac_data);
+  H_pmx_DATA->Scale(normfac_data);
+  H_pmy_DATA->Scale(normfac_data);
+  H_pmz_DATA->Scale(normfac_data);
+  H_W_DATA->Scale(normfac_data);
+
   // Dummy Subtraction
   H_ssxfp_DATA->Add(H_ssxfp_DUMMY,-1);
   H_ssyfp_DATA->Add(H_ssyfp_DUMMY,-1);

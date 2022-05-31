@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 14:19:38 trottar"
+# Time-stamp: "2022-05-31 14:42:32 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -59,8 +59,8 @@ USER = "trottar"
 HOST = "ifarm"
 UTILPATH = "/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT" % USER
 REPLAYPATH = "/group/c-kaonlt/USERS/%s/simc_gfortran" % USER
-ROOTfilePath = "%s/OUTPUTS/" % REPLAYPATH
-OutPath = "%s/OUTPUTS/" % REPLAYPATH
+ROOTfilePath = "%s/OUTPUTS" % REPLAYPATH
+OutPath = "%s/OUTPUTS" % REPLAYPATH
 
 rootFile = ROOTfilePath+"/"+InDATAFilename
 rootFile_DUMMY = ROOTfilePath+"/"+InDUMMYFilename

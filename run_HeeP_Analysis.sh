@@ -10,7 +10,7 @@ OutDUMMYFilename="${KIN}_Analysed_DummyData"
 OutFullAnalysisFilename="${KIN}_FullAnalysis"
 
 cd scripts
-root <<EOF
+root -l <<EOF
 .Analysis_COIN.C($InDATAFilename,$OutDATAFilename)
 EOF
 root <<EOF

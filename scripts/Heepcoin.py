@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 13:25:14 trottar"
+# Time-stamp: "2022-05-31 13:25:48 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -73,6 +73,7 @@ outputpdf  = OutPath+"/" + OutFilename + ".pdf"
 simc_hist = "%s/OUTPUTS/Heep_Coin_10p6.hist" % REPLAYPATH
 f_simc = open(simc_hist)
 for line in f_simc:
+    print(line)
     if "Ngen" in line:
         val = line.split("=")
         simc_nevents = int(val[1])

@@ -2,7 +2,7 @@
 
 KIN=$1
 
-ANA_DIR="/group/c-kaonlt/USERS/${USER}/simc_gfortran/scripts/"
+ANA_DIR="/group/c-kaonlt/USERS/${USER}/simc_gfortran/scripts"
 
 InDATAFilename="${KIN}_Raw_Data.root"
 InDUMMYFilename="${KIN}_Raw_DummyData.root"
@@ -13,7 +13,7 @@ OutFullAnalysisFilename="${KIN}_FullAnalysis"
 
 cd $ANA_DIR
 pwd
-eval "root -l -q \"${ANA_DIR}Analysed_COIN.C(${InDATAFilename},${OutDATAFilename})\""
-eval "root -l -q \"${ANA_DIR}Analysed_COIN.C(${InDUMMYFilename},${OutDUMMYFilename})\""
+eval "root -l -q \"$ANA_DIR/Analysed_COIN.C($InDATAFilename,$OutDATAFilename)\""
+eval "root -l -q \"$ANA_DIR/Analysed_COIN.C($InDUMMYFilename,$OutDUMMYFilename)\""
 
 python3 HeepCoin.py "${OutDATAFilename}.root" "${OutDUMMYFilename}.root" ${InSIMCFilename} ${OutFullAnalysisFilename}

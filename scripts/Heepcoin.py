@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 13:01:40 trottar"
+# Time-stamp: "2022-05-31 13:04:40 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -372,50 +372,50 @@ for evt in TBRANCH_DATA:
   #TBRANCH_DATA.GetEntry(i)
 
   #CUTs Definations 
-  SHMS_FixCut = (P_hod_goodstarttime_data == 1) & (P_dc_InsideDipoleExit_data == 1) # & P_hod_betanotrack_data > 0.5 & P_hod_betanotrack_data < 1.4
-  SHMS_Acceptance = (P_gtr_dp_data>=-10.0) & (P_gtr_dp_data<=20.0) & (P_gtr_xptar_data>=-0.06) & (P_gtr_xptar_data<=0.06) & (P_gtr_yptar_data>=-0.04) & (P_gtr_yptar_data<=0.04)
-  SHMS_ELECTRON_PID = (P_cal_etottracknorm_data >= 0.85) & (P_cal_etottracknorm_data <= 1.2) # P_hgcer_npeSum_data >=0.5 & P_aero_npeSum_data >=0.5
+  SHMS_FixCut = (evt.P_hod_goodstarttime == 1) & (evt.P_dc_InsideDipoleExit == 1) # & P_hod_betanotrack > 0.5 & P_hod_betanotrack < 1.4
+  SHMS_Acceptance = (evt.P_gtr_dp>=-10.0) & (evt.P_gtr_dp<=20.0) & (evt.P_gtr_xptar>=-0.06) & (evt.P_gtr_xptar<=0.06) & (evt.P_gtr_yptar>=-0.04) & (evt.P_gtr_yptar<=0.04)
+  SHMS_ELECTRON_PID = (evt.P_cal_etottracknorm >= 0.85) & (evt.P_cal_etottracknorm <= 1.2) # evt.P_hgcer_npeSum >=0.5 & evt.P_aero_npeSum >=0.5
 
-  HMS_FixCut = (H_hod_goodscinhit_data == 1) & (H_hod_goodstarttime_data == 1) & (H_dc_InsideDipoleExit_data == 1)
-  HMS_Acceptance = (H_gtr_dp_data>=-8.0) & (H_gtr_dp_data<=8.0) & (H_gtr_xptar_data>=-0.08) & (H_gtr_xptar_data<=0.08) & (H_gtr_yptar_data>=-0.045) & (H_gtr_yptar_data<=0.045)       
-  HMS_ELECTRON_PID = (H_cer_npeSum_data >=0.5) & (H_cal_etotnorm_data >=0.8) & (H_cal_etotnorm_data <=1.2)
+  HMS_FixCut = (evt.H_hod_goodscinhit == 1) & (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
+  HMS_Acceptance = (evt.H_gtr_dp>=-8.0) & (evt.H_gtr_dp<=8.0) & (evt.H_gtr_xptar>=-0.08) & (evt.H_gtr_xptar<=0.08) & (evt.H_gtr_yptar>=-0.045) & (evt.H_gtr_yptar<=0.045)       
+  HMS_ELECTRON_PID = (evt.H_cer_npeSum >=0.5) & (evt.H_cal_etotnorm >=0.8) & (evt.H_cal_etotnorm <=1.2)
 
   #........................................
 
   #if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID) 
   if(SHMS_FixCut & SHMS_Acceptance):
     
-      H_ssxfp_DATA.Fill(ssxfp_data)
-      H_ssyfp_DATA.Fill(ssyfp_data)
-      H_ssxpfp_DATA.Fill(ssxpfp_data)
-      H_ssypfp_DATA.Fill(ssypfp_data)
-      H_ssdelta_DATA.Fill(ssdelta_data)
-      H_ssxptar_DATA.Fill(ssxptar_data)
-      H_ssyptar_DATA.Fill(ssyptar_data)
+      H_ssxfp_DATA.Fill(evt.ssxfp)
+      H_ssyfp_DATA.Fill(evt.ssyfp)
+      H_ssxpfp_DATA.Fill(evt.ssxpfp)
+      H_ssypfp_DATA.Fill(evt.ssypfp)
+      H_ssdelta_DATA.Fill(evt.ssdelta)
+      H_ssxptar_DATA.Fill(evt.ssxptar)
+      H_ssyptar_DATA.Fill(evt.ssyptar)
 
     
 
   #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
   if(HMS_FixCut & HMS_Acceptance):
     
-      H_pmiss_DATA.Fill(pm_data)	
-      H_emiss_DATA.Fill(em_data)	
-      H_pmx_DATA.Fill(pmx_data)
-      H_pmy_DATA.Fill(pmy_data)
-      H_pmz_DATA.Fill(pmz_data)
-      H_Q2_DATA.Fill(Q2_data)
-      H_W_DATA.Fill(W_data)
-      H_epsilon_DATA.Fill(epsilon_data)
-      H_MMp_DATA.Fill((pow(em_data, 2) - pow(pm_data, 2)))  
-      #H_MMp_DATA.Fill(MMp_data)  
+      H_pmiss_DATA.Fill(evt.pm)	
+      H_emiss_DATA.Fill(evt.em)	
+      H_pmx_DATA.Fill(evt.pmx)
+      H_pmy_DATA.Fill(evt.pmy)
+      H_pmz_DATA.Fill(evt.pmz)
+      H_Q2_DATA.Fill(evt.Q2)
+      H_W_DATA.Fill(evt.W)
+      H_epsilon_DATA.Fill(evt.epsilon)
+      H_MMp_DATA.Fill((pow(evt.em, 2) - pow(evt.pm, 2)))  
+      #H_MMp_DATA.Fill(evt.MMp)  
 
-      H_hsxfp_DATA.Fill(hsxfp_data)
-      H_hsyfp_DATA.Fill(hsyfp_data)
-      H_hsxpfp_DATA.Fill(hsxpfp_data)
-      H_hsypfp_DATA.Fill(hsypfp_data)
-      H_hsdelta_DATA.Fill(hsdelta_data)
-      H_hsxptar_DATA.Fill(hsxptar_data)	
-      H_hsyptar_DATA.Fill(hsyptar_data)
+      H_hsxfp_DATA.Fill(evt.hsxfp)
+      H_hsyfp_DATA.Fill(evt.hsyfp)
+      H_hsxpfp_DATA.Fill(evt.hsxpfp)
+      H_hsypfp_DATA.Fill(evt.hsypfp)
+      H_hsdelta_DATA.Fill(evt.hsdelta)
+      H_hsxptar_DATA.Fill(evt.hsxptar)	
+      H_hsyptar_DATA.Fill(evt.hsyptar)
 
 for evt in TBRANCH_DUMMY:
 
@@ -424,50 +424,50 @@ for evt in TBRANCH_DUMMY:
   #......... Define Cuts.................
 
   #CUTs Definations 
-  SHMS_FixCut = (P_hod_goodstarttime_dummy == 1) & (P_dc_InsideDipoleExit_dummy == 1) # & P_hod_betanotrack_dummy > 0.5 & P_hod_betanotrack_dummy < 1.4
-  SHMS_Acceptance = (P_gtr_dp_dummy>=-10.0) & (P_gtr_dp_dummy<=20.0) & (P_gtr_xptar_dummy>=-0.06) & (P_gtr_xptar_dummy<=0.06) & (P_gtr_yptar_dummy>=-0.04) & (P_gtr_yptar_dummy<=0.04)
-  SHMS_ELECTRON_PID = (P_cal_etottracknorm_dummy >= 0.85) & (P_cal_etottracknorm_dummy <= 1.2) # P_hgcer_npeSum_dummy >=0.5 & P_aero_npeSum_dummy >=0.5
+  SHMS_FixCut = (evt.P_hod_goodstarttime_dummy == 1) & (evt.P_dc_InsideDipoleExit_dummy == 1) # & evt.P_hod_betanotrack_dummy > 0.5 & evt.P_hod_betanotrack_dummy < 1.4
+  SHMS_Acceptance = (evt.P_gtr_dp_dummy>=-10.0) & (evt.P_gtr_dp_dummy<=20.0) & (evt.P_gtr_xptar_dummy>=-0.06) & (evt.P_gtr_xptar_dummy<=0.06) & (evt.P_gtr_yptar_dummy>=-0.04) & (evt.P_gtr_yptar_dummy<=0.04)
+  SHMS_ELECTRON_PID = (evt.P_cal_etottracknorm_dummy >= 0.85) & (evt.P_cal_etottracknorm_dummy <= 1.2) # evt.P_hgcer_npeSum_dummy >=0.5 & evt.P_aero_npeSum_dummy >=0.5
 
-  HMS_FixCut = (H_hod_goodscinhit_dummy == 1) & (H_hod_goodstarttime_dummy == 1) & (H_dc_InsideDipoleExit_dummy == 1)
-  HMS_Acceptance = (H_gtr_dp_dummy>=-8.0) & (H_gtr_dp_dummy<=8.0) & (H_gtr_xptar_dummy>=-0.08) & (H_gtr_xptar_dummy<=0.08) & (H_gtr_yptar_dummy>=-0.045) & (H_gtr_yptar_dummy<=0.045)       
-  HMS_ELECTRON_PID = (H_cer_npeSum_dummy >=0.5) & (H_cal_etotnorm_dummy >=0.8) & (H_cal_etotnorm_dummy <=1.2)
+  HMS_FixCut = (evt.H_hod_goodscinhit_dummy == 1) & (evt.H_hod_goodstarttime_dummy == 1) & (evt.H_dc_InsideDipoleExit_dummy == 1)
+  HMS_Acceptance = (evt.H_gtr_dp_dummy>=-8.0) & (evt.H_gtr_dp_dummy<=8.0) & (evt.H_gtr_xptar_dummy>=-0.08) & (evt.H_gtr_xptar_dummy<=0.08) & (evt.H_gtr_yptar_dummy>=-0.045) & (evt.H_gtr_yptar_dummy<=0.045)       
+  HMS_ELECTRON_PID = (evt.H_cer_npeSum_dummy >=0.5) & (evt.H_cal_etotnorm_dummy >=0.8) & (evt.H_cal_etotnorm_dummy <=1.2)
   
   #........................................
 
   #if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID) 
   if(SHMS_FixCut & SHMS_Acceptance):
     
-      H_ssxfp_DUMMY.Fill(ssxfp_dummy)
-      H_ssyfp_DUMMY.Fill(ssyfp_dummy)
-      H_ssxpfp_DUMMY.Fill(ssxpfp_dummy)
-      H_ssypfp_DUMMY.Fill(ssypfp_dummy)
-      H_ssdelta_DUMMY.Fill(ssdelta_dummy)
-      H_ssxptar_DUMMY.Fill(ssxptar_dummy)
-      H_ssyptar_DUMMY.Fill(ssyptar_dummy)
+      H_ssxfp_DUMMY.Fill(evt.ssxfp)
+      H_ssyfp_DUMMY.Fill(evt.ssyfp)
+      H_ssxpfp_DUMMY.Fill(evt.ssxpfp)
+      H_ssypfp_DUMMY.Fill(evt.ssypfp)
+      H_ssdelta_DUMMY.Fill(evt.ssdelta)
+      H_ssxptar_DUMMY.Fill(evt.ssxptar)
+      H_ssyptar_DUMMY.Fill(evt.ssyptar)
 
     
 
   #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
   if(HMS_FixCut & HMS_Acceptance):
     
-      H_pmiss_DUMMY.Fill(pm_dummy)	
-      H_emiss_DUMMY.Fill(em_dummy)	
-      H_pmx_DUMMY.Fill(pmx_dummy)
-      H_pmy_DUMMY.Fill(pmy_dummy)
-      H_pmz_DUMMY.Fill(pmz_dummy)
-      H_Q2_DUMMY.Fill(Q2_dummy)
-      H_W_DUMMY.Fill(W_dummy)
-      H_epsilon_DUMMY.Fill(epsilon_dummy)
-      H_MMp_DUMMY.Fill((pow(em_dummy, 2) - pow(pm_dummy, 2)))  
-      #H_MMp_DUMMY.Fill(MMp_dummy)  
+      H_pmiss_DUMMY.Fill(evt.pm)	
+      H_emiss_DUMMY.Fill(evt.em)	
+      H_pmx_DUMMY.Fill(evt.pmx)
+      H_pmy_DUMMY.Fill(evt.pmy)
+      H_pmz_DUMMY.Fill(evt.pmz)
+      H_Q2_DUMMY.Fill(evt.Q2)
+      H_W_DUMMY.Fill(evt.W)
+      H_epsilon_DUMMY.Fill(evt.epsilon)
+      H_MMp_DUMMY.Fill((pow(evt.em, 2) - pow(evt.pm, 2)))  
+      #H_MMp_DUMMY.Fill(evt.MMp)  
 
-      H_hsxfp_DUMMY.Fill(hsxfp_dummy)
-      H_hsyfp_DUMMY.Fill(hsyfp_dummy)
-      H_hsxpfp_DUMMY.Fill(hsxpfp_dummy)
-      H_hsypfp_DUMMY.Fill(hsypfp_dummy)
-      H_hsdelta_DUMMY.Fill(hsdelta_dummy)
-      H_hsxptar_DUMMY.Fill(hsxptar_dummy)	
-      H_hsyptar_DUMMY.Fill(hsyptar_dummy)
+      H_hsxfp_DUMMY.Fill(evt.hsxfp)
+      H_hsyfp_DUMMY.Fill(evt.hsyfp)
+      H_hsxpfp_DUMMY.Fill(evt.hsxpfp)
+      H_hsypfp_DUMMY.Fill(evt.hsypfp)
+      H_hsdelta_DUMMY.Fill(evt.hsdelta)
+      H_hsxptar_DUMMY.Fill(evt.hsxptar)	
+      H_hsyptar_DUMMY.Fill(evt.hsyptar)
     
 
 #simc_wgt = 0.131105E-04

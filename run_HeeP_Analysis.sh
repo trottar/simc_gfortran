@@ -13,10 +13,10 @@ OutFullAnalysisFilename="FullAnalysis_$KIN"
 
 cd $ANA_DIR
 root -l <<EOF 
-$ANA_DIR/Analysed_COIN.C($InDATAFilename,$OutDATAFilename)
+.x $ANA_DIR/Analysed_COIN.C($InDATAFilename,$OutDATAFilename)
 EOF
 root -l <<EOF 
-$ANA_DIR/Analysed_COIN.C($InDUMMYFilename,$OutDUMMYFilename)
+.x $ANA_DIR/Analysed_COIN.C($InDUMMYFilename,$OutDUMMYFilename)
 EOF
 pwd
 

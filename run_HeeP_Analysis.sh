@@ -27,4 +27,5 @@ EOF
 
 python3 HeepCoin.py "${OutDATAFilename}.root" "${OutDUMMYFilename}.root" ${InSIMCFilename} ${OutFullAnalysisFilename}
 
+cd ../
 evince "OUTPUTS/${OutFullAnalysisFilename}.pdf"

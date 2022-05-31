@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 12:30:13 trottar"
+# Time-stamp: "2022-05-31 12:40:14 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -317,20 +317,19 @@ for i in range(nEntries_TBRANCH_SIMC):
 
   # Select the cuts
   #HMS
-  CUT1 = ((hsdelta >=-8.0) & (hsdelta <=8.0))
-  CUT2 = ((hsxptar >=-0.08) & (hsxpfp <=0.08))
-  CUT3 = ((hsyptar >=-0.045) & (hsypfp <=0.045))
+  CUT1 = (hsdelta >=-8.0) & (hsdelta <=8.0)
+  CUT2 = (hsxptar >=-0.08) & (hsxpfp <=0.08)
+  CUT3 = (hsyptar >=-0.045) & (hsypfp <=0.045)
 
   #SHMS    
-  CUT4 = ((ssdelta >=-10.0) & (hsdelta <=20.0))
-  CUT5 = ((ssxptar >=-0.06) & (hsxpfp <=0.06))
-  CUT6 = ((hsyptar >=-0.04) & (hsypfp <=0.04))
+  CUT4 = (ssdelta >=-10.0) & (hsdelta <=20.0)
+  CUT5 = (ssxptar >=-0.06) & (hsxpfp <=0.06)
+  CUT6 = (hsyptar >=-0.04) & (hsypfp <=0.04)
 
   #........................................
 
   #Fill SIMC events
-
-  if(CUT1 & CUT2 & CUT3 & CUT4 & CUT5 & CUT6):
+  if np.allclose(CUT1, CUT2, CUT3, CUT4, CUT5, CUT6):
     
       H_ssxfp_SIMC.Fill(ssxfp, Weight)
       H_ssyfp_SIMC.Fill(ssyfp, Weight)
@@ -361,18 +360,18 @@ for i in range(nEntries_TBRANCH_DATA):
   #TBRANCH_DATA.GetEntry(i)
 
   #CUTs Definations 
-  SHMS_FixCut = ((P_hod_goodstarttime_data == 1) & (P_dc_InsideDipoleExit_data == 1)) # & P_hod_betanotrack_data > 0.5 & P_hod_betanotrack_data < 1.4
-  SHMS_Acceptance = ((P_gtr_dp_data>=-10.0) & (P_gtr_dp_data<=20.0) & (P_gtr_xptar_data>=-0.06) & (P_gtr_xptar_data<=0.06) & (P_gtr_yptar_data>=-0.04) & (P_gtr_yptar_data<=0.04))
-  SHMS_ELECTRON_PID = ((P_cal_etottracknorm_data >= 0.85) & (P_cal_etottracknorm_data <= 1.2)) # P_hgcer_npeSum_data >=0.5 & P_aero_npeSum_data >=0.5
+  SHMS_FixCut = (P_hod_goodstarttime_data == 1) & (P_dc_InsideDipoleExit_data == 1) # & P_hod_betanotrack_data > 0.5 & P_hod_betanotrack_data < 1.4
+  SHMS_Acceptance = (P_gtr_dp_data>=-10.0) & (P_gtr_dp_data<=20.0) & (P_gtr_xptar_data>=-0.06) & (P_gtr_xptar_data<=0.06) & (P_gtr_yptar_data>=-0.04) & (P_gtr_yptar_data<=0.04)
+  SHMS_ELECTRON_PID = (P_cal_etottracknorm_data >= 0.85) & (P_cal_etottracknorm_data <= 1.2) # P_hgcer_npeSum_data >=0.5 & P_aero_npeSum_data >=0.5
 
-  HMS_FixCut = ((H_hod_goodscinhit_data == 1) & (H_hod_goodstarttime_data == 1) & (H_dc_InsideDipoleExit_data == 1))
-  HMS_Acceptance = ((H_gtr_dp_data>=-8.0) & (H_gtr_dp_data<=8.0) & (H_gtr_xptar_data>=-0.08) & (H_gtr_xptar_data<=0.08) & (H_gtr_yptar_data>=-0.045) & (H_gtr_yptar_data<=0.045))
-  HMS_ELECTRON_PID = ((H_cer_npeSum_data >=0.5) & (H_cal_etotnorm_data >=0.8) & (H_cal_etotnorm_data <=1.2))
+  HMS_FixCut = (H_hod_goodscinhit_data == 1) & (H_hod_goodstarttime_data == 1) & (H_dc_InsideDipoleExit_data == 1)
+  HMS_Acceptance = (H_gtr_dp_data>=-8.0) & (H_gtr_dp_data<=8.0) & (H_gtr_xptar_data>=-0.08) & (H_gtr_xptar_data<=0.08) & (H_gtr_yptar_data>=-0.045) & (H_gtr_yptar_data<=0.045)       
+  HMS_ELECTRON_PID = (H_cer_npeSum_data >=0.5) & (H_cal_etotnorm_data >=0.8) & (H_cal_etotnorm_data <=1.2)
 
   #........................................
 
   #if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID) 
-  if(SHMS_FixCut & SHMS_Acceptance):
+  if np.allclose(SHMS_FixCut, SHMS_Acceptance):
     
       H_ssxfp_DATA.Fill(ssxfp_data)
       H_ssyfp_DATA.Fill(ssyfp_data)
@@ -385,7 +384,7 @@ for i in range(nEntries_TBRANCH_DATA):
     
 
   #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
-  if(HMS_FixCut & HMS_Acceptance):
+  if np.allclose(HMS_FixCut, HMS_Acceptance):
     
       H_pmiss_DATA.Fill(pm_data)	
       H_emiss_DATA.Fill(em_data)	
@@ -413,18 +412,18 @@ for i in range(nEntries_TBRANCH_DUMMY):
   #......... Define Cuts.................
 
   #CUTs Definations 
-  SHMS_FixCut = ((P_hod_goodstarttime_dummy == 1) & (P_dc_InsideDipoleExit_dummy == 1)) # & P_hod_betanotrack_dummy > 0.5 & P_hod_betanotrack_dummy < 1.4
-  SHMS_Acceptance = ((P_gtr_dp_dummy>=-10.0) & (P_gtr_dp_dummy<=20.0) & (P_gtr_xptar_dummy>=-0.06) & (P_gtr_xptar_dummy<=0.06) & (P_gtr_yptar_dummy>=-0.04) & (P_gtr_yptar_dummy<=0.04))
-  SHMS_ELECTRON_PID = ((P_cal_etottracknorm_dummy >= 0.85) & (P_cal_etottracknorm_dummy <= 1.2)) # P_hgcer_npeSum_dummy >=0.5 & P_aero_npeSum_dummy >=0.5
+  SHMS_FixCut = (P_hod_goodstarttime_dummy == 1) & (P_dc_InsideDipoleExit_dummy == 1) # & P_hod_betanotrack_dummy > 0.5 & P_hod_betanotrack_dummy < 1.4
+  SHMS_Acceptance = (P_gtr_dp_dummy>=-10.0) & (P_gtr_dp_dummy<=20.0) & (P_gtr_xptar_dummy>=-0.06) & (P_gtr_xptar_dummy<=0.06) & (P_gtr_yptar_dummy>=-0.04) & (P_gtr_yptar_dummy<=0.04)
+  SHMS_ELECTRON_PID = (P_cal_etottracknorm_dummy >= 0.85) & (P_cal_etottracknorm_dummy <= 1.2) # P_hgcer_npeSum_dummy >=0.5 & P_aero_npeSum_dummy >=0.5
 
-  HMS_FixCut = ((H_hod_goodscinhit_dummy == 1) & (H_hod_goodstarttime_dummy == 1) & (H_dc_InsideDipoleExit_dummy == 1))
-  HMS_Acceptance = ((H_gtr_dp_dummy>=-8.0) & (H_gtr_dp_dummy<=8.0) & (H_gtr_xptar_dummy>=-0.08) & (H_gtr_xptar_dummy<=0.08) & (H_gtr_yptar_dummy>=-0.045) & (H_gtr_yptar_dummy<=0.045))
-  HMS_ELECTRON_PID = ((H_cer_npeSum_dummy >=0.5) & (H_cal_etotnorm_dummy >=0.8) & (H_cal_etotnorm_dummy <=1.2))
+  HMS_FixCut = (H_hod_goodscinhit_dummy == 1) & (H_hod_goodstarttime_dummy == 1) & (H_dc_InsideDipoleExit_dummy == 1)
+  HMS_Acceptance = (H_gtr_dp_dummy>=-8.0) & (H_gtr_dp_dummy<=8.0) & (H_gtr_xptar_dummy>=-0.08) & (H_gtr_xptar_dummy<=0.08) & (H_gtr_yptar_dummy>=-0.045) & (H_gtr_yptar_dummy<=0.045)       
+  HMS_ELECTRON_PID = (H_cer_npeSum_dummy >=0.5) & (H_cal_etotnorm_dummy >=0.8) & (H_cal_etotnorm_dummy <=1.2)
   
   #........................................
 
   #if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID) 
-  if(SHMS_FixCut & SHMS_Acceptance):
+  if np.allclose(SHMS_FixCut, SHMS_Acceptance):
     
       H_ssxfp_DUMMY.Fill(ssxfp_dummy)
       H_ssyfp_DUMMY.Fill(ssyfp_dummy)
@@ -437,7 +436,7 @@ for i in range(nEntries_TBRANCH_DUMMY):
     
 
   #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
-  if(HMS_FixCut & HMS_Acceptance):
+  if np.allclose(HMS_FixCut, HMS_Acceptance):
     
       H_pmiss_DUMMY.Fill(pm_dummy)	
       H_emiss_DUMMY.Fill(em_dummy)	

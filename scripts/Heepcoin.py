@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 12:40:14 trottar"
+# Time-stamp: "2022-05-31 12:43:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -317,19 +317,21 @@ for i in range(nEntries_TBRANCH_SIMC):
 
   # Select the cuts
   #HMS
-  CUT1 = (hsdelta >=-8.0) & (hsdelta <=8.0)
-  CUT2 = (hsxptar >=-0.08) & (hsxpfp <=0.08)
-  CUT3 = (hsyptar >=-0.045) & (hsypfp <=0.045)
+  #CUT1 = (hsdelta >=-8.0) & (hsdelta <=8.0)
+  #CUT2 = (hsxptar >=-0.08) & (hsxpfp <=0.08)
+  #CUT3 = (hsyptar >=-0.045) & (hsypfp <=0.045)
 
   #SHMS    
-  CUT4 = (ssdelta >=-10.0) & (hsdelta <=20.0)
-  CUT5 = (ssxptar >=-0.06) & (hsxpfp <=0.06)
-  CUT6 = (hsyptar >=-0.04) & (hsypfp <=0.04)
+  #CUT4 = (ssdelta >=-10.0) & (hsdelta <=20.0)
+  #CUT5 = (ssxptar >=-0.06) & (hsxpfp <=0.06)
+  #CUT6 = (hsyptar >=-0.04) & (hsypfp <=0.04)
+  CUT1 = (hsdelta >=-8.0) & (hsdelta <=8.0) & (hsxptar >=-0.08) & (hsxpfp <=0.08) & (hsyptar >=-0.045) & (hsypfp <=0.045) & (ssdelta >=-10.0) & (hsdelta <=20.0) & (ssxptar >=-0.06) & (hsxpfp <=0.06) & (hsyptar >=-0.04) & (hsypfp <=0.04)
 
   #........................................
 
   #Fill SIMC events
-  if np.allclose(CUT1, CUT2, CUT3, CUT4, CUT5, CUT6):
+  #if (CUT1 & CUT2 & CUT3 & CUT4 & CUT5 & CUT6):
+  if (CUT1):
     
       H_ssxfp_SIMC.Fill(ssxfp, Weight)
       H_ssyfp_SIMC.Fill(ssyfp, Weight)
@@ -371,7 +373,7 @@ for i in range(nEntries_TBRANCH_DATA):
   #........................................
 
   #if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID) 
-  if np.allclose(SHMS_FixCut, SHMS_Acceptance):
+  if(SHMS_FixCut & SHMS_Acceptance):
     
       H_ssxfp_DATA.Fill(ssxfp_data)
       H_ssyfp_DATA.Fill(ssyfp_data)
@@ -384,7 +386,7 @@ for i in range(nEntries_TBRANCH_DATA):
     
 
   #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
-  if np.allclose(HMS_FixCut, HMS_Acceptance):
+  if(HMS_FixCut & HMS_Acceptance):
     
       H_pmiss_DATA.Fill(pm_data)	
       H_emiss_DATA.Fill(em_data)	
@@ -423,7 +425,7 @@ for i in range(nEntries_TBRANCH_DUMMY):
   #........................................
 
   #if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID) 
-  if np.allclose(SHMS_FixCut, SHMS_Acceptance):
+  if(SHMS_FixCut & SHMS_Acceptance):
     
       H_ssxfp_DUMMY.Fill(ssxfp_dummy)
       H_ssyfp_DUMMY.Fill(ssyfp_dummy)
@@ -436,7 +438,7 @@ for i in range(nEntries_TBRANCH_DUMMY):
     
 
   #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
-  if np.allclose(HMS_FixCut, HMS_Acceptance):
+  if(HMS_FixCut & HMS_Acceptance):
     
       H_pmiss_DUMMY.Fill(pm_dummy)	
       H_emiss_DUMMY.Fill(em_dummy)	

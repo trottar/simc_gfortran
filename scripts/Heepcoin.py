@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 12:48:13 trottar"
+# Time-stamp: "2022-05-31 12:50:41 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -332,29 +332,29 @@ for i in range(nEntries_TBRANCH_SIMC):
   #if (CUT1 & CUT2 & CUT3 & CUT4 & CUT5 & CUT6):
   if (hsdelta[i] >=-8.0) & (hsdelta[i] <=8.0) & (hsxptar[i] >=-0.08) & (hsxpfp[i] <=0.08) & (hsyptar[i] >=-0.045) & (hsypfp[i] <=0.045) & (ssdelta[i] >=-10.0) & (hsdelta[i] <=20.0) & (ssxptar[i] >=-0.06) & (hsxpfp[i] <=0.06) & (hsyptar[i] >=-0.04) & (hsypfp[i] <=0.04):
     
-      H_ssxfp_SIMC.Fill(ssxfp, Weight)
-      H_ssyfp_SIMC.Fill(ssyfp, Weight)
-      H_ssxpfp_SIMC.Fill(ssxpfp, Weight)
-      H_ssypfp_SIMC.Fill(ssypfp, Weight)
-      H_hsxfp_SIMC.Fill(hsxfp, Weight)
-      H_hsyfp_SIMC.Fill(hsyfp, Weight)
-      H_hsxpfp_SIMC.Fill(hsxpfp, Weight)
-      H_hsypfp_SIMC.Fill(hsypfp, Weight)
-      H_ssdelta_SIMC.Fill(ssdelta, Weight) 
-      H_hsdelta_SIMC.Fill(hsdelta, Weight)	
-      H_ssxptar_SIMC.Fill(ssxptar, Weight)
-      H_ssyptar_SIMC.Fill(ssyptar, Weight)
-      H_hsxptar_SIMC.Fill(hsxptar, Weight)	
-      H_hsyptar_SIMC.Fill(hsyptar, Weight)	
-      H_pmiss_SIMC.Fill(Pm, Weight)	
-      H_emiss_SIMC.Fill(Em, Weight)	
-      H_pmx_SIMC.Fill(Pmx, Weight)
-      H_pmy_SIMC.Fill(Pmy, Weight)
-      H_pmz_SIMC.Fill(Pmz, Weight)
-      H_Q2_SIMC.Fill(Q2_simc, Weight)
-      H_W_SIMC.Fill(W_simc, Weight)
-      H_epsilon_SIMC.Fill(epsilon_simc, Weight)
-      H_MMp_SIMC.Fill((pow(Em, 2) - pow(Pm, 2)), Weight)  
+      H_ssxfp_SIMC.Fill(i.ssxfp, Weight)
+      H_ssyfp_SIMC.Fill(i.ssyfp, Weight)
+      H_ssxpfp_SIMC.Fill(i.ssxpfp, Weight)
+      H_ssypfp_SIMC.Fill(i.ssypfp, Weight)
+      H_hsxfp_SIMC.Fill(i.hsxfp, Weight)
+      H_hsyfp_SIMC.Fill(i.hsyfp, Weight)
+      H_hsxpfp_SIMC.Fill(i.hsxpfp, Weight)
+      H_hsypfp_SIMC.Fill(i.hsypfp, Weight)
+      H_ssdelta_SIMC.Fill(i.ssdelta, Weight) 
+      H_hsdelta_SIMC.Fill(i.hsdelta, Weight)	
+      H_ssxptar_SIMC.Fill(i.ssxptar, Weight)
+      H_ssyptar_SIMC.Fill(i.ssyptar, Weight)
+      H_hsxptar_SIMC.Fill(i.hsxptar, Weight)	
+      H_hsyptar_SIMC.Fill(i.hsyptar, Weight)	
+      H_pmiss_SIMC.Fill(i.Pm, Weight)	
+      H_emiss_SIMC.Fill(i.Em, Weight)	
+      H_pmx_SIMC.Fill(i.Pmx, Weight)
+      H_pmy_SIMC.Fill(i.Pmy, Weight)
+      H_pmz_SIMC.Fill(i.Pmz, Weight)
+      H_Q2_SIMC.Fill(i.Q2_simc, Weight)
+      H_W_SIMC.Fill(i.W_simc, Weight)
+      H_epsilon_SIMC.Fill(i.epsilon_simc, Weight)
+      H_MMp_SIMC.Fill((pow(i.Em, 2) - pow(i.Pm, 2)), Weight)  
     
 for i in range(nEntries_TBRANCH_DATA):
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 13:25:48 trottar"
+# Time-stamp: "2022-05-31 13:27:46 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -80,7 +80,7 @@ for line in f_simc:
     if "normfac" in line:
         val = line.split("=")
         simc_normfactor = float(val[1])
-    else:
+if 'simc_nevents' and 'simc_normfactor' not in locals():
         print("ERROR: Invalid simc hist file %s" % simc_hist)
         sys.exit(1)
         

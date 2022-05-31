@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 19:36:42 trottar"
+# Time-stamp: "2022-05-31 19:40:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -101,10 +101,11 @@ TBRANCH_SIMC  = InFile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
 
 TSCALER_DATA  = up.open(rootFile)["charge"]
-print(TSCALER_DATA)
 TSCALER_DUMMY  = up.open(rootFile_DUMMY)["charge"]
 
 ################################################################################################################################################
+
+NBCM = 5
 
 # Data charge calculation
 bcm1_charge_DATA = TSCALER_DATA.array("bcm1_charge")

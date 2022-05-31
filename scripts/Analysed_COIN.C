@@ -223,9 +223,9 @@ void Analysed_COIN(string InDATAFilename = "", string OutFilename = "")
 
   s_tree->Branch("bcm1_charge",&P_BCM1_scalerCharge,"P_BCM1_scalerCharge/D");
   s_tree->Branch("bcm2_charge",&P_BCM1_scalerCharge,"P_BCM2_scalerCharge/D");
-  s_tree->Branch("bcm4A_charge",&P_BCM1_scalerCharge,"P_BCM4A_scalerCharge/D");
-  s_tree->Branch("bcm4B_charge",&P_BCM1_scalerCharge,"P_BCM4B_scalerCharge/D");
-  s_tree->Branch("bcm4C_charge",&P_BCM1_scalerCharge,"P_BCM4C_scalerCharge/D");
+  s_tree->Branch("bcm4a_charge",&P_BCM1_scalerCharge,"P_BCM4A_scalerCharge/D");
+  s_tree->Branch("bcm4b_charge",&P_BCM1_scalerCharge,"P_BCM4B_scalerCharge/D");
+  s_tree->Branch("bcm4c_charge",&P_BCM1_scalerCharge,"P_BCM4C_scalerCharge/D");
   
   //for progress bar
   double progress=0.0;

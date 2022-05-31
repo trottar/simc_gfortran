@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 19:35:05 trottar"
+# Time-stamp: "2022-05-31 19:36:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -107,11 +107,11 @@ TSCALER_DUMMY  = up.open(rootFile_DUMMY)["charge"]
 ################################################################################################################################################
 
 # Data charge calculation
-bcm1_charge_DATA = TSCALER_DATA.array(b'bcm1_charge')
-bcm2_charge_DATA = TSCALER_DATA.array(b'bcm2_charge')
-bcm4a_charge_DATA = TSCALER_DATA.array(b'bcm4a_charge')
-bcm4b_charge_DATA = TSCALER_DATA.array(b'bcm4b_charge')
-bcm4c_charge_DATA = TSCALER_DATA.array(b'bcm4c_charge')
+bcm1_charge_DATA = TSCALER_DATA.array("bcm1_charge")
+bcm2_charge_DATA = TSCALER_DATA.array("bcm2_charge")
+bcm4a_charge_DATA = TSCALER_DATA.array("bcm4a_charge")
+bcm4b_charge_DATA = TSCALER_DATA.array("bcm4b_charge")
+bcm4c_charge_DATA = TSCALER_DATA.array("bcm4c_charge")
 
 bcm_value_DATA  = [bcm1_charge_DATA, bcm2_charge_DATA, bcm4a_charge_DATA, bcm4b_charge_DATA, bcm4c_charge_DATA]
 

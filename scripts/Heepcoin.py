@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 12:00:08 trottar"
+# Time-stamp: "2022-05-31 12:07:43 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -101,9 +101,9 @@ ssxpfp = TBRANCH_SIMC.array("ssxpfp")
 ssypfp = TBRANCH_SIMC.array("ssypfp")
 
 q = TBRANCH_SIMC.array("q")
-Q2 = simcTBRANCH.array->SetBranchAddress("Q2", &)
-W = simcTBRANCH.array->SetBranchAddress("W", )
-epsilon = simcTBRANCH.array->SetBranchAddress("epsilon", &epsil)
+Q2 = TBRANCH_SIMC.array("Q2")
+W = TBRANCH_SIMC.array("W")
+epsilon = TBRANCH_SIMC.array("epsilon")
 Pmx = TBRANCH_SIMC.array("Pmx")
 Pmy = TBRANCH_SIMC.array("Pmy")
 Pmz = TBRANCH_SIMC.array("Pmz")

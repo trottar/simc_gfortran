@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 19:23:05 trottar"
+# Time-stamp: "2022-05-31 19:25:23 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -100,8 +100,8 @@ nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
 TBRANCH_SIMC  = InFile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
 
-TSCALER_DATA  = up.open(InFile_DATA)["charge"]
-TSCALER_DUMMY  = up.open(InFile_DUMMY)["charge"]
+TSCALER_DATA  = up.open(rootFile)["charge"]
+TSCALER_DUMMY  = up.open(rootFile_DUMMY)["charge"]
 
 ################################################################################################################################################
 

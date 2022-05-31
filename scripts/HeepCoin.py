@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 15:32:49 trottar"
+# Time-stamp: "2022-05-31 15:51:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -55,13 +55,14 @@ ltsep package import and pathing definitions
 import ltsep as lt 
 
 # Add this to all files for more dynamic pathing
-#USER =  lt.SetPath(os.path.realpath(__file__)).getPath("USER") # Grab user info for file finding
-#HOST = lt.SetPath(os.path.realpath(__file__)).getPath("HOST")
-#UTILPATH = lt.SetPath(os.path.realpath(__file__)).getPath("UTILPATH")
-USER = "trottar"
-HOST = "ifarm"
-UTILPATH = "/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT" % USER
-REPLAYPATH = "/group/c-kaonlt/USERS/%s/simc_gfortran" % USER
+USER =  lt.SetPath(os.path.realpath(__file__)).getPath("USER") # Grab user info for file finding
+HOST = lt.SetPath(os.path.realpath(__file__)).getPath("HOST")
+UTILPATH = lt.SetPath(os.path.realpath(__file__)).getPath("UTILPATH")
+SIMCPATH = lt.SetPath(os.path.realpath(__file__)).getPath("SIMCPATH")
+#USER = "trottar"
+#HOST = "ifarm"
+#UTILPATH = "/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT" % USER
+REPLAYPATH = SIMCPATH
 ROOTfilePath = "%s/OUTPUTS" % REPLAYPATH
 OutPath = "%s/OUTPUTS" % REPLAYPATH
 

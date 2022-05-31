@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 17:11:21 trottar"
+# Time-stamp: "2022-05-31 17:27:45 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -102,109 +102,109 @@ nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
 
 ################################################################################################################################################
   
-H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta hsdelta", 300, -20.0, 20.0)
-H_hsdelta_DUMMY  = ROOT.TH1D("H_hsdelta_DUMMY","HMS Delta hsdelta", 300, -20.0, 20.0)
-H_hsdelta_SIMC  = ROOT.TH1D("H_hsdelta_SIMC","HMS Delta hsdelta", 300, -20.0, 20.0)
+H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta", 300, -20.0, 20.0)
+H_hsdelta_DUMMY  = ROOT.TH1D("H_hsdelta_DUMMY","HMS Delta", 300, -20.0, 20.0)
+H_hsdelta_SIMC  = ROOT.TH1D("H_hsdelta_SIMC","HMS Delta", 300, -20.0, 20.0)
 
-H_hsxptar_DATA  = ROOT.TH1D("H_hsxptar_DATA","HMS xptar hsxptar", 300, -0.1, 0.1)
-H_hsxptar_DUMMY  = ROOT.TH1D("H_hsxptar_DUMMY","HMS xptar hsxptar", 300, -0.1, 0.1)
-H_hsxptar_SIMC  = ROOT.TH1D("H_hsxptar_SIMC","HMS xptar hsxptar", 300, -0.1, 0.1)
+H_hsxptar_DATA  = ROOT.TH1D("H_hsxptar_DATA","HMS xptar", 300, -0.1, 0.1)
+H_hsxptar_DUMMY  = ROOT.TH1D("H_hsxptar_DUMMY","HMS xptar", 300, -0.1, 0.1)
+H_hsxptar_SIMC  = ROOT.TH1D("H_hsxptar_SIMC","HMS xptar", 300, -0.1, 0.1)
 
-H_hsyptar_DATA  = ROOT.TH1D("H_hsyptar_DATA","HMS yptar hsyptar", 300, -0.1, 0.1)
-H_hsyptar_DUMMY  = ROOT.TH1D("H_hsyptar_DUMMY","HMS yptar hsyptar", 300, -0.1, 0.1)
-H_hsyptar_SIMC  = ROOT.TH1D("H_hsyptar_SIMC","HMS yptar hsyptar", 300, -0.1, 0.1)
+H_hsyptar_DATA  = ROOT.TH1D("H_hsyptar_DATA","HMS yptar", 300, -0.1, 0.1)
+H_hsyptar_DUMMY  = ROOT.TH1D("H_hsyptar_DUMMY","HMS yptar", 300, -0.1, 0.1)
+H_hsyptar_SIMC  = ROOT.TH1D("H_hsyptar_SIMC","HMS yptar", 300, -0.1, 0.1)
 
-H_ssxfp_DATA    = ROOT.TH1D("H_ssxfp_DATA","SHMS xfp ssxfp", 300, -20.0, 20.0)
-H_ssxfp_DUMMY    = ROOT.TH1D("H_ssxfp_DUMMY","SHMS xfp ssxfp", 300, -20.0, 20.0)
-H_ssxfp_SIMC    = ROOT.TH1D("H_ssxfp_SIMC","SHMS xfp ssxfp", 300, -20.0, 20.0)
+H_ssxfp_DATA    = ROOT.TH1D("H_ssxfp_DATA","SHMS xfp", 300, -20.0, 20.0)
+H_ssxfp_DUMMY    = ROOT.TH1D("H_ssxfp_DUMMY","SHMS xfp", 300, -20.0, 20.0)
+H_ssxfp_SIMC    = ROOT.TH1D("H_ssxfp_SIMC","SHMS xfp", 300, -20.0, 20.0)
 
-H_ssyfp_DATA    = ROOT.TH1D("H_ssyfp_DATA","SHMS yfp ssyfp", 300, -20.0, 20.0)
-H_ssyfp_DUMMY    = ROOT.TH1D("H_ssyfp_DUMMY","SHMS yfp ssyfp", 300, -20.0, 20.0)
-H_ssyfp_SIMC    = ROOT.TH1D("H_ssyfp_SIMC","SHMS yfp ssyfp", 300, -20.0, 20.0)
+H_ssyfp_DATA    = ROOT.TH1D("H_ssyfp_DATA","SHMS yfp", 300, -20.0, 20.0)
+H_ssyfp_DUMMY    = ROOT.TH1D("H_ssyfp_DUMMY","SHMS yfp", 300, -20.0, 20.0)
+H_ssyfp_SIMC    = ROOT.TH1D("H_ssyfp_SIMC","SHMS yfp", 300, -20.0, 20.0)
 
-H_ssxpfp_DATA   = ROOT.TH1D("H_ssxpfp_DATA","SHMS xpfp ssxpfp", 300, -0.09, 0.09)
-H_ssxpfp_DUMMY   = ROOT.TH1D("H_ssxpfp_DUMMY","SHMS xpfp ssxpfp", 300, -0.09, 0.09)
-H_ssxpfp_SIMC   = ROOT.TH1D("H_ssxpfp_SIMC","SHMS xpfp ssxpfp", 300, -0.09, 0.09)
+H_ssxpfp_DATA   = ROOT.TH1D("H_ssxpfp_DATA","SHMS xpfp", 300, -0.09, 0.09)
+H_ssxpfp_DUMMY   = ROOT.TH1D("H_ssxpfp_DUMMY","SHMS xpfp", 300, -0.09, 0.09)
+H_ssxpfp_SIMC   = ROOT.TH1D("H_ssxpfp_SIMC","SHMS xpfp", 300, -0.09, 0.09)
 
-H_ssypfp_DATA   = ROOT.TH1D("H_ssypfp_DATA","SHMS ypfp ssypfp", 300, -0.05, 0.04)
-H_ssypfp_DUMMY   = ROOT.TH1D("H_ssypfp_DUMMY","SHMS ypfp ssypfp", 300, -0.05, 0.04)
-H_ssypfp_SIMC   = ROOT.TH1D("H_ssypfp_SIMC","SHMS ypfp ssypfp", 300, -0.05, 0.04)
+H_ssypfp_DATA   = ROOT.TH1D("H_ssypfp_DATA","SHMS ypfp", 300, -0.05, 0.04)
+H_ssypfp_DUMMY   = ROOT.TH1D("H_ssypfp_DUMMY","SHMS ypfp", 300, -0.05, 0.04)
+H_ssypfp_SIMC   = ROOT.TH1D("H_ssypfp_SIMC","SHMS ypfp", 300, -0.05, 0.04)
 
-H_hsxfp_DATA    = ROOT.TH1D("H_hsxfp_DATA","HMS xfp hsxfp", 300, -40.0, 40.0)
-H_hsxfp_DUMMY    = ROOT.TH1D("H_hsxfp_DUMMY","HMS xfp hsxfp", 300, -40.0, 40.0)
-H_hsxfp_SIMC    = ROOT.TH1D("H_hsxfp_SIMC","HMS xfp hsxfp", 300, -40.0, 40.0)
+H_hsxfp_DATA    = ROOT.TH1D("H_hsxfp_DATA","HMS xfp", 300, -40.0, 40.0)
+H_hsxfp_DUMMY    = ROOT.TH1D("H_hsxfp_DUMMY","HMS xfp", 300, -40.0, 40.0)
+H_hsxfp_SIMC    = ROOT.TH1D("H_hsxfp_SIMC","HMS xfp", 300, -40.0, 40.0)
 
-H_hsyfp_DATA    = ROOT.TH1D("H_hsyfp_DATA","HMS yfp hsyfp", 300, -20.0, 20.0)
-H_hsyfp_DUMMY    = ROOT.TH1D("H_hsyfp_DUMMY","HMS yfp hsyfp", 300, -20.0, 20.0)
-H_hsyfp_SIMC    = ROOT.TH1D("H_hsyfp_SIMC","HMS yfp hsyfp", 300, -20.0, 20.0)
+H_hsyfp_DATA    = ROOT.TH1D("H_hsyfp_DATA","HMS yfp", 300, -20.0, 20.0)
+H_hsyfp_DUMMY    = ROOT.TH1D("H_hsyfp_DUMMY","HMS yfp", 300, -20.0, 20.0)
+H_hsyfp_SIMC    = ROOT.TH1D("H_hsyfp_SIMC","HMS yfp", 300, -20.0, 20.0)
 
-H_hsxpfp_DATA   = ROOT.TH1D("H_hsxpfp_DATA","HMS xpfp hsxpfp", 300, -0.09, 0.05)
-H_hsxpfp_DUMMY   = ROOT.TH1D("H_hsxpfp_DUMMY","HMS xpfp hsxpfp", 300, -0.09, 0.05)
-H_hsxpfp_SIMC   = ROOT.TH1D("H_hsxpfp_SIMC","HMS xpfp hsxpfp", 300, -0.09, 0.05)
+H_hsxpfp_DATA   = ROOT.TH1D("H_hsxpfp_DATA","HMS xpfp", 300, -0.09, 0.05)
+H_hsxpfp_DUMMY   = ROOT.TH1D("H_hsxpfp_DUMMY","HMS xpfp", 300, -0.09, 0.05)
+H_hsxpfp_SIMC   = ROOT.TH1D("H_hsxpfp_SIMC","HMS xpfp", 300, -0.09, 0.05)
 
-H_hsypfp_DATA   = ROOT.TH1D("H_hsypfp_DATA","HMS ypfp hsypfp", 300, -0.05, 0.04)
-H_hsypfp_DUMMY   = ROOT.TH1D("H_hsypfp_DUMMY","HMS ypfp hsypfp", 300, -0.05, 0.04)
-H_hsypfp_SIMC   = ROOT.TH1D("H_hsypfp_SIMC","HMS ypfp hsypfp", 300, -0.05, 0.04)
+H_hsypfp_DATA   = ROOT.TH1D("H_hsypfp_DATA","HMS ypfp", 300, -0.05, 0.04)
+H_hsypfp_DUMMY   = ROOT.TH1D("H_hsypfp_DUMMY","HMS ypfp", 300, -0.05, 0.04)
+H_hsypfp_SIMC   = ROOT.TH1D("H_hsypfp_SIMC","HMS ypfp", 300, -0.05, 0.04)
 
-H_ssdelta_DATA  = ROOT.TH1D("H_ssdelta_DATA","SHMS delta ssdelta", 300, -20.0, 20.0)
-H_ssdelta_DUMMY  = ROOT.TH1D("H_ssdelta_DUMMY","SHMS delta ssdelta", 300, -20.0, 20.0)
-H_ssdelta_SIMC  = ROOT.TH1D("H_ssdelta_SIMC","SHMS delta ssdelta", 300, -20.0, 20.0)
+H_ssdelta_DATA  = ROOT.TH1D("H_ssdelta_DATA","SHMS delta", 300, -20.0, 20.0)
+H_ssdelta_DUMMY  = ROOT.TH1D("H_ssdelta_DUMMY","SHMS delta", 300, -20.0, 20.0)
+H_ssdelta_SIMC  = ROOT.TH1D("H_ssdelta_SIMC","SHMS delta", 300, -20.0, 20.0)
 
-H_ssxptar_DATA  = ROOT.TH1D("H_ssxptar_DATA","SHMS xptar ssxptar", 300, -0.1, 0.1)
-H_ssxptar_DUMMY  = ROOT.TH1D("H_ssxptar_DUMMY","SHMS xptar ssxptar", 300, -0.1, 0.1)
-H_ssxptar_SIMC  = ROOT.TH1D("H_ssxptar_SIMC","SHMS xptar ssxptar", 300, -0.1, 0.1)
+H_ssxptar_DATA  = ROOT.TH1D("H_ssxptar_DATA","SHMS xptar", 300, -0.1, 0.1)
+H_ssxptar_DUMMY  = ROOT.TH1D("H_ssxptar_DUMMY","SHMS xptar", 300, -0.1, 0.1)
+H_ssxptar_SIMC  = ROOT.TH1D("H_ssxptar_SIMC","SHMS xptar", 300, -0.1, 0.1)
 
-H_ssyptar_DATA  = ROOT.TH1D("H_ssyptar_DATA","SHMS yptar ssyptar", 300, -0.04, 0.04)
-H_ssyptar_DUMMY  = ROOT.TH1D("H_ssyptar_DUMMY","SHMS yptar ssyptar", 300, -0.04, 0.04)
-H_ssyptar_SIMC  = ROOT.TH1D("H_ssyptar_SIMC","SHMS yptar ssyptar", 300, -0.04, 0.04)
+H_ssyptar_DATA  = ROOT.TH1D("H_ssyptar_DATA","SHMS yptar", 300, -0.04, 0.04)
+H_ssyptar_DUMMY  = ROOT.TH1D("H_ssyptar_DUMMY","SHMS yptar", 300, -0.04, 0.04)
+H_ssyptar_SIMC  = ROOT.TH1D("H_ssyptar_SIMC","SHMS yptar", 300, -0.04, 0.04)
 
-H_q_DATA        = ROOT.TH1D("H_q_DATA","q q", 300, 5.0, 7.0)
-H_q_DUMMY        = ROOT.TH1D("H_q_DUMMY","q q", 300, 5.0, 7.0)
-H_q_SIMC        = ROOT.TH1D("H_q_SIMC","q q", 300, 5.0, 7.0)
+H_q_DATA        = ROOT.TH1D("H_q_DATA","q", 300, 5.0, 7.0)
+H_q_DUMMY        = ROOT.TH1D("H_q_DUMMY","q", 300, 5.0, 7.0)
+H_q_SIMC        = ROOT.TH1D("H_q_SIMC","q", 300, 5.0, 7.0)
 
-H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2 Q2", 300, 1.5, 8.0)  
-H_Q2_DUMMY       = ROOT.TH1D("H_Q2_DUMMY","Q2 Q2", 300, 1.5, 8.0)  
-H_Q2_SIMC       = ROOT.TH1D("H_Q2_SIMC","Q2 Q2", 300, 1.5, 8.0)  
+H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2", 300, 1.5, 8.0)  
+H_Q2_DUMMY       = ROOT.TH1D("H_Q2_DUMMY","Q2", 300, 1.5, 8.0)  
+H_Q2_SIMC       = ROOT.TH1D("H_Q2_SIMC","Q2", 300, 1.5, 8.0)  
 
-H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon epsilon", 300, 0.5, 1.0)
-H_epsilon_DUMMY  = ROOT.TH1D("H_epsilon_DUMMY","epsilon epsilon", 300, 0.5, 1.0)
-H_epsilon_SIMC  = ROOT.TH1D("H_epsilon_SIMC","epsilon epsilon", 300, 0.5, 1.0)
+H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 300, 0.5, 1.0)
+H_epsilon_DUMMY  = ROOT.TH1D("H_epsilon_DUMMY","epsilon", 300, 0.5, 1.0)
+H_epsilon_SIMC  = ROOT.TH1D("H_epsilon_SIMC","epsilon", 300, 0.5, 1.0)
 
-H_MMp_DATA  = ROOT.TH1D("H_MMp_DATA","MMp  MMp", 300, -0.005, 0.005)
-H_MMp_DUMMY  = ROOT.TH1D("H_MMp_DUMMY","MMp  MMp", 300, -0.005, 0.005)
-H_MMp_SIMC  = ROOT.TH1D("H_MMp_SIMC","MMp  MMp", 300, -0.005, 0.005)
+H_MMp_DATA  = ROOT.TH1D("H_MMp_DATA","MMp ", 300, -0.005, 0.005)
+H_MMp_DUMMY  = ROOT.TH1D("H_MMp_DUMMY","MMp ", 300, -0.005, 0.005)
+H_MMp_SIMC  = ROOT.TH1D("H_MMp_SIMC","MMp ", 300, -0.005, 0.005)
 
-H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar P_gtr_xp", 300, -0.1, 0.1)
-H_th_DUMMY  = ROOT.TH1D("H_th_DUMMY","X' tar P_gtr_xp", 300, -0.1, 0.1)
-H_th_SIMC  = ROOT.TH1D("H_th_SIMC","H_th_simc ssxptar", 300, -0.1, 0.1)
+H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar", 300, -0.1, 0.1)
+H_th_DUMMY  = ROOT.TH1D("H_th_DUMMY","X' tar", 300, -0.1, 0.1)
+H_th_SIMC  = ROOT.TH1D("H_th_SIMC","X' tar", 300, -0.1, 0.1)
 
-H_ph_DATA  = ROOT.TH1D("H_ph_DATA","Y' tar P_gtr_yp", 300, -0.1, 0.1)
-H_ph_DUMMY  = ROOT.TH1D("H_ph_DUMMY","Y' tar P_gtr_yp", 300, -0.1, 0.1)
-H_ph_SIMC  = ROOT.TH1D("H_ph_SIMC","H_ph_simc ssyptar", 300, -0.1, 0.1)
+H_ph_DATA  = ROOT.TH1D("H_ph_DATA","Y' tar", 300, -0.1, 0.1)
+H_ph_DUMMY  = ROOT.TH1D("H_ph_DUMMY","Y' tar", 300, -0.1, 0.1)
+H_ph_SIMC  = ROOT.TH1D("H_ph_SIMC","Y' tar", 300, -0.1, 0.1)
 
-H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss pm", 300, -0.1, 0.4)
-H_pmiss_DUMMY  = ROOT.TH1D("H_pmiss_DUMMY","pmiss pm", 300, -0.1, 0.4)
-H_pmiss_SIMC  = ROOT.TH1D("H_pmiss_SIMC","pmiss pm", 300, -0.1, 0.4)
+H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss", 300, -0.1, 0.4)
+H_pmiss_DUMMY  = ROOT.TH1D("H_pmiss_DUMMY","pmiss", 300, -0.1, 0.4)
+H_pmiss_SIMC  = ROOT.TH1D("H_pmiss_SIMC","pmiss", 300, -0.1, 0.4)
 
-H_emiss_DATA  = ROOT.TH1D("H_emiss_DATA","emiss emiss", 300, -0.1, 0.4)
-H_emiss_DUMMY  = ROOT.TH1D("H_emiss_DUMMY","emiss emiss", 300, -0.1, 0.4)
-H_emiss_SIMC  = ROOT.TH1D("H_emiss_SIMC","emiss emiss", 300, -0.1, 0.4)
+H_emiss_DATA  = ROOT.TH1D("H_emiss_DATA","emiss", 300, -0.1, 0.4)
+H_emiss_DUMMY  = ROOT.TH1D("H_emiss_DUMMY","emiss", 300, -0.1, 0.4)
+H_emiss_SIMC  = ROOT.TH1D("H_emiss_SIMC","emiss", 300, -0.1, 0.4)
 
-H_pmx_DATA  = ROOT.TH1D("H_pmx_DATA","pmx pmx", 300, -0.2, 0.2)
-H_pmx_DUMMY  = ROOT.TH1D("H_pmx_DUMMY","pmx pmx", 300, -0.2, 0.2)
-H_pmx_SIMC  = ROOT.TH1D("H_pmx_SIMC","pmx pmx", 300, -0.2, 0.2)
+H_pmx_DATA  = ROOT.TH1D("H_pmx_DATA","pmx", 300, -0.2, 0.2)
+H_pmx_DUMMY  = ROOT.TH1D("H_pmx_DUMMY","pmx", 300, -0.2, 0.2)
+H_pmx_SIMC  = ROOT.TH1D("H_pmx_SIMC","pmx", 300, -0.2, 0.2)
 
-H_pmy_DATA  = ROOT.TH1D("H_pmy_DATA","pmy  pmy", 300, -0.2, 0.2)
-H_pmy_DUMMY  = ROOT.TH1D("H_pmy_DUMMY","pmy  pmy", 300, -0.2, 0.2)
-H_pmy_SIMC  = ROOT.TH1D("H_pmy_SIMC","pmy pmy", 300, -0.2, 0.2)
+H_pmy_DATA  = ROOT.TH1D("H_pmy_DATA","pmy ", 300, -0.2, 0.2)
+H_pmy_DUMMY  = ROOT.TH1D("H_pmy_DUMMY","pmy ", 300, -0.2, 0.2)
+H_pmy_SIMC  = ROOT.TH1D("H_pmy_SIMC","pmy", 300, -0.2, 0.2)
 
-H_pmz_DATA  = ROOT.TH1D("H_pmz_DATA","pmz pmz", 300, -0.2, 0.2)
-H_pmz_DUMMY  = ROOT.TH1D("H_pmz_DUMMY","pmz pmz", 300, -0.2, 0.2)
-H_pmz_SIMC  = ROOT.TH1D("H_pmz_SIMC","pmz pmz", 300, -0.2, 0.2)
+H_pmz_DATA  = ROOT.TH1D("H_pmz_DATA","pmz", 300, -0.2, 0.2)
+H_pmz_DUMMY  = ROOT.TH1D("H_pmz_DUMMY","pmz", 300, -0.2, 0.2)
+H_pmz_SIMC  = ROOT.TH1D("H_pmz_SIMC","pmz", 300, -0.2, 0.2)
 
-H_W_DATA  = ROOT.TH1D("H_W_DATA","W  W", 300, 0.5, 1.5)
-H_W_DUMMY  = ROOT.TH1D("H_W_DUMMY","W  W", 300, 0.5, 1.5)
-H_W_SIMC  = ROOT.TH1D("H_W_SIMC","W W", 300, 0.5, 1.5)
+H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 300, 0.5, 1.5)
+H_W_DUMMY  = ROOT.TH1D("H_W_DUMMY","W ", 300, 0.5, 1.5)
+H_W_SIMC  = ROOT.TH1D("H_W_SIMC","W", 300, 0.5, 1.5)
 
 ################################################################################################################################################
 
@@ -472,13 +472,6 @@ H_ssxfp_DATA.SetLineColor(kRed)
 H_ssxfp_SIMC.Draw("")
 H_ssxfp_DATA.Draw("same")
 
-b_high_xfp_simc = H_ssxfp_SIMC.GetXaxis().FindBin(20)
-b_low_xfp_simc = H_ssxfp_SIMC.GetXaxis().FindBin(-20)
-b_high_xfp_data = H_ssxfp_DATA.GetXaxis().FindBin(20)
-b_low_xfp_data = H_ssxfp_DATA.GetXaxis().FindBin(-20)
-
-#b_int_xfp_simc = int(H_ssxfp_SIMC.Integral(b_low_xfp_simc,b_high_xfp_simc))
-#b_int_xfp_data = int(H_ssxfp_DATA.Integral(b_low_xfp_data,b_high_xfp_data))
 b_int_xfp_simc = int(H_ssxfp_SIMC.Integral())
 b_int_xfp_data = int(H_ssxfp_DATA.Integral())
 
@@ -491,12 +484,16 @@ xfp.Print(outputpdf + '(')
 
 yfp = TCanvas()
 l_yfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_yfp.AddEntry(H_ssyfp_SIMC,"SIMC")
-l_yfp.AddEntry(H_ssyfp_DATA,"Data")
-H_ssyfp_DATA.SetLineColor(kRed)
 
+H_ssyfp_DATA.SetLineColor(kRed)
 H_ssyfp_SIMC.Draw("")
 H_ssyfp_DATA.Draw("same")
+
+b_int_yfp_simc = int(H_ssyfp_SIMC.Integral())
+b_int_yfp_data = int(H_ssyfp_DATA.Integral())
+
+l_yfp.AddEntry(H_ssyfp_SIMC,"SIMC, INT = %s" % b_int_yfp_simc)
+l_yfp.AddEntry(H_ssyfp_DATA,"DATA, INT = %s" % b_int_yfp_data)
 
 l_yfp.Draw()
 
@@ -504,12 +501,16 @@ yfp.Print(outputpdf)
 
 xpfp = TCanvas()
 l_xpfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_xpfp.AddEntry(H_ssxpfp_SIMC,"SIMC")
-l_xpfp.AddEntry(H_ssxpfp_DATA,"Data")
-H_ssxpfp_DATA.SetLineColor(kRed)
 
+H_ssxpfp_DATA.SetLineColor(kRed)
 H_ssxpfp_SIMC.Draw("")
 H_ssxpfp_DATA.Draw("same")
+
+b_int_xpfp_simc = int(H_ssxpfp_SIMC.Integral())
+b_int_xpfp_data = int(H_ssxpfp_DATA.Integral())
+
+l_xpfp.AddEntry(H_ssxpfp_SIMC,"SIMC, INT = %s" % b_int_xpfp_simc)
+l_xpfp.AddEntry(H_ssxpfp_DATA,"DATA, INT = %s" % b_int_xpfp_data)
 
 l_xpfp.Draw()
 
@@ -517,12 +518,16 @@ xpfp.Print(outputpdf)
 
 ypfp = TCanvas()
 l_ypfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_ypfp.AddEntry(H_ssypfp_SIMC,"SIMC")
-l_ypfp.AddEntry(H_ssypfp_DATA,"Data")
-H_ssypfp_DATA.SetLineColor(kRed)
 
+H_ssypfp_DATA.SetLineColor(kRed)
 H_ssypfp_SIMC.Draw("")
 H_ssypfp_DATA.Draw("same")
+
+b_int_ypfp_simc = int(H_ssypfp_SIMC.Integral())
+b_int_ypfp_data = int(H_ssypfp_DATA.Integral())
+
+l_ypfp.AddEntry(H_ssypfp_SIMC,"SIMC, INT = %s" % b_int_ypfp_simc)
+l_ypfp.AddEntry(H_ssypfp_DATA,"DATA, INT = %s" % b_int_ypfp_data)
 
 l_ypfp.Draw()
 
@@ -530,12 +535,16 @@ ypfp.Print(outputpdf)
 
 hxfp = TCanvas()
 l_hxfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_hxfp.AddEntry(H_hsxfp_SIMC,"SIMC")
-l_hxfp.AddEntry(H_hsxfp_DATA,"Data")
-H_hsxfp_DATA.SetLineColor(kRed)
 
+H_hsxfp_DATA.SetLineColor(kRed)
 H_hsxfp_SIMC.Draw("")
 H_hsxfp_DATA.Draw("same")
+
+b_int_hxfp_simc = int(H_hshxfp_SIMC.Integral())
+b_int_hxfp_data = int(H_hshxfp_DATA.Integral())
+
+l_hxfp.AddEntry(H_hshxfp_SIMC,"SIMC, INT = %s" % b_int_hxfp_simc)
+l_hxfp.AddEntry(H_hshxfp_DATA,"DATA, INT = %s" % b_int_hxfp_data)
 
 l_hxfp.Draw()
 
@@ -543,12 +552,18 @@ hxfp.Print(outputpdf)
 
 hyfp = TCanvas()
 l_hyfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
+
 l_hyfp.AddEntry(H_hsyfp_SIMC,"SIMC")
 l_hyfp.AddEntry(H_hsyfp_DATA,"Data")
 H_hsyfp_DATA.SetLineColor(kRed)
-
 H_hsyfp_SIMC.Draw("")
 H_hsyfp_DATA.Draw("same")
+
+b_int_hyfp_simc = int(H_hshyfp_SIMC.Integral())
+b_int_hyfp_data = int(H_hshyfp_DATA.Integral())
+
+l_hyfp.AddEntry(H_hshyfp_SIMC,"SIMC, INT = %s" % b_int_hyfp_simc)
+l_hyfp.AddEntry(H_hshyfp_DATA,"DATA, INT = %s" % b_int_hyfp_data)
 
 l_hyfp.Draw()
 
@@ -556,12 +571,16 @@ hyfp.Print(outputpdf)
 
 hxpfp = TCanvas()
 l_hxpfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_hxpfp.AddEntry(H_hsxpfp_SIMC,"SIMC")
-l_hxpfp.AddEntry(H_hsxpfp_DATA,"Data")
-H_hsxpfp_DATA.SetLineColor(kRed)
 
+H_hsxpfp_DATA.SetLineColor(kRed)
 H_hsxpfp_SIMC.Draw("")
 H_hsxpfp_DATA.Draw("same")
+
+b_int_hxpfp_simc = int(H_hshxpfp_SIMC.Integral())
+b_int_hxpfp_data = int(H_hshxpfp_DATA.Integral())
+
+l_hxpfp.AddEntry(H_hshxpfp_SIMC,"SIMC, INT = %s" % b_int_hxpfp_simc)
+l_hxpfp.AddEntry(H_hshxpfp_DATA,"DATA, INT = %s" % b_int_hxpfp_data)
 
 l_hxpfp.Draw()
 
@@ -569,12 +588,16 @@ hxpfp.Print(outputpdf)
 
 hypfp = TCanvas()
 l_hypfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_hypfp.AddEntry(H_hsypfp_SIMC,"SIMC")
-l_hypfp.AddEntry(H_hsypfp_DATA,"Data")
-H_hsypfp_DATA.SetLineColor(kRed)
 
+H_hsypfp_DATA.SetLineColor(kRed)
 H_hsypfp_SIMC.Draw("")
 H_hsypfp_DATA.Draw("same")
+
+b_int_hypfp_simc = int(H_hshypfp_SIMC.Integral())
+b_int_hypfp_data = int(H_hshypfp_DATA.Integral())
+
+l_hypfp.AddEntry(H_hshypfp_SIMC,"SIMC, INT = %s" % b_int_hypfp_simc)
+l_hypfp.AddEntry(H_hshypfp_DATA,"DATA, INT = %s" % b_int_hypfp_data)
 
 l_hypfp.Draw()
 
@@ -582,12 +605,16 @@ hypfp.Print(outputpdf)
 
 xptar = TCanvas()
 l_xptar = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_xptar.AddEntry(H_ssxptar_SIMC,"SIMC")
-l_xptar.AddEntry(H_ssxptar_DATA,"Data")
-H_ssxptar_DATA.SetLineColor(kRed)
 
+H_ssxptar_DATA.SetLineColor(kRed)
 H_ssxptar_SIMC.Draw("")
 H_ssxptar_DATA.Draw("same")
+
+b_int_xptar_simc = int(H_ssxptar_SIMC.Integral())
+b_int_xptar_data = int(H_ssxptar_DATA.Integral())
+
+l_xptar.AddEntry(H_ssxptar_SIMC,"SIMC, INT = %s" % b_int_xptar_simc)
+l_xptar.AddEntry(H_ssxptar_DATA,"DATA, INT = %s" % b_int_xptar_data)
 
 l_xptar.Draw()
 
@@ -595,12 +622,16 @@ xptar.Print(outputpdf)
 
 yptar = TCanvas()
 l_yptar = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_yptar.AddEntry(H_ssyptar_SIMC,"SIMC")
-l_yptar.AddEntry(H_ssyptar_DATA,"Data")
-H_ssyptar_DATA.SetLineColor(kRed)
 
+H_ssyptar_DATA.SetLineColor(kRed)
 H_ssyptar_SIMC.Draw("")
 H_ssyptar_DATA.Draw("same")
+
+b_int_yptar_simc = int(H_ssyptar_SIMC.Integral())
+b_int_yptar_data = int(H_ssyptar_DATA.Integral())
+
+l_yptar.AddEntry(H_ssyptar_SIMC,"SIMC, INT = %s" % b_int_yptar_simc)
+l_yptar.AddEntry(H_ssyptar_DATA,"DATA, INT = %s" % b_int_yptar_data)
 
 l_yptar.Draw()
 
@@ -608,12 +639,16 @@ yptar.Print(outputpdf)
 
 hxptar = TCanvas()
 l_hxptar = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_hxptar.AddEntry(H_hsxptar_SIMC,"SIMC")
-l_hxptar.AddEntry(H_hsxptar_DATA,"data")
-H_hsxptar_DATA.SetLineColor(kRed)
 
+H_hsxptar_DATA.SetLineColor(kRed)
 H_hsxptar_SIMC.Draw("")
 H_hsxptar_DATA.Draw("same")
+
+b_int_hxptar_simc = int(H_hshxptar_SIMC.Integral())
+b_int_hxptar_data = int(H_hshxptar_DATA.Integral())
+
+l_hxptar.AddEntry(H_hshxptar_SIMC,"SIMC, INT = %s" % b_int_hxptar_simc)
+l_hxptar.AddEntry(H_hshxptar_DATA,"DATA, INT = %s" % b_int_hxptar_data)
 
 l_hxptar.Draw()
 
@@ -621,12 +656,16 @@ hxptar.Print(outputpdf)
 
 hyptar = TCanvas()
 l_hyptar = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_hyptar.AddEntry(H_hsyptar_SIMC,"SIMC")
-l_hyptar.AddEntry(H_hsyptar_DATA,"Data")
-H_hsyptar_DATA.SetLineColor(kRed)
 
+H_hsyptar_DATA.SetLineColor(kRed)
 H_hsyptar_SIMC.Draw("")
 H_hsyptar_DATA.Draw("same")
+
+b_int_hyptar_simc = int(H_hshyptar_SIMC.Integral())
+b_int_hyptar_data = int(H_hshyptar_DATA.Integral())
+
+l_hyptar.AddEntry(H_hshyptar_SIMC,"SIMC, INT = %s" % b_int_hyptar_simc)
+l_hyptar.AddEntry(H_hshyptar_DATA,"DATA, INT = %s" % b_int_hyptar_data)
 
 l_hyptar.Draw()
 
@@ -634,12 +673,16 @@ hyptar.Print(outputpdf)
 
 Delta = TCanvas()
 l_Delta = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_Delta.AddEntry(H_ssdelta_SIMC,"SIMC")
-l_Delta.AddEntry(H_ssdelta_DATA,"Data")
-H_ssdelta_DATA.SetLineColor(kRed)
 
+H_ssdelta_DATA.SetLineColor(kRed)
 H_ssdelta_SIMC.Draw("")
 H_ssdelta_DATA.Draw("same")
+
+b_int_Delta_simc = int(H_ssdelta_SIMC.Integral())
+b_int_Delta_data = int(H_ssdelta_DATA.Integral())
+
+l_Delta.AddEntry(H_ssdelta_SIMC,"SIMC, INT = %s" % b_int_Delta_simc)
+l_Delta.AddEntry(H_ssdelta_DATA,"DATA, INT = %s" % b_int_Delta_data)
 
 l_Delta.Draw()
 
@@ -647,139 +690,174 @@ Delta.Print(outputpdf)
 
 hDelta = TCanvas()
 l_hDelta = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_hDelta.AddEntry(H_hsdelta_SIMC,"SIMC")
-l_hDelta.AddEntry(H_hsdelta_DATA,"Data")
+
 H_hsdelta_DATA.SetLineColor(kRed)
 
 H_hsdelta_SIMC.Draw("")
 H_hsdelta_DATA.Draw("same")
+
+b_int_hDelta_simc = int(H_hsdelta_SIMC.Integral())
+b_int_hDelta_data = int(H_hsdelta_DATA.Integral())
+
+l_hDelta.AddEntry(H_hsdelta_SIMC,"SIMC, INT = %s" % b_int_hDelta_simc)
+l_hDelta.AddEntry(H_hsdelta_DATA,"DATA, INT = %s" % b_int_hDelta_data)
 
 l_hDelta.Draw()
 
 hDelta.Print(outputpdf)
 
 CQ2 = TCanvas()
-l_CQ2 = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_CQ2.AddEntry(H_Q2_SIMC,"SIMC")
-l_CQ2.AddEntry(H_Q2_DATA,"Data")
-H_Q2_DATA.SetLineColor(kRed)
+l_Q2 = ROOT.TLegend(0.115,0.835,0.43,0.9)
 
+H_Q2_DATA.SetLineColor(kRed)
 H_Q2_SIMC.Draw("")
 H_Q2_DATA.Draw("same")
 
-l_CQ2.Draw()
+b_int_Q2_simc = int(H_Q2_SIMC.Integral())
+b_int_Q2_data = int(H_Q2_DATA.Integral())
+
+l_Q2.AddEntry(H_Q2_SIMC,"SIMC, INT = %s" % b_int_Q2_simc)
+l_Q2.AddEntry(H_Q2_DATA,"DATA, INT = %s" % b_int_Q2_data)
+
+l_Q2.Draw()
 
 CQ2.Print(outputpdf)
 
 Cepsilon = TCanvas()
-l_Cepsilon = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_epsilon = ROOT.TLegend(0.115,0.835,0.43,0.9)
 
-l_Cepsilon.AddEntry(H_epsilon_SIMC,"SIMC")
-l_Cepsilon.AddEntry(H_epsilon_DATA,"Data")
 H_epsilon_DATA.SetLineColor(kRed)
-
 H_epsilon_SIMC.Draw("")
 H_epsilon_DATA.Draw("same")
 
-l_Cepsilon.Draw()
+
+b_int_epsilon_simc = int(H_epsilon_SIMC.Integral())
+b_int_epsilon_data = int(H_epsilon_DATA.Integral())
+
+l_epsilon.AddEntry(H_epsilon_SIMC,"SIMC, INT = %s" % b_int_epsilon_simc)
+l_epsilon.AddEntry(H_epsilon_DATA,"DATA, INT = %s" % b_int_epsilon_data)
+
+l_epsilon.Draw()
 
 Cepsilon.Print(outputpdf)
 
 CMMp = TCanvas()
-l_CMMp = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_MMp = ROOT.TLegend(0.115,0.835,0.43,0.9)
 
-l_CMMp.AddEntry(H_MMp_SIMC,"SIMC")
-l_CMMp.AddEntry(H_MMp_DATA,"Data")
+
 H_MMp_DATA.SetLineColor(kRed)
-
 H_MMp_SIMC.Draw("")
 H_MMp_DATA.Draw("same")
 
-l_CMMp.Draw()
+b_int_MMp_simc = int(H_MMp_SIMC.Integral())
+b_int_MMp_data = int(H_MMp_DATA.Integral())
+
+l_MMp.AddEntry(H_MMp_SIMC,"SIMC, INT = %s" % b_int_MMp_simc)
+l_MMp.AddEntry(H_MMp_DATA,"DATA, INT = %s" % b_int_MMp_data)
+
+l_MMp.Draw()
 
 CMMp.Print(outputpdf)
 
 Cpmiss = TCanvas()
-l_Cpmiss = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_pmiss = ROOT.TLegend(0.115,0.835,0.43,0.9)
 
-l_Cpmiss.AddEntry(H_pmiss_SIMC,"SIMC")
-l_Cpmiss.AddEntry(H_pmiss_DATA,"Data")
 H_pmiss_DATA.SetLineColor(kRed)
-
 H_pmiss_SIMC.Draw("")
 H_pmiss_DATA.Draw("same")
 
-l_Cpmiss.Draw()
+b_int_pmiss_simc = int(H_pmiss_SIMC.Integral())
+b_int_pmiss_data = int(H_pmiss_DATA.Integral())
+
+l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, INT = %s" % b_int_pmiss_simc)
+l_pmiss.AddEntry(H_pmiss_DATA,"DATA, INT = %s" % b_int_pmiss_data)
+
+l_pmiss.Draw()
 
 Cpmiss.Print(outputpdf)
 
 Cemiss = TCanvas()
-l_Cemiss = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_emiss = ROOT.TLegend(0.115,0.835,0.43,0.9)
 
-l_Cemiss.AddEntry(H_emiss_SIMC,"SIMC")
-l_Cemiss.AddEntry(H_emiss_DATA,"Data")
 H_emiss_DATA.SetLineColor(kRed)
-
 H_emiss_SIMC.Draw("")
 H_emiss_DATA.Draw("same")
 
-l_Cemiss.Draw()
+b_int_emiss_simc = int(H_emiss_SIMC.Integral())
+b_int_emiss_data = int(H_emiss_DATA.Integral())
+
+l_emiss.AddEntry(H_emiss_SIMC,"SIMC, INT = %s" % b_int_emiss_simc)
+l_emiss.AddEntry(H_emiss_DATA,"DATA, INT = %s" % b_int_emiss_data)
+
+l_emiss.Draw()
 
 Cemiss.Print(outputpdf)
 
 Cpmiss_x = TCanvas()
-l_Cpmiss_x = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_pmx = ROOT.TLegend(0.115,0.835,0.43,0.9)
 
-l_Cpmiss_x.AddEntry(H_pmx_SIMC,"SIMC")
-l_Cpmiss_x.AddEntry(H_pmx_DATA,"Data")
 H_pmx_DATA.SetLineColor(kRed)
-
 H_pmx_SIMC.Draw("")
 H_pmx_DATA.Draw("same")
 
-l_Cpmiss_x.Draw()
+b_int_pmx_simc = int(H_pmx_SIMC.Integral())
+b_int_pmx_data = int(H_pmx_DATA.Integral())
+
+l_pmx.AddEntry(H_pmx_SIMC,"SIMC, INT = %s" % b_int_pmx_simc)
+l_pmx.AddEntry(H_pmx_DATA,"DATA, INT = %s" % b_int_pmx_data)
+
+l_pmx.Draw()
 
 Cpmiss_x.Print(outputpdf)
 
 Cpmiss_y = TCanvas()
-l_Cpmiss_y = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_pmy = ROOT.TLegend(0.115,0.835,0.43,0.9)
 
-l_Cpmiss_y.AddEntry(H_pmy_SIMC,"SIMC")
-l_Cpmiss_y.AddEntry(H_pmy_DATA,"Data")
 H_pmy_DATA.SetLineColor(kRed)
-
 H_pmy_SIMC.Draw("")
 H_pmy_DATA.Draw("same")
 
-l_Cpmiss_y.Draw()
+b_int_pmy_simc = int(H_pmy_SIMC.Integral())
+b_int_pmy_data = int(H_pmy_DATA.Integral())
+
+l_pmy.AddEntry(H_pmy_SIMC,"SIMC, INT = %s" % b_int_pmy_simc)
+l_pmy.AddEntry(H_pmy_DATA,"DATA, INT = %s" % b_int_pmy_data)
+
+l_pmy.Draw()
 
 Cpmiss_y.Print(outputpdf)
 
 Cpmiss_z = TCanvas()
-l_Cpmiss_z = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_pmz = ROOT.TLegend(0.115,0.835,0.43,0.9)
 
-l_Cpmiss_z.AddEntry(H_pmz_SIMC,"SIMC")
-l_Cpmiss_z.AddEntry(H_pmz_DATA,"Data")
 H_pmz_DATA.SetLineColor(kRed)
-
 H_pmz_SIMC.Draw("")
 H_pmz_DATA.Draw("same")
 
-l_Cpmiss_z.Draw()
+b_int_pmz_simc = int(H_pmz_SIMC.Integral())
+b_int_pmz_data = int(H_pmz_DATA.Integral())
+
+l_pmz.AddEntry(H_pmz_SIMC,"SIMC, INT = %s" % b_int_pmz_simc)
+l_pmz.AddEntry(H_pmz_DATA,"DATA, INT = %s" % b_int_pmz_data)
+
+l_pmz.Draw()
 
 Cpmiss_z.Print(outputpdf)
 
 CW = TCanvas()
-l_CW = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_W = ROOT.TLegend(0.115,0.835,0.43,0.9)
 
-l_CW.AddEntry(H_W_SIMC,"SIMC")
-l_CW.AddEntry(H_W_DATA,"Data")
 H_W_DATA.SetLineColor(kRed)
-
 H_W_SIMC.Draw("")
 H_W_DATA.Draw("same")
 
-l_CW.Draw()
+b_int_W_simc = int(H_W_SIMC.Integral())
+b_int_W_data = int(H_W_DATA.Integral())
+
+l_W.AddEntry(H_W_SIMC,"SIMC, INT = %s" % b_int_W_simc)
+l_W.AddEntry(H_W_DATA,"DATA, INT = %s" % b_int_W_data)
+
+l_W.Draw()
 
 CW.Print(outputpdf + ')')
 

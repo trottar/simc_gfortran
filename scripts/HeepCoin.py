@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 18:01:02 trottar"
+# Time-stamp: "2022-05-31 19:23:05 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -99,6 +99,55 @@ TBRANCH_DUMMY  = InFile_DUMMY.Get("hist")
 nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
 TBRANCH_SIMC  = InFile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
+
+TSCALER_DATA  = up.open(InFile_DATA)["charge"]
+TSCALER_DUMMY  = up.open(InFile_DUMMY)["charge"]
+
+################################################################################################################################################
+
+# Data charge calculation
+bcm1_charge_DATA = TSCALER_DATA.array("bcm1_charge")
+bcm2_charge_DATA = TSCALER_DATA.array("bcm2_charge")
+bcm4a_charge_DATA = TSCALER_DATA.array("bcm4a_charge")
+bcm4b_charge_DATA = TSCALER_DATA.array("bcm4b_charge")
+bcm4c_charge_DATA = TSCALER_DATA.array("bcm4c_charge")
+
+bcm_value_DATA  = [bcm1_charge_DATA, bcm2_charge_DATA, bcm4a_charge_DATA, bcm4b_charge_DATA, bcm4c_charge_DATA]
+
+charge_sum_DATA = [0]*NBCM
+previous_charge_DATA = [0]*NBCM
+
+for ibcm in range(0, 5):
+    previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][0]
+    # Iterate over all scaler events to get various scaler values
+    for i, evt in enumerate(s_evts):
+        # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
+        charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
+        previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]
+        
+data_charge = charge_sum_DATA[0]
+        
+# Dummy charge calculation
+bcm1_charge_DUMMY = TSCALER_DUMMY.array("bcm1_charge")
+bcm2_charge_DUMMY = TSCALER_DUMMY.array("bcm2_charge")
+bcm4a_charge_DUMMY = TSCALER_DUMMY.array("bcm4a_charge")
+bcm4b_charge_DUMMY = TSCALER_DUMMY.array("bcm4b_charge")
+bcm4c_charge_DUMMY = TSCALER_DUMMY.array("bcm4c_charge")
+
+bcm_value_DUMMY  = [bcm1_charge_DUMMY, bcm2_charge_DUMMY, bcm4a_charge_DUMMY, bcm4b_charge_DUMMY, bcm4c_charge_DUMMY]
+
+charge_sum_DUMMY = [0]*NBCM
+previous_charge_DUMMY = [0]*NBCM
+
+for ibcm in range(0, 5):
+    previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][0]
+    # Iterate over all scaler events to get various scaler values
+    for i, evt in enumerate(s_evts):
+        # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
+        charge_sum_DUMMY[ibcm] += (bcm_value_DUMMY[ibcm][i] - previous_charge_DUMMY[ibcm])
+        previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][i]
+        
+dummy_charge = charge_sum_DUMMY[0]
 
 ################################################################################################################################################
   
@@ -375,7 +424,6 @@ H_W_SIMC.Scale(normfac_simc)
 H_epsilon_SIMC.Scale(normfac_simc)                                                                                                                                                    
 H_MMp_SIMC.Scale(normfac_simc)
 
-dummy_charge = 42.096
 dummy_target_corr = 4.8579
 normfac_dummy = 1/(dummy_charge*dummy_target_corr)
 H_ssxfp_DUMMY.Scale(normfac_dummy)
@@ -402,7 +450,6 @@ H_pmy_DUMMY.Scale(normfac_dummy)
 H_pmz_DUMMY.Scale(normfac_dummy)
 H_W_DUMMY.Scale(normfac_dummy)
 
-data_charge = 542.499
 normfac_data = 1/(data_charge)
 H_ssxfp_DATA.Scale(normfac_data)
 H_ssyfp_DATA.Scale(normfac_data)

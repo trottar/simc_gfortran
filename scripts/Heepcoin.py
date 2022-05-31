@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 12:52:09 trottar"
+# Time-stamp: "2022-05-31 12:57:59 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -71,7 +71,7 @@ fouttxt  = OutPath+"/" + OutFilename + ".txt"
 outputpdf  = OutPath+"/" + OutFilename + ".pdf"
 
 ################################################################################################################################################
-
+'''
 InFile_DATA = up.open(rootFile)
 InFile_DUMMY = up.open(rootFile_DUMMY)
 InFile_SIMC = up.open(rootFile_SIMC)
@@ -82,9 +82,20 @@ TBRANCH_DUMMY  = InFile_DUMMY["hist"]
 nEntries_TBRANCH_DUMMY  = len(TBRANCH_DUMMY)
 TBRANCH_SIMC  = InFile_SIMC["h10"]
 nEntries_TBRANCH_SIMC  = len(TBRANCH_SIMC)
+'''
+InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
+InFile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "OPEN")
+InFile_SIMC = ROOT.TFile.Open(rootFile_SIMC, "READ")
+
+TBRANCH_DATA  = InFile_DATA.Get("hist")
+nEntries_TBRANCH_DATA  = TBRANCH_DATA.GetEntries()
+TBRANCH_DUMMY  = InFile_DUMMY.Get("hist")
+nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
+TBRANCH_SIMC  = InFile_SIMC.Get("h10")
+nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
 
 ################################################################################################################################################
-  
+'''
 # SIMC variables
 # HMS
 hsdelta = TBRANCH_SIMC.array("hsdelta")
@@ -201,7 +212,7 @@ H_gtr_xptar_dummy = TBRANCH_DUMMY.array("H_gtr_xptar")
 H_gtr_yptar_dummy = TBRANCH_DUMMY.array("H_gtr_yptar")  
 H_cer_npeSum_dummy = TBRANCH_DUMMY.array("H_cer_npeSum")
 H_cal_etotnorm_dummy = TBRANCH_DUMMY.array("H_cal_etotnorm")
-
+'''
 ################################################################################################################################################
   
 H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta hsdelta", 300, -20.0, 20.0)
@@ -312,7 +323,7 @@ H_W_SIMC  = ROOT.TH1D("H_W_SIMC","W W", 300, 0.5, 1.5)
 
 for i in range(nEntries_TBRANCH_SIMC):
 
-  #TBRANCH_SIMC.GetEntry(i)
+  TBRANCH_SIMC.GetEntry(i)
   # Define the acceptance cuts  
 
   # Select the cuts
@@ -329,36 +340,36 @@ for i in range(nEntries_TBRANCH_SIMC):
   #........................................
 
   #Fill SIMC events
-  #if (CUT1 & CUT2 & CUT3 & CUT4 & CUT5 & CUT6):
-  if (hsdelta[i] >=-8.0) & (hsdelta[i] <=8.0) & (hsxptar[i] >=-0.08) & (hsxpfp[i] <=0.08) & (hsyptar[i] >=-0.045) & (hsypfp[i] <=0.045) & (ssdelta[i] >=-10.0) & (hsdelta[i] <=20.0) & (ssxptar[i] >=-0.06) & (hsxpfp[i] <=0.06) & (hsyptar[i] >=-0.04) & (hsypfp[i] <=0.04):
+  if (CUT1 & CUT2 & CUT3 & CUT4 & CUT5 & CUT6):
+  #if (hsdelta[i] >=-8.0) & (hsdelta[i] <=8.0) & (hsxptar[i] >=-0.08) & (hsxpfp[i] <=0.08) & (hsyptar[i] >=-0.045) & (hsypfp[i] <=0.045) & (ssdelta[i] >=-10.0) & (hsdelta[i] <=20.0) & (ssxptar[i] >=-0.06) & (hsxpfp[i] <=0.06) & (hsyptar[i] >=-0.04) & (hsypfp[i] <=0.04):
     
-      H_ssxfp_SIMC.Fill(ssxfp[i], Weight[i])
-      H_ssyfp_SIMC.Fill(ssyfp[i], Weight[i])
-      H_ssxpfp_SIMC.Fill(ssxpfp[i], Weight[i])
-      H_ssypfp_SIMC.Fill(ssypfp[i], Weight[i])
-      H_hsxfp_SIMC.Fill(hsxfp[i], Weight[i])
-      H_hsyfp_SIMC.Fill(hsyfp[i], Weight[i])
-      H_hsxpfp_SIMC.Fill(hsxpfp[i], Weight[i])
-      H_hsypfp_SIMC.Fill(hsypfp[i], Weight[i])
-      H_ssdelta_SIMC.Fill(ssdelta[i], Weight)[i] 
-      H_hsdelta_SIMC.Fill(hsdelta[i], Weight)[i]	
-      H_ssxptar_SIMC.Fill(ssxptar[i], Weight[i])
-      H_ssyptar_SIMC.Fill(ssyptar[i], Weight[i])
-      H_hsxptar_SIMC.Fill(hsxptar[i], Weight)[i]	
-      H_hsyptar_SIMC.Fill(hsyptar[i], Weight)[i]	
-      H_pmiss_SIMC.Fill(Pm[i], Weight)[i]	
-      H_emiss_SIMC.Fill(Em[i], Weight)[i]	
-      H_pmx_SIMC.Fill(Pmx[i], Weight[i])
-      H_pmy_SIMC.Fill(Pmy[i], Weight[i])
-      H_pmz_SIMC.Fill(Pmz[i], Weight[i])
-      H_Q2_SIMC.Fill(Q2_simc[i], Weight[i])
-      H_W_SIMC.Fill(W_simc[i], Weight[i])
-      H_epsilon_SIMC.Fill(epsilon_simc[i], Weight[i])
-      H_MMp_SIMC.Fill((pow(Em[i], 2) - pow(Pm[i], 2)), Weight[i])
+      H_ssxfp_SIMC.Fill(ssxfp, Weight)
+      H_ssyfp_SIMC.Fill(ssyfp, Weight)
+      H_ssxpfp_SIMC.Fill(ssxpfp, Weight)
+      H_ssypfp_SIMC.Fill(ssypfp, Weight)
+      H_hsxfp_SIMC.Fill(hsxfp, Weight)
+      H_hsyfp_SIMC.Fill(hsyfp, Weight)
+      H_hsxpfp_SIMC.Fill(hsxpfp, Weight)
+      H_hsypfp_SIMC.Fill(hsypfp, Weight)
+      H_ssdelta_SIMC.Fill(ssdelta, Weight) 
+      H_hsdelta_SIMC.Fill(hsdelta, Weight)	
+      H_ssxptar_SIMC.Fill(ssxptar, Weight)
+      H_ssyptar_SIMC.Fill(ssyptar, Weight)
+      H_hsxptar_SIMC.Fill(hsxptar, Weight)	
+      H_hsyptar_SIMC.Fill(hsyptar, Weight)	
+      H_pmiss_SIMC.Fill(Pm, Weight)	
+      H_emiss_SIMC.Fill(Em, Weight)	
+      H_pmx_SIMC.Fill(Pmx, Weight)
+      H_pmy_SIMC.Fill(Pmy, Weight)
+      H_pmz_SIMC.Fill(Pmz, Weight)
+      H_Q2_SIMC.Fill(Q2_simc, Weight)
+      H_W_SIMC.Fill(W_simc, Weight)
+      H_epsilon_SIMC.Fill(epsilon_simc, Weight)
+      H_MMp_SIMC.Fill((pow(Em, 2) - pow(Pm, 2)), Weight)  
     
 for i in range(nEntries_TBRANCH_DATA):
 
-  #TBRANCH_DATA.GetEntry(i)
+  TBRANCH_DATA.GetEntry(i)
 
   #CUTs Definations 
   SHMS_FixCut = (P_hod_goodstarttime_data == 1) & (P_dc_InsideDipoleExit_data == 1) # & P_hod_betanotrack_data > 0.5 & P_hod_betanotrack_data < 1.4
@@ -408,7 +419,7 @@ for i in range(nEntries_TBRANCH_DATA):
 
 for i in range(nEntries_TBRANCH_DUMMY):
 
-  #TBRANCH_DUMMY.GetEntry(i)
+  TBRANCH_DUMMY.GetEntry(i)
 
   #......... Define Cuts.................
 

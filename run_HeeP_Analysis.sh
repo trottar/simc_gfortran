@@ -12,9 +12,15 @@ OutDUMMYFilename="Analysed_DummyData_$KIN"
 OutFullAnalysisFilename="FullAnalysis_$KIN"
 
 cd $ANA_DIR
+echo
+echo "Analysing data..."
+echo
 root -l <<EOF 
 .x $ANA_DIR/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
 EOF
+echo
+echo "Analysing dummy data..."
+echo
 root -l <<EOF 
 .x $ANA_DIR/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
 EOF

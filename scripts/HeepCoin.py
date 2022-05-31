@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 14:42:32 trottar"
+# Time-stamp: "2022-05-31 15:32:49 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -43,7 +43,10 @@ InDUMMYFilename = sys.argv[2]
 InSIMCFilename = sys.argv[3]
 OutFilename = sys.argv[4]
 
-################################################################################################################################################
+###############################################################################################################################################
+ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
+###############################################################################################################################################
+
 '''
 ltsep package import and pathing definitions
 '''
@@ -85,7 +88,7 @@ if 'simc_nevents' and 'simc_normfactor' in locals():
 else:
     print("ERROR: Invalid simc hist file %s" % simc_hist)
     sys.exit(1)
-        
+    
 ################################################################################################################################################
 
 InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")

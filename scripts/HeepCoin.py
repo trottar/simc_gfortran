@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 17:34:43 trottar"
+# Time-stamp: "2022-05-31 17:45:12 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -466,7 +466,7 @@ ROOT.gStyle.SetOptStat(0)
 # PLOT HIST..
 
 xfp = TCanvas()
-l_xfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_xfp = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_ssxfp_DATA.SetLineColor(kRed)
 H_ssxfp_SIMC.Draw("")
@@ -483,7 +483,7 @@ l_xfp.Draw()
 xfp.Print(outputpdf + '(')
 
 yfp = TCanvas()
-l_yfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_yfp = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_ssyfp_DATA.SetLineColor(kRed)
 H_ssyfp_SIMC.Draw("")
@@ -500,7 +500,7 @@ l_yfp.Draw()
 yfp.Print(outputpdf)
 
 xpfp = TCanvas()
-l_xpfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_xpfp = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_ssxpfp_DATA.SetLineColor(kRed)
 H_ssxpfp_SIMC.Draw("")
@@ -517,7 +517,7 @@ l_xpfp.Draw()
 xpfp.Print(outputpdf)
 
 ypfp = TCanvas()
-l_ypfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_ypfp = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_ssypfp_DATA.SetLineColor(kRed)
 H_ssypfp_SIMC.Draw("")
@@ -534,7 +534,7 @@ l_ypfp.Draw()
 ypfp.Print(outputpdf)
 
 hxfp = TCanvas()
-l_hxfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_hxfp = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_hsxfp_DATA.SetLineColor(kRed)
 H_hsxfp_SIMC.Draw("")
@@ -551,7 +551,7 @@ l_hxfp.Draw()
 hxfp.Print(outputpdf)
 
 hyfp = TCanvas()
-l_hyfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_hyfp = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_hsyfp_DATA.SetLineColor(kRed)
 H_hsyfp_SIMC.Draw("")
@@ -568,7 +568,7 @@ l_hyfp.Draw()
 hyfp.Print(outputpdf)
 
 hxpfp = TCanvas()
-l_hxpfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_hxpfp = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_hsxpfp_DATA.SetLineColor(kRed)
 H_hsxpfp_SIMC.Draw("")
@@ -585,7 +585,7 @@ l_hxpfp.Draw()
 hxpfp.Print(outputpdf)
 
 hypfp = TCanvas()
-l_hypfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_hypfp = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_hsypfp_DATA.SetLineColor(kRed)
 H_hsypfp_SIMC.Draw("")
@@ -602,7 +602,7 @@ l_hypfp.Draw()
 hypfp.Print(outputpdf)
 
 xptar = TCanvas()
-l_xptar = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_xptar = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_ssxptar_DATA.SetLineColor(kRed)
 H_ssxptar_SIMC.Draw("")
@@ -619,7 +619,7 @@ l_xptar.Draw()
 xptar.Print(outputpdf)
 
 yptar = TCanvas()
-l_yptar = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_yptar = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_ssyptar_DATA.SetLineColor(kRed)
 H_ssyptar_SIMC.Draw("")
@@ -636,7 +636,7 @@ l_yptar.Draw()
 yptar.Print(outputpdf)
 
 hxptar = TCanvas()
-l_hxptar = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_hxptar = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_hsxptar_DATA.SetLineColor(kRed)
 H_hsxptar_SIMC.Draw("")
@@ -653,7 +653,7 @@ l_hxptar.Draw()
 hxptar.Print(outputpdf)
 
 hyptar = TCanvas()
-l_hyptar = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_hyptar = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_hsyptar_DATA.SetLineColor(kRed)
 H_hsyptar_SIMC.Draw("")
@@ -670,7 +670,7 @@ l_hyptar.Draw()
 hyptar.Print(outputpdf)
 
 Delta = TCanvas()
-l_Delta = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_Delta = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_ssdelta_DATA.SetLineColor(kRed)
 H_ssdelta_SIMC.Draw("")
@@ -687,7 +687,7 @@ l_Delta.Draw()
 Delta.Print(outputpdf)
 
 hDelta = TCanvas()
-l_hDelta = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_hDelta = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_hsdelta_DATA.SetLineColor(kRed)
 
@@ -705,7 +705,7 @@ l_hDelta.Draw()
 hDelta.Print(outputpdf)
 
 CQ2 = TCanvas()
-l_Q2 = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_Q2 = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_Q2_DATA.SetLineColor(kRed)
 H_Q2_SIMC.Draw("")
@@ -722,7 +722,7 @@ l_Q2.Draw()
 CQ2.Print(outputpdf)
 
 Cepsilon = TCanvas()
-l_epsilon = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_epsilon = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_epsilon_DATA.SetLineColor(kRed)
 H_epsilon_SIMC.Draw("")
@@ -740,7 +740,7 @@ l_epsilon.Draw()
 Cepsilon.Print(outputpdf)
 
 CMMp = TCanvas()
-l_MMp = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_MMp = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 
 H_MMp_DATA.SetLineColor(kRed)
@@ -758,7 +758,7 @@ l_MMp.Draw()
 CMMp.Print(outputpdf)
 
 Cpmiss = TCanvas()
-l_pmiss = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_pmiss = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_pmiss_DATA.SetLineColor(kRed)
 H_pmiss_SIMC.Draw("")
@@ -775,7 +775,7 @@ l_pmiss.Draw()
 Cpmiss.Print(outputpdf)
 
 Cemiss = TCanvas()
-l_emiss = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_emiss = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_emiss_DATA.SetLineColor(kRed)
 H_emiss_SIMC.Draw("")
@@ -792,7 +792,7 @@ l_emiss.Draw()
 Cemiss.Print(outputpdf)
 
 Cpmiss_x = TCanvas()
-l_pmx = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_pmx = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_pmx_DATA.SetLineColor(kRed)
 H_pmx_SIMC.Draw("")
@@ -809,7 +809,7 @@ l_pmx.Draw()
 Cpmiss_x.Print(outputpdf)
 
 Cpmiss_y = TCanvas()
-l_pmy = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_pmy = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_pmy_DATA.SetLineColor(kRed)
 H_pmy_SIMC.Draw("")
@@ -826,7 +826,7 @@ l_pmy.Draw()
 Cpmiss_y.Print(outputpdf)
 
 Cpmiss_z = TCanvas()
-l_pmz = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_pmz = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_pmz_DATA.SetLineColor(kRed)
 H_pmz_SIMC.Draw("")
@@ -843,7 +843,7 @@ l_pmz.Draw()
 Cpmiss_z.Print(outputpdf)
 
 CW = TCanvas()
-l_W = ROOT.TLegend(0.115,0.835,0.43,0.9)
+l_W = ROOT.TLegend(0.115,0.835,0.43,0.5)
 
 H_W_DATA.SetLineColor(kRed)
 H_W_SIMC.Draw("")

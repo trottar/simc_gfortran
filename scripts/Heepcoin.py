@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 13:23:39 trottar"
+# Time-stamp: "2022-05-31 13:24:52 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -70,7 +70,7 @@ foutname = OutPath+"/" + OutFilename + ".root"
 fouttxt  = OutPath+"/" + OutFilename + ".txt"
 outputpdf  = OutPath+"/" + OutFilename + ".pdf"
 
-simc_hist = "%s/OUTPUTS/Heep_Coin_106.hist" % REPLAYPATH
+simc_hist = "%s/OUTPUTS/Heep_Coin_10p6.hist" % REPLAYPATH
 f_simc = open(simc_hist)
 for line in f:
     if "Ngen" in line:

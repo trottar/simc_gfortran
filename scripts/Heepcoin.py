@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 12:12:00 trottar"
+# Time-stamp: "2022-05-31 12:13:50 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -359,11 +359,11 @@ for i in range(nEntries_TBRANCH_DATA):
 
   #CUTs Definations 
   SHMS_FixCut = P_hod_goodstarttime_data = 1 and P_dc_InsideDipoleExit_data = 1 # and P_hod_betanotrack_data > 0.5 and P_hod_betanotrack_data < 1.4
-  SHMS_Acceptance = P_gtr_dp_data>=-10.0 and P_gtr_dp_data<=20.0andP_gtr_xptar_data>=-0.06andP_gtr_xptar_data<=0.06andP_gtr_yptar_data>=-0.04andP_gtr_yptar_data<=0.04
+  SHMS_Acceptance = P_gtr_dp_data>=-10.0 and P_gtr_dp_data<=20.0 and P_gtr_xptar_data>=-0.06 and P_gtr_xptar_data<=0.06 and P_gtr_yptar_data>=-0.04 and P_gtr_yptar_data<=0.04
   SHMS_ELECTRON_PID = P_cal_etottracknorm_data >= 0.85 and P_cal_etottracknorm_data <= 1.2 # P_hgcer_npeSum_data >=0.5 and P_aero_npeSum_data >=0.5
 
   HMS_FixCut = H_hod_goodscinhit_data = 1 and H_hod_goodstarttime_data = 1andH_dc_InsideDipoleExit_data = 1
-  HMS_Acceptance = H_gtr_dp_data>=-8.0 and H_gtr_dp_data<=8.0andH_gtr_xptar_data>=-0.08andH_gtr_xptar_data<=0.08andH_gtr_yptar_data>=-0.045andH_gtr_yptar_data<=0.045       
+  HMS_Acceptance = H_gtr_dp_data>=-8.0 and H_gtr_dp_data<=8.0 and H_gtr_xptar_data>=-0.08 and H_gtr_xptar_data<=0.08 and H_gtr_yptar_data>=-0.045 and H_gtr_yptar_data<=0.045       
   HMS_ELECTRON_PID = H_cer_npeSum_data >=0.5 and H_cal_etotnorm_data >=0.8 and H_cal_etotnorm_data <=1.2
 
   #........................................
@@ -411,11 +411,11 @@ for i in range(nEntries_TBRANCH_DUMMY):
 
   #CUTs Definations 
   SHMS_FixCut = P_hod_goodstarttime_dummy = 1 and P_dc_InsideDipoleExit_dummy = 1 # and P_hod_betanotrack_dummy > 0.5 and P_hod_betanotrack_dummy < 1.4
-  SHMS_Acceptance = P_gtr_dp_dummy>=-10.0 and P_gtr_dp_dummy<=20.0andP_gtr_xptar_dummy>=-0.06andP_gtr_xptar_dummy<=0.06andP_gtr_yptar_dummy>=-0.04andP_gtr_yptar_dummy<=0.04
+  SHMS_Acceptance = P_gtr_dp_dummy>=-10.0 and P_gtr_dp_dummy<=20.0 and P_gtr_xptar_dummy>=-0.06 and P_gtr_xptar_dummy<=0.06 and P_gtr_yptar_dummy>=-0.04 and P_gtr_yptar_dummy<=0.04
   SHMS_ELECTRON_PID = P_cal_etottracknorm_dummy >= 0.85 and P_cal_etottracknorm_dummy <= 1.2 # P_hgcer_npeSum_dummy >=0.5 and P_aero_npeSum_dummy >=0.5
 
   HMS_FixCut = H_hod_goodscinhit_dummy = 1 and H_hod_goodstarttime_dummy = 1andH_dc_InsideDipoleExit_dummy = 1
-  HMS_Acceptance = H_gtr_dp_dummy>=-8.0 and H_gtr_dp_dummy<=8.0andH_gtr_xptar_dummy>=-0.08andH_gtr_xptar_dummy<=0.08andH_gtr_yptar_dummy>=-0.045andH_gtr_yptar_dummy<=0.045       
+  HMS_Acceptance = H_gtr_dp_dummy>=-8.0 and H_gtr_dp_dummy<=8.0 and H_gtr_xptar_dummy>=-0.08 and H_gtr_xptar_dummy<=0.08 and H_gtr_yptar_dummy>=-0.045 and H_gtr_yptar_dummy<=0.045       
   HMS_ELECTRON_PID = H_cer_npeSum_dummy >=0.5 and H_cal_etotnorm_dummy >=0.8 and H_cal_etotnorm_dummy <=1.2
 
   #........................................

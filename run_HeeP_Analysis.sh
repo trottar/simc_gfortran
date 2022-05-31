@@ -4,12 +4,12 @@ KIN=$1
 
 ANA_DIR="/group/c-kaonlt/USERS/${USER}/simc_gfortran/scripts"
 
-InDATAFilename="${KIN}_Raw_Data.root"
-InDUMMYFilename="${KIN}_Raw_DummyData.root"
+InDATAFilename="Raw_Data_${KIN}.root"
+InDUMMYFilename="Raw_DummyData_${KIN}.root"
 InSIMCFilename="Heep_Coin_${KIN}.root"
-OutDATAFilename="${KIN}_Analysed_Data"
-OutDUMMYFilename="${KIN}_Analysed_DummyData"
-OutFullAnalysisFilename="${KIN}_FullAnalysis"
+OutDATAFilename="Analysed_Data_${KIN}"
+OutDUMMYFilename="Analysed_DummyData_${KIN}"
+OutFullAnalysisFilename="FullAnalysis_${KIN}"
 
 cd $ANA_DIR
 pwd

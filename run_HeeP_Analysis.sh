@@ -13,7 +13,7 @@ OutFullAnalysisFilename="FullAnalysis_${KIN}"
 
 cd $ANA_DIR
 pwd
-eval "root -l -q \"$ANA_DIR/Analysed_COIN.C("${InDATAFilename}","${OutDATAFilename}")\""
-eval "root -l -q \"$ANA_DIR/Analysed_COIN.C("${InDUMMYFilename}","${OutDUMMYFilename}")\""
+eval "root -l -q \"$ANA_DIR/Analysed_COIN.C(\"${InDATAFilename}\",\"${OutDATAFilename}\")\""
+eval "root -l -q \"$ANA_DIR/Analysed_COIN.C(\"${InDUMMYFilename}\",\"${OutDUMMYFilename}\")\""
 
 python3 HeepCoin.py "${OutDATAFilename}.root" "${OutDUMMYFilename}.root" ${InSIMCFilename} ${OutFullAnalysisFilename}

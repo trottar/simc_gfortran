@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 16:39:02 trottar"
+# Time-stamp: "2022-05-31 16:55:02 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -465,12 +465,21 @@ H_W_DATA.Add(H_W_DUMMY,-1)
 
 xfp = TCanvas("SHMS xfp")
 l_xfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_xfp.AddEntry(H_ssxfp_SIMC,"SIMC")
-l_xfp.AddEntry(H_ssxfp_DATA,"Data")
-H_ssxfp_DATA.SetLineColor(kRed)
 
+H_ssxfp_DATA.SetLineColor(kRed)
 H_ssxfp_SIMC.Draw("")
 H_ssxfp_DATA.Draw("same")
+
+b_high_xfp_simc = H_ssxfp_SIMC.GetXaxis().FindBin(20)
+b_low_xfp_simc = H_ssxfp_SIMC.GetXaxis().FindBin(-20)
+b_high_xfp_data = H_ssxfp_DATA.GetXaxis().FindBin(20)
+b_low_xfp_data = H_ssxfp_DATA.GetXaxis().FindBin(-20)
+
+b_int_xfp_simc = int(H_ssxfp_SIMC.Integral(b_low_xfp_simc,b_high_xfp_simc))
+b_int_xfp_data = int(H_ssxfp_DATA.Integral(b_low_xfp_data,b_high_xfp_data))
+
+l_xfp.AddEntry(H_ssxfp_SIMC,"SIMC, INT = ",b_int_xfp_simc)
+l_xfp.AddEntry(H_ssxfp_DATA,"DATA, INT = ",b_int_xfp_data)
 
 xfp.Print(outputpdf + '(')
 

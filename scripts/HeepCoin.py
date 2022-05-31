@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 19:43:32 trottar"
+# Time-stamp: "2022-05-31 19:45:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -124,7 +124,7 @@ previous_charge_DATA = [0]*NBCM
 for ibcm in range(0, 5):
     previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][0]
     # Iterate over all scaler events to get various scaler values
-    for i, evt in enumerate(s_evts_DATA):
+    for i, evt in enumerate(range(0,s_evts_DATA)):
         # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
         charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
         previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]
@@ -148,7 +148,7 @@ previous_charge_DUMMY = [0]*NBCM
 for ibcm in range(0, 5):
     previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][0]
     # Iterate over all scaler events to get various scaler values
-    for i, evt in enumerate(s_evts_DUMMY):
+    for i, evt in enumerate(range(0,s_evts_DUMMY)):
         # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
         charge_sum_DUMMY[ibcm] += (bcm_value_DUMMY[ibcm][i] - previous_charge_DUMMY[ibcm])
         previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][i]

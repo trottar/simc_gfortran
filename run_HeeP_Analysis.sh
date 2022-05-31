@@ -11,10 +11,10 @@ OutFullAnalysisFilename="${KIN}_FullAnalysis"
 
 cd scripts
 root -l <<EOF
-.Analysis_COIN.C($InDATAFilename,$OutDATAFilename)
+.x Analysis_COIN.C($InDATAFilename,$OutDATAFilename)
 EOF
 root <<EOF
-.Analysis_COIN.C($InDUMMYFilename,$OutDUMMYFilename)
+.x Analysis_COIN.C($InDUMMYFilename,$OutDUMMYFilename)
 EOF
 
 python3 HeepCoin.py OutDATAFilename OutDUMMYFilename InSIMCFilename OutFullAnalysisFilename

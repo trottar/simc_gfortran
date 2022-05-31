@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 13:07:09 trottar"
+# Time-stamp: "2022-05-31 13:23:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -70,19 +70,21 @@ foutname = OutPath+"/" + OutFilename + ".root"
 fouttxt  = OutPath+"/" + OutFilename + ".txt"
 outputpdf  = OutPath+"/" + OutFilename + ".pdf"
 
+simc_hist = "%s/OUTPUTS/Heep_Coin_106.hist" % REPLAYPATH
+f_simc = open(simc_hist)
+for line in f:
+    if "Ngen" in line:
+        val = line.split("=")
+        simc_nevents = int(val[1])
+    if "normfac" in line:
+        val = line.split("=")
+        simc_normfactor = float(val[1])
+    else:
+        print("ERROR: Invalid simc hist file %s" % simc_hist)
+        sys.exit(1)
+        
 ################################################################################################################################################
-'''
-InFile_DATA = up.open(rootFile)
-InFile_DUMMY = up.open(rootFile_DUMMY)
-InFile_SIMC = up.open(rootFile_SIMC)
 
-TBRANCH_DATA  = InFile_DATA["hist"]
-nEntries_TBRANCH_DATA  = len(TBRANCH_DATA)
-TBRANCH_DUMMY  = InFile_DUMMY["hist"]
-nEntries_TBRANCH_DUMMY  = len(TBRANCH_DUMMY)
-TBRANCH_SIMC  = InFile_SIMC["h10"]
-nEntries_TBRANCH_SIMC  = len(TBRANCH_SIMC)
-'''
 InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
 InFile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "OPEN")
 InFile_SIMC = ROOT.TFile.Open(rootFile_SIMC, "READ")
@@ -94,125 +96,6 @@ nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
 TBRANCH_SIMC  = InFile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
 
-################################################################################################################################################
-'''
-# SIMC variables
-# HMS
-hsdelta = TBRANCH_SIMC.array("hsdelta")
-hsxptar = TBRANCH_SIMC.array("hsxptar")
-hsyptar = TBRANCH_SIMC.array("hsyptar")
-hsxfp = TBRANCH_SIMC.array("hsxfp")
-hsyfp = TBRANCH_SIMC.array("hsyfp")
-hsxpfp = TBRANCH_SIMC.array("hsxpfp")
-hsypfp = TBRANCH_SIMC.array("hsypfp")
-# SHMS
-ssdelta = TBRANCH_SIMC.array("ssdelta")
-ssxptar = TBRANCH_SIMC.array("ssxptar")
-ssyptar = TBRANCH_SIMC.array("ssyptar")
-ssxfp = TBRANCH_SIMC.array("ssxfp")
-ssyfp = TBRANCH_SIMC.array("ssyfp")
-ssxpfp = TBRANCH_SIMC.array("ssxpfp")
-ssypfp = TBRANCH_SIMC.array("ssypfp")
-
-q = TBRANCH_SIMC.array("q")
-Q2 = TBRANCH_SIMC.array("Q2")
-W = TBRANCH_SIMC.array("W")
-epsilon = TBRANCH_SIMC.array("epsilon")
-Pmx = TBRANCH_SIMC.array("Pmx")
-Pmy = TBRANCH_SIMC.array("Pmy")
-Pmz = TBRANCH_SIMC.array("Pmz")
-Em = TBRANCH_SIMC.array("Em")
-Pm = TBRANCH_SIMC.array("Pm")
-Weight = TBRANCH_SIMC.array("Weight")
-
-# DATA variables
-# HMS
-hsdelta_data = TBRANCH_DATA.array("hsdelta")
-hsxptar_data = TBRANCH_DATA.array("hsxptar")
-hsyptar_data = TBRANCH_DATA.array("hsyptar")
-hsxfp_data = TBRANCH_DATA.array("hsxfp")
-hsyfp_data = TBRANCH_DATA.array("hsyfp")
-hsxpfp_data = TBRANCH_DATA.array("hsxpfp")
-hsypfp_data = TBRANCH_DATA.array("hsypfp")
-# SHMS
-ssdelta_data = TBRANCH_DATA.array("ssdelta")
-ssxptar_data = TBRANCH_DATA.array("ssxptar")
-ssyptar_data = TBRANCH_DATA.array("ssyptar")
-ssxfp_data = TBRANCH_DATA.array("ssxfp")
-ssyfp_data = TBRANCH_DATA.array("ssyfp")
-ssxpfp_data = TBRANCH_DATA.array("ssxpfp")
-ssypfp_data = TBRANCH_DATA.array("ssypfp")
-
-Q2_data = TBRANCH_DATA.array("Q2")
-W_data = TBRANCH_DATA.array("W")
-epsilon_data = TBRANCH_DATA.array("epsilon")
-pmx_data = TBRANCH_DATA.array("pmx")
-pmy_data = TBRANCH_DATA.array("pmy")
-pmz_data = TBRANCH_DATA.array("pmz")
-em_data = TBRANCH_DATA.array("emiss")
-pm_data = TBRANCH_DATA.array("pmiss")
-MMp_data = TBRANCH_DATA.array("MMp")
-
-P_hod_goodstarttime_data = TBRANCH_DATA.array("P_hod_goodstarttime")  
-P_dc_InsideDipoleExit_data = TBRANCH_DATA.array("P_dc_InsideDipoleExit")
-P_gtr_xptar_data = TBRANCH_DATA.array("P_gtr_xptar")  
-P_gtr_dp_data = TBRANCH_DATA.array("P_gtr_dp")
-P_gtr_yptar_data = TBRANCH_DATA.array("P_gtr_yptar")    
-P_cal_etottracknorm_data = TBRANCH_DATA.array("P_cal_etottracknorm")  
-
-H_hod_goodscinhit_data = TBRANCH_DATA.array("H_hod_goodscinhit")  
-H_hod_goodstarttime_data = TBRANCH_DATA.array("H_hod_goodstarttime")  
-H_dc_InsideDipoleExit_data = TBRANCH_DATA.array("H_dc_InsideDipoleExit")
-H_gtr_dp_data = TBRANCH_DATA.array("H_gtr_dp")
-H_gtr_xptar_data = TBRANCH_DATA.array("H_gtr_xptar")  
-H_gtr_yptar_data = TBRANCH_DATA.array("H_gtr_yptar")  
-H_cer_npeSum_data = TBRANCH_DATA.array("H_cer_npeSum")
-H_cal_etotnorm_data = TBRANCH_DATA.array("H_cal_etotnorm")  
-
-# DUMMY variables
-# HMS
-hsdelta_dummy = TBRANCH_DUMMY.array("hsdelta")
-hsxptar_dummy = TBRANCH_DUMMY.array("hsxptar")
-hsyptar_dummy = TBRANCH_DUMMY.array("hsyptar")
-hsxfp_dummy = TBRANCH_DUMMY.array("hsxfp")
-hsyfp_dummy = TBRANCH_DUMMY.array("hsyfp")
-hsxpfp_dummy = TBRANCH_DUMMY.array("hsxpfp")
-hsypfp_dummy = TBRANCH_DUMMY.array("hsypfp")
-# SHMS
-ssdelta_dummy = TBRANCH_DUMMY.array("ssdelta")
-ssxptar_dummy = TBRANCH_DUMMY.array("ssxptar")
-ssyptar_dummy = TBRANCH_DUMMY.array("ssyptar")
-ssxfp_dummy = TBRANCH_DUMMY.array("ssxfp")
-ssyfp_dummy = TBRANCH_DUMMY.array("ssyfp")
-ssxpfp_dummy = TBRANCH_DUMMY.array("ssxpfp")
-ssypfp_dummy = TBRANCH_DUMMY.array("ssypfp")
-
-Q2_dummy = TBRANCH_DUMMY.array("Q2")
-W_dummy = TBRANCH_DUMMY.array("W")
-epsilon_dummy = TBRANCH_DUMMY.array("epsilon")
-pmx_dummy = TBRANCH_DUMMY.array("pmx")
-pmy_dummy = TBRANCH_DUMMY.array("pmy")
-pmz_dummy = TBRANCH_DUMMY.array("pmz")
-em_dummy = TBRANCH_DUMMY.array("emiss")
-pm_dummy = TBRANCH_DUMMY.array("pmiss")
-MMp_dummy = TBRANCH_DUMMY.array("MMp")
-
-P_hod_goodstarttime_dummy = TBRANCH_DUMMY.array("P_hod_goodstarttime")  
-P_dc_InsideDipoleExit_dummy = TBRANCH_DUMMY.array("P_dc_InsideDipoleExit")
-P_gtr_xptar_dummy = TBRANCH_DUMMY.array("P_gtr_xptar")  
-P_gtr_dp_dummy = TBRANCH_DUMMY.array("P_gtr_dp")
-P_gtr_yptar_dummy = TBRANCH_DUMMY.array("P_gtr_yptar")    
-P_cal_etottracknorm_dummy = TBRANCH_DUMMY.array("P_cal_etottracknorm")  
-
-H_hod_goodscinhit_dummy = TBRANCH_DUMMY.array("H_hod_goodscinhit")  
-H_hod_goodstarttime_dummy = TBRANCH_DUMMY.array("H_hod_goodstarttime")  
-H_dc_InsideDipoleExit_dummy = TBRANCH_DUMMY.array("H_dc_InsideDipoleExit")
-H_gtr_dp_dummy = TBRANCH_DUMMY.array("H_gtr_dp")  
-H_gtr_xptar_dummy = TBRANCH_DUMMY.array("H_gtr_xptar")  
-H_gtr_yptar_dummy = TBRANCH_DUMMY.array("H_gtr_yptar")  
-H_cer_npeSum_dummy = TBRANCH_DUMMY.array("H_cer_npeSum")
-H_cal_etotnorm_dummy = TBRANCH_DUMMY.array("H_cal_etotnorm")
-'''
 ################################################################################################################################################
   
 H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta hsdelta", 300, -20.0, 20.0)
@@ -323,7 +206,6 @@ H_W_SIMC  = ROOT.TH1D("H_W_SIMC","W W", 300, 0.5, 1.5)
 
 for evt in TBRANCH_SIMC:
 
-  #TBRANCH_SIMC.GetEntry(i)
   # Define the acceptance cuts  
 
   # Select the cuts
@@ -341,7 +223,6 @@ for evt in TBRANCH_SIMC:
 
   #Fill SIMC events
   if (CUT1 & CUT2 & CUT3 & CUT4 & CUT5 & CUT6):
-  #if (hsdelta[i] >=-8.0) & (hsdelta[i] <=8.0) & (hsxptar[i] >=-0.08) & (hsxpfp[i] <=0.08) & (hsyptar[i] >=-0.045) & (hsypfp[i] <=0.045) & (ssdelta[i] >=-10.0) & (hsdelta[i] <=20.0) & (ssxptar[i] >=-0.06) & (hsxpfp[i] <=0.06) & (hsyptar[i] >=-0.04) & (hsypfp[i] <=0.04):
     
       H_ssxfp_SIMC.Fill(evt.ssxfp, evt.Weight)
       H_ssyfp_SIMC.Fill(evt.ssyfp, evt.Weight)
@@ -368,8 +249,6 @@ for evt in TBRANCH_SIMC:
       H_MMp_SIMC.Fill((pow(evt.Em, 2) - pow(evt.Pm, 2)), evt.Weight)
     
 for evt in TBRANCH_DATA:
-
-  #TBRANCH_DATA.GetEntry(i)
 
   #CUTs Definations 
   SHMS_FixCut = (evt.P_hod_goodstarttime == 1) & (evt.P_dc_InsideDipoleExit == 1) # & P_hod_betanotrack > 0.5 & P_hod_betanotrack < 1.4
@@ -419,8 +298,6 @@ for evt in TBRANCH_DATA:
 
 for evt in TBRANCH_DUMMY:
 
-  #TBRANCH_DUMMY.GetEntry(i)
-
   #......... Define Cuts.................
 
   #CUTs Definations 
@@ -469,10 +346,9 @@ for evt in TBRANCH_DUMMY:
       H_hsxptar_DUMMY.Fill(evt.hsxptar)	
       H_hsyptar_DUMMY.Fill(evt.hsyptar)
     
-
 #simc_wgt = 0.131105E-04
-simc_normfactor = 0.830037E+07
-simc_nevents = 200000
+#simc_normfactor = 0.830037E+07
+#simc_nevents = 200000
 normfac_simc = (simc_normfactor)/(simc_nevents)
 
 H_ssxfp_SIMC.Scale(normfac_simc)                                                                                                                                   

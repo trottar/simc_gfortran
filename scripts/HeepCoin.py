@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 15:57:11 trottar"
+# Time-stamp: "2022-05-31 16:15:20 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -55,10 +55,10 @@ ltsep package import and pathing definitions
 import ltsep as lt 
 
 # Add this to all files for more dynamic pathing
-USER =  lt.SetPath(os.path.realpath(__file__)).getPath("USER",DEBUG=True) # Grab user info for file finding
-HOST = lt.SetPath(os.path.realpath(__file__)).getPath("HOST",DEBUG=True)
-UTILPATH = lt.SetPath(os.path.realpath(__file__)).getPath("UTILPATH",DEBUG=True)
-SIMCPATH = lt.SetPath(os.path.realpath(__file__)).getPath("SIMCPATH",DEBUG=True)
+USER =  lt.SetPath(os.path.realpath(__file__)).getPath("USER") # Grab user info for file finding
+HOST = lt.SetPath(os.path.realpath(__file__)).getPath("HOST")
+UTILPATH = lt.SetPath(os.path.realpath(__file__)).getPath("UTILPATH")
+SIMCPATH = lt.SetPath(os.path.realpath(__file__)).getPath("SIMCPATH")
 REPLAYPATH = SIMCPATH
 ROOTfilePath = "%s/OUTPUTS" % REPLAYPATH
 OutPath = "%s/OUTPUTS" % REPLAYPATH
@@ -645,3 +645,100 @@ H_W_SIMC.Draw("")
 H_W_DATA.Draw("same")
 
 CW.Print(outputpdf + ')')
+
+#############################################################################################################################################
+
+outHistFile = ROOT.TFile.Open(foutname, "RECREATE")
+d_Data = outHistFile.mkdir("Data")
+d_Dummy = outHistFile.mkdir("Dummy")
+d_Simc = outHistFile.mkdir("SIMC")
+
+d_Data.cd()
+H_hsdelta_DATA.write()
+H_hsxptar_DATA.write()
+H_hsyptar_DATA.write()
+H_ssxfp_DATA.write()
+H_ssyfp_DATA.write()
+H_ssxpfp_DATA.write()
+H_ssypfp_DATA.write()
+H_hsxfp_DATA.write()
+H_hsyfp_DATA.write()
+H_hsxpfp_DATA.write()
+H_hsypfp_DATA.write()
+H_ssdelta_DATA.write()
+H_ssxptar_DATA.write()
+H_ssyptar_DATA.write()
+H_q_DATA.write()
+H_Q2_DATA.write()
+H_epsilon_DATA.write()
+H_MMp_DATA.write()
+H_th_DATA.write()
+H_ph_DATA.write()
+H_pmiss_DATA.write()
+H_emiss_DATA.write()
+H_pmx_DATA.write()
+H_pmy_DATA.write()
+H_pmz_DATA.write()
+H_W_DATA.write()
+
+d_Dummy.cd()
+H_hsdelta_DUMMY.write()
+H_hsxptar_DUMMY.write()
+H_hsyptar_DUMMY.write()
+H_ssxfp_DUMMY.write()
+H_ssyfp_DUMMY.write()
+H_ssxpfp_DUMMY.write()
+H_ssypfp_DUMMY.write()
+H_hsxfp_DUMMY.write()
+H_hsyfp_DUMMY.write()
+H_hsxpfp_DUMMY.write()
+H_hsypfp_DUMMY.write()
+H_ssdelta_DUMMY.write()
+H_ssxptar_DUMMY.write()
+H_ssyptar_DUMMY.write()
+H_q_DUMMY.write()
+H_Q2_DUMMY.write()
+H_epsilon_DUMMY.write()
+H_MMp_DUMMY.write()
+H_th_DUMMY.write()
+H_ph_DUMMY.write()
+H_pmiss_DUMMY.write()
+H_emiss_DUMMY.write()
+H_pmx_DUMMY.write()
+H_pmy_DUMMY.write()
+H_pmz_DUMMY.write()
+H_W_DUMMY.write()
+
+d_Simc.cd()
+H_hsdelta_SIMC.write()
+H_hsxptar_SIMC.write()
+H_hsyptar_SIMC.write()
+H_ssxfp_SIMC.write()
+H_ssyfp_SIMC.write()
+H_ssxpfp_SIMC.write()
+H_ssypfp_SIMC.write()
+H_hsxfp_SIMC.write()
+H_hsyfp_SIMC.write()
+H_hsxpfp_SIMC.write()
+H_hsypfp_SIMC.write()
+H_ssdelta_SIMC.write()
+H_ssxptar_SIMC.write()
+H_ssyptar_SIMC.write()
+H_q_SIMC.write()
+H_Q2_SIMC.write()
+H_epsilon_SIMC.write()
+H_MMp_SIMC.write()
+H_th_SIMC.write()
+H_ph_SIMC.write()
+H_pmiss_SIMC.write()
+H_emiss_SIMC.write()
+H_pmx_SIMC.write()
+H_pmy_SIMC.write()
+H_pmz_SIMC.write()
+H_W_SIMC.write()
+
+outHistFile.Close()
+InFile_DATA.Close()
+InFile_DUMMY.Close()
+InFile_SIMC.Close()
+print ("Processing Complete")

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 13:36:13 trottar"
+# Time-stamp: "2022-05-31 14:19:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -249,7 +249,7 @@ for evt in TBRANCH_SIMC:
       H_Q2_SIMC.Fill(evt.Q2, evt.Weight)
       H_W_SIMC.Fill(evt.W, evt.Weight)
       H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
-      H_MMp_SIMC.Fill((pow(evt.Em, 2) - pow(evt.Pm, 2)), evt.Weight)
+      H_MMp_SIMC.Fill(np.sqrt(pow(evt.Em, 2) - pow(evt.Pm, 2)), evt.Weight)
     
 for evt in TBRANCH_DATA:
 

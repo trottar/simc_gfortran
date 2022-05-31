@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 17:30:14 trottar"
+# Time-stamp: "2022-05-31 17:34:43 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -553,8 +553,6 @@ hxfp.Print(outputpdf)
 hyfp = TCanvas()
 l_hyfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
 
-l_hyfp.AddEntry(H_hsyfp_SIMC,"SIMC")
-l_hyfp.AddEntry(H_hsyfp_DATA,"Data")
 H_hsyfp_DATA.SetLineColor(kRed)
 H_hsyfp_SIMC.Draw("")
 H_hsyfp_DATA.Draw("same")

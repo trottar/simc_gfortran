@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 17:09:05 trottar"
+# Time-stamp: "2022-05-31 17:11:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -477,8 +477,10 @@ b_low_xfp_simc = H_ssxfp_SIMC.GetXaxis().FindBin(-20)
 b_high_xfp_data = H_ssxfp_DATA.GetXaxis().FindBin(20)
 b_low_xfp_data = H_ssxfp_DATA.GetXaxis().FindBin(-20)
 
-b_int_xfp_simc = int(H_ssxfp_SIMC.Integral(b_low_xfp_simc,b_high_xfp_simc))
-b_int_xfp_data = int(H_ssxfp_DATA.Integral(b_low_xfp_data,b_high_xfp_data))
+#b_int_xfp_simc = int(H_ssxfp_SIMC.Integral(b_low_xfp_simc,b_high_xfp_simc))
+#b_int_xfp_data = int(H_ssxfp_DATA.Integral(b_low_xfp_data,b_high_xfp_data))
+b_int_xfp_simc = int(H_ssxfp_SIMC.Integral())
+b_int_xfp_data = int(H_ssxfp_DATA.Integral())
 
 l_xfp.AddEntry(H_ssxfp_SIMC,"SIMC, INT = %s" % b_int_xfp_simc)
 l_xfp.AddEntry(H_ssxfp_DATA,"DATA, INT = %s" % b_int_xfp_data)

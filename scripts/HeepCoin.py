@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 19:40:16 trottar"
+# Time-stamp: "2022-05-31 19:43:32 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -114,6 +114,8 @@ bcm4a_charge_DATA = TSCALER_DATA.array("bcm4a_charge")
 bcm4b_charge_DATA = TSCALER_DATA.array("bcm4b_charge")
 bcm4c_charge_DATA = TSCALER_DATA.array("bcm4c_charge")
 
+s_evts_DATA = len(bcm1_charge_DATA)
+
 bcm_value_DATA  = [bcm1_charge_DATA, bcm2_charge_DATA, bcm4a_charge_DATA, bcm4b_charge_DATA, bcm4c_charge_DATA]
 
 charge_sum_DATA = [0]*NBCM
@@ -122,7 +124,7 @@ previous_charge_DATA = [0]*NBCM
 for ibcm in range(0, 5):
     previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][0]
     # Iterate over all scaler events to get various scaler values
-    for i, evt in enumerate(s_evts):
+    for i, evt in enumerate(s_evts_DATA):
         # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
         charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
         previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]
@@ -136,6 +138,8 @@ bcm4a_charge_DUMMY = TSCALER_DUMMY.array("bcm4a_charge")
 bcm4b_charge_DUMMY = TSCALER_DUMMY.array("bcm4b_charge")
 bcm4c_charge_DUMMY = TSCALER_DUMMY.array("bcm4c_charge")
 
+s_evts_DUMMY = len(bcm1_charge_DUMMY)
+
 bcm_value_DUMMY  = [bcm1_charge_DUMMY, bcm2_charge_DUMMY, bcm4a_charge_DUMMY, bcm4b_charge_DUMMY, bcm4c_charge_DUMMY]
 
 charge_sum_DUMMY = [0]*NBCM
@@ -144,7 +148,7 @@ previous_charge_DUMMY = [0]*NBCM
 for ibcm in range(0, 5):
     previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][0]
     # Iterate over all scaler events to get various scaler values
-    for i, evt in enumerate(s_evts):
+    for i, evt in enumerate(s_evts_DUMMY):
         # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
         charge_sum_DUMMY[ibcm] += (bcm_value_DUMMY[ibcm][i] - previous_charge_DUMMY[ibcm])
         previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][i]

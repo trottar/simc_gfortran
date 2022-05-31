@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 12:19:13 trottar"
+# Time-stamp: "2022-05-31 12:20:23 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -312,7 +312,7 @@ H_W_SIMC  = ROOT.TH1D("H_W_SIMC","W W", 300, 0.5, 1.5)
 
 for i in range(nEntries_TBRANCH_SIMC):
 
-  TBRANCH_SIMC.GetEntry(i)
+  #TBRANCH_SIMC.GetEntry(i)
   # Define the acceptance cuts  
 
   # Select the cuts
@@ -358,7 +358,7 @@ for i in range(nEntries_TBRANCH_SIMC):
     
 for i in range(nEntries_TBRANCH_DATA):
 
-  TBRANCH_DATA.GetEntry(i)
+  #TBRANCH_DATA.GetEntry(i)
 
   #CUTs Definations 
   SHMS_FixCut = P_hod_goodstarttime_data == 1 and P_dc_InsideDipoleExit_data == 1 # and P_hod_betanotrack_data > 0.5 and P_hod_betanotrack_data < 1.4
@@ -408,7 +408,7 @@ for i in range(nEntries_TBRANCH_DATA):
 
 for i in range(nEntries_TBRANCH_DUMMY):
 
-  TBRANCH_DUMMY.GetEntry(i)
+  #TBRANCH_DUMMY.GetEntry(i)
 
   #......... Define Cuts.................
 

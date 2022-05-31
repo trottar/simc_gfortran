@@ -24,6 +24,7 @@ echo
 root -l <<EOF 
 .x $ANA_DIR/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
 EOF
-pwd
 
 python3 HeepCoin.py "${OutDATAFilename}.root" "${OutDUMMYFilename}.root" ${InSIMCFilename} ${OutFullAnalysisFilename}
+
+evince "OUTPUTS/${OutFullAnalysisFilename}.pdf"

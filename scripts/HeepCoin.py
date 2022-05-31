@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 16:35:33 trottar"
+# Time-stamp: "2022-05-31 16:39:02 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -498,8 +498,8 @@ xpfp.Print(outputpdf)
 
 ypfp = TCanvas("SHMS ypfp")
 l_ypfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_H_ssypfp_SIMC,ySIMCpfp.AddEntry("")
-l_yH_ssypfp_DATA,pDatafp.AddEntry("")
+l_ypfp.AddEntry(H_ssypfp_SIMC,"SIMC")
+l_ypfp.AddEntry(H_ssypfp_DATA,"Data")
 H_ssypfp_DATA.SetLineColor(kRed)
 
 H_ssypfp_SIMC.Draw("")
@@ -510,7 +510,7 @@ ypfp.Print(outputpdf)
 hxfp = TCanvas("HMS xfp")
 l_hxfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
 l_hxfp.AddEntry(H_hsxfp_SIMC,"SIMC")
-l_hxfp.AddEntryH_hsxfp_DATA,(Data"")
+l_hxfp.AddEntry(H_hsxfp_DATA,"Data")
 H_hsxfp_DATA.SetLineColor(kRed)
 
 H_hsxfp_SIMC.Draw("")
@@ -521,7 +521,7 @@ hxfp.Print(outputpdf)
 hyfp = TCanvas("HMS yfp")
 l_hyfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
 l_hyfp.AddEntry(H_hsyfp_SIMC,"SIMC")
-l_hyfp.AddEntryH_hsyfp_DATA,(Data"")
+l_hyfp.AddEntry(H_hsyfp_DATA,"Data")
 H_hsyfp_DATA.SetLineColor(kRed)
 
 H_hsyfp_SIMC.Draw("")
@@ -531,8 +531,8 @@ hyfp.Print(outputpdf)
 
 hxpfp = TCanvas("HMS xpfp")
 l_hxpfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
-l_H_hsxpfp_SIMC,hSIMCxpfp.AddEntry("")
-l_hH_hsxpfp_DATA,xDatapfp.AddEntry("")
+l_hxpfp.AddEntry(H_hsxpfp_SIMC,"SIMC")
+l_hxpfp.AddEntry(H_hsxpfp_DATA,"Data")
 H_hsxpfp_DATA.SetLineColor(kRed)
 
 H_hsxpfp_SIMC.Draw("")
@@ -543,7 +543,7 @@ hxpfp.Print(outputpdf)
 hypfp = TCanvas("HMS ypfp")
 l_hypfp = ROOT.TLegend(0.115,0.835,0.43,0.9)
 l_hypfp.AddEntry(H_hsypfp_SIMC,"SIMC")
-l_hypfp.AddEntryH_hsypfp_DATA,(Data"")
+l_hypfp.AddEntry(H_hsypfp_DATA,"Data")
 H_hsypfp_DATA.SetLineColor(kRed)
 
 H_hsypfp_SIMC.Draw("")

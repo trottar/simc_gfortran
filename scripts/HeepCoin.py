@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 16:58:08 trottar"
+# Time-stamp: "2022-05-31 17:00:18 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -481,6 +481,8 @@ b_int_xfp_data = int(H_ssxfp_DATA.Integral(b_low_xfp_data,b_high_xfp_data))
 l_xfp.AddEntry(H_ssxfp_SIMC,"SIMC, INT = ",b_int_xfp_simc)
 l_xfp.AddEntry(H_ssxfp_DATA,"DATA, INT = ",b_int_xfp_data)
 
+l_xfp.Draw()
+
 xfp.Print(outputpdf + '(')
 
 yfp = TCanvas("SHMS yfp")
@@ -491,6 +493,8 @@ H_ssyfp_DATA.SetLineColor(kRed)
 
 H_ssyfp_SIMC.Draw("")
 H_ssyfp_DATA.Draw("same")
+
+l_yfp.Draw()
 
 yfp.Print(outputpdf)
 
@@ -503,6 +507,8 @@ H_ssxpfp_DATA.SetLineColor(kRed)
 H_ssxpfp_SIMC.Draw("")
 H_ssxpfp_DATA.Draw("same")
 
+l_xpfp.Draw()
+
 xpfp.Print(outputpdf)
 
 ypfp = TCanvas("SHMS ypfp")
@@ -513,6 +519,8 @@ H_ssypfp_DATA.SetLineColor(kRed)
 
 H_ssypfp_SIMC.Draw("")
 H_ssypfp_DATA.Draw("same")
+
+l_ypfp.Draw()
 
 ypfp.Print(outputpdf)
 
@@ -525,6 +533,8 @@ H_hsxfp_DATA.SetLineColor(kRed)
 H_hsxfp_SIMC.Draw("")
 H_hsxfp_DATA.Draw("same")
 
+l_hxfp.Draw()
+
 hxfp.Print(outputpdf)
 
 hyfp = TCanvas("HMS yfp")
@@ -535,6 +545,8 @@ H_hsyfp_DATA.SetLineColor(kRed)
 
 H_hsyfp_SIMC.Draw("")
 H_hsyfp_DATA.Draw("same")
+
+l_hyfp.Draw()
 
 hyfp.Print(outputpdf)
 
@@ -547,6 +559,8 @@ H_hsxpfp_DATA.SetLineColor(kRed)
 H_hsxpfp_SIMC.Draw("")
 H_hsxpfp_DATA.Draw("same")
 
+l_hxpfp.Draw()
+
 hxpfp.Print(outputpdf)
 
 hypfp = TCanvas("HMS ypfp")
@@ -557,6 +571,8 @@ H_hsypfp_DATA.SetLineColor(kRed)
 
 H_hsypfp_SIMC.Draw("")
 H_hsypfp_DATA.Draw("same")
+
+l_hypfp.Draw()
 
 hypfp.Print(outputpdf)
 
@@ -569,6 +585,8 @@ H_ssxptar_DATA.SetLineColor(kRed)
 H_ssxptar_SIMC.Draw("")
 H_ssxptar_DATA.Draw("same")
 
+l_xptar.Draw()
+
 xptar.Print(outputpdf)
 
 yptar = TCanvas("SHMS yptar")
@@ -579,6 +597,8 @@ H_ssyptar_DATA.SetLineColor(kRed)
 
 H_ssyptar_SIMC.Draw("")
 H_ssyptar_DATA.Draw("same")
+
+l_yptar.Draw()
 
 yptar.Print(outputpdf)
 
@@ -591,6 +611,8 @@ H_hsxptar_DATA.SetLineColor(kRed)
 H_hsxptar_SIMC.Draw("")
 H_hsxptar_DATA.Draw("same")
 
+l_hxptar.Draw()
+
 hxptar.Print(outputpdf)
 
 hyptar = TCanvas("HMS yptar")
@@ -601,6 +623,8 @@ H_hsyptar_DATA.SetLineColor(kRed)
 
 H_hsyptar_SIMC.Draw("")
 H_hsyptar_DATA.Draw("same")
+
+l_hyptar.Draw()
 
 hyptar.Print(outputpdf)
 
@@ -613,6 +637,8 @@ H_ssdelta_DATA.SetLineColor(kRed)
 H_ssdelta_SIMC.Draw("")
 H_ssdelta_DATA.Draw("same")
 
+l_Delta.Draw()
+
 Delta.Print(outputpdf)
 
 hDelta = TCanvas("HMS Delta")
@@ -624,6 +650,8 @@ H_hsdelta_DATA.SetLineColor(kRed)
 H_hsdelta_SIMC.Draw("")
 H_hsdelta_DATA.Draw("same")
 
+l_hDelta.Draw()
+
 hDelta.Print(outputpdf)
 
 CQ2 = TCanvas("SHMS Q2")
@@ -634,6 +662,8 @@ H_Q2_DATA.SetLineColor(kRed)
 
 H_Q2_SIMC.Draw("")
 H_Q2_DATA.Draw("same")
+
+l_CQ2.Draw()
 
 CQ2.Print(outputpdf)
 
@@ -647,6 +677,8 @@ H_epsilon_DATA.SetLineColor(kRed)
 H_epsilon_SIMC.Draw("")
 H_epsilon_DATA.Draw("same")
 
+l_Cepsilon.Draw()
+
 Cepsilon.Print(outputpdf)
 
 CMMp = TCanvas("MMp")
@@ -658,6 +690,8 @@ H_MMp_DATA.SetLineColor(kRed)
 
 H_MMp_SIMC.Draw("")
 H_MMp_DATA.Draw("same")
+
+l_CMMp.Draw()
 
 CMMp.Print(outputpdf)
 
@@ -671,6 +705,8 @@ H_pmiss_DATA.SetLineColor(kRed)
 H_pmiss_SIMC.Draw("")
 H_pmiss_DATA.Draw("same")
 
+l_Cpmiss.Draw()
+
 Cpmiss.Print(outputpdf)
 
 Cemiss = TCanvas("emiss")
@@ -683,6 +719,8 @@ H_emiss_DATA.SetLineColor(kRed)
 H_emiss_SIMC.Draw("")
 H_emiss_DATA.Draw("same")
 
+l_Cemiss.Draw()
+
 Cemiss.Print(outputpdf)
 
 Cpmiss_x = TCanvas("pmiss_x")
@@ -694,6 +732,9 @@ H_pmx_DATA.SetLineColor(kRed)
 
 H_pmx_SIMC.Draw("")
 H_pmx_DATA.Draw("same")
+
+l_Cpmiss_x.Draw()
+
 Cpmiss_x.Print(outputpdf)
 
 Cpmiss_y = TCanvas("pmiss_y")
@@ -705,6 +746,8 @@ H_pmy_DATA.SetLineColor(kRed)
 
 H_pmy_SIMC.Draw("")
 H_pmy_DATA.Draw("same")
+
+l_Cpmiss_y.Draw()
 
 Cpmiss_y.Print(outputpdf)
 
@@ -718,6 +761,8 @@ H_pmz_DATA.SetLineColor(kRed)
 H_pmz_SIMC.Draw("")
 H_pmz_DATA.Draw("same")
 
+l_Cpmiss_z.Draw()
+
 Cpmiss_z.Print(outputpdf)
 
 CW = TCanvas("W")
@@ -729,6 +774,8 @@ H_W_DATA.SetLineColor(kRed)
 
 H_W_SIMC.Draw("")
 H_W_DATA.Draw("same")
+
+l_CW.Draw()
 
 CW.Print(outputpdf + ')')
 

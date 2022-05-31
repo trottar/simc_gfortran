@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 17:27:45 trottar"
+# Time-stamp: "2022-05-31 17:30:14 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -540,11 +540,11 @@ H_hsxfp_DATA.SetLineColor(kRed)
 H_hsxfp_SIMC.Draw("")
 H_hsxfp_DATA.Draw("same")
 
-b_int_hxfp_simc = int(H_hshxfp_SIMC.Integral())
-b_int_hxfp_data = int(H_hshxfp_DATA.Integral())
+b_int_hxfp_simc = int(H_hsxfp_SIMC.Integral())
+b_int_hxfp_data = int(H_hsxfp_DATA.Integral())
 
-l_hxfp.AddEntry(H_hshxfp_SIMC,"SIMC, INT = %s" % b_int_hxfp_simc)
-l_hxfp.AddEntry(H_hshxfp_DATA,"DATA, INT = %s" % b_int_hxfp_data)
+l_hxfp.AddEntry(H_hsxfp_SIMC,"SIMC, INT = %s" % b_int_hxfp_simc)
+l_hxfp.AddEntry(H_hsxfp_DATA,"DATA, INT = %s" % b_int_hxfp_data)
 
 l_hxfp.Draw()
 
@@ -559,11 +559,11 @@ H_hsyfp_DATA.SetLineColor(kRed)
 H_hsyfp_SIMC.Draw("")
 H_hsyfp_DATA.Draw("same")
 
-b_int_hyfp_simc = int(H_hshyfp_SIMC.Integral())
-b_int_hyfp_data = int(H_hshyfp_DATA.Integral())
+b_int_hyfp_simc = int(H_hsyfp_SIMC.Integral())
+b_int_hyfp_data = int(H_hsyfp_DATA.Integral())
 
-l_hyfp.AddEntry(H_hshyfp_SIMC,"SIMC, INT = %s" % b_int_hyfp_simc)
-l_hyfp.AddEntry(H_hshyfp_DATA,"DATA, INT = %s" % b_int_hyfp_data)
+l_hyfp.AddEntry(H_hsyfp_SIMC,"SIMC, INT = %s" % b_int_hyfp_simc)
+l_hyfp.AddEntry(H_hsyfp_DATA,"DATA, INT = %s" % b_int_hyfp_data)
 
 l_hyfp.Draw()
 
@@ -576,11 +576,11 @@ H_hsxpfp_DATA.SetLineColor(kRed)
 H_hsxpfp_SIMC.Draw("")
 H_hsxpfp_DATA.Draw("same")
 
-b_int_hxpfp_simc = int(H_hshxpfp_SIMC.Integral())
-b_int_hxpfp_data = int(H_hshxpfp_DATA.Integral())
+b_int_hxpfp_simc = int(H_hsxpfp_SIMC.Integral())
+b_int_hxpfp_data = int(H_hsxpfp_DATA.Integral())
 
-l_hxpfp.AddEntry(H_hshxpfp_SIMC,"SIMC, INT = %s" % b_int_hxpfp_simc)
-l_hxpfp.AddEntry(H_hshxpfp_DATA,"DATA, INT = %s" % b_int_hxpfp_data)
+l_hxpfp.AddEntry(H_hsxpfp_SIMC,"SIMC, INT = %s" % b_int_hxpfp_simc)
+l_hxpfp.AddEntry(H_hsxpfp_DATA,"DATA, INT = %s" % b_int_hxpfp_data)
 
 l_hxpfp.Draw()
 
@@ -593,11 +593,11 @@ H_hsypfp_DATA.SetLineColor(kRed)
 H_hsypfp_SIMC.Draw("")
 H_hsypfp_DATA.Draw("same")
 
-b_int_hypfp_simc = int(H_hshypfp_SIMC.Integral())
-b_int_hypfp_data = int(H_hshypfp_DATA.Integral())
+b_int_hypfp_simc = int(H_hsypfp_SIMC.Integral())
+b_int_hypfp_data = int(H_hsypfp_DATA.Integral())
 
-l_hypfp.AddEntry(H_hshypfp_SIMC,"SIMC, INT = %s" % b_int_hypfp_simc)
-l_hypfp.AddEntry(H_hshypfp_DATA,"DATA, INT = %s" % b_int_hypfp_data)
+l_hypfp.AddEntry(H_hsypfp_SIMC,"SIMC, INT = %s" % b_int_hypfp_simc)
+l_hypfp.AddEntry(H_hsypfp_DATA,"DATA, INT = %s" % b_int_hypfp_data)
 
 l_hypfp.Draw()
 
@@ -644,11 +644,11 @@ H_hsxptar_DATA.SetLineColor(kRed)
 H_hsxptar_SIMC.Draw("")
 H_hsxptar_DATA.Draw("same")
 
-b_int_hxptar_simc = int(H_hshxptar_SIMC.Integral())
-b_int_hxptar_data = int(H_hshxptar_DATA.Integral())
+b_int_hxptar_simc = int(H_hsxptar_SIMC.Integral())
+b_int_hxptar_data = int(H_hsxptar_DATA.Integral())
 
-l_hxptar.AddEntry(H_hshxptar_SIMC,"SIMC, INT = %s" % b_int_hxptar_simc)
-l_hxptar.AddEntry(H_hshxptar_DATA,"DATA, INT = %s" % b_int_hxptar_data)
+l_hxptar.AddEntry(H_hsxptar_SIMC,"SIMC, INT = %s" % b_int_hxptar_simc)
+l_hxptar.AddEntry(H_hsxptar_DATA,"DATA, INT = %s" % b_int_hxptar_data)
 
 l_hxptar.Draw()
 
@@ -661,11 +661,11 @@ H_hsyptar_DATA.SetLineColor(kRed)
 H_hsyptar_SIMC.Draw("")
 H_hsyptar_DATA.Draw("same")
 
-b_int_hyptar_simc = int(H_hshyptar_SIMC.Integral())
-b_int_hyptar_data = int(H_hshyptar_DATA.Integral())
+b_int_hyptar_simc = int(H_hsyptar_SIMC.Integral())
+b_int_hyptar_data = int(H_hsyptar_DATA.Integral())
 
-l_hyptar.AddEntry(H_hshyptar_SIMC,"SIMC, INT = %s" % b_int_hyptar_simc)
-l_hyptar.AddEntry(H_hshyptar_DATA,"DATA, INT = %s" % b_int_hyptar_data)
+l_hyptar.AddEntry(H_hsyptar_SIMC,"SIMC, INT = %s" % b_int_hyptar_simc)
+l_hyptar.AddEntry(H_hsyptar_DATA,"DATA, INT = %s" % b_int_hyptar_data)
 
 l_hyptar.Draw()
 

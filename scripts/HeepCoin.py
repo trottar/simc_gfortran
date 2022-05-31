@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 17:56:11 trottar"
+# Time-stamp: "2022-05-31 18:01:02 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -350,11 +350,7 @@ for evt in TBRANCH_DUMMY:
       H_hsxptar_DUMMY.Fill(evt.hsxptar)	
       H_hsyptar_DUMMY.Fill(evt.hsyptar)
     
-#simc_wgt = 0.131105E-04
-#simc_normfactor = 0.830037E+07
-#simc_nevents = 200000
 normfac_simc = (simc_normfactor)/(simc_nevents)
-
 H_ssxfp_SIMC.Scale(normfac_simc)                                                                                                                                   
 H_ssyfp_SIMC.Scale(normfac_simc)                                                                                                                                  
 H_ssxpfp_SIMC.Scale(normfac_simc)                                                                                                                              
@@ -382,7 +378,6 @@ H_MMp_SIMC.Scale(normfac_simc)
 dummy_charge = 42.096
 dummy_target_corr = 4.8579
 normfac_dummy = 1/(dummy_charge*dummy_target_corr)
-
 H_ssxfp_DUMMY.Scale(normfac_dummy)
 H_ssyfp_DUMMY.Scale(normfac_dummy)
 H_ssxpfp_DUMMY.Scale(normfac_dummy)
@@ -409,7 +404,6 @@ H_W_DUMMY.Scale(normfac_dummy)
 
 data_charge = 542.499
 normfac_data = 1/(data_charge)
-
 H_ssxfp_DATA.Scale(normfac_data)
 H_ssyfp_DATA.Scale(normfac_data)
 H_ssxpfp_DATA.Scale(normfac_data)

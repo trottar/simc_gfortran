@@ -76,6 +76,9 @@ void Analysed_COIN(string InDATAFilename = "", string OutFilename = "")
   TFile *OutHisto_file = new TFile(foutname,"RECREATE");
   TTree *tree = new TTree("hist","Analyzed Data");
    
+  //####################################################################
+  TTree* TSCALER  = (TTree*)InFile->Get("TSP"); Long64_t nEntries_TSCALER  = (Long64_t)TSCALER->GetEntries();
+  Double_t  P_BCM4A_scalerCharge;TSCALER->SetBranchAddress("P.BCM4A.scalerCharge", &P_BCM4A_scalerCharge);
   //#################################################################### 
 
   TTree* TBRANCH  = (TTree*)InFile->Get("T"); Long64_t nEntries_TBRANCH  = (Long64_t)TBRANCH->GetEntries();
@@ -213,6 +216,8 @@ void Analysed_COIN(string InDATAFilename = "", string OutFilename = "")
   tree->Branch("H_cer_npeSum",&H_cer_npeSum,"H_cer_npeSum/D");
   tree->Branch("H_cal_etottracknorm",&H_cal_etottracknorm),"H_cal_etottracknorm)/D";	
 
+  tree->Branch("bcm4a_charge",&P_BCM4A_scalerCharge,"P_BCM4A_scalerCharge/D");
+  
   //for progress bar
   double progress=0.0;
 

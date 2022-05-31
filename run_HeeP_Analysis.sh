@@ -12,10 +12,10 @@ OutDUMMYFilename="Analysed_DummyData_$KIN"
 OutFullAnalysisFilename="FullAnalysis_$KIN"
 
 cd $ANA_DIR
-root -l -q<<EOF 
+root -l <<EOF 
 $ANA_DIR/Analysed_COIN.C($InDATAFilename,$OutDATAFilename)
 EOF
-root -l -q<<EOF 
+root -l <<EOF 
 $ANA_DIR/Analysed_COIN.C($InDUMMYFilename,$OutDUMMYFilename)
 EOF
 pwd

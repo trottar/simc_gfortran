@@ -1,13 +1,20 @@
 #! /bin/bash
 
-RUNNUMBER=$1
-MAXEVENTS=$2
-SPEC=$3
+KIN=$1
 
-InDATAFilename=${RUNNUMBER}_${MAXEVENTS}_sw_heep_${SPEC}_Analysis_Distributions
-InSIMCFilename=simc_heep_${SPEC}_${RUNNUMBER}_${MAXEVENTS}
-OutFilename=analyzed_heep_${SPEC}_${RUNNUMBER}_${MAXEVENTS}
+InDATAFilename="${KIN}_Raw_Data.root"
+InDUMMYFilename="${KIN}_Raw_DummyData.root"
+InSIMCFilename="Heep_Coin_${KIN}.root"
+OutDATAFilename="${KIN}_Analysed_Data"
+OutDUMMYFilename="${KIN}_Analysed_DummyData"
+OutFullAnalysisFilename="${KIN}_FullAnalysis"
 
+cd scripts
 root <<EOF
-.Analysis_${SPEC}.C($InDATAFilename,$InSIMCFilename,$OutFilename)
+.Analysis_COIN.C($InDATAFilename,$OutDATAFilename)
 EOF
+root <<EOF
+.Analysis_COIN.C($InDUMMYFilename,$OutDUMMYFilename)
+EOF
+
+python3 HeepCoin.py OutDATAFilename OutDUMMYFilename InSIMCFilename OutFullAnalysisFilename

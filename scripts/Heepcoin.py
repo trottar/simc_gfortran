@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 13:32:01 trottar"
+# Time-stamp: "2022-05-31 13:32:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -84,7 +84,7 @@ if 'simc_nevents' and 'simc_normfactor' in locals():
     print('\n\nsimc_nevents = ',simc_nevents,'\n','simc_normfactor = ',simc_normfactor)
 else:
     print("ERROR: Invalid simc hist file %s" % simc_hist)
-        sys.exit(1)
+    sys.exit(1)
         
 ################################################################################################################################################
 

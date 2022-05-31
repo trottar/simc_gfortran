@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 13:04:40 trottar"
+# Time-stamp: "2022-05-31 13:06:12 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -398,15 +398,15 @@ for evt in TBRANCH_DATA:
   #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
   if(HMS_FixCut & HMS_Acceptance):
     
-      H_pmiss_DATA.Fill(evt.pm)	
-      H_emiss_DATA.Fill(evt.em)	
+      H_pmiss_DATA.Fill(evt.pmiss)	
+      H_emiss_DATA.Fill(evt.emiss)	
       H_pmx_DATA.Fill(evt.pmx)
       H_pmy_DATA.Fill(evt.pmy)
       H_pmz_DATA.Fill(evt.pmz)
       H_Q2_DATA.Fill(evt.Q2)
       H_W_DATA.Fill(evt.W)
       H_epsilon_DATA.Fill(evt.epsilon)
-      H_MMp_DATA.Fill((pow(evt.em, 2) - pow(evt.pm, 2)))  
+      H_MMp_DATA.Fill((pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
       #H_MMp_DATA.Fill(evt.MMp)  
 
       H_hsxfp_DATA.Fill(evt.hsxfp)
@@ -450,15 +450,15 @@ for evt in TBRANCH_DUMMY:
   #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
   if(HMS_FixCut & HMS_Acceptance):
     
-      H_pmiss_DUMMY.Fill(evt.pm)	
-      H_emiss_DUMMY.Fill(evt.em)	
+      H_pmiss_DUMMY.Fill(evt.pmiss)	
+      H_emiss_DUMMY.Fill(evt.emiss)	
       H_pmx_DUMMY.Fill(evt.pmx)
       H_pmy_DUMMY.Fill(evt.pmy)
       H_pmz_DUMMY.Fill(evt.pmz)
       H_Q2_DUMMY.Fill(evt.Q2)
       H_W_DUMMY.Fill(evt.W)
       H_epsilon_DUMMY.Fill(evt.epsilon)
-      H_MMp_DUMMY.Fill((pow(evt.em, 2) - pow(evt.pm, 2)))  
+      H_MMp_DUMMY.Fill((pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
       #H_MMp_DUMMY.Fill(evt.MMp)  
 
       H_hsxfp_DUMMY.Fill(evt.hsxfp)

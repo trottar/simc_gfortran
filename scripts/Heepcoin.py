@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 12:08:52 trottar"
+# Time-stamp: "2022-05-31 12:10:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -327,7 +327,7 @@ for i in range(nEntries_TBRANCH_SIMC):
 
   #Fill SIMC events
 
-  if(CUT1 and CUT2 and CUT3 and CUT4 and CUT5 and CUT6)
+  if(CUT1 and CUT2 and CUT3 and CUT4 and CUT5 and CUT6):
     
       H_ssxfp_SIMC.Fill(ssxfp, Weight)
       H_ssyfp_SIMC.Fill(ssyfp, Weight)
@@ -369,7 +369,7 @@ for i in range(nEntries_TBRANCH_DATA):
   #........................................
 
   #if(SHMS_FixCut and SHMS_Acceptance and SHMS_ELECTRON_PID) 
-  if(SHMS_FixCut and SHMS_Acceptance) 
+  if(SHMS_FixCut and SHMS_Acceptance):
     
       H_ssxfp_DATA.Fill(ssxfp_data)
       H_ssyfp_DATA.Fill(ssyfp_data)
@@ -382,7 +382,7 @@ for i in range(nEntries_TBRANCH_DATA):
     
 
   #if(HMS_FixCut and HMS_Acceptance and HMS_ELECTRON_PID)
-  if(HMS_FixCut and HMS_Acceptance)
+  if(HMS_FixCut and HMS_Acceptance):
     
       H_pmiss_DATA.Fill(pm_data)	
       H_emiss_DATA.Fill(em_data)	
@@ -421,7 +421,7 @@ for i in range(nEntries_TBRANCH_DUMMY):
   #........................................
 
   #if(SHMS_FixCut and SHMS_Acceptance and SHMS_ELECTRON_PID) 
-  if(SHMS_FixCut and SHMS_Acceptance) 
+  if(SHMS_FixCut and SHMS_Acceptance):
     
       H_ssxfp_DUMMY.Fill(ssxfp_dummy)
       H_ssyfp_DUMMY.Fill(ssyfp_dummy)
@@ -434,7 +434,7 @@ for i in range(nEntries_TBRANCH_DUMMY):
     
 
   #if(HMS_FixCut and HMS_Acceptance and HMS_ELECTRON_PID)
-  if(HMS_FixCut and HMS_Acceptance)
+  if(HMS_FixCut and HMS_Acceptance):
     
       H_pmiss_DUMMY.Fill(pm_dummy)	
       H_emiss_DUMMY.Fill(em_dummy)	

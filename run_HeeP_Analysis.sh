@@ -9,7 +9,7 @@ OutDATAFilename="${KIN}_Analysed_Data"
 OutDUMMYFilename="${KIN}_Analysed_DummyData"
 OutFullAnalysisFilename="${KIN}_FullAnalysis"
 
-cd scripts
+cd "/group/c-kaonlt/USERS/${USER}/simc_gfortran/scripts"
 root -l <<EOF
 .x Analysis_COIN.C($InDATAFilename,$OutDATAFilename)
 EOF

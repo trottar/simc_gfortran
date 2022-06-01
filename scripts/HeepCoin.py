@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-01 00:44:53 trottar"
+# Time-stamp: "2022-06-01 00:50:24 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -140,7 +140,7 @@ for ibcm in range(0, 5):
             charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
         previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]
         
-data_charge = charge_sum_DATA[0]/100
+data_charge = charge_sum_DATA[0]/1000
         
 # Dummy charge calculation
 bcm1_charge_DUMMY = TSCALER_DUMMY.array("bcm1_charge")
@@ -173,7 +173,7 @@ for ibcm in range(0, 5):
             charge_sum_DUMMY[ibcm] += (bcm_value_DUMMY[ibcm][i] - previous_charge_DUMMY[ibcm])
         previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][i]
         
-dummy_charge = charge_sum_DUMMY[0]/100
+dummy_charge = charge_sum_DUMMY[0]/1000
 
 print("\ndata_charge = ",data_charge,"\ndummy_charge = ",dummy_charge,"\n\n")
 
@@ -342,8 +342,8 @@ for evt in TBRANCH_DATA:
 
   #........................................
 
-  #if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID) 
-  if(SHMS_FixCut & SHMS_Acceptance):
+  if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID) 
+  #if(SHMS_FixCut & SHMS_Acceptance):
     
       H_ssxfp_DATA.Fill(evt.ssxfp)
       H_ssyfp_DATA.Fill(evt.ssyfp)
@@ -355,8 +355,8 @@ for evt in TBRANCH_DATA:
 
     
 
-  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
-  if(HMS_FixCut & HMS_Acceptance):
+  if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
+  #if(HMS_FixCut & HMS_Acceptance):
     
       H_pmiss_DATA.Fill(evt.pmiss)	
       H_emiss_DATA.Fill(evt.emiss)	
@@ -366,7 +366,7 @@ for evt in TBRANCH_DATA:
       H_Q2_DATA.Fill(evt.Q2)
       H_W_DATA.Fill(evt.W)
       H_epsilon_DATA.Fill(evt.epsilon)
-      H_MMp_DATA.Fill((pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
+      H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
       #H_MMp_DATA.Fill(evt.MMp)  
 
       H_hsxfp_DATA.Fill(evt.hsxfp)
@@ -392,8 +392,8 @@ for evt in TBRANCH_DUMMY:
   
   #........................................
 
-  #if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID) 
-  if(SHMS_FixCut & SHMS_Acceptance):
+  if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID) 
+  #if(SHMS_FixCut & SHMS_Acceptance):
     
       H_ssxfp_DUMMY.Fill(evt.ssxfp)
       H_ssyfp_DUMMY.Fill(evt.ssyfp)
@@ -405,8 +405,8 @@ for evt in TBRANCH_DUMMY:
 
     
 
-  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
-  if(HMS_FixCut & HMS_Acceptance):
+  if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
+  #if(HMS_FixCut & HMS_Acceptance):
     
       H_pmiss_DUMMY.Fill(evt.pmiss)	
       H_emiss_DUMMY.Fill(evt.emiss)	
@@ -416,7 +416,7 @@ for evt in TBRANCH_DUMMY:
       H_Q2_DUMMY.Fill(evt.Q2)
       H_W_DUMMY.Fill(evt.W)
       H_epsilon_DUMMY.Fill(evt.epsilon)
-      H_MMp_DUMMY.Fill((pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
+      H_MMp_DUMMY.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
       #H_MMp_DUMMY.Fill(evt.MMp)  
 
       H_hsxfp_DUMMY.Fill(evt.hsxfp)

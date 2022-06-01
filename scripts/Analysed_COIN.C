@@ -79,8 +79,6 @@ void Analysed_COIN(string InDATAFilename = "", string OutFilename = "")
    
   //####################################################################
   TTree* TSCALER  = (TTree*)InFile->Get("TSP"); Long64_t nEntries_TSCALER  = (Long64_t)TSCALER->GetEntries();
-
-  Double_t  P_1Mhz_scalerTime;TSCALER->SetBranchAddress("P.1Mhz.scalerTime", &P_1Mhz_scalerTime);
   
   Double_t  P_BCM1_scalerCharge;TSCALER->SetBranchAddress("P.BCM1.scalerCharge", &P_BCM1_scalerCharge);
   Double_t  P_BCM2_scalerCharge;TSCALER->SetBranchAddress("P.BCM2.scalerCharge", &P_BCM2_scalerCharge);
@@ -229,8 +227,6 @@ void Analysed_COIN(string InDATAFilename = "", string OutFilename = "")
   tree->Branch("H_cal_etotnorm",&H_cal_etotnorm,"H_cal_etotnorm/D");
   tree->Branch("H_cer_npeSum",&H_cer_npeSum,"H_cer_npeSum/D");
   tree->Branch("H_cal_etottracknorm",&H_cal_etottracknorm),"H_cal_etottracknorm)/D";	
-
-  s_tree->Branch("time",&P_1Mhz_scalerTime,"P_1Mhz_scalerTime/D");
   
   s_tree->Branch("bcm1_charge",&P_BCM1_scalerCharge,"P_BCM1_scalerCharge/D");
   s_tree->Branch("bcm2_charge",&P_BCM1_scalerCharge,"P_BCM2_scalerCharge/D");

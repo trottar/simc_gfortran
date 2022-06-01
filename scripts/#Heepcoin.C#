@@ -524,7 +524,7 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
     }
 
   //  Double_t simc_wgt = 0.131105E-04;
-  Double_t simc_normfactor = 0.832520E+07;
+  Double_t simc_normfactor = 0.831315E+07;
   Double_t simc_nevents = 200000;
   Double_t normfac_simc = (simc_normfactor)/(simc_nevents);
 
@@ -642,7 +642,13 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
   //  TH1D *H_ssxfp_DATA = (TH1D)H_ssxfp_DATA_clone->Clone(“H_ssxfp_DATA”);
   //  TH1D *H_ssxfp_DATA_clone    = new TH1D("H_ssxfp_DATA_clone","SHMS xfp; ssxfp;", 300, -20.0, 20.0);
   //  H_ssxfp_DATA_clone->Clone("H_ssxfp_DATA");
-  H_ssxfp_DATA->Integral(H_ssxfp_DATA->FindBin(-20.0), H_ssxfp_DATA->FindBin(20.0), "Width");
+  H_ssxfp_DATA->Integral(H_ssxfp_DATA->FindBin(-20.0), H_ssxfp_DATA->FindBin(20.0));
+  String Integrals[0]={"Integral"}; 
+  TLegend *Integrals{};
+   = new TLegend(0.65, 0.7, 0.85, 0.9);
+  Q2Labels[A]->SetHeader(Q2LabelsInfo[A], "C");
+  Q2Labels[A]->SetBorderSize(0); Q2Labels[A]->SetFillStyle(0); // Remove the borders and make the legend box transparent
+  Q2Labels[A]->SetTextSize(0.06);
   //  cout << H_ssxfp_DATA->Integral(H_ssxfp_DATA->FindBin(-20.0), H_ssxfp_DATA->FindBin(20.0)) << endl;
   //  cout << H_ssxfp_DATA->Integral(H_ssxfp_DATA->FindBin(-20.0), H_ssxfp_DATA->FindBin(20.0), "width") << endl;
 
@@ -650,7 +656,7 @@ void Heepcoin(string InDATAFilename = "", string InDUMMYFilename = "",string InS
 
   //  TH1D *H_ssxfp_SIMC_clone    = new TH1D("H_ssxfp_SIMC_clone","SHMS xfp; ssxfp;", 300, -20.0, 20.0);
   //  H_ssxfp_SIMC_clone->Clone("H_ssxfp_SIMC");
-  H_ssxfp_SIMC->Integral(H_ssxfp_SIMC->FindBin(-20.0), H_ssxfp_SIMC->FindBin(20.0), "Width");
+  H_ssxfp_SIMC->Integral(H_ssxfp_SIMC->FindBin(-20.0), H_ssxfp_SIMC->FindBin(20.0));
 
   H_ssxfp_SIMC->Draw("");
   H_ssxfp_DATA->Draw("same");

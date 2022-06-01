@@ -83,6 +83,7 @@ c
       do 15 i=1,4
       diff(i)=0.0
   15  continue
+c      do 20 i=1,4 -> I changed to debug
       do 20 j=1,5
       diff(i)=diff(i)+par(j)*derv(i,j)
   20  continue

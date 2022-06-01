@@ -18,7 +18,11 @@ while getopts 'ha' flag; do
     esac
 done
 
-KIN=$2
+if [[ $a_flag = "true" ]]; then
+    KIN=$2
+else
+    KIN=$1
+fi
 
 ANA_DIR="/group/c-kaonlt/USERS/${USER}/simc_gfortran/scripts"
 

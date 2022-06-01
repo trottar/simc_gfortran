@@ -83,7 +83,7 @@ c
       do 15 i=1,4
       diff(i)=0.0
   15  continue
-c      do 20 i=1,4 -> I changed to debug
+      do 20 i=1,4
       do 20 j=1,5
       diff(i)=diff(i)+par(j)*derv(i,j)
   20  continue
@@ -104,9 +104,11 @@ c      do 20 i=1,4 -> I changed to debug
       if (arg.gt. 1.0) arg= 1.0
       angle=acos(arg)/radfac
       end
-      subroutine heepkin(e,the,pe,thq,q)
+      function momentum(e)
       data am/938.30/, radfac/0.017453293/
       pe=e/(1.0+2.0*e/am*sin(the*radfac/2.0)**2)
+      subroutine heepkin(e,the,pe,thq,q)
+      pe=momentum(e)
       q=side3(e,pe,the)
       thq=angle(pe,q,e)
       end

@@ -31,7 +31,7 @@ OutFullAnalysisFilename="FullAnalysis_$KIN"
 
 cd $ANA_DIR
 
-if [[ $g_flag = "true" ]]; then
+if [[ $a_flag = "true" ]]; then
     echo
     echo "Analysing data..."
     echo

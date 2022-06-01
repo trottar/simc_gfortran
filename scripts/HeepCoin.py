@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-01 01:07:02 trottar"
+# Time-stamp: "2022-06-01 15:09:20 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -104,7 +104,7 @@ TSCALER_DATA  = up.open(rootFile)["scaler"]
 TSCALER_DUMMY  = up.open(rootFile_DUMMY)["scaler"]
 
 ################################################################################################################################################
-
+# Charge calculation
 thres_curr = 2.5
 
 NBCM = 5
@@ -340,11 +340,11 @@ for evt in TBRANCH_DATA:
   HMS_Acceptance = (evt.H_gtr_dp>=-8.0) & (evt.H_gtr_dp<=8.0) & (evt.H_gtr_xptar>=-0.08) & (evt.H_gtr_xptar<=0.08) & (evt.H_gtr_yptar>=-0.045) & (evt.H_gtr_yptar<=0.045)       
   HMS_ELECTRON_PID = (evt.H_cer_npeSum >=0.5) & (evt.H_cal_etotnorm >=0.8) & (evt.H_cal_etotnorm <=1.2)
 
-  #........................................
+  #........................................  
+      
+  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID & SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
+  if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
-  #if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
-  if(SHMS_FixCut & SHMS_Acceptance):
-    
       H_ssxfp_DATA.Fill(evt.ssxfp)
       H_ssyfp_DATA.Fill(evt.ssyfp)
       H_ssxpfp_DATA.Fill(evt.ssxpfp)
@@ -352,10 +352,7 @@ for evt in TBRANCH_DATA:
       H_ssdelta_DATA.Fill(evt.ssdelta)
       H_ssxptar_DATA.Fill(evt.ssxptar)
       H_ssyptar_DATA.Fill(evt.ssyptar)
-
-  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID):
-  if(HMS_FixCut & HMS_Acceptance):
-    
+      
       H_hsxfp_DATA.Fill(evt.hsxfp)
       H_hsyfp_DATA.Fill(evt.hsyfp)
       H_hsxpfp_DATA.Fill(evt.hsxpfp)
@@ -363,9 +360,6 @@ for evt in TBRANCH_DATA:
       H_hsdelta_DATA.Fill(evt.hsdelta)
       H_hsxptar_DATA.Fill(evt.hsxptar)	
       H_hsyptar_DATA.Fill(evt.hsyptar)
-      
-  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID & SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
-  if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
       
       H_pmiss_DATA.Fill(evt.pmiss)	
       H_emiss_DATA.Fill(evt.emiss)	
@@ -377,7 +371,6 @@ for evt in TBRANCH_DATA:
       H_epsilon_DATA.Fill(evt.epsilon)
       H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
       #H_MMp_DATA.Fill(evt.MMp)  
-
       
 for evt in TBRANCH_DUMMY:
 
@@ -393,10 +386,10 @@ for evt in TBRANCH_DUMMY:
   HMS_ELECTRON_PID = (evt.H_cer_npeSum >=0.5) & (evt.H_cal_etotnorm >=0.8) & (evt.H_cal_etotnorm <=1.2)
   
   #........................................
+      
+  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID & SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
+  if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
-  #if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
-  if(SHMS_FixCut & SHMS_Acceptance):
-    
       H_ssxfp_DUMMY.Fill(evt.ssxfp)
       H_ssyfp_DUMMY.Fill(evt.ssyfp)
       H_ssxpfp_DUMMY.Fill(evt.ssxpfp)
@@ -404,10 +397,7 @@ for evt in TBRANCH_DUMMY:
       H_ssdelta_DUMMY.Fill(evt.ssdelta)
       H_ssxptar_DUMMY.Fill(evt.ssxptar)
       H_ssyptar_DUMMY.Fill(evt.ssyptar)
-
-  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID):
-  if(HMS_FixCut & HMS_Acceptance):
-    
+      
       H_hsxfp_DUMMY.Fill(evt.hsxfp)
       H_hsyfp_DUMMY.Fill(evt.hsyfp)
       H_hsxpfp_DUMMY.Fill(evt.hsxpfp)
@@ -415,9 +405,6 @@ for evt in TBRANCH_DUMMY:
       H_hsdelta_DUMMY.Fill(evt.hsdelta)
       H_hsxptar_DUMMY.Fill(evt.hsxptar)	
       H_hsyptar_DUMMY.Fill(evt.hsyptar)
-      
-  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID & SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
-  if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
       
       H_pmiss_DUMMY.Fill(evt.pmiss)	
       H_emiss_DUMMY.Fill(evt.emiss)	
@@ -429,8 +416,7 @@ for evt in TBRANCH_DUMMY:
       H_epsilon_DUMMY.Fill(evt.epsilon)
       H_MMp_DUMMY.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
       #H_MMp_DUMMY.Fill(evt.MMp)  
-
-  
+      
 normfac_simc = (simc_normfactor)/(simc_nevents)
 H_ssxfp_SIMC.Scale(normfac_simc)                                                                                                                                   
 H_ssyfp_SIMC.Scale(normfac_simc)                                                                                                                                  

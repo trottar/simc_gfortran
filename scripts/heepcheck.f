@@ -107,6 +107,7 @@ c
       function momentum(e)
       data am/938.30/, radfac/0.017453293/
       pe=e/(1.0+2.0*e/am*sin(the*radfac/2.0)**2)
+      end
       subroutine heepkin(e,the,pe,thq,q)
       pe=momentum(e)
       q=side3(e,pe,the)

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-01 15:09:20 trottar"
+# Time-stamp: "2022-06-01 15:12:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -71,6 +71,7 @@ foutname = OutPath+"/" + OutFilename + ".root"
 fouttxt  = OutPath+"/" + OutFilename + ".txt"
 outputpdf  = OutPath+"/" + OutFilename + ".pdf"
 
+# Grabs simc number of events and weight
 simc_hist = "%s/OUTPUTS/Heep_Coin_10p6.hist" % REPLAYPATH
 f_simc = open(simc_hist)
 for line in f_simc:

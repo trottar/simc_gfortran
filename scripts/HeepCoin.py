@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-01 00:52:37 trottar"
+# Time-stamp: "2022-06-01 01:01:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -342,8 +342,8 @@ for evt in TBRANCH_DATA:
 
   #........................................
 
-  if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
-  #if(SHMS_FixCut & SHMS_Acceptance):
+  #if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
+  if(SHMS_FixCut & SHMS_Acceptance):
     
       H_ssxfp_DATA.Fill(evt.ssxfp)
       H_ssyfp_DATA.Fill(evt.ssyfp)
@@ -353,11 +353,20 @@ for evt in TBRANCH_DATA:
       H_ssxptar_DATA.Fill(evt.ssxptar)
       H_ssyptar_DATA.Fill(evt.ssyptar)
 
+  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID):
+  if(HMS_FixCut & HMS_Acceptance):
     
-
-  if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID):
-  #if(HMS_FixCut & HMS_Acceptance):
-    
+      H_hsxfp_DATA.Fill(evt.hsxfp)
+      H_hsyfp_DATA.Fill(evt.hsyfp)
+      H_hsxpfp_DATA.Fill(evt.hsxpfp)
+      H_hsypfp_DATA.Fill(evt.hsypfp)
+      H_hsdelta_DATA.Fill(evt.hsdelta)
+      H_hsxptar_DATA.Fill(evt.hsxptar)	
+      H_hsyptar_DATA.Fill(evt.hsyptar)
+      
+  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID & SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
+  if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
+      
       H_pmiss_DATA.Fill(evt.pmiss)	
       H_emiss_DATA.Fill(evt.emiss)	
       H_pmx_DATA.Fill(evt.pmx)
@@ -369,14 +378,7 @@ for evt in TBRANCH_DATA:
       H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
       #H_MMp_DATA.Fill(evt.MMp)  
 
-      H_hsxfp_DATA.Fill(evt.hsxfp)
-      H_hsyfp_DATA.Fill(evt.hsyfp)
-      H_hsxpfp_DATA.Fill(evt.hsxpfp)
-      H_hsypfp_DATA.Fill(evt.hsypfp)
-      H_hsdelta_DATA.Fill(evt.hsdelta)
-      H_hsxptar_DATA.Fill(evt.hsxptar)	
-      H_hsyptar_DATA.Fill(evt.hsyptar)
-
+      
 for evt in TBRANCH_DUMMY:
 
   #......... Define Cuts.................
@@ -392,8 +394,8 @@ for evt in TBRANCH_DUMMY:
   
   #........................................
 
-  if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID): 
-  #if(SHMS_FixCut & SHMS_Acceptance):
+  #if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
+  if(SHMS_FixCut & SHMS_Acceptance):
     
       H_ssxfp_DUMMY.Fill(evt.ssxfp)
       H_ssyfp_DUMMY.Fill(evt.ssyfp)
@@ -403,11 +405,20 @@ for evt in TBRANCH_DUMMY:
       H_ssxptar_DUMMY.Fill(evt.ssxptar)
       H_ssyptar_DUMMY.Fill(evt.ssyptar)
 
+  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID):
+  if(HMS_FixCut & HMS_Acceptance):
     
-
-  if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID):
-  #if(HMS_FixCut & HMS_Acceptance):
-    
+      H_hsxfp_DUMMY.Fill(evt.hsxfp)
+      H_hsyfp_DUMMY.Fill(evt.hsyfp)
+      H_hsxpfp_DUMMY.Fill(evt.hsxpfp)
+      H_hsypfp_DUMMY.Fill(evt.hsypfp)
+      H_hsdelta_DUMMY.Fill(evt.hsdelta)
+      H_hsxptar_DUMMY.Fill(evt.hsxptar)	
+      H_hsyptar_DUMMY.Fill(evt.hsyptar)
+      
+  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID & SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
+  if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
+      
       H_pmiss_DUMMY.Fill(evt.pmiss)	
       H_emiss_DUMMY.Fill(evt.emiss)	
       H_pmx_DUMMY.Fill(evt.pmx)
@@ -419,14 +430,7 @@ for evt in TBRANCH_DUMMY:
       H_MMp_DUMMY.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
       #H_MMp_DUMMY.Fill(evt.MMp)  
 
-      H_hsxfp_DUMMY.Fill(evt.hsxfp)
-      H_hsyfp_DUMMY.Fill(evt.hsyfp)
-      H_hsxpfp_DUMMY.Fill(evt.hsxpfp)
-      H_hsypfp_DUMMY.Fill(evt.hsypfp)
-      H_hsdelta_DUMMY.Fill(evt.hsdelta)
-      H_hsxptar_DUMMY.Fill(evt.hsxptar)	
-      H_hsyptar_DUMMY.Fill(evt.hsyptar)
-    
+  
 normfac_simc = (simc_normfactor)/(simc_nevents)
 H_ssxfp_SIMC.Scale(normfac_simc)                                                                                                                                   
 H_ssyfp_SIMC.Scale(normfac_simc)                                                                                                                                  

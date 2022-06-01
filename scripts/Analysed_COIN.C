@@ -74,16 +74,25 @@ void Analysed_COIN(string InDATAFilename = "", string OutFilename = "")
   TString outputpdf  = OutPath+"/" + TOutFilename + ".pdf";
 
   TFile *OutHisto_file = new TFile(foutname,"RECREATE");
-  TTree *s_tree = new TTree("charge","Charge Data");
+  TTree *s_tree = new TTree("scaler","Scaler Data");
   TTree *tree = new TTree("hist","Analyzed Data");
    
   //####################################################################
   TTree* TSCALER  = (TTree*)InFile->Get("TSP"); Long64_t nEntries_TSCALER  = (Long64_t)TSCALER->GetEntries();
+
+  Double_t  P_1Mhz_scalerTime;TSCALER->SetBranchAddress("P.1Mhz.scalerTime", &P_1Mhz_scalerTime);
+  
   Double_t  P_BCM1_scalerCharge;TSCALER->SetBranchAddress("P.BCM1.scalerCharge", &P_BCM1_scalerCharge);
   Double_t  P_BCM2_scalerCharge;TSCALER->SetBranchAddress("P.BCM2.scalerCharge", &P_BCM2_scalerCharge);
   Double_t  P_BCM4A_scalerCharge;TSCALER->SetBranchAddress("P.BCM4A.scalerCharge", &P_BCM4A_scalerCharge);
   Double_t  P_BCM4B_scalerCharge;TSCALER->SetBranchAddress("P.BCM4B.scalerCharge", &P_BCM4B_scalerCharge);
   Double_t  P_BCM4C_scalerCharge;TSCALER->SetBranchAddress("P.BCM4C.scalerCharge", &P_BCM4C_scalerCharge);
+
+  Double_t  P_BCM1_scalerCurrent;TSCALER->SetBranchAddress("P.BCM1.scalerCurrent", &P_BCM1_scalerCurrent);
+  Double_t  P_BCM2_scalerCurrent;TSCALER->SetBranchAddress("P.BCM2.scalerCurrent", &P_BCM2_scalerCurrent);
+  Double_t  P_BCM4A_scalerCurrent;TSCALER->SetBranchAddress("P.BCM4A.scalerCurrent", &P_BCM4A_scalerCurrent);
+  Double_t  P_BCM4B_scalerCurrent;TSCALER->SetBranchAddress("P.BCM4B.scalerCurrent", &P_BCM4B_scalerCurrent);
+  Double_t  P_BCM4C_scalerCurrent;TSCALER->SetBranchAddress("P.BCM4C.scalerCurrent", &P_BCM4C_scalerCurrent);
   //#################################################################### 
 
   TTree* TBRANCH  = (TTree*)InFile->Get("T"); Long64_t nEntries_TBRANCH  = (Long64_t)TBRANCH->GetEntries();
@@ -221,11 +230,19 @@ void Analysed_COIN(string InDATAFilename = "", string OutFilename = "")
   tree->Branch("H_cer_npeSum",&H_cer_npeSum,"H_cer_npeSum/D");
   tree->Branch("H_cal_etottracknorm",&H_cal_etottracknorm),"H_cal_etottracknorm)/D";	
 
+  s_tree->Branch("time",&P_1Mhz_scalerTime,"P_1Mhz_scalerTime/D");
+  
   s_tree->Branch("bcm1_charge",&P_BCM1_scalerCharge,"P_BCM1_scalerCharge/D");
   s_tree->Branch("bcm2_charge",&P_BCM1_scalerCharge,"P_BCM2_scalerCharge/D");
   s_tree->Branch("bcm4a_charge",&P_BCM1_scalerCharge,"P_BCM4A_scalerCharge/D");
   s_tree->Branch("bcm4b_charge",&P_BCM1_scalerCharge,"P_BCM4B_scalerCharge/D");
   s_tree->Branch("bcm4c_charge",&P_BCM1_scalerCharge,"P_BCM4C_scalerCharge/D");
+
+  s_tree->Branch("bcm1_current",&P_BCM1_scalerCurrent,"P_BCM1_scalerCurrent/D");
+  s_tree->Branch("bcm2_current",&P_BCM1_scalerCurrent,"P_BCM2_scalerCurrent/D");
+  s_tree->Branch("bcm4a_current",&P_BCM1_scalerCurrent,"P_BCM4A_scalerCurrent/D");
+  s_tree->Branch("bcm4b_current",&P_BCM1_scalerCurrent,"P_BCM4B_scalerCurrent/D");
+  s_tree->Branch("bcm4c_current",&P_BCM1_scalerCurrent,"P_BCM4C_scalerCurrent/D");
   
   //for progress bar
   double progress=0.0;

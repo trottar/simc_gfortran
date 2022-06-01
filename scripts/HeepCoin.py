@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 20:10:47 trottar"
+# Time-stamp: "2022-05-31 20:38:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -100,60 +100,111 @@ nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
 TBRANCH_SIMC  = InFile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
 
-TSCALER_DATA  = up.open(rootFile)["charge"]
-TSCALER_DUMMY  = up.open(rootFile_DUMMY)["charge"]
+TSCALER_DATA  = up.open(rootFile)["scaler"]
+TSCALER_DUMMY  = up.open(rootFile_DUMMY)["scaler"]
 
 ################################################################################################################################################
+
+thres_curr = 2.5
 
 NBCM = 5
 
 # Data charge calculation
+time_value_DATA = TSCALER_DATA.array("time")
+
+time_sum_DATA = [0]*NBCM
+previous_time_DATA = [0]*NBCM
+current_time_DATA = 0
+
 bcm1_charge_DATA = TSCALER_DATA.array("bcm1_charge")
 bcm2_charge_DATA = TSCALER_DATA.array("bcm2_charge")
 bcm4a_charge_DATA = TSCALER_DATA.array("bcm4a_charge")
 bcm4b_charge_DATA = TSCALER_DATA.array("bcm4b_charge")
 bcm4c_charge_DATA = TSCALER_DATA.array("bcm4c_charge")
 
-s_evts_DATA = len(bcm1_charge_DATA)
+bcm1_current_DATA = TSCALER_DATA.array("bcm1_current")
+bcm2_current_DATA = TSCALER_DATA.array("bcm2_current")
+bcm4a_current_DATA = TSCALER_DATA.array("bcm4a_current")
+bcm4b_current_DATA = TSCALER_DATA.array("bcm4b_current")
+bcm4c_current_DATA = TSCALER_DATA.array("bcm4c_current")
+
+s_evts_DATA = bcm1_charge_DATA
 
 bcm_value_DATA  = [bcm1_charge_DATA, bcm2_charge_DATA, bcm4a_charge_DATA, bcm4b_charge_DATA, bcm4c_charge_DATA]
 
 charge_sum_DATA = [0]*NBCM
 previous_charge_DATA = [0]*NBCM
 
+current_DATA  = [bcm1_current_DATA, bcm2_current_DATA, bcm4a_current_DATA, bcm4b_current_DATA, bcm4c_current_DATA]
+
+current_I_DATA = 0
+
 for ibcm in range(0, 5):
+    previous_time_DATA[ibcm] = time_value_DATA[0]
     previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][0]
     # Iterate over all scaler events to get various scaler values
-    for i, evt in enumerate(range(0,s_evts_DATA)):
-        # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
-        charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
+    for i, evt in enumerate(s_evts):
+        if (time_value_DATA[i] != previous_time_DATA[ibcm]):
+            # Current calculation using iterative charge and time values.
+            # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
+            current_I_DATA = (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])/(time_value_DATA[i] - previous_time_DATA[ibcm])
+        if (abs( current_DATA[ibcm][i]) < thres_curr ):
+            # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
+            charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
+            time_sum_DATA[ibcm] += (time_value_DATA[i] - previous_time_DATA[ibcm])
+        previous_time_DATA[ibcm] = time_value_DATA[i]
         previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]
         
 data_charge = charge_sum_DATA[0]
         
 # Dummy charge calculation
+time_value_DUMMY = TSCALER_DUMMY.array("time")
+
+time_sum_DUMMY = [0]*NBCM
+previous_time_DUMMY = [0]*NBCM
+current_time_DUMMY = 0
+
 bcm1_charge_DUMMY = TSCALER_DUMMY.array("bcm1_charge")
 bcm2_charge_DUMMY = TSCALER_DUMMY.array("bcm2_charge")
 bcm4a_charge_DUMMY = TSCALER_DUMMY.array("bcm4a_charge")
 bcm4b_charge_DUMMY = TSCALER_DUMMY.array("bcm4b_charge")
 bcm4c_charge_DUMMY = TSCALER_DUMMY.array("bcm4c_charge")
 
-s_evts_DUMMY = len(bcm1_charge_DUMMY)
+bcm1_current_DUMMY = TSCALER_DUMMY.array("bcm1_current")
+bcm2_current_DUMMY = TSCALER_DUMMY.array("bcm2_current")
+bcm4a_current_DUMMY = TSCALER_DUMMY.array("bcm4a_current")
+bcm4b_current_DUMMY = TSCALER_DUMMY.array("bcm4b_current")
+bcm4c_current_DUMMY = TSCALER_DUMMY.array("bcm4c_current")
+
+s_evts_DUMMY = bcm1_charge_DUMMY
 
 bcm_value_DUMMY  = [bcm1_charge_DUMMY, bcm2_charge_DUMMY, bcm4a_charge_DUMMY, bcm4b_charge_DUMMY, bcm4c_charge_DUMMY]
 
 charge_sum_DUMMY = [0]*NBCM
 previous_charge_DUMMY = [0]*NBCM
 
+current_DUMMY  = [bcm1_current_DUMMY, bcm2_current_DUMMY, bcm4a_current_DUMMY, bcm4b_current_DUMMY, bcm4c_current_DUMMY]
+
+current_I_DUMMY = 0
+
 for ibcm in range(0, 5):
+    previous_time_DUMMY[ibcm] = time_value_DUMMY[0]
     previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][0]
     # Iterate over all scaler events to get various scaler values
-    for i, evt in enumerate(range(0,s_evts_DUMMY)):
-        # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
-        charge_sum_DUMMY[ibcm] += (bcm_value_DUMMY[ibcm][i] - previous_charge_DUMMY[ibcm])
+    for i, evt in enumerate(s_evts):
+        if (time_value_DUMMY[i] != previous_time_DUMMY[ibcm]):
+            # Current calculation using iterative charge and time values.
+            # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
+            current_I_DUMMY = (bcm_value_DUMMY[ibcm][i] - previous_charge_DUMMY[ibcm])/(time_value_DUMMY[i] - previous_time_DUMMY[ibcm])
+        if (abs( current_DUMMY[ibcm][i]) < thres_curr ):
+            # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
+            charge_sum_DUMMY[ibcm] += (bcm_value_DUMMY[ibcm][i] - previous_charge_DUMMY[ibcm])
+            time_sum_DUMMY[ibcm] += (time_value_DUMMY[i] - previous_time_DUMMY[ibcm])
+        previous_time_DUMMY[ibcm] = time_value_DUMMY[i]
         previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][i]
         
 dummy_charge = charge_sum_DUMMY[0]
+
 print("\n\ndata_charge = ",data_charge,"\ndummy_charge = ",dummy_charge,"\n\n")
 
 ################################################################################################################################################

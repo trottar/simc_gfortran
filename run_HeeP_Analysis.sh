@@ -35,15 +35,15 @@ if [[ $g_flag = "true" ]]; then
     echo
     echo "Analysing data..."
     echo
-    root -l <<EOF 
-    .x $ANA_DIR/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
-    EOF
+root -l <<EOF 
+.x $ANA_DIR/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
+EOF
     echo
     echo "Analysing dummy data..."
     echo
-    root -l <<EOF 
-    .x $ANA_DIR/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
-    EOF
+root -l <<EOF 
+.x $ANA_DIR/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
+EOF
 fi
 
 python3 HeepCoin.py "${OutDATAFilename}.root" "${OutDUMMYFilename}.root" ${InSIMCFilename} ${OutFullAnalysisFilename}

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 20:53:28 trottar"
+# Time-stamp: "2022-05-31 20:55:56 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -140,7 +140,7 @@ for ibcm in range(0, 5):
             charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
         previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]
         
-data_charge = charge_sum_DATA[0]
+data_charge = charge_sum_DATA[0]/1000
         
 # Dummy charge calculation
 bcm1_charge_DUMMY = TSCALER_DUMMY.array("bcm1_charge")
@@ -168,12 +168,12 @@ for ibcm in range(0, 5):
     previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][0]
     # Iterate over all scaler events to get various scaler values
     for i, evt in enumerate(s_evts_DUMMY):
-        if (abs( current_DUMMY[ibcm][i]) < thres_curr ):
+        if (current_DUMMY[ibcm][i] > thres_curr ):
             # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
             charge_sum_DUMMY[ibcm] += (bcm_value_DUMMY[ibcm][i] - previous_charge_DUMMY[ibcm])
         previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][i]
         
-dummy_charge = charge_sum_DUMMY[0]
+dummy_charge = charge_sum_DUMMY[0]/1000
 
 print("\ndata_charge = ",data_charge,"\ndummy_charge = ",dummy_charge,"\n\n")
 

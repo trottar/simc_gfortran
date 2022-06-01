@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 20:47:46 trottar"
+# Time-stamp: "2022-05-31 20:53:28 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -135,7 +135,7 @@ for ibcm in range(0, 5):
     previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][0]
     # Iterate over all scaler events to get various scaler values
     for i, evt in enumerate(s_evts_DATA):
-        if (abs( current_DATA[ibcm][i]) < thres_curr ):
+        if (current_DATA[ibcm][i] > thres_curr ):
             # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
             charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
         previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]
@@ -175,7 +175,7 @@ for ibcm in range(0, 5):
         
 dummy_charge = charge_sum_DUMMY[0]
 
-print("\n\ndata_charge = ",data_charge,"\ndummy_charge = ",dummy_charge,"\n\n")
+print("\ndata_charge = ",data_charge,"\ndummy_charge = ",dummy_charge,"\n\n")
 
 ################################################################################################################################################
   

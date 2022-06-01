@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-01 00:50:24 trottar"
+# Time-stamp: "2022-06-01 00:52:37 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -342,7 +342,7 @@ for evt in TBRANCH_DATA:
 
   #........................................
 
-  if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID) 
+  if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
   #if(SHMS_FixCut & SHMS_Acceptance):
     
       H_ssxfp_DATA.Fill(evt.ssxfp)
@@ -355,7 +355,7 @@ for evt in TBRANCH_DATA:
 
     
 
-  if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
+  if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID):
   #if(HMS_FixCut & HMS_Acceptance):
     
       H_pmiss_DATA.Fill(evt.pmiss)	
@@ -392,7 +392,7 @@ for evt in TBRANCH_DUMMY:
   
   #........................................
 
-  if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID) 
+  if(SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID): 
   #if(SHMS_FixCut & SHMS_Acceptance):
     
       H_ssxfp_DUMMY.Fill(evt.ssxfp)
@@ -405,7 +405,7 @@ for evt in TBRANCH_DUMMY:
 
     
 
-  if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID)
+  if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID):
   #if(HMS_FixCut & HMS_Acceptance):
     
       H_pmiss_DUMMY.Fill(evt.pmiss)	

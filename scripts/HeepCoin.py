@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 20:55:56 trottar"
+# Time-stamp: "2022-05-31 21:03:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -247,9 +247,9 @@ H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 300, 0.5, 1.0)
 H_epsilon_DUMMY  = ROOT.TH1D("H_epsilon_DUMMY","epsilon", 300, 0.5, 1.0)
 H_epsilon_SIMC  = ROOT.TH1D("H_epsilon_SIMC","epsilon", 300, 0.5, 1.0)
 
-H_MMp_DATA  = ROOT.TH1D("H_MMp_DATA","MMp ", 300, -0.005, 0.005)
-H_MMp_DUMMY  = ROOT.TH1D("H_MMp_DUMMY","MMp ", 300, -0.005, 0.005)
-H_MMp_SIMC  = ROOT.TH1D("H_MMp_SIMC","MMp ", 300, -0.005, 0.005)
+H_MMp_DATA  = ROOT.TH1D("H_MMp_DATA","MMp ", 300, -0.055, 0.055)
+H_MMp_DUMMY  = ROOT.TH1D("H_MMp_DUMMY","MMp ", 300, -0.055, 0.055)
+H_MMp_SIMC  = ROOT.TH1D("H_MMp_SIMC","MMp ", 300, -0.055, 0.055)
 
 H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar", 300, -0.1, 0.1)
 H_th_DUMMY  = ROOT.TH1D("H_th_DUMMY","X' tar", 300, -0.1, 0.1)

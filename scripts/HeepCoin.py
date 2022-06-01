@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-05-31 19:53:20 trottar"
+# Time-stamp: "2022-05-31 20:10:47 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -130,7 +130,6 @@ for ibcm in range(0, 5):
         previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]
         
 data_charge = charge_sum_DATA[0]
-print("data_charge = ",data_charge)
         
 # Dummy charge calculation
 bcm1_charge_DUMMY = TSCALER_DUMMY.array("bcm1_charge")
@@ -155,7 +154,7 @@ for ibcm in range(0, 5):
         previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][i]
         
 dummy_charge = charge_sum_DUMMY[0]
-print("dummy_charge = ",dummy_charge)
+print("\n\ndata_charge = ",data_charge,"\ndummy_charge = ",dummy_charge,"\n\n")
 
 ################################################################################################################################################
   

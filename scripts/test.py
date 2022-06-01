@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-01 17:35:06 trottar"
+# Time-stamp: "2022-06-01 17:47:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -13,11 +13,12 @@
 from numpy import f2py
 import os,sys
 
-inp_f = 'heepcheck'
+inp_f = 'elas_kin'
 
 with open("%s.f" % inp_f) as srcf:
     srcc = srcf.read()
-f2py.compile(srcc,modulename='pyadd', verbose=False)
+#f2py.compile(srcc,modulename='pyadd', verbose=False)
+f2py.compile(srcc,modulename='pyadd', verbose=True)
 
 try:
     import pyadd

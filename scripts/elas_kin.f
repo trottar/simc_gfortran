@@ -87,7 +87,7 @@ cdg	1'    15 - Best fit of Walker data (PRD 49, p. 5681)           ')
          
          iff =15
 c         call nform(iff,qsq,GEp,GEn,GMp,GMn)
-        write(6, *) 'GEn:',GEn,'GMn:',GMn,'GEp:',GEp,'GMp:',GMp
+c        write(6, *) 'GEn:',GEn,'GMn:',GMn,'GEp:',GEp,'GMp:',GMp
          
          t2 = tan(abs(theta)/2.)**2
          

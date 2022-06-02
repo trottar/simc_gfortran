@@ -94,6 +94,9 @@ void Analysed_COIN(string InDATAFilename = "", string OutFilename = "")
   //#################################################################### 
 
   TTree* TBRANCH  = (TTree*)InFile->Get("T"); Long64_t nEntries_TBRANCH  = (Long64_t)TBRANCH->GetEntries();
+
+  Double_t  CTime_epCoinTime_ROC1;TBRANCH->SetBranchAddress("CTime.epCoinTime_ROC1", &CTime_epCoinTime_ROC1);
+  
   Double_t  H_dc_InsideDipoleExit;TBRANCH->SetBranchAddress("H.dc.InsideDipoleExit", &H_dc_InsideDipoleExit);
   //Double_t  H_hod_betanotrack;TBRANCH->SetBranchAddress("H_hod_betanotrack", &H_hod_betanotrack);
 
@@ -227,6 +230,8 @@ void Analysed_COIN(string InDATAFilename = "", string OutFilename = "")
   tree->Branch("H_cal_etotnorm",&H_cal_etotnorm,"H_cal_etotnorm/D");
   tree->Branch("H_cer_npeSum",&H_cer_npeSum,"H_cer_npeSum/D");
   tree->Branch("H_cal_etottracknorm",&H_cal_etottracknorm),"H_cal_etottracknorm)/D";	
+
+  tree->Branch("CTime_epCoinTime_ROC1",&CTime_epCoinTime_ROC1),"CTime_epCoinTime_ROC1)/D";	
   
   s_tree->Branch("bcm1_charge",&P_BCM1_scalerCharge,"P_BCM1_scalerCharge/D");
   s_tree->Branch("bcm2_charge",&P_BCM1_scalerCharge,"P_BCM2_scalerCharge/D");

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 13:57:41 trottar"
+# Time-stamp: "2022-06-02 14:04:32 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -346,6 +346,7 @@ H_W_SIMC  = ROOT.TH1D("H_W_SIMC","W", 300, 0.5, 1.5)
 
 H_ct_ep_DATA = ROOT.TH1D("H_ct_ep_DATA", "Electron-Proton CTime", 200, -50, 50)
 H_ct_ep_DUMMY = ROOT.TH1D("H_ct_ep_DUMMY", "Electron-Proton CTime", 200, -50, 50)
+H_ct_ep_DATA_cut = ROOT.TH1D("H_ct_ep_DATA_cut", "Electron-Proton CTime (cut)", 200, -50, 50)
 
 ################################################################################################################################################
 
@@ -411,6 +412,8 @@ for evt in TBRANCH_DATA:
   #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID & SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
   if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
+      H_ct_ep_DATA_cut.Fill(evt.CTime_epCoinTime_ROC1)
+      
       H_ssxfp_DATA.Fill(evt.ssxfp)
       H_ssyfp_DATA.Fill(evt.ssyfp)
       H_ssxpfp_DATA.Fill(evt.ssxpfp)
@@ -645,7 +648,13 @@ ROOT.gStyle.SetOptStat(0)
 ct_ep = TCanvas()
 l_ct_ep = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
+H_ct_ep_DATA.SetLineColor(kRed)
+
 H_ct_ep_DATA.Draw("")
+H_ct_ep_DATA_cut.Draw("same")
+
+l_ct_ep.AddEntry(H_ct_ep_DATA,"No cut")
+l_ct_ep.AddEntry(H_ct_ep_DATA_cut,"Cut")
 
 l_ct_ep.Draw()
 

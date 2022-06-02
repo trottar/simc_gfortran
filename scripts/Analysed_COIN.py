@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 16:09:39 trottar"
+# Time-stamp: "2022-06-02 16:12:57 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -146,7 +146,7 @@ def main():
     for i in range (0, len(data_keys)):
         if("Proton" in data_keys[i]):
             DFHeader=list(COIN_Proton_Data_Header)
-        elif("scalers" in data_keys[i]):
+        elif("Scaler" in data_keys[i]):
             DFHeader=list(Scaler_Data_Header)
         else:
             continue

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 18:19:47 trottar"
+# Time-stamp: "2022-06-02 18:21:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -168,7 +168,7 @@ nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
 #TSCALER_DUMMY  = up.open(rootFile_DUMMY)["scaler"]
 
 ################################################################################################################################################
-'''
+
 # Charge calculation
 thres_curr = 2.5
 NBCM = 5
@@ -240,7 +240,7 @@ for ibcm in range(0, 5):
 dummy_charge = charge_sum_DUMMY[0]/1000
 
 print("\ndata_charge = ",data_charge,"\ndummy_charge = ",dummy_charge,"\n\n")
-'''
+
 ################################################################################################################################################
   
 H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta", 300, -20.0, 20.0)

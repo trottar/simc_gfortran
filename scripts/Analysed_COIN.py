@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 16:21:25 trottar"
+# Time-stamp: "2022-06-02 16:22:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -141,13 +141,11 @@ def main():
     for d in (COIN_Proton_Data,Scaler_Data): 
         data.update(d)
     data_keys = list(data.keys()) # Create a list of all the keys in all dicts added above, each is an array of data
-    print(data_keys['Uncut_Proton_Events'])
-    print(data_keys['scaler'])
 
     for i in range (0, len(data_keys)):
         if("Proton" in data_keys[i]):
             DFHeader=list(COIN_Proton_Data_Header)
-        elif("Scaler" in data_keys[i]):
+        if("Scaler" in data_keys[i]):
             DFHeader=list(Scaler_Data_Header)
         else:
             continue

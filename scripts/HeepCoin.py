@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 13:11:13 trottar"
+# Time-stamp: "2022-06-02 13:12:24 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -167,7 +167,7 @@ TSCALER_DUMMY  = up.open(rootFile_DUMMY)["scaler"]
 
 ################################################################################################################################################
 # Charge calculation
-thres_curr = 40
+thres_curr = 2.5
 NBCM = 5
 
 # Data charge calculation

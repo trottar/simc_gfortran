@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 16:31:30 trottar"
+# Time-stamp: "2022-06-02 17:01:33 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -157,12 +157,12 @@ InFile_SIMC = ROOT.TFile.Open(rootFile_SIMC, "READ")
 
 #TBRANCH_DATA  = InFile_DATA.Get("hist")
 TBRANCH_DATA  = InFile_DATA.Get("Cut_Proton_Events_All")
-nEntries_TBRANCH_DATA  = TBRANCH_DATA.GetEntries()
+#nEntries_TBRANCH_DATA  = TBRANCH_DATA.GetEntries()
 #TBRANCH_DUMMY  = InFile_DUMMY.Get("hist")
 TBRANCH_DUMMY  = InFile_DUMMY.Get("Cut_Proton_Events_All")
-nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
+#nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
 TBRANCH_SIMC  = InFile_SIMC.Get("h10")
-nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
+#nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
 
 TSCALER_DATA  = up.open(rootFile)["scaler"]
 TSCALER_DUMMY  = up.open(rootFile_DUMMY)["scaler"]

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 12:16:38 trottar"
+# Time-stamp: "2022-06-02 12:19:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -503,8 +503,7 @@ H_W_SIMC.Scale(normfac_simc)
 H_epsilon_SIMC.Scale(normfac_simc)                                                                                                                                                    
 H_MMp_SIMC.Scale(normfac_simc)
 
-#dummy_target_corr = 4.8579
-dummy_target_corr = 1
+dummy_target_corr = 4.8579
 normfac_dummy = 1/(dummy_charge*dummy_target_corr)
 H_ssxfp_DUMMY.Scale(normfac_dummy)
 H_ssyfp_DUMMY.Scale(normfac_dummy)
@@ -605,7 +604,7 @@ H_pmy_DUMMY.Add(H_pmy_DUMMY.Scale(1.0/nWindows),-1)
 H_pmz_DUMMY.Add(H_pmz_DUMMY.Scale(1.0/nWindows),-1)
 H_W_DUMMY.Add(H_W_DUMMY.Scale(1.0/nWindows),-1)
 
-
+'''
 # Dummy Subtraction
 H_ssxfp_DATA.Add(H_ssxfp_DUMMY,-1)
 H_ssyfp_DATA.Add(H_ssyfp_DUMMY,-1)
@@ -630,6 +629,7 @@ H_pmx_DATA.Add(H_pmx_DUMMY,-1)
 H_pmy_DATA.Add(H_pmy_DUMMY,-1)
 H_pmz_DATA.Add(H_pmz_DUMMY,-1)
 H_W_DATA.Add(H_W_DUMMY,-1)
+'''
 
 ################################################################################################################################################
 ROOT.gStyle.SetOptStat(0)

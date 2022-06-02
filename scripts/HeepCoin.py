@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 11:31:15 trottar"
+# Time-stamp: "2022-06-02 11:32:13 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -31,7 +31,7 @@ from ROOT import kBlack, kBlue, kRed
 ##################################################################################################################################################
 
 # Check the number of arguments provided to the script
-if len(sys.argv)-1!=4:
+if len(sys.argv)-1!=5:
     print("!!!!! ERROR !!!!!\n Expected 4 arguments\n Usage is with - InDATAFilename InDUMMYFilename InSIMCFilename OutFilename \n!!!!! ERROR !!!!!")
     sys.exit(1)
 
@@ -100,7 +100,7 @@ try:
     runNum
 except:
     print("ERROR: No valid run number for this setting!")
-    sys.exit(0)
+    sys.exit(1)
 
 # Section for grabing Prompt/Random selection parameters from PARAM file
 PARAMPATH = "%s/DB/PARAM" % UTILPATH

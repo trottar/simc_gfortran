@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 15:38:36 trottar"
+# Time-stamp: "2022-06-02 16:06:00 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -64,7 +64,35 @@ b = proc_root[1] # Dictionary of branches
 OUTPATH = proc_root[2] # Get pathing for OUTPATH
 
 #################################################################################################################################################################
+UTILPATH = SetPath(CURRENT_ENV).getPath("UTILPATH")
+rootName = "%s/ROOTfiles/Analysis/%s/%s_%s_%s.root" % (UTILPATH, runType, ROOTPrefix, runNum, MaxEvent)     # Input file location and variables taking
+s_tree = up.open(rootName)["TSP"]
 
+P_BCM4A_scalerCharge = s_tree.array("P.BCM4A.scalerCharge")
+P_BCM2_scalerCharge = s_tree.array("P.BCM2.scalerCharge")
+P_BCM4B_scalerCharge = s_tree.array("P.BCM4B.scalerCharge")
+P_BCM1_scalerCharge = s_tree.array("P.BCM1.scalerCharge")
+P_BCM4C_scalerCharge = s_tree.array("P.BCM4C.scalerCharge")
+
+P_BCM4A_scalerCurrent = s_tree.array("P.BCM4A.scalerCurrent")
+P_BCM2_scalerCurrent = s_tree.array("P.BCM2.scalerCurrent")
+P_BCM4B_scalerCurrent = s_tree.array("P.BCM4B.scalerCurrent")
+P_BCM1_scalerCurrent = s_tree.array("P.BCM1.scalerCurrent")
+P_BCM4C_scalerCurrent = s_tree.array("P.BCM4C.scalerCurrent")
+
+def scalers():
+    
+    NoCut = [P_BCM4A_scalerCharge,P_BCM4B_scalerCharge,P_BCM4C_scalerCharge,P_BCM2_scalerCharge,P_BCM1_scalerCharge,P_BCM4A_scalerCurrent,P_BCM4B_scalerCurrent,P_BCM4C_scalerCurrent,P_BCM2_scalerCurrent,P_BCM1_scalerCurrent]
+        
+    Uncut = [(P_BCM4A_scalerCharge,P_BCM4B_scalerCharge,P_BCM4C_scalerCharge,P_BCM2_scalerCharge,P_BCM1_scalerCharge,P_BCM4A_scalerCurrent,P_BCM4B_scalerCurrent,P_BCM4C_scalerCurrent,P_BCM2_scalerCurrent,P_BCM1_scalerCurrent) for (P_BCM4A_scalerCharge,P_BCM4B_scalerCharge,P_BCM4C_scalerCharge,P_BCM2_scalerCharge,P_BCM1_scalerCharge,P_BCM4A_scalerCurrent,P_BCM4B_scalerCurrent,P_BCM4C_scalerCurrent,P_BCM2_scalerCurrent,P_BCM1_scalerCurrent) in zip(*NoCut)]
+    
+
+    SCALERS = {
+        "scaler" : Uncut,
+    }
+
+    return SCALERS
+    
 def coin_protons():
 
     # Define the array of arrays containing the relevant HMS and SHMS info                              
@@ -97,20 +125,29 @@ def coin_protons():
 def main():
     COIN_Proton_Data = coin_protons()
 
+    scalers = scalers()
+
     # This is just the list of branches we use from the initial root file for each dict
     # I don't like re-defining this here as it's very prone to errors if you included (or removed something) earlier but didn't modify it here
     # Should base the branches to include based on some list and just repeat the list here (or call it again directly below)
 
     COIN_Proton_Data_Header = ["H_gtr_beta","H_gtr_xp","H_gtr_yp","H_gtr_dp", "H_gtr_p", "H_hod_goodscinhit","H_hod_goodstarttime","H_cal_etotnorm","H_cal_etottracknorm","H_cer_npeSum","CTime_epCoinTime_ROC1","P_gtr_beta","P_gtr_xp","P_gtr_yp","P_gtr_p","P_gtr_dp","P_hod_goodscinhit","P_hod_goodstarttime","P_cal_etotnorm","P_cal_etottracknorm","P_aero_npeSum","P_aero_xAtAero","P_aero_yAtAero","P_hgcer_npeSum","P_hgcer_xAtCer","P_hgcer_yAtCer","MMp","H_RF_Dist","P_RF_Dist", "Q2", "W", "epsilon", "ph_q", "MandelT", "pmiss", "pmiss_x", "pmiss_y", "pmiss_z"]
 
+
+    scalers_Header = ["P_BCM4A_scalerCharge","P_BCM4B_scalerCharge","P_BCM4C_scalerCharge","P_BCM2_scalerCharge","P_BCM1_scalerCharge","P_BCM4A_scalerCurrent","P_BCM4B_scalerCurrent","P_BCM4C_scalerCurrent","P_BCM2_scalerCurrent","P_BCM1_scalerCurrent"]
+
+    
     # Need to create a dict for all the branches we grab                                                
     data = {}
-    data.update(COIN_Proton_Data)
+    for d in (COIN_Proton_Data,scalers): 
+        data.update(d)
     data_keys = list(data.keys()) # Create a list of all the keys in all dicts added above, each is an array of data                                                                                       
 
     for i in range (0, len(data_keys)):
         if("Proton" in data_keys[i]):
             DFHeader=list(COIN_Proton_Data_Header)
+        elif("scalers" in data_keys[i]):
+            DFHeader=list(scalers_Header)
         else:
             continue
             # Uncomment the line below if you want .csv file output, WARNING the files can be very large and take a long time to process!                                                                      

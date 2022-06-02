@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 14:07:36 trottar"
+# Time-stamp: "2022-06-02 14:12:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -347,6 +347,7 @@ H_W_SIMC  = ROOT.TH1D("H_W_SIMC","W", 300, 0.5, 1.5)
 H_ct_ep_DATA = ROOT.TH1D("H_ct_ep_DATA", "Electron-Proton CTime", 200, -100, 100)
 H_ct_ep_DUMMY = ROOT.TH1D("H_ct_ep_DUMMY", "Electron-Proton CTime", 200, -100, 100)
 H_ct_ep_DATA_cut = ROOT.TH1D("H_ct_ep_DATA_cut", "Electron-Proton CTime (cut)", 200, -100, 100)
+H_ct_ep_DUMMY_cut = ROOT.TH1D("H_ct_ep_DUMMY_cut", "Electron-Proton CTime (cut)", 200, -100, 100)
 
 ################################################################################################################################################
 
@@ -461,6 +462,8 @@ for evt in TBRANCH_DUMMY:
   #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID & SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
   if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
+      H_ct_ep_DUMMY_cut.Fill(evt.CTime_epCoinTime_ROC1)
+      
       H_ssxfp_DUMMY.Fill(evt.ssxfp)
       H_ssyfp_DUMMY.Fill(evt.ssyfp)
       H_ssxpfp_DUMMY.Fill(evt.ssxpfp)
@@ -538,6 +541,7 @@ H_pmx_DUMMY.Scale(normfac_dummy)
 H_pmy_DUMMY.Scale(normfac_dummy)
 H_pmz_DUMMY.Scale(normfac_dummy)
 H_W_DUMMY.Scale(normfac_dummy)
+H_ct_ep_DUMMY_cut.Scale(normfac_dummy)
 
 normfac_data = 1/(data_charge)
 H_ssxfp_DATA.Scale(normfac_data)
@@ -563,6 +567,7 @@ H_pmx_DATA.Scale(normfac_data)
 H_pmy_DATA.Scale(normfac_data)
 H_pmz_DATA.Scale(normfac_data)
 H_W_DATA.Scale(normfac_data)
+H_ct_ep_DATA_cut.Scale(normfac_data)
 
 # Data Random subtraction
 H_ssxfp_DATA.Add(H_ssxfp_DATA.Scale(1.0/nWindows),-1)
@@ -588,6 +593,7 @@ H_pmx_DATA.Add(H_pmx_DATA.Scale(1.0/nWindows),-1)
 H_pmy_DATA.Add(H_pmy_DATA.Scale(1.0/nWindows),-1)
 H_pmz_DATA.Add(H_pmz_DATA.Scale(1.0/nWindows),-1)
 H_W_DATA.Add(H_W_DATA.Scale(1.0/nWindows),-1)
+H_ct_ep_DATA_cut.Add(H_ct_ep_DATA_cut.Scale(1.0/nWindows),-1)
 
 # Dummy Random subtraction
 H_ssxfp_DUMMY.Add(H_ssxfp_DUMMY.Scale(1.0/nWindows),-1)
@@ -613,6 +619,7 @@ H_pmx_DUMMY.Add(H_pmx_DUMMY.Scale(1.0/nWindows),-1)
 H_pmy_DUMMY.Add(H_pmy_DUMMY.Scale(1.0/nWindows),-1)
 H_pmz_DUMMY.Add(H_pmz_DUMMY.Scale(1.0/nWindows),-1)
 H_W_DUMMY.Add(H_W_DUMMY.Scale(1.0/nWindows),-1)
+H_ct_ep_DUMMY_cut.Add(H_ct_ep_DUMMY_cut.Scale(1.0/nWindows),-1)
 
 # Dummy Subtraction
 H_ssxfp_DATA.Add(H_ssxfp_DUMMY,-1)
@@ -638,6 +645,7 @@ H_pmx_DATA.Add(H_pmx_DUMMY,-1)
 H_pmy_DATA.Add(H_pmy_DUMMY,-1)
 H_pmz_DATA.Add(H_pmz_DUMMY,-1)
 H_W_DATA.Add(H_W_DUMMY,-1)
+H_ct_ep_DATA_cut.Add(H_ct_ep_DUMMY_cut,-1)
 
 ################################################################################################################################################
 ROOT.gStyle.SetOptStat(0)

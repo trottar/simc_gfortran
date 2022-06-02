@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 13:54:46 trottar"
+# Time-stamp: "2022-06-02 13:57:41 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -404,8 +404,10 @@ for evt in TBRANCH_DATA:
   HMS_Acceptance = (evt.H_gtr_dp>=-8.0) & (evt.H_gtr_dp<=8.0) & (evt.H_gtr_xptar>=-0.08) & (evt.H_gtr_xptar<=0.08) & (evt.H_gtr_yptar>=-0.045) & (evt.H_gtr_yptar<=0.045)       
   HMS_ELECTRON_PID = (evt.H_cer_npeSum >=0.5) & (evt.H_cal_etotnorm >=0.8) & (evt.H_cal_etotnorm <=1.2)
 
-  #........................................  
-      
+  #........................................
+  
+  H_ct_ep_DATA.Fill(evt.CTime_epCoinTime_ROC1)
+  
   #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID & SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
   if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
@@ -450,7 +452,9 @@ for evt in TBRANCH_DUMMY:
   HMS_ELECTRON_PID = (evt.H_cer_npeSum >=0.5) & (evt.H_cal_etotnorm >=0.8) & (evt.H_cal_etotnorm <=1.2)
   
   #........................................
-      
+
+  H_ct_ep_DUMMY.Fill(evt.CTime_epCoinTime_ROC1)
+  
   #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID & SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
   if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 

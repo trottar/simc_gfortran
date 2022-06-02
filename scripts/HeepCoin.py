@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 12:28:15 trottar"
+# Time-stamp: "2022-06-02 12:29:46 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -201,7 +201,7 @@ for ibcm in range(0, 5):
             charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
         previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]
         
-data_charge = charge_sum_DATA[0]/2000
+data_charge = charge_sum_DATA[0]/(1000*(69/29))
         
 # Dummy charge calculation
 bcm1_charge_DUMMY = TSCALER_DUMMY.array("bcm1_charge")

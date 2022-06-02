@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 12:13:37 trottar"
+# Time-stamp: "2022-06-02 12:16:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -168,7 +168,6 @@ TSCALER_DUMMY  = up.open(rootFile_DUMMY)["scaler"]
 ################################################################################################################################################
 # Charge calculation
 thres_curr = 2.5
-
 NBCM = 5
 
 # Data charge calculation
@@ -504,7 +503,8 @@ H_W_SIMC.Scale(normfac_simc)
 H_epsilon_SIMC.Scale(normfac_simc)                                                                                                                                                    
 H_MMp_SIMC.Scale(normfac_simc)
 
-dummy_target_corr = 4.8579
+#dummy_target_corr = 4.8579
+dummy_target_corr = 1
 normfac_dummy = 1/(dummy_charge*dummy_target_corr)
 H_ssxfp_DUMMY.Scale(normfac_dummy)
 H_ssyfp_DUMMY.Scale(normfac_dummy)

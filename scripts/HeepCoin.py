@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 14:12:01 trottar"
+# Time-stamp: "2022-06-02 14:14:11 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -541,6 +541,7 @@ H_pmx_DUMMY.Scale(normfac_dummy)
 H_pmy_DUMMY.Scale(normfac_dummy)
 H_pmz_DUMMY.Scale(normfac_dummy)
 H_W_DUMMY.Scale(normfac_dummy)
+H_ct_ep_DUMMY.Scale(normfac_dummy)
 H_ct_ep_DUMMY_cut.Scale(normfac_dummy)
 
 normfac_data = 1/(data_charge)
@@ -567,6 +568,7 @@ H_pmx_DATA.Scale(normfac_data)
 H_pmy_DATA.Scale(normfac_data)
 H_pmz_DATA.Scale(normfac_data)
 H_W_DATA.Scale(normfac_data)
+H_ct_ep_DATA.Scale(normfac_data)
 H_ct_ep_DATA_cut.Scale(normfac_data)
 
 # Data Random subtraction
@@ -593,6 +595,7 @@ H_pmx_DATA.Add(H_pmx_DATA.Scale(1.0/nWindows),-1)
 H_pmy_DATA.Add(H_pmy_DATA.Scale(1.0/nWindows),-1)
 H_pmz_DATA.Add(H_pmz_DATA.Scale(1.0/nWindows),-1)
 H_W_DATA.Add(H_W_DATA.Scale(1.0/nWindows),-1)
+H_ct_ep_DATA.Add(H_ct_ep_DATA.Scale(1.0/nWindows),-1)
 H_ct_ep_DATA_cut.Add(H_ct_ep_DATA_cut.Scale(1.0/nWindows),-1)
 
 # Dummy Random subtraction
@@ -619,6 +622,7 @@ H_pmx_DUMMY.Add(H_pmx_DUMMY.Scale(1.0/nWindows),-1)
 H_pmy_DUMMY.Add(H_pmy_DUMMY.Scale(1.0/nWindows),-1)
 H_pmz_DUMMY.Add(H_pmz_DUMMY.Scale(1.0/nWindows),-1)
 H_W_DUMMY.Add(H_W_DUMMY.Scale(1.0/nWindows),-1)
+H_ct_ep_DUMMY.Add(H_ct_ep_DUMMY.Scale(1.0/nWindows),-1)
 H_ct_ep_DUMMY_cut.Add(H_ct_ep_DUMMY_cut.Scale(1.0/nWindows),-1)
 
 # Dummy Subtraction
@@ -645,6 +649,7 @@ H_pmx_DATA.Add(H_pmx_DUMMY,-1)
 H_pmy_DATA.Add(H_pmy_DUMMY,-1)
 H_pmz_DATA.Add(H_pmz_DUMMY,-1)
 H_W_DATA.Add(H_W_DUMMY,-1)
+H_ct_ep_DATA.Add(H_ct_ep_DUMMY,-1)
 H_ct_ep_DATA_cut.Add(H_ct_ep_DUMMY_cut,-1)
 
 ################################################################################################################################################

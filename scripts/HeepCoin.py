@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 18:02:26 trottar"
+# Time-stamp: "2022-06-02 18:12:05 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -151,8 +151,8 @@ RandomWindows[3] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpac
     
 ################################################################################################################################################
 
-InFile_DATA = ROOT.TFile.Open(rootFile, "READ")
-InFile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "READ")
+InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
+InFile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "OPEN")
 InFile_SIMC = ROOT.TFile.Open(rootFile_SIMC, "READ")
 
 #TBRANCH_DATA  = InFile_DATA.Get("hist")

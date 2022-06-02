@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 16:12:57 trottar"
+# Time-stamp: "2022-06-02 16:18:45 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -58,7 +58,7 @@ fout = '/DB/CUTS/run_type/coin_heep.cuts'
 # defining Cuts
 cuts = ["coin_ep_cut_all_RF"]
 
-proc_root = lt.Root(ROOTPrefix,runNum,MaxEvent,fout,cuts,os.path.realpath(__file__),DEBUG=True).setup_ana()
+proc_root = lt.Root(ROOTPrefix,runNum,MaxEvent,fout,cuts,os.path.realpath(__file__)).setup_ana()
 c = proc_root[0] # Cut object
 b = proc_root[1] # Dictionary of branches
 OUTPATH = proc_root[2] # Get pathing for OUTPATH
@@ -86,7 +86,6 @@ def scalers():
         
     Uncut = [(P_BCM4A_scalerCharge,P_BCM4B_scalerCharge,P_BCM4C_scalerCharge,P_BCM2_scalerCharge,P_BCM1_scalerCharge,P_BCM4A_scalerCurrent,P_BCM4B_scalerCurrent,P_BCM4C_scalerCurrent,P_BCM2_scalerCurrent,P_BCM1_scalerCurrent) for (P_BCM4A_scalerCharge,P_BCM4B_scalerCharge,P_BCM4C_scalerCharge,P_BCM2_scalerCharge,P_BCM1_scalerCharge,P_BCM4A_scalerCurrent,P_BCM4B_scalerCurrent,P_BCM4C_scalerCurrent,P_BCM2_scalerCurrent,P_BCM1_scalerCurrent) in zip(*NoCut)]
     
-
     SCALERS = {
         "scaler" : Uncut,
     }
@@ -123,6 +122,7 @@ def coin_protons():
 ##################################################################################################################################################################
 
 def main():
+    
     COIN_Proton_Data = coin_protons()
 
     Scaler_Data = scalers()
@@ -133,7 +133,6 @@ def main():
 
     COIN_Proton_Data_Header = ["H_gtr_beta","H_gtr_xp","H_gtr_yp","H_gtr_dp", "H_gtr_p", "H_hod_goodscinhit","H_hod_goodstarttime","H_cal_etotnorm","H_cal_etottracknorm","H_cer_npeSum","CTime_epCoinTime_ROC1","P_gtr_beta","P_gtr_xp","P_gtr_yp","P_gtr_p","P_gtr_dp","P_hod_goodscinhit","P_hod_goodstarttime","P_cal_etotnorm","P_cal_etottracknorm","P_aero_npeSum","P_aero_xAtAero","P_aero_yAtAero","P_hgcer_npeSum","P_hgcer_xAtCer","P_hgcer_yAtCer","MMp","H_RF_Dist","P_RF_Dist", "Q2", "W", "epsilon", "ph_q", "MandelT", "pmiss", "pmiss_x", "pmiss_y", "pmiss_z"]
 
-
     Scaler_Data_Header = ["P_BCM4A_scalerCharge","P_BCM4B_scalerCharge","P_BCM4C_scalerCharge","P_BCM2_scalerCharge","P_BCM1_scalerCharge","P_BCM4A_scalerCurrent","P_BCM4B_scalerCurrent","P_BCM4C_scalerCurrent","P_BCM2_scalerCurrent","P_BCM1_scalerCurrent"]
 
     
@@ -141,7 +140,8 @@ def main():
     data = {}
     for d in (COIN_Proton_Data,Scaler_Data): 
         data.update(d)
-    data_keys = list(data.keys()) # Create a list of all the keys in all dicts added above, each is an array of data                                                                                       
+    data_keys = list(data.keys()) # Create a list of all the keys in all dicts added above, each is an array of data
+    print(data_keys)
 
     for i in range (0, len(data_keys)):
         if("Proton" in data_keys[i]):

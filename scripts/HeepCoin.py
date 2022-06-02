@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-01 15:12:07 trottar"
+# Time-stamp: "2022-06-02 11:20:52 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -71,6 +71,8 @@ foutname = OutPath+"/" + OutFilename + ".root"
 fouttxt  = OutPath+"/" + OutFilename + ".txt"
 outputpdf  = OutPath+"/" + OutFilename + ".pdf"
 
+###############################################################################################################################################
+
 # Grabs simc number of events and weight
 simc_hist = "%s/OUTPUTS/Heep_Coin_10p6.hist" % REPLAYPATH
 f_simc = open(simc_hist)
@@ -87,6 +89,53 @@ if 'simc_nevents' and 'simc_normfactor' in locals():
 else:
     print("ERROR: Invalid simc hist file %s" % simc_hist)
     sys.exit(1)
+
+###############################################################################################################################################
+
+# Section for grabing Prompt/Random selection parameters from PARAM file
+PARAMPATH = "%s/DB/PARAM" % UTILPATH
+print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], REPLAYPATH))
+TimingCutFile = "%s/Timing_Parameters.csv" % PARAMPATH # This should match the param file actually being used!
+TimingCutf = open(TimingCutFile)
+try:
+    TimingCutFile
+except NameError:
+    print("!!!!! ERRROR !!!!!\n One (or more) of the cut files not found!\n!!!!! ERRORR !!!!!")
+    sys.exit(2)
+print("Reading timing cuts from %s" % TimingCutFile)
+PromptWindow = [0, 0]
+RandomWindows = [0, 0, 0, 0]
+linenum = 0 # Count line number we're on
+TempPar = -1 # To check later
+for line in TimingCutf: # Read all lines in the cut file
+    linenum += 1 # Add one to line number at start of loop
+    if(linenum > 1): # Skip first line
+        line = line.partition('#')[0] # Treat anything after a # as a comment and ignore it
+        line = line.rstrip()
+        array = line.split(",") # Convert line into an array, anything after a comma is a new entry 
+        if(int(runNum) in range (int(array[0]), int(array[1])+1)): # Check if run number for file is within any of the ranges specified in the cut file
+            TempPar += 2 # If run number is in range, set to non -1 value
+            BunchSpacing = float(array[2])
+            CoinOffset = float(array[3]) # Coin offset value
+            nSkip = float(array[4]) # Number of random windows skipped 
+            nWindows = float(array[5]) # Total number of random windows
+            PromptPeak = float(array[6]) # Pion CT prompt peak positon 
+TimingCutf.close() # After scanning all lines in file, close file
+
+if(TempPar == -1): # If value is still -1, run number provided din't match any ranges specified so exit 
+    print("!!!!! ERROR !!!!!\n Run number specified does not fall within a set of runs for which cuts are defined in %s\n!!!!! ERROR !!!!!" % TimingCutFile)
+    sys.exit(3)
+elif(TempPar > 1):
+    print("!!! WARNING!!! Run number was found within the range of two (or more) line entries of %s !!! WARNING !!!" % TimingCutFile)
+    print("The last matching entry will be treated as the input, you should ensure this is what you want")
+
+# From our values from the file, reconstruct our windows 
+PromptWindow[0] = PromptPeak - (BunchSpacing/2) - CoinOffset
+PromptWindow[1] = PromptPeak + (BunchSpacing/2) + CoinOffset
+RandomWindows[0] = PromptPeak - (BunchSpacing/2) - CoinOffset - (nSkip*BunchSpacing) - ((nWindows/2)*BunchSpacing)
+RandomWindows[1] = PromptPeak - (BunchSpacing/2) - CoinOffset - (nSkip*BunchSpacing)
+RandomWindows[2] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing)
+RandomWindows[3] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing) + ((nWindows/2)*BunchSpacing)
     
 ################################################################################################################################################
 

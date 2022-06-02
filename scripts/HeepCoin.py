@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 11:20:52 trottar"
+# Time-stamp: "2022-06-02 11:31:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -37,11 +37,12 @@ if len(sys.argv)-1!=4:
 
 ##################################################################################################################################################
 
-# Input params - run number and max number of events
-InDATAFilename = sys.argv[1]
-InDUMMYFilename = sys.argv[2]
-InSIMCFilename = sys.argv[3]
-OutFilename = sys.argv[4]
+# Input params
+heep_kinematics = sys.argv[1]
+InDATAFilename = sys.argv[2]
+InDUMMYFilename = sys.argv[3]
+InSIMCFilename = sys.argv[4]
+OutFilename = sys.argv[5]
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -74,7 +75,7 @@ outputpdf  = OutPath+"/" + OutFilename + ".pdf"
 ###############################################################################################################################################
 
 # Grabs simc number of events and weight
-simc_hist = "%s/OUTPUTS/Heep_Coin_10p6.hist" % REPLAYPATH
+simc_hist = "%s/OUTPUTS/Heep_Coin_%s.hist" % (REPLAYPATH,heep_kinematics)
 f_simc = open(simc_hist)
 for line in f_simc:
     print(line)
@@ -91,6 +92,15 @@ else:
     sys.exit(1)
 
 ###############################################################################################################################################
+
+if "10p6" in heep_kinematics:
+    runNum = 4827 # First run number of coin heep setting
+
+try:
+    runNum
+except:
+    print("ERROR: No valid run number for this setting!")
+    sys.exit(0)
 
 # Section for grabing Prompt/Random selection parameters from PARAM file
 PARAMPATH = "%s/DB/PARAM" % UTILPATH

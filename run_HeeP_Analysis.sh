@@ -50,7 +50,7 @@ root -l <<EOF
 EOF
 fi
 
-python3 HeepCoin.py "${OutDATAFilename}.root" "${OutDUMMYFilename}.root" ${InSIMCFilename} ${OutFullAnalysisFilename}
+python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" "${OutDUMMYFilename}.root" ${InSIMCFilename} ${OutFullAnalysisFilename}
 
 cd ../
 evince "OUTPUTS/${OutFullAnalysisFilename}.pdf"

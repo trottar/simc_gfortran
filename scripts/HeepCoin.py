@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 19:23:37 trottar"
+# Time-stamp: "2022-06-02 19:30:41 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -406,7 +406,7 @@ for evt in TBRANCH_DATA:
   SHMS_ELECTRON_PID = (evt.P_cal_etottracknorm >= 0.85) & (evt.P_cal_etottracknorm <= 1.2) # evt.P_hgcer_npeSum >=0.5 & evt.P_aero_npeSum >=0.5
 
   HMS_FixCut = (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
-  HMS_Acceptance = (evt.hsdp>=-8.0) & (evt.hsdp<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)       
+  HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)       
   HMS_ELECTRON_PID = (evt.H_cer_npeSum >=0.5) & (evt.H_cal_etotnorm >=0.8) & (evt.H_cal_etotnorm <=1.2)
 
   #........................................

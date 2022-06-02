@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 12:25:58 trottar"
+# Time-stamp: "2022-06-02 12:28:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -84,7 +84,7 @@ for line in f_simc:
         simc_nevents = int(val[1])
     if "normfac" in line:
         val = line.split("=")
-        simc_normfactor = float(val[1])/10
+        simc_normfactor = float(val[1])
 if 'simc_nevents' and 'simc_normfactor' in locals():
     print('\n\nsimc_nevents = ',simc_nevents,'\nsimc_normfactor = ',simc_normfactor,'\n\n')
 else:
@@ -201,7 +201,7 @@ for ibcm in range(0, 5):
             charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
         previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]
         
-data_charge = charge_sum_DATA[0]/1000
+data_charge = charge_sum_DATA[0]/2000
         
 # Dummy charge calculation
 bcm1_charge_DUMMY = TSCALER_DUMMY.array("bcm1_charge")

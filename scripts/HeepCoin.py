@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 13:12:24 trottar"
+# Time-stamp: "2022-06-02 13:54:46 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -344,6 +344,9 @@ H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 300, 0.5, 1.5)
 H_W_DUMMY  = ROOT.TH1D("H_W_DUMMY","W ", 300, 0.5, 1.5)
 H_W_SIMC  = ROOT.TH1D("H_W_SIMC","W", 300, 0.5, 1.5)
 
+H_ct_ep_DATA = ROOT.TH1D("H_ct_ep_DATA", "Electron-Proton CTime", 200, -50, 50)
+H_ct_ep_DUMMY = ROOT.TH1D("H_ct_ep_DUMMY", "Electron-Proton CTime", 200, -50, 50)
+
 ################################################################################################################################################
 
 for evt in TBRANCH_SIMC:
@@ -635,6 +638,15 @@ ROOT.gStyle.SetOptStat(0)
 
 # PLOT HIST..
 
+ct_ep = TCanvas()
+l_ct_ep = ROOT.TLegend(0.115,0.735,0.33,0.9)
+
+H_ct_ep_DATA.Draw("")
+
+l_ct_ep.Draw()
+
+ct_ep.Print(outputpdf + '(')
+
 xfp = TCanvas()
 l_xfp = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
@@ -650,7 +662,7 @@ l_xfp.AddEntry(H_ssxfp_DATA,"DATA, INT = %s" % b_int_xfp_data)
 
 l_xfp.Draw()
 
-xfp.Print(outputpdf + '(')
+xfp.Print(outputpdf)
 
 yfp = TCanvas()
 l_yfp = ROOT.TLegend(0.115,0.735,0.33,0.9)
@@ -1063,6 +1075,7 @@ H_pmx_DATA.Write()
 H_pmy_DATA.Write()
 H_pmz_DATA.Write()
 H_W_DATA.Write()
+H_ct_ep_DATA.Write()
 
 d_Dummy.cd()
 H_hsdelta_DUMMY.Write()
@@ -1091,6 +1104,7 @@ H_pmx_DUMMY.Write()
 H_pmy_DUMMY.Write()
 H_pmz_DUMMY.Write()
 H_W_DUMMY.Write()
+H_ct_ep_DUMMY.Write()
 
 d_Simc.cd()
 H_hsdelta_SIMC.Write()

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 13:04:37 trottar"
+# Time-stamp: "2022-06-02 13:06:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -197,7 +197,7 @@ for ibcm in range(0, 5):
     # Iterate over all scaler events to get various scaler values
     for i, evt in enumerate(s_evts_DATA):
         #if (current_DATA[ibcm][i] > thres_curr ):
-        if (abs(current_DATA[ibcm][i] - 35) < thres_curr ):
+        if (abs(current_DATA[ibcm][i] - 25) < thres_curr ):
             # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
             charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
         previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]

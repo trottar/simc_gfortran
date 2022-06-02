@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 18:01:14 trottar"
+# Time-stamp: "2022-06-02 18:02:26 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -157,7 +157,7 @@ InFile_SIMC = ROOT.TFile.Open(rootFile_SIMC, "READ")
 
 #TBRANCH_DATA  = InFile_DATA.Get("hist")
 TBRANCH_DATA  = InFile_DATA.Get("Uncut_Proton_Events")
-#nEntries_TBRANCH_DATA  = TBRANCH_DATA.GetEntries()
+nEntries_TBRANCH_DATA  = TBRANCH_DATA.GetEntries()
 #TBRANCH_DUMMY  = InFile_DUMMY.Get("hist")
 TBRANCH_DUMMY  = InFile_DUMMY.Get("Uncut_Proton_Events")
 nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()

@@ -1,5 +1,6 @@
 # ignore patterns
 
+*.so
 *~
 # Objects and executable
 *.o

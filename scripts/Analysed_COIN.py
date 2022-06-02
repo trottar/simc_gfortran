@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 16:08:10 trottar"
+# Time-stamp: "2022-06-02 16:08:48 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -65,7 +65,7 @@ OUTPATH = proc_root[2] # Get pathing for OUTPATH
 
 #################################################################################################################################################################
 UTILPATH = lt.SetPath(os.path.realpath(__file__)).getPath("UTILPATH")
-rootName = "HeeP/ROOTfiles/Analysis/%s/%s_%s_%s.root" % (UTILPATH, ROOTPrefix, runNum, MaxEvent)     # Input file location and variables taking
+rootName = "%s/ROOTfiles/Analysis/HeeP/%s_%s_%s.root" % (UTILPATH, ROOTPrefix, runNum, MaxEvent)     # Input file location and variables taking
 s_tree = up.open(rootName)["TSP"]
 
 P_BCM4A_scalerCharge = s_tree.array("P.BCM4A.scalerCharge")

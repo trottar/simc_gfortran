@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 16:20:30 trottar"
+# Time-stamp: "2022-06-02 16:21:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -138,11 +138,11 @@ def main():
     
     # Need to create a dict for all the branches we grab                                                
     data = {}
-    #   for d in (COIN_Proton_Data,Scaler_Data): 
-    #        data.update(d)
-    data.update(COIN_Proton_Data)
+    for d in (COIN_Proton_Data,Scaler_Data): 
+        data.update(d)
     data_keys = list(data.keys()) # Create a list of all the keys in all dicts added above, each is an array of data
-    print(data_keys)
+    print(data_keys['Uncut_Proton_Events'])
+    print(data_keys['scaler'])
 
     for i in range (0, len(data_keys)):
         if("Proton" in data_keys[i]):

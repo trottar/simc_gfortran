@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 14:18:23 trottar"
+# Time-stamp: "2022-06-02 14:20:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -665,8 +665,8 @@ l_ct_ep = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
 H_ct_ep_DATA.SetLineColor(kRed)
 
-H_ct_ep_DATA.Draw("")
-H_ct_ep_DATA_cut.Draw("same")
+#H_ct_ep_DATA.Draw("")
+H_ct_ep_DATA_cut.Draw("")
 
 l_ct_ep.AddEntry(H_ct_ep_DATA,"No cut")
 l_ct_ep.AddEntry(H_ct_ep_DATA_cut,"Cut")

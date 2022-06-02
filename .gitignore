@@ -1,5 +1,6 @@
 # ignore patterns
 
+*.so
 *~
 # Objects and executable
 *.o
@@ -19,3 +20,6 @@ CTP/daVarRpc.h
 CTP/daVarRpc_clnt.c
 CTP/daVarRpc_svc.c
 CTP/daVarRpc_xdr.c
+
+# Sym link
+OUTPUTS

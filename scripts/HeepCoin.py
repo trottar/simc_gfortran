@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 17:43:50 trottar"
+# Time-stamp: "2022-06-02 17:59:23 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -157,7 +157,7 @@ InFile_SIMC = ROOT.TFile.Open(rootFile_SIMC, "READ")
 
 #TBRANCH_DATA  = InFile_DATA.Get("hist")
 TBRANCH_DATA  = InFile_DATA.Get("Uncut_Proton_Events")
-#nEntries_TBRANCH_DATA  = TBRANCH_DATA.GetEntries()
+nEntries_TBRANCH_DATA  = TBRANCH_DATA.GetEntries()
 #TBRANCH_DUMMY  = InFile_DUMMY.Get("hist")
 TBRANCH_DUMMY  = InFile_DUMMY.Get("Uncut_Proton_Events")
 nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
@@ -397,8 +397,7 @@ for evt in TBRANCH_SIMC:
       H_W_SIMC.Fill(evt.W, evt.Weight)
       H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
       H_MMp_SIMC.Fill(np.sqrt(pow(evt.Em, 2) - pow(evt.Pm, 2)), evt.Weight)
-      
-'''   
+
 for evt in TBRANCH_DATA:
 
   #CUTs Definations 
@@ -494,79 +493,6 @@ for evt in TBRANCH_DUMMY:
       H_epsilon_DUMMY.Fill(evt.epsilon)
       H_MMp_DUMMY.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
       #H_MMp_DUMMY.Fill(evt.MMp)  
-'''
-
-    
-for evt in TBRANCH_DATA:
-    
-  #........................................
-  
-  H_ct_ep_DATA.Fill(evt.CTime_epCoinTime_ROC1)
-
-  H_ct_ep_DATA_cut.Fill(evt.CTime_epCoinTime_ROC1)
-
-  H_ssxfp_DATA.Fill(evt.ssxfp)
-  H_ssyfp_DATA.Fill(evt.ssyfp)
-  H_ssxpfp_DATA.Fill(evt.ssxpfp)
-  H_ssypfp_DATA.Fill(evt.ssypfp)
-  H_ssdelta_DATA.Fill(evt.ssdelta)
-  H_ssxptar_DATA.Fill(evt.ssxptar)
-  H_ssyptar_DATA.Fill(evt.ssyptar)
-
-  H_hsxfp_DATA.Fill(evt.hsxfp)
-  H_hsyfp_DATA.Fill(evt.hsyfp)
-  H_hsxpfp_DATA.Fill(evt.hsxpfp)
-  H_hsypfp_DATA.Fill(evt.hsypfp)
-  H_hsdelta_DATA.Fill(evt.hsdelta)
-  H_hsxptar_DATA.Fill(evt.hsxptar)	
-  H_hsyptar_DATA.Fill(evt.hsyptar)
-
-  H_pmiss_DATA.Fill(evt.pmiss)	
-  H_emiss_DATA.Fill(evt.emiss)	
-  H_pmx_DATA.Fill(evt.pmx)
-  H_pmy_DATA.Fill(evt.pmy)
-  H_pmz_DATA.Fill(evt.pmz)
-  H_Q2_DATA.Fill(evt.Q2)
-  H_W_DATA.Fill(evt.W)
-  H_epsilon_DATA.Fill(evt.epsilon)
-  H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-  #H_MMp_DATA.Fill(evt.MMp)  
-      
-for evt in TBRANCH_DUMMY:
-  
-  #........................................
-
-  H_ct_ep_DUMMY.Fill(evt.CTime_epCoinTime_ROC1)
-
-  H_ct_ep_DUMMY_cut.Fill(evt.CTime_epCoinTime_ROC1)
-
-  H_ssxfp_DUMMY.Fill(evt.ssxfp)
-  H_ssyfp_DUMMY.Fill(evt.ssyfp)
-  H_ssxpfp_DUMMY.Fill(evt.ssxpfp)
-  H_ssypfp_DUMMY.Fill(evt.ssypfp)
-  H_ssdelta_DUMMY.Fill(evt.ssdelta)
-  H_ssxptar_DUMMY.Fill(evt.ssxptar)
-  H_ssyptar_DUMMY.Fill(evt.ssyptar)
-
-  H_hsxfp_DUMMY.Fill(evt.hsxfp)
-  H_hsyfp_DUMMY.Fill(evt.hsyfp)
-  H_hsxpfp_DUMMY.Fill(evt.hsxpfp)
-  H_hsypfp_DUMMY.Fill(evt.hsypfp)
-  H_hsdelta_DUMMY.Fill(evt.hsdelta)
-  H_hsxptar_DUMMY.Fill(evt.hsxptar)	
-  H_hsyptar_DUMMY.Fill(evt.hsyptar)
-
-  H_pmiss_DUMMY.Fill(evt.pmiss)	
-  H_emiss_DUMMY.Fill(evt.emiss)	
-  H_pmx_DUMMY.Fill(evt.pmx)
-  H_pmy_DUMMY.Fill(evt.pmy)
-  H_pmz_DUMMY.Fill(evt.pmz)
-  H_Q2_DUMMY.Fill(evt.Q2)
-  H_W_DUMMY.Fill(evt.W)
-  H_epsilon_DUMMY.Fill(evt.epsilon)
-  H_MMp_DUMMY.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-  #H_MMp_DUMMY.Fill(evt.MMp)  
-
 
 normfac_simc = (simc_normfactor)/(simc_nevents)
 H_ssxfp_SIMC.Scale(normfac_simc)                                                                                                                                   

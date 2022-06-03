@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-03 11:38:47 trottar"
+# Time-stamp: "2022-06-03 11:39:47 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -107,7 +107,7 @@ def coin_protons():
     Cut_COIN_Protons_all_tmp = []
 
     for arr in Cut_COIN_Protons_tmp:
-        Cut_COIN_Protons_all_tmp.append(c.add_cut(arr, "coin_ep_cut_all_RF"))
+        Cut_COIN_Protons_all_tmp.append(c.add_cut(arr, "coin_ep_cut_prompt_noRF_nopid"))
 
     Cut_COIN_Protons_all = [(b["H_gtr_yp"],b["H_gtr_xp"],b["H_dc_yp_fp"],b["H_dc_xp_fp"],b["H_dc_y_fp"],b["H_dc_x_fp"],b["P_gtr_yp"],b["P_gtr_xp"],b["P_dc_yp_fp"],b["P_dc_xp_fp"],b["P_dc_y_fp"],b["P_dc_x_fp"],b["P_dc_InsideDipoleExit"],b["H_dc_InsideDipoleExit"],b["H_gtr_beta"],  b["H_gtr_dp"], b["H_gtr_p"], b["H_hod_goodscinhit"], b["H_hod_goodstarttime"], b["H_cal_etotnorm"], b["H_cal_etottracknorm"], b["H_cer_npeSum"], b["CTime_epCoinTime_ROC1"], b["P_gtr_beta"],  b["P_gtr_p"], b["P_gtr_dp"], b["P_hod_goodscinhit"], b["P_hod_goodstarttime"], b["P_cal_etotnorm"], b["P_cal_etottracknorm"], b["P_aero_npeSum"], b["P_aero_xAtAero"], b["P_aero_yAtAero"], b["P_hgcer_npeSum"], b["P_hgcer_xAtCer"], b["P_hgcer_yAtCer"], b["MMp"], b["H_RF_Dist"],b["P_RF_Dist"], b["Q2"], b["W"], b["epsilon"], b["ph_q"], b["MandelT"], b["emiss"],b["pmiss"], b["pmiss_x"], b["pmiss_y"], b["pmiss_z"]) for (b["H_gtr_yp"],b["H_gtr_xp"],b["H_dc_yp_fp"],b["H_dc_xp_fp"],b["H_dc_y_fp"],b["H_dc_x_fp"],b["P_gtr_yp"],b["P_gtr_xp"],b["P_dc_yp_fp"],b["P_dc_xp_fp"],b["P_dc_y_fp"],b["P_dc_x_fp"],b["P_dc_InsideDipoleExit"],b["H_dc_InsideDipoleExit"],b["H_gtr_beta"],  b["H_gtr_dp"], b["H_gtr_p"], b["H_hod_goodscinhit"], b["H_hod_goodstarttime"], b["H_cal_etotnorm"], b["H_cal_etottracknorm"], b["H_cer_npeSum"], b["CTime_epCoinTime_ROC1"], b["P_gtr_beta"],  b["P_gtr_p"], b["P_gtr_dp"], b["P_hod_goodscinhit"], b["P_hod_goodstarttime"], b["P_cal_etotnorm"], b["P_cal_etottracknorm"], b["P_aero_npeSum"], b["P_aero_xAtAero"], b["P_aero_yAtAero"], b["P_hgcer_npeSum"], b["P_hgcer_xAtCer"], b["P_hgcer_yAtCer"], b["MMp"], b["H_RF_Dist"],b["P_RF_Dist"], b["Q2"], b["W"], b["epsilon"], b["ph_q"], b["MandelT"], b["emiss"],b["pmiss"], b["pmiss_x"], b["pmiss_y"], b["pmiss_z"]) in zip(*Cut_COIN_Protons_all_tmp)
         ]
@@ -134,7 +134,6 @@ def main():
     COIN_Proton_Data_Header = ["hsyptar","hsxptar","hsypfp","hsxpfp","hsyfp","hsxfp","ssyptar","ssxptar","ssypfp","ssxpfp","ssyfp","ssxfp","P_dc_InsideDipoleExit","H_dc_InsideDipoleExit","H_gtr_eta", "hsdelta", "H_gtr_p", "H_hod_goodscinhit", "H_hod_goodstarttime", "H_cal_etotnorm", "H_cal_etottracknorm", "H_cer_npeSum", "CTime_epCoinTime_ROC1", "P_gtr_eta", "P_gtr_p", "ssdelta", "P_hod_goodscinhit", "P_hod_goodstarttime", "P_cal_etotnorm", "P_cal_etottracknorm", "P_aero_npeSum", "P_aero_xAtAero", "P_aero_yAtAero", "P_hgcer_npeSum", "P_hgcer_xAtCer", "P_hgcer_yAtCer", "MMp", "H_RF_Dist","P_RF_Dist", "Q2", "W", "epsilon", "ph_q", "MandelT", "emiss", "pmiss", "pmx", "pmy", "pmz"]
 
     Scaler_Data_Header = ["bcm4a_charge","bcm4b_charge","bcm4c_charge","bcm2_charge","bcm1_charge","bcm4a_current","bcm4b_current","bcm4c_current","bcm2_current","bcm1_current"]
-
     
     # Need to create a dict for all the branches we grab                                                
     data = {}

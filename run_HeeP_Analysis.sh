@@ -33,8 +33,16 @@ OutDATAFilename="Analysed_Data_$KIN"
 OutDUMMYFilename="Analysed_DummyData_$KIN"
 OutFullAnalysisFilename="FullAnalysis_$KIN"
 
-declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
-declare -a dummydata=(4864)
+if [[ $KIN = "10p6" ]]; then
+    declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
+    declare -a dummydata=(4864)
+elif [[ $KIN = "8p2" ]]; then
+    declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
+    declare -a dummydata=(4864)
+else
+    echo "Invalid kinematic setting, ${KIN}"
+    exit 1
+fi
 
 if [[ $a_flag = "true" ]]; then
     
@@ -58,7 +66,7 @@ if [[ $a_flag = "true" ]]; then
     cd "${ANA_DIR}/OUTPUTS"
     echo
     echo "Combining root files..."  
-    hadd -f Analysed_Data_10p6.root *_-1_Raw_Data.root
+    hadd -f Analysed_Data_${KIN}.root *_-1_Raw_Data.root
     rm -f *_-1_Raw_Data.root
     
     cd "${ANA_DIR}/scripts"    
@@ -81,7 +89,7 @@ if [[ $a_flag = "true" ]]; then
     cd "${ANA_DIR}/OUTPUTS"
     echo
     echo "Combining root files..."
-    hadd -f Analysed_DummyData_10p6.root *_-1_Raw_Data.root
+    hadd -f Analysed_DummyData_${KIN}.root *_-1_Raw_Data.root
     rm -f *_-1_Raw_Data.root
 fi
 

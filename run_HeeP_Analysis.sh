@@ -46,9 +46,9 @@ if [[ $a_flag = "true" ]]; then
     for i in "${data[@]}"
     do
 	echo
-	echo "------------------------"
+	echo "-----------------------------"
 	echo "Analysing data run $i..."
-	echo "------------------------"
+	echo "-----------------------------"
 	echo
 	python3 Analysed_COIN.py "$i"
 	#root -l <<EOF 
@@ -69,9 +69,9 @@ if [[ $a_flag = "true" ]]; then
     for i in "${dummydata[@]}"
     do
 	echo
-	echo "------------------------------"
+	echo "-----------------------------------"
 	echo "Analysing dummy data run $i..."
-	echo "------------------------------"
+	echo "-----------------------------------"
 	echo
 	python3 Analysed_COIN.py "$i"
 	#root -l <<EOF 

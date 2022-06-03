@@ -45,6 +45,7 @@ if [[ $a_flag = "true" ]]; then
     
     for i in "${data[@]}"
     do
+	echo "Analysing data run $i"
 	python3 Analysed_COIN.py "$i"
 	#root -l <<EOF 
 	#.x $ANA_DIR/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
@@ -61,6 +62,7 @@ if [[ $a_flag = "true" ]]; then
     
     for i in "${dummydata[@]}"
     do
+	echo "Analysing dummy data run $i"
 	python3 Analysed_COIN.py "$i"
 	#root -l <<EOF 
 	#.x $ANA_DIR/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")

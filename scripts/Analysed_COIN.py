@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 19:40:21 trottar"
+# Time-stamp: "2022-06-03 11:29:29 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -35,9 +35,9 @@ if len(sys.argv)-1!=3:
 ##################################################################################################################################################
 
 # Input params - run number and max number of events
-ROOTPrefix = sys.argv[1]
-runNum = sys.argv[2]
-MaxEvent = sys.argv[3]
+ROOTPrefix = "Kaon_coin_replay_production"
+runNum = sys.argv[1]
+MaxEvent = "-1"
 
 ################################################################################################################################################
 '''
@@ -53,10 +53,10 @@ import ltsep as lt
 Define and set up cuts
 '''
 
-fout = '/DB/CUTS/run_type/coin_heep.cuts'
+fout = '/DB/CUTS/run_type/simc_coin_heep.cuts'
 
 # defining Cuts
-cuts = ["coin_ep_cut_all_RF"]
+cuts = ["coin_ep_cut_prompt_noRF_nopid"]
 
 proc_root = lt.Root(ROOTPrefix,runNum,MaxEvent,fout,cuts,os.path.realpath(__file__)).setup_ana()
 c = proc_root[0] # Cut object

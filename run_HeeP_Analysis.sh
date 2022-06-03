@@ -24,7 +24,7 @@ else
     KIN=$1
 fi
 
-ANA_DIR="/group/c-kaonlt/USERS/${USER}/simc_gfortran/scripts"
+ANA_DIR="/group/c-kaonlt/USERS/${USER}/simc_gfortran"
 
 InDATAFilename="Raw_Data_$KIN.root"
 InDUMMYFilename="Raw_DummyData_$KIN.root"
@@ -33,21 +33,42 @@ OutDATAFilename="Analysed_Data_$KIN"
 OutDUMMYFilename="Analysed_DummyData_$KIN"
 OutFullAnalysisFilename="FullAnalysis_$KIN"
 
-cd $ANA_DIR
+declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
+declare -a dummydata=(4864)
+
+cd "${ANA_DIR}/scripts"
 
 if [[ $a_flag = "true" ]]; then
     echo
     echo "Analysing data..."
     echo
-root -l <<EOF 
-.x $ANA_DIR/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
-EOF
+    
+    for i in "${data[@]}"
+    do
+	python3 Analysed_COIN.py "$i"
+	#root -l <<EOF 
+	#.x $ANA_DIR/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
+	#EOF
+    done
+    cd "${ANA_DIR}/OUTPUTS"
+    hadd -f Analysed_Data_10p6.root *_-1_Raw_Data.root
+    rm -rf *_-1_Raw_Data.root
+    
+    cd "${ANA_DIR}/scripts"    
     echo
     echo "Analysing dummy data..."
     echo
-root -l <<EOF 
-.x $ANA_DIR/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
-EOF
+    
+    for i in "${dummydata[@]}"
+    do
+	python3 Analysed_COIN.py "$i"
+	#root -l <<EOF 
+	#.x $ANA_DIR/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
+	#EOF
+    done
+    cd "${ANA_DIR}/OUTPUTS"
+    hadd -f Analysed_Data_10p6.root *_-1_Raw_Data.root
+    rm -rf *_-1_Raw_Data.root
 fi
 
 python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" "${OutDUMMYFilename}.root" ${InSIMCFilename} ${OutFullAnalysisFilename}

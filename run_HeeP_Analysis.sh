@@ -36,9 +36,9 @@ OutFullAnalysisFilename="FullAnalysis_$KIN"
 declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
 declare -a dummydata=(4864)
 
-cd "${ANA_DIR}/scripts"
-
 if [[ $a_flag = "true" ]]; then
+    
+    cd "${ANA_DIR}/scripts"
     echo
     echo "Analysing data..."
     echo
@@ -73,6 +73,7 @@ if [[ $a_flag = "true" ]]; then
     rm -rf *_-1_Raw_Data.root
 fi
 
+cd "${ANA_DIR}/scripts"
 python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" "${OutDUMMYFilename}.root" ${InSIMCFilename} ${OutFullAnalysisFilename}
 
 cd ../

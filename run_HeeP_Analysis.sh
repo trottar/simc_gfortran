@@ -46,9 +46,9 @@ if [[ $a_flag = "true" ]]; then
     for i in "${data[@]}"
     do
 	echo
-	echo "---------------------------"
-	echo "Analysing data run $i"
-	echo "---------------------------"
+	echo "------------------------"
+	echo "Analysing data run $i..."
+	echo "------------------------"
 	echo
 	python3 Analysed_COIN.py "$i"
 	#root -l <<EOF 
@@ -56,6 +56,8 @@ if [[ $a_flag = "true" ]]; then
 	#EOF
     done
     cd "${ANA_DIR}/OUTPUTS"
+    echo
+    echo "Combining root files..."  
     hadd -f Analysed_Data_10p6.root *_-1_Raw_Data.root
     rm -f *_-1_Raw_Data.root
     
@@ -67,9 +69,9 @@ if [[ $a_flag = "true" ]]; then
     for i in "${dummydata[@]}"
     do
 	echo
-	echo "---------------------------"
-	echo "Analysing dummy data run $i"
-	echo "---------------------------"
+	echo "------------------------------"
+	echo "Analysing dummy data run $i..."
+	echo "------------------------------"
 	echo
 	python3 Analysed_COIN.py "$i"
 	#root -l <<EOF 
@@ -77,6 +79,8 @@ if [[ $a_flag = "true" ]]; then
 	#EOF
     done
     cd "${ANA_DIR}/OUTPUTS"
+    echo
+    echo "Combining root files..."
     hadd -f Analysed_DummyData_10p6.root *_-1_Raw_Data.root
     rm -f *_-1_Raw_Data.root
 fi

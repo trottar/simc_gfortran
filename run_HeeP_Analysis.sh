@@ -53,7 +53,7 @@ if [[ $a_flag = "true" ]]; then
     done
     cd "${ANA_DIR}/OUTPUTS"
     hadd -f Analysed_Data_10p6.root *_-1_Raw_Data.root
-    rm -rf *_-1_Raw_Data.root
+    rm -f *_-1_Raw_Data.root
     
     cd "${ANA_DIR}/scripts"    
     echo
@@ -70,7 +70,7 @@ if [[ $a_flag = "true" ]]; then
     done
     cd "${ANA_DIR}/OUTPUTS"
     hadd -f Analysed_Data_10p6.root *_-1_Raw_Data.root
-    rm -rf *_-1_Raw_Data.root
+    rm -f *_-1_Raw_Data.root
 fi
 
 cd "${ANA_DIR}/scripts"

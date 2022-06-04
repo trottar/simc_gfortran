@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-04 16:56:03 trottar"
+# Time-stamp: "2022-06-04 16:58:22 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -679,7 +679,7 @@ ct_ep.Print(outputpdf + '(')
 
 ct_ep_mmp = TCanvas()
 
-H_ct_ep_vs_H_MMp_DATA.Draw("")
+H_ct_ep_vs_H_MMp_DATA.Draw("colz")
 
 ct_ep_mmp.Print(outputpdf)
 

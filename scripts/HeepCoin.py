@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-04 16:48:27 trottar"
+# Time-stamp: "2022-06-04 16:53:24 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -676,6 +676,12 @@ l_ct_ep.AddEntry(H_ct_ep_DATA_cut,"Cut")
 l_ct_ep.Draw()
 
 ct_ep.Print(outputpdf + '(')
+
+ct_ep_mmp = TCanvas()
+
+H_ct_ep_vs_H_MMp_DATA.Draw("")
+
+ct_ep_mmp.Print(outputpdf)
 
 xfp = TCanvas()
 l_xfp = ROOT.TLegend(0.115,0.735,0.33,0.9)

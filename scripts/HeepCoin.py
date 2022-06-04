@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-04 14:03:21 trottar"
+# Time-stamp: "2022-06-04 16:48:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -355,6 +355,9 @@ H_ct_ep_DUMMY = ROOT.TH1D("H_ct_ep_DUMMY", "Electron-Proton CTime", 200, -100, 1
 H_ct_ep_DATA_cut = ROOT.TH1D("H_ct_ep_DATA_cut", "Electron-Proton CTime (cut)", 200, -100, 100)
 H_ct_ep_DUMMY_cut = ROOT.TH1D("H_ct_ep_DUMMY_cut", "Electron-Proton CTime (cut)", 200, -100, 100)
 
+H_ct_ep_vs_H_MMp_DATA = ROOT.TH2D("H_ct_ep_vs_H_MMp_DATA","Electron-Proton CTime vs Missing Mass; e p Coin_Time; MM_{p}", 200, -100, 100, 200, 0, 2)
+
+
 ################################################################################################################################################
 
 for evt in TBRANCH_SIMC:
@@ -416,6 +419,7 @@ for evt in TBRANCH_DATA:
   
   if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
+      H_ct_ep_vs_H_MMp_DATA.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
       H_ct_ep_DATA_cut.Fill(evt.CTime_epCoinTime_ROC1)
       
       H_ssxfp_DATA.Fill(evt.ssxfp)

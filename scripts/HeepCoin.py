@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-04 13:19:29 trottar"
+# Time-stamp: "2022-06-04 13:21:28 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -40,9 +40,9 @@ if len(sys.argv)-1!=7:
 # Input params
 heep_kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
-data_charge = int(sys.argv[3])/10000
+data_charge = int(sys.argv[3])/1000
 InDUMMYFilename = sys.argv[4]
-dummy_charge = int(sys.argv[5])/10000
+dummy_charge = int(sys.argv[5])/1000
 InSIMCFilename = sys.argv[6]
 OutFilename = sys.argv[7]
 

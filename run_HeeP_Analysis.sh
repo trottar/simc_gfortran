@@ -98,10 +98,10 @@ cd "${ANA_DIR}/scripts"
 DataChargeVal=()
 echo
 echo "Calculating data total charge..."
-echo
 for i in "${data[@]}"
 do
     DataChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
+    echo "Run:$i ${DataChargeVal} mC"
 done
 DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
 echo $DataChargeSum
@@ -109,10 +109,10 @@ echo $DataChargeSum
 DummyChargeVal=()
 echo
 echo "Calculating dummy total charge..."
-echo
 for i in "${dummydata[@]}"
 do
     DummyChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
+    echo "Run:$i ${DummyChargeVal} mC"
 done
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
 echo $DummyChargeSum

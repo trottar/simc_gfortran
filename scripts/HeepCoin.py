@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-04 13:15:34 trottar"
+# Time-stamp: "2022-06-04 13:17:53 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -40,9 +40,9 @@ if len(sys.argv)-1!=7:
 # Input params
 heep_kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
-data_charge = sys.argv[3]
+data_charge = int(sys.argv[3])/1000
 InDUMMYFilename = sys.argv[4]
-dummy_charge = sys.argv[5]
+dummy_charge = int(sys.argv[5])/1000
 InSIMCFilename = sys.argv[6]
 OutFilename = sys.argv[7]
 
@@ -89,6 +89,7 @@ for line in f_simc:
         simc_normfactor = float(val[1])
 if 'simc_nevents' and 'simc_normfactor' in locals():
     print('\n\nsimc_nevents = ',simc_nevents,'\nsimc_normfactor = ',simc_normfactor,'\n\n')
+    print('\n\ndata_charge = ',data_charge,'\ndummy_charge = ',dummy_charge,'\n\n')
 else:
     print("ERROR: Invalid simc hist file %s" % simc_hist)
     sys.exit(1)
@@ -516,7 +517,7 @@ H_epsilon_SIMC.Scale(normfac_simc)
 H_MMp_SIMC.Scale(normfac_simc)
 
 dummy_target_corr = 4.8579
-normfac_dummy = 1/((dummy_charge/1000)*dummy_target_corr)
+normfac_dummy = 1/(dummy_charge*dummy_target_corr)
 H_ssxfp_DUMMY.Scale(normfac_dummy)
 H_ssyfp_DUMMY.Scale(normfac_dummy)
 H_ssxpfp_DUMMY.Scale(normfac_dummy)
@@ -543,7 +544,7 @@ H_W_DUMMY.Scale(normfac_dummy)
 H_ct_ep_DUMMY.Scale(normfac_dummy)
 H_ct_ep_DUMMY_cut.Scale(normfac_dummy)
 
-normfac_data = 1/(data_charge/1000)
+normfac_data = 1/(data_charge)
 H_ssxfp_DATA.Scale(normfac_data)
 H_ssyfp_DATA.Scale(normfac_data)
 H_ssxpfp_DATA.Scale(normfac_data)

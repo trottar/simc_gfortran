@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-04 13:06:39 trottar"
+# Time-stamp: "2022-06-04 13:11:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -46,5 +46,5 @@ with open(report) as f:
     for line in f:
         data = line.split(':')
         if 'BCM1_Beam_Cut_Charge' in data[0]:
-            charge = float(re.sub("\D","","%s" % data[1]))
+            charge = int(re.sub("\D","","%s" % data[1]))
 print(charge)

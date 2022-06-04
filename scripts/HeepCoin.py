@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-04 16:53:24 trottar"
+# Time-stamp: "2022-06-04 16:56:03 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -355,7 +355,7 @@ H_ct_ep_DUMMY = ROOT.TH1D("H_ct_ep_DUMMY", "Electron-Proton CTime", 200, -100, 1
 H_ct_ep_DATA_cut = ROOT.TH1D("H_ct_ep_DATA_cut", "Electron-Proton CTime (cut)", 200, -100, 100)
 H_ct_ep_DUMMY_cut = ROOT.TH1D("H_ct_ep_DUMMY_cut", "Electron-Proton CTime (cut)", 200, -100, 100)
 
-H_ct_ep_vs_H_MMp_DATA = ROOT.TH2D("H_ct_ep_vs_H_MMp_DATA","Electron-Proton CTime vs Missing Mass; e p Coin_Time; MM_{p}", 200, -100, 100, 200, 0, 2)
+H_ct_ep_vs_H_MMp_DATA = ROOT.TH2D("H_ct_ep_vs_H_MMp_DATA","Electron-Proton CTime vs Missing Mass; e p Coin_Time; MM_{p}", 200, -100, 100, 200, -2, 2)
 
 
 ################################################################################################################################################
@@ -446,8 +446,8 @@ for evt in TBRANCH_DATA:
       H_Q2_DATA.Fill(evt.Q2)
       H_W_DATA.Fill(evt.W)
       H_epsilon_DATA.Fill(evt.epsilon)
-      H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-      #H_MMp_DATA.Fill(evt.MMp)  
+      #H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
+      H_MMp_DATA.Fill(evt.MMp)  
       
 for evt in TBRANCH_DUMMY:
 
@@ -492,8 +492,8 @@ for evt in TBRANCH_DUMMY:
       H_Q2_DUMMY.Fill(evt.Q2)
       H_W_DUMMY.Fill(evt.W)
       H_epsilon_DUMMY.Fill(evt.epsilon)
-      H_MMp_DUMMY.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-      #H_MMp_DUMMY.Fill(evt.MMp)  
+      #H_MMp_DUMMY.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
+      H_MMp_DUMMY.Fill(evt.MMp)  
 
 normfac_simc = (simc_normfactor)/(simc_nevents)
 H_ssxfp_SIMC.Scale(normfac_simc)                                                                                                                                   

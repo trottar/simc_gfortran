@@ -3,15 +3,14 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-04 12:57:29 trottar"
+# Time-stamp: "2022-06-04 13:06:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
 #
 # Copyright (c) trottar
 #
-import pandas as pd
-
+import re
 import sys, os
 
 ################################################################################################################################################
@@ -47,5 +46,5 @@ with open(report) as f:
     for line in f:
         data = line.split(':')
         if 'BCM1_Beam_Cut_Charge' in data[0]:
-            charge = float(data[1].replace("uA",""))
+            charge = float(re.sub("\D","","%s" % data[1]))
 print(charge)

@@ -101,10 +101,10 @@ echo "Calculating data total charge..."
 for i in "${data[@]}"
 do
     DataChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
-    echo "${DataChargeVal[@]} mC"
+    #echo "${DataChargeVal[@]} mC"
 done
 DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
-echo $DataChargeSum
+echo "${DataChargeSum} mC"
 
 DummyChargeVal=()
 echo
@@ -112,10 +112,10 @@ echo "Calculating dummy total charge..."
 for i in "${dummydata[@]}"
 do
     DummyChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
-    echo "${DummyChargeVal[@]} mC"
+    #echo "${DummyChargeVal[@]} mC"
 done
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
-echo $DummyChargeSum
+echo "${DummyChargeSum} mC"
 
 python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${OutDUMMYFilename}.root" $DummyChargeSum ${InSIMCFilename} ${OutFullAnalysisFilename}
 

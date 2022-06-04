@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-04 13:14:16 trottar"
+# Time-stamp: "2022-06-04 13:15:34 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -31,7 +31,7 @@ from ROOT import kBlack, kBlue, kRed
 ##################################################################################################################################################
 
 # Check the number of arguments provided to the script
-if len(sys.argv)-1!=5:
+if len(sys.argv)-1!=7:
     print("!!!!! ERROR !!!!!\n Expected 4 arguments\n Usage is with - InDATAFilename InDUMMYFilename InSIMCFilename OutFilename \n!!!!! ERROR !!!!!")
     sys.exit(1)
 
@@ -516,7 +516,7 @@ H_epsilon_SIMC.Scale(normfac_simc)
 H_MMp_SIMC.Scale(normfac_simc)
 
 dummy_target_corr = 4.8579
-normfac_dummy = 1/(dummy_charge*dummy_target_corr)
+normfac_dummy = 1/((dummy_charge/1000)*dummy_target_corr)
 H_ssxfp_DUMMY.Scale(normfac_dummy)
 H_ssyfp_DUMMY.Scale(normfac_dummy)
 H_ssxpfp_DUMMY.Scale(normfac_dummy)
@@ -543,7 +543,7 @@ H_W_DUMMY.Scale(normfac_dummy)
 H_ct_ep_DUMMY.Scale(normfac_dummy)
 H_ct_ep_DUMMY_cut.Scale(normfac_dummy)
 
-normfac_data = 1/(data_charge)
+normfac_data = 1/(data_charge/1000)
 H_ssxfp_DATA.Scale(normfac_data)
 H_ssyfp_DATA.Scale(normfac_data)
 H_ssxpfp_DATA.Scale(normfac_data)

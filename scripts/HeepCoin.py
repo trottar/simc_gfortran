@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-04 13:21:28 trottar"
+# Time-stamp: "2022-06-04 14:00:17 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -245,7 +245,7 @@ dummy_charge = charge_sum_DUMMY[0]/1000
 print("\ndata_charge = ",data_charge,"\ndummy_charge = ",dummy_charge,"\n\n")
 '''
 ################################################################################################################################################
-  
+
 H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta", 300, -20.0, 20.0)
 H_hsdelta_DUMMY  = ROOT.TH1D("H_hsdelta_DUMMY","HMS Delta", 300, -20.0, 20.0)
 H_hsdelta_SIMC  = ROOT.TH1D("H_hsdelta_SIMC","HMS Delta", 300, -20.0, 20.0)
@@ -571,6 +571,7 @@ H_W_DATA.Scale(normfac_data)
 H_ct_ep_DATA.Scale(normfac_data)
 H_ct_ep_DATA_cut.Scale(normfac_data)
 
+'''
 # Data Random subtraction
 H_ssxfp_DATA.Add(H_ssxfp_DATA.Scale(1.0/nWindows),-1)
 H_ssyfp_DATA.Add(H_ssyfp_DATA.Scale(1.0/nWindows),-1)
@@ -624,6 +625,7 @@ H_pmz_DUMMY.Add(H_pmz_DUMMY.Scale(1.0/nWindows),-1)
 H_W_DUMMY.Add(H_W_DUMMY.Scale(1.0/nWindows),-1)
 H_ct_ep_DUMMY.Add(H_ct_ep_DUMMY.Scale(1.0/nWindows),-1)
 H_ct_ep_DUMMY_cut.Add(H_ct_ep_DUMMY_cut.Scale(1.0/nWindows),-1)
+'''
 
 # Dummy Subtraction
 H_ssxfp_DATA.Add(H_ssxfp_DUMMY,-1)

@@ -94,6 +94,24 @@ if [[ $a_flag = "true" ]]; then
 fi
 
 cd "${ANA_DIR}/scripts"
+
+DataChargeVal=()
+for i in "${data[@]}"
+do
+    echo
+    echo "Calculating data total charge..."
+    echo
+    DataChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
+done
+DummyChargeVal=()
+for i in "${dummydata[@]}"
+do
+    echo
+    echo "Calculating dummy total charge..."
+    echo
+    DummyChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
+done
+
 python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" "${OutDUMMYFilename}.root" ${InSIMCFilename} ${OutFullAnalysisFilename}
 
 cd ../

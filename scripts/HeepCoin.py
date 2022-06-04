@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-03 12:13:19 trottar"
+# Time-stamp: "2022-06-04 13:14:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -40,9 +40,11 @@ if len(sys.argv)-1!=5:
 # Input params
 heep_kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
-InDUMMYFilename = sys.argv[3]
-InSIMCFilename = sys.argv[4]
-OutFilename = sys.argv[5]
+data_charge = sys.argv[3]
+InDUMMYFilename = sys.argv[4]
+dummy_charge = sys.argv[5]
+InSIMCFilename = sys.argv[6]
+OutFilename = sys.argv[7]
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -168,7 +170,7 @@ TSCALER_DATA  = up.open(rootFile)["scaler"]
 TSCALER_DUMMY  = up.open(rootFile_DUMMY)["scaler"]
 
 ################################################################################################################################################
-
+'''
 # Charge calculation
 thres_curr = 2.5
 NBCM = 5
@@ -240,7 +242,7 @@ for ibcm in range(0, 5):
 dummy_charge = charge_sum_DUMMY[0]/1000
 
 print("\ndata_charge = ",data_charge,"\ndummy_charge = ",dummy_charge,"\n\n")
-
+'''
 ################################################################################################################################################
   
 H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta", 300, -20.0, 20.0)

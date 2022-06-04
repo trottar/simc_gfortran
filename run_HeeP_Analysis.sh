@@ -103,8 +103,7 @@ for i in "${data[@]}"
 do
     DataChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
 done
-echo $DataChargeVal
-DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))")
+DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
 echo $DataChargeSum
 
 DummyChargeVal=()
@@ -115,11 +114,10 @@ for i in "${dummydata[@]}"
 do
     DummyChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
 done
-echo $DummyChargeVal
-DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))")
+DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
 echo $DummyChargeSum
 
-python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" "${OutDUMMYFilename}.root" ${InSIMCFilename} ${OutFullAnalysisFilename}
+python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${OutDUMMYFilename}.root" $DummyChargeSum ${InSIMCFilename} ${OutFullAnalysisFilename}
 
 cd ../
 evince "OUTPUTS/${OutFullAnalysisFilename}.pdf"

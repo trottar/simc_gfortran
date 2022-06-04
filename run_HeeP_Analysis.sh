@@ -96,23 +96,23 @@ fi
 cd "${ANA_DIR}/scripts"
 
 DataChargeVal=()
+echo
+echo "Calculating data total charge..."
+echo
 for i in "${data[@]}"
 do
-    echo
-    echo "Calculating data total charge..."
-    echo
     DataChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
-    echo $DataChargeVal
 done
+echo $DataChargeVal
 DummyChargeVal=()
+echo
+echo "Calculating dummy total charge..."
+echo
 for i in "${dummydata[@]}"
 do
-    echo
-    echo "Calculating dummy total charge..."
-    echo
     DummyChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
-    echo $DummyChargeVal
 done
+echo $DummyChargeVal
 
 python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" "${OutDUMMYFilename}.root" ${InSIMCFilename} ${OutFullAnalysisFilename}
 

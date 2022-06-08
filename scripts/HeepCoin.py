@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-02 14:22:31 trottar"
+# Time-stamp: "2022-06-04 16:58:22 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -31,7 +31,7 @@ from ROOT import kBlack, kBlue, kRed
 ##################################################################################################################################################
 
 # Check the number of arguments provided to the script
-if len(sys.argv)-1!=5:
+if len(sys.argv)-1!=7:
     print("!!!!! ERROR !!!!!\n Expected 4 arguments\n Usage is with - InDATAFilename InDUMMYFilename InSIMCFilename OutFilename \n!!!!! ERROR !!!!!")
     sys.exit(1)
 
@@ -40,9 +40,11 @@ if len(sys.argv)-1!=5:
 # Input params
 heep_kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
-InDUMMYFilename = sys.argv[3]
-InSIMCFilename = sys.argv[4]
-OutFilename = sys.argv[5]
+data_charge = int(sys.argv[3])/1000
+InDUMMYFilename = sys.argv[4]
+dummy_charge = int(sys.argv[5])/1000
+InSIMCFilename = sys.argv[6]
+OutFilename = sys.argv[7]
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -87,6 +89,7 @@ for line in f_simc:
         simc_normfactor = float(val[1])
 if 'simc_nevents' and 'simc_normfactor' in locals():
     print('\n\nsimc_nevents = ',simc_nevents,'\nsimc_normfactor = ',simc_normfactor,'\n\n')
+    print('\n\ndata_charge = ',data_charge,'\ndummy_charge = ',dummy_charge,'\n\n')
 else:
     print("ERROR: Invalid simc hist file %s" % simc_hist)
     sys.exit(1)
@@ -155,9 +158,11 @@ InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
 InFile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "OPEN")
 InFile_SIMC = ROOT.TFile.Open(rootFile_SIMC, "READ")
 
-TBRANCH_DATA  = InFile_DATA.Get("hist")
+TBRANCH_DATA  = InFile_DATA.Get("Cut_Proton_Events_All")
+#TBRANCH_DATA  = InFile_DATA.Get("Uncut_Proton_Events")
 nEntries_TBRANCH_DATA  = TBRANCH_DATA.GetEntries()
-TBRANCH_DUMMY  = InFile_DUMMY.Get("hist")
+TBRANCH_DUMMY  = InFile_DUMMY.Get("Cut_Proton_Events_All")
+#TBRANCH_DUMMY  = InFile_DUMMY.Get("Uncut_Proton_Events")
 nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
 TBRANCH_SIMC  = InFile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
@@ -166,6 +171,7 @@ TSCALER_DATA  = up.open(rootFile)["scaler"]
 TSCALER_DUMMY  = up.open(rootFile_DUMMY)["scaler"]
 
 ################################################################################################################################################
+'''
 # Charge calculation
 thres_curr = 2.5
 NBCM = 5
@@ -237,9 +243,9 @@ for ibcm in range(0, 5):
 dummy_charge = charge_sum_DUMMY[0]/1000
 
 print("\ndata_charge = ",data_charge,"\ndummy_charge = ",dummy_charge,"\n\n")
-
+'''
 ################################################################################################################################################
-  
+
 H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta", 300, -20.0, 20.0)
 H_hsdelta_DUMMY  = ROOT.TH1D("H_hsdelta_DUMMY","HMS Delta", 300, -20.0, 20.0)
 H_hsdelta_SIMC  = ROOT.TH1D("H_hsdelta_SIMC","HMS Delta", 300, -20.0, 20.0)
@@ -349,6 +355,9 @@ H_ct_ep_DUMMY = ROOT.TH1D("H_ct_ep_DUMMY", "Electron-Proton CTime", 200, -100, 1
 H_ct_ep_DATA_cut = ROOT.TH1D("H_ct_ep_DATA_cut", "Electron-Proton CTime (cut)", 200, -100, 100)
 H_ct_ep_DUMMY_cut = ROOT.TH1D("H_ct_ep_DUMMY_cut", "Electron-Proton CTime (cut)", 200, -100, 100)
 
+H_ct_ep_vs_H_MMp_DATA = ROOT.TH2D("H_ct_ep_vs_H_MMp_DATA","Electron-Proton CTime vs Missing Mass; e p Coin_Time; MM_{p}", 200, -100, 100, 200, -2, 2)
+
+
 ################################################################################################################################################
 
 for evt in TBRANCH_SIMC:
@@ -394,25 +403,23 @@ for evt in TBRANCH_SIMC:
       H_W_SIMC.Fill(evt.W, evt.Weight)
       H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
       H_MMp_SIMC.Fill(np.sqrt(pow(evt.Em, 2) - pow(evt.Pm, 2)), evt.Weight)
-    
+
 for evt in TBRANCH_DATA:
 
   #CUTs Definations 
   SHMS_FixCut = (evt.P_hod_goodstarttime == 1) & (evt.P_dc_InsideDipoleExit == 1) # & P_hod_betanotrack > 0.5 & P_hod_betanotrack < 1.4
-  SHMS_Acceptance = (evt.P_gtr_dp>=-10.0) & (evt.P_gtr_dp<=20.0) & (evt.P_gtr_xptar>=-0.06) & (evt.P_gtr_xptar<=0.06) & (evt.P_gtr_yptar>=-0.04) & (evt.P_gtr_yptar<=0.04)
-  SHMS_ELECTRON_PID = (evt.P_cal_etottracknorm >= 0.85) & (evt.P_cal_etottracknorm <= 1.2) # evt.P_hgcer_npeSum >=0.5 & evt.P_aero_npeSum >=0.5
+  SHMS_Acceptance = (evt.ssdelta>=-10.0) & (evt.ssdelta<=20.0) & (evt.ssxptar>=-0.06) & (evt.ssxptar<=0.06) & (evt.ssyptar>=-0.04) & (evt.ssyptar<=0.04)
 
   HMS_FixCut = (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
-  HMS_Acceptance = (evt.H_gtr_dp>=-8.0) & (evt.H_gtr_dp<=8.0) & (evt.H_gtr_xptar>=-0.08) & (evt.H_gtr_xptar<=0.08) & (evt.H_gtr_yptar>=-0.045) & (evt.H_gtr_yptar<=0.045)       
-  HMS_ELECTRON_PID = (evt.H_cer_npeSum >=0.5) & (evt.H_cal_etotnorm >=0.8) & (evt.H_cal_etotnorm <=1.2)
+  HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)       
 
   #........................................
   
   H_ct_ep_DATA.Fill(evt.CTime_epCoinTime_ROC1)
   
-  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID & SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
   if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
+      H_ct_ep_vs_H_MMp_DATA.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
       H_ct_ep_DATA_cut.Fill(evt.CTime_epCoinTime_ROC1)
       
       H_ssxfp_DATA.Fill(evt.ssxfp)
@@ -439,27 +446,24 @@ for evt in TBRANCH_DATA:
       H_Q2_DATA.Fill(evt.Q2)
       H_W_DATA.Fill(evt.W)
       H_epsilon_DATA.Fill(evt.epsilon)
-      H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-      #H_MMp_DATA.Fill(evt.MMp)  
+      #H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
+      H_MMp_DATA.Fill(evt.MMp)  
       
 for evt in TBRANCH_DUMMY:
 
   #......... Define Cuts.................
 
   #CUTs Definations 
-  SHMS_FixCut = (evt.P_hod_goodstarttime == 1) & (evt.P_dc_InsideDipoleExit == 1) # & evt.P_hod_betanotrack > 0.5 & evt.P_hod_betanotrack < 1.4
-  SHMS_Acceptance = (evt.P_gtr_dp>=-10.0) & (evt.P_gtr_dp<=20.0) & (evt.P_gtr_xptar>=-0.06) & (evt.P_gtr_xptar<=0.06) & (evt.P_gtr_yptar>=-0.04) & (evt.P_gtr_yptar<=0.04)
-  SHMS_ELECTRON_PID = (evt.P_cal_etottracknorm >= 0.85) & (evt.P_cal_etottracknorm <= 1.2) # evt.P_hgcer_npeSum >=0.5 & evt.P_aero_npeSum >=0.5
+  SHMS_FixCut = (evt.P_hod_goodstarttime == 1) & (evt.P_dc_InsideDipoleExit == 1) # & P_hod_betanotrack > 0.5 & P_hod_betanotrack < 1.4
+  SHMS_Acceptance = (evt.ssdelta>=-10.0) & (evt.ssdelta<=20.0) & (evt.ssxptar>=-0.06) & (evt.ssxptar<=0.06) & (evt.ssyptar>=-0.04) & (evt.ssyptar<=0.04)
 
   HMS_FixCut = (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
-  HMS_Acceptance = (evt.H_gtr_dp>=-8.0) & (evt.H_gtr_dp<=8.0) & (evt.H_gtr_xptar>=-0.08) & (evt.H_gtr_xptar<=0.08) & (evt.H_gtr_yptar>=-0.045) & (evt.H_gtr_yptar<=0.045)       
-  HMS_ELECTRON_PID = (evt.H_cer_npeSum >=0.5) & (evt.H_cal_etotnorm >=0.8) & (evt.H_cal_etotnorm <=1.2)
+  HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)       
   
   #........................................
 
   H_ct_ep_DUMMY.Fill(evt.CTime_epCoinTime_ROC1)
   
-  #if(HMS_FixCut & HMS_Acceptance & HMS_ELECTRON_PID & SHMS_FixCut & SHMS_Acceptance & SHMS_ELECTRON_PID):
   if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
       H_ct_ep_DUMMY_cut.Fill(evt.CTime_epCoinTime_ROC1)
@@ -488,9 +492,9 @@ for evt in TBRANCH_DUMMY:
       H_Q2_DUMMY.Fill(evt.Q2)
       H_W_DUMMY.Fill(evt.W)
       H_epsilon_DUMMY.Fill(evt.epsilon)
-      H_MMp_DUMMY.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-      #H_MMp_DUMMY.Fill(evt.MMp)  
-      
+      #H_MMp_DUMMY.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
+      H_MMp_DUMMY.Fill(evt.MMp)  
+
 normfac_simc = (simc_normfactor)/(simc_nevents)
 H_ssxfp_SIMC.Scale(normfac_simc)                                                                                                                                   
 H_ssyfp_SIMC.Scale(normfac_simc)                                                                                                                                  
@@ -672,6 +676,12 @@ l_ct_ep.AddEntry(H_ct_ep_DATA_cut,"Cut")
 l_ct_ep.Draw()
 
 ct_ep.Print(outputpdf + '(')
+
+ct_ep_mmp = TCanvas()
+
+H_ct_ep_vs_H_MMp_DATA.Draw("colz")
+
+ct_ep_mmp.Print(outputpdf)
 
 xfp = TCanvas()
 l_xfp = ROOT.TLegend(0.115,0.735,0.33,0.9)

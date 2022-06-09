@@ -63,7 +63,7 @@ if [[ $a_flag = "true" ]]; then
 	#.x $ANA_DIR/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
 	#EOF
     done
-    cd "${ANA_DIR}/OUTPUTS"
+    cd "${ANA_DIR}/OUTPUTS/Analysis/HeeP"
     echo
     echo "Combining root files..."  
     hadd -f Analysed_Data_${KIN}.root *_-1_Raw_Data.root
@@ -86,7 +86,7 @@ if [[ $a_flag = "true" ]]; then
 	#.x $ANA_DIR/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
 	#EOF
     done
-    cd "${ANA_DIR}/OUTPUTS"
+    cd "${ANA_DIR}/OUTPUTS/Analysis/HeeP"
     echo
     echo "Combining root files..."
     hadd -f Analysed_DummyData_${KIN}.root *_-1_Raw_Data.root

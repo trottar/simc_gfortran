@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-09 01:52:01 trottar"
+# Time-stamp: "2022-06-09 01:56:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -581,7 +581,6 @@ for evt in TBRANCH_DUMMY:
       #H_MMp_DUMMY.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
       H_MMp_DUMMY.Fill(evt.MMp)  
 
-      H_ct_ep_vs_H_MMp_DUMMY_rand.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
       H_ct_ep_DUMMY_cut_rand.Fill(evt.CTime_epCoinTime_ROC1)
       
       H_ssxfp_DUMMY_rand.Fill(evt.ssxfp)

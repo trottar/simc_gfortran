@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-09 01:56:10 trottar"
+# Time-stamp: "2022-06-09 02:03:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -715,7 +715,7 @@ H_pmx_DATA_rand.Scale(normfac_data/nWindows)
 H_pmy_DATA_rand.Scale(normfac_data/nWindows)
 H_pmz_DATA_rand.Scale(normfac_data/nWindows)
 H_W_DATA_rand.Scale(normfac_data/nWindows)
-H_ct_ep_DATA_rand.Scale(normfac_data/nWindows)
+#H_ct_ep_DATA_rand.Scale(normfac_data/nWindows)
 H_ct_ep_DATA_cut_rand.Scale(normfac_data/nWindows)
 
 # Dummy Random subtraction
@@ -742,7 +742,7 @@ H_pmx_DUMMY_rand.Scale(normfac_dummy/nWindows)
 H_pmy_DUMMY_rand.Scale(normfac_dummy/nWindows)
 H_pmz_DUMMY_rand.Scale(normfac_dummy/nWindows)
 H_W_DUMMY_rand.Scale(normfac_dummy/nWindows)
-H_ct_ep_DUMMY_rand.Scale(normfac_dummy/nWindows)
+#H_ct_ep_DUMMY_rand.Scale(normfac_dummy/nWindows)
 H_ct_ep_DUMMY_cut_rand.Scale(normfac_dummy/nWindows)
 
 ###
@@ -771,7 +771,7 @@ H_pmx_DATA.Add(H_pmx_DATA_rand,-1)
 H_pmy_DATA.Add(H_pmy_DATA_rand,-1)
 H_pmz_DATA.Add(H_pmz_DATA_rand,-1)
 H_W_DATA.Add(H_W_DATA_rand,-1)
-H_ct_ep_DATA.Add(H_ct_ep_DATA_rand,-1)
+#H_ct_ep_DATA.Add(H_ct_ep_DATA_rand,-1)
 H_ct_ep_DATA_cut.Add(H_ct_ep_DATA_cut_rand,-1)
 
 # Dummy Random subtraction
@@ -798,7 +798,7 @@ H_pmx_DUMMY.Add(H_pmx_DUMMY_rand,-1)
 H_pmy_DUMMY.Add(H_pmy_DUMMY_rand,-1)
 H_pmz_DUMMY.Add(H_pmz_DUMMY_rand,-1)
 H_W_DUMMY.Add(H_W_DUMMY_rand,-1)
-H_ct_ep_DUMMY.Add(H_ct_ep_DUMMY_rand,-1)
+#H_ct_ep_DUMMY.Add(H_ct_ep_DUMMY_rand,-1)
 H_ct_ep_DUMMY_cut.Add(H_ct_ep_DUMMY_cut_rand,-1)
 
 # Dummy Subtraction

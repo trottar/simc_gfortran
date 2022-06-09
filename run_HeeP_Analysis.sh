@@ -34,10 +34,9 @@ OutDUMMYFilename="Analysed_DummyData_$KIN"
 OutFullAnalysisFilename="FullAnalysis_$KIN"
 
 if [[ $KIN = "10p6" ]]; then
-    #declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
-    #declare -a data=(4855 4856 4857 4858 4859 4860 4862 4863)
-    declare -a data=(4859 4860 4862 4863)
-    #declare -a data=(4827 4828)
+    declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # All heep coin 10p6 runs
+    #declare -a data=(4827 4828 4855 4856 4857 4858 4859) # 40 ns cointime offset heep coin 10p6 runs
+    #declare -a data=(4860 4862 4863) # cointime offset corrected heep coin 10p6 runs
     declare -a dummydata=(4864)
 elif [[ $KIN = "8p2" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)

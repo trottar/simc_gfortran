@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-09 02:47:26 trottar"
+# Time-stamp: "2022-06-09 06:52:28 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -501,8 +501,8 @@ for evt in TBRANCH_DATA:
       H_Q2_DATA.Fill(evt.Q2)
       H_W_DATA.Fill(evt.W)
       H_epsilon_DATA.Fill(evt.epsilon)
-      #H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-      H_MMp_DATA.Fill(evt.MMp)  
+      H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
+      #H_MMp_DATA.Fill(evt.MMp)  
 
       H_ct_ep_vs_H_MMp_DATA_rand.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
       H_ct_ep_DATA_cut_rand.Fill(evt.CTime_epCoinTime_ROC1)
@@ -531,8 +531,8 @@ for evt in TBRANCH_DATA:
       H_Q2_DATA_rand.Fill(evt.Q2)
       H_W_DATA_rand.Fill(evt.W)
       H_epsilon_DATA_rand.Fill(evt.epsilon)
-      #H_MMp_DATA_rand.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-      H_MMp_DATA_rand.Fill(evt.MMp)  
+      H_MMp_DATA_rand.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
+      #H_MMp_DATA_rand.Fill(evt.MMp)  
 
       
 for evt in TBRANCH_DUMMY:

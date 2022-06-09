@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-09 00:51:00 trottar"
+# Time-stamp: "2022-06-09 00:56:43 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -63,8 +63,8 @@ HOST = lt.SetPath(os.path.realpath(__file__)).getPath("HOST")
 UTILPATH = lt.SetPath(os.path.realpath(__file__)).getPath("UTILPATH")
 SIMCPATH = lt.SetPath(os.path.realpath(__file__)).getPath("SIMCPATH")
 REPLAYPATH = SIMCPATH
-ROOTfilePath = "%s/OUTPUTS" % REPLAYPATH
-OutPath = "%s/OUTPUTS" % REPLAYPATH
+ROOTfilePath = "%s/OUTPUTS/Analysis/HeeP" % REPLAYPATH
+OutPath = "%s/OUTPUTS/Analysis/HeeP" % REPLAYPATH
 
 rootFile = ROOTfilePath+"/"+InDATAFilename
 rootFile_DUMMY = ROOTfilePath+"/"+InDUMMYFilename

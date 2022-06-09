@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-04 16:58:22 trottar"
+# Time-stamp: "2022-06-09 00:51:00 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -77,7 +77,7 @@ outputpdf  = OutPath+"/" + OutFilename + ".pdf"
 ###############################################################################################################################################
 
 # Grabs simc number of events and weight
-simc_hist = "%s/OUTPUTS/Heep_Coin_%s.hist" % (REPLAYPATH,heep_kinematics)
+simc_hist = "%s/OUTPUTS/Analysis/HeeP/Heep_Coin_%s.hist" % (REPLAYPATH,heep_kinematics)
 f_simc = open(simc_hist)
 for line in f_simc:
     print(line)

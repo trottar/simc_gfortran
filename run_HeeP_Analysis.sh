@@ -34,7 +34,8 @@ OutDUMMYFilename="Analysed_DummyData_$KIN"
 OutFullAnalysisFilename="FullAnalysis_$KIN"
 
 if [[ $KIN = "10p6" ]]; then
-    declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
+    #declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
+    declare -a data=(4855 4856 4857 4858 4859 4860 4862 4863)
     declare -a dummydata=(4864)
 elif [[ $KIN = "8p2" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
@@ -120,4 +121,4 @@ echo "${DummyChargeSum} uC"
 python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${OutDUMMYFilename}.root" $DummyChargeSum ${InSIMCFilename} ${OutFullAnalysisFilename}
 
 cd ../
-evince "OUTPUTS/${OutFullAnalysisFilename}.pdf"
+evince "OUTPUTS/Analysis/HeeP/${OutFullAnalysisFilename}.pdf"

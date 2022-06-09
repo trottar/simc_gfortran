@@ -37,8 +37,8 @@ if [[ $KIN = "10p6" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
     declare -a dummydata=(4864)
 elif [[ $KIN = "8p2" ]]; then
-    declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
-    declare -a dummydata=(4864)
+    declare -a data=(7974 7975 7976)
+    declare -a dummydata=(7977)
 else
     echo "Invalid kinematic setting, ${KIN}"
     exit 1

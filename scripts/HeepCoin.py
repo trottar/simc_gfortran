@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-09 02:03:55 trottar"
+# Time-stamp: "2022-06-09 02:37:08 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -746,7 +746,7 @@ H_W_DUMMY_rand.Scale(normfac_dummy/nWindows)
 H_ct_ep_DUMMY_cut_rand.Scale(normfac_dummy/nWindows)
 
 ###
-
+'''
 # Data Random subtraction
 H_ssxfp_DATA.Add(H_ssxfp_DATA_rand,-1)
 H_ssyfp_DATA.Add(H_ssyfp_DATA_rand,-1)
@@ -800,6 +800,7 @@ H_pmz_DUMMY.Add(H_pmz_DUMMY_rand,-1)
 H_W_DUMMY.Add(H_W_DUMMY_rand,-1)
 #H_ct_ep_DUMMY.Add(H_ct_ep_DUMMY_rand,-1)
 H_ct_ep_DUMMY_cut.Add(H_ct_ep_DUMMY_cut_rand,-1)
+'''
 
 # Dummy Subtraction
 H_ssxfp_DATA.Add(H_ssxfp_DUMMY,-1)

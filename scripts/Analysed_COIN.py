@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-03 11:39:47 trottar"
+# Time-stamp: "2022-06-11 07:04:33 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -61,11 +61,16 @@ cuts = ["coin_ep_cut_prompt_noRF_nopid"]
 proc_root = lt.Root(ROOTPrefix,runNum,MaxEvent,fout,cuts,os.path.realpath(__file__)).setup_ana()
 c = proc_root[0] # Cut object
 b = proc_root[1] # Dictionary of branches
-OUTPATH = proc_root[2] # Get pathing for OUTPATH
 
 #################################################################################################################################################################
+
 UTILPATH = lt.SetPath(os.path.realpath(__file__)).getPath("UTILPATH")
+SIMCPATH = lt.SetPath(os.path.realpath(__file__)).getPath("SIMCPATH")
 rootName = "%s/ROOTfiles/Analysis/HeeP/%s_%s_%s.root" % (UTILPATH, ROOTPrefix, runNum, MaxEvent)     # Input file location and variables taking
+OUTPATH = "%s/OUTPUTS/Analysis/HeeP" % SIMCPATH     # Input file location and variables taking # Get pathing for OUTPATH
+
+#################################################################################################################################################################
+
 s_tree = up.open(rootName)["TSP"]
 
 P_BCM4A_scalerCharge = s_tree.array("P.BCM4A.scalerCharge")

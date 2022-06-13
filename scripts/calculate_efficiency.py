@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:15:35 trottar"
+# Time-stamp: "2022-06-13 09:17:44 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -44,7 +44,7 @@ except IOError:
     print("Error: %s does not appear to exist." % inp_f)
 print(eff_data.keys())
 
-eff_data = eff_data[eff_data['Run_Number'] == runNum]
+eff_data = eff_data.loc[eff_data['Run_Number'] == runNum]
 
 print(eff_data)
 

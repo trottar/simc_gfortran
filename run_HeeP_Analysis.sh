@@ -124,7 +124,7 @@ DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integ
 echo "${DummyChargeSum} uC"
 echo "${DummyEffVal[*]}"
 
-python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum ${DataEffVal} "${OutDUMMYFilename}.root" $DummyChargeSum ${DummyEffVal} ${InSIMCFilename} ${OutFullAnalysisFilename}
+python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename}
 
 cd ../
 evince "OUTPUT/Analysis/HeeP/${OutFullAnalysisFilename}.pdf"

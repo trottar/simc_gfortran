@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-09 06:52:28 trottar"
+# Time-stamp: "2022-06-13 08:18:29 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -57,27 +57,28 @@ ltsep package import and pathing definitions
 # Import package for cuts
 import ltsep as lt 
 
+proc_root = lt.Root(os.path.realpath(__file__),"Plot_SimcCoin").setup_ana()
+p = proc_root[2] # Dictionary of pathing variables
+OUTPATH = proc_root[3] # Get pathing for OUTPATH
+
 # Add this to all files for more dynamic pathing
-USER =  lt.SetPath(os.path.realpath(__file__)).getPath("USER") # Grab user info for file finding
-HOST = lt.SetPath(os.path.realpath(__file__)).getPath("HOST")
-UTILPATH = lt.SetPath(os.path.realpath(__file__)).getPath("UTILPATH")
-SIMCPATH = lt.SetPath(os.path.realpath(__file__)).getPath("SIMCPATH")
-REPLAYPATH = SIMCPATH
-ROOTfilePath = "%s/OUTPUTS/Analysis/HeeP" % REPLAYPATH
-OutPath = "%s/OUTPUTS/Analysis/HeeP" % REPLAYPATH
+USER =  p["USER"] # Grab user info for file finding
+HOST = p["HOST"]
+UTILPATH = p["UTILPATH"]
+SIMCPATH = p["SIMCPATH"]
 
-rootFile = ROOTfilePath+"/"+InDATAFilename
-rootFile_DUMMY = ROOTfilePath+"/"+InDUMMYFilename
-rootFile_SIMC = ROOTfilePath+"/"+InSIMCFilename
+rootFile = OUTPATH+"/"+InDATAFilename
+rootFile_DUMMY = OUTPATH+"/"+InDUMMYFilename
+rootFile_SIMC = OUTPATH+"/"+InSIMCFilename
 
-foutname = OutPath+"/" + OutFilename + ".root"
-fouttxt  = OutPath+"/" + OutFilename + ".txt"
-outputpdf  = OutPath+"/" + OutFilename + ".pdf"
+foutname = OUTPATH+"/" + OutFilename + ".root"
+fouttxt  = OUTPATH+"/" + OutFilename + ".txt"
+outputpdf  = OUTPATH+"/" + OutFilename + ".pdf"
 
 ###############################################################################################################################################
 
 # Grabs simc number of events and weight
-simc_hist = "%s/OUTPUTS/Analysis/HeeP/Heep_Coin_%s.hist" % (REPLAYPATH,heep_kinematics)
+simc_hist = "%s/OUTPUT/Analysis/HeeP/Heep_Coin_%s.hist" % (SIMCPATH,heep_kinematics)
 f_simc = open(simc_hist)
 for line in f_simc:
     print(line)
@@ -109,7 +110,7 @@ except:
 
 # Section for grabing Prompt/Random selection parameters from PARAM file
 PARAMPATH = "%s/DB/PARAM" % UTILPATH
-print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], REPLAYPATH))
+print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], SIMCPATH))
 TimingCutFile = "%s/Timing_Parameters.csv" % PARAMPATH # This should match the param file actually being used!
 TimingCutf = open(TimingCutFile)
 try:
@@ -153,6 +154,22 @@ RandomWindows[2] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpac
 RandomWindows[3] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing) + ((nWindows/2)*BunchSpacing)
     
 ################################################################################################################################################
+# Define efficiencies
+
+inp_f = UTILPATH+"scripts/efficiency/OUTPUTS/coin_production_HeePCoin_efficiency_data_2022_06_13.csv"
+
+# Converts csv data to dataframe
+try:
+    eff_data = pd.read_csv(inp_f)
+except IOError:
+    print("Error: %s does not appear to exist." % inp_f)
+print(eff_data.keys())
+
+data_efficiency = eff_data["Non_Scaler_EDTM_Live_Time"]*eff_data["SHMS_Pion_SING_TRACK_EFF"]*eff_data["SHMS_Aero_SING_Pion_Eff"]*eff_data["SHMS_Hodo_3_of_4_EFF"]*eff_data["HMS_Elec_SING_TRACK_EFF"]*eff_data["HMS_Cer_SING_Elec_Eff"]*eff_data["HMS_Hodo_3_of_4_EFF"]
+
+dummy_efficiency = eff_data["Non_Scaler_EDTM_Live_Time"]*eff_data["SHMS_Pion_SING_TRACK_EFF"]*eff_data["SHMS_Aero_SING_Pion_Eff"]*eff_data["SHMS_Hodo_3_of_4_EFF"]*eff_data["HMS_Elec_SING_TRACK_EFF"]*eff_data["HMS_Cer_SING_Elec_Eff"]*eff_data["HMS_Hodo_3_of_4_EFF"]
+
+################################################################################################################################################
 
 InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
 InFile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "OPEN")
@@ -167,83 +184,6 @@ nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
 TBRANCH_SIMC  = InFile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
 
-TSCALER_DATA  = up.open(rootFile)["scaler"]
-TSCALER_DUMMY  = up.open(rootFile_DUMMY)["scaler"]
-
-################################################################################################################################################
-'''
-# Charge calculation
-thres_curr = 2.5
-NBCM = 5
-
-# Data charge calculation
-bcm1_charge_DATA = TSCALER_DATA.array("bcm1_charge")
-bcm2_charge_DATA = TSCALER_DATA.array("bcm2_charge")
-bcm4a_charge_DATA = TSCALER_DATA.array("bcm4a_charge")
-bcm4b_charge_DATA = TSCALER_DATA.array("bcm4b_charge")
-bcm4c_charge_DATA = TSCALER_DATA.array("bcm4c_charge")
-
-bcm1_current_DATA = TSCALER_DATA.array("bcm1_current")
-bcm2_current_DATA = TSCALER_DATA.array("bcm2_current")
-bcm4a_current_DATA = TSCALER_DATA.array("bcm4a_current")
-bcm4b_current_DATA = TSCALER_DATA.array("bcm4b_current")
-bcm4c_current_DATA = TSCALER_DATA.array("bcm4c_current")
-
-s_evts_DATA = bcm1_charge_DATA
-
-bcm_value_DATA  = [bcm1_charge_DATA, bcm2_charge_DATA, bcm4a_charge_DATA, bcm4b_charge_DATA, bcm4c_charge_DATA]
-
-charge_sum_DATA = [0]*NBCM
-previous_charge_DATA = [0]*NBCM
-
-current_DATA  = [bcm1_current_DATA, bcm2_current_DATA, bcm4a_current_DATA, bcm4b_current_DATA, bcm4c_current_DATA]
-
-for ibcm in range(0, 5):
-    previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][0]
-    # Iterate over all scaler events to get various scaler values
-    for i, evt in enumerate(s_evts_DATA):
-        if (current_DATA[ibcm][i] > thres_curr ):
-            # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
-            charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
-        previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]
-        
-data_charge = charge_sum_DATA[0]/1000
-        
-# Dummy charge calculation
-bcm1_charge_DUMMY = TSCALER_DUMMY.array("bcm1_charge")
-bcm2_charge_DUMMY = TSCALER_DUMMY.array("bcm2_charge")
-bcm4a_charge_DUMMY = TSCALER_DUMMY.array("bcm4a_charge")
-bcm4b_charge_DUMMY = TSCALER_DUMMY.array("bcm4b_charge")
-bcm4c_charge_DUMMY = TSCALER_DUMMY.array("bcm4c_charge")
-
-bcm1_current_DUMMY = TSCALER_DUMMY.array("bcm1_current")
-bcm2_current_DUMMY = TSCALER_DUMMY.array("bcm2_current")
-bcm4a_current_DUMMY = TSCALER_DUMMY.array("bcm4a_current")
-bcm4b_current_DUMMY = TSCALER_DUMMY.array("bcm4b_current")
-bcm4c_current_DUMMY = TSCALER_DUMMY.array("bcm4c_current")
-
-s_evts_DUMMY = bcm1_charge_DUMMY
-
-bcm_value_DUMMY  = [bcm1_charge_DUMMY, bcm2_charge_DUMMY, bcm4a_charge_DUMMY, bcm4b_charge_DUMMY, bcm4c_charge_DUMMY]
-
-charge_sum_DUMMY = [0]*NBCM
-previous_charge_DUMMY = [0]*NBCM
-
-current_DUMMY  = [bcm1_current_DUMMY, bcm2_current_DUMMY, bcm4a_current_DUMMY, bcm4b_current_DUMMY, bcm4c_current_DUMMY]
-
-for ibcm in range(0, 5):
-    previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][0]
-    # Iterate over all scaler events to get various scaler values
-    for i, evt in enumerate(s_evts_DUMMY):
-        if (current_DUMMY[ibcm][i] > thres_curr ):
-            # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
-            charge_sum_DUMMY[ibcm] += (bcm_value_DUMMY[ibcm][i] - previous_charge_DUMMY[ibcm])
-        previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][i]
-        
-dummy_charge = charge_sum_DUMMY[0]/1000
-
-print("\ndata_charge = ",data_charge,"\ndummy_charge = ",dummy_charge,"\n\n")
-'''
 ################################################################################################################################################
 
 H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta", 300, -20.0, 20.0)

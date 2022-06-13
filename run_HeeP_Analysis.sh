@@ -35,6 +35,7 @@ OutFullAnalysisFilename="FullAnalysis_$KIN"
 
 if [[ $KIN = "10p6" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # All heep coin 10p6 runs
+    #declare -a data=(4827) # All heep coin 10p6 runs
     declare -a dummydata=(4864)
 elif [[ $KIN = "8p2" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
@@ -63,7 +64,7 @@ if [[ $a_flag = "true" ]]; then
 	#.x $ANA_DIR/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
 	#EOF
     done
-    cd "${ANA_DIR}/OUTPUTS/Analysis/HeeP"
+    cd "${ANA_DIR}/OUTPUT/Analysis/HeeP"
     echo
     echo "Combining root files..."  
     hadd -f Analysed_Data_${KIN}.root *_-1_Raw_Data.root
@@ -86,7 +87,7 @@ if [[ $a_flag = "true" ]]; then
 	#.x $ANA_DIR/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
 	#EOF
     done
-    cd "${ANA_DIR}/OUTPUTS/Analysis/HeeP"
+    cd "${ANA_DIR}/OUTPUT/Analysis/HeeP"
     echo
     echo "Combining root files..."
     hadd -f Analysed_DummyData_${KIN}.root *_-1_Raw_Data.root
@@ -101,6 +102,7 @@ echo "Calculating data total charge..."
 for i in "${data[@]}"
 do
     DataChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
+    #DataEffVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
     #echo "${DataChargeVal[@]} mC"
 done
 DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
@@ -112,6 +114,7 @@ echo "Calculating dummy total charge..."
 for i in "${dummydata[@]}"
 do
     DummyChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
+    #DummyEffVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
     #echo "${DummyChargeVal[@]} mC"
 done
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
@@ -120,4 +123,4 @@ echo "${DummyChargeSum} uC"
 python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${OutDUMMYFilename}.root" $DummyChargeSum ${InSIMCFilename} ${OutFullAnalysisFilename}
 
 cd ../
-evince "OUTPUTS/Analysis/HeeP/${OutFullAnalysisFilename}.pdf"
+evince "OUTPUT/Analysis/HeeP/${OutFullAnalysisFilename}.pdf"

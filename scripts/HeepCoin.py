@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 10:06:52 trottar"
+# Time-stamp: "2022-06-13 10:07:43 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -50,7 +50,7 @@ InSIMCFilename = sys.argv[8]
 OutFilename = sys.argv[9]
 
 #data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
-for val in enumerate([float(i) for i in data_efficiency.split(" ")]):
+for val in [float(i) for i in data_efficiency.split(" ")]:
     data_efficiency *= val
     
 

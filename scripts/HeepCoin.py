@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:52:42 trottar"
+# Time-stamp: "2022-06-13 09:53:37 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -51,7 +51,7 @@ OutFilename = sys.argv[9]
 
 data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
 
-print("\n\ndata_efficiency=",data_efficiency,"\n\n",type(data_efficiency))
+print("\n\ndata_efficiency=",data_efficiency,"\n\n",[float(i) for i in data_efficiency.split(" ")])
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen

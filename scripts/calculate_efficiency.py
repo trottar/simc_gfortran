@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:23:57 trottar"
+# Time-stamp: "2022-06-13 09:27:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -47,8 +47,17 @@ except IOError:
 eff_data = eff_data[eff_data['Run_Number'] == int(runNum)]
 #print(eff_data)
 
+EDTM = eff_data["Non_Scaler_EDTM_Live_Time"].iloc[0]
+pPiTrack = eff_data["SHMS_Pion_SING_TRACK_EFF"].iloc[0]
+pPiAero = eff_data["SHMS_Aero_SING_Pion_Eff"].iloc[0]
+pHodo3_4 = eff_data["SHMS_Hodo_3_of_4_EFF"].iloc[0]
+hElTrack = eff_data["HMS_Elec_SING_TRACK_EFF"].iloc[0]
+hElCer = eff_data["HMS_Cer_SING_Elec_Eff"].iloc[0]
+hHodo3_4 = eff_data["HMS_Hodo_3_of_4_EFF"].iloc[0]
+
+
 print(eff_data["Non_Scaler_EDTM_Live_Time"].iloc[0],eff_data["SHMS_Pion_SING_TRACK_EFF"].iloc[0],eff_data["SHMS_Aero_SING_Pion_Eff"].iloc[0],eff_data["SHMS_Hodo_3_of_4_EFF"].iloc[0],eff_data["HMS_Elec_SING_TRACK_EFF"].iloc[0],eff_data["HMS_Cer_SING_Elec_Eff"].iloc[0],eff_data["HMS_Hodo_3_of_4_EFF"].iloc[0])
 
-data_efficiency = eff_data["Non_Scaler_EDTM_Live_Time"].iloc[0]*eff_data["SHMS_Pion_SING_TRACK_EFF"].iloc[0]*eff_data["SHMS_Aero_SING_Pion_Eff"].iloc[0]*eff_data["SHMS_Hodo_3_of_4_EFF"].iloc[0]*eff_data["HMS_Elec_SING_TRACK_EFF"].iloc[0]*eff_data["HMS_Cer_SING_Elec_Eff"].iloc[0]*eff_data["HMS_Hodo_3_of_4_EFF"].iloc[0]
+data_efficiency = EDTM*pHodo3_4*hHodo3_4
 
 print(data_efficiency)

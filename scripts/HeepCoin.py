@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 08:18:29 trottar"
+# Time-stamp: "2022-06-13 09:06:04 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -152,22 +152,6 @@ RandomWindows[0] = PromptPeak - (BunchSpacing/2) - CoinOffset - (nSkip*BunchSpac
 RandomWindows[1] = PromptPeak - (BunchSpacing/2) - CoinOffset - (nSkip*BunchSpacing)
 RandomWindows[2] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing)
 RandomWindows[3] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing) + ((nWindows/2)*BunchSpacing)
-    
-################################################################################################################################################
-# Define efficiencies
-
-inp_f = UTILPATH+"scripts/efficiency/OUTPUTS/coin_production_HeePCoin_efficiency_data_2022_06_13.csv"
-
-# Converts csv data to dataframe
-try:
-    eff_data = pd.read_csv(inp_f)
-except IOError:
-    print("Error: %s does not appear to exist." % inp_f)
-print(eff_data.keys())
-
-data_efficiency = eff_data["Non_Scaler_EDTM_Live_Time"]*eff_data["SHMS_Pion_SING_TRACK_EFF"]*eff_data["SHMS_Aero_SING_Pion_Eff"]*eff_data["SHMS_Hodo_3_of_4_EFF"]*eff_data["HMS_Elec_SING_TRACK_EFF"]*eff_data["HMS_Cer_SING_Elec_Eff"]*eff_data["HMS_Hodo_3_of_4_EFF"]
-
-dummy_efficiency = eff_data["Non_Scaler_EDTM_Live_Time"]*eff_data["SHMS_Pion_SING_TRACK_EFF"]*eff_data["SHMS_Aero_SING_Pion_Eff"]*eff_data["SHMS_Hodo_3_of_4_EFF"]*eff_data["HMS_Elec_SING_TRACK_EFF"]*eff_data["HMS_Cer_SING_Elec_Eff"]*eff_data["HMS_Hodo_3_of_4_EFF"]
 
 ################################################################################################################################################
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:55:54 trottar"
+# Time-stamp: "2022-06-13 09:59:34 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -54,6 +54,12 @@ print("\n\ndata_efficiency_list=",[float(i) for i in data_efficiency.split(" ")]
 data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
 
 print("data_efficiency=",data_efficiency,"\n\n",type(data_efficiency))
+
+print("\n\ndummy_efficiency_list=",[float(i) for i in dummy_efficiency.split(" ")])
+
+dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
+
+print("dummy_efficiency=",dummy_efficiency,"\n\n",type(dummy_efficiency))
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen

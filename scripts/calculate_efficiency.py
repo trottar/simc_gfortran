@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:15:04 trottar"
+# Time-stamp: "2022-06-13 09:15:35 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -35,7 +35,7 @@ UTILPATH = p["UTILPATH"]
 ################################################################################################################################################
 # Define efficiencies
 
-inp_f = UTILPATH+"scripts/efficiency/OUTPUTS/coin_production_HeePCoin_efficiency_data_2022_06_13.csv"
+inp_f = UTILPATH+"/scripts/efficiency/OUTPUTS/coin_production_HeePCoin_efficiency_data_2022_06_13.csv"
 
 # Converts csv data to dataframe
 try:

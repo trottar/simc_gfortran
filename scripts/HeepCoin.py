@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:37:17 trottar"
+# Time-stamp: "2022-06-13 09:39:14 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -47,6 +47,8 @@ dummy_charge = int(sys.argv[6])/1000
 dummy_efficiency = sys.argv[7]
 InSIMCFilename = sys.argv[8]
 OutFilename = sys.argv[9]
+
+print("\n\ndata_efficiency=",data_efficiency,"\n\n")
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:12:08 trottar"
+# Time-stamp: "2022-06-13 09:14:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -13,6 +13,23 @@
 import sys
 
 runNum = sys.argv[1]
+
+###############################################################################################################################################
+
+'''
+ltsep package import and pathing definitions
+'''
+
+# Import package for cuts
+import ltsep as lt 
+
+proc_root = lt.Root(os.path.realpath(__file__),"Plot_SimcCoin").setup_ana()
+p = proc_root[2] # Dictionary of pathing variables
+OUTPATH = proc_root[3] # Get pathing for OUTPATH
+
+# Add this to all files for more dynamic pathing
+UTILPATH = p["UTILPATH"]
+
 
 ################################################################################################################################################
 # Define efficiencies

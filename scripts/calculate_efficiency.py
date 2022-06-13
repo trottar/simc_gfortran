@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:20:20 trottar"
+# Time-stamp: "2022-06-13 09:21:06 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -46,6 +46,8 @@ except IOError:
 
 eff_data = eff_data[eff_data['Run_Number'] == int(runNum)]
 #print(eff_data)
+
+print(eff_data["Non_Scaler_EDTM_Live_Time"],eff_data["SHMS_Pion_SING_TRACK_EFF"],eff_data["SHMS_Aero_SING_Pion_Eff"],eff_data["SHMS_Hodo_3_of_4_EFF"],eff_data["HMS_Elec_SING_TRACK_EFF"],eff_data["HMS_Cer_SING_Elec_Eff"],eff_data["HMS_Hodo_3_of_4_EFF"])
 
 data_efficiency = eff_data["Non_Scaler_EDTM_Live_Time"]*eff_data["SHMS_Pion_SING_TRACK_EFF"]*eff_data["SHMS_Aero_SING_Pion_Eff"]*eff_data["SHMS_Hodo_3_of_4_EFF"]*eff_data["HMS_Elec_SING_TRACK_EFF"]*eff_data["HMS_Cer_SING_Elec_Eff"]*eff_data["HMS_Hodo_3_of_4_EFF"]
 

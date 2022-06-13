@@ -97,24 +97,26 @@ fi
 cd "${ANA_DIR}/scripts"
 
 DataChargeVal=()
+DataEffVal=()
 echo
 echo "Calculating data total charge..."
 for i in "${data[@]}"
 do
     DataChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
-    #DataEffVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
+    DataEffVal+=($(python3 calculate_efficiency.py "$i"))
     #echo "${DataChargeVal[@]} mC"
 done
 DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
 echo "${DataChargeSum} uC"
 
 DummyChargeVal=()
+DummyEffVal=()
 echo
 echo "Calculating dummy total charge..."
 for i in "${dummydata[@]}"
 do
     DummyChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
-    #DummyEffVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
+    DummyEffVal+=($(python3 calculate_efficiency.py "$i"))
     #echo "${DummyChargeVal[@]} mC"
 done
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers

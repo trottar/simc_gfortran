@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:28:53 trottar"
+# Time-stamp: "2022-06-13 09:29:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -55,7 +55,7 @@ hElTrack = eff_data["HMS_Elec_SING_TRACK_EFF"].iloc[0]
 hElCer = eff_data["HMS_Cer_SING_Elec_Eff"].iloc[0]
 hHodo3_4 = eff_data["HMS_Hodo_3_of_4_EFF"].iloc[0]
 
-print("EDTM",EDTM,"pPiTrack",pPiTrack,"pPiAero",pPiAero,"pHodo3",pHodo3,"hElTrack",hElTrack,"hElCer",hElCer,"hHodo3",hHodo3)
+print("EDTM",EDTM,"pPiTrack",pPiTrack,"pPiAero",pPiAero,"pHodo3_4",pHodo3_4,"hElTrack",hElTrack,"hElCer",hElCer,"hHodo3_4",hHodo3_4)
 data_efficiency = EDTM*pHodo3_4*hHodo3_4
 
 print(data_efficiency)

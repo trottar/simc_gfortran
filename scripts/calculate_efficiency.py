@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:19:01 trottar"
+# Time-stamp: "2022-06-13 09:19:49 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -50,4 +50,4 @@ print(eff_data)
 
 data_efficiency = eff_data["Non_Scaler_EDTM_Live_Time"]*eff_data["SHMS_Pion_SING_TRACK_EFF"]*eff_data["SHMS_Aero_SING_Pion_Eff"]*eff_data["SHMS_Hodo_3_of_4_EFF"]*eff_data["HMS_Elec_SING_TRACK_EFF"]*eff_data["HMS_Cer_SING_Elec_Eff"]*eff_data["HMS_Hodo_3_of_4_EFF"]
 
-dummy_efficiency = eff_data["Non_Scaler_EDTM_Live_Time"]*eff_data["SHMS_Pion_SING_TRACK_EFF"]*eff_data["SHMS_Aero_SING_Pion_Eff"]*eff_data["SHMS_Hodo_3_of_4_EFF"]*eff_data["HMS_Elec_SING_TRACK_EFF"]*eff_data["HMS_Cer_SING_Elec_Eff"]*eff_data["HMS_Hodo_3_of_4_EFF"]
+print(data_efficiency)

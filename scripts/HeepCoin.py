@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 10:10:25 trottar"
+# Time-stamp: "2022-06-13 10:12:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -49,10 +49,12 @@ dummy_efficiency = sys.argv[7]
 InSIMCFilename = sys.argv[8]
 OutFilename = sys.argv[9]
 
-data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
+#data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
+data_efficiency = sum([float(i) for i in data_efficiency.split(" ")])/len([float(i) for i in data_efficiency.split(" ")])
 print("\n\ndata_efficiency=",data_efficiency)
 
-dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
+#dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
+dummy_efficiency = sum([float(i) for i in dummy_efficiency.split(" ")])/len([float(i) for i in dummy_efficiency.split(" ")])
 print("dummy_efficiency=",dummy_efficiency)
 
 ###############################################################################################################################################

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:59:34 trottar"
+# Time-stamp: "2022-06-13 10:01:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -49,17 +49,12 @@ dummy_efficiency = sys.argv[7]
 InSIMCFilename = sys.argv[8]
 OutFilename = sys.argv[9]
 
-print("\n\ndata_efficiency_list=",[float(i) for i in data_efficiency.split(" ")])
 
 data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
-
-print("data_efficiency=",data_efficiency,"\n\n",type(data_efficiency))
-
-print("\n\ndummy_efficiency_list=",[float(i) for i in dummy_efficiency.split(" ")])
+print("data_efficiency=",data_efficiency)
 
 dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
-
-print("dummy_efficiency=",dummy_efficiency,"\n\n",type(dummy_efficiency))
+print("dummy_efficiency=",dummy_efficiency)
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -576,7 +571,7 @@ H_epsilon_SIMC.Scale(normfac_simc)
 H_MMp_SIMC.Scale(normfac_simc)
 
 dummy_target_corr = 4.8579
-normfac_dummy = 1/(dummy_charge*dummy_target_corr)
+normfac_dummy = 1/(dummy_charge*dummy_target_corr*dummy_efficiency)
 H_ssxfp_DUMMY.Scale(normfac_dummy)
 H_ssyfp_DUMMY.Scale(normfac_dummy)
 H_ssxpfp_DUMMY.Scale(normfac_dummy)
@@ -603,7 +598,7 @@ H_W_DUMMY.Scale(normfac_dummy)
 H_ct_ep_DUMMY.Scale(normfac_dummy)
 H_ct_ep_DUMMY_cut.Scale(normfac_dummy)
 
-normfac_data = 1/(data_charge)
+normfac_data = 1/(data_charge*data_efficiency)
 H_ssxfp_DATA.Scale(normfac_data)
 H_ssyfp_DATA.Scale(normfac_data)
 H_ssxpfp_DATA.Scale(normfac_data)

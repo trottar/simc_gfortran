@@ -108,7 +108,6 @@ do
 done
 DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
 echo "${DataChargeSum} uC"
-echo "${DataEffVal[*]}"
 
 DummyChargeVal=()
 DummyEffVal=()
@@ -122,7 +121,6 @@ do
 done
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
 echo "${DummyChargeSum} uC"
-echo "${DummyEffVal[*]}"
 
 python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename}
 

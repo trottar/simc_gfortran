@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:47:40 trottar"
+# Time-stamp: "2022-06-13 09:50:40 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -27,6 +27,7 @@ import sys, math, os, subprocess
 import array
 from ROOT import TCanvas, TColor, TGaxis, TH1F, TH2F, TPad, TStyle, gStyle, gPad, TGaxis, TLine, TMath, TPaveText, TArc, TGraphPolar 
 from ROOT import kBlack, kBlue, kRed
+from functools import reduce
 
 ##################################################################################################################################################
 
@@ -48,7 +49,7 @@ dummy_efficiency = sys.argv[7]
 InSIMCFilename = sys.argv[8]
 OutFilename = sys.argv[9]
 
-data_efficiency = data_efficiency.split(" ")
+data_efficiency = reduce(lambda x, y: x*y, data_efficiency.split(" "))
 
 print("\n\ndata_efficiency=",data_efficiency,"\n\n",type(data_efficiency))
 

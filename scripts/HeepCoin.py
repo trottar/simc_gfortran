@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 10:01:38 trottar"
+# Time-stamp: "2022-06-13 10:02:33 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -51,7 +51,7 @@ OutFilename = sys.argv[9]
 
 
 data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
-print("data_efficiency=",data_efficiency)
+print("\n\ndata_efficiency=",data_efficiency)
 
 dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
 print("dummy_efficiency=",dummy_efficiency)

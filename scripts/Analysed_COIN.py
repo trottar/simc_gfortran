@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-03 11:39:47 trottar"
+# Time-stamp: "2022-06-13 05:01:23 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -58,39 +58,18 @@ fout = '/DB/CUTS/run_type/simc_coin_heep.cuts'
 # defining Cuts
 cuts = ["coin_ep_cut_prompt_noRF_nopid"]
 
-proc_root = lt.Root(ROOTPrefix,runNum,MaxEvent,fout,cuts,os.path.realpath(__file__)).setup_ana()
+proc_root = lt.Root(os.path.realpath(__file__),"SimcCoin",ROOTPrefix,runNum,MaxEvent,fout,cuts).setup_ana()
 c = proc_root[0] # Cut object
 b = proc_root[1] # Dictionary of branches
-OUTPATH = proc_root[2] # Get pathing for OUTPATH
+p = proc_root[2] # Dictionary of pathing variables
+OUTPATH = proc_root[3] # Get pathing for OUTPATH
 
 #################################################################################################################################################################
-UTILPATH = lt.SetPath(os.path.realpath(__file__)).getPath("UTILPATH")
-rootName = "%s/ROOTfiles/Analysis/HeeP/%s_%s_%s.root" % (UTILPATH, ROOTPrefix, runNum, MaxEvent)     # Input file location and variables taking
-s_tree = up.open(rootName)["TSP"]
 
-P_BCM4A_scalerCharge = s_tree.array("P.BCM4A.scalerCharge")
-P_BCM2_scalerCharge = s_tree.array("P.BCM2.scalerCharge")
-P_BCM4B_scalerCharge = s_tree.array("P.BCM4B.scalerCharge")
-P_BCM1_scalerCharge = s_tree.array("P.BCM1.scalerCharge")
-P_BCM4C_scalerCharge = s_tree.array("P.BCM4C.scalerCharge")
+ROOTPATH = p["ROOTPATH"]
+SIMCPATH = p["SIMCPATH"]
 
-P_BCM4A_scalerCurrent = s_tree.array("P.BCM4A.scalerCurrent")
-P_BCM2_scalerCurrent = s_tree.array("P.BCM2.scalerCurrent")
-P_BCM4B_scalerCurrent = s_tree.array("P.BCM4B.scalerCurrent")
-P_BCM1_scalerCurrent = s_tree.array("P.BCM1.scalerCurrent")
-P_BCM4C_scalerCurrent = s_tree.array("P.BCM4C.scalerCurrent")
-
-def scalers():
-    
-    NoCut = [P_BCM4A_scalerCharge,P_BCM4B_scalerCharge,P_BCM4C_scalerCharge,P_BCM2_scalerCharge,P_BCM1_scalerCharge,P_BCM4A_scalerCurrent,P_BCM4B_scalerCurrent,P_BCM4C_scalerCurrent,P_BCM2_scalerCurrent,P_BCM1_scalerCurrent]
-        
-    Uncut = [(P_BCM4A_scalerCharge,P_BCM4B_scalerCharge,P_BCM4C_scalerCharge,P_BCM2_scalerCharge,P_BCM1_scalerCharge,P_BCM4A_scalerCurrent,P_BCM4B_scalerCurrent,P_BCM4C_scalerCurrent,P_BCM2_scalerCurrent,P_BCM1_scalerCurrent) for (P_BCM4A_scalerCharge,P_BCM4B_scalerCharge,P_BCM4C_scalerCharge,P_BCM2_scalerCharge,P_BCM1_scalerCharge,P_BCM4A_scalerCurrent,P_BCM4B_scalerCurrent,P_BCM4C_scalerCurrent,P_BCM2_scalerCurrent,P_BCM1_scalerCurrent) in zip(*NoCut)]
-    
-    SCALERS = {
-        "scaler" : Uncut,
-    }
-
-    return SCALERS
+#################################################################################################################################################################
 
 def coin_protons():
 
@@ -125,20 +104,15 @@ def main():
     
     COIN_Proton_Data = coin_protons()
 
-    Scaler_Data = scalers()
-
     # This is just the list of branches we use from the initial root file for each dict
     # I don't like re-defining this here as it's very prone to errors if you included (or removed something) earlier but didn't modify it here
     # Should base the branches to include based on some list and just repeat the list here (or call it again directly below)
 
     COIN_Proton_Data_Header = ["hsyptar","hsxptar","hsypfp","hsxpfp","hsyfp","hsxfp","ssyptar","ssxptar","ssypfp","ssxpfp","ssyfp","ssxfp","P_dc_InsideDipoleExit","H_dc_InsideDipoleExit","H_gtr_eta", "hsdelta", "H_gtr_p", "H_hod_goodscinhit", "H_hod_goodstarttime", "H_cal_etotnorm", "H_cal_etottracknorm", "H_cer_npeSum", "CTime_epCoinTime_ROC1", "P_gtr_eta", "P_gtr_p", "ssdelta", "P_hod_goodscinhit", "P_hod_goodstarttime", "P_cal_etotnorm", "P_cal_etottracknorm", "P_aero_npeSum", "P_aero_xAtAero", "P_aero_yAtAero", "P_hgcer_npeSum", "P_hgcer_xAtCer", "P_hgcer_yAtCer", "MMp", "H_RF_Dist","P_RF_Dist", "Q2", "W", "epsilon", "ph_q", "MandelT", "emiss", "pmiss", "pmx", "pmy", "pmz"]
-
-    Scaler_Data_Header = ["bcm4a_charge","bcm4b_charge","bcm4c_charge","bcm2_charge","bcm1_charge","bcm4a_current","bcm4b_current","bcm4c_current","bcm2_current","bcm1_current"]
     
     # Need to create a dict for all the branches we grab                                                
     data = {}
-    for d in (COIN_Proton_Data,Scaler_Data): 
-        data.update(d)
+    data.update(COIN_Proton_Data)
     data_keys = list(data.keys()) # Create a list of all the keys in all dicts added above, each is an array of data
 
     for i in range (0, len(data_keys)):

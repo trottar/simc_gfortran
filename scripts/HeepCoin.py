@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-09 02:37:08 trottar"
+# Time-stamp: "2022-06-13 10:12:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -27,11 +27,12 @@ import sys, math, os, subprocess
 import array
 from ROOT import TCanvas, TColor, TGaxis, TH1F, TH2F, TPad, TStyle, gStyle, gPad, TGaxis, TLine, TMath, TPaveText, TArc, TGraphPolar 
 from ROOT import kBlack, kBlue, kRed
+from functools import reduce
 
 ##################################################################################################################################################
 
 # Check the number of arguments provided to the script
-if len(sys.argv)-1!=7:
+if len(sys.argv)-1!=9:
     print("!!!!! ERROR !!!!!\n Expected 4 arguments\n Usage is with - InDATAFilename InDUMMYFilename InSIMCFilename OutFilename \n!!!!! ERROR !!!!!")
     sys.exit(1)
 
@@ -41,10 +42,20 @@ if len(sys.argv)-1!=7:
 heep_kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
 data_charge = int(sys.argv[3])/1000
-InDUMMYFilename = sys.argv[4]
-dummy_charge = int(sys.argv[5])/1000
-InSIMCFilename = sys.argv[6]
-OutFilename = sys.argv[7]
+data_efficiency = sys.argv[4]
+InDUMMYFilename = sys.argv[5]
+dummy_charge = int(sys.argv[6])/1000
+dummy_efficiency = sys.argv[7]
+InSIMCFilename = sys.argv[8]
+OutFilename = sys.argv[9]
+
+#data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
+data_efficiency = sum([float(i) for i in data_efficiency.split(" ")])/len([float(i) for i in data_efficiency.split(" ")])
+print("\n\ndata_efficiency=",data_efficiency)
+
+#dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
+dummy_efficiency = sum([float(i) for i in dummy_efficiency.split(" ")])/len([float(i) for i in dummy_efficiency.split(" ")])
+print("dummy_efficiency=",dummy_efficiency)
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -57,27 +68,28 @@ ltsep package import and pathing definitions
 # Import package for cuts
 import ltsep as lt 
 
+proc_root = lt.Root(os.path.realpath(__file__),"Plot_SimcCoin").setup_ana()
+p = proc_root[2] # Dictionary of pathing variables
+OUTPATH = proc_root[3] # Get pathing for OUTPATH
+
 # Add this to all files for more dynamic pathing
-USER =  lt.SetPath(os.path.realpath(__file__)).getPath("USER") # Grab user info for file finding
-HOST = lt.SetPath(os.path.realpath(__file__)).getPath("HOST")
-UTILPATH = lt.SetPath(os.path.realpath(__file__)).getPath("UTILPATH")
-SIMCPATH = lt.SetPath(os.path.realpath(__file__)).getPath("SIMCPATH")
-REPLAYPATH = SIMCPATH
-ROOTfilePath = "%s/OUTPUTS/Analysis/HeeP" % REPLAYPATH
-OutPath = "%s/OUTPUTS/Analysis/HeeP" % REPLAYPATH
+USER =  p["USER"] # Grab user info for file finding
+HOST = p["HOST"]
+UTILPATH = p["UTILPATH"]
+SIMCPATH = p["SIMCPATH"]
 
-rootFile = ROOTfilePath+"/"+InDATAFilename
-rootFile_DUMMY = ROOTfilePath+"/"+InDUMMYFilename
-rootFile_SIMC = ROOTfilePath+"/"+InSIMCFilename
+rootFile = OUTPATH+"/"+InDATAFilename
+rootFile_DUMMY = OUTPATH+"/"+InDUMMYFilename
+rootFile_SIMC = OUTPATH+"/"+InSIMCFilename
 
-foutname = OutPath+"/" + OutFilename + ".root"
-fouttxt  = OutPath+"/" + OutFilename + ".txt"
-outputpdf  = OutPath+"/" + OutFilename + ".pdf"
+foutname = OUTPATH+"/" + OutFilename + ".root"
+fouttxt  = OUTPATH+"/" + OutFilename + ".txt"
+outputpdf  = OUTPATH+"/" + OutFilename + ".pdf"
 
 ###############################################################################################################################################
 
 # Grabs simc number of events and weight
-simc_hist = "%s/OUTPUTS/Analysis/HeeP/Heep_Coin_%s.hist" % (REPLAYPATH,heep_kinematics)
+simc_hist = "%s/OUTPUT/Analysis/HeeP/Heep_Coin_%s.hist" % (SIMCPATH,heep_kinematics)
 f_simc = open(simc_hist)
 for line in f_simc:
     print(line)
@@ -109,7 +121,7 @@ except:
 
 # Section for grabing Prompt/Random selection parameters from PARAM file
 PARAMPATH = "%s/DB/PARAM" % UTILPATH
-print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], REPLAYPATH))
+print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], SIMCPATH))
 TimingCutFile = "%s/Timing_Parameters.csv" % PARAMPATH # This should match the param file actually being used!
 TimingCutf = open(TimingCutFile)
 try:
@@ -151,99 +163,22 @@ RandomWindows[0] = PromptPeak - (BunchSpacing/2) - CoinOffset - (nSkip*BunchSpac
 RandomWindows[1] = PromptPeak - (BunchSpacing/2) - CoinOffset - (nSkip*BunchSpacing)
 RandomWindows[2] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing)
 RandomWindows[3] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing) + ((nWindows/2)*BunchSpacing)
-    
+
 ################################################################################################################################################
 
 InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
 InFile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "OPEN")
 InFile_SIMC = ROOT.TFile.Open(rootFile_SIMC, "READ")
 
-#TBRANCH_DATA  = InFile_DATA.Get("Cut_Proton_Events_All")
-TBRANCH_DATA  = InFile_DATA.Get("Uncut_Proton_Events")
+TBRANCH_DATA  = InFile_DATA.Get("Cut_Proton_Events_All")
+#TBRANCH_DATA  = InFile_DATA.Get("Uncut_Proton_Events")
 nEntries_TBRANCH_DATA  = TBRANCH_DATA.GetEntries()
-#TBRANCH_DUMMY  = InFile_DUMMY.Get("Cut_Proton_Events_All")
-TBRANCH_DUMMY  = InFile_DUMMY.Get("Uncut_Proton_Events")
+TBRANCH_DUMMY  = InFile_DUMMY.Get("Cut_Proton_Events_All")
+#TBRANCH_DUMMY  = InFile_DUMMY.Get("Uncut_Proton_Events")
 nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
 TBRANCH_SIMC  = InFile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
 
-TSCALER_DATA  = up.open(rootFile)["scaler"]
-TSCALER_DUMMY  = up.open(rootFile_DUMMY)["scaler"]
-
-################################################################################################################################################
-'''
-# Charge calculation
-thres_curr = 2.5
-NBCM = 5
-
-# Data charge calculation
-bcm1_charge_DATA = TSCALER_DATA.array("bcm1_charge")
-bcm2_charge_DATA = TSCALER_DATA.array("bcm2_charge")
-bcm4a_charge_DATA = TSCALER_DATA.array("bcm4a_charge")
-bcm4b_charge_DATA = TSCALER_DATA.array("bcm4b_charge")
-bcm4c_charge_DATA = TSCALER_DATA.array("bcm4c_charge")
-
-bcm1_current_DATA = TSCALER_DATA.array("bcm1_current")
-bcm2_current_DATA = TSCALER_DATA.array("bcm2_current")
-bcm4a_current_DATA = TSCALER_DATA.array("bcm4a_current")
-bcm4b_current_DATA = TSCALER_DATA.array("bcm4b_current")
-bcm4c_current_DATA = TSCALER_DATA.array("bcm4c_current")
-
-s_evts_DATA = bcm1_charge_DATA
-
-bcm_value_DATA  = [bcm1_charge_DATA, bcm2_charge_DATA, bcm4a_charge_DATA, bcm4b_charge_DATA, bcm4c_charge_DATA]
-
-charge_sum_DATA = [0]*NBCM
-previous_charge_DATA = [0]*NBCM
-
-current_DATA  = [bcm1_current_DATA, bcm2_current_DATA, bcm4a_current_DATA, bcm4b_current_DATA, bcm4c_current_DATA]
-
-for ibcm in range(0, 5):
-    previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][0]
-    # Iterate over all scaler events to get various scaler values
-    for i, evt in enumerate(s_evts_DATA):
-        if (current_DATA[ibcm][i] > thres_curr ):
-            # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
-            charge_sum_DATA[ibcm] += (bcm_value_DATA[ibcm][i] - previous_charge_DATA[ibcm])
-        previous_charge_DATA[ibcm] = bcm_value_DATA[ibcm][i]
-        
-data_charge = charge_sum_DATA[0]/1000
-        
-# Dummy charge calculation
-bcm1_charge_DUMMY = TSCALER_DUMMY.array("bcm1_charge")
-bcm2_charge_DUMMY = TSCALER_DUMMY.array("bcm2_charge")
-bcm4a_charge_DUMMY = TSCALER_DUMMY.array("bcm4a_charge")
-bcm4b_charge_DUMMY = TSCALER_DUMMY.array("bcm4b_charge")
-bcm4c_charge_DUMMY = TSCALER_DUMMY.array("bcm4c_charge")
-
-bcm1_current_DUMMY = TSCALER_DUMMY.array("bcm1_current")
-bcm2_current_DUMMY = TSCALER_DUMMY.array("bcm2_current")
-bcm4a_current_DUMMY = TSCALER_DUMMY.array("bcm4a_current")
-bcm4b_current_DUMMY = TSCALER_DUMMY.array("bcm4b_current")
-bcm4c_current_DUMMY = TSCALER_DUMMY.array("bcm4c_current")
-
-s_evts_DUMMY = bcm1_charge_DUMMY
-
-bcm_value_DUMMY  = [bcm1_charge_DUMMY, bcm2_charge_DUMMY, bcm4a_charge_DUMMY, bcm4b_charge_DUMMY, bcm4c_charge_DUMMY]
-
-charge_sum_DUMMY = [0]*NBCM
-previous_charge_DUMMY = [0]*NBCM
-
-current_DUMMY  = [bcm1_current_DUMMY, bcm2_current_DUMMY, bcm4a_current_DUMMY, bcm4b_current_DUMMY, bcm4c_current_DUMMY]
-
-for ibcm in range(0, 5):
-    previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][0]
-    # Iterate over all scaler events to get various scaler values
-    for i, evt in enumerate(s_evts_DUMMY):
-        if (current_DUMMY[ibcm][i] > thres_curr ):
-            # Iterate over current value then subtracting previous so that there is no double counting. Subtracted values are uncut.
-            charge_sum_DUMMY[ibcm] += (bcm_value_DUMMY[ibcm][i] - previous_charge_DUMMY[ibcm])
-        previous_charge_DUMMY[ibcm] = bcm_value_DUMMY[ibcm][i]
-        
-dummy_charge = charge_sum_DUMMY[0]/1000
-
-print("\ndata_charge = ",data_charge,"\ndummy_charge = ",dummy_charge,"\n\n")
-'''
 ################################################################################################################################################
 
 H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta", 300, -20.0, 20.0)
@@ -501,8 +436,8 @@ for evt in TBRANCH_DATA:
       H_Q2_DATA.Fill(evt.Q2)
       H_W_DATA.Fill(evt.W)
       H_epsilon_DATA.Fill(evt.epsilon)
-      #H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-      H_MMp_DATA.Fill(evt.MMp)  
+      H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
+      #H_MMp_DATA.Fill(evt.MMp)  
 
       H_ct_ep_vs_H_MMp_DATA_rand.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
       H_ct_ep_DATA_cut_rand.Fill(evt.CTime_epCoinTime_ROC1)
@@ -531,8 +466,8 @@ for evt in TBRANCH_DATA:
       H_Q2_DATA_rand.Fill(evt.Q2)
       H_W_DATA_rand.Fill(evt.W)
       H_epsilon_DATA_rand.Fill(evt.epsilon)
-      #H_MMp_DATA_rand.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-      H_MMp_DATA_rand.Fill(evt.MMp)  
+      H_MMp_DATA_rand.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
+      #H_MMp_DATA_rand.Fill(evt.MMp)  
 
       
 for evt in TBRANCH_DUMMY:
@@ -637,7 +572,7 @@ H_epsilon_SIMC.Scale(normfac_simc)
 H_MMp_SIMC.Scale(normfac_simc)
 
 dummy_target_corr = 4.8579
-normfac_dummy = 1/(dummy_charge*dummy_target_corr)
+normfac_dummy = 1/(dummy_charge*dummy_target_corr*dummy_efficiency)
 H_ssxfp_DUMMY.Scale(normfac_dummy)
 H_ssyfp_DUMMY.Scale(normfac_dummy)
 H_ssxpfp_DUMMY.Scale(normfac_dummy)
@@ -664,7 +599,7 @@ H_W_DUMMY.Scale(normfac_dummy)
 H_ct_ep_DUMMY.Scale(normfac_dummy)
 H_ct_ep_DUMMY_cut.Scale(normfac_dummy)
 
-normfac_data = 1/(data_charge)
+normfac_data = 1/(data_charge*data_efficiency)
 H_ssxfp_DATA.Scale(normfac_data)
 H_ssyfp_DATA.Scale(normfac_data)
 H_ssxpfp_DATA.Scale(normfac_data)

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-while getopts 'ha' flag; do
+while getopts 'hao' flag; do
     case "${flag}" in
         h) 
         echo "---------------------------------------------------"
@@ -10,15 +10,17 @@ while getopts 'ha' flag; do
         echo "The following flags can be called for the heep analysis..."
         echo "    -h, help"
         echo "    -a, analyze"
+        echo "    -o, offset"
         exit 0
         ;;
         a) a_flag='true' ;;
+        o) o_flag='true' ;;
         *) print_usage
         exit 1 ;;
     esac
 done
 
-if [[ $a_flag = "true" ]]; then
+if [[ $a_flag = "true" || $o_flag = "true" ]]; then
     KIN=$2
 else
     KIN=$1
@@ -26,16 +28,21 @@ fi
 
 ANA_DIR="/group/c-kaonlt/USERS/${USER}/simc_gfortran"
 
-InDATAFilename="Raw_Data_$KIN.root"
-InDUMMYFilename="Raw_DummyData_$KIN.root"
-InSIMCFilename="Heep_Coin_$KIN.root"
-OutDATAFilename="Analysed_Data_$KIN"
-OutDUMMYFilename="Analysed_DummyData_$KIN"
-OutFullAnalysisFilename="FullAnalysis_$KIN"
+InDATAFilename="Raw_Data_${KIN}.root"
+InDUMMYFilename="Raw_DummyData_${KIN}.root"
+if [[ $o_flag = "true" ]]; then
+    InSIMCFilename="Heep_Coin_${KIN}_Offset.root"
+    OutFullAnalysisFilename="FullAnalysis_${KIN}_Offset"
+else
+    InSIMCFilename="Heep_Coin_${KIN}.root"
+    OutFullAnalysisFilename="FullAnalysis_${KIN}"
+fi
+OutDATAFilename="Analysed_Data_${KIN}"
+OutDUMMYFilename="Analysed_DummyData_${KIN}"
 
 if [[ $KIN = "10p6" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # All heep coin 10p6 runs
-    #declare -a data=(4827) # All heep coin 10p6 runs
+    #declare -a data=(4827) # Just one test run
     declare -a dummydata=(4864)
 elif [[ $KIN = "8p2" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)

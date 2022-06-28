@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 04:40:53 trottar"
+# Time-stamp: "2022-06-28 06:06:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -29,11 +29,10 @@ ltsep package import and pathing definitions
 # Import package for cuts
 import ltsep as lt 
 
-proc_root = lt.Root(os.path.realpath(__file__)).setup_ana()
-p = proc_root[2] # Dictionary of pathing variables
+p=lt.SetPath(os.path.realpath(__file__))
 
 # Add this to all files for more dynamic pathing
-UTILPATH = p["UTILPATH"]
+UTILPATH=p.getPath("UTILPATH")
 
 ################################################################################################################################################
 

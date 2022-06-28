@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 05:01:23 trottar"
+# Time-stamp: "2022-06-28 05:36:26 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -47,27 +47,31 @@ ltsep package import and pathing definitions
 # Import package for cuts
 import ltsep as lt 
 
+p=lt.SetPath(os.path.realpath(__file__))
+
+# Add this to all files for more dynamic pathing
+USER=p.getPath("USER") # Grab user info for file finding
+HOST=p.getPath("HOST")
+REPLAYPATH=p.getPath("REPLAYPATH")
+UTILPATH=p.getPath("UTILPATH")
+SIMCPATH=p.getPath("SIMCPATH")
+ANATYPE=p.getPath("ANATYPE")
 
 ##############################################################################################################################################
 '''
 Define and set up cuts
 '''
 
-fout = '/DB/CUTS/run_type/simc_coin_heep.cuts'
+cut_f = '/DB/CUTS/run_type/simc_coin_heep.cuts'
 
 # defining Cuts
 cuts = ["coin_ep_cut_prompt_noRF_nopid"]
 
-proc_root = lt.Root(os.path.realpath(__file__),"SimcCoin",ROOTPrefix,runNum,MaxEvent,fout,cuts).setup_ana()
+proc_root = lt.Root(os.path.realpath(__file__),"SimcCoin",ROOTPrefix,runNum,MaxEvent,cut_f,cuts).setup_ana()
 c = proc_root[0] # Cut object
-b = proc_root[1] # Dictionary of branches
-p = proc_root[2] # Dictionary of pathing variables
-OUTPATH = proc_root[3] # Get pathing for OUTPATH
-
-#################################################################################################################################################################
-
-ROOTPATH = p["ROOTPATH"]
-SIMCPATH = p["SIMCPATH"]
+tree = proc_root[1] # Dictionary of branches
+OUTPATH = proc_root[2] # Get pathing for OUTPATH
+strDict = proc_root[3] # Dictionary of cuts as strings
 
 #################################################################################################################################################################
 
@@ -75,9 +79,9 @@ def coin_protons():
 
     # Define the array of arrays containing the relevant HMS and SHMS info                              
 
-    NoCut_COIN_Protons = [b["H_gtr_yp"],b["H_gtr_xp"],b["H_dc_yp_fp"],b["H_dc_xp_fp"],b["H_dc_y_fp"],b["H_dc_x_fp"],b["P_gtr_yp"],b["P_gtr_xp"],b["P_dc_yp_fp"],b["P_dc_xp_fp"],b["P_dc_y_fp"],b["P_dc_x_fp"],b["P_dc_InsideDipoleExit"],b["H_dc_InsideDipoleExit"],b["H_gtr_beta"],  b["H_gtr_dp"], b["H_gtr_p"], b["H_hod_goodscinhit"], b["H_hod_goodstarttime"], b["H_cal_etotnorm"], b["H_cal_etottracknorm"], b["H_cer_npeSum"], b["CTime_epCoinTime_ROC1"], b["P_gtr_beta"],  b["P_gtr_p"], b["P_gtr_dp"], b["P_hod_goodscinhit"], b["P_hod_goodstarttime"], b["P_cal_etotnorm"], b["P_cal_etottracknorm"], b["P_aero_npeSum"], b["P_aero_xAtAero"], b["P_aero_yAtAero"], b["P_hgcer_npeSum"], b["P_hgcer_xAtCer"], b["P_hgcer_yAtCer"], b["MMp"], b["H_RF_Dist"],b["P_RF_Dist"], b["Q2"], b["W"], b["epsilon"], b["ph_q"], b["MandelT"], b["emiss"],b["pmiss"], b["pmiss_x"], b["pmiss_y"], b["pmiss_z"]]
+    NoCut_COIN_Protons = [tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["P_gtr_yp"],tree["P_gtr_xp"],tree["P_dc_yp_fp"],tree["P_dc_xp_fp"],tree["P_dc_y_fp"],tree["P_dc_x_fp"],tree["P_dc_InsideDipoleExit"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"], tree["CTime_epCoinTime_ROC1"], tree["P_gtr_beta"],  tree["P_gtr_p"], tree["P_gtr_dp"], tree["P_hod_goodscinhit"], tree["P_hod_goodstarttime"], tree["P_cal_etotnorm"], tree["P_cal_etottracknorm"], tree["P_aero_npeSum"], tree["P_aero_xAtAero"], tree["P_aero_yAtAero"], tree["P_hgcer_npeSum"], tree["P_hgcer_xAtCer"], tree["P_hgcer_yAtCer"], tree["MMp"], tree["H_RF_Dist"],tree["P_RF_Dist"], tree["Q2"], tree["W"], tree["epsilon"], tree["ph_q"], tree["MandelT"], tree["emiss"],tree["pmiss"], tree["pmiss_x"], tree["pmiss_y"], tree["pmiss_z"]]
 
-    Uncut_COIN_Protons = [(b["H_gtr_yp"],b["H_gtr_xp"],b["H_dc_yp_fp"],b["H_dc_xp_fp"],b["H_dc_y_fp"],b["H_dc_x_fp"],b["P_gtr_yp"],b["P_gtr_xp"],b["P_dc_yp_fp"],b["P_dc_xp_fp"],b["P_dc_y_fp"],b["P_dc_x_fp"],b["P_dc_InsideDipoleExit"],b["H_dc_InsideDipoleExit"],b["H_gtr_beta"],  b["H_gtr_dp"], b["H_gtr_p"], b["H_hod_goodscinhit"], b["H_hod_goodstarttime"], b["H_cal_etotnorm"], b["H_cal_etottracknorm"], b["H_cer_npeSum"], b["CTime_epCoinTime_ROC1"], b["P_gtr_beta"],  b["P_gtr_p"], b["P_gtr_dp"], b["P_hod_goodscinhit"], b["P_hod_goodstarttime"], b["P_cal_etotnorm"], b["P_cal_etottracknorm"], b["P_aero_npeSum"], b["P_aero_xAtAero"], b["P_aero_yAtAero"], b["P_hgcer_npeSum"], b["P_hgcer_xAtCer"], b["P_hgcer_yAtCer"], b["MMp"], b["H_RF_Dist"],b["P_RF_Dist"], b["Q2"], b["W"], b["epsilon"], b["ph_q"], b["MandelT"], b["emiss"],b["pmiss"], b["pmiss_x"], b["pmiss_y"], b["pmiss_z"]) for (b["H_gtr_yp"],b["H_gtr_xp"],b["H_dc_yp_fp"],b["H_dc_xp_fp"],b["H_dc_y_fp"],b["H_dc_x_fp"],b["P_gtr_yp"],b["P_gtr_xp"],b["P_dc_yp_fp"],b["P_dc_xp_fp"],b["P_dc_y_fp"],b["P_dc_x_fp"],b["P_dc_InsideDipoleExit"],b["H_dc_InsideDipoleExit"],b["H_gtr_beta"],  b["H_gtr_dp"], b["H_gtr_p"], b["H_hod_goodscinhit"], b["H_hod_goodstarttime"], b["H_cal_etotnorm"], b["H_cal_etottracknorm"], b["H_cer_npeSum"], b["CTime_epCoinTime_ROC1"], b["P_gtr_beta"],  b["P_gtr_p"], b["P_gtr_dp"], b["P_hod_goodscinhit"], b["P_hod_goodstarttime"], b["P_cal_etotnorm"], b["P_cal_etottracknorm"], b["P_aero_npeSum"], b["P_aero_xAtAero"], b["P_aero_yAtAero"], b["P_hgcer_npeSum"], b["P_hgcer_xAtCer"], b["P_hgcer_yAtCer"], b["MMp"], b["H_RF_Dist"],b["P_RF_Dist"], b["Q2"], b["W"], b["epsilon"], b["ph_q"], b["MandelT"], b["emiss"],b["pmiss"], b["pmiss_x"], b["pmiss_y"], b["pmiss_z"]) in zip(*NoCut_COIN_Protons)
+    Uncut_COIN_Protons = [(tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["P_gtr_yp"],tree["P_gtr_xp"],tree["P_dc_yp_fp"],tree["P_dc_xp_fp"],tree["P_dc_y_fp"],tree["P_dc_x_fp"],tree["P_dc_InsideDipoleExit"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"], tree["CTime_epCoinTime_ROC1"], tree["P_gtr_beta"],  tree["P_gtr_p"], tree["P_gtr_dp"], tree["P_hod_goodscinhit"], tree["P_hod_goodstarttime"], tree["P_cal_etotnorm"], tree["P_cal_etottracknorm"], tree["P_aero_npeSum"], tree["P_aero_xAtAero"], tree["P_aero_yAtAero"], tree["P_hgcer_npeSum"], tree["P_hgcer_xAtCer"], tree["P_hgcer_yAtCer"], tree["MMp"], tree["H_RF_Dist"],tree["P_RF_Dist"], tree["Q2"], tree["W"], tree["epsilon"], tree["ph_q"], tree["MandelT"], tree["emiss"],tree["pmiss"], tree["pmiss_x"], tree["pmiss_y"], tree["pmiss_z"]) for (tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["P_gtr_yp"],tree["P_gtr_xp"],tree["P_dc_yp_fp"],tree["P_dc_xp_fp"],tree["P_dc_y_fp"],tree["P_dc_x_fp"],tree["P_dc_InsideDipoleExit"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"], tree["CTime_epCoinTime_ROC1"], tree["P_gtr_beta"],  tree["P_gtr_p"], tree["P_gtr_dp"], tree["P_hod_goodscinhit"], tree["P_hod_goodstarttime"], tree["P_cal_etotnorm"], tree["P_cal_etottracknorm"], tree["P_aero_npeSum"], tree["P_aero_xAtAero"], tree["P_aero_yAtAero"], tree["P_hgcer_npeSum"], tree["P_hgcer_xAtCer"], tree["P_hgcer_yAtCer"], tree["MMp"], tree["H_RF_Dist"],tree["P_RF_Dist"], tree["Q2"], tree["W"], tree["epsilon"], tree["ph_q"], tree["MandelT"], tree["emiss"],tree["pmiss"], tree["pmiss_x"], tree["pmiss_y"], tree["pmiss_z"]) in zip(*NoCut_COIN_Protons)
         ]
 
     # Create array of arrays of pions after cuts, all events, prompt and random          
@@ -88,7 +92,7 @@ def coin_protons():
     for arr in Cut_COIN_Protons_tmp:
         Cut_COIN_Protons_all_tmp.append(c.add_cut(arr, "coin_ep_cut_prompt_noRF_nopid"))
 
-    Cut_COIN_Protons_all = [(b["H_gtr_yp"],b["H_gtr_xp"],b["H_dc_yp_fp"],b["H_dc_xp_fp"],b["H_dc_y_fp"],b["H_dc_x_fp"],b["P_gtr_yp"],b["P_gtr_xp"],b["P_dc_yp_fp"],b["P_dc_xp_fp"],b["P_dc_y_fp"],b["P_dc_x_fp"],b["P_dc_InsideDipoleExit"],b["H_dc_InsideDipoleExit"],b["H_gtr_beta"],  b["H_gtr_dp"], b["H_gtr_p"], b["H_hod_goodscinhit"], b["H_hod_goodstarttime"], b["H_cal_etotnorm"], b["H_cal_etottracknorm"], b["H_cer_npeSum"], b["CTime_epCoinTime_ROC1"], b["P_gtr_beta"],  b["P_gtr_p"], b["P_gtr_dp"], b["P_hod_goodscinhit"], b["P_hod_goodstarttime"], b["P_cal_etotnorm"], b["P_cal_etottracknorm"], b["P_aero_npeSum"], b["P_aero_xAtAero"], b["P_aero_yAtAero"], b["P_hgcer_npeSum"], b["P_hgcer_xAtCer"], b["P_hgcer_yAtCer"], b["MMp"], b["H_RF_Dist"],b["P_RF_Dist"], b["Q2"], b["W"], b["epsilon"], b["ph_q"], b["MandelT"], b["emiss"],b["pmiss"], b["pmiss_x"], b["pmiss_y"], b["pmiss_z"]) for (b["H_gtr_yp"],b["H_gtr_xp"],b["H_dc_yp_fp"],b["H_dc_xp_fp"],b["H_dc_y_fp"],b["H_dc_x_fp"],b["P_gtr_yp"],b["P_gtr_xp"],b["P_dc_yp_fp"],b["P_dc_xp_fp"],b["P_dc_y_fp"],b["P_dc_x_fp"],b["P_dc_InsideDipoleExit"],b["H_dc_InsideDipoleExit"],b["H_gtr_beta"],  b["H_gtr_dp"], b["H_gtr_p"], b["H_hod_goodscinhit"], b["H_hod_goodstarttime"], b["H_cal_etotnorm"], b["H_cal_etottracknorm"], b["H_cer_npeSum"], b["CTime_epCoinTime_ROC1"], b["P_gtr_beta"],  b["P_gtr_p"], b["P_gtr_dp"], b["P_hod_goodscinhit"], b["P_hod_goodstarttime"], b["P_cal_etotnorm"], b["P_cal_etottracknorm"], b["P_aero_npeSum"], b["P_aero_xAtAero"], b["P_aero_yAtAero"], b["P_hgcer_npeSum"], b["P_hgcer_xAtCer"], b["P_hgcer_yAtCer"], b["MMp"], b["H_RF_Dist"],b["P_RF_Dist"], b["Q2"], b["W"], b["epsilon"], b["ph_q"], b["MandelT"], b["emiss"],b["pmiss"], b["pmiss_x"], b["pmiss_y"], b["pmiss_z"]) in zip(*Cut_COIN_Protons_all_tmp)
+    Cut_COIN_Protons_all = [(tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["P_gtr_yp"],tree["P_gtr_xp"],tree["P_dc_yp_fp"],tree["P_dc_xp_fp"],tree["P_dc_y_fp"],tree["P_dc_x_fp"],tree["P_dc_InsideDipoleExit"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"], tree["CTime_epCoinTime_ROC1"], tree["P_gtr_beta"],  tree["P_gtr_p"], tree["P_gtr_dp"], tree["P_hod_goodscinhit"], tree["P_hod_goodstarttime"], tree["P_cal_etotnorm"], tree["P_cal_etottracknorm"], tree["P_aero_npeSum"], tree["P_aero_xAtAero"], tree["P_aero_yAtAero"], tree["P_hgcer_npeSum"], tree["P_hgcer_xAtCer"], tree["P_hgcer_yAtCer"], tree["MMp"], tree["H_RF_Dist"],tree["P_RF_Dist"], tree["Q2"], tree["W"], tree["epsilon"], tree["ph_q"], tree["MandelT"], tree["emiss"],tree["pmiss"], tree["pmiss_x"], tree["pmiss_y"], tree["pmiss_z"]) for (tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["P_gtr_yp"],tree["P_gtr_xp"],tree["P_dc_yp_fp"],tree["P_dc_xp_fp"],tree["P_dc_y_fp"],tree["P_dc_x_fp"],tree["P_dc_InsideDipoleExit"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"], tree["CTime_epCoinTime_ROC1"], tree["P_gtr_beta"],  tree["P_gtr_p"], tree["P_gtr_dp"], tree["P_hod_goodscinhit"], tree["P_hod_goodstarttime"], tree["P_cal_etotnorm"], tree["P_cal_etottracknorm"], tree["P_aero_npeSum"], tree["P_aero_xAtAero"], tree["P_aero_yAtAero"], tree["P_hgcer_npeSum"], tree["P_hgcer_xAtCer"], tree["P_hgcer_yAtCer"], tree["MMp"], tree["H_RF_Dist"],tree["P_RF_Dist"], tree["Q2"], tree["W"], tree["epsilon"], tree["ph_q"], tree["MandelT"], tree["emiss"],tree["pmiss"], tree["pmiss_x"], tree["pmiss_y"], tree["pmiss_z"]) in zip(*Cut_COIN_Protons_all_tmp)
         ]
 
     COIN_Protons = {
@@ -118,8 +122,6 @@ def main():
     for i in range (0, len(data_keys)):
         if("Proton" in data_keys[i]):
             DFHeader=list(COIN_Proton_Data_Header)
-        elif("scaler" in data_keys[i]):
-            DFHeader=list(Scaler_Data_Header)
         else:
             continue
             # Uncomment the line below if you want .csv file output, WARNING the files can be very large and take a long time to process!                                                                      

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-29 09:22:06 trottar"
+# Time-stamp: "2022-06-29 09:30:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -78,9 +78,6 @@ UTILPATH=lt.UTILPATH
 SIMCPATH=lt.SIMCPATH
 ANATYPE=lt.ANATYPE
 OUTPATH=lt.OUTPATH
-
-proc_root = lt.setup_ana()
-#OUTPATH = proc_root[2] # Get pathing for OUTPATH
 
 rootFile = OUTPATH+"/"+InDATAFilename
 rootFile_DUMMY = OUTPATH+"/"+InDUMMYFilename

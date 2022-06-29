@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-28 06:20:09 trottar"
+# Time-stamp: "2022-06-29 07:53:45 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -66,19 +66,19 @@ ltsep package import and pathing definitions
 '''
 
 # Import package for cuts
-import ltsep as lt 
+from ltsep import Root
 
-p=lt.SetPath(os.path.realpath(__file__))
+lt=Root(os.path.realpath(__file__),"Plot_SimcCoin")
 
 # Add this to all files for more dynamic pathing
-USER=p.getPath("USER") # Grab user info for file finding
-HOST=p.getPath("HOST")
-REPLAYPATH=p.getPath("REPLAYPATH")
-UTILPATH=p.getPath("UTILPATH")
-SIMCPATH=p.getPath("SIMCPATH")
-ANATYPE=p.getPath("ANATYPE")
+USER=lt.USER # Grab user info for file finding
+HOST=lt.HOST
+REPLAYPATH=lt.REPLAYPATH
+UTILPATH=lt.UTILPATH
+SIMCPATH=lt.SIMCPATH
+ANATYPE=lt.ANATYPE
 
-proc_root = lt.Root(os.path.realpath(__file__),"Plot_SimcCoin").setup_ana()
+proc_root = lt.setup_ana()
 OUTPATH = proc_root[2] # Get pathing for OUTPATH
 
 rootFile = OUTPATH+"/"+InDATAFilename

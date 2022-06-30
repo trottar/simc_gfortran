@@ -1,6 +1,6 @@
 #! /bin/bash
 
-while getopts 'hr' flag; do
+while getopts 'hra' flag; do
     case "${flag}" in
         h) 
         echo "----------------------------------------------------------------"
@@ -10,9 +10,11 @@ while getopts 'hr' flag; do
         echo "The following flags can be called for the heep analysis..."
         echo "    -h, help"
         echo "    -r, reset offset, if no offset given the input offsets are set to default."
+        echo "    -a, analyze new offset simc"
         exit 0
         ;;
         r) r_flag='true' ;;
+        a) a_flag='true' ;;
         *) print_usage
         exit 1 ;;
     esac
@@ -51,13 +53,24 @@ if [[ $r_flag = "true" ]]; then
     if [[ $3 -eq "" ]]; then
 	exit 0
     fi
+elif [[ $a_flag = "true" ]]; then
+    KIN=$2
+    OFFSET=$3
 else
     KIN=$1
     OFFSET=$2
 fi
 
-InputSIMC="Heep_Coin_${KIN}_Offset.inp"
+InputSIMC="Heep_Coin_${KIN}_Offset"
 
 cd "${SIMCPATH}/scripts"
 python3 setOffset.py ${InputSIMC} ${OFFSET}
 
+if [[ $a_flag = "true" ]]; then
+    echo
+    echo 
+    echo "Running simc analysis for ${InputSIMC}..."
+    echo
+    cd "${SIMCPATH}"
+    ./run_simc_tree "${InputSIMC}"
+fi

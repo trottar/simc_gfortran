@@ -88,7 +88,7 @@ c
       diff(i)=diff(i)+par(j)*derv(i,j)
   20  continue
       write(6,620)par, diff
- 620  format(5f7.1,4f8.2)
+ 620  format(5f7.1," |",4f8.2)
       goto 10
       end
       function side3(x,y,t)

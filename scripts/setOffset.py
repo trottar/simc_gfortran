@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-30 06:15:21 trottar"
+# Time-stamp: "2022-06-30 06:58:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -31,7 +31,7 @@ SIMCPATH=lt.SIMCPATH
 ################################################################################################################################################
 
 # Open inp_f file to grab prescale values and tracking efficiency
-inp_f = SIMCPATH+"/input/%s" % InputSIMC
+inp_f = SIMCPATH+"/input/%s.inp" % InputSIMC
 
 with open(inp_f, 'r') as f:
     f_data = f.read()

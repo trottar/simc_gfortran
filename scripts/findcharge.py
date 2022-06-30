@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-28 06:06:38 trottar"
+# Time-stamp: "2022-06-30 05:14:11 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -25,14 +25,13 @@ MaxEvent=sys.argv[3]
 '''
 ltsep package import and pathing definitions
 '''
-
 # Import package for cuts
-import ltsep as lt 
+from ltsep import Root
 
-p=lt.SetPath(os.path.realpath(__file__))
+lt=Root(os.path.realpath(__file__))
 
 # Add this to all files for more dynamic pathing
-UTILPATH=p.getPath("UTILPATH")
+UTILPATH=lt.UTILPATH
 
 ################################################################################################################################################
 

@@ -77,7 +77,7 @@ fi
 
 if [[ $a_flag = "true" ]]; then
     
-    cd "${SIMCPATH}/scripts"
+    cd "${SIMCPATH}/scripts/COIN"
     echo
     echo "Analysing data..."
     echo
@@ -100,7 +100,7 @@ if [[ $a_flag = "true" ]]; then
     hadd -f Analysed_Data_${KIN}.root *_-1_Raw_Data.root
     rm -f *_-1_Raw_Data.root
     
-    cd "${SIMCPATH}/scripts"    
+    cd "${SIMCPATH}/scripts/COIN"    
     echo
     echo "Analysing dummy data..."
     echo
@@ -152,7 +152,8 @@ done
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
 echo "${DummyChargeSum} uC"
 
+cd "${SIMCPATH}/scripts/COIN"
 python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename}
 
-cd ../
+cd "${SIMCPATH}"
 evince "OUTPUT/Analysis/HeeP/${OutFullAnalysisFilename}.pdf"

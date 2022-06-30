@@ -6,13 +6,13 @@ begin parm experiment
 end parm experiment
 
 begin parm kinematics_main
-  Ebeam = 10585.37  		;  (MeV)
+  Ebeam = 10532.44  		;  (MeV)
   dEbeam = 0.05			;  beam energy variation (%)
   electron_arm = 1              ;  1=hms,2=sos,3=hrsr,4=hrsl,5=shms 		
   hadron_arm = 5                ;  1=hms,2=sos,3=hrsr,4=hrsl,5=shms
-  spec%e%P = 6557.0		;  e arm central momentum (MeV/c) -0.5%
-  spec%e%theta = 18.845		;  e arm angle setting (degrees)
-  spec%p%P = 4815.8		;  p arm central momentum (MeV/c)
+  spec%e%P = 6590.0		;  e arm central momentum (MeV/c)
+  spec%e%theta = 18.845   	;  e arm angle setting (degrees)
+  spec%p%P = 4864.2		;  p arm central momentum (MeV/c)
   spec%p%theta = 26.145   	;  p arm angle setting (degrees)
 end parm kinematics_main
 
@@ -74,7 +74,7 @@ end parm beamandtargetinfo
 ; thus pointing above target and giving a negative shift to particle's xptar)
 begin parm spect_offset
 ;  spec%e%offset%x = 0.4         ;  x offset (cm)
-;  spec%e%offset%y = 0.030       ;  y offset (cm)
+;  spec%e%offset%y = 0.014       ;  y offset (cm)
 ;  spec%e%offset%y = 0.30         ;  y offset (cm)
 ;  spec%e%offset%z = 0.          ;  z offset (cm)
 ;  spec%e%offset%xptar = 1.10    ;  xptar offset (mr)    !x(y)ptar is slope, so

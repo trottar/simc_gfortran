@@ -47,7 +47,7 @@ if [[ $r_flag = "true" ]]; then
     KIN=$2
     OFFSET=$3
     cd "${SIMCPATH}/input"
-    cp "Heep_Coin_${KIN}.inp" "Heep_Coin_${KIN}_Offset_test.inp"
+    cp "Heep_Coin_${KIN}.inp" "Heep_Coin_${KIN}_Offset.inp"
     if [[ $3 -eq "" ]]; then
 	exit 0
     fi
@@ -56,7 +56,7 @@ else
     OFFSET=$2
 fi
 
-InputSIMC="Heep_Coin_${KIN}_Offset_test.inp"
+InputSIMC="Heep_Coin_${KIN}_Offset.inp"
 
 cd "${SIMCPATH}/scripts"
 python3 setOffset.py ${InputSIMC} ${OFFSET}

@@ -25,13 +25,31 @@ USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 
+while getopts 'hc' flag; do
+    case "${flag}" in
+        h) 
+        echo "---------------------------"
+        echo "./check_Offsets.sh -{flags}"
+        echo "---------------------------"
+        echo
+        echo "The following flags can be called for the heep analysis..."
+        echo "    -h, help"
+        echo "    -c, compile fortran code"
+        exit 0
+        ;;
+        c) c_flag='true' ;;
+        *) print_usage
+        exit 1 ;;
+    esac
+done
+
 HEEPFOR="heepcheck"
 
 cd ${SIMCPATH}/scripts/
-if [[ -f ${HEEPFOR} ]]; then
-    ./${HEEPFOR}
-else
+if [[ $c_flag = "true" ]]; then
     echo "Compiling ${HEEPFOR}.f..."
     eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"
+    ./${HEEPFOR}
+else
     ./${HEEPFOR}
 fi

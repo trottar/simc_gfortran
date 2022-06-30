@@ -28,7 +28,10 @@ SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 HEEPFOR="heepcheck"
 
 cd ${SIMCPATH}/scripts/
-if [[ -f ${HEEPFOR} ]]
-echo "Compiling ${HEEPFOR}.f..."
-eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"
-./${HEEPFOR}
+if [[ -f ${HEEPFOR} ]]; then
+    ./${HEEPFOR}
+else
+    echo "Compiling ${HEEPFOR}.f..."
+    eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"
+    ./${HEEPFOR}
+fi

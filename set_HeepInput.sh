@@ -50,7 +50,8 @@ if [[ $r_flag = "true" ]]; then
     OFFSET=$3
     cd "${SIMCPATH}/input"
     cp "Heep_Coin_${KIN}.inp" "Heep_Coin_${KIN}_Offset.inp"
-    if [[ $3 -eq "" ]]; then
+    #if [[ $3 -eq "" ]]; then
+    if [[ -z "$3" ]]; then
 	exit 0
     fi
 elif [[ $a_flag = "true" ]]; then

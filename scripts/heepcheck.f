@@ -24,8 +24,8 @@ c
      1/"    e_e     th_e'    e_e'     q     th_q     W"/6f8.1)
       write(6,603)
  603  format(/"variations in W, E_m and p_m for changes in parms",
-     1/"     dE   dth_e'  dp_e'  dthp  dp_p  ",
-     2 "  dW    dE_m   dp_m(par)  dp_m(perp)"/)
+     1/"     dE   dth_e'  dp_e'  dthp  dp_p |",
+     2 " dW    dE_m   dp_m(par)  dp_m(perp)"/)
       unity=1.0
 c   variation of +0.1% in beam energy
       de=0.001*e0
@@ -34,7 +34,7 @@ c   variation of +0.1% in beam energy
       derv(3,1)=de*cos(thq0*radfac)
       derv(4,1)=de*sin(thq0*radfac)
       write(6,611)unity,(derv(i,1),i=1,4)
- 611  format(f7.1,28x,4f8.2)
+ 611  format(f7.1,28x," |",4f8.2)
 c   variation of +1 mrad in electron angle
       dth=0.001
       derv(1,2)=w(e0,pe0,the0+dth/radfac)-w0
@@ -42,7 +42,7 @@ c   variation of +1 mrad in electron angle
       derv(3,2)=pe0*dth*sin((the0+thq0)*radfac)
       derv(4,2)=-pe0*dth*cos((the0+thq0)*radfac)
       write(6,612)unity,(derv(i,2),i=1,4)
- 612  format(7x,f7.1,21x,4f8.2)
+ 612  format(7x,f7.1,21x," |",4f8.2)
 c   variation of +0.1% in scattered electron energy
       dpe=0.001*pe0
       derv(1,3)=w(e0,pe0+dpe,the0)-w0
@@ -50,7 +50,7 @@ c   variation of +0.1% in scattered electron energy
       derv(3,3)=-dpe*cos((the0+thq0)*radfac)
       derv(4,3)=-dpe*sin((the0+thq0)*radfac)
       write(6,613)unity,(derv(i,3),i=1,4)
- 613  format(14x,f7.1,14x,4f8.2)
+ 613  format(14x,f7.1,14x," |",4f8.2)
 c   variation of +1 mrad in proton angle
       dthp=0.001
       derv(1,4)=0.0
@@ -58,7 +58,7 @@ c   variation of +1 mrad in proton angle
       derv(3,4)=0.0
       derv(4,4)=q0*dthp
       write(6,614)unity,(derv(i,4),i=1,4)
- 614  format(21x,f7.1,7x,4f8.2)
+ 614  format(21x,f7.1,7x," |",4f8.2)
 c   variation of +0.1% in proton momentum
       dpp=0.001*q0
       derv(1,5)=0.0
@@ -66,7 +66,7 @@ c   variation of +0.1% in proton momentum
       derv(3,5)=-dpp
       derv(4,5)=0.0
       write(6,615)unity,(derv(i,5),i=1,4)
- 615  format(28x,f7.1,4f8.2)
+ 615  format(28x,f7.1," |",4f8.2)
       write(6,610)
  610  format(/" now give your own de0, dthe, dpe, dthp, dpp;",
      1 /" the units are 0.1% for momenta and 1 mrad for angles",
@@ -88,7 +88,7 @@ c
       diff(i)=diff(i)+par(j)*derv(i,j)
   20  continue
       write(6,620)par, diff
- 620  format(5f7.1,4f8.2)
+ 620  format(5f7.1," |",4f8.2)
       goto 10
       end
       function side3(x,y,t)

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 10:12:15 trottar"
+# Time-stamp: "2022-06-29 09:30:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -66,17 +66,18 @@ ltsep package import and pathing definitions
 '''
 
 # Import package for cuts
-import ltsep as lt 
+from ltsep import Root
 
-proc_root = lt.Root(os.path.realpath(__file__),"Plot_SimcCoin").setup_ana()
-p = proc_root[2] # Dictionary of pathing variables
-OUTPATH = proc_root[3] # Get pathing for OUTPATH
+lt=Root(os.path.realpath(__file__),"Plot_SimcCoin")
 
 # Add this to all files for more dynamic pathing
-USER =  p["USER"] # Grab user info for file finding
-HOST = p["HOST"]
-UTILPATH = p["UTILPATH"]
-SIMCPATH = p["SIMCPATH"]
+USER=lt.USER # Grab user info for file finding
+HOST=lt.HOST
+REPLAYPATH=lt.REPLAYPATH
+UTILPATH=lt.UTILPATH
+SIMCPATH=lt.SIMCPATH
+ANATYPE=lt.ANATYPE
+OUTPATH=lt.OUTPATH
 
 rootFile = OUTPATH+"/"+InDATAFilename
 rootFile_DUMMY = OUTPATH+"/"+InDUMMYFilename
@@ -89,7 +90,7 @@ outputpdf  = OUTPATH+"/" + OutFilename + ".pdf"
 ###############################################################################################################################################
 
 # Grabs simc number of events and weight
-simc_hist = "%s/OUTPUT/Analysis/HeeP/Heep_Coin_%s.hist" % (SIMCPATH,heep_kinematics)
+simc_hist = "%s/OUTPUT/Analysis/HeeP/%s" % (SIMCPATH,InSIMCFilename.replace('.root','.hist'))
 f_simc = open(simc_hist)
 for line in f_simc:
     print(line)

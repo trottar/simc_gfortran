@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-13 09:31:00 trottar"
+# Time-stamp: "2022-06-30 05:13:53 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -22,15 +22,12 @@ ltsep package import and pathing definitions
 '''
 
 # Import package for cuts
-import ltsep as lt 
+from ltsep import Root
 
-proc_root = lt.Root(os.path.realpath(__file__),"Plot_SimcCoin").setup_ana()
-p = proc_root[2] # Dictionary of pathing variables
-OUTPATH = proc_root[3] # Get pathing for OUTPATH
+lt=Root(os.path.realpath(__file__))
 
 # Add this to all files for more dynamic pathing
-UTILPATH = p["UTILPATH"]
-
+UTILPATH=lt.UTILPATH
 
 ################################################################################################################################################
 # Define efficiencies

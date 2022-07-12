@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-29 09:30:07 trottar"
+# Time-stamp: "2022-07-01 01:46:41 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -266,17 +266,17 @@ H_ssyptar_DUMMY  = ROOT.TH1D("H_ssyptar_DUMMY","SHMS yptar", 300, -0.04, 0.04)
 H_ssyptar_DUMMY_rand  = ROOT.TH1D("H_ssyptar_DUMMY_rand","SHMS yptar", 300, -0.04, 0.04)
 H_ssyptar_SIMC  = ROOT.TH1D("H_ssyptar_SIMC","SHMS yptar", 300, -0.04, 0.04)
 
-H_q_DATA        = ROOT.TH1D("H_q_DATA","q", 300, 5.0, 7.0)
-H_q_DATA_rand        = ROOT.TH1D("H_q_DATA_rand","q", 300, 5.0, 7.0)
-H_q_DUMMY        = ROOT.TH1D("H_q_DUMMY","q", 300, 5.0, 7.0)
-H_q_DUMMY_rand        = ROOT.TH1D("H_q_DUMMY_rand","q", 300, 5.0, 7.0)
-H_q_SIMC        = ROOT.TH1D("H_q_SIMC","q", 300, 5.0, 7.0)
+H_q_DATA        = ROOT.TH1D("H_q_DATA","q", 300, 0.0, 10.0)
+H_q_DATA_rand        = ROOT.TH1D("H_q_DATA_rand","q", 300, 0.0, 10.0)
+H_q_DUMMY        = ROOT.TH1D("H_q_DUMMY","q", 300, 0.0, 10.0)
+H_q_DUMMY_rand        = ROOT.TH1D("H_q_DUMMY_rand","q", 300, 0.0, 10.0)
+H_q_SIMC        = ROOT.TH1D("H_q_SIMC","q", 300, 0.0, 10.0)
 
-H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2", 300, 1.5, 8.0)  
-H_Q2_DATA_rand       = ROOT.TH1D("H_Q2_DATA_rand","Q2", 300, 1.5, 8.0)  
-H_Q2_DUMMY       = ROOT.TH1D("H_Q2_DUMMY","Q2", 300, 1.5, 8.0)  
-H_Q2_DUMMY_rand       = ROOT.TH1D("H_Q2_DUMMY_rand","Q2", 300, 1.5, 8.0)  
-H_Q2_SIMC       = ROOT.TH1D("H_Q2_SIMC","Q2", 300, 1.5, 8.0)  
+H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2", 300, 0.0, 10.0)  
+H_Q2_DATA_rand       = ROOT.TH1D("H_Q2_DATA_rand","Q2", 300, 0.0, 10.0)  
+H_Q2_DUMMY       = ROOT.TH1D("H_Q2_DUMMY","Q2", 300, 0.0, 10.0)  
+H_Q2_DUMMY_rand       = ROOT.TH1D("H_Q2_DUMMY_rand","Q2", 300, 0.0, 10.0)  
+H_Q2_SIMC       = ROOT.TH1D("H_Q2_SIMC","Q2", 300, 0.0, 10.0)  
 
 H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 300, 0.5, 1.0)
 H_epsilon_DATA_rand  = ROOT.TH1D("H_epsilon_DATA_rand","epsilon", 300, 0.5, 1.0)

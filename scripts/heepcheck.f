@@ -25,7 +25,7 @@ c
       write(6,603)
  603  format(/"variations in W, E_m and p_m for changes in parms",
      1/"     dE   dth_e'  dp_e'  dthp  dp_p |",
-     2 " dW    dE_m   dp_m(par)  dp_m(perp)"/)
+     2 "    dW    dE_m   dp_m(par)  dp_m(perp)"/)
       unity=1.0
 c   variation of +0.1% in beam energy
       de=0.001*e0

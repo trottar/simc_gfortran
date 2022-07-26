@@ -88,6 +88,7 @@ else
     InputSIMC="Heep_Coin_${KIN}"
 fi
 
+cd ${SIMCPATH}/scripts
 if [[ $a_flag = "true" ]]; then
     echo
     echo 

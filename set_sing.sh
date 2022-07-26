@@ -71,10 +71,9 @@ SIMCINP=`python3 getSetting.py ${InputSIMC}`
 BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
 THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 
-echo $BEAMINP
-echo $THETAINP
-
 OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")
+
+echo "$OUTPUTELAS"
 
 cd "${SIMCPATH}/scripts/SING"
 python3 setElasArm.py  ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} "$OUTPUTELAS" ${InputSIM}

@@ -8,7 +8,7 @@ set inp_theta [lindex $argv 1]
 spawn ./heepcheck
 
 #if we encounter this message ...
-expect " enter electron energy(MeV) and angle; E0=0/:" {
+expect " enter electron energy(MeV) and angle; E0=0/:/" {
     #... we send it our first argument
     send "$inp_energy\r"
     send "$inp_theta\r"

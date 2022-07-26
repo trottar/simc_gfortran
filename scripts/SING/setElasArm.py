@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 13:44:04 trottar"
+# Time-stamp: "2022-07-26 13:44:54 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -76,7 +76,7 @@ print(data)
 print(ebeam_elas,eTh_elas)
 
 for d in data:
-    if eTh in d[0]:
+    if eTh_elas in d[0]:
         eP_elas = d[2]
         pTh_elas = d[3]
         pP_elas = d[4]

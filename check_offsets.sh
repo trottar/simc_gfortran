@@ -72,8 +72,6 @@ fi
 
 SIMCINP=`python3 getSetting.py ${InputSIMC}`
 
-echo "$SIMCINP"
-
 BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
 THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 

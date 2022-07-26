@@ -49,16 +49,21 @@ cd ${SIMCPATH}/scripts/SING
 if [[ $c_flag = "true" ]]; then
     echo "Compiling ${ELASFOR}.f..."
     eval "gfortran -o  ${ELASFOR} ${ELASFOR}.f"
-    INPBEAM=$2
+    KIN=$2
+    spec=$3
+    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
 else
-    INPBEAM=$1
+    KIN=$1
+    spec=$2
+    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
 fi
 
-#echo "$(($(./${ELASFOR}.expect ${INPBEAM})))"
-OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${INPBEAM})")
-#OUTPUTELAS=$(echo "$(($(./${ELASFOR}.expect ${INPBEAM})))")
+SIMCINP='python3 getSetting.py ${KIN} ${SPEC}'
 
-#echo "$OUTPUTELAS"
+INPBEAM='echo ${SIMCINP} | cut -d ',' -f1'
+INPTHETA='echo ${SIMCINP} | cut -d ',' -f2'
+
+OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${INPBEAM})")
 
 cd "${SIMCPATH}/scripts/SING"
-python3 setElasArm.py "$OUTPUTELAS"
+python3 setElasArm.py ${INPBEAM} ${INPTHETA} ${SPEC} "$OUTPUTELAS"

@@ -1,0 +1,66 @@
+#! /usr/bin/python
+
+#
+# Description:
+# ================================================================
+# Time-stamp: "2022-07-26 12:16:16 trottar"
+# ================================================================
+#
+# Author:  Richard L. Trotta III <trotta@cua.edu>
+#
+# Copyright (c) trottar
+#
+import sys,os,math
+
+KIN = sys.argv[1]
+SPEC = sys.argv[2]
+
+################################################################################################################################################
+'''
+ltsep package import and pathing definitions
+'''
+# Import package for cuts
+from ltsep import Root
+
+lt=Root(os.path.realpath(__file__))
+
+# Add this to all files for more dynamic pathing
+UTILPATH=lt.UTILPATH
+SIMCPATH=lt.SIMCPATH
+
+################################################################################################################################################
+
+InputSIMC = "Heep_%s_%s.inp" % (SPEC,KIN)
+
+# Open inp_f file to grab prescale values and tracking efficiency
+inp_f = SIMCPATH+"/input/%s.inp" % InputSIMC
+
+with open(inp_f, 'r') as f:
+    f_data = f.read()
+
+with open(inp_f, 'r') as f:
+    # Search for keywords, then save as value in dictionary
+    for line in f:
+        data = line.split('=')
+        if 'Ebeam' in data[0]:
+            if not 'dEbeam' in data[0]:
+                ebeam = data[1].split(";")[0]
+        if 'spec%e%P' in data[0]:
+            eP = data[1].split(";")[0]
+        if 'spec%e%theta' in data[0]:
+            eTh = data[1].split(";")[0]
+        if 'spec%p%P' in data[0]:
+            pP = data[1].split(";")[0]
+        if 'spec%p%theta' in data[0]:
+            pTh = data[1].split(";")[0]
+
+inpDict = {
+    "ebeam" : ebeam,
+    "eP" : eP,
+    "eTh" : eTh,
+    "pP" : pP,
+    "pTh" : pTh,
+}
+
+BashPathEntry=("%s,%s,%s,%s,%s" % (inpDict["ebeam"],inpDict["eP"],inpDict["eTh"],inpDict["pP"],inpDict["pTh"]))
+print(BashPathEntry)

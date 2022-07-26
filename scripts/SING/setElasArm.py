@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 11:59:08 trottar"
+# Time-stamp: "2022-07-26 12:17:05 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -12,8 +12,11 @@
 #
 import sys,os,math
 
-inp_table = sys.argv[1]
-
+beam = sys.argv[1]
+eTh = sys.argv[2]
+SPEC = sys.argv[3]
+inp_table = sys.argv[3]
+                   
 ################################################################################################################################################
 '''
 ltsep package import and pathing definitions
@@ -37,9 +40,7 @@ for i,l in enumerate(data):
     data[i] = [j.strip(' ').strip('\r') for j in data[i]]
 print(data)
 
-    
-#for line in inp_table:
-#    print("-",line)
+print(beam,eTh)    
 
 '''
 # Open inp_f file to grab prescale values and tracking efficiency

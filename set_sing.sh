@@ -45,11 +45,6 @@ while getopts 'hca' flag; do
     esac
 done
 
-InputSIMC="Heep_${SPEC}_${KIN}"
-
-cd ${SIMCPATH}/scripts
-SIMCINP=`python3 getSetting.py ${InputSIMC}`
-
 ELASFOR="elas_kin"
 
 cd ${SIMCPATH}/scripts/SING
@@ -69,9 +64,15 @@ else
     KIN=$2
 fi
 
+InputSIMC="Heep_${SPEC}_${KIN}"
+
+cd ${SIMCPATH}/scripts
+SIMCINP=`python3 getSetting.py ${InputSIMC}`
+
 BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
 THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 
+cd ${SIMCPATH}/scripts/SING
 OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")
 
 python3 setElasArm.py ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} ${InputSIMC} "$OUTPUTELAS"

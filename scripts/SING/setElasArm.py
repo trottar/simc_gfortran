@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 13:37:28 trottar"
+# Time-stamp: "2022-07-26 13:38:33 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -83,8 +83,6 @@ for d in data:
         print("For eTh = %s the elastic settings are...\n",d)
 
 outDict = inpDict.copy()
-
-print("Given offsets...\n",offset,"\n")
 
 for off in offset:
     for key,val in inpDict.items():

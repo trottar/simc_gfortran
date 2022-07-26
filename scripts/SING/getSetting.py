@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 12:16:16 trottar"
+# Time-stamp: "2022-07-26 12:22:41 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -30,7 +30,7 @@ SIMCPATH=lt.SIMCPATH
 
 ################################################################################################################################################
 
-InputSIMC = "Heep_%s_%s.inp" % (SPEC,KIN)
+InputSIMC = "Heep_%s_%s" % (SPEC,KIN)
 
 # Open inp_f file to grab prescale values and tracking efficiency
 inp_f = SIMCPATH+"/input/%s.inp" % InputSIMC

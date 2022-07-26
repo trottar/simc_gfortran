@@ -24,6 +24,16 @@ while getopts 'haos' flag; do
     esac
 done
 
+if [[ $s_flag = "true" ]]; then
+    spec=$2
+    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+    KIN=$3
+elif [[ $a_flag = "true" || $o_flag = "true" ]]; then
+    KIN=$2
+else
+    KIN=$1
+fi
+
 # Runs script in the ltsep python package that grabs current path enviroment
 if [[ ${HOSTNAME} = *"cdaq"* ]]; then
     PATHFILE_INFO=`python3 /home/cdaq/pionLT-2021/hallc_replay_lt/UTIL_PION/bin/python/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string

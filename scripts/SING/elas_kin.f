@@ -33,7 +33,7 @@ c     theta =14.0
       write(6,*)' Electron beam energy: ',ei,' GeV'
       
       write(6,790)
- 790  format(/,t3,'Th_e',t14,'Q^2',t24,'E_e',t32,'Th_p',t44,'P_p',
+ 790  format(/,'Th_e',t14,'Q^2',t24,'E_e',t32,'Th_p',t44,'P_p',
      1     t55,'Mott',t62,'Sig_p (fm^2/sr)')
       do i=0,1000
          theta = 7.*pi/180 + i/20.*pi/180.

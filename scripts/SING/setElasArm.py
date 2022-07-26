@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 11:37:26 trottar"
+# Time-stamp: "2022-07-26 11:38:02 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -35,7 +35,7 @@ data_lst = data_str.split("\n")
 for i,l in enumerate(data_lst):
     print(l)
     print(l.split('\t'))
-    data_lst[i] = l.split('     ')
+    data_lst[i] = l.split('\t')
 #print(data_lst)
 
     

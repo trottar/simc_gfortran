@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 12:22:41 trottar"
+# Time-stamp: "2022-07-26 12:26:22 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -55,10 +55,10 @@ with open(inp_f, 'r') as f:
             pTh = data[1].split(";")[0]
 
 inpDict = {
-    "ebeam" : ebeam,
-    "eP" : eP,
+    "ebeam" : float(ebeam)/1000, # Convert to GeV
+    "eP" : float(eP)/1000,
     "eTh" : eTh,
-    "pP" : pP,
+    "pP" : float(pP)/1000,
     "pTh" : pTh,
 }
 

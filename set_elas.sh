@@ -49,7 +49,7 @@ cd ${SIMCPATH}/scripts/SING
 if [[ $c_flag = "true" ]]; then
     echo "Compiling ${ELASFOR}.f..."
     eval "gfortran -o  ${ELASFOR} ${ELASFOR}.f"
-    ./${ELASFOR}
+    ELASOUT=$(eval ./${ELASFOR})
 else
-    ./${ELASFOR}
+    ELASOUT=$(eval ./${ELASFOR})
 fi

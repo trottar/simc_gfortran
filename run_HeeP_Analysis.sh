@@ -3,15 +3,17 @@
 while getopts 'haos' flag; do
     case "${flag}" in
         h) 
-        echo "---------------------------------------------------"
-        echo "./run_HeeP_Analysis.sh -{flags} {kinematic setting}"
-        echo "---------------------------------------------------"
+        echo "--------------------------------------------------------------"
+        echo "./run_HeeP_Analysis.sh -{flags} {variable arguments, see help}"
+        echo "--------------------------------------------------------------"
         echo
         echo "The following flags can be called for the heep analysis..."
         echo "    -h, help"
         echo "    -a, analyze"
-        echo "    -o, offset"
+	echo "        coin -> KIN=arg1"
+	echo "        sing -> SPEC=arg1 KIN=arg2 (requires -s flag)"
 	echo "    -s, single arm"
+	echo "    -s, offset to replay applied"
         exit 0
         ;;
         a) a_flag='true' ;;
@@ -23,14 +25,15 @@ while getopts 'haos' flag; do
 done
 
 if [[ $a_flag = "true" || $o_flag = "true" || $s_flag = "true" ]]; then
-    KIN=$2
+    if [[ $s_flag = "true" ]]; then
+	spec=$2
+	SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+	KIN=$3
+    else
+	KIN=$2
+    fi
 else
     KIN=$1
-fi
-
-if [[ $s_flag = "true" ]]; then
-    spec=$3
-    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
 fi
 
 # Runs script in the ltsep python package that grabs current path enviroment
@@ -61,27 +64,25 @@ SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 if [[ $s_flag = "true" ]]; then
     InDATAFilename="Raw_Data_${SPEC}_${KIN}.root"
     InDUMMYFilename="Raw_DummyData_${SPEC}_${KIN}.root"
-    if [[ $o_flag = "true" ]]; then
-	InSIMCFilename="Heep_Coin_${SPEC}_${KIN}_Offset.root"
-	OutFullAnalysisFilename="FullAnalysis_${SPEC}_${KIN}_Offset"
-    else
-	InSIMCFilename="Heep_Coin_${SPEC}_${KIN}.root"
-	OutFullAnalysisFilename="FullAnalysis_${SPEC}_${KIN}"
-    fi
+    InSIMCFilename="Heep_Coin_${SPEC}_${KIN}.root"
     OutDATAFilename="Analysed_Data_${SPEC}_${KIN}"
     OutDUMMYFilename="Analysed_DummyData_${SPEC}_${KIN}"
+    if [[ $o_flag = "true" ]]; then
+	OutFullAnalysisFilename="FullAnalysis_Offset_${SPEC}_${KIN}"
+    else
+	OutFullAnalysisFilename="FullAnalysis_${SPEC}_${KIN}"
+    fi
 else
     InDATAFilename="Raw_Data_${KIN}.root"
     InDUMMYFilename="Raw_DummyData_${KIN}.root"
-    if [[ $o_flag = "true" ]]; then
-	InSIMCFilename="Heep_Coin_${KIN}_Offset.root"
-	OutFullAnalysisFilename="FullAnalysis_${KIN}_Offset"
-    else
-	InSIMCFilename="Heep_Coin_${KIN}.root"
-	OutFullAnalysisFilename="FullAnalysis_${KIN}"
-    fi
+    InSIMCFilename="Heep_Coin_${KIN}.root"
     OutDATAFilename="Analysed_Data_${KIN}"
     OutDUMMYFilename="Analysed_DummyData_${KIN}"
+    if [[ $o_flag = "true" ]]; then
+	OutFullAnalysisFilename="FullAnalysis_Offset_${KIN}"
+    else
+	OutFullAnalysisFilename="FullAnalysis_${KIN}"
+    fi
 fi
     
 if [[ $KIN = "10p6" ]]; then

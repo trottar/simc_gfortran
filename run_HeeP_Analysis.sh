@@ -194,4 +194,44 @@ if [[ $a_flag = "true" ]]; then
 	echo "Combining root files..."
 	hadd -f ${OutDUMMYFilename}.root *_-1_Raw_Data.root
 	rm -f *_-1_Raw_Data.root
+    fi
 fi
+
+cd "${SIMCPATH}/scripts"
+
+DataChargeVal=()
+DataEffVal=()
+echo
+echo "Calculating data total charge..."
+for i in "${data[@]}"
+do
+    DataChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
+    DataEffVal+=($(python3 calculate_efficiency.py "$i"))
+    #echo "${DataChargeVal[@]} mC"
+done
+DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
+echo "${DataChargeSum} uC"
+
+DummyChargeVal=()
+DummyEffVal=()
+echo
+echo "Calculating dummy total charge..."
+for i in "${dummydata[@]}"
+do
+    DummyChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
+    DummyEffVal+=($(python3 calculate_efficiency.py "$i"))
+    #echo "${DummyChargeVal[@]} mC"
+done
+DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
+echo "${DummyChargeSum} uC"
+
+if [[ $s_flag = "true" ]]; then
+    cd "${SIMCPATH}/scripts/SING"
+    python3 HeepSing.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${SPEC}
+else
+    cd "${SIMCPATH}/scripts/COIN"
+    python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename}
+fi
+
+cd "${SIMCPATH}"
+evince "OUTPUT/Analysis/HeeP/${OutFullAnalysisFilename}.pdf"

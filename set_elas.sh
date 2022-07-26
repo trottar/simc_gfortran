@@ -54,7 +54,9 @@ else
     INPBEAM=$1
 fi
 
-OUTPUTELAS=$(./${ELASFOR}.expect ${INPBEAM})
+read -d '' OUTPUTELAS << EOF
+./${ELASFOR}.expect ${INPBEAM}
+EOF
 
 echo $OUTPUTELAS
 

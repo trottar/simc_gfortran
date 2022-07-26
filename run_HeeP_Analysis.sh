@@ -24,3 +24,27 @@ ANATYPE=`echo ${PATHFILE_INFO} | cut -d ','  -f13`
 USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
+
+while getopts 'haos' flag; do
+    case "${flag}" in
+        h) 
+        echo "--------------------------------------------------------------"
+        echo "./run_HeeP_Analysis.sh -{flags} {variable arguments, see help}"
+        echo "--------------------------------------------------------------"
+        echo
+        echo "The following flags can be called for the heep analysis..."
+        echo "    -h, help"
+        echo "    -a, analyze"
+	echo "        coin -> KIN=arg1"
+	echo "        sing -> SPEC=arg1 KIN=arg2 (requires -s flag)"
+	echo "    -s, single arm"
+	echo "    -o, offset to replay applied"
+        exit 0
+        ;;
+        a) a_flag='true' ;;
+        o) o_flag='true' ;;
+	s) s_flag='true' ;;
+        *) print_usage
+        exit 1 ;;
+    esac
+done

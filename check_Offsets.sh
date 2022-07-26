@@ -49,7 +49,16 @@ cd ${SIMCPATH}/scripts
 if [[ $c_flag = "true" ]]; then
     echo "Compiling ${HEEPFOR}.f..."
     eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"
-    ./${HEEPFOR}
+    KIN=$2
 else
-    ./${HEEPFOR}
+    KIN=$1
 fi
+
+InputSIMC="Heep_${SPEC}_${KIN}"
+
+SIMCINP=`python3 getSetting.py ${InputSIMC}`
+
+BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
+THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
+
+OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")

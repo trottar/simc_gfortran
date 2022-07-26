@@ -64,10 +64,9 @@ else
     KIN=$1
 fi
 
-
 InputSIMC="Heep_${SPEC}_${KIN}"
 
-SIMCINP=`python3 getSetting.py ${KIN} ${SPEC} ${InputSIMC}`
+SIMCINP=`python3 getSetting.py ${InputSIMC}`
 
 BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
 THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`

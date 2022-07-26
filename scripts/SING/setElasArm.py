@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 12:18:48 trottar"
+# Time-stamp: "2022-07-26 12:24:20 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -12,7 +12,7 @@
 #
 import sys,os,math
 
-beam = sys.argv[1]
+beam = sys.argv[1]/1000
 eTh = sys.argv[2]
 SPEC = sys.argv[3]
 inp_table = sys.argv[4]

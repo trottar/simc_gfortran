@@ -8,11 +8,11 @@
    1  continue
       write(6,601)
  601  format(" enter electron energy(MeV) and angle; E0=0/:")     
-      read(5,*)e0*1000, the0
-      if(e0.lt.0.1)stop
-      call heepkin(e0,the0,pe0,thq0,q0)
-      w0=w(e0,pe0,the0)
-      write(6,602)e0,the0,pe0,q0,thq0,w0
+      read(5,*)e0, the0
+      if(e0*1000.lt.0.1)stop
+      call heepkin(e0*1000,the0,pe0,thq0,q0)
+      w0=w(e0*1000,pe0,the0)
+      write(6,602)e0*1000,the0,pe0,q0,thq0,w0
 c
 c  these are the real values corresponding to the given energy and angle
 c  they will in general (at least for q, thq and W) NOT be the ones you
@@ -28,8 +28,8 @@ c
      2 "    dW    dE_m   dp_m(par)  dp_m(perp)"/)
       unity=1.0
 c   variation of +0.1% in beam energy
-      de=0.001*e0
-      derv(1,1)=w(e0+de,pe0,the0)-w0
+      de=0.001*e0*1000
+      derv(1,1)=w(e0*1000+de,pe0,the0)-w0
       derv(2,1)=de
       derv(3,1)=de*cos(thq0*radfac)
       derv(4,1)=de*sin(thq0*radfac)
@@ -37,7 +37,7 @@ c   variation of +0.1% in beam energy
  611  format(f7.1,28x," |",4f8.2)
 c   variation of +1 mrad in electron angle
       dth=0.001
-      derv(1,2)=w(e0,pe0,the0+dth/radfac)-w0
+      derv(1,2)=w(e0*1000,pe0,the0+dth/radfac)-w0
       derv(2,2)=0.0
       derv(3,2)=pe0*dth*sin((the0+thq0)*radfac)
       derv(4,2)=-pe0*dth*cos((the0+thq0)*radfac)

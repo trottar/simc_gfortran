@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 13:36:11 trottar"
+# Time-stamp: "2022-07-26 13:37:28 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -12,10 +12,11 @@
 #
 import sys,os,math
 
-ebeam_elas = sys.argv[1]
-eTh_elas = sys.argv[2]
-SPEC = sys.argv[3]
-inp_table = sys.argv[4]
+KIN = sys.argv[1]
+SPEC = sys.argv[2]
+ebeam_elas = sys.argv[3]
+eTh_elas = sys.argv[4]
+inp_table = sys.argv[5]
 
 ################################################################################################################################################
 '''

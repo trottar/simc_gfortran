@@ -66,4 +66,4 @@ THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")
 
 cd "${SIMCPATH}/scripts/SING"
-python3 setElasArm.py ${BEAMINP} ${THETAINP} ${SPEC} "$OUTPUTELAS"
+python3 setElasArm.py  ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} "$OUTPUTELAS"

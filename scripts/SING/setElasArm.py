@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 14:18:38 trottar"
+# Time-stamp: "2022-07-26 14:22:45 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -12,13 +12,14 @@
 #
 import sys,os,math
 
+'''
 KIN = sys.argv[1]
 SPEC = sys.argv[2]
 ebeam_elas = sys.argv[3]
 eTh_elas = sys.argv[4]
 InputSIMC = sys.argv[5]
 inp_table = sys.argv[6]
-
+'''
 ################################################################################################################################################
 '''
 ltsep package import and pathing definitions

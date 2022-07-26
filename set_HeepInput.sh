@@ -25,57 +25,68 @@ USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 
-while getopts 'hca' flag; do
+while getopts 'hcas' flag; do
     case "${flag}" in
         h) 
-        echo "---------------------------"
-        echo "./check_Offsets.sh -{flags}"
-        echo "---------------------------"
+        echo "----------------------------------------------------------"
+        echo "./set_HeepInput.sh -{flags} {variable arguments, see help}"
+        echo "----------------------------------------------------------"
         echo
         echo "The following flags can be called for the heep analysis..."
         echo "    -h, help"
-        echo "    -c, compile fortran code"
-	echo "    -a, run SIMC with new singles settings"
+        echo "    -c, compile fortran code (singles only)"
+	echo "    -a, run SIMC with new settings"
+	echo "        coin -> KIN=arg1"
+	echo "        sing -> SPEC=arg1 KIN=arg2 (requires -s flag)"
+	echo "    -s, single arm"
         exit 0
         ;;
         c) c_flag='true' ;;
 	a) a_flag='true' ;;
+	s) s_flag='true' ;;
         *) print_usage
         exit 1 ;;
     esac
 done
 
-ELASFOR="elas_kin"
+if [[ $s_flag = "true" ]]; then
+    ELASFOR="elas_kin"
 
-cd ${SIMCPATH}/scripts/SING
-if [[ $c_flag = "true" ]]; then
-    echo "Compiling ${ELASFOR}.f..."
-    eval "gfortran -o  ${ELASFOR} ${ELASFOR}.f"
-    spec=$2
-    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
-    KIN=$3
-elif [[ $a_flag = "true" ]]; then
-    spec=$2
-    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
-    KIN=$3
+    cd ${SIMCPATH}/scripts/SING
+    if [[ $c_flag = "true" ]]; then
+	echo "Compiling ${ELASFOR}.f..."
+	eval "gfortran -o  ${ELASFOR} ${ELASFOR}.f"
+	spec=$2
+	SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+	KIN=$3
+    elif [[ $a_flag = "true" ]]; then
+	spec=$2
+	SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+	KIN=$3
+    else
+	spec=$1
+	SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+	KIN=$2
+    fi
+
+    InputSIMC="Heep_${SPEC}_${KIN}"
+
+    cd ${SIMCPATH}/scripts
+    SIMCINP=`python3 getSetting.py ${InputSIMC}`
+
+    BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
+    THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
+
+    cd ${SIMCPATH}/scripts/SING
+    OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")
+
+    python3 setElasArm.py ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} ${InputSIMC} "$OUTPUTELAS"
 else
-    spec=$1
-    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
-    KIN=$2
+    cd ${SIMCPATH}/scripts/COIN
+    KIN=$1
+
+    InputSIMC="Heep_Coin_${KIN}"
 fi
-
-InputSIMC="Heep_${SPEC}_${KIN}"
-
-cd ${SIMCPATH}/scripts
-SIMCINP=`python3 getSetting.py ${InputSIMC}`
-
-BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
-THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
-
-cd ${SIMCPATH}/scripts/SING
-OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")
-
-python3 setElasArm.py ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} ${InputSIMC} "$OUTPUTELAS"
 
 if [[ $a_flag = "true" ]]; then
     echo

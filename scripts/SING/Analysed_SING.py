@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 17:14:44 trottar"
+# Time-stamp: "2022-07-26 17:18:03 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -113,9 +113,9 @@ def hms_protons():
 
     # Define the array of arrays containing the relevant HMS and SHMS info                              
 
-    NoCut_HMS_Protons = [tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["W"]]
+    NoCut_HMS_Protons = [tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["H_W"]]
 
-    Uncut_HMS_Protons = [(tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["W"]) for (tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["W"]) in zip(*NoCut_HMS_Protons)]
+    Uncut_HMS_Protons = [(tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["H_W"]) for (tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["H_W"]) in zip(*NoCut_HMS_Protons)]
 
     # Create array of arrays of pions after cuts, all events, prompt and random          
 
@@ -125,7 +125,7 @@ def hms_protons():
     for arr in Cut_HMS_Protons_tmp:
         Cut_HMS_Protons_all_tmp.append(c.add_cut(arr, "ecut_pid"))
 
-    Cut_HMS_Protons_all = [(tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["W"]) for (tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["W"]) in zip(*Cut_HMS_Protons_all_tmp)]
+    Cut_HMS_Protons_all = [(tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["H_W"]) for (tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["H_W"]) in zip(*Cut_HMS_Protons_all_tmp)]
 
     HMS_Protons = {
         "Uncut_Proton_Events" : Uncut_HMS_Protons,

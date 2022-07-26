@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 11:58:21 trottar"
+# Time-stamp: "2022-07-26 11:59:08 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -31,10 +31,10 @@ SIMCPATH=lt.SIMCPATH
 
 print(inp_table)
 data_str = inp_table.split("Sig_p (fm^2/sr)")[1]
-data_lst = data_str.split("\n")
-for i,l in enumerate(data_lst):
-    data_lst[i] = l.split('    ')
-    data_lst[i] = [j.strip(' ').strip('\r') for j in data_lst[i]]
+data = data_str.split("\n")
+for i,l in enumerate(data):
+    data[i] = l.split('    ')
+    data[i] = [j.strip(' ').strip('\r') for j in data[i]]
 print(data)
 
     

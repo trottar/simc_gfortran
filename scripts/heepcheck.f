@@ -8,7 +8,7 @@
    1  continue
       write(6,601)
  601  format(" enter electron energy(MeV) and angle; E0=0/:")     
-      read(5,*)e0, the0
+      read(5,*)e0*1000, the0
       if(e0.lt.0.1)stop
       call heepkin(e0,the0,pe0,thq0,q0)
       w0=w(e0,pe0,the0)

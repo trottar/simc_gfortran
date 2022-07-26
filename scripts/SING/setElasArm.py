@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 13:24:42 trottar"
+# Time-stamp: "2022-07-26 13:36:11 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -12,8 +12,8 @@
 #
 import sys,os,math
 
-beam = sys.argv[1]
-eTh = sys.argv[2]
+ebeam_elas = sys.argv[1]
+eTh_elas = sys.argv[2]
 SPEC = sys.argv[3]
 inp_table = sys.argv[4]
 
@@ -32,21 +32,8 @@ SIMCPATH=lt.SIMCPATH
 
 ################################################################################################################################################
 
-print(inp_table)
-data_str = inp_table.split("Sig_p (fm^2/sr)")[1]
-data = data_str.split("\n")
-for i,l in enumerate(data):
-    data[i] = l.split('    ')
-    data[i] = [j.strip(' ').strip('\r') for j in data[i]]
-print(data)
+InputSIMC = "Heep_%s_%s" % (SPEC,KIN)
 
-print(beam,eTh)
-
-for d in data:
-    if eTh in d[0]:
-        print(d)
-
-'''
 # Open inp_f file to grab prescale values and tracking efficiency
 inp_f = SIMCPATH+"/input/%s.inp" % InputSIMC
 
@@ -77,34 +64,43 @@ inpDict = {
     "pTh" : pTh,
 }
 
-outDict = inpDict.copy()
+print(inp_table)
+data_str = inp_table.split("Sig_p (fm^2/sr)")[1]
+data = data_str.split("\n")
+for i,l in enumerate(data):
+    data[i] = l.split('    ')
+    data[i] = [j.strip(' ').strip('\r') for j in data[i]]
+print(data)
 
-offset = offset.split(",")
+print(ebeam_elas,eTh_elas)
+
+for d in data:
+    if eTh in d[0]:
+        eP_elas = d[2]
+        pTh_elas = d[3]
+        pP_elas = d[4]
+        print("For eTh = %s the elastic settings are...\n",d)
+
+outDict = inpDict.copy()
 
 print("Given offsets...\n",offset,"\n")
 
 for off in offset:
     for key,val in inpDict.items():
-        val = float(val)
         if key in off:
-            offsetPct = float(off.replace(key,"").replace("=",""))
-            if "Th" in key:
-                offsetValue = offsetPct*(180/(1000*math.pi))
-            else:
-                offsetValue = val*(offsetPct/1000)
             if key == "ebeam":
-                outDict[key] = " {0:.2f}  \t\t".format(val+offsetValue)
+                outDict[key] = " {0:.2f}  \t\t".format(ebeam)
             if key == "eP":
-                outDict[key] = " {0:.1f}\t\t".format(val+offsetValue)
+                outDict[key] = " {0:.1f}\t\t".format(eP)
             if key == "eTh":
-                outDict[key] = " {0:.3f}\t\t".format(val+offsetValue)
+                outDict[key] = " {0:.3f}\t\t".format(eTh)
             if key == "pP":
-                outDict[key] = " {0:.1f}\t\t".format(val+offsetValue)
+                outDict[key] = " {0:.1f}\t\t".format(pP_elas)
             if key == "pTh":
-                outDict[key] = " {0:.3f}   \t".format(val+offsetValue)
+                outDict[key] = " {0:.3f}   \t".format(pTh_elas)
 
 print("Original Values...\n",sorted(inpDict.items()))
-print("Offset Values...\n",sorted(outDict.items()))
+print("Elastic Values...\n",sorted(outDict.items()))
 
 f_data = f_data.replace(inpDict['ebeam'],outDict['ebeam'])
 f_data = f_data.replace(inpDict['eP'],outDict['eP'])
@@ -114,4 +110,3 @@ f_data = f_data.replace(inpDict['pTh'],outDict['pTh'])
 
 with open(inp_f, 'w') as f:
     f.write(f_data)
-'''

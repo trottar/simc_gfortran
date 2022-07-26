@@ -1,6 +1,6 @@
 #! /bin/bash
 
-while getopts 'hao' flag; do
+while getopts 'haos' flag; do
     case "${flag}" in
         h) 
         echo "---------------------------------------------------"
@@ -11,19 +11,26 @@ while getopts 'hao' flag; do
         echo "    -h, help"
         echo "    -a, analyze"
         echo "    -o, offset"
+	echo "    -s, single arm"
         exit 0
         ;;
         a) a_flag='true' ;;
         o) o_flag='true' ;;
+	s) s_flag='true' ;;
         *) print_usage
         exit 1 ;;
     esac
 done
 
-if [[ $a_flag = "true" || $o_flag = "true" ]]; then
+if [[ $a_flag = "true" || $o_flag = "true" || $s_flag = "true" ]]; then
     KIN=$2
 else
     KIN=$1
+fi
+
+if [[ $s_flag = "true" ]]; then
+    spec=$3
+    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
 fi
 
 # Runs script in the ltsep python package that grabs current path enviroment
@@ -51,18 +58,32 @@ USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 
-InDATAFilename="Raw_Data_${KIN}.root"
-InDUMMYFilename="Raw_DummyData_${KIN}.root"
-if [[ $o_flag = "true" ]]; then
-    InSIMCFilename="Heep_Coin_${KIN}_Offset.root"
-    OutFullAnalysisFilename="FullAnalysis_${KIN}_Offset"
+if [[ $s_flag = "true" ]]; then
+    InDATAFilename="Raw_Data_${SPEC}_${KIN}.root"
+    InDUMMYFilename="Raw_DummyData_${SPEC}_${KIN}.root"
+    if [[ $o_flag = "true" ]]; then
+	InSIMCFilename="Heep_Coin_${SPEC}_${KIN}_Offset.root"
+	OutFullAnalysisFilename="FullAnalysis_${SPEC}_${KIN}_Offset"
+    else
+	InSIMCFilename="Heep_Coin_${SPEC}_${KIN}.root"
+	OutFullAnalysisFilename="FullAnalysis_${SPEC}_${KIN}"
+    fi
+    OutDATAFilename="Analysed_Data_${SPEC}_${KIN}"
+    OutDUMMYFilename="Analysed_DummyData_${SPEC}_${KIN}"
 else
-    InSIMCFilename="Heep_Coin_${KIN}.root"
-    OutFullAnalysisFilename="FullAnalysis_${KIN}"
+    InDATAFilename="Raw_Data_${KIN}.root"
+    InDUMMYFilename="Raw_DummyData_${KIN}.root"
+    if [[ $o_flag = "true" ]]; then
+	InSIMCFilename="Heep_Coin_${KIN}_Offset.root"
+	OutFullAnalysisFilename="FullAnalysis_${KIN}_Offset"
+    else
+	InSIMCFilename="Heep_Coin_${KIN}.root"
+	OutFullAnalysisFilename="FullAnalysis_${KIN}"
+    fi
+    OutDATAFilename="Analysed_Data_${KIN}"
+    OutDUMMYFilename="Analysed_DummyData_${KIN}"
 fi
-OutDATAFilename="Analysed_Data_${KIN}"
-OutDUMMYFilename="Analysed_DummyData_${KIN}"
-
+    
 if [[ $KIN = "10p6" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # All heep coin 10p6 runs
     #declare -a data=(4827) # Just one test run
@@ -76,52 +97,98 @@ else
 fi
 
 if [[ $a_flag = "true" ]]; then
-    
-    cd "${SIMCPATH}/scripts/COIN"
-    echo
-    echo "Analysing data..."
-    echo
-    
-    for i in "${data[@]}"
-    do
+    if [[ $s_flag = "true" ]]; then
+	cd "${SIMCPATH}/scripts/SING"
 	echo
-	echo "-----------------------------"
-	echo "Analysing data run $i..."
-	echo "-----------------------------"
+	echo "Analysing ${SPEC} data..."
 	echo
-	python3 Analysed_COIN.py "$i"
-	#root -l <<EOF 
-	#.x $SIMCPATH/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
-	#EOF
-    done
-    cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
-    echo
-    echo "Combining root files..."  
-    hadd -f Analysed_Data_${KIN}.root *_-1_Raw_Data.root
-    rm -f *_-1_Raw_Data.root
-    
-    cd "${SIMCPATH}/scripts/COIN"    
-    echo
-    echo "Analysing dummy data..."
-    echo
-    
-    for i in "${dummydata[@]}"
-    do
+
+	for i in "${data[@]}"
+	do
+	    echo
+	    echo "-----------------------------"
+	    echo "Analysing data run $i..."
+	    echo "-----------------------------"
+	    echo
+	    python3 Analysed_SING.py "$i" ${SPEC}
+	    #root -l <<EOF 
+	    #.x $SIMCPATH/Analysed_SING.C("$InDATAFilename","$OutDATAFilename")
+	    #EOF
+	done
+	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
 	echo
-	echo "-----------------------------------"
-	echo "Analysing dummy data run $i..."
-	echo "-----------------------------------"
+	echo "Combining root files..."  
+	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
+	rm -f *_-1_Raw_Data.root
+
+	cd "${SIMCPATH}/scripts/SING"    
 	echo
-	python3 Analysed_COIN.py "$i"
-	#root -l <<EOF 
-	#.x $SIMCPATH/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
-	#EOF
-    done
-    cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
-    echo
-    echo "Combining root files..."
-    hadd -f Analysed_DummyData_${KIN}.root *_-1_Raw_Data.root
-    rm -f *_-1_Raw_Data.root
+	echo "Analysing ${SPEC} dummy data..."
+	echo
+
+	for i in "${dummydata[@]}"
+	do
+	    echo
+	    echo "-----------------------------------"
+	    echo "Analysing dummy data run $i..."
+	    echo "-----------------------------------"
+	    echo
+	    python3 Analysed_SING.py "$i" ${SPEC}
+	    #root -l <<EOF 
+	    #.x $SIMCPATH/Analysed_SING.C("$InDUMMYFilename","$OutDUMMYFilename")
+	    #EOF
+	done
+	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
+	echo
+	echo "Combining root files..."
+	hadd -f ${OutDUMMYFilename}.root *_-1_Raw_Data.root
+	rm -f *_-1_Raw_Data.root	
+    else
+	cd "${SIMCPATH}/scripts/COIN"
+	echo
+	echo "Analysing data..."
+	echo
+
+	for i in "${data[@]}"
+	do
+	    echo
+	    echo "-----------------------------"
+	    echo "Analysing data run $i..."
+	    echo "-----------------------------"
+	    echo
+	    python3 Analysed_COIN.py "$i"
+	    #root -l <<EOF 
+	    #.x $SIMCPATH/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
+	    #EOF
+	done
+	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
+	echo
+	echo "Combining root files..."  
+	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
+	rm -f *_-1_Raw_Data.root
+
+	cd "${SIMCPATH}/scripts/COIN"    
+	echo
+	echo "Analysing dummy data..."
+	echo
+
+	for i in "${dummydata[@]}"
+	do
+	    echo
+	    echo "-----------------------------------"
+	    echo "Analysing dummy data run $i..."
+	    echo "-----------------------------------"
+	    echo
+	    python3 Analysed_COIN.py "$i"
+	    #root -l <<EOF 
+	    #.x $SIMCPATH/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
+	    #EOF
+	done
+	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
+	echo
+	echo "Combining root files..."
+	hadd -f ${OutDUMMYFilename}.root *_-1_Raw_Data.root
+	rm -f *_-1_Raw_Data.root
 fi
 
 cd "${SIMCPATH}/scripts"
@@ -152,8 +219,13 @@ done
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
 echo "${DummyChargeSum} uC"
 
-cd "${SIMCPATH}/scripts/COIN"
-python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename}
+if [[ $s_flag = "true" ]]; then
+    cd "${SIMCPATH}/scripts/SING"
+    python3 HeepSing.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${SPEC}
+else
+    cd "${SIMCPATH}/scripts/COIN"
+    python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename}
+fi
 
 cd "${SIMCPATH}"
 evince "OUTPUT/Analysis/HeeP/${OutFullAnalysisFilename}.pdf"

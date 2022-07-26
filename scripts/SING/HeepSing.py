@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-29 09:30:52 trottar"
+# Time-stamp: "2022-07-26 08:47:32 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -48,6 +48,7 @@ dummy_charge = int(sys.argv[6])/1000
 dummy_efficiency = sys.argv[7]
 InSIMCFilename = sys.argv[8]
 OutFilename = sys.argv[9]
+spec = sys.argv[10]
 
 #data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
 data_efficiency = sum([float(i) for i in data_efficiency.split(" ")])/len([float(i) for i in data_efficiency.split(" ")])

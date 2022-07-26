@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-29 09:36:45 trottar"
+# Time-stamp: "2022-07-26 09:41:28 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -35,7 +35,6 @@ if len(sys.argv)-1!=1:
 ##################################################################################################################################################
 
 # Input params - run number and max number of events
-ROOTPrefix = "Kaon_coin_replay_production"
 runNum = sys.argv[1]
 MaxEvent = "-1"
 
@@ -46,6 +45,21 @@ ltsep package import and pathing definitions
 
 # Import package for cuts
 from ltsep import Root
+
+lt=Root(os.path.realpath(__file__))
+
+# Add this to all files for more dynamic pathing
+USER=lt.USER # Grab user info for file finding
+HOST=lt.HOST
+REPLAYPATH=lt.REPLAYPATH
+UTILPATH=lt.UTILPATH
+SIMCPATH=lt.SIMCPATH
+ANATYPE=lt.ANATYPE
+OUTPATH=lt.OUTPATH
+
+##############################################################################################################################################
+
+ROOTPrefix = "%s_coin_replay_production" % ANATYPE
 
 ##############################################################################################################################################
 '''

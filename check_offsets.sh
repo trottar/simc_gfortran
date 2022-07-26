@@ -60,6 +60,11 @@ elif [[ $c_flag = "true" && $s_flag != "true" ]]; then
     eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"
     KIN=$2
     InputSIMC="Heep_Coin_${KIN}"
+elif [[ $c_flag = "true" && $s_flag = "true" ]]; then
+    spec=$2
+    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+    KIN=$3
+    InputSIMC="Heep_${SPEC}_${KIN}"
 else
     KIN=$1
     InputSIMC="Heep_Coin_${KIN}"

@@ -24,18 +24,6 @@ while getopts 'haos' flag; do
     esac
 done
 
-if [[ $a_flag = "true" || $o_flag = "true" || $s_flag = "true" ]]; then
-    if [[ $s_flag = "true" ]]; then
-	spec=$2
-	SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
-	KIN=$3
-    else
-	KIN=$2
-    fi
-else
-    KIN=$1
-fi
-
 # Runs script in the ltsep python package that grabs current path enviroment
 if [[ ${HOSTNAME} = *"cdaq"* ]]; then
     PATHFILE_INFO=`python3 /home/cdaq/pionLT-2021/hallc_replay_lt/UTIL_PION/bin/python/ltsep/scripts/getPathDict.py $PWD` # The output of this python script is just a comma separated string
@@ -60,6 +48,30 @@ ANATYPE=`echo ${PATHFILE_INFO} | cut -d ','  -f13`
 USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
+
+if [[ $s_flag = "true" ]]; then
+    InDATAFilename="Raw_Data_${SPEC}_${KIN}.root"
+    InDUMMYFilename="Raw_DummyData_${SPEC}_${KIN}.root"
+    InSIMCFilename="Heep_Coin_${SPEC}_${KIN}.root"
+    OutDATAFilename="Analysed_Data_${SPEC}_${KIN}"
+    OutDUMMYFilename="Analysed_DummyData_${SPEC}_${KIN}"
+    if [[ $o_flag = "true" ]]; then
+	OutFullAnalysisFilename="FullAnalysis_Offset_${SPEC}_${KIN}"
+    else
+	OutFullAnalysisFilename="FullAnalysis_${SPEC}_${KIN}"
+    fi
+else
+    InDATAFilename="Raw_Data_${KIN}.root"
+    InDUMMYFilename="Raw_DummyData_${KIN}.root"
+    InSIMCFilename="Heep_Coin_${KIN}.root"
+    OutDATAFilename="Analysed_Data_${KIN}"
+    OutDUMMYFilename="Analysed_DummyData_${KIN}"
+    if [[ $o_flag = "true" ]]; then
+	OutFullAnalysisFilename="FullAnalysis_Offset_${KIN}"
+    else
+	OutFullAnalysisFilename="FullAnalysis_${KIN}"
+    fi
+fi
 
 if [[ $KIN = "10p6" && $s_flag != "true" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # All heep coin 10p6 runs

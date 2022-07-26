@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 14:38:38 trottar"
+# Time-stamp: "2022-07-26 14:43:22 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -75,7 +75,7 @@ for d in data:
         eP_elas = d[2]
         pTh_elas = d[3]
         pP_elas = d[4]
-        print("For eTh = %s the elastic settings are...\n" % eTh_elas,d)
+        print("For ebeam = %s, eTh = %s the elastic settings are...\n" % (ebeam_elas,eTh_elas),d)
 
 try:
     pTh_elas

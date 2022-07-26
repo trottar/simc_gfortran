@@ -24,6 +24,15 @@ while getopts 'haos' flag; do
     esac
 done
 
+if [[ $s_flag = "true" ]]; then
+    spec=$2
+    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+    KIN=$3
+elif [[ $a_flag = "true" || $o_flag = "true" ]]; then
+    KIN=$2
+else
+    KIN=$1
+fi
 
 # Runs script in the ltsep python package that grabs current path enviroment
 if [[ ${HOSTNAME} = *"cdaq"* ]]; then

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 11:57:58 trottar"
+# Time-stamp: "2022-07-26 11:58:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -34,7 +34,7 @@ data_str = inp_table.split("Sig_p (fm^2/sr)")[1]
 data_lst = data_str.split("\n")
 for i,l in enumerate(data_lst):
     data_lst[i] = l.split('    ')
-    data_ls[i] = [j.strip(' ').strip('\r') for j in data_lst[i]]
+    data_lst[i] = [j.strip(' ').strip('\r') for j in data_lst[i]]
 print(data)
 
     

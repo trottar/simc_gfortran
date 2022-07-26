@@ -61,28 +61,22 @@ USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 
-if [[ $s_flag = "true" ]]; then
-    InDATAFilename="Raw_Data_${SPEC}_${KIN}.root"
-    InDUMMYFilename="Raw_DummyData_${SPEC}_${KIN}.root"
-    InSIMCFilename="Heep_Coin_${SPEC}_${KIN}.root"
-    OutDATAFilename="Analysed_Data_${SPEC}_${KIN}"
-    OutDUMMYFilename="Analysed_DummyData_${SPEC}_${KIN}"
-    if [[ $o_flag = "true" ]]; then
-	OutFullAnalysisFilename="FullAnalysis_Offset_${SPEC}_${KIN}"
-    else
-	OutFullAnalysisFilename="FullAnalysis_${SPEC}_${KIN}"
-    fi
+if [[ $KIN = "10p6" && $s_flag != "true" ]]; then
+    declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # All heep coin 10p6 runs
+    #declare -a data=(4827) # Just one test run
+    declare -a dummydata=(4864)
+elif [[ $KIN = "8p2" && $s_flag != "true" ]]; then
+    declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
+    declare -a dummydata=(4864)
+elif [[ $KIN = "10p6" && $s_flag = "true" ]]; then
+    declare -a data=(4784 4785) # All heep singles 10p6 runs
+    declare -a dummydata=(4786)
+elif [[ $KIN = "8p2" && $s_flag = "true" ]]; then
+    declare -a data=(111)
+    declare -a dummydata=(111)    
 else
-    InDATAFilename="Raw_Data_${KIN}.root"
-    InDUMMYFilename="Raw_DummyData_${KIN}.root"
-    InSIMCFilename="Heep_Coin_${KIN}.root"
-    OutDATAFilename="Analysed_Data_${KIN}"
-    OutDUMMYFilename="Analysed_DummyData_${KIN}"
-    if [[ $o_flag = "true" ]]; then
-	OutFullAnalysisFilename="FullAnalysis_Offset_${KIN}"
-    else
-	OutFullAnalysisFilename="FullAnalysis_${KIN}"
-    fi
+    echo "Invalid kinematic setting, ${KIN}"
+    exit 128
 fi
 
 if [[ $a_flag = "true" ]]; then

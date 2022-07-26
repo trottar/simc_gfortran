@@ -88,12 +88,11 @@ else
     InputSIMC="Heep_Coin_${KIN}"
 fi
 
-cd ${SIMCPATH}/scripts
 if [[ $a_flag = "true" ]]; then
     echo
     echo 
     echo "Running simc analysis for ${InputSIMC}..."
     echo
-    cd "${SIMCPATH}"
+    cd ${SIMCPATH}/scripts
     ./run_simc_tree "${InputSIMC}"
 fi

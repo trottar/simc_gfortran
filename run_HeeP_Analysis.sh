@@ -49,12 +49,14 @@ while getopts 'haos' flag; do
     esac
 done
 
-if [[ $a_flag = "true" || $o_flag = "true" ]]; then
-    KIN=$2
-elif [[ $s_flag = "true" ]]; then
-    spec=$2
-    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
-    KIN=$3
+if [[ $a_flag = "true" || $o_flag = "true" || $s_flag = "true" ]]; then
+    if [[ $s_flag = "true" ]]; then
+	spec=$2
+	SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+	KIN=$3
+    else
+	KIN=$2
+    fi
 else
     KIN=$1
 fi

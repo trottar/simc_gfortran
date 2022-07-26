@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 13:23:57 trottar"
+# Time-stamp: "2022-07-26 13:51:59 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -14,6 +14,7 @@ import sys,os,math
 
 KIN = sys.argv[1]
 SPEC = sys.argv[2]
+InputSIMC = sys.argv[3]
 
 ################################################################################################################################################
 '''
@@ -29,8 +30,6 @@ UTILPATH=lt.UTILPATH
 SIMCPATH=lt.SIMCPATH
 
 ################################################################################################################################################
-
-InputSIMC = "Heep_%s_%s" % (SPEC,KIN)
 
 # Open inp_f file to grab prescale values and tracking efficiency
 inp_f = SIMCPATH+"/input/%s.inp" % InputSIMC

@@ -25,7 +25,7 @@ USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 
-while getopts 'hc' flag; do
+while getopts 'hca' flag; do
     case "${flag}" in
         h) 
         echo "---------------------------"
@@ -35,9 +35,11 @@ while getopts 'hc' flag; do
         echo "The following flags can be called for the heep analysis..."
         echo "    -h, help"
         echo "    -c, compile fortran code"
+	echo "    -a, run SIMC with new singles settings"
         exit 0
         ;;
         c) c_flag='true' ;;
+	a) a_flag='true' ;;
         *) print_usage
         exit 1 ;;
     esac
@@ -52,13 +54,20 @@ if [[ $c_flag = "true" ]]; then
     spec=$2
     SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
     KIN=$3
+elif [[ $a_flag = "true" ]]; then
+    spec=$2
+    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+    KIN=$3
 else
     spec=$1
     SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
     KIN=$1
 fi
 
-SIMCINP=`python3 getSetting.py ${KIN} ${SPEC}`
+
+InputSIMC="Heep_${SPEC}_${KIN}"
+
+SIMCINP=`python3 getSetting.py ${KIN} ${SPEC} ${InputSIMC}`
 
 BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
 THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
@@ -66,4 +75,13 @@ THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")
 
 cd "${SIMCPATH}/scripts/SING"
-python3 setElasArm.py  ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} "$OUTPUTELAS"
+python3 setElasArm.py  ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} "$OUTPUTELAS" ${InputSIM}
+
+if [[ $a_flag = "true" ]]; then
+    echo
+    echo 
+    echo "Running simc analysis for ${InputSIMC}..."
+    echo
+    cd "${SIMCPATH}"
+    ./run_simc_tree "${InputSIMC}"
+fi

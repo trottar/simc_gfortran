@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 14:25:19 trottar"
+# Time-stamp: "2022-07-26 14:26:47 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -64,15 +64,11 @@ inpDict = {
     "pTh" : pTh,
 }
 
-print(inp_table)
 data_str = inp_table.split("Sig_p (fm^2/sr)")[1]
 data = data_str.split("\n")
 for i,l in enumerate(data):
     data[i] = l.split('    ')
     data[i] = [j.strip(' ').strip('\r') for j in data[i]]
-print(data)
-
-print(ebeam_elas,eTh_elas)
 
 for d in data:
     if eTh_elas in d[0]:

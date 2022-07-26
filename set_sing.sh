@@ -73,16 +73,5 @@ THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 
 OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")
 
-echo "$OUTPUTELAS"
-
 cd "${SIMCPATH}/scripts/SING"
 python3 setElasArm.py  ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} "$OUTPUTELAS" ${InputSIM}
-
-if [[ $a_flag = "true" ]]; then
-    echo
-    echo 
-    echo "Running simc analysis for ${InputSIMC}..."
-    echo
-    cd "${SIMCPATH}"
-    ./run_simc_tree "${InputSIMC}"
-fi

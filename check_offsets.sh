@@ -25,7 +25,7 @@ USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 
-while getopts 'hc' flag; do
+while getopts 'hcs' flag; do
     case "${flag}" in
         h) 
         echo "---------------------------"
@@ -35,9 +35,11 @@ while getopts 'hc' flag; do
         echo "The following flags can be called for the heep analysis..."
         echo "    -h, help"
         echo "    -c, compile fortran code"
+	echo "    -s, single arm"
         exit 0
         ;;
         c) c_flag='true' ;;
+	s) s_flag='true' ;;
         *) print_usage
         exit 1 ;;
     esac
@@ -50,11 +52,15 @@ if [[ $c_flag = "true" ]]; then
     echo "Compiling ${HEEPFOR}.f..."
     eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"
     KIN=$2
+elif [[ $s_flag = "true" ]]; then
+    spec=$2
+    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+    KIN=$3
+    InputSIMC="Heep_${SPEC}_${KIN}"
 else
     KIN=$1
+    InputSIMC="Heep_Coin_${KIN}"
 fi
-
-InputSIMC="Heep_${SPEC}_${KIN}"
 
 SIMCINP=`python3 getSetting.py ${InputSIMC}`
 

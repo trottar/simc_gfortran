@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 14:27:25 trottar"
+# Time-stamp: "2022-07-26 14:31:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -99,7 +99,7 @@ for key,val in inpDict.items():
         outDict[key] = " {0:.3f}\t\t".format(abs(float(pTh_elas))) # Removes minus sign
 
 print("Original Values...\n",sorted(inpDict.items()))
-print("New Elastic Values...\n",sorted(outDict.items()))
+print("New Values...\n",sorted(outDict.items()))
 
 f_data = f_data.replace(inpDict['ebeam'],outDict['ebeam'])
 f_data = f_data.replace(inpDict['eP'],outDict['eP'])

@@ -56,7 +56,6 @@ fi
 
 read -d '' OUTPUTELAS << EOF
 ./${ELASFOR}.expect ${INPBEAM}
-echo $OUTPUTELAS
 EOF
 
-#echo $ELASOUT
+echo $OUTPUTELAS

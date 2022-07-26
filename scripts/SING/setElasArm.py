@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 12:25:43 trottar"
+# Time-stamp: "2022-07-26 13:21:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -40,7 +40,11 @@ for i,l in enumerate(data):
     data[i] = [j.strip(' ').strip('\r') for j in data[i]]
 print(data)
 
-print(beam,eTh)    
+print(beam,eTh)
+
+for d in data:
+    if eTh in d[0]:
+        print(d)
 
 '''
 # Open inp_f file to grab prescale values and tracking efficiency

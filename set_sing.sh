@@ -74,7 +74,7 @@ THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")
 
 cd ${SIMCPATH}/scripts/SING
-python3 setElasArm.py  ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} ${InputSIM} "$OUTPUTELAS"
+python3 setElasArm.py ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} ${InputSIM} "$OUTPUTELAS"
 
 if [[ $a_flag = "true" ]]; then
     echo

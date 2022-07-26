@@ -55,6 +55,7 @@ else
 fi
 
 #echo "$(($(./${ELASFOR}.expect ${INPBEAM})))"
-OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${INPBEAM})")
+#OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${INPBEAM})")
+OUTPUTELAS=$(./${ELASFOR}.expect ${INPBEAM})
 
 echo ${OUTPUTELAS[@]}

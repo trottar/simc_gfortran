@@ -125,7 +125,7 @@ if [[ $a_flag = "true" ]]; then
 	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
 	echo
 	echo "Combining root files..."  
-	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
+	hadd -f ${OutDATAFilename}.root *_-1_${SPEC}_Raw_Data.root
 	rm -f *_-1_${SPEC}_Raw_Data.root
 
 	cd "${SIMCPATH}/scripts/SING"    
@@ -148,7 +148,7 @@ if [[ $a_flag = "true" ]]; then
 	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
 	echo
 	echo "Combining root files..."
-	hadd -f ${OutDUMMYFilename}.root *_-1_Raw_Data.root
+	hadd -f ${OutDUMMYFilename}.root *_-1_${SPEC}_Raw_Data.root
 	rm -f *_-1_${SPEC}_Raw_Data.root	
     else
 	cd "${SIMCPATH}/scripts/COIN"

@@ -67,4 +67,4 @@ SIMCINP=`python3 getSetting.py ${InputSIMC}`
 BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
 THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 
-./${HEEPFOR}.expect ${BEAMINP} ${THETAINP}
+./${HEEPFOR}.expect $((${BEAMINP}*1000)) ${THETAINP}

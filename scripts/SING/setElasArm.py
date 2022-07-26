@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 13:39:28 trottar"
+# Time-stamp: "2022-07-26 13:41:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -86,15 +86,15 @@ outDict = inpDict.copy()
 
 for key,val in inpDict.items():
     if key == "ebeam":
-        outDict[key] = " {0:.2f}  \t\t".format(ebeam)
+        outDict[key] = " {0:.2f}  \t\t".format(float(ebeam))
     if key == "eP":
-        outDict[key] = " {0:.1f}\t\t".format(eP)
+        outDict[key] = " {0:.1f}\t\t".format(float(eP))
     if key == "eTh":
-        outDict[key] = " {0:.3f}\t\t".format(eTh)
+        outDict[key] = " {0:.3f}\t\t".format(float(eTh))
     if key == "pP":
-        outDict[key] = " {0:.1f}\t\t".format(pP_elas)
+        outDict[key] = " {0:.1f}\t\t".format(float(pP_elas))
     if key == "pTh":
-        outDict[key] = " {0:.3f}   \t".format(pTh_elas)
+        outDict[key] = " {0:.3f}   \t".format(float(pTh_elas))
 
 print("Original Values...\n",sorted(inpDict.items()))
 print("Elastic Values...\n",sorted(outDict.items()))

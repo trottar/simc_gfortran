@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 11:22:56 trottar"
+# Time-stamp: "2022-07-26 11:26:50 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -29,8 +29,9 @@ SIMCPATH=lt.SIMCPATH
 
 ################################################################################################################################################
 
-for line in inp_table:
-    print("-",line)
+print(inp_table)
+#for line in inp_table:
+#    print("-",line)
 
 '''
 # Open inp_f file to grab prescale values and tracking efficiency

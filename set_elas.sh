@@ -58,4 +58,6 @@ fi
 OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${INPBEAM})")
 #OUTPUTELAS=$(echo "$(($(./${ELASFOR}.expect ${INPBEAM})))")
 
-echo "$OUTPUTELAS"
+#echo "$OUTPUTELAS"
+
+python3 setElasArm.py "$OUTPUTELAS"

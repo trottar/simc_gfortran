@@ -84,7 +84,7 @@ else
 	OutFullAnalysisFilename="FullAnalysis_${KIN}"
     fi
 fi
-
+    
 if [[ $KIN = "10p6" && $s_flag != "true" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # All heep coin 10p6 runs
     #declare -a data=(4827) # Just one test run
@@ -96,8 +96,8 @@ elif [[ $KIN = "10p6" && $s_flag = "true" ]]; then
     declare -a data=(4784 4785) # All heep singles 10p6 runs
     declare -a dummydata=(4785)
 elif [[ $KIN = "8p2" && $s_flag = "true" ]]; then
-    declare -a data=()
-    declare -a dummydata=()    
+    declare -a data=(111)
+    declare -a dummydata=(111)    
 else
     echo "Invalid kinematic setting, ${KIN}"
     exit 1

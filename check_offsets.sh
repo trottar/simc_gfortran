@@ -49,23 +49,21 @@ HEEPFOR="heepcheck"
 
 cd ${SIMCPATH}/scripts
 if [[ $c_flag = "true" ]]; then
-    echo "Compiling ${HEEPFOR}.f..."
-    eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"
     KIN=$2
 elif [[ $s_flag = "true" ]]; then
-    KIN=$3
-else
-    KIN=$1
-fi
-
-if [[ $s_flag = "true" ]]; then
     spec=$2
     SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+    KIN=$3
     InputSIMC="Heep_${SPEC}_${KIN}"
 else
+    KIN=$1
     InputSIMC="Heep_Coin_${KIN}"
 fi
 
+if [[ $c_flag = "true" ]]; then
+    echo "Compiling ${HEEPFOR}.f..."
+    eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"
+fi
 
 SIMCINP=`python3 getSetting.py ${InputSIMC}`
 

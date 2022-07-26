@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 17:11:19 trottar"
+# Time-stamp: "2022-07-26 17:14:44 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -70,7 +70,10 @@ Define and set up cuts
 cut_f = '/DB/CUTS/run_type/simc_sing_heep.cuts'
 
 # defining Cuts
-cuts = ["coin_ep_cut_prompt_noRF_nopid"]
+if spec == 'HMS':
+    cuts = ["ecut_pid"]
+else:
+    cuts = ["pcut_pid"]
 
 lt=Root(os.path.realpath(__file__),"SimcSing_%s" % spec,ROOTPrefix,runNum,MaxEvent,cut_f,cuts)
 

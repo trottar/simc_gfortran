@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 13:41:27 trottar"
+# Time-stamp: "2022-07-26 13:44:04 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -82,6 +82,13 @@ for d in data:
         pP_elas = d[4]
         print("For eTh = %s the elastic settings are...\n",d)
 
+try:
+    pTh_elas
+    pP_elas
+except NameError:
+    print("Error: eTh = %s not found in elastic table..." % eTh_elas)
+    sys.exit(0)
+    
 outDict = inpDict.copy()
 
 for key,val in inpDict.items():

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 13:22:23 trottar"
+# Time-stamp: "2022-07-26 13:24:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -43,7 +43,6 @@ print(data)
 print(beam,eTh)
 
 for d in data:
-    print(d)
     if eTh in d[0]:
         print(d)
 

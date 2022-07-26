@@ -113,6 +113,6 @@ c        write(6,*) 'thetaq = ',thetaq*180/3.14159
          write(6,3) scat,q2,ep,thetaq*180./3.14159,q3,mott,csp
       enddo
       
- 3    format(5(f7.3,1x),2(E10.3E2,1x))
+ 3    format(5(f7.3,4x),2(E10.3E2,4x))
       
       end

@@ -57,5 +57,5 @@ fi
 
 OUTPUTELAS=$(./${ELASFOR}.expect ${INPBEAM})
 
-#echo $(IFS=+; echo "$((${OUTPUTELAS[*]}))")
-echo $(echo "$((${OUTPUTELAS[*]}))")
+#echo $(echo "$((${OUTPUTELAS[*]}))")
+echo $(echo "$(${OUTPUTELAS[*]})")

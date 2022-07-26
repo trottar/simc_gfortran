@@ -54,4 +54,5 @@ else
     INPBEAM=$1
 fi
 
-echo "$(($(./${ELASFOR}.expect ${INPBEAM}; echo)))"
+#echo "$(($(./${ELASFOR}.expect ${INPBEAM})))"
+echo "$(./${ELASFOR}.expect ${INPBEAM})"

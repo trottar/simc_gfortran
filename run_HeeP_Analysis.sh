@@ -58,3 +58,27 @@ elif [[ $s_flag = "true" ]]; then
 else
     KIN=$1
 fi
+
+if [[ $s_flag = "true" ]]; then
+    InDATAFilename="Raw_Data_${SPEC}_${KIN}.root"
+    InDUMMYFilename="Raw_DummyData_${SPEC}_${KIN}.root"
+    InSIMCFilename="Heep_Coin_${SPEC}_${KIN}.root"
+    OutDATAFilename="Analysed_Data_${SPEC}_${KIN}"
+    OutDUMMYFilename="Analysed_DummyData_${SPEC}_${KIN}"
+    if [[ $o_flag = "true" ]]; then
+	OutFullAnalysisFilename="FullAnalysis_Offset_${SPEC}_${KIN}"
+    else
+	OutFullAnalysisFilename="FullAnalysis_${SPEC}_${KIN}"
+    fi
+else
+    InDATAFilename="Raw_Data_${KIN}.root"
+    InDUMMYFilename="Raw_DummyData_${KIN}.root"
+    InSIMCFilename="Heep_Coin_${KIN}.root"
+    OutDATAFilename="Analysed_Data_${KIN}"
+    OutDUMMYFilename="Analysed_DummyData_${KIN}"
+    if [[ $o_flag = "true" ]]; then
+	OutFullAnalysisFilename="FullAnalysis_Offset_${KIN}"
+    else
+	OutFullAnalysisFilename="FullAnalysis_${KIN}"
+    fi
+fi

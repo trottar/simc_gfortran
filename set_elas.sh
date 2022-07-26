@@ -58,10 +58,10 @@ else
     KIN=$1
 fi
 
-SIMCINP='python3 getSetting.py ${KIN} ${SPEC}'
+SIMCINP=`python3 getSetting.py ${KIN} ${SPEC}`
 
-BEAMINP='echo ${SIMCINP} | cut -d ',' -f1'
-THETAINP='echo ${SIMCINP} | cut -d ',' -f2'
+BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
+THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 
 echo $BEAMINP
 echo $THETAINP

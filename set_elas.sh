@@ -60,4 +60,5 @@ OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${INPBEAM})")
 
 #echo "$OUTPUTELAS"
 
+cd "${SIMCPATH}/scripts/SING"
 python3 setElasArm.py "$OUTPUTELAS"

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 13:39:16 trottar"
+# Time-stamp: "2022-07-26 13:39:28 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -105,5 +105,5 @@ f_data = f_data.replace(inpDict['eTh'],outDict['eTh'])
 f_data = f_data.replace(inpDict['pP'],outDict['pP'])
 f_data = f_data.replace(inpDict['pTh'],outDict['pTh'])
 
-with open(inp_f, 'w') as f:
-    f.write(f_data)
+#with open(inp_f, 'w') as f:
+#    f.write(f_data)

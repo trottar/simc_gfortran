@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 13:38:33 trottar"
+# Time-stamp: "2022-07-26 13:39:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -84,19 +84,17 @@ for d in data:
 
 outDict = inpDict.copy()
 
-for off in offset:
-    for key,val in inpDict.items():
-        if key in off:
-            if key == "ebeam":
-                outDict[key] = " {0:.2f}  \t\t".format(ebeam)
-            if key == "eP":
-                outDict[key] = " {0:.1f}\t\t".format(eP)
-            if key == "eTh":
-                outDict[key] = " {0:.3f}\t\t".format(eTh)
-            if key == "pP":
-                outDict[key] = " {0:.1f}\t\t".format(pP_elas)
-            if key == "pTh":
-                outDict[key] = " {0:.3f}   \t".format(pTh_elas)
+for key,val in inpDict.items():
+    if key == "ebeam":
+        outDict[key] = " {0:.2f}  \t\t".format(ebeam)
+    if key == "eP":
+        outDict[key] = " {0:.1f}\t\t".format(eP)
+    if key == "eTh":
+        outDict[key] = " {0:.3f}\t\t".format(eTh)
+    if key == "pP":
+        outDict[key] = " {0:.1f}\t\t".format(pP_elas)
+    if key == "pTh":
+        outDict[key] = " {0:.3f}   \t".format(pTh_elas)
 
 print("Original Values...\n",sorted(inpDict.items()))
 print("Elastic Values...\n",sorted(outDict.items()))

@@ -7,7 +7,7 @@
  600  format(" program heepcheck, version 31.5.97") 
    1  continue
       write(6,601)
- 601  format(" enter electron energy(MeV) and angle; E0=0/:")     
+ 601  format(" enter electron energy(MeV) and angle; E0=0/: stop")     
       read(5,*)e0, the0
       if(e0.lt.0.1)stop
       call heepkin(e0,the0,pe0,thq0,q0)

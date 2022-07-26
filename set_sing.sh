@@ -61,7 +61,7 @@ elif [[ $a_flag = "true" ]]; then
 else
     spec=$1
     SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
-    KIN=$1
+    KIN=$2
 fi
 
 InputSIMC="Heep_${SPEC}_${KIN}"

@@ -45,7 +45,7 @@ done
 
 HEEPFOR="heepcheck"
 
-cd ${SIMCPATH}/scripts/
+cd ${SIMCPATH}/scripts
 if [[ $c_flag = "true" ]]; then
     echo "Compiling ${HEEPFOR}.f..."
     eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"

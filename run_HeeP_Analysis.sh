@@ -13,7 +13,7 @@ while getopts 'haos' flag; do
 	echo "        coin -> KIN=arg1"
 	echo "        sing -> SPEC=arg1 KIN=arg2 (requires -s flag)"
 	echo "    -s, single arm"
-	echo "    -s, offset to replay applied"
+	echo "    -o, offset to replay applied"
         exit 0
         ;;
         a) a_flag='true' ;;
@@ -84,7 +84,7 @@ else
 	OutFullAnalysisFilename="FullAnalysis_${KIN}"
     fi
 fi
-    
+
 if [[ $KIN = "10p6" && $s_flag != "true" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # All heep coin 10p6 runs
     #declare -a data=(4827) # Just one test run
@@ -94,13 +94,13 @@ elif [[ $KIN = "8p2" && $s_flag != "true" ]]; then
     declare -a dummydata=(4864)
 elif [[ $KIN = "10p6" && $s_flag = "true" ]]; then
     declare -a data=(4784 4785) # All heep singles 10p6 runs
-    declare -a dummydata=(4785)
+    declare -a dummydata=(4786)
 elif [[ $KIN = "8p2" && $s_flag = "true" ]]; then
     declare -a data=(111)
     declare -a dummydata=(111)    
 else
     echo "Invalid kinematic setting, ${KIN}"
-    exit 1
+    exit 128
 fi
 
 if [[ $a_flag = "true" ]]; then

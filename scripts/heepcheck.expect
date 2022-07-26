@@ -2,7 +2,7 @@
 
 #we store the content of our 1st argument
 set inp_energy [lindex $argv 0]
-set inp_theta [lindex $argv 0]
+set inp_theta [lindex $argv 1]
 
 #process we need to interract with
 spawn ./heepcheck

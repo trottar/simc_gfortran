@@ -61,4 +61,4 @@ SIMCINP=`python3 getSetting.py ${InputSIMC}`
 BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
 THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 
-OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")
+OUTPUTELAS=$(echo "$(./${HEEPFOR}.expect ${BEAMINP} ${THETAINP})")

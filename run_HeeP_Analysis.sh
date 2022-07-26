@@ -100,3 +100,98 @@ else
     echo "Invalid kinematic setting, ${KIN}"
     exit 128
 fi
+
+if [[ $a_flag = "true" ]]; then
+    if [[ $s_flag = "true" ]]; then
+	cd "${SIMCPATH}/scripts/SING"
+	echo
+	echo "Analysing ${SPEC} data..."
+	echo
+
+	for i in "${data[@]}"
+	do
+	    echo
+	    echo "-----------------------------"
+	    echo "Analysing data run $i..."
+	    echo "-----------------------------"
+	    echo
+	    python3 Analysed_SING.py "$i" ${SPEC}
+	    #root -l <<EOF 
+	    #.x $SIMCPATH/Analysed_SING.C("$InDATAFilename","$OutDATAFilename")
+	    #EOF
+	done
+	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
+	echo
+	echo "Combining root files..."  
+	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
+	rm -f *_-1_Raw_Data.root
+
+	cd "${SIMCPATH}/scripts/SING"    
+	echo
+	echo "Analysing ${SPEC} dummy data..."
+	echo
+
+	for i in "${dummydata[@]}"
+	do
+	    echo
+	    echo "-----------------------------------"
+	    echo "Analysing dummy data run $i..."
+	    echo "-----------------------------------"
+	    echo
+	    python3 Analysed_SING.py "$i" ${SPEC}
+	    #root -l <<EOF 
+	    #.x $SIMCPATH/Analysed_SING.C("$InDUMMYFilename","$OutDUMMYFilename")
+	    #EOF
+	done
+	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
+	echo
+	echo "Combining root files..."
+	hadd -f ${OutDUMMYFilename}.root *_-1_Raw_Data.root
+	rm -f *_-1_Raw_Data.root	
+    else
+	cd "${SIMCPATH}/scripts/COIN"
+	echo
+	echo "Analysing data..."
+	echo
+
+	for i in "${data[@]}"
+	do
+	    echo
+	    echo "-----------------------------"
+	    echo "Analysing data run $i..."
+	    echo "-----------------------------"
+	    echo
+	    python3 Analysed_COIN.py "$i"
+	    #root -l <<EOF 
+	    #.x $SIMCPATH/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
+	    #EOF
+	done
+	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
+	echo
+	echo "Combining root files..."  
+	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
+	rm -f *_-1_Raw_Data.root
+
+	cd "${SIMCPATH}/scripts/COIN"    
+	echo
+	echo "Analysing dummy data..."
+	echo
+
+	for i in "${dummydata[@]}"
+	do
+	    echo
+	    echo "-----------------------------------"
+	    echo "Analysing dummy data run $i..."
+	    echo "-----------------------------------"
+	    echo
+	    python3 Analysed_COIN.py "$i"
+	    #root -l <<EOF 
+	    #.x $SIMCPATH/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
+	    #EOF
+	done
+	cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
+	echo
+	echo "Combining root files..."
+	hadd -f ${OutDUMMYFilename}.root *_-1_Raw_Data.root
+	rm -f *_-1_Raw_Data.root
+fi

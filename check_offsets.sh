@@ -53,14 +53,19 @@ if [[ $c_flag = "true" ]]; then
     eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"
     KIN=$2
 elif [[ $s_flag = "true" ]]; then
-    spec=$2
-    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
     KIN=$3
-    InputSIMC="Heep_${SPEC}_${KIN}"
 else
     KIN=$1
+fi
+
+if [[ $s_flag = "true" ]]; then
+    spec=$2
+    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+    InputSIMC="Heep_${SPEC}_${KIN}"
+else
     InputSIMC="Heep_Coin_${KIN}"
 fi
+
 
 SIMCINP=`python3 getSetting.py ${InputSIMC}`
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-01 01:46:41 trottar"
+# Time-stamp: "2022-07-14 12:31:04 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -391,7 +391,9 @@ for evt in TBRANCH_SIMC:
       H_pmy_SIMC.Fill(evt.Pmy, evt.Weight)
       H_pmz_SIMC.Fill(evt.Pmz, evt.Weight)
       H_Q2_SIMC.Fill(evt.Q2, evt.Weight)
-      H_W_SIMC.Fill(evt.W, evt.Weight)
+      #H_W_SIMC.Fill(evt.W, evt.Weight)
+      Mp = 938.27
+      H_W_SIMC.Fill((Mp+evt.q)/1000, evt.Weight)
       H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
       H_MMp_SIMC.Fill(np.sqrt(pow(evt.Em, 2) - pow(evt.Pm, 2)), evt.Weight)
 
@@ -1179,8 +1181,13 @@ H_W_DATA.Draw("same")
 b_int_W_simc = int(H_W_SIMC.Integral())
 b_int_W_data = int(H_W_DATA.Integral())
 
+b_bin_W_simc = H_W_SIMC.GetXaxis().GetBinCenter(H_W_SIMC.GetMaximumBin())
+b_bin_W_data = H_W_DATA.GetXaxis().GetBinCenter(H_W_DATA.GetMaximumBin())
+
 l_W.AddEntry(H_W_SIMC,"SIMC, INT = %s" % b_int_W_simc)
 l_W.AddEntry(H_W_DATA,"DATA, INT = %s" % b_int_W_data)
+l_W.AddEntry(H_W_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_W_simc))
+l_W.AddEntry(H_W_DATA,"DATA, BIN = {0:.3f}".format(b_bin_W_data))
 
 l_W.Draw()
 

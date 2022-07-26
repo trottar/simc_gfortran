@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 14:10:27 trottar"
+# Time-stamp: "2022-07-26 14:37:44 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -54,10 +54,10 @@ with open(inp_f, 'r') as f:
 inpDict = {
     "ebeam" : float(ebeam)/1000, # Convert to GeV
     "eP" : float(eP)/1000,
-    "eTh" : eTh,
+    "eTh" : float(eTh),
     "pP" : float(pP)/1000,
-    "pTh" : pTh,
+    "pTh" : float(pTh),
 }
 
-BashPathEntry=("%s,%s,%s,%s,%s" % (inpDict["ebeam"],inpDict["eTh"],inpDict["eP"],inpDict["pTh"],inpDict["pP"]))
+BashPathEntry=("{0:.2f},{1:.3f},{2:.1f},{3:.3f},{4:.1f}".format(inpDict["ebeam"],inpDict["eTh"],inpDict["eP"],inpDict["pTh"],inpDict["pP"]))
 print(BashPathEntry)

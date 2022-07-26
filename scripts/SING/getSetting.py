@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 15:13:17 trottar"
+# Time-stamp: "2022-07-26 15:14:05 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -59,5 +59,5 @@ inpDict = {
     "pTh" : float(pTh),
 }
 
-BashPathEntry=("{0:.5f},{1:.3f},{2:.5f},{3:.3f},{4:.5f}".format(inpDict["ebeam"],inpDict["eTh"],inpDict["eP"],inpDict["pTh"],inpDict["pP"]))
+BashPathEntry=("%s,%s,%s,%s,%s".format(inpDict["ebeam"],inpDict["eTh"],inpDict["eP"],inpDict["pTh"],inpDict["pP"]))
 print(BashPathEntry)

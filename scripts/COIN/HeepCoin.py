@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-14 12:31:04 trottar"
+# Time-stamp: "2022-07-27 10:15:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -33,7 +33,7 @@ from functools import reduce
 
 # Check the number of arguments provided to the script
 if len(sys.argv)-1!=9:
-    print("!!!!! ERROR !!!!!\n Expected 4 arguments\n Usage is with - InDATAFilename InDUMMYFilename InSIMCFilename OutFilename \n!!!!! ERROR !!!!!")
+    print("!!!!! ERROR !!!!!\n Expected 9 arguments\n Usage is with - KIN OutDATAFilename.root data_charge data_efficiency OutDUMMYFilename.root dummy_charge dummy_efficiency InSIMCFilename OutFullAnalysisFilename \n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################

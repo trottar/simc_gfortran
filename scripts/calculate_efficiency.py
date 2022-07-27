@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-27 10:12:05 trottar"
+# Time-stamp: "2022-07-27 10:16:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -40,7 +40,7 @@ try:
     eff_data = pd.read_csv(inp_f)
 except IOError:
     print("Error: %s does not appear to exist." % inp_f)
-    sys.exit(0)
+    sys.exit(1)
 #print(eff_data.keys())
 
 eff_data = eff_data[eff_data['Run_Number'] == int(runNum)]

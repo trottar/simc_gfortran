@@ -54,8 +54,10 @@ if [[ $a_flag = "true" || $o_flag = "true" || $s_flag = "true" ]]; then
 	spec=$(echo "$2" | tr '[:upper:]' '[:lower:]')
 	SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
 	KIN=$3
+	ROOTPREFIX=replay_${spec}_heep
     else
 	KIN=$2
+	ROOTPREFIX=replay_coin_heep
     fi
 else
     KIN=$1
@@ -199,64 +201,34 @@ if [[ $a_flag = "true" ]]; then
     fi
 fi
 
-if [[ $s_flag = "true" ]]; then
-    cd "${SIMCPATH}/scripts"
+cd "${SIMCPATH}/scripts"
 
-    DataChargeVal=()
-    DataEffVal=()
-    echo
-    echo "Calculating data total charge..."
-    for i in "${data[@]}"
-    do
-	DataChargeVal+=($(python3 findcharge.py replay_${spec}_heep "$i" -1))
-	DataEffVal+=($(python3 calculate_efficiency.py "$i"))
-	#echo "${DataChargeVal[@]} mC"
-    done
-    DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
-    echo "${DataChargeSum} uC"
+DataChargeVal=()
+DataEffVal=()
+echo
+echo "Calculating data total charge..."
+for i in "${data[@]}"
+do
+    DataChargeVal+=($(python3 findcharge.py ${ROOTPREFIX} "$i" -1))
+    DataEffVal+=($(python3 calculate_efficiency.py "$i"))
+    #echo "${DataChargeVal[@]} mC"
+done
+DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
+echo "${DataChargeSum} uC"
 
-    DummyChargeVal=()
-    DummyEffVal=()
-    echo
-    echo "Calculating dummy total charge..."
-    for i in "${dummydata[@]}"
-    do
-	DummyChargeVal+=($(python3 findcharge.py replay_${spec}_heep "$i" -1))
-	DummyEffVal+=($(python3 calculate_efficiency.py "$i"))
-	#echo "${DummyChargeVal[@]} mC"
-    done
-    DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
-    echo "${DummyChargeSum} uC"
-else
-    cd "${SIMCPATH}/scripts"
+DummyChargeVal=()
+DummyEffVal=()
+echo
+echo "Calculating dummy total charge..."
+for i in "${dummydata[@]}"
+do
+    DummyChargeVal+=($(python3 findcharge.py ${ROOTPREFIX} "$i" -1))
+    DummyEffVal+=($(python3 calculate_efficiency.py "$i"))
+    #echo "${DummyChargeVal[@]} mC"
+done
+DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
+echo "${DummyChargeSum} uC"
 
-    DataChargeVal=()
-    DataEffVal=()
-    echo
-    echo "Calculating data total charge..."
-    for i in "${data[@]}"
-    do
-	DataChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
-	DataEffVal+=($(python3 calculate_efficiency.py "$i"))
-	#echo "${DataChargeVal[@]} mC"
-    done
-    DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
-    echo "${DataChargeSum} uC"
-
-    DummyChargeVal=()
-    DummyEffVal=()
-    echo
-    echo "Calculating dummy total charge..."
-    for i in "${dummydata[@]}"
-    do
-	DummyChargeVal+=($(python3 findcharge.py replay_coin_heep "$i" -1))
-	DummyEffVal+=($(python3 calculate_efficiency.py "$i"))
-	#echo "${DummyChargeVal[@]} mC"
-    done
-    DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
-    echo "${DummyChargeSum} uC"
-fi
-    
 if [[ $s_flag = "true" ]]; then
     cd "${SIMCPATH}/scripts/SING"
     python3 HeepSing.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${SPEC}

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-27 10:43:14 trottar"
+# Time-stamp: "2022-07-27 10:44:08 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -60,7 +60,7 @@ try:
     dummy_efficiency = sum([float(i) for i in dummy_efficiency.split(" ")])/len([float(i) for i in dummy_efficiency.split(" ")])
     print("dummy_efficiency=",dummy_efficiency)
 except ValueError:
-    print("Error: Efficiency value not found...")
+    print("\nError: Invalid efficiency value found...")
     sys.exit(1)
     
 ###############################################################################################################################################

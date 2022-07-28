@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-28 10:30:58 trottar"
+# Time-stamp: "2022-07-28 10:31:43 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1159,7 +1159,7 @@ if spec == "HMS":
     H_hsxpfp_SIMC.Write()
     H_hsypfp_SIMC.Write()
     H_W_SIMC.Write()
-else
+else:
     d_Data.cd()
     H_ssxfp_DATA.Write()
     H_ssyfp_DATA.Write()

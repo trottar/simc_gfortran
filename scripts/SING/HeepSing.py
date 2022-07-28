@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-28 10:29:04 trottar"
+# Time-stamp: "2022-07-28 10:30:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -554,7 +554,7 @@ if spec == "HMS":
     H_hsypfp_DUMMY.Scale(normfac_dummy)
     H_hsxptar_DUMMY.Scale(normfac_dummy)
     H_hsyptar_DUMMY.Scale(normfac_dummy)
-    H_hsdelta_DUMMY.Scale(normfac_dummy))
+    H_hsdelta_DUMMY.Scale(normfac_dummy)
     H_W_DUMMY.Scale(normfac_dummy)
 
     normfac_data = 1/(data_charge*data_efficiency)
@@ -564,7 +564,7 @@ if spec == "HMS":
     H_hsypfp_DATA.Scale(normfac_data)
     H_hsxptar_DATA.Scale(normfac_data)
     H_hsyptar_DATA.Scale(normfac_data)
-    H_hsdelta_DATA.Scale(normfac_data))
+    H_hsdelta_DATA.Scale(normfac_data)
     H_W_DATA.Scale(normfac_data)
 
     # Data Random subtraction

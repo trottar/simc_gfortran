@@ -61,6 +61,7 @@ if [[ $a_flag = "true" || $o_flag = "true" || $s_flag = "true" ]]; then
     fi
 else
     KIN=$1
+    ROOTPREFIX=replay_coin_heep
 fi
 
 if [[ $s_flag = "true" ]]; then
@@ -210,10 +211,6 @@ if [[ $a_flag = "true" ]]; then
 fi
 
 cd "${SIMCPATH}/scripts"
-
-echo
-echo
-echo $ROOTPREFIX
 
 DataChargeVal=()
 DataEffVal=()

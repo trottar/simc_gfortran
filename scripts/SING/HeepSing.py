@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-28 10:39:54 trottar"
+# Time-stamp: "2022-07-28 10:49:26 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -52,11 +52,13 @@ spec = sys.argv[10]
 
 try:    
     #data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
-    data_efficiency = sum([float(i) for i in data_efficiency.split(" ")])/len([float(i) for i in data_efficiency.split(" ")])
+    #data_efficiency = sum([float(i) for i in data_efficiency.split(" ")])/len([float(i) for i in data_efficiency.split(" ")])
+    data_efficiency = 1
     print("\n\ndata_efficiency=",data_efficiency)
 
     #dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
-    dummy_efficiency = sum([float(i) for i in dummy_efficiency.split(" ")])/len([float(i) for i in dummy_efficiency.split(" ")])
+    #dummy_efficiency = sum([float(i) for i in dummy_efficiency.split(" ")])/len([float(i) for i in dummy_efficiency.split(" ")])
+    dummy_efficiency = 1
     print("dummy_efficiency=",dummy_efficiency)
 except ValueError:
     print("\nError: Invalid efficiency value found...")
@@ -176,11 +178,11 @@ InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
 InFile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "OPEN")
 InFile_SIMC = ROOT.TFile.Open(rootFile_SIMC, "READ")
 
-TBRANCH_DATA  = InFile_DATA.Get("Cut_Proton_Events_All")
-#TBRANCH_DATA  = InFile_DATA.Get("Uncut_Proton_Events")
+#TBRANCH_DATA  = InFile_DATA.Get("Cut_Proton_Events_All")
+TBRANCH_DATA  = InFile_DATA.Get("Uncut_Proton_Events")
 nEntries_TBRANCH_DATA  = TBRANCH_DATA.GetEntries()
-TBRANCH_DUMMY  = InFile_DUMMY.Get("Cut_Proton_Events_All")
-#TBRANCH_DUMMY  = InFile_DUMMY.Get("Uncut_Proton_Events")
+#TBRANCH_DUMMY  = InFile_DUMMY.Get("Cut_Proton_Events_All")
+TBRANCH_DUMMY  = InFile_DUMMY.Get("Uncut_Proton_Events")
 nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
 TBRANCH_SIMC  = InFile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()

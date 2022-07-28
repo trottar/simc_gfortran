@@ -73,7 +73,7 @@ if [[ $s_flag = "true" ]]; then
     fi
     InDATAFilename="Raw_Data_${SPEC}_${KIN}.root"
     InDUMMYFilename="Raw_DummyData_${SPEC}_${KIN}.root"
-    InSIMCFilename="Heep_Coin_${SPEC}_${KIN}.root"
+    InSIMCFilename="Heep_${SPEC}_${KIN}.root"
     OutDATAFilename="Analysed_Data_${SPEC}_${KIN}"
     OutDUMMYFilename="Analysed_DummyData_${SPEC}_${KIN}"
     if [[ $o_flag = "true" ]]; then

@@ -83,7 +83,7 @@ if [[ $s_flag = "true" ]]; then
     python3 setElasArm.py ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} ${InputSIMC} "$OUTPUTELAS"
 else
     cd ${SIMCPATH}/scripts/COIN
-    KIN=$1
+    KIN=$2
 
     InputSIMC="Heep_Coin_${KIN}"
 fi

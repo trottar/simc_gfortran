@@ -64,6 +64,11 @@ else
 fi
 
 if [[ $s_flag = "true" ]]; then
+    if [[ $SPEC = "HMS" ]]; then
+	EffData="hms_heep_HeePSing_efficiency_data_2022_07_28.csv"
+    else
+	EffData="shms_heep_HeePSing_efficiency_data_2022_07_28.csv"
+    fi
     InDATAFilename="Raw_Data_${SPEC}_${KIN}.root"
     InDUMMYFilename="Raw_DummyData_${SPEC}_${KIN}.root"
     InSIMCFilename="Heep_Coin_${SPEC}_${KIN}.root"
@@ -75,6 +80,7 @@ if [[ $s_flag = "true" ]]; then
 	OutFullAnalysisFilename="FullAnalysis_${SPEC}_${KIN}"
     fi
 else
+    EffData="coin_production_HeePCoin_efficiency_data_2022_06_13.csv"
     InDATAFilename="Raw_Data_${KIN}.root"
     InDUMMYFilename="Raw_DummyData_${KIN}.root"
     InSIMCFilename="Heep_Coin_${KIN}.root"
@@ -210,7 +216,7 @@ echo "Calculating data total charge..."
 for i in "${data[@]}"
 do
     DataChargeVal+=($(python3 findcharge.py ${ROOTPREFIX} "$i" -1))
-    DataEffVal+=($(python3 calculate_efficiency.py "$i"))
+    DataEffVal+=($(python3 calculate_efficiency.py "$i" ${EffData}))
     #echo "${DataChargeVal[@]} mC"
 done
 DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
@@ -223,7 +229,7 @@ echo "Calculating dummy total charge..."
 for i in "${dummydata[@]}"
 do
     DummyChargeVal+=($(python3 findcharge.py ${ROOTPREFIX} "$i" -1))
-    DummyEffVal+=($(python3 calculate_efficiency.py "$i"))
+    DummyEffVal+=($(python3 calculate_efficiency.py "$i" ${EffData}))
     #echo "${DummyChargeVal[@]} mC"
 done
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers

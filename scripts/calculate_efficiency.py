@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-27 11:19:25 trottar"
+# Time-stamp: "2022-07-28 09:25:43 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -14,6 +14,7 @@ import pandas as pd
 import sys,os
 
 runNum = sys.argv[1]
+efficiency_table = sys.argv[2]
 
 ###############################################################################################################################################
 
@@ -32,7 +33,7 @@ UTILPATH=lt.UTILPATH
 ################################################################################################################################################
 # Define efficiencies
 
-inp_f = UTILPATH+"/scripts/efficiency/OUTPUTS/coin_production_HeePCoin_efficiency_data_2022_06_13.csv"
+inp_f = UTILPATH+"/scripts/efficiency/OUTPUTS/%s" % efficiency_table
 
 # Converts csv data to dataframe
 try:

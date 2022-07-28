@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-28 11:00:22 trottar"
+# Time-stamp: "2022-07-28 11:03:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1163,8 +1163,6 @@ else:
     H_ssxptar_DATA.Write()
     H_ssyptar_DATA.Write()
     H_MMp_DATA.Write()
-    H_th_DATA.Write()
-    H_ph_DATA.Write()
     H_pmiss_DATA.Write()
     H_emiss_DATA.Write()
     H_pmx_DATA.Write()
@@ -1181,8 +1179,6 @@ else:
     H_ssxptar_DUMMY.Write()
     H_ssyptar_DUMMY.Write()
     H_MMp_DUMMY.Write()
-    H_th_DUMMY.Write()
-    H_ph_DUMMY.Write()
     H_pmiss_DUMMY.Write()
     H_emiss_DUMMY.Write()
     H_pmx_DUMMY.Write()
@@ -1199,8 +1195,6 @@ else:
     H_ssxptar_SIMC.Write()
     H_ssyptar_SIMC.Write()
     H_MMp_SIMC.Write()
-    H_th_SIMC.Write()
-    H_ph_SIMC.Write()
     H_pmiss_SIMC.Write()
     H_emiss_SIMC.Write()
     H_pmx_SIMC.Write()

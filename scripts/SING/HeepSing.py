@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-28 10:36:39 trottar"
+# Time-stamp: "2022-07-28 10:37:19 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -424,7 +424,7 @@ for evt in TBRANCH_DATA:
           H_hsxptar_DATA_rand.Fill(evt.hsxptar)	
           H_hsyptar_DATA_rand.Fill(evt.hsyptar)
 
-          H_W_DATA_rand.Fill(evt.H_W)
+          H_W_DATA_rand.Fill(evt.W)
 
   else:
       
@@ -489,7 +489,7 @@ for evt in TBRANCH_DUMMY:
           H_hsxptar_DUMMY.Fill(evt.hsxptar)	
           H_hsyptar_DUMMY.Fill(evt.hsyptar)
 
-          H_W_DUMMY.Fill(evt.H_W)
+          H_W_DUMMY.Fill(evt.W)
           
           H_hsxfp_DUMMY_rand.Fill(evt.hsxfp)
           H_hsyfp_DUMMY_rand.Fill(evt.hsyfp)
@@ -499,7 +499,7 @@ for evt in TBRANCH_DUMMY:
           H_hsxptar_DUMMY_rand.Fill(evt.hsxptar)	
           H_hsyptar_DUMMY_rand.Fill(evt.hsyptar)
 
-          H_W_DUMMY_rand.Fill(evt.H_W)
+          H_W_DUMMY_rand.Fill(evt.W)
 
   else:
       

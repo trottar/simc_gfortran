@@ -219,6 +219,7 @@ echo "Calculating data total charge..."
 for i in "${data[@]}"
 do
     DataChargeVal+=($(python3 findcharge.py ${ROOTPREFIX} "$i" -1))
+    python3 calculate_efficiency.py "$i" ${EffData}
     DataEffVal+=($(python3 calculate_efficiency.py "$i" ${EffData}))
     #echo "${DataChargeVal[@]} mC"
 done

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-28 11:07:55 trottar"
+# Time-stamp: "2022-07-28 11:08:33 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -14,8 +14,8 @@ import sys,os,math
 
 KIN = sys.argv[1]
 SPEC = sys.argv[2]
-ebeam_elas = "{0:.3f}".format(sys.argv[3])
-eTh_elas = "{0:.3f}".format(sys.argv[4])
+ebeam_elas = "{0:.3f}".format(float(sys.argv[3]))
+eTh_elas = "{0:.3f}".format(float(sys.argv[4]))
 InputSIMC = sys.argv[5]
 inp_table = sys.argv[6]
 

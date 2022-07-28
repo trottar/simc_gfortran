@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-28 10:35:21 trottar"
+# Time-stamp: "2022-07-28 10:36:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -414,7 +414,7 @@ for evt in TBRANCH_DATA:
           H_hsxptar_DATA.Fill(evt.hsxptar)	
           H_hsyptar_DATA.Fill(evt.hsyptar)
 
-          H_W_DATA.Fill(evt.H_W)
+          H_W_DATA.Fill(evt.W)
           
           H_hsxfp_DATA_rand.Fill(evt.hsxfp)
           H_hsyfp_DATA_rand.Fill(evt.hsyfp)

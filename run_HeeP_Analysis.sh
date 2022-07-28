@@ -64,6 +64,7 @@ else
 fi
 
 if [[ $s_flag = "true" ]]; then
+    # Hard coded file
     if [[ $SPEC = "HMS" ]]; then
 	EffData="hms_heep_HeePSing_efficiency_data_2022_07_28.csv"
     else
@@ -80,6 +81,7 @@ if [[ $s_flag = "true" ]]; then
 	OutFullAnalysisFilename="FullAnalysis_${SPEC}_${KIN}"
     fi
 else
+    # Hard coded file
     EffData="coin_production_HeePCoin_efficiency_data_2022_06_13.csv"
     InDATAFilename="Raw_Data_${KIN}.root"
     InDUMMYFilename="Raw_DummyData_${KIN}.root"
@@ -208,6 +210,10 @@ if [[ $a_flag = "true" ]]; then
 fi
 
 cd "${SIMCPATH}/scripts"
+
+echo
+echo
+echo $ROOTPREFIX
 
 DataChargeVal=()
 DataEffVal=()

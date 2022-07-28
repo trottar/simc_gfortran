@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-28 10:30:10 trottar"
+# Time-stamp: "2022-07-28 10:30:58 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -622,7 +622,6 @@ if spec == "HMS":
 
 else:    
 
-if spec == "HMS":
     normfac_simc = (simc_normfactor)/(simc_nevents)
     H_ssxfp_SIMC.Scale(normfac_simc)
     H_ssyfp_SIMC.Scale(normfac_simc)

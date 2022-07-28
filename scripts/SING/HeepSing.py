@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-28 10:56:03 trottar"
+# Time-stamp: "2022-07-28 10:58:23 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -117,7 +117,7 @@ else:
 ###############################################################################################################################################
 
 if "10p6" in heep_kinematics:
-    runNum = 4784 # First run number of 10p6 coin heep setting
+    runNum = 4827 # First run number of 10p6 coin heep setting
 if "8p2" in heep_kinematics:
     runNum = 7974 # First run number of 8p2 coin heep setting
 
@@ -178,11 +178,11 @@ InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
 InFile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "OPEN")
 InFile_SIMC = ROOT.TFile.Open(rootFile_SIMC, "READ")
 
-#TBRANCH_DATA  = InFile_DATA.Get("Cut_Proton_Events_All")
-TBRANCH_DATA  = InFile_DATA.Get("Uncut_Proton_Events")
+TBRANCH_DATA  = InFile_DATA.Get("Cut_Proton_Events_All")
+#TBRANCH_DATA  = InFile_DATA.Get("Uncut_Proton_Events")
 nEntries_TBRANCH_DATA  = TBRANCH_DATA.GetEntries()
-#TBRANCH_DUMMY  = InFile_DUMMY.Get("Cut_Proton_Events_All")
-TBRANCH_DUMMY  = InFile_DUMMY.Get("Uncut_Proton_Events")
+TBRANCH_DUMMY  = InFile_DUMMY.Get("Cut_Proton_Events_All")
+#TBRANCH_DUMMY  = InFile_DUMMY.Get("Uncut_Proton_Events")
 nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
 TBRANCH_SIMC  = InFile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
@@ -596,7 +596,7 @@ if spec == "HMS":
     H_W_DUMMY_rand.Scale(normfac_dummy/nWindows)
 
     ###
-    #'''
+    '''
     # Data Random subtraction
     H_hsxfp_DATA.Add(H_hsxfp_DATA_rand,-1)
     H_hsyfp_DATA.Add(H_hsyfp_DATA_rand,-1)
@@ -616,7 +616,7 @@ if spec == "HMS":
     H_hsyptar_DUMMY.Add(H_hsyptar_DUMMY_rand,-1)
     H_hsdelta_DUMMY.Add(H_hsdelta_DUMMY_rand,-1)
     H_W_DUMMY.Add(H_W_DUMMY_rand,-1)
-    #'''
+    '''
 
     # Dummy Subtraction
     H_hsxfp_DATA.Add(H_hsxfp_DUMMY,-1)
@@ -712,7 +712,7 @@ else:
     H_W_DUMMY_rand.Scale(normfac_dummy/nWindows)
 
     ###
-    #'''
+    '''
     # Data Random subtraction
     H_ssxfp_DATA.Add(H_ssxfp_DATA_rand,-1)
     H_ssyfp_DATA.Add(H_ssyfp_DATA_rand,-1)
@@ -744,7 +744,7 @@ else:
     H_pmy_DUMMY.Add(H_pmy_DUMMY_rand,-1)
     H_pmz_DUMMY.Add(H_pmz_DUMMY_rand,-1)
     H_W_DUMMY.Add(H_W_DUMMY_rand,-1)
-    #'''
+    '''
 
     # Dummy Subtraction
     H_ssxfp_DATA.Add(H_ssxfp_DUMMY,-1)

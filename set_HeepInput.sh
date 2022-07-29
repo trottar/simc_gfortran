@@ -64,9 +64,9 @@ if [[ $s_flag = "true" ]]; then
 	SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
 	KIN=$3
     else
-	spec=$1
+	spec=$2
 	SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
-	KIN=$2
+	KIN=$3
     fi
 
     InputSIMC="Heep_${SPEC}_${KIN}"
@@ -83,7 +83,7 @@ if [[ $s_flag = "true" ]]; then
     python3 setElasArm.py ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} ${InputSIMC} "$OUTPUTELAS"
 else
     cd ${SIMCPATH}/scripts/COIN
-    KIN=$2
+    KIN=$1
 
     InputSIMC="Heep_Coin_${KIN}"
 fi

@@ -28,13 +28,18 @@ SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 while getopts 'hcs' flag; do
     case "${flag}" in
         h) 
-        echo "---------------------------"
-        echo "./check_Offsets.sh -{flags}"
-        echo "---------------------------"
+        echo "----------------------------------------------------------"
+        echo "./check_Offsets.sh -{flags} {variable arguments, see help}"
+        echo "----------------------------------------------------------"
         echo
         echo "The following flags can be called for the heep analysis..."
+	echo "    If no flags called arguments are..."
+	echo "        coin -> KIN=arg1"
+	echo "        sing -> SPEC=arg1 KIN=arg2 (requires -s flag)"
         echo "    -h, help"
         echo "    -c, compile fortran code"
+	echo "        coin -> KIN=arg1"
+	echo "        sing -> SPEC=arg1 KIN=arg2 (requires -s flag)"	
 	echo "    -s, single arm"
         exit 0
         ;;

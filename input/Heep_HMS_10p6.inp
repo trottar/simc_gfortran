@@ -6,14 +6,14 @@ begin parm experiment
 end parm experiment
 
 begin parm kinematics_main
-  Ebeam = 10585.37  		;  (MeV)
+  Ebeam = 10585.37		;  (MeV)
   dEbeam = 0.05			;  beam energy variation (%)
-  electron_arm = 1              ;  1=hms,2=sos,3=hrsr,4=hrsl,5=shms 		
+  electron_arm = 1              ;  1=hms,2=sos,3=hrsr,4=hrsl,5=shms
   hadron_arm = 5                ;  1=hms,2=sos,3=hrsr,4=hrsl,5=shms
-  spec%e%P = 6583.4		;  e arm central momentum (MeV/c)
-  spec%e%theta = 18.960		;  e arm angle setting (degrees)
-  spec%p%P = 4844.8		;  p arm central momentum (MeV/c)
-  spec%p%theta = 26.030   	;  p arm angle setting (degrees)
+  spec%e%P = 6620.0		;  e arm central momentum (MeV/c)
+  spec%e%theta = 18.800		;  e arm angle setting (degrees)
+  spec%p%P = 4846.		;  p arm central momentum (MeV/c)
+  spec%p%theta = 26.125		;  p arm angle setting (degrees)
 end parm kinematics_main
 
 begin parm target
@@ -25,7 +25,7 @@ begin parm target
   targ%thick = 723.00		;  target thick (mg/cm^2) 10.0cm long
   targ%angle = 0.		;  target angle (for solid target) (degrees)
   targ%abundancy = 100.		;  target purity (%)
-  targ%can = 2			;  1=beer can (fpi), 2=pudding can (nucpi)
+  targ%can = 3			;  1=beer can (fpi), 2=pudding can (nucpi), 3=cryo17
 end parm target
 
 begin parm debug		;  (ONES give helpful debug info)

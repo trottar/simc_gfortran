@@ -1,11 +1,12 @@
 ! elas_kin.f
 ! written by Dave Gaskell
 ! cross sections are based on parameterization of Walker data
-
-      program elas_kin
-
-      implicit none
       
+      subroutine kin_table(ei,Th_e,Q_2,E_e,Th_p,P_p,Mott_cross,Sig_p,N)
+      implicit none
+
+      integer N
+      real*8 Th_e(N),Q_2(N),E_e(N),Th_p(N),P_p(N),Mott_cross(N),Sig_p(N)
       real*8 mn,pi,ei
       real*8 theta,scat,q2,ep,eps,nu,tau,mott,recoil
       real*8 alpha,barn
@@ -24,18 +25,13 @@ c     nucleon mass = 0.938272 GeV/c**2
       data pi/3.14159/
 C     alpha = 1/137, barn:(1 GeV)**-2 = 0.389e-3 barn
       data alpha,barn/7.2993e-3,0.389e-3/
-      
-      write(6,*) 'Input electron beam energy in GeV.'
-      read(5,*) ei
-c     type *,'Input scattering angle (degrees).'
-c     accept *,theta
-c     theta =14.0
+
       write(6,*)' Electron beam energy: ',ei,' GeV'
       
       write(6,790)
  790  format(/,t3,'Th_e',t14,'Q^2',t24,'E_e',t32,'Th_p',t44,'P_p',
      1     t55,'Mott',t62,'Sig_p (fm^2/sr)')
-      do i=0,1000
+      do i=1,N
          theta = 7.*pi/180 + i/20.*pi/180.
          
 C     Calculate Q**2
@@ -111,8 +107,13 @@ c        write(6,*) 'ef = ',ep,'q3 = ',q3
 c        write(6,*) 'thetaq = ',thetaq*180/3.14159
          
          write(6,3) scat,q2,ep,thetaq*180./3.14159,q3,mott,csp
+         Th_e(i) = scat
+         Q_2(i) = q2
+         E_e(i) = ep
+         Th_p(i) = thetaq*180./3.14159
+         P_p(i) = q3
+         Mott_cross(i) = mott
+         Sig_p(i) = csp
       enddo
-      
- 3    format(5(f7.3,4x),2(E10.3E2,4x))
-      
+ 3    format(5(f7.3,3x),2(E10.3E2,3x))
       end

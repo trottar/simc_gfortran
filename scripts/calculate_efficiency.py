@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-30 05:13:53 trottar"
+# Time-stamp: "2022-07-28 09:49:49 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -14,6 +14,7 @@ import pandas as pd
 import sys,os
 
 runNum = sys.argv[1]
+efficiency_table = sys.argv[2]
 
 ###############################################################################################################################################
 
@@ -32,13 +33,14 @@ UTILPATH=lt.UTILPATH
 ################################################################################################################################################
 # Define efficiencies
 
-inp_f = UTILPATH+"/scripts/efficiency/OUTPUTS/coin_production_HeePCoin_efficiency_data_2022_06_13.csv"
+inp_f = UTILPATH+"/scripts/efficiency/OUTPUTS/%s" % efficiency_table
 
 # Converts csv data to dataframe
 try:
     eff_data = pd.read_csv(inp_f)
 except IOError:
     print("Error: %s does not appear to exist." % inp_f)
+    sys.exit(1)
 #print(eff_data.keys())
 
 eff_data = eff_data[eff_data['Run_Number'] == int(runNum)]

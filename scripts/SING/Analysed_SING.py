@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-29 09:31:29 trottar"
+# Time-stamp: "2022-07-26 17:23:26 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -28,8 +28,8 @@ import sys, math, os, subprocess
 ##################################################################################################################################################
 
 # Check the number of arguments provided to the script
-if len(sys.argv)-1!=1:
-    print("!!!!! ERROR !!!!!\n Expected 3 arguments\n Usage is with - ROOTfilePrefix RunNumber MaxEvents \n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=2:
+    print("!!!!! ERROR !!!!!\n Expected 2 arguments\n Usage is with - ROOTfilePrefix RunNumber MaxEvents \n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################
@@ -38,7 +38,6 @@ if len(sys.argv)-1!=1:
 runNum = sys.argv[1]
 MaxEvent = "-1"
 spec = sys.argv[2]
-ROOTPrefix = "Kaon_%s_replay_production" % spec
 
 ################################################################################################################################################
 '''
@@ -47,6 +46,8 @@ ltsep package import and pathing definitions
 
 # Import package for cuts
 from ltsep import Root
+
+lt=Root(os.path.realpath(__file__),"SimcSing_%s" % spec)
 
 # Add this to all files for more dynamic pathing
 USER=lt.USER # Grab user info for file finding
@@ -58,6 +59,10 @@ ANATYPE=lt.ANATYPE
 OUTPATH=lt.OUTPATH
 
 ##############################################################################################################################################
+
+ROOTPrefix = "%s_%s_replay_production" % (ANATYPE,spec)
+
+##############################################################################################################################################
 '''
 Define and set up cuts
 '''
@@ -65,7 +70,10 @@ Define and set up cuts
 cut_f = '/DB/CUTS/run_type/simc_sing_heep.cuts'
 
 # defining Cuts
-cuts = ["coin_ep_cut_prompt_noRF_nopid"]
+if spec == 'HMS':
+    cuts = ["ecut_pid"]
+else:
+    cuts = ["pcut_pid"]
 
 lt=Root(os.path.realpath(__file__),"SimcSing_%s" % spec,ROOTPrefix,runNum,MaxEvent,cut_f,cuts)
 
@@ -90,7 +98,7 @@ def shms_protons():
     Cut_SHMS_Protons_all_tmp = []
 
     for arr in Cut_SHMS_Protons_tmp:
-        Cut_SHMS_Protons_all_tmp.append(c.add_cut(arr, "coin_ep_cut_prompt_noRF_nopid"))
+        Cut_SHMS_Protons_all_tmp.append(c.add_cut(arr, "pcut_pid"))
 
     Cut_SHMS_Protons_all = [(tree["P_gtr_yp"],tree["P_gtr_xp"],tree["P_dc_yp_fp"],tree["P_dc_xp_fp"],tree["P_dc_y_fp"],tree["P_dc_x_fp"],tree["P_dc_InsideDipoleExit"], tree["P_gtr_beta"],  tree["P_gtr_p"], tree["P_gtr_dp"], tree["P_hod_goodscinhit"], tree["P_hod_goodstarttime"], tree["P_cal_etotnorm"], tree["P_cal_etottracknorm"], tree["P_aero_npeSum"], tree["P_aero_xAtAero"], tree["P_aero_yAtAero"], tree["P_hgcer_npeSum"], tree["P_hgcer_xAtCer"], tree["P_hgcer_yAtCer"], tree["MMp"], tree["P_RF_Dist"], tree["W"], tree["emiss"],tree["pmiss"], tree["pmiss_x"], tree["pmiss_y"], tree["pmiss_z"]) for (tree["P_gtr_yp"],tree["P_gtr_xp"],tree["P_dc_yp_fp"],tree["P_dc_xp_fp"],tree["P_dc_y_fp"],tree["P_dc_x_fp"],tree["P_dc_InsideDipoleExit"], tree["P_gtr_beta"],  tree["P_gtr_p"], tree["P_gtr_dp"], tree["P_hod_goodscinhit"], tree["P_hod_goodstarttime"], tree["P_cal_etotnorm"], tree["P_cal_etottracknorm"], tree["P_aero_npeSum"], tree["P_aero_xAtAero"], tree["P_aero_yAtAero"], tree["P_hgcer_npeSum"], tree["P_hgcer_xAtCer"], tree["P_hgcer_yAtCer"], tree["MMp"], tree["P_RF_Dist"], tree["W"], tree["emiss"],tree["pmiss"], tree["pmiss_x"], tree["pmiss_y"], tree["pmiss_z"]) in zip(*Cut_SHMS_Protons_all_tmp)]
 
@@ -105,9 +113,9 @@ def hms_protons():
 
     # Define the array of arrays containing the relevant HMS and SHMS info                              
 
-    NoCut_HMS_Protons = [tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["W"]]
+    NoCut_HMS_Protons = [tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["H_W"]]
 
-    Uncut_HMS_Protons = [(tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["W"]) for (tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["W"]) in zip(*NoCut_HMS_Protons)]
+    Uncut_HMS_Protons = [(tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["H_W"]) for (tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["H_W"]) in zip(*NoCut_HMS_Protons)]
 
     # Create array of arrays of pions after cuts, all events, prompt and random          
 
@@ -115,9 +123,9 @@ def hms_protons():
     Cut_HMS_Protons_all_tmp = []
 
     for arr in Cut_HMS_Protons_tmp:
-        Cut_HMS_Protons_all_tmp.append(c.add_cut(arr, "coin_ep_cut_prompt_noRF_nopid"))
+        Cut_HMS_Protons_all_tmp.append(c.add_cut(arr, "ecut_pid"))
 
-    Cut_HMS_Protons_all = [(tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["W"]) for (tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["W"]) in zip(*Cut_HMS_Protons_all_tmp)]
+    Cut_HMS_Protons_all = [(tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["H_W"]) for (tree["H_gtr_yp"],tree["H_gtr_xp"],tree["H_dc_yp_fp"],tree["H_dc_xp_fp"],tree["H_dc_y_fp"],tree["H_dc_x_fp"],tree["H_dc_InsideDipoleExit"],tree["H_gtr_beta"],  tree["H_gtr_dp"], tree["H_gtr_p"], tree["H_hod_goodscinhit"], tree["H_hod_goodstarttime"], tree["H_cal_etotnorm"], tree["H_cal_etottracknorm"], tree["H_cer_npeSum"],tree["H_RF_Dist"], tree["H_W"]) in zip(*Cut_HMS_Protons_all_tmp)]
 
     HMS_Protons = {
         "Uncut_Proton_Events" : Uncut_HMS_Protons,
@@ -137,10 +145,13 @@ def main():
     if "SHMS" in spec:
         Sing_Proton_Data = shms_protons()
         Sing_Proton_Data_Header = ["ssyptar","ssxptar","ssypfp","ssxpfp","ssyfp","ssxfp","P_dc_InsideDipoleExit", "P_gtr_eta", "P_gtr_p", "ssdelta", "P_hod_goodscinhit", "P_hod_goodstarttime", "P_cal_etotnorm", "P_cal_etottracknorm", "P_aero_npeSum", "P_aero_xAtAero", "P_aero_yAtAero", "P_hgcer_npeSum", "P_hgcer_xAtCer", "P_hgcer_yAtCer", "MMp","P_RF_Dist", "W", "emiss", "pmiss", "pmx", "pmy", "pmz"]
-    else:
+    elif "HMS" in spec:
         Sing_Proton_Data = hms_protons()
         Sing_Proton_Data_Header = ["hsyptar","hsxptar","hsypfp","hsxpfp","hsyfp","hsxfp","H_dc_InsideDipoleExit","H_gtr_eta", "hsdelta", "H_gtr_p", "H_hod_goodscinhit", "H_hod_goodstarttime", "H_cal_etotnorm", "H_cal_etottracknorm", "H_cer_npeSum","H_RF_Dist", "W"]
-
+    else:
+        print("Error: %s invalid spectrometer" % SPEC)
+        sys.exit(0)
+        
     # Need to create a dict for all the branches we grab                                                
     data = {}
     data.update(Sing_Proton_Data)

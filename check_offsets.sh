@@ -25,74 +25,59 @@ USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 
-while getopts 'hcas' flag; do
+while getopts 'hcs' flag; do
     case "${flag}" in
         h) 
         echo "----------------------------------------------------------"
-        echo "./set_HeepInput.sh -{flags} {variable arguments, see help}"
+        echo "./check_Offsets.sh -{flags} {variable arguments, see help}"
         echo "----------------------------------------------------------"
         echo
         echo "The following flags can be called for the heep analysis..."
-        echo "    -h, help"
-        echo "    -c, compile fortran code (singles only)"
-	echo "    -a, run SIMC with new settings"
+	echo "    If no flags called arguments are..."
 	echo "        coin -> KIN=arg1"
 	echo "        sing -> SPEC=arg1 KIN=arg2 (requires -s flag)"
+        echo "    -h, help"
+        echo "    -c, compile fortran code"
+	echo "        coin -> KIN=arg1"
+	echo "        sing -> SPEC=arg1 KIN=arg2 (requires -s flag)"	
 	echo "    -s, single arm"
         exit 0
         ;;
         c) c_flag='true' ;;
-	a) a_flag='true' ;;
 	s) s_flag='true' ;;
         *) print_usage
         exit 1 ;;
     esac
 done
 
-if [[ $s_flag = "true" ]]; then
-    ELASFOR="elas_kin"
+HEEPFOR="heepcheck"
 
-    cd ${SIMCPATH}/scripts/SING
-    if [[ $c_flag = "true" ]]; then
-	echo "Compiling ${ELASFOR}.f..."
-	eval "gfortran -o  ${ELASFOR} ${ELASFOR}.f"
-	spec=$2
-	SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
-	KIN=$3
-    elif [[ $a_flag = "true" ]]; then
-	spec=$2
-	SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
-	KIN=$3
-    else
-	spec=$2
-	SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
-	KIN=$3
-    fi
-
+cd ${SIMCPATH}/scripts
+if [[ $c_flag = "true" && $s_flag = "true" ]]; then
+    echo "Compiling ${HEEPFOR}.f..."
+    eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"
+    spec=$2
+    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+    KIN=$3
     InputSIMC="Heep_${SPEC}_${KIN}"
-
-    cd ${SIMCPATH}/scripts
-    SIMCINP=`python3 getSetting.py ${InputSIMC}`
-
-    BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
-    THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
-
-    cd ${SIMCPATH}/scripts/SING
-    OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")
-
-    python3 setElasArm.py ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} ${InputSIMC} "$OUTPUTELAS"
+elif [[ $c_flag = "true" && $s_flag != "true" ]]; then
+    echo "Compiling ${HEEPFOR}.f..."
+    eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"
+    KIN=$2
+    InputSIMC="Heep_Coin_${KIN}"
+elif [[ $s_flag = "true" ]]; then
+    spec=$2
+    SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
+    KIN=$3
+    InputSIMC="Heep_${SPEC}_${KIN}"
 else
-    cd ${SIMCPATH}/scripts/COIN
     KIN=$1
-
     InputSIMC="Heep_Coin_${KIN}"
 fi
 
-if [[ $a_flag = "true" ]]; then
-    echo
-    echo 
-    echo "Running simc analysis for ${InputSIMC}..."
-    echo
-    cd ${SIMCPATH}/scripts
-    ./run_simc_tree "${InputSIMC}"
-fi
+SIMCINP=`python3 getSetting.py ${InputSIMC}`
+
+BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
+THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
+
+./${HEEPFOR}.expect $(echo "${BEAMINP}*1000"|bc) ${THETAINP} # piping bc allows float arithmetic

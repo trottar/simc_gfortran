@@ -23,3 +23,7 @@ CTP/daVarRpc_xdr.c
 
 # Sym link
 OUTPUTS
+
+# fortran compiles
+elas_kin
+heepcheck

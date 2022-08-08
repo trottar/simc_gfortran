@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-06-30 06:58:10 trottar"
+# Time-stamp: "2022-07-28 11:08:33 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -12,8 +12,12 @@
 #
 import sys,os,math
 
-InputSIMC = sys.argv[1]
-offset = sys.argv[2]
+KIN = sys.argv[1]
+SPEC = sys.argv[2]
+ebeam_elas = "{0:.3f}".format(float(sys.argv[3]))
+eTh_elas = "{0:.3f}".format(float(sys.argv[4]))
+InputSIMC = sys.argv[5]
+inp_table = sys.argv[6]
 
 ################################################################################################################################################
 '''
@@ -60,34 +64,42 @@ inpDict = {
     "pTh" : pTh,
 }
 
+data_str = inp_table.split("Sig_p (fm^2/sr)")[1]
+data = data_str.split("\n")
+for i,l in enumerate(data):
+    data[i] = l.split('    ')
+    data[i] = [j.strip(' ').strip('\r') for j in data[i]]
+
+for d in data:
+    if eTh_elas in d[0]:
+        eP_elas = d[2]
+        pTh_elas = d[3]
+        pP_elas = d[4]
+        print("For ebeam = %s, eTh = %s the elastic settings are...\n" % (ebeam_elas,eTh_elas),d)
+
+try:
+    pTh_elas
+    pP_elas
+except NameError:
+    print("Error: eTh = %s not found in elastic table..." % eTh_elas)
+    sys.exit(0)
+    
 outDict = inpDict.copy()
 
-offset = offset.split(",")
-
-print("Given offsets...\n",offset,"\n")
-
-for off in offset:
-    for key,val in inpDict.items():
-        val = float(val)
-        if key in off:
-            offsetPct = float(off.replace(key,"").replace("=",""))
-            if "Th" in key:
-                offsetValue = offsetPct*(180/(1000*math.pi))
-            else:
-                offsetValue = val*(offsetPct/1000)
-            if key == "ebeam":
-                outDict[key] = " {0:.2f}  \t\t".format(val+offsetValue)
-            if key == "eP":
-                outDict[key] = " {0:.1f}\t\t".format(val+offsetValue)
-            if key == "eTh":
-                outDict[key] = " {0:.3f}\t\t".format(val+offsetValue)
-            if key == "pP":
-                outDict[key] = " {0:.1f}\t\t".format(val+offsetValue)
-            if key == "pTh":
-                outDict[key] = " {0:.3f}   \t".format(val+offsetValue)
+for key,val in inpDict.items():
+    if key == "ebeam":
+        outDict[key] = " {0:.2f}\t\t".format(float(ebeam))
+    if key == "eP":
+        outDict[key] = " {0:.1f}\t\t".format(float(eP))
+    if key == "eTh":
+        outDict[key] = " {0:.3f}\t\t".format(float(eTh))
+    if key == "pP":
+        outDict[key] = " {0:.1f}\t\t".format(float(pP_elas)*1000) # Converts to MeV
+    if key == "pTh":
+        outDict[key] = " {0:.3f}\t\t".format(abs(float(pTh_elas))) # Removes minus sign
 
 print("Original Values...\n",sorted(inpDict.items()))
-print("Offset Values...\n",sorted(outDict.items()))
+print("New Values...\n",sorted(outDict.items()))
 
 f_data = f_data.replace(inpDict['ebeam'],outDict['ebeam'])
 f_data = f_data.replace(inpDict['eP'],outDict['eP'])

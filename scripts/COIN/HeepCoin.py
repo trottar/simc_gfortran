@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-01 01:46:41 trottar"
+# Time-stamp: "2022-08-04 10:25:53 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -33,7 +33,7 @@ from functools import reduce
 
 # Check the number of arguments provided to the script
 if len(sys.argv)-1!=9:
-    print("!!!!! ERROR !!!!!\n Expected 4 arguments\n Usage is with - InDATAFilename InDUMMYFilename InSIMCFilename OutFilename \n!!!!! ERROR !!!!!")
+    print("!!!!! ERROR !!!!!\n Expected 9 arguments\n Usage is with - KIN OutDATAFilename.root data_charge data_efficiency OutDUMMYFilename.root dummy_charge dummy_efficiency InSIMCFilename OutFullAnalysisFilename \n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################
@@ -49,13 +49,17 @@ dummy_efficiency = sys.argv[7]
 InSIMCFilename = sys.argv[8]
 OutFilename = sys.argv[9]
 
-#data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
-data_efficiency = sum([float(i) for i in data_efficiency.split(" ")])/len([float(i) for i in data_efficiency.split(" ")])
-print("\n\ndata_efficiency=",data_efficiency)
+try:    
+    #data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
+    data_efficiency = sum([float(i) for i in data_efficiency.split(" ")])/len([float(i) for i in data_efficiency.split(" ")])
+    print("\n\ndata_efficiency=",data_efficiency)
 
-#dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
-dummy_efficiency = sum([float(i) for i in dummy_efficiency.split(" ")])/len([float(i) for i in dummy_efficiency.split(" ")])
-print("dummy_efficiency=",dummy_efficiency)
+    #dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
+    dummy_efficiency = sum([float(i) for i in dummy_efficiency.split(" ")])/len([float(i) for i in dummy_efficiency.split(" ")])
+    print("dummy_efficiency=",dummy_efficiency)
+except ValueError:
+    print("\nError: Invalid efficiency value found...")
+    sys.exit(1)
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -392,6 +396,8 @@ for evt in TBRANCH_SIMC:
       H_pmz_SIMC.Fill(evt.Pmz, evt.Weight)
       H_Q2_SIMC.Fill(evt.Q2, evt.Weight)
       H_W_SIMC.Fill(evt.W, evt.Weight)
+      Mp = 938.27
+      #H_W_SIMC.Fill((Mp+evt.q)/1000, evt.Weight)
       H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
       H_MMp_SIMC.Fill(np.sqrt(pow(evt.Em, 2) - pow(evt.Pm, 2)), evt.Weight)
 
@@ -1179,8 +1185,13 @@ H_W_DATA.Draw("same")
 b_int_W_simc = int(H_W_SIMC.Integral())
 b_int_W_data = int(H_W_DATA.Integral())
 
+b_bin_W_simc = H_W_SIMC.GetXaxis().GetBinCenter(H_W_SIMC.GetMaximumBin())
+b_bin_W_data = H_W_DATA.GetXaxis().GetBinCenter(H_W_DATA.GetMaximumBin())
+
 l_W.AddEntry(H_W_SIMC,"SIMC, INT = %s" % b_int_W_simc)
 l_W.AddEntry(H_W_DATA,"DATA, INT = %s" % b_int_W_data)
+l_W.AddEntry(H_W_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_W_simc))
+l_W.AddEntry(H_W_DATA,"DATA, BIN = {0:.3f}".format(b_bin_W_data))
 
 l_W.Draw()
 

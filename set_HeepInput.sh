@@ -81,14 +81,12 @@ if [[ $s_flag = "true" ]]; then
     OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")
 
     python3 setElasArm.py ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} ${InputSIMC} "$OUTPUTELAS"
-else
+elif [[ $a_flag = "true" ]]; then
     cd ${SIMCPATH}/scripts/COIN
-    KIN=$1
+    KIN=$2
 
     InputSIMC="Heep_Coin_${KIN}"
-fi
-
-if [[ $a_flag = "true" ]]; then
+    
     echo
     echo 
     echo "Running simc analysis for ${InputSIMC}..."
@@ -96,3 +94,4 @@ if [[ $a_flag = "true" ]]; then
     cd ${SIMCPATH}/scripts
     ./run_simc_tree "${InputSIMC}"
 fi
+

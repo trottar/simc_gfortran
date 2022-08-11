@@ -100,7 +100,6 @@ if [[ $KIN = "10p6" && $s_flag != "true" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # All heep coin 10p6 runs
     #declare -a data=(4827) # Just one test run
     declare -a dummydata=(4864)
-<<<<<<< HEAD
 elif [[ $KIN = "8p2" ]]; then
     declare -a data=(7974 7975 7976)
     declare -a dummydata=(7977)
@@ -114,7 +113,6 @@ elif [[ $KIN = "10p6" && $s_flag = "true" ]]; then
 elif [[ $KIN = "8p2" && $s_flag = "true" ]]; then
     declare -a data=(111)
     declare -a dummydata=(111)    
->>>>>>> upstream/spring_2022
 else
     echo "Invalid kinematic setting, ${KIN}"
     exit 128

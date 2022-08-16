@@ -854,8 +854,8 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! So looking along q, out of plane is down, perp. is left.
 
 	vertex%Pmx = -(vertex%p%P*vertex%up%x - vertex%q*vertex%uq%x) ! Negative sign for convention to match hcana
-	vertex%Pmy = -(vertex%p%P*vertex%up%y - vertex%q*vertex%uq%y) ! Negative sign for convention to match hcana
-	vertex%Pmz = (vertex%p%P*vertex%up%z - vertex%q*vertex%uq%z)
+	vertex%Pmy = (vertex%p%P*vertex%up%y - vertex%q*vertex%uq%y)
+	vertex%Pmz = -(vertex%p%P*vertex%up%z - vertex%q*vertex%uq%z) ! Negative sign for convention to match hcana
 	vertex%Pmiss = sqrt(vertex%Pmx**2+vertex%Pmy**2+vertex%Pmz**2)
 	vertex%Emiss = vertex%nu + targ%M - vertex%p%E
 
@@ -1249,8 +1249,8 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! So looking along q, out of plane is down, perp. is left.
 
 	recon%Pmx = -(recon%p%P*recon%up%x - recon%q*recon%uq%x) ! Negative sign for convention to match hcana
-	recon%Pmy = -(recon%p%P*recon%up%y - recon%q*recon%uq%y) ! Negative sign for convention to match hcana
-	recon%Pmz = (recon%p%P*recon%up%z - recon%q*recon%uq%z)
+	recon%Pmy = (recon%p%P*recon%up%y - recon%q*recon%uq%y)
+	recon%Pmz = -(recon%p%P*recon%up%z - recon%q*recon%uq%z) ! Negative sign for convention to match hcana
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!

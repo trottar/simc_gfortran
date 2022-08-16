@@ -853,9 +853,9 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! Perp. component is what's left: along (q_hat) x (oop_hat).
 ! So looking along q, out of plane is down, perp. is left.
 
-	vertex%Pmx = vertex%p%P*vertex%up%x - vertex%q*vertex%uq%x
-	vertex%Pmy = vertex%p%P*vertex%up%y - vertex%q*vertex%uq%y
-	vertex%Pmz = vertex%p%P*vertex%up%z - vertex%q*vertex%uq%z
+	vertex%Pmx = -(vertex%p%P*vertex%up%x - vertex%q*vertex%uq%x)
+	vertex%Pmy = -(vertex%p%P*vertex%up%y - vertex%q*vertex%uq%y)
+	vertex%Pmz = -(vertex%p%P*vertex%up%z - vertex%q*vertex%uq%z)
 	vertex%Pmiss = sqrt(vertex%Pmx**2+vertex%Pmy**2+vertex%Pmz**2)
 	vertex%Emiss = vertex%nu + targ%M - vertex%p%E
 
@@ -1248,9 +1248,9 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! Perp. component is what's left: along (q_hat) x (oop_hat).
 ! So looking along q, out of plane is down, perp. is left.
 
-	recon%Pmx = recon%p%P*recon%up%x - recon%q*recon%uq%x
-	recon%Pmy = recon%p%P*recon%up%y - recon%q*recon%uq%y
-	recon%Pmz = recon%p%P*recon%up%z - recon%q*recon%uq%z
+	recon%Pmx = -(recon%p%P*recon%up%x - recon%q*recon%uq%x)
+	recon%Pmy = -(recon%p%P*recon%up%y - recon%q*recon%uq%y)
+	recon%Pmz = -(recon%p%P*recon%up%z - recon%q*recon%uq%z)
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!

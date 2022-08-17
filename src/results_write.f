@@ -55,9 +55,9 @@
 	  corrsing = recon%e%P - poftheta
 	  Pm_Heepz = -(recon%Pmy*recon%uq%y+recon%Pmz*recon%uq%z)
      >		/ sqrt(recon%uq%y**2+recon%uq%z**2)
-	  Pm_Heepy =  (recon%Pmz*recon%uq%y-recon%Pmy*recon%uq%z)
+	  Pm_Heepx =  (recon%Pmz*recon%uq%y-recon%Pmy*recon%uq%z)
      >		/ sqrt(recon%uq%y**2+recon%uq%z**2)
-	  Pm_Heepx =  -recon%Pmx
+	  Pm_Heepy =  -recon%Pmx
 	endif
 
 	if(electron_arm.eq.1 .or. electron_arm.eq.3.or. electron_arm.eq.7)then !electron = right side.

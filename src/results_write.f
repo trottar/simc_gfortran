@@ -57,7 +57,7 @@
      >		/ sqrt(recon%uq%y**2+recon%uq%z**2)
 	  Pm_Heepx =  (recon%Pmz*recon%uq%y-recon%Pmy*recon%uq%z)
      >		/ sqrt(recon%uq%y**2+recon%uq%z**2) ! Flipped x and y so its in replay coordinates 
-	  Pm_Heepy =  recon%Pmx ! Flipped sign so its in replay coordinates 
+	  Pm_Heepy =  -recon%Pmx ! Flipped sign so its in replay coordinates 
 	endif
 
 	if(electron_arm.eq.1 .or. electron_arm.eq.3.or. electron_arm.eq.7)then !electron = right side.

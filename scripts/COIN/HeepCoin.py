@@ -117,6 +117,8 @@ if "10p6" in heep_kinematics:
     runNum = 4827 # First run number of 10p6 coin heep setting
 if "8p2" in heep_kinematics:
     runNum = 7974 # First run number of 8p2 coin heep setting
+if "6p2" in heep_kinematics:
+    runNum = 7866 # First run number of 8p2 coin heep setting
 
 try:
     runNum
@@ -204,17 +206,17 @@ H_hsyptar_DUMMY  = ROOT.TH1D("H_hsyptar_DUMMY","HMS yptar", 300, -0.1, 0.1)
 H_hsyptar_DUMMY_rand  = ROOT.TH1D("H_hsyptar_DUMMY_rand","HMS yptar", 300, -0.1, 0.1)
 H_hsyptar_SIMC  = ROOT.TH1D("H_hsyptar_SIMC","HMS yptar", 300, -0.1, 0.1)
 
-H_ssxfp_DATA    = ROOT.TH1D("H_ssxfp_DATA","SHMS xfp", 300, -20.0, 20.0)
-H_ssxfp_DATA_rand    = ROOT.TH1D("H_ssxfp_DATA_rand","SHMS xfp", 300, -20.0, 20.0)
-H_ssxfp_DUMMY    = ROOT.TH1D("H_ssxfp_DUMMY","SHMS xfp", 300, -20.0, 20.0)
-H_ssxfp_DUMMY_rand    = ROOT.TH1D("H_ssxfp_DUMMY_rand","SHMS xfp", 300, -20.0, 20.0)
-H_ssxfp_SIMC    = ROOT.TH1D("H_ssxfp_SIMC","SHMS xfp", 300, -20.0, 20.0)
+H_ssxfp_DATA    = ROOT.TH1D("H_ssxfp_DATA","SHMS xfp", 300, -25.0, 25.0)
+H_ssxfp_DATA_rand    = ROOT.TH1D("H_ssxfp_DATA_rand","SHMS xfp", 300, -25.0, 25.0)
+H_ssxfp_DUMMY    = ROOT.TH1D("H_ssxfp_DUMMY","SHMS xfp", 300, -25.0, 25.0)
+H_ssxfp_DUMMY_rand    = ROOT.TH1D("H_ssxfp_DUMMY_rand","SHMS xfp", 300, -25.0, 25.0)
+H_ssxfp_SIMC    = ROOT.TH1D("H_ssxfp_SIMC","SHMS xfp", 300, -25.0, 25.0)
 
-H_ssyfp_DATA    = ROOT.TH1D("H_ssyfp_DATA","SHMS yfp", 300, -20.0, 20.0)
-H_ssyfp_DATA_rand    = ROOT.TH1D("H_ssyfp_DATA_rand","SHMS yfp", 300, -20.0, 20.0)
-H_ssyfp_DUMMY    = ROOT.TH1D("H_ssyfp_DUMMY","SHMS yfp", 300, -20.0, 20.0)
-H_ssyfp_DUMMY_rand    = ROOT.TH1D("H_ssyfp_DUMMY_rand","SHMS yfp", 300, -20.0, 20.0)
-H_ssyfp_SIMC    = ROOT.TH1D("H_ssyfp_SIMC","SHMS yfp", 300, -20.0, 20.0)
+H_ssyfp_DATA    = ROOT.TH1D("H_ssyfp_DATA","SHMS yfp", 300, -25.0, 25.0)
+H_ssyfp_DATA_rand    = ROOT.TH1D("H_ssyfp_DATA_rand","SHMS yfp", 300, -25.0, 25.0)
+H_ssyfp_DUMMY    = ROOT.TH1D("H_ssyfp_DUMMY","SHMS yfp", 300, -25.0, 25.0)
+H_ssyfp_DUMMY_rand    = ROOT.TH1D("H_ssyfp_DUMMY_rand","SHMS yfp", 300, -25.0, 25.0)
+H_ssyfp_SIMC    = ROOT.TH1D("H_ssyfp_SIMC","SHMS yfp", 300, -25.0, 25.0)
 
 H_ssxpfp_DATA   = ROOT.TH1D("H_ssxpfp_DATA","SHMS xpfp", 300, -0.09, 0.09)
 H_ssxpfp_DATA_rand   = ROOT.TH1D("H_ssxpfp_DATA_rand","SHMS xpfp", 300, -0.09, 0.09)
@@ -288,11 +290,11 @@ H_epsilon_DUMMY  = ROOT.TH1D("H_epsilon_DUMMY","epsilon", 300, 0.5, 1.0)
 H_epsilon_DUMMY_rand  = ROOT.TH1D("H_epsilon_DUMMY_rand","epsilon", 300, 0.5, 1.0)
 H_epsilon_SIMC  = ROOT.TH1D("H_epsilon_SIMC","epsilon", 300, 0.5, 1.0)
 
-H_MMp_DATA  = ROOT.TH1D("H_MMp_DATA","MMp ", 300, -0.055, 0.055)
-H_MMp_DATA_rand  = ROOT.TH1D("H_MMp_DATA_rand","MMp ", 300, -0.055, 0.055)
-H_MMp_DUMMY  = ROOT.TH1D("H_MMp_DUMMY","MMp ", 300, -0.055, 0.055)
-H_MMp_DUMMY_rand  = ROOT.TH1D("H_MMp_DUMMY_rand","MMp ", 300, -0.055, 0.055)
-H_MMp_SIMC  = ROOT.TH1D("H_MMp_SIMC","MMp ", 300, -0.055, 0.055)
+H_MMp_DATA  = ROOT.TH1D("H_MMp_DATA","MMp ", 300, -0.03, 0.03)
+H_MMp_DATA_rand  = ROOT.TH1D("H_MMp_DATA_rand","MMp ", 300, -0.03, 0.03)
+H_MMp_DUMMY  = ROOT.TH1D("H_MMp_DUMMY","MMp ", 300, -0.03, 0.03)
+H_MMp_DUMMY_rand  = ROOT.TH1D("H_MMp_DUMMY_rand","MMp ", 300, -0.03, 0.03)
+H_MMp_SIMC  = ROOT.TH1D("H_MMp_SIMC","MMp ", 300, -0.03, 0.03)
 
 H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar", 300, -0.1, 0.1)
 H_th_DATA_rand  = ROOT.TH1D("H_th_DATA_rand","X' tar", 300, -0.1, 0.1)
@@ -306,17 +308,17 @@ H_ph_DUMMY  = ROOT.TH1D("H_ph_DUMMY","Y' tar", 300, -0.1, 0.1)
 H_ph_DUMMY_rand  = ROOT.TH1D("H_ph_DUMMY_rand","Y' tar", 300, -0.1, 0.1)
 H_ph_SIMC  = ROOT.TH1D("H_ph_SIMC","Y' tar", 300, -0.1, 0.1)
 
-H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss", 300, -0.1, 0.4)
-H_pmiss_DATA_rand  = ROOT.TH1D("H_pmiss_DATA_rand","pmiss", 300, -0.1, 0.4)
-H_pmiss_DUMMY  = ROOT.TH1D("H_pmiss_DUMMY","pmiss", 300, -0.1, 0.4)
-H_pmiss_DUMMY_rand  = ROOT.TH1D("H_pmiss_DUMMY_rand","pmiss", 300, -0.1, 0.4)
-H_pmiss_SIMC  = ROOT.TH1D("H_pmiss_SIMC","pmiss", 300, -0.1, 0.4)
+H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss", 300, -0.2, 0.4)
+H_pmiss_DATA_rand  = ROOT.TH1D("H_pmiss_DATA_rand","pmiss", 300, -0.2, 0.4)
+H_pmiss_DUMMY  = ROOT.TH1D("H_pmiss_DUMMY","pmiss", 300, -0.2, 0.4)
+H_pmiss_DUMMY_rand  = ROOT.TH1D("H_pmiss_DUMMY_rand","pmiss", 300, -0.2, 0.4)
+H_pmiss_SIMC  = ROOT.TH1D("H_pmiss_SIMC","pmiss", 300, -0.2, 0.4)
 
-H_emiss_DATA  = ROOT.TH1D("H_emiss_DATA","emiss", 300, -0.1, 0.4)
-H_emiss_DATA_rand  = ROOT.TH1D("H_emiss_DATA_rand","emiss", 300, -0.1, 0.4)
-H_emiss_DUMMY  = ROOT.TH1D("H_emiss_DUMMY","emiss", 300, -0.1, 0.4)
-H_emiss_DUMMY_rand  = ROOT.TH1D("H_emiss_DUMMY_rand","emiss", 300, -0.1, 0.4)
-H_emiss_SIMC  = ROOT.TH1D("H_emiss_SIMC","emiss", 300, -0.1, 0.4)
+H_emiss_DATA  = ROOT.TH1D("H_emiss_DATA","emiss", 300, -0.2, 0.4)
+H_emiss_DATA_rand  = ROOT.TH1D("H_emiss_DATA_rand","emiss", 300, -0.2, 0.4)
+H_emiss_DUMMY  = ROOT.TH1D("H_emiss_DUMMY","emiss", 300, -0.2, 0.4)
+H_emiss_DUMMY_rand  = ROOT.TH1D("H_emiss_DUMMY_rand","emiss", 300, -0.2, 0.4)
+H_emiss_SIMC  = ROOT.TH1D("H_emiss_SIMC","emiss", 300, -0.2, 0.4)
 
 H_pmx_DATA  = ROOT.TH1D("H_pmx_DATA","pmx", 300, -0.2, 0.2)
 H_pmx_DATA_rand  = ROOT.TH1D("H_pmx_DATA_rand","pmx", 300, -0.2, 0.2)
@@ -395,11 +397,11 @@ for evt in TBRANCH_SIMC:
       H_pmy_SIMC.Fill(evt.Pmy, evt.Weight)
       H_pmz_SIMC.Fill(evt.Pmz, evt.Weight)
       H_Q2_SIMC.Fill(evt.Q2, evt.Weight)
-      #H_W_SIMC.Fill(evt.W, evt.Weight)
+      H_W_SIMC.Fill(evt.W, evt.Weight)
       Mp = 938.27
-      H_W_SIMC.Fill((Mp+evt.q), evt.Weight)
+#      H_W_SIMC.Fill((Mp+evt.q), evt.Weight)
       H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
-      H_MMp_SIMC.Fill(np.sqrt(pow(evt.Em, 2) - pow(evt.Pm, 2)), evt.Weight)
+      H_MMp_SIMC.Fill(pow(evt.Em, 2) - pow(evt.Pm, 2), evt.Weight)
 
 for evt in TBRANCH_DATA:
 
@@ -437,14 +439,16 @@ for evt in TBRANCH_DATA:
       
       H_pmiss_DATA.Fill(evt.pmiss)	
       H_emiss_DATA.Fill(evt.emiss)	
+      #H_emiss_DATA.Fill(evt.emiss_nuc)
       H_pmx_DATA.Fill(evt.pmx)
       H_pmy_DATA.Fill(evt.pmy)
       H_pmz_DATA.Fill(evt.pmz)
       H_Q2_DATA.Fill(evt.Q2)
       H_W_DATA.Fill(evt.W)
       H_epsilon_DATA.Fill(evt.epsilon)
-      H_MMp_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-      #H_MMp_DATA.Fill(evt.MMp)  
+      H_MMp_DATA.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
+      #H_MMp_DATA.Fill(pow(evt.MMp, 2))  
+      #H_MMp_DATA.Fill(evt.Mrecoil)
 
       H_ct_ep_vs_H_MMp_DATA_rand.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
       H_ct_ep_DATA_cut_rand.Fill(evt.CTime_epCoinTime_ROC1)
@@ -467,14 +471,16 @@ for evt in TBRANCH_DATA:
       
       H_pmiss_DATA_rand.Fill(evt.pmiss)	
       H_emiss_DATA_rand.Fill(evt.emiss)	
+      #H_emiss_DATA_rand.Fill(evt.emiss_nuc)
       H_pmx_DATA_rand.Fill(evt.pmx)
       H_pmy_DATA_rand.Fill(evt.pmy)
       H_pmz_DATA_rand.Fill(evt.pmz)
       H_Q2_DATA_rand.Fill(evt.Q2)
       H_W_DATA_rand.Fill(evt.W)
       H_epsilon_DATA_rand.Fill(evt.epsilon)
-      H_MMp_DATA_rand.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
+      H_MMp_DATA_rand.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
       #H_MMp_DATA_rand.Fill(evt.MMp)  
+      #H_MMp_DATA_rand.Fill(evt.Mrecoil)
 
       
 for evt in TBRANCH_DUMMY:
@@ -514,14 +520,16 @@ for evt in TBRANCH_DUMMY:
       
       H_pmiss_DUMMY.Fill(evt.pmiss)	
       H_emiss_DUMMY.Fill(evt.emiss)	
+      #H_emiss_DUMMY.Fill(evt.emiss_nuc)
       H_pmx_DUMMY.Fill(evt.pmx)
       H_pmy_DUMMY.Fill(evt.pmy)
       H_pmz_DUMMY.Fill(evt.pmz)
       H_Q2_DUMMY.Fill(evt.Q2)
       H_W_DUMMY.Fill(evt.W)
       H_epsilon_DUMMY.Fill(evt.epsilon)
-      #H_MMp_DUMMY.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-      H_MMp_DUMMY.Fill(evt.MMp)  
+      H_MMp_DUMMY.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
+      #H_MMp_DUMMY.Fill(evt.MMp)  
+      #H_MMp_DUMMY.Fill(evt.Mrecoil)
 
       H_ct_ep_DUMMY_cut_rand.Fill(evt.CTime_epCoinTime_ROC1)
       
@@ -543,14 +551,16 @@ for evt in TBRANCH_DUMMY:
       
       H_pmiss_DUMMY_rand.Fill(evt.pmiss)	
       H_emiss_DUMMY_rand.Fill(evt.emiss)	
+      #H_emiss_DUMMY_rand.Fill(evt.emiss_nuc)
       H_pmx_DUMMY_rand.Fill(evt.pmx)
       H_pmy_DUMMY_rand.Fill(evt.pmy)
       H_pmz_DUMMY_rand.Fill(evt.pmz)
       H_Q2_DUMMY_rand.Fill(evt.Q2)
       H_W_DUMMY_rand.Fill(evt.W)
       H_epsilon_DUMMY_rand.Fill(evt.epsilon)
-      #H_MMp_DUMMY_rand.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))  
-      H_MMp_DUMMY_rand.Fill(evt.MMp)  
+      H_MMp_DUMMY_rand.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
+      #H_MMp_DUMMY_rand.Fill(evt.MMp)  
+      #H_MMp_DUMMY_rand.Fill(evt.Mrecoil)
 
 
 normfac_simc = (simc_normfactor)/(simc_nevents)
@@ -574,8 +584,8 @@ H_pmx_SIMC.Scale(normfac_simc)
 H_pmy_SIMC.Scale(normfac_simc)                                                                                                                                                
 H_pmz_SIMC.Scale(normfac_simc)                                                                                                                                                
 H_Q2_SIMC.Scale(normfac_simc)
-#H_W_SIMC.Scale(normfac_simc)                                                                                                                                                         
-H_W_SIMC.Scale(normfac_simc/1000)                                                                                                                                                         
+H_W_SIMC.Scale(normfac_simc)                                                                                                                                                         
+#H_W_SIMC.Scale(normfac_simc/1000)                                                                                                                                                         
 H_epsilon_SIMC.Scale(normfac_simc)                                                                                                                                                    
 H_MMp_SIMC.Scale(normfac_simc)
 
@@ -1078,8 +1088,11 @@ l_MMp = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
 
 H_MMp_DATA.SetLineColor(kRed)
-H_MMp_SIMC.Draw("")
-H_MMp_DATA.Draw("same")
+H_MMp_DATA.Draw("")
+H_MMp_SIMC.Draw("same")
+
+#H_MMp_SIMC.Draw("")
+#H_MMp_DATA.Draw("same")
 
 b_int_MMp_simc = int(H_MMp_SIMC.Integral())
 b_int_MMp_data = int(H_MMp_DATA.Integral())

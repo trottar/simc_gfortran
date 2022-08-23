@@ -23,6 +23,7 @@ CTP/daVarRpc_xdr.c
 
 # Sym link
 OUTPUTS
+OUTPUT
 
 # fortran compiles
 elas_kin

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-04 12:16:59 trottar"
+# Time-stamp: "2022-08-23 15:16:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -119,6 +119,8 @@ if "8p2" in heep_kinematics:
     runNum = 7974 # First run number of 8p2 coin heep setting
 if "6p2" in heep_kinematics:
     runNum = 7866 # First run number of 8p2 coin heep setting
+if "4p9" in heep_kinematics:
+    runNum = 6881 # First run number of 8p2 coin heep setting    
 
 try:
     runNum

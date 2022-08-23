@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-23 15:16:25 trottar"
+# Time-stamp: "2022-08-23 15:28:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -118,9 +118,9 @@ if "10p6" in heep_kinematics:
 if "8p2" in heep_kinematics:
     runNum = 7974 # First run number of 8p2 coin heep setting
 if "6p2" in heep_kinematics:
-    runNum = 7866 # First run number of 8p2 coin heep setting
+    runNum = 7866 # First run number of 6p2 coin heep setting
 if "4p9" in heep_kinematics:
-    runNum = 6881 # First run number of 8p2 coin heep setting    
+    runNum = 6881 # First run number of 4p9 coin heep setting    
 
 try:
     runNum
@@ -179,11 +179,11 @@ InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
 InFile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "OPEN")
 InFile_SIMC = ROOT.TFile.Open(rootFile_SIMC, "READ")
 
-TBRANCH_DATA  = InFile_DATA.Get("Cut_Proton_Events_All")
-#TBRANCH_DATA  = InFile_DATA.Get("Uncut_Proton_Events")
+#TBRANCH_DATA  = InFile_DATA.Get("Cut_Proton_Events_All")
+TBRANCH_DATA  = InFile_DATA.Get("Uncut_Proton_Events")
 nEntries_TBRANCH_DATA  = TBRANCH_DATA.GetEntries()
-TBRANCH_DUMMY  = InFile_DUMMY.Get("Cut_Proton_Events_All")
-#TBRANCH_DUMMY  = InFile_DUMMY.Get("Uncut_Proton_Events")
+#TBRANCH_DUMMY  = InFile_DUMMY.Get("Cut_Proton_Events_All")
+TBRANCH_DUMMY  = InFile_DUMMY.Get("Uncut_Proton_Events")
 nEntries_TBRANCH_DUMMY  = TBRANCH_DUMMY.GetEntries()
 TBRANCH_SIMC  = InFile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-24 23:59:58 trottar"
+# Time-stamp: "2022-08-25 00:34:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -43,20 +43,27 @@ heep_kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
 data_charge = int(sys.argv[3])/1000
 data_efficiency = sys.argv[4]
-InDUMMYFilename = sys.argv[5]
-dummy_charge = int(sys.argv[6])/1000
-dummy_efficiency = sys.argv[7]
-InSIMCFilename = sys.argv[8]
-OutFilename = sys.argv[9]
+data_runNums = sys.argv[5]
+InDUMMYFilename = sys.argv[6]
+dummy_charge = int(sys.argv[7])/1000
+dummy_efficiency = sys.argv[8]
+dummy_runNums = sys.argv[9]
+InSIMCFilename = sys.argv[10]
+OutFilename = sys.argv[11]
 
 try:    
     #data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
     data_efficiency = sum([float(i) for i in data_efficiency.split(" ")])/len([float(i) for i in data_efficiency.split(" ")])
     print("\n\ndata_efficiency=",data_efficiency)
 
+    G_data_eff = ROOT.TGraph(len(data_efficiency), data_efficiency, data_runNums)
+
     #dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
     dummy_efficiency = sum([float(i) for i in dummy_efficiency.split(" ")])/len([float(i) for i in dummy_efficiency.split(" ")])
     print("dummy_efficiency=",dummy_efficiency)
+
+    G_dummy_eff = ROOT.TGraph(len(dummy_efficiency), dummy_efficiency, dummy_runNums)
+    
 except ValueError:
     print("\nError: Invalid efficiency value found...")
     sys.exit(1)

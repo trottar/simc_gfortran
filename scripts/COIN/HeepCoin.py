@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-24 23:16:20 trottar"
+# Time-stamp: "2022-08-24 23:26:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1120,7 +1120,6 @@ H_epsilon_DATA.SetLineColor(kRed)
 H_epsilon_SIMC.Draw("")
 H_epsilon_DATA.Draw("same")
 
-
 b_int_epsilon_simc = int(H_epsilon_SIMC.Integral())
 b_int_epsilon_data = int(H_epsilon_DATA.Integral())
 
@@ -1134,7 +1133,6 @@ Cepsilon.Print(outputpdf)
 CMMp2 = TCanvas()
 l_MMp2 = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
-
 H_MMp2_DATA.SetLineColor(kRed)
 H_MMp2_DATA.Draw("")
 H_MMp2_SIMC.Draw("same")
@@ -1145,13 +1143,13 @@ H_MMp2_SIMC.Draw("same")
 b_int_MMp2_simc = int(H_MMp2_SIMC.Integral())
 b_int_MMp2_data = int(H_MMp2_DATA.Integral())
 
-b_bin_MMp2_simc = H_MMp2_SIMC.GetXaxis().GetBinCenter(H_MMp2_SIMC.GetMaximumBin())
-b_bin_MMp2_data = H_MMp2_DATA.GetXaxis().GetBinCenter(H_MMp2_DATA.GetMaximumBin())
+b_mean_MMp2_simc = H_MMp2_SIMC.GetMean()
+b_mean_MMp2_data = H_MMp2_DATA.GetMean()
 
 l_MMp2.AddEntry(H_MMp2_SIMC,"SIMC, INT = %s" % b_int_MMp2_simc)
 l_MMp2.AddEntry(H_MMp2_DATA,"DATA, INT = %s" % b_int_MMp2_data)
-l_MMp2.AddEntry(H_MMp2_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_MMp2_simc))
-l_MMp2.AddEntry(H_MMp2_DATA,"DATA, BIN = {0:.3f}".format(b_bin_MMp2_data))
+l_MMp2.AddEntry(H_MMp2_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_MMp2_simc))
+l_MMp2.AddEntry(H_MMp2_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_MMp2_data))
 
 l_MMp2.Draw()
 
@@ -1167,13 +1165,13 @@ H_pmiss_DATA.Draw("same")
 b_int_pmiss_simc = int(H_pmiss_SIMC.Integral())
 b_int_pmiss_data = int(H_pmiss_DATA.Integral())
 
-b_bin_pmiss_simc = H_pmiss_SIMC.GetXaxis().GetBinCenter(H_pmiss_SIMC.GetMaximumBin())
-b_bin_pmiss_data = H_pmiss_DATA.GetXaxis().GetBinCenter(H_pmiss_DATA.GetMaximumBin())
+b_mean_pmiss_simc = H_pmiss_SIMC.GetMean()
+b_mean_pmiss_data = H_pmiss_DATA.GetMean(H_pmiss_DATA.GetMaximumBin())
 
 l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, INT = %s" % b_int_pmiss_simc)
 l_pmiss.AddEntry(H_pmiss_DATA,"DATA, INT = %s" % b_int_pmiss_data)
-l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_pmiss_simc))
-l_pmiss.AddEntry(H_pmiss_DATA,"DATA, BIN = {0:.3f}".format(b_bin_pmiss_data))
+l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_pmiss_simc))
+l_pmiss.AddEntry(H_pmiss_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_pmiss_data))
 
 l_pmiss.Draw()
 
@@ -1189,13 +1187,13 @@ H_emiss_DATA.Draw("same")
 b_int_emiss_simc = int(H_emiss_SIMC.Integral())
 b_int_emiss_data = int(H_emiss_DATA.Integral())
 
-b_bin_emiss_simc = H_emiss_SIMC.GetXaxis().GetBinCenter(H_emiss_SIMC.GetMaximumBin())
-b_bin_emiss_data = H_emiss_DATA.GetXaxis().GetBinCenter(H_emiss_DATA.GetMaximumBin())
+b_mean_emiss_simc = H_emiss_SIMC.GetMean()
+b_mean_emiss_data = H_emiss_DATA.GetMean()
 
 l_emiss.AddEntry(H_emiss_SIMC,"SIMC, INT = %s" % b_int_emiss_simc)
 l_emiss.AddEntry(H_emiss_DATA,"DATA, INT = %s" % b_int_emiss_data)
-l_emiss.AddEntry(H_emiss_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_emiss_simc))
-l_emiss.AddEntry(H_emiss_DATA,"DATA, BIN = {0:.3f}".format(b_bin_emiss_data))
+l_emiss.AddEntry(H_emiss_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_emiss_simc))
+l_emiss.AddEntry(H_emiss_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_emiss_data))
 
 l_emiss.Draw()
 
@@ -1211,13 +1209,13 @@ H_pmx_DATA.Draw("same")
 b_int_pmx_simc = int(H_pmx_SIMC.Integral())
 b_int_pmx_data = int(H_pmx_DATA.Integral())
 
-b_bin_pmx_simc = H_pmx_SIMC.GetXaxis().GetBinCenter(H_pmx_SIMC.GetMaximumBin())
-b_bin_pmx_data = H_pmx_DATA.GetXaxis().GetBinCenter(H_pmx_DATA.GetMaximumBin())
+b_mean_pmx_simc = H_pmx_SIMC.GetMean()
+b_mean_pmx_data = H_pmx_DATA.GetMean()
 
 l_pmx.AddEntry(H_pmx_SIMC,"SIMC, INT = %s" % b_int_pmx_simc)
 l_pmx.AddEntry(H_pmx_DATA,"DATA, INT = %s" % b_int_pmx_data)
-l_pmx.AddEntry(H_pmx_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_pmx_simc))
-l_pmx.AddEntry(H_pmx_DATA,"DATA, BIN = {0:.3f}".format(b_bin_pmx_data))
+l_pmx.AddEntry(H_pmx_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_pmx_simc))
+l_pmx.AddEntry(H_pmx_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_pmx_data))
 
 l_pmx.Draw()
 
@@ -1233,13 +1231,13 @@ H_pmy_DATA.Draw("same")
 b_int_pmy_simc = int(H_pmy_SIMC.Integral())
 b_int_pmy_data = int(H_pmy_DATA.Integral())
 
-b_bin_pmy_simc = H_pmy_SIMC.GetXaxis().GetBinCenter(H_pmy_SIMC.GetMaximumBin())
-b_bin_pmy_data = H_pmy_DATA.GetXaxis().GetBinCenter(H_pmy_DATA.GetMaximumBin())
+b_mean_pmy_simc = H_pmy_SIMC.GetMean()
+b_mean_pmy_data = H_pmy_DATA.GetMean()
 
 l_pmy.AddEntry(H_pmy_SIMC,"SIMC, INT = %s" % b_int_pmy_simc)
 l_pmy.AddEntry(H_pmy_DATA,"DATA, INT = %s" % b_int_pmy_data)
-l_pmy.AddEntry(H_pmy_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_pmy_simc))
-l_pmy.AddEntry(H_pmy_DATA,"DATA, BIN = {0:.3f}".format(b_bin_pmy_data))
+l_pmy.AddEntry(H_pmy_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_pmy_simc))
+l_pmy.AddEntry(H_pmy_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_pmy_data))
 
 l_pmy.Draw()
 
@@ -1255,13 +1253,13 @@ H_pmz_DATA.Draw("same")
 b_int_pmz_simc = int(H_pmz_SIMC.Integral())
 b_int_pmz_data = int(H_pmz_DATA.Integral())
 
-b_bin_pmz_simc = H_pmz_SIMC.GetXaxis().GetBinCenter(H_pmz_SIMC.GetMaximumBin())
-b_bin_pmz_data = H_pmz_DATA.GetXaxis().GetBinCenter(H_pmz_DATA.GetMaximumBin())
+b_mean_pmz_simc = H_pmz_SIMC.GetMean()
+b_mean_pmz_data = H_pmz_DATA.GetMean()
 
 l_pmz.AddEntry(H_pmz_SIMC,"SIMC, INT = %s" % b_int_pmz_simc)
 l_pmz.AddEntry(H_pmz_DATA,"DATA, INT = %s" % b_int_pmz_data)
-l_pmz.AddEntry(H_pmz_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_pmz_simc))
-l_pmz.AddEntry(H_pmz_DATA,"DATA, BIN = {0:.3f}".format(b_bin_pmz_data))
+l_pmz.AddEntry(H_pmz_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_pmz_simc))
+l_pmz.AddEntry(H_pmz_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_pmz_data))
 
 l_pmz.Draw()
 
@@ -1277,13 +1275,13 @@ H_W_DATA.Draw("same")
 b_int_W_simc = int(H_W_SIMC.Integral())
 b_int_W_data = int(H_W_DATA.Integral())
 
-b_bin_W_simc = H_W_SIMC.GetXaxis().GetBinCenter(H_W_SIMC.GetMaximumBin())
-b_bin_W_data = H_W_DATA.GetXaxis().GetBinCenter(H_W_DATA.GetMaximumBin())
+b_mean_W_simc = H_W_SIMC.GetMean()
+b_mean_W_data = H_W_DATA.GetMean()
 
 l_W.AddEntry(H_W_SIMC,"SIMC, INT = %s" % b_int_W_simc)
 l_W.AddEntry(H_W_DATA,"DATA, INT = %s" % b_int_W_data)
-l_W.AddEntry(H_W_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_W_simc))
-l_W.AddEntry(H_W_DATA,"DATA, BIN = {0:.3f}".format(b_bin_W_data))
+l_W.AddEntry(H_W_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_W_simc))
+l_W.AddEntry(H_W_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_W_data))
 
 l_W.Draw()
 

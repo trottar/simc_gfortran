@@ -109,7 +109,10 @@ elif [[ $KIN = "6p2" ]]; then
     declare -a dummydata=(7868)
 elif [[ $KIN = "4p9" ]]; then
     declare -a data=(6881 6882)
-    declare -a dummydata=(6883)    
+    declare -a dummydata=(6883)
+elif [[ $KIN = "3p8" ]]; then
+    declare -a data=(6634 6635)
+    declare -a dummydata=(6637)
 elif [[ $KIN = "8p2" && $s_flag != "true" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
     declare -a dummydata=(4864)

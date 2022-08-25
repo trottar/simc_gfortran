@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-25 01:21:10 trottar"
+# Time-stamp: "2022-08-25 01:22:48 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -63,8 +63,8 @@ except ValueError:
     sys.exit(1)
 
 print(np.array([float(x) for x in data_runNums.split(' ')]),'\n',np.array([float(x) for x in InData_efficiency.split(' ')]))
-G_data_eff = ROOT.TGraph(len(InData_efficiency.split(' ')), np.array([float(x) for x in data_runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]))
-G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency.split(' ')), np.array([float(x) for x in dummy_runNums.split(' ')]),np.array([float(x) for x in InDummy_efficiency.split(' ')]))
+G_data_eff = ROOT.TGraph(len(InData_efficiency.split(' ')), np.array([int(x) for x in data_runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]))
+G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency.split(' ')), np.array([int(x) for x in dummy_runNums.split(' ')]),np.array([float(x) for x in InDummy_efficiency.split(' ')]))
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen

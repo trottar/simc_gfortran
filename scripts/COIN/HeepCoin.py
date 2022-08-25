@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-24 22:39:13 trottar"
+# Time-stamp: "2022-08-24 22:42:04 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -299,11 +299,11 @@ H_epsilon_DUMMY  = ROOT.TH1D("H_epsilon_DUMMY","epsilon", 300, 0.5, 1.0)
 #H_epsilon_DUMMY_rand  = ROOT.TH1D("H_epsilon_DUMMY_rand","epsilon", 300, 0.5, 1.0)
 H_epsilon_SIMC  = ROOT.TH1D("H_epsilon_SIMC","epsilon", 300, 0.5, 1.0)
 
-H_MMp2_DATA  = ROOT.TH1D("H_MMp2_DATA","MM^{2}_{p}", 300, -0.03, 0.03)
-#H_MMp2_DATA_rand  = ROOT.TH1D("H_MMp2_DATA_rand","MM^{2}_{p}", 300, -0.03, 0.03)
-H_MMp2_DUMMY  = ROOT.TH1D("H_MMp2_DUMMY","MM^{2}_{p}", 300, -0.03, 0.03)
-#H_MMp2_DUMMY_rand  = ROOT.TH1D("H_MMp2_DUMMY_rand","MM^{2}_{p}", 300, -0.03, 0.03)
-H_MMp2_SIMC  = ROOT.TH1D("H_MMp2_SIMC","MM^{2}_{p}", 300, -0.03, 0.03)
+H_MMp2_DATA  = ROOT.TH1D("H_MMp2_DATA","(MM)^{2}_{p}", 300, -0.03, 0.03)
+#H_MMp2_DATA_rand  = ROOT.TH1D("H_MMp2_DATA_rand","(MM)^{2}_{p}", 300, -0.03, 0.03)
+H_MMp2_DUMMY  = ROOT.TH1D("H_MMp2_DUMMY","(MM)^{2}_{p}", 300, -0.03, 0.03)
+#H_MMp2_DUMMY_rand  = ROOT.TH1D("H_MMp2_DUMMY_rand","(MM)^{2}_{p}", 300, -0.03, 0.03)
+H_MMp2_SIMC  = ROOT.TH1D("H_MMp2_SIMC","(MM)^{2}_{p}", 300, -0.03, 0.03)
 
 H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar", 300, -0.1, 0.1)
 #H_th_DATA_rand  = ROOT.TH1D("H_th_DATA_rand","X' tar", 300, -0.1, 0.1)
@@ -360,8 +360,8 @@ H_ct_ep_DATA_cut = ROOT.TH1D("H_ct_ep_DATA_cut", "Electron-Proton CTime (cut)", 
 H_ct_ep_DUMMY_cut = ROOT.TH1D("H_ct_ep_DUMMY_cut", "Electron-Proton CTime (cut)", 200, -100, 100)
 #H_ct_ep_DUMMY_cut_rand = ROOT.TH1D("H_ct_ep_DUMMY_cut_rand", "Electron-Proton CTime (cut)", 200, -100, 100)
 
-H_ct_ep_vs_H_MMp2_DATA = ROOT.TH2D("H_ct_ep_vs_H_MMp2_DATA","Electron-Proton CTime vs MM^{2}_{p}; e p Coin_Time; MM^{2}_{p}", 200, -100, 100, 200, -2, 2)
-#H_ct_ep_vs_H_MMp2_DATA_rand = ROOT.TH2D("H_ct_ep_vs_H_MMp2_DATA_rand","Electron-Proton CTime vs MM^{2}_{p}; e p Coin_Time; MM^{2}_{p}", 200, -100, 100, 200, -2, 2)
+H_ct_ep_vs_H_MMp2_DATA = ROOT.TH2D("H_ct_ep_vs_H_MMp2_DATA","Electron-Proton CTime vs (MM)^{2}_{p}; e p Coin_Time; (MM)^{2}_{p}", 200, -100, 100, 200, -2, 2)
+#H_ct_ep_vs_H_MMp2_DATA_rand = ROOT.TH2D("H_ct_ep_vs_H_MMp2_DATA_rand","Electron-Proton CTime vs (MM)^{2}_{p}; e p Coin_Time; (MM)^{2}_{p}", 200, -100, 100, 200, -2, 2)
 
 
 ################################################################################################################################################

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-25 01:09:31 trottar"
+# Time-stamp: "2022-08-25 01:11:24 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -819,7 +819,7 @@ ROOT.gStyle.SetOptStat(0)
 eff_plt = TCanvas()
 
 G_data_eff.Draw("APL")
-G_dummy_eff.Draw("same")
+G_dummy_eff.Draw("APL")
 
 l_eff_plt.Draw()
 
@@ -838,7 +838,7 @@ l_ct_ep.AddEntry(H_ct_ep_DATA_cut,"Cut")
 
 l_ct_ep.Draw()
 
-ct_ep.Print(outputpdf
+ct_ep.Print(outputpdf)
 
 ct_ep_mmp = TCanvas()
 

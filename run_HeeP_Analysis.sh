@@ -113,15 +113,19 @@ elif [[ $KIN = "4p9" ]]; then
 elif [[ $KIN = "3p8" ]]; then
     declare -a data=(6634 6635)
     declare -a dummydata=(6637)
-elif [[ $KIN = "8p2" && $s_flag != "true" ]]; then
-    declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
-    declare -a dummydata=(4864)
 elif [[ $KIN = "10p6" && $s_flag = "true" ]]; then
-    declare -a data=(4784 4785) # All heep singles 10p6 runs
-    declare -a dummydata=(4786)
-elif [[ $KIN = "8p2" && $s_flag = "true" ]]; then
+    declare -a data=(7974 7975 7976)
+    #    declare -a data=(7974) # Just one test run
+    declare -a dummydata=(7977)    
+elif [[ $KIN = "8p2" && $s_flag != "true" ]]; then
     declare -a data=(111)
-    declare -a dummydata=(111)    
+    declare -a dummydata=(111)
+elif [[ $KIN = "4p9" && $s_flag = "true" ]]; then
+    declare -a data=(111)
+    declare -a dummydata=(111)
+elif [[ $KIN = "3p8" && $s_flag = "true" ]]; then
+    declare -a data=(111)
+    declare -a dummydata=(111)        
 else
     echo "Invalid kinematic setting, ${KIN}"
     exit 128

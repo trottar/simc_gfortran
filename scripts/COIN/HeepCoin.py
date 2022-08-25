@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-24 23:30:15 trottar"
+# Time-stamp: "2022-08-24 23:32:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1159,8 +1159,8 @@ Cpmiss = TCanvas()
 l_pmiss = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
 H_pmiss_DATA.SetLineColor(kRed)
-H_pmiss_SIMC.Draw("")
-H_pmiss_DATA.Draw("same")
+H_pmiss_DATA.Draw("")
+H_pmiss_SIMC.Draw("same")
 
 b_int_pmiss_simc = int(H_pmiss_SIMC.Integral())
 b_int_pmiss_data = int(H_pmiss_DATA.Integral())

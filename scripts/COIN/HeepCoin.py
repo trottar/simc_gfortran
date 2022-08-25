@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-25 01:11:24 trottar"
+# Time-stamp: "2022-08-25 01:14:04 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -817,9 +817,13 @@ ROOT.gStyle.SetOptStat(0)
 # PLOT HIST..
 
 eff_plt = TCanvas()
+l_eff_plt = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
 G_data_eff.Draw("APL")
 G_dummy_eff.Draw("APL")
+
+l_eff_plt.AddEntry(G_data_eff,"Data")
+l_eff_plt.AddEntry(G_dummy_eff,"Dummy")
 
 l_eff_plt.Draw()
 

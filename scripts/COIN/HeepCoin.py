@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-24 23:34:20 trottar"
+# Time-stamp: "2022-08-24 23:37:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -329,23 +329,23 @@ H_emiss_DUMMY  = ROOT.TH1D("H_emiss_DUMMY","emiss", 300, -0.04, 0.04)
 #H_emiss_DUMMY_rand  = ROOT.TH1D("H_emiss_DUMMY_rand","emiss", 300, -0.04, 0.04)
 H_emiss_SIMC  = ROOT.TH1D("H_emiss_SIMC","emiss", 300, -0.04, 0.04)
 
-H_pmx_DATA  = ROOT.TH1D("H_pmx_DATA","pmx", 300, -0.2, 0.2)
-#H_pmx_DATA_rand  = ROOT.TH1D("H_pmx_DATA_rand","pmx", 300, -0.2, 0.2)
-H_pmx_DUMMY  = ROOT.TH1D("H_pmx_DUMMY","pmx", 300, -0.2, 0.2)
-#H_pmx_DUMMY_rand  = ROOT.TH1D("H_pmx_DUMMY_rand","pmx", 300, -0.2, 0.2)
-H_pmx_SIMC  = ROOT.TH1D("H_pmx_SIMC","pmx", 300, -0.2, 0.2)
+H_pmx_DATA  = ROOT.TH1D("H_pmx_DATA","pmx", 300, -0.1, 0.1)
+#H_pmx_DATA_rand  = ROOT.TH1D("H_pmx_DATA_rand","pmx", 300, -0.1, 0.1)
+H_pmx_DUMMY  = ROOT.TH1D("H_pmx_DUMMY","pmx", 300, -0.1, 0.1)
+#H_pmx_DUMMY_rand  = ROOT.TH1D("H_pmx_DUMMY_rand","pmx", 300, -0.1, 0.1)
+H_pmx_SIMC  = ROOT.TH1D("H_pmx_SIMC","pmx", 300, -0.1, 0.1)
 
-H_pmy_DATA  = ROOT.TH1D("H_pmy_DATA","pmy ", 300, -0.2, 0.2)
-#H_pmy_DATA_rand  = ROOT.TH1D("H_pmy_DATA_rand","pmy ", 300, -0.2, 0.2)
-H_pmy_DUMMY  = ROOT.TH1D("H_pmy_DUMMY","pmy ", 300, -0.2, 0.2)
-#H_pmy_DUMMY_rand  = ROOT.TH1D("H_pmy_DUMMY_rand","pmy ", 300, -0.2, 0.2)
-H_pmy_SIMC  = ROOT.TH1D("H_pmy_SIMC","pmy", 300, -0.2, 0.2)
+H_pmy_DATA  = ROOT.TH1D("H_pmy_DATA","pmy ", 300, -0.1, 0.1)
+#H_pmy_DATA_rand  = ROOT.TH1D("H_pmy_DATA_rand","pmy ", 300, -0.1, 0.1)
+H_pmy_DUMMY  = ROOT.TH1D("H_pmy_DUMMY","pmy ", 300, -0.1, 0.1)
+#H_pmy_DUMMY_rand  = ROOT.TH1D("H_pmy_DUMMY_rand","pmy ", 300, -0.1, 0.1)
+H_pmy_SIMC  = ROOT.TH1D("H_pmy_SIMC","pmy", 300, -0.1, 0.1)
 
-H_pmz_DATA  = ROOT.TH1D("H_pmz_DATA","pmz", 300, -0.2, 0.2)
-#H_pmz_DATA_rand  = ROOT.TH1D("H_pmz_DATA_rand","pmz", 300, -0.2, 0.2)
-H_pmz_DUMMY  = ROOT.TH1D("H_pmz_DUMMY","pmz", 300, -0.2, 0.2)
-#H_pmz_DUMMY_rand  = ROOT.TH1D("H_pmz_DUMMY_rand","pmz", 300, -0.2, 0.2)
-H_pmz_SIMC  = ROOT.TH1D("H_pmz_SIMC","pmz", 300, -0.2, 0.2)
+H_pmz_DATA  = ROOT.TH1D("H_pmz_DATA","pmz", 300, -0.1, 0.1)
+#H_pmz_DATA_rand  = ROOT.TH1D("H_pmz_DATA_rand","pmz", 300, -0.1, 0.1)
+H_pmz_DUMMY  = ROOT.TH1D("H_pmz_DUMMY","pmz", 300, -0.1, 0.1)
+#H_pmz_DUMMY_rand  = ROOT.TH1D("H_pmz_DUMMY_rand","pmz", 300, -0.1, 0.1)
+H_pmz_SIMC  = ROOT.TH1D("H_pmz_SIMC","pmz", 300, -0.1, 0.1)
 
 H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 300, 0.5, 1.5)
 #H_W_DATA_rand  = ROOT.TH1D("H_W_DATA_rand","W ", 300, 0.5, 1.5)

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-25 00:49:03 trottar"
+# Time-stamp: "2022-08-25 00:51:50 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -54,11 +54,11 @@ OutFilename = sys.argv[11]
 try:
     data_efficiency = sum([float(i) for i in InData_efficiency.split(" ")])/len([float(i) for i in InData_efficiency.split(" ")])
     print("\n\ndata_efficiency=",data_efficiency)
-    G_data_eff = ROOT.TGraph2D(len(InData_efficiency), np.array(InData_efficiency), np.array(data_runNums))
+    G_data_eff = ROOT.TGraph(len(InData_efficiency), np.array(InData_efficiency, 'd'), np.array(data_runNums,'d'))
 
     dummy_efficiency = sum([float(i) for i in InDummy_efficiency.split(" ")])/len([float(i) for i in InDummy_efficiency.split(" ")])
     print("dummy_efficiency=",dummy_efficiency)
-    G_data_eff = ROOT.TGraph2D(len(InData_efficiency), np.array(InData_efficiency), np.array(data_runNums))
+    G_data_eff = ROOT.TGraph(len(InData_efficiency), np.array(InData_efficiency), np.array(data_runNums))
     
 except ValueError:
     print("\nError: Invalid efficiency value found...")

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-24 22:53:27 trottar"
+# Time-stamp: "2022-08-24 23:09:22 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -363,6 +363,11 @@ H_ct_ep_DUMMY_cut = ROOT.TH1D("H_ct_ep_DUMMY_cut", "Electron-Proton CTime (cut)"
 H_ct_ep_vs_H_MMp2_DATA = ROOT.TH2D("H_ct_ep_vs_H_MMp2_DATA","Electron-Proton CTime vs (MM)^{2}_{p}; e p Coin_Time; (MM)^{2}_{p}", 200, -100, 100, 200, -2, 2)
 #H_ct_ep_vs_H_MMp2_DATA_rand = ROOT.TH2D("H_ct_ep_vs_H_MMp2_DATA_rand","Electron-Proton CTime vs (MM)^{2}_{p}; e p Coin_Time; (MM)^{2}_{p}", 200, -100, 100, 200, -2, 2)
 
+H_emiss_vs_H_hsdelta_DATA = ROOT.TH2D("H_emiss_vs_H_hsdelta_DATA","Pmiss vs HMS Delta;  Emiss; HMS Delta", 300, -0.2, 0.4, 300, -20.0, 20.0)
+H_emiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_emiss_vs_H_ssdelta_DATA","Pmiss vs SHMS Delta;  Emiss; SHMS Delta", 300, -0.2, 0.4, 300, -20.0, 20.0)
+
+H_pmiss_vs_H_hsdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_hsdelta_DATA","Emiss vs HMS Delta;  Pmiss; HMS Delta", 300, -0.2, 0.4, 300, -20.0, 20.0)
+H_pmiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_ssdelta_DATA","Emiss vs SHMS Delta;  Pmiss; SHMS Delta", 300, -0.2, 0.4, 300, -20.0, 20.0)
 
 ################################################################################################################################################
 
@@ -429,6 +434,11 @@ for evt in TBRANCH_DATA:
 
       H_ct_ep_vs_H_MMp2_DATA.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
       H_ct_ep_DATA_cut.Fill(evt.CTime_epCoinTime_ROC1)
+
+      H_emiss_vs_H_hsdelta_DATA.Fill(evt.emiss, evt.hsdelta)
+      H_emiss_vs_H_ssdelta_DATA.Fill(evt.emiss, evt.ssdelta)
+      H_pmiss_vs_H_hsdelta_DATA.Fill(evt.pmiss, evt.hsdelta)
+      H_pmiss_vs_H_ssdelta_DATA.Fill(evt.pmiss, evt.ssdelta)
       
       H_ssxfp_DATA.Fill(evt.ssxfp)
       H_ssyfp_DATA.Fill(evt.ssyfp)
@@ -822,6 +832,30 @@ ct_ep_mmp = TCanvas()
 H_ct_ep_vs_H_MMp2_DATA.Draw("colz")
 
 ct_ep_mmp.Print(outputpdf)
+
+emiss_vs_delta = TCanvas()
+
+emiss_vs_delta.Divide(1,2)
+
+emiss_vs_delta.cd(1)
+H_emiss_vs_H_hsdelta_DATA.Draw("colz")
+
+emiss_vs_delta.cd(2)
+H_emiss_vs_H_ssdelta_DATA.Draw("colz")
+
+emiss_vs_delta.Print(outputpdf)
+
+pmiss_vs_delta = TCanvas()
+
+pmiss_vs_delta.Divide(1,2)
+
+pmiss_vs_delta.cd(1)
+H_pmiss_vs_H_hsdelta_DATA.Draw("colz")
+
+pmiss_vs_delta.cd(2)
+H_pmiss_vs_H_ssdelta_DATA.Draw("colz")
+
+pmiss_vs_delta.Print(outputpdf)
 
 xfp = TCanvas()
 l_xfp = ROOT.TLegend(0.115,0.735,0.33,0.9)

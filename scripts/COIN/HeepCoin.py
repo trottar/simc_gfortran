@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-25 00:35:41 trottar"
+# Time-stamp: "2022-08-25 00:37:13 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -51,18 +51,16 @@ dummy_runNums = sys.argv[9]
 InSIMCFilename = sys.argv[10]
 OutFilename = sys.argv[11]
 
-try:    
+try:
+    G_data_eff = ROOT.TGraph(len(data_efficiency), data_efficiency, data_runNums)
     #data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
     data_efficiency = sum([float(i) for i in data_efficiency.split(" ")])/len([float(i) for i in data_efficiency.split(" ")])
     print("\n\ndata_efficiency=",data_efficiency)
 
-    G_data_eff = ROOT.TGraph(len(data_efficiency), data_efficiency, data_runNums)
-
+    G_dummy_eff = ROOT.TGraph(len(dummy_efficiency), dummy_efficiency, dummy_runNums)
     #dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
     dummy_efficiency = sum([float(i) for i in dummy_efficiency.split(" ")])/len([float(i) for i in dummy_efficiency.split(" ")])
     print("dummy_efficiency=",dummy_efficiency)
-
-    G_dummy_eff = ROOT.TGraph(len(dummy_efficiency), dummy_efficiency, dummy_runNums)
     
 except ValueError:
     print("\nError: Invalid efficiency value found...")

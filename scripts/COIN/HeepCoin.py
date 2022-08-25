@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-25 01:39:26 trottar"
+# Time-stamp: "2022-08-25 01:41:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -831,8 +831,8 @@ G_dummy_eff.SetMarkerColor(kRed)
 G_data_eff.Draw()
 G_dummy_eff.Draw()
 
-G_data_eff.GetXaxis().SetLimits(0.5,1.5)
-G_dummy_eff.GetXaxis().SetLimits(0.5,1.5)
+G_data_eff.GetYaxis().SetLimits(0.5,1.5)
+G_dummy_eff.GetYaxis().SetLimits(0.5,1.5)
 
 l_eff_plt.AddEntry(G_data_eff,"Data")
 l_eff_plt.AddEntry(G_dummy_eff,"Dummy")

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-25 00:42:32 trottar"
+# Time-stamp: "2022-08-25 00:49:03 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -42,25 +42,23 @@ if len(sys.argv)-1!=11:
 heep_kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
 data_charge = int(sys.argv[3])/1000
-data_efficiency = sys.argv[4]
+InData_efficiency = sys.argv[4]
 data_runNums = sys.argv[5]
 InDUMMYFilename = sys.argv[6]
 dummy_charge = int(sys.argv[7])/1000
-dummy_efficiency = sys.argv[8]
+InDummy_efficiency = sys.argv[8]
 dummy_runNums = sys.argv[9]
 InSIMCFilename = sys.argv[10]
 OutFilename = sys.argv[11]
 
 try:
-    G_data_eff = ROOT.TGraph(len(data_efficiency)-1, np.array(data_efficiency), np.array(data_runNums))
-    #data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
-    data_efficiency = sum([float(i) for i in data_efficiency.split(" ")])/len([float(i) for i in data_efficiency.split(" ")])
+    data_efficiency = sum([float(i) for i in InData_efficiency.split(" ")])/len([float(i) for i in InData_efficiency.split(" ")])
     print("\n\ndata_efficiency=",data_efficiency)
+    G_data_eff = ROOT.TGraph2D(len(InData_efficiency), np.array(InData_efficiency), np.array(data_runNums))
 
-    G_dummy_eff = ROOT.TGraph(len(dummy_efficiency)-1, np.array(dummy_efficiency), np.array(dummy_runNums))
-    #dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
-    dummy_efficiency = sum([float(i) for i in dummy_efficiency.split(" ")])/len([float(i) for i in dummy_efficiency.split(" ")])
+    dummy_efficiency = sum([float(i) for i in InDummy_efficiency.split(" ")])/len([float(i) for i in InDummy_efficiency.split(" ")])
     print("dummy_efficiency=",dummy_efficiency)
+    G_data_eff = ROOT.TGraph2D(len(InData_efficiency), np.array(InData_efficiency), np.array(data_runNums))
     
 except ValueError:
     print("\nError: Invalid efficiency value found...")

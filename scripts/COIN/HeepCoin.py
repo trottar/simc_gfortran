@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-24 22:48:34 trottar"
+# Time-stamp: "2022-08-24 22:53:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1111,6 +1111,9 @@ H_MMp2_SIMC.Draw("same")
 b_int_MMp2_simc = int(H_MMp2_SIMC.Integral())
 b_int_MMp2_data = int(H_MMp2_DATA.Integral())
 
+b_bin_MMp2_simc = H_MMp2_SIMC.GetXaxis().GetBinCenter(H_MMp2_SIMC.GetMaximumBin())
+b_bin_MMp2_data = H_MMp2_DATA.GetXaxis().GetBinCenter(H_MMp2_DATA.GetMaximumBin())
+
 l_MMp2.AddEntry(H_MMp2_SIMC,"SIMC, INT = %s" % b_int_MMp2_simc)
 l_MMp2.AddEntry(H_MMp2_DATA,"DATA, INT = %s" % b_int_MMp2_data)
 l_MMp2.AddEntry(H_MMp2_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_MMp2_simc))
@@ -1129,6 +1132,9 @@ H_pmiss_DATA.Draw("same")
 
 b_int_pmiss_simc = int(H_pmiss_SIMC.Integral())
 b_int_pmiss_data = int(H_pmiss_DATA.Integral())
+
+b_bin_pmiss_simc = H_pmiss_SIMC.GetXaxis().GetBinCenter(H_pmiss_SIMC.GetMaximumBin())
+b_bin_pmiss_data = H_pmiss_DATA.GetXaxis().GetBinCenter(H_pmiss_DATA.GetMaximumBin())
 
 l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, INT = %s" % b_int_pmiss_simc)
 l_pmiss.AddEntry(H_pmiss_DATA,"DATA, INT = %s" % b_int_pmiss_data)
@@ -1149,10 +1155,13 @@ H_emiss_DATA.Draw("same")
 b_int_emiss_simc = int(H_emiss_SIMC.Integral())
 b_int_emiss_data = int(H_emiss_DATA.Integral())
 
+b_bin_emiss_simc = H_emiss_SIMC.GetXaxis().GetBinCenter(H_emiss_SIMC.GetMaximumBin())
+b_bin_emiss_data = H_emiss_DATA.GetXaxis().GetBinCenter(H_emiss_DATA.GetMaximumBin())
+
 l_emiss.AddEntry(H_emiss_SIMC,"SIMC, INT = %s" % b_int_emiss_simc)
 l_emiss.AddEntry(H_emiss_DATA,"DATA, INT = %s" % b_int_emiss_data)
-l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_pmiss_simc))
-l_pmiss.AddEntry(H_pmiss_DATA,"DATA, BIN = {0:.3f}".format(b_bin_pmiss_data))
+l_emiss.AddEntry(H_emiss_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_emiss_simc))
+l_emiss.AddEntry(H_emiss_DATA,"DATA, BIN = {0:.3f}".format(b_bin_emiss_data))
 
 l_emiss.Draw()
 
@@ -1167,6 +1176,9 @@ H_pmx_DATA.Draw("same")
 
 b_int_pmx_simc = int(H_pmx_SIMC.Integral())
 b_int_pmx_data = int(H_pmx_DATA.Integral())
+
+b_bin_pmx_simc = H_pmx_SIMC.GetXaxis().GetBinCenter(H_pmx_SIMC.GetMaximumBin())
+b_bin_pmx_data = H_pmx_DATA.GetXaxis().GetBinCenter(H_pmx_DATA.GetMaximumBin())
 
 l_pmx.AddEntry(H_pmx_SIMC,"SIMC, INT = %s" % b_int_pmx_simc)
 l_pmx.AddEntry(H_pmx_DATA,"DATA, INT = %s" % b_int_pmx_data)
@@ -1187,6 +1199,9 @@ H_pmy_DATA.Draw("same")
 b_int_pmy_simc = int(H_pmy_SIMC.Integral())
 b_int_pmy_data = int(H_pmy_DATA.Integral())
 
+b_bin_pmy_simc = H_pmy_SIMC.GetXaxis().GetBinCenter(H_pmy_SIMC.GetMaximumBin())
+b_bin_pmy_data = H_pmy_DATA.GetXaxis().GetBinCenter(H_pmy_DATA.GetMaximumBin())
+
 l_pmy.AddEntry(H_pmy_SIMC,"SIMC, INT = %s" % b_int_pmy_simc)
 l_pmy.AddEntry(H_pmy_DATA,"DATA, INT = %s" % b_int_pmy_data)
 l_pmy.AddEntry(H_pmy_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_pmy_simc))
@@ -1205,6 +1220,9 @@ H_pmz_DATA.Draw("same")
 
 b_int_pmz_simc = int(H_pmz_SIMC.Integral())
 b_int_pmz_data = int(H_pmz_DATA.Integral())
+
+b_bin_pmz_simc = H_pmz_SIMC.GetXaxis().GetBinCenter(H_pmz_SIMC.GetMaximumBin())
+b_bin_pmz_data = H_pmz_DATA.GetXaxis().GetBinCenter(H_pmz_DATA.GetMaximumBin())
 
 l_pmz.AddEntry(H_pmz_SIMC,"SIMC, INT = %s" % b_int_pmz_simc)
 l_pmz.AddEntry(H_pmz_DATA,"DATA, INT = %s" % b_int_pmz_data)

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-25 00:56:17 trottar"
+# Time-stamp: "2022-08-25 00:59:33 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -62,8 +62,13 @@ except ValueError:
     print("\nError: Invalid efficiency value found...")
     sys.exit(1)
 
-G_data_eff = ROOT.TGraph(len(InData_efficiency), np.array([float(x) for x in InData_efficiency], 'd'), np.array([float(x) for x in data_runNums],'d'))
-G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency), np.array([float(x) for x in InDummy_efficiency], 'd'), np.array([float(x) for x in dummy_runNums],'d'))
+data_x = np.array([float(x) for x in InData_efficiency], 'd')
+data_y = np.array([float(x) for x in data_runNums],'d')
+G_data_eff = ROOT.TGraph(len(InData_efficiency), data_x, data_y)
+
+dummy_x = np.array([float(x) for x in InDummy_efficiency], 'd')
+dummy_y = np.array([float(x) for x in dummy_runNums],'d')
+G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency), dummy_x, dummy_y)
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen

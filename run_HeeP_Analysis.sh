@@ -98,11 +98,11 @@ fi
 
 if [[ $KIN = "10p6" && $s_flag != "true" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # All heep coin 10p6 runs
-    declare -a data=(4827) # Just one test run
+    #    declare -a data=(4827) # Just one test run
     declare -a dummydata=(4864)
 elif [[ $KIN = "8p2" ]]; then
     declare -a data=(7974 7975 7976)
-#    declare -a data=(7974)
+    #    declare -a data=(7974) # Just one test run
     declare -a dummydata=(7977)
 elif [[ $KIN = "6p2" ]]; then
     declare -a data=(7866 7867)

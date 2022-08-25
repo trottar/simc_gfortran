@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-25 01:02:55 trottar"
+# Time-stamp: "2022-08-25 01:03:54 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -62,7 +62,7 @@ except ValueError:
     print("\nError: Invalid efficiency value found...")
     sys.exit(1)
 
-print(InData_efficiency,'\n',data_runNums)
+print(type(InData_efficiency),'\n',type(data_runNums))
 G_data_eff = ROOT.TGraph(len(InData_efficiency), np.array([float(x) for x in InData_efficiency], 'd'), np.array([float(x) for x in data_runNums],'d'))
 G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency), np.array([float(x) for x in InDummy_efficiency], 'd'), np.array([float(x) for x in dummy_runNums],'d'))
 

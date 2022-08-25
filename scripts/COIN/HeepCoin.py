@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-24 22:42:04 trottar"
+# Time-stamp: "2022-08-24 22:48:34 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1097,8 +1097,8 @@ l_epsilon.Draw()
 
 Cepsilon.Print(outputpdf)
 
-CMmp2 = TCanvas()
-l_Mmp2 = ROOT.TLegend(0.115,0.735,0.33,0.9)
+CMMp2 = TCanvas()
+l_MMp2 = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
 
 H_MMp2_DATA.SetLineColor(kRed)
@@ -1108,15 +1108,17 @@ H_MMp2_SIMC.Draw("same")
 #H_MMp2_SIMC.Draw("")
 #H_MMp2_DATA.Draw("same")
 
-b_int_Mmp2_simc = int(H_MMp2_SIMC.Integral())
-b_int_Mmp2_data = int(H_MMp2_DATA.Integral())
+b_int_MMp2_simc = int(H_MMp2_SIMC.Integral())
+b_int_MMp2_data = int(H_MMp2_DATA.Integral())
 
-l_Mmp2.AddEntry(H_MMp2_SIMC,"SIMC, INT = %s" % b_int_Mmp2_simc)
-l_Mmp2.AddEntry(H_MMp2_DATA,"DATA, INT = %s" % b_int_Mmp2_data)
+l_MMp2.AddEntry(H_MMp2_SIMC,"SIMC, INT = %s" % b_int_MMp2_simc)
+l_MMp2.AddEntry(H_MMp2_DATA,"DATA, INT = %s" % b_int_MMp2_data)
+l_MMp2.AddEntry(H_MMp2_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_MMp2_simc))
+l_MMp2.AddEntry(H_MMp2_DATA,"DATA, BIN = {0:.3f}".format(b_bin_MMp2_data))
 
-l_Mmp2.Draw()
+l_MMp2.Draw()
 
-CMmp2.Print(outputpdf)
+CMMp2.Print(outputpdf)
 
 Cpmiss = TCanvas()
 l_pmiss = ROOT.TLegend(0.115,0.735,0.33,0.9)
@@ -1130,6 +1132,8 @@ b_int_pmiss_data = int(H_pmiss_DATA.Integral())
 
 l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, INT = %s" % b_int_pmiss_simc)
 l_pmiss.AddEntry(H_pmiss_DATA,"DATA, INT = %s" % b_int_pmiss_data)
+l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_pmiss_simc))
+l_pmiss.AddEntry(H_pmiss_DATA,"DATA, BIN = {0:.3f}".format(b_bin_pmiss_data))
 
 l_pmiss.Draw()
 
@@ -1147,6 +1151,8 @@ b_int_emiss_data = int(H_emiss_DATA.Integral())
 
 l_emiss.AddEntry(H_emiss_SIMC,"SIMC, INT = %s" % b_int_emiss_simc)
 l_emiss.AddEntry(H_emiss_DATA,"DATA, INT = %s" % b_int_emiss_data)
+l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_pmiss_simc))
+l_pmiss.AddEntry(H_pmiss_DATA,"DATA, BIN = {0:.3f}".format(b_bin_pmiss_data))
 
 l_emiss.Draw()
 
@@ -1164,6 +1170,8 @@ b_int_pmx_data = int(H_pmx_DATA.Integral())
 
 l_pmx.AddEntry(H_pmx_SIMC,"SIMC, INT = %s" % b_int_pmx_simc)
 l_pmx.AddEntry(H_pmx_DATA,"DATA, INT = %s" % b_int_pmx_data)
+l_pmx.AddEntry(H_pmx_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_pmx_simc))
+l_pmx.AddEntry(H_pmx_DATA,"DATA, BIN = {0:.3f}".format(b_bin_pmx_data))
 
 l_pmx.Draw()
 
@@ -1181,6 +1189,8 @@ b_int_pmy_data = int(H_pmy_DATA.Integral())
 
 l_pmy.AddEntry(H_pmy_SIMC,"SIMC, INT = %s" % b_int_pmy_simc)
 l_pmy.AddEntry(H_pmy_DATA,"DATA, INT = %s" % b_int_pmy_data)
+l_pmy.AddEntry(H_pmy_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_pmy_simc))
+l_pmy.AddEntry(H_pmy_DATA,"DATA, BIN = {0:.3f}".format(b_bin_pmy_data))
 
 l_pmy.Draw()
 
@@ -1198,6 +1208,8 @@ b_int_pmz_data = int(H_pmz_DATA.Integral())
 
 l_pmz.AddEntry(H_pmz_SIMC,"SIMC, INT = %s" % b_int_pmz_simc)
 l_pmz.AddEntry(H_pmz_DATA,"DATA, INT = %s" % b_int_pmz_data)
+l_pmz.AddEntry(H_pmz_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_pmz_simc))
+l_pmz.AddEntry(H_pmz_DATA,"DATA, BIN = {0:.3f}".format(b_bin_pmz_data))
 
 l_pmz.Draw()
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-24 23:26:39 trottar"
+# Time-stamp: "2022-08-24 23:30:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -317,17 +317,17 @@ H_ph_DUMMY  = ROOT.TH1D("H_ph_DUMMY","Y' tar", 300, -0.1, 0.1)
 #H_ph_DUMMY_rand  = ROOT.TH1D("H_ph_DUMMY_rand","Y' tar", 300, -0.1, 0.1)
 H_ph_SIMC  = ROOT.TH1D("H_ph_SIMC","Y' tar", 300, -0.1, 0.1)
 
-H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss", 300, -0.2, 0.4)
-#H_pmiss_DATA_rand  = ROOT.TH1D("H_pmiss_DATA_rand","pmiss", 300, -0.2, 0.4)
-H_pmiss_DUMMY  = ROOT.TH1D("H_pmiss_DUMMY","pmiss", 300, -0.2, 0.4)
-#H_pmiss_DUMMY_rand  = ROOT.TH1D("H_pmiss_DUMMY_rand","pmiss", 300, -0.2, 0.4)
-H_pmiss_SIMC  = ROOT.TH1D("H_pmiss_SIMC","pmiss", 300, -0.2, 0.4)
+H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss", 300, -0.04, 0.04)
+#H_pmiss_DATA_rand  = ROOT.TH1D("H_pmiss_DATA_rand","pmiss", 300, -0.04, 0.04)
+H_pmiss_DUMMY  = ROOT.TH1D("H_pmiss_DUMMY","pmiss", 300, -0.04, 0.04)
+#H_pmiss_DUMMY_rand  = ROOT.TH1D("H_pmiss_DUMMY_rand","pmiss", 300, -0.04, 0.04)
+H_pmiss_SIMC  = ROOT.TH1D("H_pmiss_SIMC","pmiss", 300, -0.04, 0.04)
 
-H_emiss_DATA  = ROOT.TH1D("H_emiss_DATA","emiss", 300, -0.2, 0.4)
-#H_emiss_DATA_rand  = ROOT.TH1D("H_emiss_DATA_rand","emiss", 300, -0.2, 0.4)
-H_emiss_DUMMY  = ROOT.TH1D("H_emiss_DUMMY","emiss", 300, -0.2, 0.4)
-#H_emiss_DUMMY_rand  = ROOT.TH1D("H_emiss_DUMMY_rand","emiss", 300, -0.2, 0.4)
-H_emiss_SIMC  = ROOT.TH1D("H_emiss_SIMC","emiss", 300, -0.2, 0.4)
+H_emiss_DATA  = ROOT.TH1D("H_emiss_DATA","emiss", 300, -0.04, 0.04)
+#H_emiss_DATA_rand  = ROOT.TH1D("H_emiss_DATA_rand","emiss", 300, -0.04, 0.04)
+H_emiss_DUMMY  = ROOT.TH1D("H_emiss_DUMMY","emiss", 300, -0.04, 0.04)
+#H_emiss_DUMMY_rand  = ROOT.TH1D("H_emiss_DUMMY_rand","emiss", 300, -0.04, 0.04)
+H_emiss_SIMC  = ROOT.TH1D("H_emiss_SIMC","emiss", 300, -0.04, 0.04)
 
 H_pmx_DATA  = ROOT.TH1D("H_pmx_DATA","pmx", 300, -0.2, 0.2)
 #H_pmx_DATA_rand  = ROOT.TH1D("H_pmx_DATA_rand","pmx", 300, -0.2, 0.2)
@@ -363,11 +363,11 @@ H_ct_ep_DUMMY_cut = ROOT.TH1D("H_ct_ep_DUMMY_cut", "Electron-Proton CTime (cut)"
 H_ct_ep_vs_H_MMp2_DATA = ROOT.TH2D("H_ct_ep_vs_H_MMp2_DATA","Electron-Proton CTime vs (MM)^{2}_{p}; e p Coin_Time; (MM)^{2}_{p}", 200, -100, 100, 200, -2, 2)
 #H_ct_ep_vs_H_MMp2_DATA_rand = ROOT.TH2D("H_ct_ep_vs_H_MMp2_DATA_rand","Electron-Proton CTime vs (MM)^{2}_{p}; e p Coin_Time; (MM)^{2}_{p}", 200, -100, 100, 200, -2, 2)
 
-H_emiss_vs_H_hsdelta_DATA = ROOT.TH2D("H_emiss_vs_H_hsdelta_DATA","Emiss vs HMS Delta;  Emiss; HMS Delta", 300, -0.2, 0.4, 300, -20.0, 20.0)
-H_emiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_emiss_vs_H_ssdelta_DATA","Emiss vs SHMS Delta;  Emiss; SHMS Delta", 300, -0.2, 0.4, 300, -20.0, 20.0)
+H_emiss_vs_H_hsdelta_DATA = ROOT.TH2D("H_emiss_vs_H_hsdelta_DATA","Emiss vs HMS Delta;  Emiss; HMS Delta", 300, -0.04, 0.04, 300, -20.0, 20.0)
+H_emiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_emiss_vs_H_ssdelta_DATA","Emiss vs SHMS Delta;  Emiss; SHMS Delta", 300, -0.04, 0.04, 300, -20.0, 20.0)
 
-H_pmiss_vs_H_hsdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_hsdelta_DATA","Pmiss vs HMS Delta;  Pmiss; HMS Delta", 300, -0.2, 0.4, 300, -20.0, 20.0)
-H_pmiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_ssdelta_DATA","Pmiss vs SHMS Delta;  Pmiss; SHMS Delta", 300, -0.2, 0.4, 300, -20.0, 20.0)
+H_pmiss_vs_H_hsdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_hsdelta_DATA","Pmiss vs HMS Delta;  Pmiss; HMS Delta", 300, -0.04, 0.04, 300, -20.0, 20.0)
+H_pmiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_ssdelta_DATA","Pmiss vs SHMS Delta;  Pmiss; SHMS Delta", 300, -0.04, 0.04, 300, -20.0, 20.0)
 
 ################################################################################################################################################
 

@@ -253,7 +253,7 @@ for i in "${dummydata[@]}"
 do
     DummyChargeVal+=($(python3 findcharge.py ${ROOTPREFIX} "$i" -1))
     DummyEffVal+=($(python3 calculate_efficiency.py "$i" ${EffData}))
-    DummyRunNum+=("$i")
+    DummyRunNum+=($(echo "$i"))
     #echo "${DummyChargeVal[@]} mC"
 done
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers

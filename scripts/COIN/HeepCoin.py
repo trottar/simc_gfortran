@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-25 02:01:36 trottar"
+# Time-stamp: "2022-08-25 02:03:33 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -833,15 +833,15 @@ G_dummy_eff.SetMarkerColor(kRed)
 G_eff_plt.Add(G_data_eff)
 G_eff_plt.Add(G_dummy_eff)
 
-#G_data_eff.Draw("AP")
-#G_dummy_eff.Draw("AP")
-
 G_eff_plt.Draw("AP")
 
-G_data_eff.SetMinimum(0.7)
-G_dummy_eff.SetMinimum(0.7)
-G_data_eff.SetMaximum(1.)
-G_dummy_eff.SetMaximum(1.)
+#G_data_eff.SetMinimum(0.7)
+#G_dummy_eff.SetMinimum(0.7)
+#G_data_eff.SetMaximum(1.)
+#G_dummy_eff.SetMaximum(1.)
+
+G_eff_plt.SetMinimum(0.7)
+G_eff_plt.SetMaximum(1.)
 
 l_eff_plt.AddEntry(G_data_eff,"Data")
 l_eff_plt.AddEntry(G_dummy_eff,"Dummy")

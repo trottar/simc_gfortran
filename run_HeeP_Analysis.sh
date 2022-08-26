@@ -98,27 +98,34 @@ fi
 
 if [[ $KIN = "10p6" && $s_flag != "true" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # All heep coin 10p6 runs
-    declare -a data=(4827) # Just one test run
+    #    declare -a data=(4827) # Just one test run
     declare -a dummydata=(4864)
 elif [[ $KIN = "8p2" ]]; then
     declare -a data=(7974 7975 7976)
-#    declare -a data=(7974)
+    #    declare -a data=(7974) # Just one test run
     declare -a dummydata=(7977)
 elif [[ $KIN = "6p2" ]]; then
     declare -a data=(7866 7867)
     declare -a dummydata=(7868)
 elif [[ $KIN = "4p9" ]]; then
     declare -a data=(6881 6882)
-    declare -a dummydata=(6883)    
-elif [[ $KIN = "8p2" && $s_flag != "true" ]]; then
-    declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863)
-    declare -a dummydata=(4864)
+    declare -a dummydata=(6883)
+elif [[ $KIN = "3p8" ]]; then
+    declare -a data=(6634 6635)
+    declare -a dummydata=(6637)
 elif [[ $KIN = "10p6" && $s_flag = "true" ]]; then
-    declare -a data=(4784 4785) # All heep singles 10p6 runs
-    declare -a dummydata=(4786)
-elif [[ $KIN = "8p2" && $s_flag = "true" ]]; then
+    declare -a data=(7974 7975 7976)
+    #    declare -a data=(7974) # Just one test run
+    declare -a dummydata=(7977)    
+elif [[ $KIN = "8p2" && $s_flag != "true" ]]; then
     declare -a data=(111)
-    declare -a dummydata=(111)    
+    declare -a dummydata=(111)
+elif [[ $KIN = "4p9" && $s_flag = "true" ]]; then
+    declare -a data=(111)
+    declare -a dummydata=(111)
+elif [[ $KIN = "3p8" && $s_flag = "true" ]]; then
+    declare -a data=(111)
+    declare -a dummydata=(111)        
 else
     echo "Invalid kinematic setting, ${KIN}"
     exit 128
@@ -224,12 +231,14 @@ cd "${SIMCPATH}/scripts"
 
 DataChargeVal=()
 DataEffVal=()
+DataRunNum=()
 echo
 echo "Calculating data total charge..."
 for i in "${data[@]}"
 do
     DataChargeVal+=($(python3 findcharge.py ${ROOTPREFIX} "$i" -1))
     DataEffVal+=($(python3 calculate_efficiency.py "$i" ${EffData}))
+    DataRunNum+=("$i")
     #echo "${DataChargeVal[@]} mC"
 done
 DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
@@ -237,12 +246,14 @@ echo "${DataChargeSum} uC"
 
 DummyChargeVal=()
 DummyEffVal=()
+DummyRunNum=()
 echo
 echo "Calculating dummy total charge..."
 for i in "${dummydata[@]}"
 do
     DummyChargeVal+=($(python3 findcharge.py ${ROOTPREFIX} "$i" -1))
     DummyEffVal+=($(python3 calculate_efficiency.py "$i" ${EffData}))
+    DummyRunNum+=($(echo "$i"))
     #echo "${DummyChargeVal[@]} mC"
 done
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
@@ -253,7 +264,7 @@ if [[ $s_flag = "true" ]]; then
     python3 HeepSing.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${SPEC}
 else
     cd "${SIMCPATH}/scripts/COIN"
-    python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename}
+    python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${DataRunNum[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" "${DummyRunNum[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename}
 fi
 
 cd "${SIMCPATH}"

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-23 15:28:15 trottar"
+# Time-stamp: "2022-08-25 02:05:06 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -32,8 +32,8 @@ from functools import reduce
 ##################################################################################################################################################
 
 # Check the number of arguments provided to the script
-if len(sys.argv)-1!=9:
-    print("!!!!! ERROR !!!!!\n Expected 9 arguments\n Usage is with - KIN OutDATAFilename.root data_charge data_efficiency OutDUMMYFilename.root dummy_charge dummy_efficiency InSIMCFilename OutFullAnalysisFilename \n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=11:
+    print("!!!!! ERROR !!!!!\n Expected 11 arguments\n Usage is with - KIN OutDATAFilename.root data_charge data_efficiency OutDUMMYFilename.root dummy_charge dummy_efficiency InSIMCFilename OutFullAnalysisFilename \n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################
@@ -42,24 +42,30 @@ if len(sys.argv)-1!=9:
 heep_kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
 data_charge = int(sys.argv[3])/1000
-data_efficiency = sys.argv[4]
-InDUMMYFilename = sys.argv[5]
-dummy_charge = int(sys.argv[6])/1000
-dummy_efficiency = sys.argv[7]
-InSIMCFilename = sys.argv[8]
-OutFilename = sys.argv[9]
+InData_efficiency = sys.argv[4]
+data_runNums = sys.argv[5]
+InDUMMYFilename = sys.argv[6]
+dummy_charge = int(sys.argv[7])/1000
+InDummy_efficiency = sys.argv[8]
+dummy_runNums = sys.argv[9]
+InSIMCFilename = sys.argv[10]
+OutFilename = sys.argv[11]
 
-try:    
-    #data_efficiency = reduce(lambda x, y: x*y, [float(i) for i in data_efficiency.split(" ")])
-    data_efficiency = sum([float(i) for i in data_efficiency.split(" ")])/len([float(i) for i in data_efficiency.split(" ")])
+try:
+    data_efficiency = sum([float(i) for i in InData_efficiency.split(" ")])/len([float(i) for i in InData_efficiency.split(" ")])
     print("\n\ndata_efficiency=",data_efficiency)
 
-    #dummy_efficiency = reduce(lambda x, y: x*y, [float(i) for i in dummy_efficiency.split(" ")])
-    dummy_efficiency = sum([float(i) for i in dummy_efficiency.split(" ")])/len([float(i) for i in dummy_efficiency.split(" ")])
+    dummy_efficiency = sum([float(i) for i in InDummy_efficiency.split(" ")])/len([float(i) for i in InDummy_efficiency.split(" ")])
     print("dummy_efficiency=",dummy_efficiency)
+    
 except ValueError:
     print("\nError: Invalid efficiency value found...")
     sys.exit(1)
+
+print(np.array([float(x) for x in data_runNums.split(' ')]),'\n',np.array([float(x) for x in InData_efficiency.split(' ')]))
+print(np.array([float(x) for x in dummy_runNums.split(' ')]),'\n',np.array([float(x) for x in InDummy_efficiency.split(' ')]))
+G_data_eff = ROOT.TGraph(len(InData_efficiency.split(' ')), np.array([float(x) for x in data_runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]))
+G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency.split(' ')), np.array([float(x) for x in dummy_runNums.split(' ')]),np.array([float(x) for x in InDummy_efficiency.split(' ')]))
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -113,6 +119,9 @@ else:
 
 ###############################################################################################################################################
 
+'''
+# Grab windows for random subtraction
+
 if "10p6" in heep_kinematics:
     runNum = 4827 # First run number of 10p6 coin heep setting
 if "8p2" in heep_kinematics:
@@ -120,7 +129,9 @@ if "8p2" in heep_kinematics:
 if "6p2" in heep_kinematics:
     runNum = 7866 # First run number of 6p2 coin heep setting
 if "4p9" in heep_kinematics:
-    runNum = 6881 # First run number of 4p9 coin heep setting    
+    runNum = 6881 # First run number of 4p9 coin heep setting
+if "3p8" in heep_kinematics:
+    runNum = 6634 # First run number of 3p8 coin heep setting        
 
 try:
     runNum
@@ -173,6 +184,8 @@ RandomWindows[1] = PromptPeak - (BunchSpacing/2) - CoinOffset - (nSkip*BunchSpac
 RandomWindows[2] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing)
 RandomWindows[3] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing) + ((nWindows/2)*BunchSpacing)
 
+'''
+
 ################################################################################################################################################
 
 InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
@@ -190,172 +203,177 @@ nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
 
 ################################################################################################################################################
 
-H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta", 300, -20.0, 20.0)
-H_hsdelta_DATA_rand  = ROOT.TH1D("H_hsdelta_DATA_rand","HMS Delta", 300, -20.0, 20.0)
-H_hsdelta_DUMMY  = ROOT.TH1D("H_hsdelta_DUMMY","HMS Delta", 300, -20.0, 20.0)
-H_hsdelta_DUMMY_rand  = ROOT.TH1D("H_hsdelta_DUMMY_rand","HMS Delta", 300, -20.0, 20.0)
-H_hsdelta_SIMC  = ROOT.TH1D("H_hsdelta_SIMC","HMS Delta", 300, -20.0, 20.0)
+H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta", 200, -20.0, 20.0)
+#H_hsdelta_DATA_rand  = ROOT.TH1D("H_hsdelta_DATA_rand","HMS Delta", 200, -20.0, 20.0)
+H_hsdelta_DUMMY  = ROOT.TH1D("H_hsdelta_DUMMY","HMS Delta", 200, -20.0, 20.0)
+#H_hsdelta_DUMMY_rand  = ROOT.TH1D("H_hsdelta_DUMMY_rand","HMS Delta", 200, -20.0, 20.0)
+H_hsdelta_SIMC  = ROOT.TH1D("H_hsdelta_SIMC","HMS Delta", 200, -20.0, 20.0)
 
-H_hsxptar_DATA  = ROOT.TH1D("H_hsxptar_DATA","HMS xptar", 300, -0.1, 0.1)
-H_hsxptar_DATA_rand  = ROOT.TH1D("H_hsxptar_DATA_rand","HMS xptar", 300, -0.1, 0.1)
-H_hsxptar_DUMMY  = ROOT.TH1D("H_hsxptar_DUMMY","HMS xptar", 300, -0.1, 0.1)
-H_hsxptar_DUMMY_rand  = ROOT.TH1D("H_hsxptar_DUMMY_rand","HMS xptar", 300, -0.1, 0.1)
-H_hsxptar_SIMC  = ROOT.TH1D("H_hsxptar_SIMC","HMS xptar", 300, -0.1, 0.1)
+H_hsxptar_DATA  = ROOT.TH1D("H_hsxptar_DATA","HMS xptar", 200, -0.1, 0.1)
+#H_hsxptar_DATA_rand  = ROOT.TH1D("H_hsxptar_DATA_rand","HMS xptar", 200, -0.1, 0.1)
+H_hsxptar_DUMMY  = ROOT.TH1D("H_hsxptar_DUMMY","HMS xptar", 200, -0.1, 0.1)
+#H_hsxptar_DUMMY_rand  = ROOT.TH1D("H_hsxptar_DUMMY_rand","HMS xptar", 200, -0.1, 0.1)
+H_hsxptar_SIMC  = ROOT.TH1D("H_hsxptar_SIMC","HMS xptar", 200, -0.1, 0.1)
 
-H_hsyptar_DATA  = ROOT.TH1D("H_hsyptar_DATA","HMS yptar", 300, -0.1, 0.1)
-H_hsyptar_DATA_rand  = ROOT.TH1D("H_hsyptar_DATA_rand","HMS yptar", 300, -0.1, 0.1)
-H_hsyptar_DUMMY  = ROOT.TH1D("H_hsyptar_DUMMY","HMS yptar", 300, -0.1, 0.1)
-H_hsyptar_DUMMY_rand  = ROOT.TH1D("H_hsyptar_DUMMY_rand","HMS yptar", 300, -0.1, 0.1)
-H_hsyptar_SIMC  = ROOT.TH1D("H_hsyptar_SIMC","HMS yptar", 300, -0.1, 0.1)
+H_hsyptar_DATA  = ROOT.TH1D("H_hsyptar_DATA","HMS yptar", 200, -0.1, 0.1)
+#H_hsyptar_DATA_rand  = ROOT.TH1D("H_hsyptar_DATA_rand","HMS yptar", 200, -0.1, 0.1)
+H_hsyptar_DUMMY  = ROOT.TH1D("H_hsyptar_DUMMY","HMS yptar", 200, -0.1, 0.1)
+#H_hsyptar_DUMMY_rand  = ROOT.TH1D("H_hsyptar_DUMMY_rand","HMS yptar", 200, -0.1, 0.1)
+H_hsyptar_SIMC  = ROOT.TH1D("H_hsyptar_SIMC","HMS yptar", 200, -0.1, 0.1)
 
-H_ssxfp_DATA    = ROOT.TH1D("H_ssxfp_DATA","SHMS xfp", 300, -25.0, 25.0)
-H_ssxfp_DATA_rand    = ROOT.TH1D("H_ssxfp_DATA_rand","SHMS xfp", 300, -25.0, 25.0)
-H_ssxfp_DUMMY    = ROOT.TH1D("H_ssxfp_DUMMY","SHMS xfp", 300, -25.0, 25.0)
-H_ssxfp_DUMMY_rand    = ROOT.TH1D("H_ssxfp_DUMMY_rand","SHMS xfp", 300, -25.0, 25.0)
-H_ssxfp_SIMC    = ROOT.TH1D("H_ssxfp_SIMC","SHMS xfp", 300, -25.0, 25.0)
+H_ssxfp_DATA    = ROOT.TH1D("H_ssxfp_DATA","SHMS xfp", 200, -25.0, 25.0)
+#H_ssxfp_DATA_rand    = ROOT.TH1D("H_ssxfp_DATA_rand","SHMS xfp", 200, -25.0, 25.0)
+H_ssxfp_DUMMY    = ROOT.TH1D("H_ssxfp_DUMMY","SHMS xfp", 200, -25.0, 25.0)
+#H_ssxfp_DUMMY_rand    = ROOT.TH1D("H_ssxfp_DUMMY_rand","SHMS xfp", 200, -25.0, 25.0)
+H_ssxfp_SIMC    = ROOT.TH1D("H_ssxfp_SIMC","SHMS xfp", 200, -25.0, 25.0)
 
-H_ssyfp_DATA    = ROOT.TH1D("H_ssyfp_DATA","SHMS yfp", 300, -25.0, 25.0)
-H_ssyfp_DATA_rand    = ROOT.TH1D("H_ssyfp_DATA_rand","SHMS yfp", 300, -25.0, 25.0)
-H_ssyfp_DUMMY    = ROOT.TH1D("H_ssyfp_DUMMY","SHMS yfp", 300, -25.0, 25.0)
-H_ssyfp_DUMMY_rand    = ROOT.TH1D("H_ssyfp_DUMMY_rand","SHMS yfp", 300, -25.0, 25.0)
-H_ssyfp_SIMC    = ROOT.TH1D("H_ssyfp_SIMC","SHMS yfp", 300, -25.0, 25.0)
+H_ssyfp_DATA    = ROOT.TH1D("H_ssyfp_DATA","SHMS yfp", 200, -25.0, 25.0)
+#H_ssyfp_DATA_rand    = ROOT.TH1D("H_ssyfp_DATA_rand","SHMS yfp", 200, -25.0, 25.0)
+H_ssyfp_DUMMY    = ROOT.TH1D("H_ssyfp_DUMMY","SHMS yfp", 200, -25.0, 25.0)
+#H_ssyfp_DUMMY_rand    = ROOT.TH1D("H_ssyfp_DUMMY_rand","SHMS yfp", 200, -25.0, 25.0)
+H_ssyfp_SIMC    = ROOT.TH1D("H_ssyfp_SIMC","SHMS yfp", 200, -25.0, 25.0)
 
-H_ssxpfp_DATA   = ROOT.TH1D("H_ssxpfp_DATA","SHMS xpfp", 300, -0.09, 0.09)
-H_ssxpfp_DATA_rand   = ROOT.TH1D("H_ssxpfp_DATA_rand","SHMS xpfp", 300, -0.09, 0.09)
-H_ssxpfp_DUMMY   = ROOT.TH1D("H_ssxpfp_DUMMY","SHMS xpfp", 300, -0.09, 0.09)
-H_ssxpfp_DUMMY_rand   = ROOT.TH1D("H_ssxpfp_DUMMY_rand","SHMS xpfp", 300, -0.09, 0.09)
-H_ssxpfp_SIMC   = ROOT.TH1D("H_ssxpfp_SIMC","SHMS xpfp", 300, -0.09, 0.09)
+H_ssxpfp_DATA   = ROOT.TH1D("H_ssxpfp_DATA","SHMS xpfp", 200, -0.09, 0.09)
+#H_ssxpfp_DATA_rand   = ROOT.TH1D("H_ssxpfp_DATA_rand","SHMS xpfp", 200, -0.09, 0.09)
+H_ssxpfp_DUMMY   = ROOT.TH1D("H_ssxpfp_DUMMY","SHMS xpfp", 200, -0.09, 0.09)
+#H_ssxpfp_DUMMY_rand   = ROOT.TH1D("H_ssxpfp_DUMMY_rand","SHMS xpfp", 200, -0.09, 0.09)
+H_ssxpfp_SIMC   = ROOT.TH1D("H_ssxpfp_SIMC","SHMS xpfp", 200, -0.09, 0.09)
 
-H_ssypfp_DATA   = ROOT.TH1D("H_ssypfp_DATA","SHMS ypfp", 300, -0.05, 0.04)
-H_ssypfp_DATA_rand   = ROOT.TH1D("H_ssypfp_DATA_rand","SHMS ypfp", 300, -0.05, 0.04)
-H_ssypfp_DUMMY   = ROOT.TH1D("H_ssypfp_DUMMY","SHMS ypfp", 300, -0.05, 0.04)
-H_ssypfp_DUMMY_rand   = ROOT.TH1D("H_ssypfp_DUMMY_rand","SHMS ypfp", 300, -0.05, 0.04)
-H_ssypfp_SIMC   = ROOT.TH1D("H_ssypfp_SIMC","SHMS ypfp", 300, -0.05, 0.04)
+H_ssypfp_DATA   = ROOT.TH1D("H_ssypfp_DATA","SHMS ypfp", 200, -0.05, 0.04)
+#H_ssypfp_DATA_rand   = ROOT.TH1D("H_ssypfp_DATA_rand","SHMS ypfp", 200, -0.05, 0.04)
+H_ssypfp_DUMMY   = ROOT.TH1D("H_ssypfp_DUMMY","SHMS ypfp", 200, -0.05, 0.04)
+#H_ssypfp_DUMMY_rand   = ROOT.TH1D("H_ssypfp_DUMMY_rand","SHMS ypfp", 200, -0.05, 0.04)
+H_ssypfp_SIMC   = ROOT.TH1D("H_ssypfp_SIMC","SHMS ypfp", 200, -0.05, 0.04)
 
-H_hsxfp_DATA    = ROOT.TH1D("H_hsxfp_DATA","HMS xfp", 300, -40.0, 40.0)
-H_hsxfp_DATA_rand    = ROOT.TH1D("H_hsxfp_DATA_rand","HMS xfp", 300, -40.0, 40.0)
-H_hsxfp_DUMMY    = ROOT.TH1D("H_hsxfp_DUMMY","HMS xfp", 300, -40.0, 40.0)
-H_hsxfp_DUMMY_rand    = ROOT.TH1D("H_hsxfp_DUMMY_rand","HMS xfp", 300, -40.0, 40.0)
-H_hsxfp_SIMC    = ROOT.TH1D("H_hsxfp_SIMC","HMS xfp", 300, -40.0, 40.0)
+H_hsxfp_DATA    = ROOT.TH1D("H_hsxfp_DATA","HMS xfp", 200, -40.0, 40.0)
+#H_hsxfp_DATA_rand    = ROOT.TH1D("H_hsxfp_DATA_rand","HMS xfp", 200, -40.0, 40.0)
+H_hsxfp_DUMMY    = ROOT.TH1D("H_hsxfp_DUMMY","HMS xfp", 200, -40.0, 40.0)
+#H_hsxfp_DUMMY_rand    = ROOT.TH1D("H_hsxfp_DUMMY_rand","HMS xfp", 200, -40.0, 40.0)
+H_hsxfp_SIMC    = ROOT.TH1D("H_hsxfp_SIMC","HMS xfp", 200, -40.0, 40.0)
 
-H_hsyfp_DATA    = ROOT.TH1D("H_hsyfp_DATA","HMS yfp", 300, -20.0, 20.0)
-H_hsyfp_DATA_rand    = ROOT.TH1D("H_hsyfp_DATA_rand","HMS yfp", 300, -20.0, 20.0)
-H_hsyfp_DUMMY    = ROOT.TH1D("H_hsyfp_DUMMY","HMS yfp", 300, -20.0, 20.0)
-H_hsyfp_DUMMY_rand    = ROOT.TH1D("H_hsyfp_DUMMY_rand","HMS yfp", 300, -20.0, 20.0)
-H_hsyfp_SIMC    = ROOT.TH1D("H_hsyfp_SIMC","HMS yfp", 300, -20.0, 20.0)
+H_hsyfp_DATA    = ROOT.TH1D("H_hsyfp_DATA","HMS yfp", 200, -20.0, 20.0)
+#H_hsyfp_DATA_rand    = ROOT.TH1D("H_hsyfp_DATA_rand","HMS yfp", 200, -20.0, 20.0)
+H_hsyfp_DUMMY    = ROOT.TH1D("H_hsyfp_DUMMY","HMS yfp", 200, -20.0, 20.0)
+#H_hsyfp_DUMMY_rand    = ROOT.TH1D("H_hsyfp_DUMMY_rand","HMS yfp", 200, -20.0, 20.0)
+H_hsyfp_SIMC    = ROOT.TH1D("H_hsyfp_SIMC","HMS yfp", 200, -20.0, 20.0)
 
-H_hsxpfp_DATA   = ROOT.TH1D("H_hsxpfp_DATA","HMS xpfp", 300, -0.09, 0.05)
-H_hsxpfp_DATA_rand   = ROOT.TH1D("H_hsxpfp_DATA_rand","HMS xpfp", 300, -0.09, 0.05)
-H_hsxpfp_DUMMY   = ROOT.TH1D("H_hsxpfp_DUMMY","HMS xpfp", 300, -0.09, 0.05)
-H_hsxpfp_DUMMY_rand   = ROOT.TH1D("H_hsxpfp_DUMMY_rand","HMS xpfp", 300, -0.09, 0.05)
-H_hsxpfp_SIMC   = ROOT.TH1D("H_hsxpfp_SIMC","HMS xpfp", 300, -0.09, 0.05)
+H_hsxpfp_DATA   = ROOT.TH1D("H_hsxpfp_DATA","HMS xpfp", 200, -0.09, 0.05)
+#H_hsxpfp_DATA_rand   = ROOT.TH1D("H_hsxpfp_DATA_rand","HMS xpfp", 200, -0.09, 0.05)
+H_hsxpfp_DUMMY   = ROOT.TH1D("H_hsxpfp_DUMMY","HMS xpfp", 200, -0.09, 0.05)
+#H_hsxpfp_DUMMY_rand   = ROOT.TH1D("H_hsxpfp_DUMMY_rand","HMS xpfp", 200, -0.09, 0.05)
+H_hsxpfp_SIMC   = ROOT.TH1D("H_hsxpfp_SIMC","HMS xpfp", 200, -0.09, 0.05)
 
-H_hsypfp_DATA   = ROOT.TH1D("H_hsypfp_DATA","HMS ypfp", 300, -0.05, 0.04)
-H_hsypfp_DATA_rand   = ROOT.TH1D("H_hsypfp_DATA_rand","HMS ypfp", 300, -0.05, 0.04)
-H_hsypfp_DUMMY   = ROOT.TH1D("H_hsypfp_DUMMY","HMS ypfp", 300, -0.05, 0.04)
-H_hsypfp_DUMMY_rand   = ROOT.TH1D("H_hsypfp_DUMMY_rand","HMS ypfp", 300, -0.05, 0.04)
-H_hsypfp_SIMC   = ROOT.TH1D("H_hsypfp_SIMC","HMS ypfp", 300, -0.05, 0.04)
+H_hsypfp_DATA   = ROOT.TH1D("H_hsypfp_DATA","HMS ypfp", 200, -0.05, 0.04)
+#H_hsypfp_DATA_rand   = ROOT.TH1D("H_hsypfp_DATA_rand","HMS ypfp", 200, -0.05, 0.04)
+H_hsypfp_DUMMY   = ROOT.TH1D("H_hsypfp_DUMMY","HMS ypfp", 200, -0.05, 0.04)
+#H_hsypfp_DUMMY_rand   = ROOT.TH1D("H_hsypfp_DUMMY_rand","HMS ypfp", 200, -0.05, 0.04)
+H_hsypfp_SIMC   = ROOT.TH1D("H_hsypfp_SIMC","HMS ypfp", 200, -0.05, 0.04)
 
-H_ssdelta_DATA  = ROOT.TH1D("H_ssdelta_DATA","SHMS delta", 300, -20.0, 20.0)
-H_ssdelta_DATA_rand  = ROOT.TH1D("H_ssdelta_DATA_rand","SHMS delta", 300, -20.0, 20.0)
-H_ssdelta_DUMMY  = ROOT.TH1D("H_ssdelta_DUMMY","SHMS delta", 300, -20.0, 20.0)
-H_ssdelta_DUMMY_rand  = ROOT.TH1D("H_ssdelta_DUMMY_rand","SHMS delta", 300, -20.0, 20.0)
-H_ssdelta_SIMC  = ROOT.TH1D("H_ssdelta_SIMC","SHMS delta", 300, -20.0, 20.0)
+H_ssdelta_DATA  = ROOT.TH1D("H_ssdelta_DATA","SHMS delta", 200, -20.0, 20.0)
+#H_ssdelta_DATA_rand  = ROOT.TH1D("H_ssdelta_DATA_rand","SHMS delta", 200, -20.0, 20.0)
+H_ssdelta_DUMMY  = ROOT.TH1D("H_ssdelta_DUMMY","SHMS delta", 200, -20.0, 20.0)
+#H_ssdelta_DUMMY_rand  = ROOT.TH1D("H_ssdelta_DUMMY_rand","SHMS delta", 200, -20.0, 20.0)
+H_ssdelta_SIMC  = ROOT.TH1D("H_ssdelta_SIMC","SHMS delta", 200, -20.0, 20.0)
 
-H_ssxptar_DATA  = ROOT.TH1D("H_ssxptar_DATA","SHMS xptar", 300, -0.1, 0.1)
-H_ssxptar_DATA_rand  = ROOT.TH1D("H_ssxptar_DATA_rand","SHMS xptar", 300, -0.1, 0.1)
-H_ssxptar_DUMMY  = ROOT.TH1D("H_ssxptar_DUMMY","SHMS xptar", 300, -0.1, 0.1)
-H_ssxptar_DUMMY_rand  = ROOT.TH1D("H_ssxptar_DUMMY_rand","SHMS xptar", 300, -0.1, 0.1)
-H_ssxptar_SIMC  = ROOT.TH1D("H_ssxptar_SIMC","SHMS xptar", 300, -0.1, 0.1)
+H_ssxptar_DATA  = ROOT.TH1D("H_ssxptar_DATA","SHMS xptar", 200, -0.1, 0.1)
+#H_ssxptar_DATA_rand  = ROOT.TH1D("H_ssxptar_DATA_rand","SHMS xptar", 200, -0.1, 0.1)
+H_ssxptar_DUMMY  = ROOT.TH1D("H_ssxptar_DUMMY","SHMS xptar", 200, -0.1, 0.1)
+#H_ssxptar_DUMMY_rand  = ROOT.TH1D("H_ssxptar_DUMMY_rand","SHMS xptar", 200, -0.1, 0.1)
+H_ssxptar_SIMC  = ROOT.TH1D("H_ssxptar_SIMC","SHMS xptar", 200, -0.1, 0.1)
 
-H_ssyptar_DATA  = ROOT.TH1D("H_ssyptar_DATA","SHMS yptar", 300, -0.04, 0.04)
-H_ssyptar_DATA_rand  = ROOT.TH1D("H_ssyptar_DATA_rand","SHMS yptar", 300, -0.04, 0.04)
-H_ssyptar_DUMMY  = ROOT.TH1D("H_ssyptar_DUMMY","SHMS yptar", 300, -0.04, 0.04)
-H_ssyptar_DUMMY_rand  = ROOT.TH1D("H_ssyptar_DUMMY_rand","SHMS yptar", 300, -0.04, 0.04)
-H_ssyptar_SIMC  = ROOT.TH1D("H_ssyptar_SIMC","SHMS yptar", 300, -0.04, 0.04)
+H_ssyptar_DATA  = ROOT.TH1D("H_ssyptar_DATA","SHMS yptar", 200, -0.04, 0.04)
+#H_ssyptar_DATA_rand  = ROOT.TH1D("H_ssyptar_DATA_rand","SHMS yptar", 200, -0.04, 0.04)
+H_ssyptar_DUMMY  = ROOT.TH1D("H_ssyptar_DUMMY","SHMS yptar", 200, -0.04, 0.04)
+#H_ssyptar_DUMMY_rand  = ROOT.TH1D("H_ssyptar_DUMMY_rand","SHMS yptar", 200, -0.04, 0.04)
+H_ssyptar_SIMC  = ROOT.TH1D("H_ssyptar_SIMC","SHMS yptar", 200, -0.04, 0.04)
 
-H_q_DATA        = ROOT.TH1D("H_q_DATA","q", 300, 0.0, 10.0)
-H_q_DATA_rand        = ROOT.TH1D("H_q_DATA_rand","q", 300, 0.0, 10.0)
-H_q_DUMMY        = ROOT.TH1D("H_q_DUMMY","q", 300, 0.0, 10.0)
-H_q_DUMMY_rand        = ROOT.TH1D("H_q_DUMMY_rand","q", 300, 0.0, 10.0)
-H_q_SIMC        = ROOT.TH1D("H_q_SIMC","q", 300, 0.0, 10.0)
+H_q_DATA        = ROOT.TH1D("H_q_DATA","q", 200, 0.0, 10.0)
+#H_q_DATA_rand        = ROOT.TH1D("H_q_DATA_rand","q", 200, 0.0, 10.0)
+H_q_DUMMY        = ROOT.TH1D("H_q_DUMMY","q", 200, 0.0, 10.0)
+#H_q_DUMMY_rand        = ROOT.TH1D("H_q_DUMMY_rand","q", 200, 0.0, 10.0)
+H_q_SIMC        = ROOT.TH1D("H_q_SIMC","q", 200, 0.0, 10.0)
 
-H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2", 300, 0.0, 10.0)  
-H_Q2_DATA_rand       = ROOT.TH1D("H_Q2_DATA_rand","Q2", 300, 0.0, 10.0)  
-H_Q2_DUMMY       = ROOT.TH1D("H_Q2_DUMMY","Q2", 300, 0.0, 10.0)  
-H_Q2_DUMMY_rand       = ROOT.TH1D("H_Q2_DUMMY_rand","Q2", 300, 0.0, 10.0)  
-H_Q2_SIMC       = ROOT.TH1D("H_Q2_SIMC","Q2", 300, 0.0, 10.0)  
+H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2", 200, 0.0, 10.0)  
+#H_Q2_DATA_rand       = ROOT.TH1D("H_Q2_DATA_rand","Q2", 200, 0.0, 10.0)  
+H_Q2_DUMMY       = ROOT.TH1D("H_Q2_DUMMY","Q2", 200, 0.0, 10.0)  
+#H_Q2_DUMMY_rand       = ROOT.TH1D("H_Q2_DUMMY_rand","Q2", 200, 0.0, 10.0)  
+H_Q2_SIMC       = ROOT.TH1D("H_Q2_SIMC","Q2", 200, 0.0, 10.0)  
 
-H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 300, 0.5, 1.0)
-H_epsilon_DATA_rand  = ROOT.TH1D("H_epsilon_DATA_rand","epsilon", 300, 0.5, 1.0)
-H_epsilon_DUMMY  = ROOT.TH1D("H_epsilon_DUMMY","epsilon", 300, 0.5, 1.0)
-H_epsilon_DUMMY_rand  = ROOT.TH1D("H_epsilon_DUMMY_rand","epsilon", 300, 0.5, 1.0)
-H_epsilon_SIMC  = ROOT.TH1D("H_epsilon_SIMC","epsilon", 300, 0.5, 1.0)
+H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 200, 0.5, 1.0)
+#H_epsilon_DATA_rand  = ROOT.TH1D("H_epsilon_DATA_rand","epsilon", 200, 0.5, 1.0)
+H_epsilon_DUMMY  = ROOT.TH1D("H_epsilon_DUMMY","epsilon", 200, 0.5, 1.0)
+#H_epsilon_DUMMY_rand  = ROOT.TH1D("H_epsilon_DUMMY_rand","epsilon", 200, 0.5, 1.0)
+H_epsilon_SIMC  = ROOT.TH1D("H_epsilon_SIMC","epsilon", 200, 0.5, 1.0)
 
-H_MMp_DATA  = ROOT.TH1D("H_MMp_DATA","MMp ", 300, -0.03, 0.03)
-H_MMp_DATA_rand  = ROOT.TH1D("H_MMp_DATA_rand","MMp ", 300, -0.03, 0.03)
-H_MMp_DUMMY  = ROOT.TH1D("H_MMp_DUMMY","MMp ", 300, -0.03, 0.03)
-H_MMp_DUMMY_rand  = ROOT.TH1D("H_MMp_DUMMY_rand","MMp ", 300, -0.03, 0.03)
-H_MMp_SIMC  = ROOT.TH1D("H_MMp_SIMC","MMp ", 300, -0.03, 0.03)
+H_MMp2_DATA  = ROOT.TH1D("H_MMp2_DATA","(MM)^{2}_{p}", 200, -0.01, 0.01)
+#H_MMp2_DATA_rand  = ROOT.TH1D("H_MMp2_DATA_rand","(MM)^{2}_{p}", 200, -0.01, 0.01)
+H_MMp2_DUMMY  = ROOT.TH1D("H_MMp2_DUMMY","(MM)^{2}_{p}", 200, -0.01, 0.01)
+#H_MMp2_DUMMY_rand  = ROOT.TH1D("H_MMp2_DUMMY_rand","(MM)^{2}_{p}", 200, -0.01, 0.01)
+H_MMp2_SIMC  = ROOT.TH1D("H_MMp2_SIMC","(MM)^{2}_{p}", 200, -0.01, 0.01)
 
-H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar", 300, -0.1, 0.1)
-H_th_DATA_rand  = ROOT.TH1D("H_th_DATA_rand","X' tar", 300, -0.1, 0.1)
-H_th_DUMMY  = ROOT.TH1D("H_th_DUMMY","X' tar", 300, -0.1, 0.1)
-H_th_DUMMY_rand  = ROOT.TH1D("H_th_DUMMY_rand","X' tar", 300, -0.1, 0.1)
-H_th_SIMC  = ROOT.TH1D("H_th_SIMC","X' tar", 300, -0.1, 0.1)
+H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar", 200, -0.1, 0.1)
+#H_th_DATA_rand  = ROOT.TH1D("H_th_DATA_rand","X' tar", 200, -0.1, 0.1)
+H_th_DUMMY  = ROOT.TH1D("H_th_DUMMY","X' tar", 200, -0.1, 0.1)
+#H_th_DUMMY_rand  = ROOT.TH1D("H_th_DUMMY_rand","X' tar", 200, -0.1, 0.1)
+H_th_SIMC  = ROOT.TH1D("H_th_SIMC","X' tar", 200, -0.1, 0.1)
 
-H_ph_DATA  = ROOT.TH1D("H_ph_DATA","Y' tar", 300, -0.1, 0.1)
-H_ph_DATA_rand  = ROOT.TH1D("H_ph_DATA_rand","Y' tar", 300, -0.1, 0.1)
-H_ph_DUMMY  = ROOT.TH1D("H_ph_DUMMY","Y' tar", 300, -0.1, 0.1)
-H_ph_DUMMY_rand  = ROOT.TH1D("H_ph_DUMMY_rand","Y' tar", 300, -0.1, 0.1)
-H_ph_SIMC  = ROOT.TH1D("H_ph_SIMC","Y' tar", 300, -0.1, 0.1)
+H_ph_DATA  = ROOT.TH1D("H_ph_DATA","Y' tar", 200, -0.1, 0.1)
+#H_ph_DATA_rand  = ROOT.TH1D("H_ph_DATA_rand","Y' tar", 200, -0.1, 0.1)
+H_ph_DUMMY  = ROOT.TH1D("H_ph_DUMMY","Y' tar", 200, -0.1, 0.1)
+#H_ph_DUMMY_rand  = ROOT.TH1D("H_ph_DUMMY_rand","Y' tar", 200, -0.1, 0.1)
+H_ph_SIMC  = ROOT.TH1D("H_ph_SIMC","Y' tar", 200, -0.1, 0.1)
 
-H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss", 300, -0.2, 0.4)
-H_pmiss_DATA_rand  = ROOT.TH1D("H_pmiss_DATA_rand","pmiss", 300, -0.2, 0.4)
-H_pmiss_DUMMY  = ROOT.TH1D("H_pmiss_DUMMY","pmiss", 300, -0.2, 0.4)
-H_pmiss_DUMMY_rand  = ROOT.TH1D("H_pmiss_DUMMY_rand","pmiss", 300, -0.2, 0.4)
-H_pmiss_SIMC  = ROOT.TH1D("H_pmiss_SIMC","pmiss", 300, -0.2, 0.4)
+H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss", 200, -0.1, 0.1)
+#H_pmiss_DATA_rand  = ROOT.TH1D("H_pmiss_DATA_rand","pmiss", 200, -0.1, 0.1)
+H_pmiss_DUMMY  = ROOT.TH1D("H_pmiss_DUMMY","pmiss", 200, -0.1, 0.1)
+#H_pmiss_DUMMY_rand  = ROOT.TH1D("H_pmiss_DUMMY_rand","pmiss", 200, -0.1, 0.1)
+H_pmiss_SIMC  = ROOT.TH1D("H_pmiss_SIMC","pmiss", 200, -0.1, 0.1)
 
-H_emiss_DATA  = ROOT.TH1D("H_emiss_DATA","emiss", 300, -0.2, 0.4)
-H_emiss_DATA_rand  = ROOT.TH1D("H_emiss_DATA_rand","emiss", 300, -0.2, 0.4)
-H_emiss_DUMMY  = ROOT.TH1D("H_emiss_DUMMY","emiss", 300, -0.2, 0.4)
-H_emiss_DUMMY_rand  = ROOT.TH1D("H_emiss_DUMMY_rand","emiss", 300, -0.2, 0.4)
-H_emiss_SIMC  = ROOT.TH1D("H_emiss_SIMC","emiss", 300, -0.2, 0.4)
+H_emiss_DATA  = ROOT.TH1D("H_emiss_DATA","emiss", 200, -0.1, 0.1)
+#H_emiss_DATA_rand  = ROOT.TH1D("H_emiss_DATA_rand","emiss", 200, -0.1, 0.1)
+H_emiss_DUMMY  = ROOT.TH1D("H_emiss_DUMMY","emiss", 200, -0.1, 0.1)
+#H_emiss_DUMMY_rand  = ROOT.TH1D("H_emiss_DUMMY_rand","emiss", 200, -0.1, 0.1)
+H_emiss_SIMC  = ROOT.TH1D("H_emiss_SIMC","emiss", 200, -0.1, 0.1)
 
-H_pmx_DATA  = ROOT.TH1D("H_pmx_DATA","pmx", 300, -0.2, 0.2)
-H_pmx_DATA_rand  = ROOT.TH1D("H_pmx_DATA_rand","pmx", 300, -0.2, 0.2)
-H_pmx_DUMMY  = ROOT.TH1D("H_pmx_DUMMY","pmx", 300, -0.2, 0.2)
-H_pmx_DUMMY_rand  = ROOT.TH1D("H_pmx_DUMMY_rand","pmx", 300, -0.2, 0.2)
-H_pmx_SIMC  = ROOT.TH1D("H_pmx_SIMC","pmx", 300, -0.2, 0.2)
+H_pmx_DATA  = ROOT.TH1D("H_pmx_DATA","pmx", 200, -0.1, 0.1)
+#H_pmx_DATA_rand  = ROOT.TH1D("H_pmx_DATA_rand","pmx", 200, -0.1, 0.1)
+H_pmx_DUMMY  = ROOT.TH1D("H_pmx_DUMMY","pmx", 200, -0.1, 0.1)
+#H_pmx_DUMMY_rand  = ROOT.TH1D("H_pmx_DUMMY_rand","pmx", 200, -0.1, 0.1)
+H_pmx_SIMC  = ROOT.TH1D("H_pmx_SIMC","pmx", 200, -0.1, 0.1)
 
-H_pmy_DATA  = ROOT.TH1D("H_pmy_DATA","pmy ", 300, -0.2, 0.2)
-H_pmy_DATA_rand  = ROOT.TH1D("H_pmy_DATA_rand","pmy ", 300, -0.2, 0.2)
-H_pmy_DUMMY  = ROOT.TH1D("H_pmy_DUMMY","pmy ", 300, -0.2, 0.2)
-H_pmy_DUMMY_rand  = ROOT.TH1D("H_pmy_DUMMY_rand","pmy ", 300, -0.2, 0.2)
-H_pmy_SIMC  = ROOT.TH1D("H_pmy_SIMC","pmy", 300, -0.2, 0.2)
+H_pmy_DATA  = ROOT.TH1D("H_pmy_DATA","pmy ", 200, -0.1, 0.1)
+#H_pmy_DATA_rand  = ROOT.TH1D("H_pmy_DATA_rand","pmy ", 200, -0.1, 0.1)
+H_pmy_DUMMY  = ROOT.TH1D("H_pmy_DUMMY","pmy ", 200, -0.1, 0.1)
+#H_pmy_DUMMY_rand  = ROOT.TH1D("H_pmy_DUMMY_rand","pmy ", 200, -0.1, 0.1)
+H_pmy_SIMC  = ROOT.TH1D("H_pmy_SIMC","pmy", 200, -0.1, 0.1)
 
-H_pmz_DATA  = ROOT.TH1D("H_pmz_DATA","pmz", 300, -0.2, 0.2)
-H_pmz_DATA_rand  = ROOT.TH1D("H_pmz_DATA_rand","pmz", 300, -0.2, 0.2)
-H_pmz_DUMMY  = ROOT.TH1D("H_pmz_DUMMY","pmz", 300, -0.2, 0.2)
-H_pmz_DUMMY_rand  = ROOT.TH1D("H_pmz_DUMMY_rand","pmz", 300, -0.2, 0.2)
-H_pmz_SIMC  = ROOT.TH1D("H_pmz_SIMC","pmz", 300, -0.2, 0.2)
+H_pmz_DATA  = ROOT.TH1D("H_pmz_DATA","pmz", 200, -0.1, 0.1)
+#H_pmz_DATA_rand  = ROOT.TH1D("H_pmz_DATA_rand","pmz", 200, -0.1, 0.1)
+H_pmz_DUMMY  = ROOT.TH1D("H_pmz_DUMMY","pmz", 200, -0.1, 0.1)
+#H_pmz_DUMMY_rand  = ROOT.TH1D("H_pmz_DUMMY_rand","pmz", 200, -0.1, 0.1)
+H_pmz_SIMC  = ROOT.TH1D("H_pmz_SIMC","pmz", 200, -0.1, 0.1)
 
-H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 300, 0.5, 1.5)
-H_W_DATA_rand  = ROOT.TH1D("H_W_DATA_rand","W ", 300, 0.5, 1.5)
-H_W_DUMMY  = ROOT.TH1D("H_W_DUMMY","W ", 300, 0.5, 1.5)
-H_W_DUMMY_rand  = ROOT.TH1D("H_W_DUMMY_rand","W ", 300, 0.5, 1.5)
-H_W_SIMC  = ROOT.TH1D("H_W_SIMC","W", 300, 0.5, 1.5)
+H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 200, 0.7, 1.1)
+#H_W_DATA_rand  = ROOT.TH1D("H_W_DATA_rand","W ", 200, 0.7, 1.1)
+H_W_DUMMY  = ROOT.TH1D("H_W_DUMMY","W ", 200, 0.7, 1.1)
+#H_W_DUMMY_rand  = ROOT.TH1D("H_W_DUMMY_rand","W ", 200, 0.7, 1.1)
+H_W_SIMC  = ROOT.TH1D("H_W_SIMC","W", 200, 0.7, 1.1)
 
-H_ct_ep_DATA = ROOT.TH1D("H_ct_ep_DATA", "Electron-Proton CTime", 200, -100, 100)
-H_ct_ep_DUMMY = ROOT.TH1D("H_ct_ep_DUMMY", "Electron-Proton CTime", 200, -100, 100)
-H_ct_ep_DATA_cut = ROOT.TH1D("H_ct_ep_DATA_cut", "Electron-Proton CTime (cut)", 200, -100, 100)
-H_ct_ep_DATA_cut_rand = ROOT.TH1D("H_ct_ep_DATA_cut_rand", "Electron-Proton CTime (cut)", 200, -100, 100)
-H_ct_ep_DUMMY_cut = ROOT.TH1D("H_ct_ep_DUMMY_cut", "Electron-Proton CTime (cut)", 200, -100, 100)
-H_ct_ep_DUMMY_cut_rand = ROOT.TH1D("H_ct_ep_DUMMY_cut_rand", "Electron-Proton CTime (cut)", 200, -100, 100)
+H_ct_ep_DATA = ROOT.TH1D("H_ct_ep_DATA", "Electron-Proton CTime", 200, -10, 10)
+H_ct_ep_DUMMY = ROOT.TH1D("H_ct_ep_DUMMY", "Electron-Proton CTime", 200, -10, 10)
+H_ct_ep_DATA_cut = ROOT.TH1D("H_ct_ep_DATA_cut", "Electron-Proton CTime (cut)", 200, -10, 10)
+#H_ct_ep_DATA_cut_rand = ROOT.TH1D("H_ct_ep_DATA_cut_rand", "Electron-Proton CTime (cut)", 200, -10, 10)
+H_ct_ep_DUMMY_cut = ROOT.TH1D("H_ct_ep_DUMMY_cut", "Electron-Proton CTime (cut)", 200, -10, 10)
+#H_ct_ep_DUMMY_cut_rand = ROOT.TH1D("H_ct_ep_DUMMY_cut_rand", "Electron-Proton CTime (cut)", 200, -10, 10)
 
-H_ct_ep_vs_H_MMp_DATA = ROOT.TH2D("H_ct_ep_vs_H_MMp_DATA","Electron-Proton CTime vs Missing Mass; e p Coin_Time; MM_{p}", 200, -100, 100, 200, -2, 2)
-H_ct_ep_vs_H_MMp_DATA_rand = ROOT.TH2D("H_ct_ep_vs_H_MMp_DATA_rand","Electron-Proton CTime vs Missing Mass; e p Coin_Time; MM_{p}", 200, -100, 100, 200, -2, 2)
+H_ct_ep_vs_H_MMp2_DATA = ROOT.TH2D("H_ct_ep_vs_H_MMp2_DATA","Electron-Proton CTime vs (MM)^{2}_{p}; e p Coin_Time; (MM)^{2}_{p}", 200, -10, 10, 200, -0.1, 0.1)
+#H_ct_ep_vs_H_MMp2_DATA_rand = ROOT.TH2D("H_ct_ep_vs_H_MMp2_DATA_rand","Electron-Proton CTime vs (MM)^{2}_{p}; e p Coin_Time; (MM)^{2}_{p}", 200, -10, 10, 200, -0.1, 0.1)
 
+H_emiss_vs_H_hsdelta_DATA = ROOT.TH2D("H_emiss_vs_H_hsdelta_DATA","Emiss vs HMS Delta;  Emiss; HMS Delta", 200, -0.1, 0.1, 200, -20.0, 20.0)
+H_emiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_emiss_vs_H_ssdelta_DATA","Emiss vs SHMS Delta;  Emiss; SHMS Delta", 200, -0.1, 0.1, 200, -20.0, 20.0)
+
+H_pmiss_vs_H_hsdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_hsdelta_DATA","Pmiss vs HMS Delta;  Pmiss; HMS Delta", 200, -0.1, 0.1, 200, -20.0, 20.0)
+H_pmiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_ssdelta_DATA","Pmiss vs SHMS Delta;  Pmiss; SHMS Delta", 200, -0.1, 0.1, 200, -20.0, 20.0)
 
 ################################################################################################################################################
 
@@ -401,9 +419,9 @@ for evt in TBRANCH_SIMC:
       H_Q2_SIMC.Fill(evt.Q2, evt.Weight)
       H_W_SIMC.Fill(evt.W, evt.Weight)
       Mp = 938.27
-#      H_W_SIMC.Fill((Mp+evt.q), evt.Weight)
+      #      H_W_SIMC.Fill((Mp+evt.q), evt.Weight)
       H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
-      H_MMp_SIMC.Fill(pow(evt.Em, 2) - pow(evt.Pm, 2), evt.Weight)
+      H_MMp2_SIMC.Fill(pow(evt.Em, 2) - pow(evt.Pm, 2), evt.Weight)
 
 for evt in TBRANCH_DATA:
 
@@ -420,8 +438,13 @@ for evt in TBRANCH_DATA:
   
   if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
-      H_ct_ep_vs_H_MMp_DATA.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
+      H_ct_ep_vs_H_MMp2_DATA.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
       H_ct_ep_DATA_cut.Fill(evt.CTime_epCoinTime_ROC1)
+
+      H_emiss_vs_H_hsdelta_DATA.Fill(evt.emiss, evt.hsdelta)
+      H_emiss_vs_H_ssdelta_DATA.Fill(evt.emiss, evt.ssdelta)
+      H_pmiss_vs_H_hsdelta_DATA.Fill(evt.pmiss, evt.hsdelta)
+      H_pmiss_vs_H_ssdelta_DATA.Fill(evt.pmiss, evt.ssdelta)
       
       H_ssxfp_DATA.Fill(evt.ssxfp)
       H_ssyfp_DATA.Fill(evt.ssyfp)
@@ -448,11 +471,13 @@ for evt in TBRANCH_DATA:
       H_Q2_DATA.Fill(evt.Q2)
       H_W_DATA.Fill(evt.W)
       H_epsilon_DATA.Fill(evt.epsilon)
-      H_MMp_DATA.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
-      #H_MMp_DATA.Fill(pow(evt.MMp, 2))  
-      #H_MMp_DATA.Fill(evt.Mrecoil)
+      H_MMp2_DATA.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
+      #H_MMp2_DATA.Fill(pow(evt.MMp, 2))  
+      #H_MMp2_DATA.Fill(evt.Mrecoil)
 
-      H_ct_ep_vs_H_MMp_DATA_rand.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
+      '''
+      # Random subtraction
+      H_ct_ep_vs_H_MMp2_DATA_rand.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
       H_ct_ep_DATA_cut_rand.Fill(evt.CTime_epCoinTime_ROC1)
       
       H_ssxfp_DATA_rand.Fill(evt.ssxfp)
@@ -480,10 +505,10 @@ for evt in TBRANCH_DATA:
       H_Q2_DATA_rand.Fill(evt.Q2)
       H_W_DATA_rand.Fill(evt.W)
       H_epsilon_DATA_rand.Fill(evt.epsilon)
-      H_MMp_DATA_rand.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
-      #H_MMp_DATA_rand.Fill(evt.MMp)  
-      #H_MMp_DATA_rand.Fill(evt.Mrecoil)
-
+      H_MMp2_DATA_rand.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
+      #H_MMp2_DATA_rand.Fill(evt.MMp)  
+      #H_MMp2_DATA_rand.Fill(evt.Mrecoil)
+      '''
       
 for evt in TBRANCH_DUMMY:
 
@@ -529,10 +554,12 @@ for evt in TBRANCH_DUMMY:
       H_Q2_DUMMY.Fill(evt.Q2)
       H_W_DUMMY.Fill(evt.W)
       H_epsilon_DUMMY.Fill(evt.epsilon)
-      H_MMp_DUMMY.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
-      #H_MMp_DUMMY.Fill(evt.MMp)  
-      #H_MMp_DUMMY.Fill(evt.Mrecoil)
+      H_MMp2_DUMMY.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
+      #H_MMp2_DUMMY.Fill(evt.MMp)  
+      #H_MMp2_DUMMY.Fill(evt.Mrecoil)
 
+      '''
+      # Random subtraction
       H_ct_ep_DUMMY_cut_rand.Fill(evt.CTime_epCoinTime_ROC1)
       
       H_ssxfp_DUMMY_rand.Fill(evt.ssxfp)
@@ -560,10 +587,10 @@ for evt in TBRANCH_DUMMY:
       H_Q2_DUMMY_rand.Fill(evt.Q2)
       H_W_DUMMY_rand.Fill(evt.W)
       H_epsilon_DUMMY_rand.Fill(evt.epsilon)
-      H_MMp_DUMMY_rand.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
-      #H_MMp_DUMMY_rand.Fill(evt.MMp)  
-      #H_MMp_DUMMY_rand.Fill(evt.Mrecoil)
-
+      H_MMp2_DUMMY_rand.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
+      #H_MMp2_DUMMY_rand.Fill(evt.MMp)  
+      #H_MMp2_DUMMY_rand.Fill(evt.Mrecoil)
+      '''
 
 normfac_simc = (simc_normfactor)/(simc_nevents)
 H_ssxfp_SIMC.Scale(normfac_simc)                                                                                                                                   
@@ -589,7 +616,7 @@ H_Q2_SIMC.Scale(normfac_simc)
 H_W_SIMC.Scale(normfac_simc)                                                                                                                                                         
 #H_W_SIMC.Scale(normfac_simc/1000)                                                                                                                                                         
 H_epsilon_SIMC.Scale(normfac_simc)                                                                                                                                                    
-H_MMp_SIMC.Scale(normfac_simc)
+H_MMp2_SIMC.Scale(normfac_simc)
 
 dummy_target_corr = 4.8579
 normfac_dummy = 1/(dummy_charge*dummy_target_corr*dummy_efficiency)
@@ -609,7 +636,7 @@ H_ssdelta_DUMMY.Scale(normfac_dummy)
 H_hsdelta_DUMMY.Scale(normfac_dummy)
 H_Q2_DUMMY.Scale(normfac_dummy)
 H_epsilon_DUMMY.Scale(normfac_dummy)
-H_MMp_DUMMY.Scale(normfac_dummy)
+H_MMp2_DUMMY.Scale(normfac_dummy)
 H_pmiss_DUMMY.Scale(normfac_dummy)
 H_emiss_DUMMY.Scale(normfac_dummy)
 H_pmx_DUMMY.Scale(normfac_dummy)
@@ -636,7 +663,7 @@ H_ssdelta_DATA.Scale(normfac_data)
 H_hsdelta_DATA.Scale(normfac_data)
 H_Q2_DATA.Scale(normfac_data)
 H_epsilon_DATA.Scale(normfac_data)
-H_MMp_DATA.Scale(normfac_data)
+H_MMp2_DATA.Scale(normfac_data)
 H_pmiss_DATA.Scale(normfac_data)
 H_emiss_DATA.Scale(normfac_data)
 H_pmx_DATA.Scale(normfac_data)
@@ -646,6 +673,7 @@ H_W_DATA.Scale(normfac_data)
 H_ct_ep_DATA.Scale(normfac_data)
 H_ct_ep_DATA_cut.Scale(normfac_data)
 
+'''
 # Data Random subtraction
 H_ssxfp_DATA_rand.Scale(normfac_data/nWindows)
 H_ssyfp_DATA_rand.Scale(normfac_data/nWindows)
@@ -663,7 +691,7 @@ H_ssdelta_DATA_rand.Scale(normfac_data/nWindows)
 H_hsdelta_DATA_rand.Scale(normfac_data/nWindows)
 H_Q2_DATA_rand.Scale(normfac_data/nWindows)
 H_epsilon_DATA_rand.Scale(normfac_data/nWindows)
-H_MMp_DATA_rand.Scale(normfac_data/nWindows)
+H_MMp2_DATA_rand.Scale(normfac_data/nWindows)
 H_pmiss_DATA_rand.Scale(normfac_data/nWindows)
 H_emiss_DATA_rand.Scale(normfac_data/nWindows)
 H_pmx_DATA_rand.Scale(normfac_data/nWindows)
@@ -690,7 +718,7 @@ H_ssdelta_DUMMY_rand.Scale(normfac_dummy/nWindows)
 H_hsdelta_DUMMY_rand.Scale(normfac_dummy/nWindows)
 H_Q2_DUMMY_rand.Scale(normfac_dummy/nWindows)
 H_epsilon_DUMMY_rand.Scale(normfac_dummy/nWindows)
-H_MMp_DUMMY_rand.Scale(normfac_dummy/nWindows)
+H_MMp2_DUMMY_rand.Scale(normfac_dummy/nWindows)
 H_pmiss_DUMMY_rand.Scale(normfac_dummy/nWindows)
 H_emiss_DUMMY_rand.Scale(normfac_dummy/nWindows)
 H_pmx_DUMMY_rand.Scale(normfac_dummy/nWindows)
@@ -701,7 +729,7 @@ H_W_DUMMY_rand.Scale(normfac_dummy/nWindows)
 H_ct_ep_DUMMY_cut_rand.Scale(normfac_dummy/nWindows)
 
 ###
-'''
+
 # Data Random subtraction
 H_ssxfp_DATA.Add(H_ssxfp_DATA_rand,-1)
 H_ssyfp_DATA.Add(H_ssyfp_DATA_rand,-1)
@@ -719,7 +747,7 @@ H_ssdelta_DATA.Add(H_ssdelta_DATA_rand,-1)
 H_hsdelta_DATA.Add(H_hsdelta_DATA_rand,-1)
 H_Q2_DATA.Add(H_Q2_DATA_rand,-1)
 H_epsilon_DATA.Add(H_epsilon_DATA_rand,-1)
-H_MMp_DATA.Add(H_MMp_DATA_rand,-1)
+H_MMp2_DATA.Add(H_MMp2_DATA_rand,-1)
 H_pmiss_DATA.Add(H_pmiss_DATA_rand,-1)
 H_emiss_DATA.Add(H_emiss_DATA_rand,-1)
 H_pmx_DATA.Add(H_pmx_DATA_rand,-1)
@@ -746,7 +774,7 @@ H_ssdelta_DUMMY.Add(H_ssdelta_DUMMY_rand,-1)
 H_hsdelta_DUMMY.Add(H_hsdelta_DUMMY_rand,-1)
 H_Q2_DUMMY.Add(H_Q2_DUMMY_rand,-1)
 H_epsilon_DUMMY.Add(H_epsilon_DUMMY_rand,-1)
-H_MMp_DUMMY.Add(H_MMp_DUMMY_rand,-1)
+H_MMp2_DUMMY.Add(H_MMp2_DUMMY_rand,-1)
 H_pmiss_DUMMY.Add(H_pmiss_DUMMY_rand,-1)
 H_emiss_DUMMY.Add(H_emiss_DUMMY_rand,-1)
 H_pmx_DUMMY.Add(H_pmx_DUMMY_rand,-1)
@@ -774,7 +802,7 @@ H_ssdelta_DATA.Add(H_ssdelta_DUMMY,-1)
 H_hsdelta_DATA.Add(H_hsdelta_DUMMY,-1)
 H_Q2_DATA.Add(H_Q2_DUMMY,-1)
 H_epsilon_DATA.Add(H_epsilon_DUMMY,-1)
-H_MMp_DATA.Add(H_MMp_DUMMY,-1)
+H_MMp2_DATA.Add(H_MMp2_DUMMY,-1)
 H_pmiss_DATA.Add(H_pmiss_DUMMY,-1)
 H_emiss_DATA.Add(H_emiss_DUMMY,-1)
 H_pmx_DATA.Add(H_pmx_DUMMY,-1)
@@ -790,6 +818,33 @@ ROOT.gStyle.SetOptStat(0)
 
 # PLOT HIST..
 
+eff_plt = TCanvas()
+G_eff_plt = ROOT.TMultiGraph()
+l_eff_plt = ROOT.TLegend(0.115,0.735,0.33,0.9)
+
+G_data_eff.SetMarkerStyle(21)
+G_dummy_eff.SetMarkerStyle(21)
+
+G_data_eff.SetMarkerSize(1)
+G_dummy_eff.SetMarkerSize(1)
+
+G_dummy_eff.SetMarkerColor(kRed)
+
+G_eff_plt.Add(G_data_eff)
+G_eff_plt.Add(G_dummy_eff)
+
+G_eff_plt.Draw("AP")
+
+#G_eff_plt.SetMinimum(0.7)
+#G_eff_plt.SetMaximum(1.)
+
+l_eff_plt.AddEntry(G_data_eff,"Data")
+l_eff_plt.AddEntry(G_dummy_eff,"Dummy")
+
+l_eff_plt.Draw()
+
+eff_plt.Print(outputpdf + '(')
+
 ct_ep = TCanvas()
 l_ct_ep = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
@@ -803,13 +858,37 @@ l_ct_ep.AddEntry(H_ct_ep_DATA_cut,"Cut")
 
 l_ct_ep.Draw()
 
-ct_ep.Print(outputpdf + '(')
+ct_ep.Print(outputpdf)
 
 ct_ep_mmp = TCanvas()
 
-H_ct_ep_vs_H_MMp_DATA.Draw("colz")
+H_ct_ep_vs_H_MMp2_DATA.Draw("colz")
 
 ct_ep_mmp.Print(outputpdf)
+
+emiss_vs_delta = TCanvas()
+
+emiss_vs_delta.Divide(1,2)
+
+emiss_vs_delta.cd(1)
+H_emiss_vs_H_hsdelta_DATA.Draw("colz")
+
+emiss_vs_delta.cd(2)
+H_emiss_vs_H_ssdelta_DATA.Draw("colz")
+
+emiss_vs_delta.Print(outputpdf)
+
+pmiss_vs_delta = TCanvas()
+
+pmiss_vs_delta.Divide(1,2)
+
+pmiss_vs_delta.cd(1)
+H_pmiss_vs_H_hsdelta_DATA.Draw("colz")
+
+pmiss_vs_delta.cd(2)
+H_pmiss_vs_H_ssdelta_DATA.Draw("colz")
+
+pmiss_vs_delta.Print(outputpdf)
 
 xfp = TCanvas()
 l_xfp = ROOT.TLegend(0.115,0.735,0.33,0.9)
@@ -1074,7 +1153,6 @@ H_epsilon_DATA.SetLineColor(kRed)
 H_epsilon_SIMC.Draw("")
 H_epsilon_DATA.Draw("same")
 
-
 b_int_epsilon_simc = int(H_epsilon_SIMC.Integral())
 b_int_epsilon_data = int(H_epsilon_DATA.Integral())
 
@@ -1085,26 +1163,30 @@ l_epsilon.Draw()
 
 Cepsilon.Print(outputpdf)
 
-CMMp = TCanvas()
-l_MMp = ROOT.TLegend(0.115,0.735,0.33,0.9)
+CMMp2 = TCanvas()
+l_MMp2 = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
+H_MMp2_DATA.SetLineColor(kRed)
+H_MMp2_DATA.Draw("")
+H_MMp2_SIMC.Draw("same")
 
-H_MMp_DATA.SetLineColor(kRed)
-H_MMp_DATA.Draw("")
-H_MMp_SIMC.Draw("same")
+#H_MMp2_SIMC.Draw("")
+#H_MMp2_DATA.Draw("same")
 
-#H_MMp_SIMC.Draw("")
-#H_MMp_DATA.Draw("same")
+b_int_MMp2_simc = int(H_MMp2_SIMC.Integral())
+b_int_MMp2_data = int(H_MMp2_DATA.Integral())
 
-b_int_MMp_simc = int(H_MMp_SIMC.Integral())
-b_int_MMp_data = int(H_MMp_DATA.Integral())
+b_mean_MMp2_simc = H_MMp2_SIMC.GetMean()
+b_mean_MMp2_data = H_MMp2_DATA.GetMean()
 
-l_MMp.AddEntry(H_MMp_SIMC,"SIMC, INT = %s" % b_int_MMp_simc)
-l_MMp.AddEntry(H_MMp_DATA,"DATA, INT = %s" % b_int_MMp_data)
+l_MMp2.AddEntry(H_MMp2_SIMC,"SIMC, INT = %s" % b_int_MMp2_simc)
+l_MMp2.AddEntry(H_MMp2_DATA,"DATA, INT = %s" % b_int_MMp2_data)
+l_MMp2.AddEntry(H_MMp2_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_MMp2_simc))
+l_MMp2.AddEntry(H_MMp2_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_MMp2_data))
 
-l_MMp.Draw()
+l_MMp2.Draw()
 
-CMMp.Print(outputpdf)
+CMMp2.Print(outputpdf)
 
 Cpmiss = TCanvas()
 l_pmiss = ROOT.TLegend(0.115,0.735,0.33,0.9)
@@ -1116,8 +1198,13 @@ H_pmiss_DATA.Draw("same")
 b_int_pmiss_simc = int(H_pmiss_SIMC.Integral())
 b_int_pmiss_data = int(H_pmiss_DATA.Integral())
 
+b_mean_pmiss_simc = H_pmiss_SIMC.GetMean()
+b_mean_pmiss_data = H_pmiss_DATA.GetMean(H_pmiss_DATA.GetMaximumBin())
+
 l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, INT = %s" % b_int_pmiss_simc)
 l_pmiss.AddEntry(H_pmiss_DATA,"DATA, INT = %s" % b_int_pmiss_data)
+l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_pmiss_simc))
+l_pmiss.AddEntry(H_pmiss_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_pmiss_data))
 
 l_pmiss.Draw()
 
@@ -1133,8 +1220,13 @@ H_emiss_DATA.Draw("same")
 b_int_emiss_simc = int(H_emiss_SIMC.Integral())
 b_int_emiss_data = int(H_emiss_DATA.Integral())
 
+b_mean_emiss_simc = H_emiss_SIMC.GetMean()
+b_mean_emiss_data = H_emiss_DATA.GetMean()
+
 l_emiss.AddEntry(H_emiss_SIMC,"SIMC, INT = %s" % b_int_emiss_simc)
 l_emiss.AddEntry(H_emiss_DATA,"DATA, INT = %s" % b_int_emiss_data)
+l_emiss.AddEntry(H_emiss_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_emiss_simc))
+l_emiss.AddEntry(H_emiss_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_emiss_data))
 
 l_emiss.Draw()
 
@@ -1150,8 +1242,13 @@ H_pmx_DATA.Draw("same")
 b_int_pmx_simc = int(H_pmx_SIMC.Integral())
 b_int_pmx_data = int(H_pmx_DATA.Integral())
 
+b_mean_pmx_simc = H_pmx_SIMC.GetMean()
+b_mean_pmx_data = H_pmx_DATA.GetMean()
+
 l_pmx.AddEntry(H_pmx_SIMC,"SIMC, INT = %s" % b_int_pmx_simc)
 l_pmx.AddEntry(H_pmx_DATA,"DATA, INT = %s" % b_int_pmx_data)
+l_pmx.AddEntry(H_pmx_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_pmx_simc))
+l_pmx.AddEntry(H_pmx_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_pmx_data))
 
 l_pmx.Draw()
 
@@ -1167,8 +1264,13 @@ H_pmy_DATA.Draw("same")
 b_int_pmy_simc = int(H_pmy_SIMC.Integral())
 b_int_pmy_data = int(H_pmy_DATA.Integral())
 
+b_mean_pmy_simc = H_pmy_SIMC.GetMean()
+b_mean_pmy_data = H_pmy_DATA.GetMean()
+
 l_pmy.AddEntry(H_pmy_SIMC,"SIMC, INT = %s" % b_int_pmy_simc)
 l_pmy.AddEntry(H_pmy_DATA,"DATA, INT = %s" % b_int_pmy_data)
+l_pmy.AddEntry(H_pmy_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_pmy_simc))
+l_pmy.AddEntry(H_pmy_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_pmy_data))
 
 l_pmy.Draw()
 
@@ -1184,8 +1286,13 @@ H_pmz_DATA.Draw("same")
 b_int_pmz_simc = int(H_pmz_SIMC.Integral())
 b_int_pmz_data = int(H_pmz_DATA.Integral())
 
+b_mean_pmz_simc = H_pmz_SIMC.GetMean()
+b_mean_pmz_data = H_pmz_DATA.GetMean()
+
 l_pmz.AddEntry(H_pmz_SIMC,"SIMC, INT = %s" % b_int_pmz_simc)
 l_pmz.AddEntry(H_pmz_DATA,"DATA, INT = %s" % b_int_pmz_data)
+l_pmz.AddEntry(H_pmz_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_pmz_simc))
+l_pmz.AddEntry(H_pmz_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_pmz_data))
 
 l_pmz.Draw()
 
@@ -1201,13 +1308,13 @@ H_W_DATA.Draw("same")
 b_int_W_simc = int(H_W_SIMC.Integral())
 b_int_W_data = int(H_W_DATA.Integral())
 
-b_bin_W_simc = H_W_SIMC.GetXaxis().GetBinCenter(H_W_SIMC.GetMaximumBin())
-b_bin_W_data = H_W_DATA.GetXaxis().GetBinCenter(H_W_DATA.GetMaximumBin())
+b_mean_W_simc = H_W_SIMC.GetMean()
+b_mean_W_data = H_W_DATA.GetMean()
 
 l_W.AddEntry(H_W_SIMC,"SIMC, INT = %s" % b_int_W_simc)
 l_W.AddEntry(H_W_DATA,"DATA, INT = %s" % b_int_W_data)
-l_W.AddEntry(H_W_SIMC,"SIMC, BIN = {0:.3f}".format(b_bin_W_simc))
-l_W.AddEntry(H_W_DATA,"DATA, BIN = {0:.3f}".format(b_bin_W_data))
+l_W.AddEntry(H_W_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_W_simc))
+l_W.AddEntry(H_W_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_W_data))
 
 l_W.Draw()
 
@@ -1238,7 +1345,7 @@ H_ssyptar_DATA.Write()
 H_q_DATA.Write()
 H_Q2_DATA.Write()
 H_epsilon_DATA.Write()
-H_MMp_DATA.Write()
+H_MMp2_DATA.Write()
 H_th_DATA.Write()
 H_ph_DATA.Write()
 H_pmiss_DATA.Write()
@@ -1267,7 +1374,7 @@ H_ssyptar_DUMMY.Write()
 H_q_DUMMY.Write()
 H_Q2_DUMMY.Write()
 H_epsilon_DUMMY.Write()
-H_MMp_DUMMY.Write()
+H_MMp2_DUMMY.Write()
 H_th_DUMMY.Write()
 H_ph_DUMMY.Write()
 H_pmiss_DUMMY.Write()
@@ -1296,7 +1403,7 @@ H_ssyptar_SIMC.Write()
 H_q_SIMC.Write()
 H_Q2_SIMC.Write()
 H_epsilon_SIMC.Write()
-H_MMp_SIMC.Write()
+H_MMp2_SIMC.Write()
 H_th_SIMC.Write()
 H_ph_SIMC.Write()
 H_pmiss_SIMC.Write()

@@ -125,7 +125,7 @@ elif [[ $KIN = "4p9" && $s_flag = "true" ]]; then
     declare -a dummydata=(111)
 elif [[ $KIN = "3p8" && $s_flag = "true" ]]; then
     declare -a data=(111)
-    declare -a dummydata=(111)        
+    declare -a dummydata=(111)
 else
     echo "Invalid kinematic setting, ${KIN}"
     exit 128

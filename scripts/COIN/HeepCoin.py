@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-25 02:05:06 trottar"
+# Time-stamp: "2022-08-27 06:51:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -62,8 +62,6 @@ except ValueError:
     print("\nError: Invalid efficiency value found...")
     sys.exit(1)
 
-print(np.array([float(x) for x in data_runNums.split(' ')]),'\n',np.array([float(x) for x in InData_efficiency.split(' ')]))
-print(np.array([float(x) for x in dummy_runNums.split(' ')]),'\n',np.array([float(x) for x in InDummy_efficiency.split(' ')]))
 G_data_eff = ROOT.TGraph(len(InData_efficiency.split(' ')), np.array([float(x) for x in data_runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]))
 G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency.split(' ')), np.array([float(x) for x in dummy_runNums.split(' ')]),np.array([float(x) for x in InDummy_efficiency.split(' ')]))
 
@@ -822,6 +820,8 @@ eff_plt = TCanvas()
 G_eff_plt = ROOT.TMultiGraph()
 l_eff_plt = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
+eff_plt.SetGrid()
+
 G_data_eff.SetMarkerStyle(21)
 G_dummy_eff.SetMarkerStyle(21)
 
@@ -837,6 +837,20 @@ G_eff_plt.Draw("AP")
 
 #G_eff_plt.SetMinimum(0.7)
 #G_eff_plt.SetMaximum(1.)
+
+G_eff_plt.SetTitle(" ;Run Numbers; Total Efficiency")
+
+i=0
+while i <= G_eff_plt.GetXaxis().GetXmax():
+    bin_ix = G_eff_plt.GetXaxis().FindBin(i)
+    if str(i) in data_runNums.split(" ") or str(i) in dummy_runNums.split(" "): 
+        print(i)
+        G_eff_plt.GetXaxis().SetBinLabel(bin_ix,"%d" % i)
+    i+=1
+
+G_eff_plt.GetYaxis().SetTitleOffset(1.5)
+G_eff_plt.GetXaxis().SetTitleOffset(1.5)
+G_eff_plt.GetXaxis().SetLabelSize(0.04)
 
 l_eff_plt.AddEntry(G_data_eff,"Data")
 l_eff_plt.AddEntry(G_dummy_eff,"Dummy")

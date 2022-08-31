@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-25 02:05:06 trottar"
+# Time-stamp: "2022-08-28 01:34:49 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -62,8 +62,6 @@ except ValueError:
     print("\nError: Invalid efficiency value found...")
     sys.exit(1)
 
-print(np.array([float(x) for x in data_runNums.split(' ')]),'\n',np.array([float(x) for x in InData_efficiency.split(' ')]))
-print(np.array([float(x) for x in dummy_runNums.split(' ')]),'\n',np.array([float(x) for x in InDummy_efficiency.split(' ')]))
 G_data_eff = ROOT.TGraph(len(InData_efficiency.split(' ')), np.array([float(x) for x in data_runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]))
 G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency.split(' ')), np.array([float(x) for x in dummy_runNums.split(' ')]),np.array([float(x) for x in InDummy_efficiency.split(' ')]))
 
@@ -377,6 +375,20 @@ H_pmiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_ssdelta_DATA","Pmiss vs SHMS
 
 ################################################################################################################################################
 
+H_cal_etotnorm_DATA = ROOT.TH1D("H_cal_etotnorm_DATA", "HMS Cal etotnorm", 200, 0.2, 1.8)
+H_cer_npeSum_DATA = ROOT.TH1D("H_cer_npeSum_DATA", "HMS Cer Npe Sum", 200, 0, 30)
+
+P_cal_etotnorm_DATA = ROOT.TH1D("P_cal_etotnorm_DATA", "SHMS Cal etotnorm", 200, 0, 1)
+P_hgcer_npeSum_DATA = ROOT.TH1D("P_hgcer_npeSum_DATA", "SHMS HGCer Npe Sum", 200, 0, 50)
+P_aero_npeSum_DATA = ROOT.TH1D("P_aero_npeSum_DATA", "SHMS Aero Npe Sum", 200, 0, 50)
+
+H_cal_etotnorm_vs_H_cer_npeSum_DATA = ROOT.TH2D("H_cal_etotnorm_vs_H_cer_npeSum_DATA","HMS Cal etotnorm vs HMS Cer Npe Sum;  HMS Cal etotnorm; HMS Cer Npe Sum", 200, 0.2, 1.8, 200, 0, 30)
+P_cal_etotnorm_vs_P_hgcer_npeSum_DATA = ROOT.TH2D("P_cal_etotnorm_vs_P_hgcer_npeSum_DATA","SHMS Cal etotnorm vs SHMS HGCer Npe Sum;  SHMS Cal etotnorm; SHMS HGCer Npe Sum", 200, 0, 1, 200, 0, 50)
+P_cal_etotnorm_vs_P_aero_npeSum_DATA = ROOT.TH2D("P_cal_etotnorm_vs_P_aero_npeSum_DATA","SHMS Cal etotnorm vs SHMS Aero Npe Sum;  SHMS Cal etotnorm; SHMS Aero Npe Sum", 200, 0, 1, 200, 0, 50)
+P_hgcer_npeSum_vs_P_aero_npeSum_DATA = ROOT.TH2D("P_hgcer_npeSum_vs_P_aero_npeSum_DATA","SHMS HGCer Npe Sum vs SHMS Aero Npe Sum;  SHMS HGCer Npe Sum; SHMS Aero Npe Sum", 200, 0, 50, 200, 0, 50)
+
+################################################################################################################################################
+
 for evt in TBRANCH_SIMC:
 
   # Define the acceptance cuts  
@@ -509,6 +521,18 @@ for evt in TBRANCH_DATA:
       #H_MMp2_DATA_rand.Fill(evt.MMp)  
       #H_MMp2_DATA_rand.Fill(evt.Mrecoil)
       '''
+
+      H_cal_etotnorm_DATA.Fill(evt.H_cal_etotnorm)
+      H_cer_npeSum_DATA.Fill(evt.H_cer_npeSum)
+
+      P_cal_etotnorm_DATA.Fill(evt.P_cal_etotnorm)
+      P_hgcer_npeSum_DATA.Fill(evt.P_hgcer_npeSum)
+      P_aero_npeSum_DATA.Fill(evt.P_aero_npeSum)
+      
+      H_cal_etotnorm_vs_H_cer_npeSum_DATA.Fill(evt.H_cal_etotnorm,evt.H_cer_npeSum)
+      P_cal_etotnorm_vs_P_hgcer_npeSum_DATA.Fill(evt.P_cal_etotnorm,evt.P_hgcer_npeSum)
+      P_cal_etotnorm_vs_P_aero_npeSum_DATA.Fill(evt.P_cal_etotnorm,evt.P_aero_npeSum)
+      P_hgcer_npeSum_vs_P_aero_npeSum_DATA.Fill(evt.P_hgcer_npeSum,evt.P_aero_npeSum)
       
 for evt in TBRANCH_DUMMY:
 
@@ -822,6 +846,8 @@ eff_plt = TCanvas()
 G_eff_plt = ROOT.TMultiGraph()
 l_eff_plt = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
+eff_plt.SetGrid()
+
 G_data_eff.SetMarkerStyle(21)
 G_dummy_eff.SetMarkerStyle(21)
 
@@ -835,8 +861,18 @@ G_eff_plt.Add(G_dummy_eff)
 
 G_eff_plt.Draw("AP")
 
-#G_eff_plt.SetMinimum(0.7)
-#G_eff_plt.SetMaximum(1.)
+G_eff_plt.SetTitle(" ;Run Numbers; Total Efficiency")
+
+i=0
+while i <= G_eff_plt.GetXaxis().GetXmax():
+    bin_ix = G_eff_plt.GetXaxis().FindBin(i)
+    if str(i) in data_runNums.split(" ") or str(i) in dummy_runNums.split(" "): 
+        G_eff_plt.GetXaxis().SetBinLabel(bin_ix,"%d" % i)
+    i+=1
+
+G_eff_plt.GetYaxis().SetTitleOffset(1.5)
+G_eff_plt.GetXaxis().SetTitleOffset(1.5)
+G_eff_plt.GetXaxis().SetLabelSize(0.04)
 
 l_eff_plt.AddEntry(G_data_eff,"Data")
 l_eff_plt.AddEntry(G_dummy_eff,"Dummy")
@@ -844,6 +880,54 @@ l_eff_plt.AddEntry(G_dummy_eff,"Dummy")
 l_eff_plt.Draw()
 
 eff_plt.Print(outputpdf + '(')
+
+c_pid = TCanvas()
+
+c_pid.Divide(2,3)
+
+c_pid.cd(1)
+gPad.SetLogy()
+H_cal_etotnorm_DATA.Draw()
+
+c_pid.cd(2)
+gPad.SetLogy()
+H_cer_npeSum_DATA.Draw()
+
+c_pid.cd(3)
+gPad.SetLogy()
+P_cal_etotnorm_DATA.Draw()
+
+c_pid.cd(4)
+gPad.SetLogy()
+P_hgcer_npeSum_DATA.Draw()
+
+c_pid.cd(5)
+gPad.SetLogy()
+P_aero_npeSum_DATA.Draw()
+
+c_pid.Draw()
+
+c_pid.Print(outputpdf)
+
+c_pid_2d = TCanvas()
+
+c_pid_2d.Divide(2,2)
+
+c_pid_2d.cd(1)
+H_cal_etotnorm_vs_H_cer_npeSum_DATA.Draw("colz")
+
+c_pid_2d.cd(2)
+P_cal_etotnorm_vs_P_hgcer_npeSum_DATA.Draw("colz")
+
+c_pid_2d.cd(3)
+P_cal_etotnorm_vs_P_aero_npeSum_DATA.Draw("colz")
+
+c_pid_2d.cd(4)
+P_hgcer_npeSum_vs_P_aero_npeSum_DATA.Draw("colz")
+
+c_pid_2d.Draw()
+
+c_pid_2d.Print(outputpdf)
 
 ct_ep = TCanvas()
 l_ct_ep = ROOT.TLegend(0.115,0.735,0.33,0.9)

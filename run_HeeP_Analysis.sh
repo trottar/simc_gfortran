@@ -145,7 +145,7 @@ if [[ $a_flag = "true" ]]; then
 	    echo "Analysing data run $i..."
 	    echo "-----------------------------"
 	    echo
-	    python3 Analysed_SING.py "$i" ${SPEC}
+	    python3 Analysed_SING.py "$i" ${SPEC} | tee ../../log/Analysed_SING_${SPEC}_$i.log
 	    #root -l <<EOF 
 	    #.x $SIMCPATH/Analysed_SING.C("$InDATAFilename","$OutDATAFilename")
 	    #EOF
@@ -168,7 +168,7 @@ if [[ $a_flag = "true" ]]; then
 	    echo "Analysing dummy data run $i..."
 	    echo "-----------------------------------"
 	    echo
-	    python3 Analysed_SING.py "$i" ${SPEC}
+	    python3 Analysed_SING.py "$i" ${SPEC} | tee ../../log/Analysed_SING_${SPEC}_$i.log
 	    #root -l <<EOF 
 	    #.x $SIMCPATH/Analysed_SING.C("$InDUMMYFilename","$OutDUMMYFilename")
 	    #EOF
@@ -191,7 +191,7 @@ if [[ $a_flag = "true" ]]; then
 	    echo "Analysing data run $i..."
 	    echo "-----------------------------"
 	    echo
-	    python3 Analysed_COIN.py "$i"
+	    python3 Analysed_COIN.py "$i" | tee ../../log/Analysed_COIN_$i.log
 	    #root -l <<EOF 
 	    #.x $SIMCPATH/Analysed_COIN.C("$InDATAFilename","$OutDATAFilename")
 	    #EOF
@@ -214,7 +214,7 @@ if [[ $a_flag = "true" ]]; then
 	    echo "Analysing dummy data run $i..."
 	    echo "-----------------------------------"
 	    echo
-	    python3 Analysed_COIN.py "$i"
+	    python3 Analysed_COIN.py "$i" | tee ../../log/Analysed_COIN_$i.log
 	    #root -l <<EOF 
 	    #.x $SIMCPATH/Analysed_COIN.C("$InDUMMYFilename","$OutDUMMYFilename")
 	    #EOF
@@ -233,10 +233,10 @@ DataChargeVal=()
 DataEffVal=()
 DataRunNum=()
 echo
-echo "Calculating data total charge..."
+echo "Calculating data total effective charge..."
 for i in "${data[@]}"
 do
-    DataChargeVal+=($(python3 findcharge.py ${ROOTPREFIX} "$i" -1))
+    DataChargeVal+=($(python3 findEffectiveCharge.py ${EffData} ${ROOTPREFIX} "$i" -1))
     DataEffVal+=($(python3 calculate_efficiency.py "$i" ${EffData}))
     DataRunNum+=("$i")
     #echo "${DataChargeVal[@]} mC"
@@ -248,10 +248,10 @@ DummyChargeVal=()
 DummyEffVal=()
 DummyRunNum=()
 echo
-echo "Calculating dummy total charge..."
+echo "Calculating dummy total effective charge..."
 for i in "${dummydata[@]}"
 do
-    DummyChargeVal+=($(python3 findcharge.py ${ROOTPREFIX} "$i" -1))
+    DummyChargeVal+=($(python3 findEffectiveCharge.py ${EffData} ${ROOTPREFIX} "$i" -1))
     DummyEffVal+=($(python3 calculate_efficiency.py "$i" ${EffData}))
     DummyRunNum+=($(echo "$i"))
     #echo "${DummyChargeVal[@]} mC"

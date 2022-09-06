@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-06 00:13:56 trottar"
+# Time-stamp: "2022-09-06 03:18:47 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -321,6 +321,30 @@ H_ph_DUMMY  = ROOT.TH1D("H_ph_DUMMY","Y' tar", 200, -0.1, 0.1)
 #H_ph_DUMMY_rand  = ROOT.TH1D("H_ph_DUMMY_rand","Y' tar", 200, -0.1, 0.1)
 H_ph_SIMC  = ROOT.TH1D("H_ph_SIMC","Y' tar", 200, -0.1, 0.1)
 
+H_ph_q_DATA  = ROOT.TH1D("H_ph_q_DATA","Phi Detected", 200, -10.0, 10.0)
+#H_ph_q_DATA_rand  = ROOT.TH1D("H_ph_q_DATA_rand","Phi Detected", 200, -10.0, 10.0)
+H_ph_q_DUMMY  = ROOT.TH1D("H_ph_q_DUMMY","Phi Detected", 200, -10.0, 10.0)
+#H_ph_q_DUMMY_rand  = ROOT.TH1D("H_ph_q_DUMMY_rand","Phi Detected", 200, -10.0, 10.0)
+H_ph_q_SIMC  = ROOT.TH1D("H_ph_q_SIMC","Phi Detected", 200, -10.0, 10.0)
+
+H_th_q_DATA  = ROOT.TH1D("H_th_q_DATA","Theta Detected", 200, -0.2, 0.2)
+#H_th_q_DATA_rand  = ROOT.TH1D("H_th_q_DATA_rand","Theta Detected", 200, -0.2, 0.2)
+H_th_q_DUMMY  = ROOT.TH1D("H_th_q_DUMMY","Theta Detected", 200, -0.2, 0.2)
+#H_th_q_DUMMY_rand  = ROOT.TH1D("H_th_q_DUMMY_rand","Theta Detected", 200, -0.2, 0.2)
+H_th_q_SIMC  = ROOT.TH1D("H_th_q_SIMC","Theta Detected", 200, -0.2, 0.2)
+
+H_ph_recoil_DATA  = ROOT.TH1D("H_ph_recoil_DATA","Phi Recoil", 200, -10.0, 10.0)
+#H_ph_recoil_DATA_rand  = ROOT.TH1D("H_ph_recoil_DATA_rand","Phi Recoil", 200, -10.0, 10.0)
+H_ph_recoil_DUMMY  = ROOT.TH1D("H_ph_recoil_DUMMY","Phi Recoil", 200, -10.0, 10.0)
+#H_ph_recoil_DUMMY_rand  = ROOT.TH1D("H_ph_recoil_DUMMY_rand","Phi Recoil", 200, -10.0, 10.0)
+H_ph_recoil_SIMC  = ROOT.TH1D("H_ph_recoil_SIMC","Phi Recoil", 200, -10.0, 10.0)
+
+H_th_recoil_DATA  = ROOT.TH1D("H_th_recoil_DATA","Theta Recoil", 200, -10.0, 10.0)
+#H_th_recoil_DATA_rand  = ROOT.TH1D("H_th_recoil_DATA_rand","Theta Recoil", 200, -10.0, 10.0)
+H_th_recoil_DUMMY  = ROOT.TH1D("H_th_recoil_DUMMY","Theta Recoil", 200, -10.0, 10.0)
+#H_th_recoil_DUMMY_rand  = ROOT.TH1D("H_th_recoil_DUMMY_rand","Theta Recoil", 200, -10.0, 10.0)
+H_th_recoil_SIMC  = ROOT.TH1D("H_th_recoil_SIMC","Theta Recoil", 200, -10.0, 10.0)
+
 H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss", 200, -0.1, 0.1)
 #H_pmiss_DATA_rand  = ROOT.TH1D("H_pmiss_DATA_rand","pmiss", 200, -0.1, 0.1)
 H_pmiss_DUMMY  = ROOT.TH1D("H_pmiss_DUMMY","pmiss", 200, -0.1, 0.1)
@@ -422,7 +446,11 @@ for evt in TBRANCH_SIMC:
       H_ssxptar_SIMC.Fill(evt.ssxptar, evt.Weight)
       H_ssyptar_SIMC.Fill(evt.ssyptar, evt.Weight)
       H_hsxptar_SIMC.Fill(evt.hsxptar, evt.Weight)	
-      H_hsyptar_SIMC.Fill(evt.hsyptar, evt.Weight)	
+      H_hsyptar_SIMC.Fill(evt.hsyptar, evt.Weight)
+
+      H_ph_q_SIMC.Fill(evt.phipq, evt.Weight)
+      H_th_q_SIMC.Fill(evt.thetapq, evt.Weight)
+
       H_pmiss_SIMC.Fill(evt.Pm, evt.Weight)	
       H_emiss_SIMC.Fill(evt.Em, evt.Weight)	
       H_pmx_SIMC.Fill(evt.Pmx, evt.Weight)
@@ -471,6 +499,11 @@ for evt in TBRANCH_DATA:
       H_hsdelta_DATA.Fill(evt.hsdelta)
       H_hsxptar_DATA.Fill(evt.hsxptar)	
       H_hsyptar_DATA.Fill(evt.hsyptar)
+
+      H_ph_q_DATA.Fill(evt.ph_q)
+      H_th_q_DATA.Fill(evt.th_q)
+      H_ph_recoil_DATA.Fill(evt.ph_recoil)
+      H_th_recoil_DATA.Fill(evt.th_recoil)
       
       H_pmiss_DATA.Fill(evt.pmiss)	
       H_emiss_DATA.Fill(evt.emiss)	
@@ -566,7 +599,12 @@ for evt in TBRANCH_DUMMY:
       H_hsdelta_DUMMY.Fill(evt.hsdelta)
       H_hsxptar_DUMMY.Fill(evt.hsxptar)	
       H_hsyptar_DUMMY.Fill(evt.hsyptar)
-      
+
+      H_ph_q_DUMMY.Fill(evt.ph_q)
+      H_th_q_DUMMY.Fill(evt.th_q)
+      H_ph_recoil_DUMMY.Fill(evt.ph_recoil)
+      H_th_recoil_DUMMY.Fill(evt.th_recoil)
+            
       H_pmiss_DUMMY.Fill(evt.pmiss)	
       H_emiss_DUMMY.Fill(evt.emiss)	
       #H_emiss_DUMMY.Fill(evt.emiss_nuc)
@@ -628,7 +666,9 @@ H_hsdelta_SIMC.Scale(normfac_simc)
 H_ssxptar_SIMC.Scale(normfac_simc)                                                                                                                                                                  
 H_ssyptar_SIMC.Scale(normfac_simc)                                                                                                                                                                  
 H_hsxptar_SIMC.Scale(normfac_simc)                                                                                                                                                                  
-H_hsyptar_SIMC.Scale(normfac_simc)                                                                                                                                                                  
+H_hsyptar_SIMC.Scale(normfac_simc)
+H_ph_q_SIMC.Scale(normfac_simc)
+H_th_q_SIMC.Scale(normfac_simc)
 H_pmiss_SIMC.Scale(normfac_simc)                                                                                                                                        
 H_emiss_SIMC.Scale(normfac_simc)                                                                                                                                            
 H_pmx_SIMC.Scale(normfac_simc)                                                                                                                                                
@@ -658,6 +698,10 @@ H_hsdelta_DUMMY.Scale(normfac_dummy)
 H_Q2_DUMMY.Scale(normfac_dummy)
 H_epsilon_DUMMY.Scale(normfac_dummy)
 H_MMp2_DUMMY.Scale(normfac_dummy)
+H_ph_q_DUMMY.Scale(normfac_dummy)
+H_th_q_DUMMY.Scale(normfac_dummy)
+H_ph_recoil_DUMMY.Scale(normfac_dummy)
+H_th_recoil_DUMMY.Scale(normfac_dummy)
 H_pmiss_DUMMY.Scale(normfac_dummy)
 H_emiss_DUMMY.Scale(normfac_dummy)
 H_pmx_DUMMY.Scale(normfac_dummy)
@@ -685,6 +729,10 @@ H_hsdelta_DATA.Scale(normfac_data)
 H_Q2_DATA.Scale(normfac_data)
 H_epsilon_DATA.Scale(normfac_data)
 H_MMp2_DATA.Scale(normfac_data)
+H_ph_q_DATA.Scale(normfac_data)
+H_th_q_DATA.Scale(normfac_data)
+H_ph_recoil_DATA.Scale(normfac_data)
+H_th_recoil_DATA.Scale(normfac_data)
 H_pmiss_DATA.Scale(normfac_data)
 H_emiss_DATA.Scale(normfac_data)
 H_pmx_DATA.Scale(normfac_data)
@@ -824,6 +872,10 @@ H_hsdelta_DATA.Add(H_hsdelta_DUMMY,-1)
 H_Q2_DATA.Add(H_Q2_DUMMY,-1)
 H_epsilon_DATA.Add(H_epsilon_DUMMY,-1)
 H_MMp2_DATA.Add(H_MMp2_DUMMY,-1)
+H_ph_q_DATA.Add(H_ph_q_DUMMY,-1)
+H_th_q_DATA.Add(H_th_q_DUMMY,-1)
+H_ph_recoil_DATA.Add(H_ph_recoil_DUMMY,-1)
+H_th_recoil_DATA.Add(H_th_recoil_DUMMY,-1)
 H_pmiss_DATA.Add(H_pmiss_DUMMY,-1)
 H_emiss_DATA.Add(H_emiss_DUMMY,-1)
 H_pmx_DATA.Add(H_pmx_DUMMY,-1)
@@ -1269,6 +1321,94 @@ l_MMp2.Draw()
 
 CMMp2.Print(outputpdf)
 
+Cph_q = TCanvas()
+l_ph_q = ROOT.TLegend(0.115,0.735,0.33,0.9)
+
+H_ph_q_DATA.SetLineColor(kRed)
+H_ph_q_SIMC.Draw("")
+H_ph_q_DATA.Draw("same")
+
+b_int_ph_q_simc = int(H_ph_q_SIMC.Integral())
+b_int_ph_q_data = int(H_ph_q_DATA.Integral())
+
+b_mean_ph_q_simc = H_ph_q_SIMC.GetMean()
+b_mean_ph_q_data = H_ph_q_DATA.GetMean()
+
+l_ph_q.AddEntry(H_ph_q_SIMC,"SIMC, INT = %s" % b_int_ph_q_simc)
+l_ph_q.AddEntry(H_ph_q_DATA,"DATA, INT = %s" % b_int_ph_q_data)
+l_ph_q.AddEntry(H_ph_q_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_ph_q_simc))
+l_ph_q.AddEntry(H_ph_q_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_ph_q_data))
+
+l_ph_q.Draw()
+
+Cph_q.Print(outputpdf)
+
+Cth_q = TCanvas()
+l_th_q = ROOT.TLegend(0.115,0.735,0.33,0.9)
+
+H_th_q_DATA.SetLineColor(kRed)
+H_th_q_SIMC.Draw("")
+H_th_q_DATA.Draw("same")
+
+b_int_th_q_simc = int(H_th_q_SIMC.Integral())
+b_int_th_q_data = int(H_th_q_DATA.Integral())
+
+b_mean_th_q_simc = H_th_q_SIMC.GetMean()
+b_mean_th_q_data = H_th_q_DATA.GetMean()
+
+l_th_q.AddEntry(H_th_q_SIMC,"SIMC, INT = %s" % b_int_th_q_simc)
+l_th_q.AddEntry(H_th_q_DATA,"DATA, INT = %s" % b_int_th_q_data)
+l_th_q.AddEntry(H_th_q_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_th_q_simc))
+l_th_q.AddEntry(H_th_q_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_th_q_data))
+
+l_th_q.Draw()
+
+Cth_q.Print(outputpdf)
+
+Cph_recoil = TCanvas()
+l_ph_recoil = ROOT.TLegend(0.115,0.735,0.33,0.9)
+
+H_ph_recoil_DATA.SetLineColor(kRed)
+#H_ph_recoil_SIMC.Draw("")
+H_ph_recoil_DATA.Draw("same")
+
+#b_int_ph_recoil_simc = int(H_ph_recoil_SIMC.Integral())
+b_int_ph_recoil_data = int(H_ph_recoil_DATA.Integral())
+
+#b_mean_ph_recoil_simc = H_ph_recoil_SIMC.GetMean()
+b_mean_ph_recoil_data = H_ph_recoil_DATA.GetMean()
+
+#l_ph_recoil.AddEntry(H_ph_recoil_SIMC,"SIMC, INT = %s" % b_int_ph_recoil_simc)
+l_ph_recoil.AddEntry(H_ph_recoil_DATA,"DATA, INT = %s" % b_int_ph_recoil_data)
+#l_ph_recoil.AddEntry(H_ph_recoil_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_ph_recoil_simc))
+l_ph_recoil.AddEntry(H_ph_recoil_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_ph_recoil_data))
+
+l_ph_recoil.Draw()
+
+Cph_recoil.Print(outputpdf)
+
+Cth_recoil = TCanvas()
+l_th_recoil = ROOT.TLegend(0.115,0.735,0.33,0.9)
+
+H_th_recoil_DATA.SetLineColor(kRed)
+#H_th_recoil_SIMC.Draw("")
+H_th_recoil_DATA.Draw("same")
+
+#b_int_th_recoil_simc = int(H_th_recoil_SIMC.Integral())
+b_int_th_recoil_data = int(H_th_recoil_DATA.Integral())
+
+#b_mean_th_recoil_simc = H_th_recoil_SIMC.GetMean()
+b_mean_th_recoil_data = H_th_recoil_DATA.GetMean()
+
+#l_th_recoil.AddEntry(H_th_recoil_SIMC,"SIMC, INT = %s" % b_int_th_recoil_simc)
+l_th_recoil.AddEntry(H_th_recoil_DATA,"DATA, INT = %s" % b_int_th_recoil_data)
+#l_th_recoil.AddEntry(H_th_recoil_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_th_recoil_simc))
+l_th_recoil.AddEntry(H_th_recoil_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_th_recoil_data))
+
+l_th_recoil.Draw()
+
+Cth_recoil.Print(outputpdf)
+
 Cpmiss = TCanvas()
 l_pmiss = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
@@ -1280,7 +1420,7 @@ b_int_pmiss_simc = int(H_pmiss_SIMC.Integral())
 b_int_pmiss_data = int(H_pmiss_DATA.Integral())
 
 b_mean_pmiss_simc = H_pmiss_SIMC.GetMean()
-b_mean_pmiss_data = H_pmiss_DATA.GetMean(H_pmiss_DATA.GetMaximumBin())
+b_mean_pmiss_data = H_pmiss_DATA.GetMean()
 
 l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, INT = %s" % b_int_pmiss_simc)
 l_pmiss.AddEntry(H_pmiss_DATA,"DATA, INT = %s" % b_int_pmiss_data)

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-08-28 01:34:49 trottar"
+# Time-stamp: "2022-09-06 00:13:56 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -400,9 +400,9 @@ for evt in TBRANCH_SIMC:
   CUT3 = (evt.hsyptar >=-0.045) & (evt.hsypfp <=0.045)
 
   #SHMS    
-  CUT4 = (evt.ssdelta >=-10.0) & (evt.hsdelta <=20.0)
-  CUT5 = (evt.ssxptar >=-0.06) & (evt.hsxpfp <=0.06)
-  CUT6 = (evt.hsyptar >=-0.04) & (evt.hsypfp <=0.04)
+  CUT4 = (evt.ssdelta >=-10.0) & (evt.ssdelta <=20.0)
+  CUT5 = (evt.ssxptar >=-0.06) & (evt.ssxpfp <=0.06)
+  CUT6 = (evt.ssyptar >=-0.04) & (evt.ssypfp <=0.04)
 
   #........................................
 
@@ -430,8 +430,6 @@ for evt in TBRANCH_SIMC:
       H_pmz_SIMC.Fill(evt.Pmz, evt.Weight)
       H_Q2_SIMC.Fill(evt.Q2, evt.Weight)
       H_W_SIMC.Fill(evt.W, evt.Weight)
-      Mp = 938.27
-      #      H_W_SIMC.Fill((Mp+evt.q), evt.Weight)
       H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
       H_MMp2_SIMC.Fill(pow(evt.Em, 2) - pow(evt.Pm, 2), evt.Weight)
 
@@ -638,7 +636,6 @@ H_pmy_SIMC.Scale(normfac_simc)
 H_pmz_SIMC.Scale(normfac_simc)                                                                                                                                                
 H_Q2_SIMC.Scale(normfac_simc)
 H_W_SIMC.Scale(normfac_simc)                                                                                                                                                         
-#H_W_SIMC.Scale(normfac_simc/1000)                                                                                                                                                         
 H_epsilon_SIMC.Scale(normfac_simc)                                                                                                                                                    
 H_MMp2_SIMC.Scale(normfac_simc)
 
@@ -1298,7 +1295,7 @@ Cemiss = TCanvas()
 l_emiss = ROOT.TLegend(0.115,0.735,0.33,0.9)
 
 H_emiss_DATA.SetLineColor(kRed)
-H_emiss_SIMC.Draw("")
+H_emiss_SIMC.Draw("same")
 H_emiss_DATA.Draw("same")
 
 b_int_emiss_simc = int(H_emiss_SIMC.Integral())

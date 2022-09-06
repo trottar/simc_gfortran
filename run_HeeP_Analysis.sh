@@ -83,7 +83,7 @@ if [[ $s_flag = "true" ]]; then
     fi
 else
     # Hard coded file
-    EffData="coin_production_HeePCoin_efficiency_data_2022_06_13.csv"
+    EffData="coin_heep_HeePCoin_efficiency_data_2022_06_13.csv"
     InDATAFilename="Raw_Data_${KIN}.root"
     InDUMMYFilename="Raw_DummyData_${KIN}.root"
     InSIMCFilename="Heep_Coin_${KIN}.root"

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-06 08:40:57 trottar"
+# Time-stamp: "2022-09-07 00:41:50 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1210,8 +1210,8 @@ P_aero_npeSum_DATA_nocut.Draw("same")
 c_pid.cd(6)
 l_pid.SetTextSize(0.05)
 log_txt = ROOT.TPaveText(0.,0.3,1.0,0.5,"NDC");
-log_entry = log_entry.strip('[').strip(']').split(',')
-log_txt.SetTextSize(0.034)
+log_entry = log_entry.replace("[","").replace("]","").replace("'","").replace("{","").replace("}","").split(",")
+log_txt.SetTextSize(0.0335)
 for cut in log_entry:
     log_txt.AddText(cut)
 l_pid.AddEntry(H_cal_etotnorm_DATA,"p cut")

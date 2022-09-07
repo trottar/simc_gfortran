@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-07 00:41:50 trottar"
+# Time-stamp: "2022-09-07 07:15:51 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -50,17 +50,6 @@ InDummy_efficiency = sys.argv[8]
 dummy_runNums = sys.argv[9]
 InSIMCFilename = sys.argv[10]
 OutFilename = sys.argv[11]
-
-try:
-    data_efficiency = sum([float(i) for i in InData_efficiency.split(" ")])/len([float(i) for i in InData_efficiency.split(" ")])
-    print("\n\ndata_efficiency=",data_efficiency)
-
-    dummy_efficiency = sum([float(i) for i in InDummy_efficiency.split(" ")])/len([float(i) for i in InDummy_efficiency.split(" ")])
-    print("dummy_efficiency=",dummy_efficiency)
-    
-except ValueError:
-    print("\nError: Invalid efficiency value found...")
-    sys.exit(1)
 
 G_data_eff = ROOT.TGraph(len(InData_efficiency.split(' ')), np.array([float(x) for x in data_runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]))
 G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency.split(' ')), np.array([float(x) for x in dummy_runNums.split(' ')]),np.array([float(x) for x in InDummy_efficiency.split(' ')]))
@@ -471,6 +460,12 @@ H_emiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_emiss_vs_H_ssdelta_DATA","Emiss vs SHMS
 H_pmiss_vs_H_hsdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_hsdelta_DATA","Pmiss vs HMS Delta;  Pmiss; HMS Delta", 200, -0.1, 0.1, 200, -20.0, 20.0)
 H_pmiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_ssdelta_DATA","Pmiss vs SHMS Delta;  Pmiss; SHMS Delta", 200, -0.1, 0.1, 200, -20.0, 20.0)
 
+H_raster_x_vs_H_pmiss_DATA = ROOT.TH2D("H_raster_x_vs_H_pmiss_DATA","Raster_X vs pmiss;  pmiss; Raster_X", 200, -0.1,0.1, 200, -0.25,0.25)
+H_raster_x_vs_H_emiss_DATA = ROOT.TH2D("H_raster_x_vs_H_emiss_DATA","Raster_X vs emiss;  emiss; Raster_X", 200, -0.1,0.1, 200, -0.25,0.25)
+H_raster_y_vs_H_pmiss_DATA = ROOT.TH2D("H_raster_y_vs_H_pmiss_DATA","Raster_Y vs pmiss;  pmiss; Raster_Y", 200, -0.1,0.1, 200, -0.05,0.25)
+H_raster_y_vs_H_emiss_DATA = ROOT.TH2D("H_raster_y_vs_H_emiss_DATA","Raster_Y vs emiss;  emiss; Raster_Y", 200, -0.1,0.1, 200, -0.05,0.25)
+H_raster_x_vs_H_raster_y_DATA = ROOT.TH2D("H_raster_x_vs_H_raster_y_DATA","Raster_X vs Raster_Y;  Raster_X; Raster_Y", 200, -0.25,0.25, 200, -0.05,0.25)
+
 ################################################################################################################################################
 
 H_cal_etotnorm_DATA = ROOT.TH1D("H_cal_etotnorm_DATA", "HMS Cal etotnorm", 200, 0.2, 1.8)
@@ -545,10 +540,10 @@ for evt in TBRANCH_SIMC:
 for evt in TBRANCH_DATA:
 
   #CUTs Definations 
-  SHMS_FixCut = (evt.P_hod_goodstarttime == 1) & (evt.P_dc_InsideDipoleExit == 1) # & P_hod_betanotrack > 0.5 & P_hod_betanotrack < 1.4
+  SHMS_FixCut = (evt.P_hod_goodscinhit == 1) & (evt.P_hod_goodstarttime == 1) & (evt.P_dc_InsideDipoleExit == 1) # & P_hod_betanotrack > 0.5 & P_hod_betanotrack < 1.4
   SHMS_Acceptance = (evt.ssdelta>=-10.0) & (evt.ssdelta<=20.0) & (evt.ssxptar>=-0.06) & (evt.ssxptar<=0.06) & (evt.ssyptar>=-0.04) & (evt.ssyptar<=0.04)
 
-  HMS_FixCut = (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
+  HMS_FixCut = (evt.H_hod_goodscinhit == 1) & (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
   HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)       
 
   #........................................
@@ -563,6 +558,12 @@ for evt in TBRANCH_DATA:
       H_emiss_vs_H_ssdelta_DATA.Fill(evt.emiss, evt.ssdelta)
       H_pmiss_vs_H_hsdelta_DATA.Fill(evt.pmiss, evt.hsdelta)
       H_pmiss_vs_H_ssdelta_DATA.Fill(evt.pmiss, evt.ssdelta)
+
+      H_raster_x_vs_H_pmiss_DATA.Fill(evt.pmiss, evt.raster_x)
+      H_raster_x_vs_H_emiss_DATA.Fill(evt.emiss, evt.raster_x)
+      H_raster_y_vs_H_pmiss_DATA.Fill(evt.pmiss, evt.raster_y)
+      H_raster_y_vs_H_emiss_DATA.Fill(evt.emiss, evt.raster_y)
+      H_raster_x_vs_H_raster_y_DATA.Fill(evt.raster_x, evt.raster_y)
       
       H_ssxfp_DATA.Fill(evt.ssxfp)
       H_ssyfp_DATA.Fill(evt.ssyfp)
@@ -695,10 +696,10 @@ for evt in TBRANCH_DUMMY:
   #......... Define Cuts.................
 
   #CUTs Definations 
-  SHMS_FixCut = (evt.P_hod_goodstarttime == 1) & (evt.P_dc_InsideDipoleExit == 1) # & P_hod_betanotrack > 0.5 & P_hod_betanotrack < 1.4
+  SHMS_FixCut = (evt.P_hod_goodscinhit == 1) & (evt.P_hod_goodstarttime == 1) & (evt.P_dc_InsideDipoleExit == 1) # & P_hod_betanotrack > 0.5 & P_hod_betanotrack < 1.4
   SHMS_Acceptance = (evt.ssdelta>=-10.0) & (evt.ssdelta<=20.0) & (evt.ssxptar>=-0.06) & (evt.ssxptar<=0.06) & (evt.ssyptar>=-0.04) & (evt.ssyptar<=0.04)
 
-  HMS_FixCut = (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
+  HMS_FixCut = (evt.H_hod_goodscinhit == 1) & (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
   HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)       
   
   #........................................
@@ -841,7 +842,7 @@ H_epsilon_SIMC.Scale(normfac_simc)
 H_MMp2_SIMC.Scale(normfac_simc)
 
 dummy_target_corr = 4.8579
-normfac_dummy = 1/(dummy_charge*dummy_target_corr*dummy_efficiency)
+normfac_dummy = 1/(dummy_charge*dummy_target_corr)
 H_ssxfp_DUMMY.Scale(normfac_dummy)
 H_ssyfp_DUMMY.Scale(normfac_dummy)
 H_ssxpfp_DUMMY.Scale(normfac_dummy)
@@ -900,7 +901,7 @@ H_pmz_DUMMY_nocut.Scale(normfac_dummy)
 H_W_DUMMY_nocut.Scale(normfac_dummy)
 H_ct_ep_DUMMY_nocut.Scale(normfac_dummy)
 
-normfac_data = 1/(data_charge*data_efficiency)
+normfac_data = 1/(data_charge)
 H_ssxfp_DATA.Scale(normfac_data)
 H_ssyfp_DATA.Scale(normfac_data)
 H_ssxpfp_DATA.Scale(normfac_data)
@@ -1290,6 +1291,42 @@ pmiss_vs_delta.cd(2)
 H_pmiss_vs_H_ssdelta_DATA.Draw("colz")
 
 pmiss_vs_delta.Print(outputpdf)
+
+raster_x_vs_miss = TCanvas()
+
+raster_x_vs_miss.Divide(1,2)
+
+raster_x_vs_miss.cd(1)
+H_raster_x_vs_H_pmiss_DATA.Draw("colz")
+
+raster_x_vs_miss.cd(2)
+H_raster_x_vs_H_emiss_DATA.Draw("colz")
+
+raster_x_vs_miss.Print(outputpdf)
+
+raster_y_vs_miss = TCanvas()
+
+raster_y_vs_miss.Divide(1,2)
+
+raster_y_vs_miss.cd(1)
+H_raster_y_vs_H_pmiss_DATA.Draw("colz")
+
+raster_y_vs_miss.cd(2)
+H_raster_y_vs_H_emiss_DATA.Draw("colz")
+
+raster_y_vs_miss.Print(outputpdf)
+
+raster_x_vs_raster_y = TCanvas()
+
+raster_x_vs_raster_y.Divide(1,2)
+
+raster_x_vs_raster_y.cd(1)
+H_raster_x_vs_H_raster_y_DATA.Draw("colz")
+
+raster_x_vs_raster_y.cd(2)
+H_raster_x_vs_H_raster_y_DATA.Draw("colz")
+
+raster_x_vs_raster_y.Print(outputpdf)
 
 xfp = TCanvas()
 l_xfp = ROOT.TLegend(0.115,0.735,0.33,0.9)

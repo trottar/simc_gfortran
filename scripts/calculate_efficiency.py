@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-08 04:39:14 trottar"
+# Time-stamp: "2022-09-08 05:21:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -62,7 +62,7 @@ def calculate_efficiency(runNum,efficiency_table):
     # Calculate total efficiency. The reduce function pretty much iterates on
     # its arguments which in this case is a lambda function. This lambda function
     # takes x,y from the list (ie the list of efficiencies) and multiplies them.
-    # This is all pythonic language for doing the product of everything in the
+    # This is all pythonic mumbo-jumbo for doing the product of everything in the
     # list. Enjoy!
     tot_efficiency = reduce(lambda x, y: x*y, list(effDict.values()))
     return tot_efficiency

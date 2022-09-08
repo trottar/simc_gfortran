@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-06 04:03:15 trottar"
+# Time-stamp: "2022-09-08 02:57:12 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -12,9 +12,6 @@
 #
 import pandas as pd
 import sys,os
-
-runNum = sys.argv[1]
-efficiency_table = sys.argv[2]
 
 ###############################################################################################################################################
 
@@ -57,12 +54,5 @@ def calculate_efficiency(runNum,efficiency_table):
 
     #print("EDTM",EDTM,"\npPiTrack",pPiTrack,"\npPiAero",pPiAero,"\npHodo3_4",pHodo3_4,"\nhElTrack",hElTrack,"\nhElCer",hElCer,"\nhHodo3_4",hHodo3_4)
 
-    data_efficiency = EDTM*pHodo3_4*hHodo3_4
-    return data_efficiency
-
-def main():
-    data_efficiency = calculate_efficiency(runNum,efficiency_table)
-    print(data_efficiency)
-
-if __name__ == "__main__":
-    main()
+    tot_efficiency = EDTM*pHodo3_4*hHodo3_4
+    return tot_efficiency

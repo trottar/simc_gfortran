@@ -237,7 +237,7 @@ echo "Calculating data total effective charge..."
 for i in "${data[@]}"
 do
     DataChargeVal+=($(python3 findEffectiveCharge.py ${EffData} ${ROOTPREFIX} "$i" -1))
-    DataEffVal+=($(python3 calculate_efficiency.py "$i" ${EffData}))
+    DataEffVal+=($(python3 get_efficiency.py "$i" ${EffData}))
     DataRunNum+=("$i")
     #echo "${DataChargeVal[@]} mC"
 done
@@ -252,7 +252,7 @@ echo "Calculating dummy total effective charge..."
 for i in "${dummydata[@]}"
 do
     DummyChargeVal+=($(python3 findEffectiveCharge.py ${EffData} ${ROOTPREFIX} "$i" -1))
-    DummyEffVal+=($(python3 calculate_efficiency.py "$i" ${EffData}))
+    DummyEffVal+=($(python3 get_efficiency.py "$i" ${EffData}))
     DummyRunNum+=($(echo "$i"))
     #echo "${DummyChargeVal[@]} mC"
 done

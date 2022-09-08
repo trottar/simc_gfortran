@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-08 01:25:20 trottar"
+# Time-stamp: "2022-09-08 01:38:33 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -532,28 +532,28 @@ H_raster_x_vs_H_raster_y_DATA = ROOT.TH2D("H_raster_x_vs_H_raster_y_DATA","Raste
 
 ################################################################################################################################################
 
-H_cal_etotnorm_DATA = ROOT.TH1D("H_cal_etotnorm_DATA", "HMS Cal etotnorm", 200, 0.2, 1.8)
+H_cal_etottracknorm_DATA = ROOT.TH1D("H_cal_etottracknorm_DATA", "HMS Cal etottracknorm", 200, 0.2, 1.8)
 H_cer_npeSum_DATA = ROOT.TH1D("H_cer_npeSum_DATA", "HMS Cer Npe Sum", 200, 0, 30)
 
-P_cal_etotnorm_DATA = ROOT.TH1D("P_cal_etotnorm_DATA", "SHMS Cal etotnorm", 200, 0, 1)
+P_cal_etottracknorm_DATA = ROOT.TH1D("P_cal_etottracknorm_DATA", "SHMS Cal etottracknorm", 200, 0, 1)
 P_hgcer_npeSum_DATA = ROOT.TH1D("P_hgcer_npeSum_DATA", "SHMS HGCer Npe Sum", 200, 0, 50)
 P_aero_npeSum_DATA = ROOT.TH1D("P_aero_npeSum_DATA", "SHMS Aero Npe Sum", 200, 0, 50)
 
-H_cal_etotnorm_DATA_nocut = ROOT.TH1D("H_cal_etotnorm_DATA_nocut", "HMS Cal etotnorm", 200, 0.2, 1.8)
-H_cal_etotnorm_DATA_nopid = ROOT.TH1D("H_cal_etotnorm_DATA_nopid", "HMS Cal etotnorm", 200, 0.2, 1.8)
+H_cal_etottracknorm_DATA_nocut = ROOT.TH1D("H_cal_etottracknorm_DATA_nocut", "HMS Cal etottracknorm", 200, 0.2, 1.8)
+H_cal_etottracknorm_DATA_nopid = ROOT.TH1D("H_cal_etottracknorm_DATA_nopid", "HMS Cal etottracknorm", 200, 0.2, 1.8)
 H_cer_npeSum_DATA_nocut = ROOT.TH1D("H_cer_npeSum_DATA_nocut", "HMS Cer Npe Sum", 200, 0, 30)
 H_cer_npeSum_DATA_nopid = ROOT.TH1D("H_cer_npeSum_DATA_nopid", "HMS Cer Npe Sum", 200, 0, 30)
 
-P_cal_etotnorm_DATA_nocut = ROOT.TH1D("P_cal_etotnorm_DATA_nocut", "SHMS Cal etotnorm", 200, 0, 1)
-P_cal_etotnorm_DATA_nopid = ROOT.TH1D("P_cal_etotnorm_DATA_nopid", "SHMS Cal etotnorm", 200, 0, 1)
+P_cal_etottracknorm_DATA_nocut = ROOT.TH1D("P_cal_etottracknorm_DATA_nocut", "SHMS Cal etottracknorm", 200, 0, 1)
+P_cal_etottracknorm_DATA_nopid = ROOT.TH1D("P_cal_etottracknorm_DATA_nopid", "SHMS Cal etottracknorm", 200, 0, 1)
 P_hgcer_npeSum_DATA_nocut = ROOT.TH1D("P_hgcer_npeSum_DATA_nocut", "SHMS HGCer Npe Sum", 200, 0, 50)
 P_hgcer_npeSum_DATA_nopid = ROOT.TH1D("P_hgcer_npeSum_DATA_nopid", "SHMS HGCer Npe Sum", 200, 0, 50)
 P_aero_npeSum_DATA_nocut = ROOT.TH1D("P_aero_npeSum_DATA_nocut", "SHMS Aero Npe Sum", 200, 0, 50)
 P_aero_npeSum_DATA_nopid = ROOT.TH1D("P_aero_npeSum_DATA_nopid", "SHMS Aero Npe Sum", 200, 0, 50)
 
-H_cal_etotnorm_vs_H_cer_npeSum_DATA = ROOT.TH2D("H_cal_etotnorm_vs_H_cer_npeSum_DATA","HMS Cal etotnorm vs HMS Cer Npe Sum;  HMS Cal etotnorm; HMS Cer Npe Sum", 200, 0.2, 1.8, 200, 0, 30)
-P_cal_etotnorm_vs_P_hgcer_npeSum_DATA = ROOT.TH2D("P_cal_etotnorm_vs_P_hgcer_npeSum_DATA","SHMS Cal etotnorm vs SHMS HGCer Npe Sum;  SHMS Cal etotnorm; SHMS HGCer Npe Sum", 200, 0, 1, 200, 0, 50)
-P_cal_etotnorm_vs_P_aero_npeSum_DATA = ROOT.TH2D("P_cal_etotnorm_vs_P_aero_npeSum_DATA","SHMS Cal etotnorm vs SHMS Aero Npe Sum;  SHMS Cal etotnorm; SHMS Aero Npe Sum", 200, 0, 1, 200, 0, 50)
+H_cal_etottracknorm_vs_H_cer_npeSum_DATA = ROOT.TH2D("H_cal_etottracknorm_vs_H_cer_npeSum_DATA","HMS Cal etottracknorm vs HMS Cer Npe Sum;  HMS Cal etottracknorm; HMS Cer Npe Sum", 200, 0.2, 1.8, 200, 0, 30)
+P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA = ROOT.TH2D("P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA","SHMS Cal etottracknorm vs SHMS HGCer Npe Sum;  SHMS Cal etottracknorm; SHMS HGCer Npe Sum", 200, 0, 1, 200, 0, 50)
+P_cal_etottracknorm_vs_P_aero_npeSum_DATA = ROOT.TH2D("P_cal_etottracknorm_vs_P_aero_npeSum_DATA","SHMS Cal etottracknorm vs SHMS Aero Npe Sum;  SHMS Cal etottracknorm; SHMS Aero Npe Sum", 200, 0, 1, 200, 0, 50)
 P_hgcer_npeSum_vs_P_aero_npeSum_DATA = ROOT.TH2D("P_hgcer_npeSum_vs_P_aero_npeSum_DATA","SHMS HGCer Npe Sum vs SHMS Aero Npe Sum;  SHMS HGCer Npe Sum; SHMS Aero Npe Sum", 200, 0, 50, 200, 0, 50)
 
 ################################################################################################################################################
@@ -694,16 +694,16 @@ for evt in TBRANCH_DATA:
       #H_MMp2_DATA_rand.Fill(evt.Mrecoil)
       '''
 
-      H_cal_etotnorm_DATA.Fill(evt.H_cal_etotnorm)
+      H_cal_etottracknorm_DATA.Fill(evt.H_cal_etottracknorm)
       H_cer_npeSum_DATA.Fill(evt.H_cer_npeSum)
 
-      P_cal_etotnorm_DATA.Fill(evt.P_cal_etotnorm)
+      P_cal_etottracknorm_DATA.Fill(evt.P_cal_etottracknorm)
       P_hgcer_npeSum_DATA.Fill(evt.P_hgcer_npeSum)
       P_aero_npeSum_DATA.Fill(evt.P_aero_npeSum)
       
-      H_cal_etotnorm_vs_H_cer_npeSum_DATA.Fill(evt.H_cal_etotnorm,evt.H_cer_npeSum)
-      P_cal_etotnorm_vs_P_hgcer_npeSum_DATA.Fill(evt.P_cal_etotnorm,evt.P_hgcer_npeSum)
-      P_cal_etotnorm_vs_P_aero_npeSum_DATA.Fill(evt.P_cal_etotnorm,evt.P_aero_npeSum)
+      H_cal_etottracknorm_vs_H_cer_npeSum_DATA.Fill(evt.H_cal_etottracknorm,evt.H_cer_npeSum)
+      P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA.Fill(evt.P_cal_etottracknorm,evt.P_hgcer_npeSum)
+      P_cal_etottracknorm_vs_P_aero_npeSum_DATA.Fill(evt.P_cal_etottracknorm,evt.P_aero_npeSum)
       P_hgcer_npeSum_vs_P_aero_npeSum_DATA.Fill(evt.P_hgcer_npeSum,evt.P_aero_npeSum)
 
 for evt in TBRANCH_DATA_nocut:
@@ -744,10 +744,10 @@ for evt in TBRANCH_DATA_nocut:
   #H_MMp2_DATA_nocut.Fill(pow(evt.MMp, 2))  
   #H_MMp2_DATA_nocut.Fill(evt.Mrecoil)
 
-  H_cal_etotnorm_DATA_nocut.Fill(evt.H_cal_etotnorm)
+  H_cal_etottracknorm_DATA_nocut.Fill(evt.H_cal_etottracknorm)
   H_cer_npeSum_DATA_nocut.Fill(evt.H_cer_npeSum)
 
-  P_cal_etotnorm_DATA_nocut.Fill(evt.P_cal_etotnorm)
+  P_cal_etottracknorm_DATA_nocut.Fill(evt.P_cal_etottracknorm)
   P_hgcer_npeSum_DATA_nocut.Fill(evt.P_hgcer_npeSum)
   P_aero_npeSum_DATA_nocut.Fill(evt.P_aero_npeSum)
 
@@ -801,10 +801,10 @@ for evt in TBRANCH_DATA_nopid:
       #H_MMp2_DATA_nopid.Fill(pow(evt.MMp, 2))  
       #H_MMp2_DATA_nopid.Fill(evt.Mrecoil)
 
-      H_cal_etotnorm_DATA_nopid.Fill(evt.H_cal_etotnorm)
+      H_cal_etottracknorm_DATA_nopid.Fill(evt.H_cal_etottracknorm)
       H_cer_npeSum_DATA_nopid.Fill(evt.H_cer_npeSum)
 
-      P_cal_etotnorm_DATA_nopid.Fill(evt.P_cal_etotnorm)
+      P_cal_etottracknorm_DATA_nopid.Fill(evt.P_cal_etottracknorm)
       P_hgcer_npeSum_DATA_nopid.Fill(evt.P_hgcer_npeSum)
       P_aero_npeSum_DATA_nopid.Fill(evt.P_aero_npeSum)
 
@@ -1432,11 +1432,11 @@ c_pid.Divide(2,3)
 
 c_pid.cd(1)
 gPad.SetLogy()
-H_cal_etotnorm_DATA_nocut.SetLineColor(kCyan)
-H_cal_etotnorm_DATA_nopid.SetLineColor(kMagenta)
-H_cal_etotnorm_DATA.Draw()
-H_cal_etotnorm_DATA_nocut.Draw("same")
-H_cal_etotnorm_DATA_nopid.Draw("same")
+H_cal_etottracknorm_DATA_nocut.SetLineColor(kCyan)
+H_cal_etottracknorm_DATA_nopid.SetLineColor(kMagenta)
+H_cal_etottracknorm_DATA.Draw()
+H_cal_etottracknorm_DATA_nocut.Draw("same")
+H_cal_etottracknorm_DATA_nopid.Draw("same")
 
 c_pid.cd(2)
 H_cer_npeSum_DATA_nocut.SetLineColor(kCyan)
@@ -1447,12 +1447,12 @@ H_cer_npeSum_DATA_nocut.Draw("same")
 H_cer_npeSum_DATA_nopid.Draw("same")
 
 c_pid.cd(3)
-P_cal_etotnorm_DATA_nocut.SetLineColor(kCyan)
-P_cal_etotnorm_DATA_nopid.SetLineColor(kMagenta)
+P_cal_etottracknorm_DATA_nocut.SetLineColor(kCyan)
+P_cal_etottracknorm_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
-P_cal_etotnorm_DATA.Draw()
-P_cal_etotnorm_DATA_nocut.Draw("same")
-P_cal_etotnorm_DATA_nopid.Draw("same")
+P_cal_etottracknorm_DATA.Draw()
+P_cal_etottracknorm_DATA_nocut.Draw("same")
+P_cal_etottracknorm_DATA_nopid.Draw("same")
 
 c_pid.cd(4)
 P_hgcer_npeSum_DATA_nocut.SetLineColor(kCyan)
@@ -1477,9 +1477,9 @@ log_entry = log_entry.replace("[","").replace("]","").replace("'","").replace("{
 log_txt.SetTextSize(0.0335)
 for cut in log_entry:
     log_txt.AddText(cut)
-l_pid.AddEntry(H_cal_etotnorm_DATA,"p cut")
-l_pid.AddEntry(H_cal_etotnorm_DATA_nocut,"No cut")
-l_pid.AddEntry(H_cal_etotnorm_DATA_nopid,"No PID cut")
+l_pid.AddEntry(H_cal_etottracknorm_DATA,"p cut")
+l_pid.AddEntry(H_cal_etottracknorm_DATA_nocut,"No cut")
+l_pid.AddEntry(H_cal_etottracknorm_DATA_nopid,"No PID cut")
 log_txt.Draw("same")
 l_pid.Draw("same")
 c_pid.Draw()
@@ -1491,13 +1491,13 @@ c_pid_2d = TCanvas()
 c_pid_2d.Divide(2,2)
 
 c_pid_2d.cd(1)
-H_cal_etotnorm_vs_H_cer_npeSum_DATA.Draw("colz")
+H_cal_etottracknorm_vs_H_cer_npeSum_DATA.Draw("colz")
 
 c_pid_2d.cd(2)
-P_cal_etotnorm_vs_P_hgcer_npeSum_DATA.Draw("colz")
+P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA.Draw("colz")
 
 c_pid_2d.cd(3)
-P_cal_etotnorm_vs_P_aero_npeSum_DATA.Draw("colz")
+P_cal_etottracknorm_vs_P_aero_npeSum_DATA.Draw("colz")
 
 c_pid_2d.cd(4)
 P_hgcer_npeSum_vs_P_aero_npeSum_DATA.Draw("colz")

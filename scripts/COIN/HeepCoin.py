@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-08 01:38:33 trottar"
+# Time-stamp: "2022-09-08 04:59:45 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -51,6 +51,7 @@ dummy_runNums = sys.argv[9]
 InSIMCFilename = sys.argv[10]
 OutFilename = sys.argv[11]
 
+# Define total efficiency vs run number plots
 G_data_eff = ROOT.TGraph(len(InData_efficiency.split(' ')), np.array([float(x) for x in data_runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]))
 G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency.split(' ')), np.array([float(x) for x in dummy_runNums.split(' ')]),np.array([float(x) for x in InDummy_efficiency.split(' ')]))
 
@@ -86,7 +87,7 @@ outputpdf  = OUTPATH+"/" + OutFilename + ".pdf"
 
 ###############################################################################################################################################
 
-# Grabs simc number of events and weight
+# Grabs simc number of events and normalizaton factor
 simc_hist = "%s/OUTPUT/Analysis/HeeP/%s" % (SIMCPATH,InSIMCFilename.replace('.root','.hist'))
 f_simc = open(simc_hist)
 for line in f_simc:
@@ -190,6 +191,7 @@ else:
 f_log.close()
 
 ################################################################################################################################################
+# Define root file trees of interest
 
 InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
 InFile_DUMMY = ROOT.TFile.Open(rootFile_DUMMY, "OPEN")
@@ -207,6 +209,7 @@ TBRANCH_SIMC  = InFile_SIMC.Get("h10")
 nEntries_TBRANCH_SIMC  = TBRANCH_SIMC.GetEntries()
 
 ################################################################################################################################################
+# Plot definitions
 
 H_hsdelta_DATA  = ROOT.TH1D("H_hsdelta_DATA","HMS Delta", 200, -20.0, 20.0)
 H_hsdelta_DATA_nocut  = ROOT.TH1D("H_hsdelta_DATA_nocut","HMS Delta", 200, -20.0, 20.0)
@@ -530,8 +533,6 @@ H_raster_y_vs_H_pmiss_DATA = ROOT.TH2D("H_raster_y_vs_H_pmiss_DATA","Raster_Y vs
 H_raster_y_vs_H_emiss_DATA = ROOT.TH2D("H_raster_y_vs_H_emiss_DATA","Raster_Y vs emiss;  emiss; Raster_Y", 200, -0.1,0.1, 200, -0.05,0.25)
 H_raster_x_vs_H_raster_y_DATA = ROOT.TH2D("H_raster_x_vs_H_raster_y_DATA","Raster_X vs Raster_Y;  Raster_X; Raster_Y", 200, -0.25,0.25, 200, -0.05,0.25)
 
-################################################################################################################################################
-
 H_cal_etottracknorm_DATA = ROOT.TH1D("H_cal_etottracknorm_DATA", "HMS Cal etottracknorm", 200, 0.2, 1.8)
 H_cer_npeSum_DATA = ROOT.TH1D("H_cer_npeSum_DATA", "HMS Cer Npe Sum", 200, 0, 30)
 
@@ -557,6 +558,7 @@ P_cal_etottracknorm_vs_P_aero_npeSum_DATA = ROOT.TH2D("P_cal_etottracknorm_vs_P_
 P_hgcer_npeSum_vs_P_aero_npeSum_DATA = ROOT.TH2D("P_hgcer_npeSum_vs_P_aero_npeSum_DATA","SHMS HGCer Npe Sum vs SHMS Aero Npe Sum;  SHMS HGCer Npe Sum; SHMS Aero Npe Sum", 200, 0, 50, 200, 0, 50)
 
 ################################################################################################################################################
+# Fill histograms for various trees called above
 
 for evt in TBRANCH_SIMC:
 
@@ -982,6 +984,10 @@ for evt in TBRANCH_DUMMY_nopid:
       #H_MMp2_DUMMY_nopid.Fill(evt.MMp)  
       #H_MMp2_DUMMY_nopid.Fill(evt.Mrecoil)
 
+################################################################################################################################################
+# Normalize simc by normfactor/nevents
+# Normalize data by effective charge
+
 normfac_simc = (simc_normfactor)/(simc_nevents)
 H_ssxfp_SIMC.Scale(normfac_simc)                                                                                                                                   
 H_ssyfp_SIMC.Scale(normfac_simc)                                                                                                                                  
@@ -1293,6 +1299,8 @@ H_W_DUMMY.Add(H_W_DUMMY_rand,-1)
 #H_ct_ep_DUMMY.Add(H_ct_ep_DUMMY_rand,-1)
 '''
 
+################################################################################################################################################
+
 # Dummy Subtraction
 H_ssxfp_DATA.Add(H_ssxfp_DUMMY,-1)
 H_ssyfp_DATA.Add(H_ssyfp_DUMMY,-1)
@@ -1381,10 +1389,10 @@ H_ct_ep_DATA_nocut.Add(H_ct_ep_DUMMY_nocut,-1)
 H_ct_ep_DATA_nopid.Add(H_ct_ep_DUMMY_nopid,-1)
 
 ################################################################################################################################################
+# Removes stat box
 ROOT.gStyle.SetOptStat(0)
 ################################################################################################################################################
-
-# PLOT HIST..
+# Plot histograms
 
 eff_plt = TCanvas()
 G_eff_plt = ROOT.TMultiGraph()
@@ -2526,6 +2534,7 @@ l_W.Draw()
 CW.Print(outputpdf + ')')
 
 #############################################################################################################################################
+# Create new root file with trees representing cut simc and data used above. Good for those who see python as...problematic
 
 outHistFile = ROOT.TFile.Open(foutname, "RECREATE")
 d_Data = outHistFile.mkdir("Data")

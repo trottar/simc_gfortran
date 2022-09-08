@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-07-26 15:38:45 trottar"
+# Time-stamp: "2022-09-08 04:44:57 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -29,7 +29,8 @@ SIMCPATH=lt.SIMCPATH
 
 ################################################################################################################################################
 
-# Open inp_f file to grab prescale values and tracking efficiency
+# Open inp_f file to grab energy, momentum, and angles 
+# from simc input file
 inp_f = SIMCPATH+"/input/%s.inp" % InputSIMC
 
 with open(inp_f, 'r') as f:

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-08 02:58:10 trottar"
+# Time-stamp: "2022-09-08 04:43:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -39,8 +39,6 @@ UTILPATH=lt.UTILPATH
 
 from calculate_efficiency import calculate_efficiency
 
-################################################################################################################################################
-
 tot_efficiency = calculate_efficiency(runNum,efficiency_table)
 
 ################################################################################################################################################
@@ -60,4 +58,5 @@ with open(report) as f:
 
 effective_charge = float(charge/1000)*float(tot_efficiency)
 
+# Need to convert to int value for bash to interpret correctly
 print(int(1000*effective_charge))

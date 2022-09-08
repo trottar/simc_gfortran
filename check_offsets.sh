@@ -25,11 +25,14 @@ USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 
+# Flag definitions (flags: h, c, s)
 while getopts 'hcs' flag; do
     case "${flag}" in
         h) 
         echo "----------------------------------------------------------"
         echo "./check_Offsets.sh -{flags} {variable arguments, see help}"
+	echo
+        echo "Description: Check the effect of offsets to dW, dE_m, dp_m(par), dp_m(perp)"
         echo "----------------------------------------------------------"
         echo
         echo "The following flags can be called for the heep analysis..."
@@ -53,6 +56,7 @@ done
 HEEPFOR="heepcheck"
 
 cd ${SIMCPATH}/scripts
+# When any flag is used then the user input changes argument order
 if [[ $c_flag = "true" && $s_flag = "true" ]]; then
     echo "Compiling ${HEEPFOR}.f..."
     eval "gfortran -o  ${HEEPFOR} ${HEEPFOR}.f"
@@ -75,9 +79,15 @@ else
     InputSIMC="Heep_Coin_${KIN}"
 fi
 
+# Python script that gets current values of simc input file
 SIMCINP=`python3 getSetting.py ${InputSIMC}`
 
+# From getSetting.py define variables for beam and theta to
+# be used as inputs for fortran elastics script
 BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
 THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 
+# Runs fortran code using 'expect' which takes the user input
+# value then runs the heepcheck script to check offsets
+# (Fotran script is run in background)
 ./${HEEPFOR}.expect $(echo "${BEAMINP}*1000"|bc) ${THETAINP} # piping bc allows float arithmetic

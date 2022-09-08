@@ -25,11 +25,14 @@ USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 
+# Flag definitions (flags: h, a, o, s)
 while getopts 'haos' flag; do
     case "${flag}" in
         h) 
         echo "--------------------------------------------------------------"
         echo "./run_HeeP_Analysis.sh -{flags} {variable arguments, see help}"
+	echo
+        echo "Description: Plots data vs simc"
         echo "--------------------------------------------------------------"
         echo
         echo "The following flags can be called for the heep analysis..."
@@ -38,7 +41,8 @@ while getopts 'haos' flag; do
 	echo "        coin -> KIN=arg1"
 	echo "        sing -> SPEC=arg1 KIN=arg2 (requires -s flag)"
 	echo "    -s, single arm"
-	echo "    -o, offset to replay applied"
+	echo "    -o, offset to replay applied "
+	echo "        (this is a label, offsets must be applied explicitly in replay before this step)"
         exit 0
         ;;
         a) a_flag='true' ;;
@@ -49,6 +53,7 @@ while getopts 'haos' flag; do
     esac
 done
 
+# When any flag is used then the user input changes argument order
 if [[ $a_flag = "true" || $o_flag = "true" || $s_flag = "true" ]]; then
     if [[ $s_flag = "true" ]]; then
 	spec=$(echo "$2" | tr '[:upper:]' '[:lower:]')
@@ -64,8 +69,12 @@ else
     ROOTPREFIX=replay_coin_heep
 fi
 
+# When just single flag used...
 if [[ $s_flag = "true" ]]; then
-    # Hard coded file
+    ##############
+    # HARD CODED #
+    ##############
+    # Defines efficiency table to use
     if [[ $SPEC = "HMS" ]]; then
 	EffData="hms_heep_HeePSing_efficiency_data_2022_07_28.csv"
     else
@@ -82,7 +91,10 @@ if [[ $s_flag = "true" ]]; then
 	OutFullAnalysisFilename="FullAnalysis_${SPEC}_${KIN}"
     fi
 else
-    # Hard coded file
+    ##############
+    # HARD CODED #
+    ##############
+    # Defines efficiency table to use
     EffData="coin_heep_HeePCoin_efficiency_data_2022_06_13.csv"
     InDATAFilename="Raw_Data_${KIN}.root"
     InDUMMYFilename="Raw_DummyData_${KIN}.root"
@@ -96,6 +108,10 @@ else
     fi
 fi
 
+##############
+# HARD CODED #
+##############
+# Define heep run numbers for a particular setting
 if [[ $KIN = "10p6" && $s_flag != "true" ]]; then
     declare -a data=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # All heep coin 10p6 runs
     #    declare -a data=(4827) # Just one test run
@@ -131,6 +147,8 @@ else
     exit 128
 fi
 
+# When analysis flag is used then the analysis script (Analysed_{SPEC}.py)
+# will create a new root file per run number which are combined using hadd
 if [[ $a_flag = "true" ]]; then
     if [[ $s_flag = "true" ]]; then
 	cd "${SIMCPATH}/scripts/SING"
@@ -236,14 +254,21 @@ echo
 echo "Calculating data total effective charge..."
 for i in "${data[@]}"
 do
+    # Calculates total efficiency then applies to the charge for each run number
+    # to get the effective charge per run and saves as an array
     DataChargeVal+=($(python3 findEffectiveCharge.py ${EffData} ${ROOTPREFIX} "$i" -1))
+    # Grabs the total effiency value per run and saves as an array
     DataEffVal+=($(python3 get_efficiency.py "$i" ${EffData}))
     DataRunNum+=("$i")
     #echo "${DataChargeVal[@]} mC"
 done
+# Sums the array to get the total effective charge
+# Note: this must be done as an array! This is why uC is used at this step
+#       and later converted to C
 DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
 echo "${DataChargeSum} uC"
 
+# Repeat the above process for dummy
 DummyChargeVal=()
 DummyEffVal=()
 DummyRunNum=()
@@ -259,6 +284,7 @@ done
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
 echo "${DummyChargeSum} uC"
 
+# Finally, run the plotting script
 if [[ $s_flag = "true" ]]; then
     cd "${SIMCPATH}/scripts/SING"
     python3 HeepSing.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${SPEC}

@@ -25,11 +25,14 @@ USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 
+# Flag definitions (flags: h, c, a, s)
 while getopts 'hcas' flag; do
     case "${flag}" in
         h) 
         echo "----------------------------------------------------------"
         echo "./set_HeepInput.sh -{flags} {variable arguments, see help}"
+	echo
+        echo "Description: Runs simc and updates simc input files"
         echo "----------------------------------------------------------"
         echo
         echo "The following flags can be called for the heep analysis..."
@@ -49,10 +52,16 @@ while getopts 'hcas' flag; do
     esac
 done
 
+# When singles flag is used...
 if [[ $s_flag = "true" ]]; then
     ELASFOR="elas_kin"
 
     cd ${SIMCPATH}/scripts/SING
+    
+    # When compile flage is used... 
+    # Run the fortran elastics code for calculating 
+    # unused arm momentum and angle then updating
+    # values of simc input file
     if [[ $c_flag = "true" ]]; then
 	echo "Compiling ${ELASFOR}.f..."
 	eval "gfortran -o  ${ELASFOR} ${ELASFOR}.f"
@@ -72,15 +81,27 @@ if [[ $s_flag = "true" ]]; then
     InputSIMC="Heep_${SPEC}_${KIN}"
 
     cd ${SIMCPATH}/scripts
+    
+    # Python script that gets current values of simc input file
     SIMCINP=`python3 getSetting.py ${InputSIMC}`
 
+    # From getSetting.py define variables for beam and theta to
+    # be used as inputs for fortran elastics script
     BEAMINP=`echo ${SIMCINP} | cut -d ',' -f1`
     THETAINP=`echo ${SIMCINP} | cut -d ',' -f2`
 
     cd ${SIMCPATH}/scripts/SING
+    # Runs fortran code using 'expect' which takes the user input
+    # value then saves the created kinematic table as a variable
+    # (Fotran script is run in background)
     OUTPUTELAS=$(echo "$(./${ELASFOR}.expect ${BEAMINP})")
 
+    # From the kinematic table the new values for the unused arm 
+    # are grabbed and updated in the simc input file
     python3 setElasArm.py ${KIN} ${SPEC} ${BEAMINP} ${THETAINP} ${InputSIMC} "$OUTPUTELAS"
+
+# When analysis flag is used then simc is run
+# for simc input file defined below
 elif [[ $a_flag = "true" ]]; then
     cd ${SIMCPATH}/scripts/COIN
     KIN=$2

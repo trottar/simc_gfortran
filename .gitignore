@@ -9,9 +9,6 @@
 simc
 CTP/O.Linux
 
-#Changed to symlink
-worksim
-
 # $HOME 
 $HOME
 
@@ -22,6 +19,8 @@ CTP/daVarRpc_svc.c
 CTP/daVarRpc_xdr.c
 
 # Sym link
+worksim
+input
 OUTPUTS
 OUTPUT
 

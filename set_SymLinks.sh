@@ -25,34 +25,7 @@ USER=`echo ${PATHFILE_INFO} | cut -d ','  -f14`
 HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 
-# Flag definitions (flags: h, c, s)
-while getopts 'hcs' flag; do
-    case "${flag}" in
-        h) 
-        echo "----------------------------------------------------------"
-        echo "./check_Offsets.sh -{flags} {variable arguments, see help}"
-	echo
-        echo "Description: Check the effect of offsets to dW, dE_m, dp_m(par), dp_m(perp)"
-        echo "----------------------------------------------------------"
-        echo
-        echo "The following flags can be called for the heep analysis..."
-	echo "    If no flags called arguments are..."
-	echo "        coin -> KIN=arg1"
-	echo "        sing -> SPEC=arg1 KIN=arg2 (requires -s flag)"
-        echo "    -h, help"
-        echo "    -c, compile fortran code"
-	echo "        coin -> KIN=arg1"
-	echo "        sing -> SPEC=arg1 KIN=arg2 (requires -s flag)"	
-	echo "    -s, single arm"
-        exit 0
-        ;;
-        c) c_flag='true' ;;
-	s) s_flag='true' ;;
-        *) print_usage
-        exit 1 ;;
-    esac
-done
-
+# Check symlinks and create/fix if bad
 if [ ! -L "${SIMCPATH}/OUTPUT" ]; then
     ln -s "${VOLATILEPATH}/OUTPUT/" "${SIMCPATH}/OUTPUT"
 elif [ -L "${SIMCPATH}/OUTPUT" ]; then

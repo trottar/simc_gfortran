@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-08 04:43:59 trottar"
+# Time-stamp: "2022-09-09 01:39:32 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -13,8 +13,7 @@
 import pandas as pd
 import sys,os
 
-runNum = sys.argv[1]
-efficiency_table = sys.argv[2]
+efficiency_table = "coin_heep_HeePCoin_efficiency_data_2022_09_09.csv"
 
 ###############################################################################################################################################
 
@@ -33,10 +32,18 @@ UTILPATH=lt.UTILPATH
 ################################################################################################################################################
 # Grab and calculate efficiency 
 
-from calculate_efficiency import calculate_efficiency
+from getDataTable import get_efficiencies
 
-tot_efficiency = calculate_efficiency(runNum,efficiency_table)
+runNums = [4827,4828,4855,4856,4857,4858,4859,4860,4862,4863]
+#runNums = [7974,7975,7976]
+#runNums = [7866,7867]
+#runNums = [6881,6882]
+#runNums = [6634,6635]
+for i,evt in enumerate(runNums):
+    effDict = get_efficiencies(evt,efficiency_table)[0]
+    for key,val in effDict.items():
+        if val < 0.75:
+            print(key,"\t",val)
 
 ################################################################################################################################################
 
-print(tot_efficiency)

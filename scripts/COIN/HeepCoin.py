@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-08 04:59:45 trottar"
+# Time-stamp: "2022-09-09 00:30:31 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -411,45 +411,45 @@ H_ph_DUMMY_nopid  = ROOT.TH1D("H_ph_DUMMY_nopid","Y' tar", 200, -0.1, 0.1)
 #H_ph_DUMMY_rand  = ROOT.TH1D("H_ph_DUMMY_rand","Y' tar", 200, -0.1, 0.1)
 H_ph_SIMC  = ROOT.TH1D("H_ph_SIMC","Y' tar", 200, -0.1, 0.1)
 
-H_ph_q_DATA  = ROOT.TH1D("H_ph_q_DATA","Phi Detected", 200, -10.0, 10.0)
-H_ph_q_DATA_nocut  = ROOT.TH1D("H_ph_q_DATA_nocut","Phi Detected", 200, -10.0, 10.0)
-H_ph_q_DATA_nopid  = ROOT.TH1D("H_ph_q_DATA_nopid","Phi Detected", 200, -10.0, 10.0)
-#H_ph_q_DATA_rand  = ROOT.TH1D("H_ph_q_DATA_rand","Phi Detected", 200, -10.0, 10.0)
-H_ph_q_DUMMY  = ROOT.TH1D("H_ph_q_DUMMY","Phi Detected", 200, -10.0, 10.0)
-H_ph_q_DUMMY_nocut  = ROOT.TH1D("H_ph_q_DUMMY_nocut","Phi Detected", 200, -10.0, 10.0)
-H_ph_q_DUMMY_nopid  = ROOT.TH1D("H_ph_q_DUMMY_nopid","Phi Detected", 200, -10.0, 10.0)
-#H_ph_q_DUMMY_rand  = ROOT.TH1D("H_ph_q_DUMMY_rand","Phi Detected", 200, -10.0, 10.0)
-H_ph_q_SIMC  = ROOT.TH1D("H_ph_q_SIMC","Phi Detected", 200, -10.0, 10.0)
+H_ph_q_DATA  = ROOT.TH1D("H_ph_q_DATA","Phi Detected (ph_xq)", 200, -10.0, 10.0)
+H_ph_q_DATA_nocut  = ROOT.TH1D("H_ph_q_DATA_nocut","Phi Detected (ph_xq)", 200, -10.0, 10.0)
+H_ph_q_DATA_nopid  = ROOT.TH1D("H_ph_q_DATA_nopid","Phi Detected (ph_xq)", 200, -10.0, 10.0)
+#H_ph_q_DATA_rand  = ROOT.TH1D("H_ph_q_DATA_rand","Phi Detected (ph_xq)", 200, -10.0, 10.0)
+H_ph_q_DUMMY  = ROOT.TH1D("H_ph_q_DUMMY","Phi Detected (ph_xq)", 200, -10.0, 10.0)
+H_ph_q_DUMMY_nocut  = ROOT.TH1D("H_ph_q_DUMMY_nocut","Phi Detected (ph_xq)", 200, -10.0, 10.0)
+H_ph_q_DUMMY_nopid  = ROOT.TH1D("H_ph_q_DUMMY_nopid","Phi Detected (ph_xq)", 200, -10.0, 10.0)
+#H_ph_q_DUMMY_rand  = ROOT.TH1D("H_ph_q_DUMMY_rand","Phi Detected (ph_xq)", 200, -10.0, 10.0)
+H_ph_q_SIMC  = ROOT.TH1D("H_ph_q_SIMC","Phi Detected (ph_xq)", 200, -10.0, 10.0)
 
-H_th_q_DATA  = ROOT.TH1D("H_th_q_DATA","Theta Detected", 200, -0.2, 0.2)
-H_th_q_DATA_nocut  = ROOT.TH1D("H_th_q_DATA_nocut","Theta Detected", 200, -0.2, 0.2)
-H_th_q_DATA_nopid  = ROOT.TH1D("H_th_q_DATA_nopid","Theta Detected", 200, -0.2, 0.2)
-#H_th_q_DATA_rand  = ROOT.TH1D("H_th_q_DATA_rand","Theta Detected", 200, -0.2, 0.2)
-H_th_q_DUMMY  = ROOT.TH1D("H_th_q_DUMMY","Theta Detected", 200, -0.2, 0.2)
-H_th_q_DUMMY_nocut  = ROOT.TH1D("H_th_q_DUMMY_nocut","Theta Detected", 200, -0.2, 0.2)
-H_th_q_DUMMY_nopid  = ROOT.TH1D("H_th_q_DUMMY_nopid","Theta Detected", 200, -0.2, 0.2)
-#H_th_q_DUMMY_rand  = ROOT.TH1D("H_th_q_DUMMY_rand","Theta Detected", 200, -0.2, 0.2)
-H_th_q_SIMC  = ROOT.TH1D("H_th_q_SIMC","Theta Detected", 200, -0.2, 0.2)
+H_th_q_DATA  = ROOT.TH1D("H_th_q_DATA","Theta Detected (th_xq)", 200, -0.2, 0.2)
+H_th_q_DATA_nocut  = ROOT.TH1D("H_th_q_DATA_nocut","Theta Detected (th_xq)", 200, -0.2, 0.2)
+H_th_q_DATA_nopid  = ROOT.TH1D("H_th_q_DATA_nopid","Theta Detected (th_xq)", 200, -0.2, 0.2)
+#H_th_q_DATA_rand  = ROOT.TH1D("H_th_q_DATA_rand","Theta Detected (th_xq)", 200, -0.2, 0.2)
+H_th_q_DUMMY  = ROOT.TH1D("H_th_q_DUMMY","Theta Detected (th_xq)", 200, -0.2, 0.2)
+H_th_q_DUMMY_nocut  = ROOT.TH1D("H_th_q_DUMMY_nocut","Theta Detected (th_xq)", 200, -0.2, 0.2)
+H_th_q_DUMMY_nopid  = ROOT.TH1D("H_th_q_DUMMY_nopid","Theta Detected (th_xq)", 200, -0.2, 0.2)
+#H_th_q_DUMMY_rand  = ROOT.TH1D("H_th_q_DUMMY_rand","Theta Detected (th_xq)", 200, -0.2, 0.2)
+H_th_q_SIMC  = ROOT.TH1D("H_th_q_SIMC","Theta Detected (th_xq)", 200, -0.2, 0.2)
 
-H_ph_recoil_DATA  = ROOT.TH1D("H_ph_recoil_DATA","Phi Recoil", 200, -10.0, 10.0)
-H_ph_recoil_DATA_nocut  = ROOT.TH1D("H_ph_recoil_DATA_nocut","Phi Recoil", 200, -10.0, 10.0)
-H_ph_recoil_DATA_nopid  = ROOT.TH1D("H_ph_recoil_DATA_nopid","Phi Recoil", 200, -10.0, 10.0)
-#H_ph_recoil_DATA_rand  = ROOT.TH1D("H_ph_recoil_DATA_rand","Phi Recoil", 200, -10.0, 10.0)
-H_ph_recoil_DUMMY  = ROOT.TH1D("H_ph_recoil_DUMMY","Phi Recoil", 200, -10.0, 10.0)
-H_ph_recoil_DUMMY_nocut  = ROOT.TH1D("H_ph_recoil_DUMMY_nocut","Phi Recoil", 200, -10.0, 10.0)
-H_ph_recoil_DUMMY_nopid  = ROOT.TH1D("H_ph_recoil_DUMMY_nopid","Phi Recoil", 200, -10.0, 10.0)
-#H_ph_recoil_DUMMY_rand  = ROOT.TH1D("H_ph_recoil_DUMMY_rand","Phi Recoil", 200, -10.0, 10.0)
-H_ph_recoil_SIMC  = ROOT.TH1D("H_ph_recoil_SIMC","Phi Recoil", 200, -10.0, 10.0)
+H_ph_recoil_DATA  = ROOT.TH1D("H_ph_recoil_DATA","Phi Recoil (ph_bq)", 200, -10.0, 10.0)
+H_ph_recoil_DATA_nocut  = ROOT.TH1D("H_ph_recoil_DATA_nocut","Phi Recoil (ph_bq)", 200, -10.0, 10.0)
+H_ph_recoil_DATA_nopid  = ROOT.TH1D("H_ph_recoil_DATA_nopid","Phi Recoil (ph_bq)", 200, -10.0, 10.0)
+#H_ph_recoil_DATA_rand  = ROOT.TH1D("H_ph_recoil_DATA_rand","Phi Recoil (ph_bq)", 200, -10.0, 10.0)
+H_ph_recoil_DUMMY  = ROOT.TH1D("H_ph_recoil_DUMMY","Phi Recoil (ph_bq)", 200, -10.0, 10.0)
+H_ph_recoil_DUMMY_nocut  = ROOT.TH1D("H_ph_recoil_DUMMY_nocut","Phi Recoil (ph_bq)", 200, -10.0, 10.0)
+H_ph_recoil_DUMMY_nopid  = ROOT.TH1D("H_ph_recoil_DUMMY_nopid","Phi Recoil (ph_bq)", 200, -10.0, 10.0)
+#H_ph_recoil_DUMMY_rand  = ROOT.TH1D("H_ph_recoil_DUMMY_rand","Phi Recoil (ph_bq)", 200, -10.0, 10.0)
+H_ph_recoil_SIMC  = ROOT.TH1D("H_ph_recoil_SIMC","Phi Recoil (ph_bq)", 200, -10.0, 10.0)
 
-H_th_recoil_DATA  = ROOT.TH1D("H_th_recoil_DATA","Theta Recoil", 200, -10.0, 10.0)
-H_th_recoil_DATA_nocut  = ROOT.TH1D("H_th_recoil_DATA_nocut","Theta Recoil", 200, -10.0, 10.0)
-H_th_recoil_DATA_nopid  = ROOT.TH1D("H_th_recoil_DATA_nopid","Theta Recoil", 200, -10.0, 10.0)
-#H_th_recoil_DATA_rand  = ROOT.TH1D("H_th_recoil_DATA_rand","Theta Recoil", 200, -10.0, 10.0)
-H_th_recoil_DUMMY  = ROOT.TH1D("H_th_recoil_DUMMY","Theta Recoil", 200, -10.0, 10.0)
-H_th_recoil_DUMMY_nocut  = ROOT.TH1D("H_th_recoil_DUMMY_nocut","Theta Recoil", 200, -10.0, 10.0)
-H_th_recoil_DUMMY_nopid  = ROOT.TH1D("H_th_recoil_DUMMY_nopid","Theta Recoil", 200, -10.0, 10.0)
-#H_th_recoil_DUMMY_rand  = ROOT.TH1D("H_th_recoil_DUMMY_rand","Theta Recoil", 200, -10.0, 10.0)
-H_th_recoil_SIMC  = ROOT.TH1D("H_th_recoil_SIMC","Theta Recoil", 200, -10.0, 10.0)
+H_th_recoil_DATA  = ROOT.TH1D("H_th_recoil_DATA","Theta Recoil (th_bq)", 200, -10.0, 10.0)
+H_th_recoil_DATA_nocut  = ROOT.TH1D("H_th_recoil_DATA_nocut","Theta Recoil (th_bq)", 200, -10.0, 10.0)
+H_th_recoil_DATA_nopid  = ROOT.TH1D("H_th_recoil_DATA_nopid","Theta Recoil (th_bq)", 200, -10.0, 10.0)
+#H_th_recoil_DATA_rand  = ROOT.TH1D("H_th_recoil_DATA_rand","Theta Recoil (th_bq)", 200, -10.0, 10.0)
+H_th_recoil_DUMMY  = ROOT.TH1D("H_th_recoil_DUMMY","Theta Recoil (th_bq)", 200, -10.0, 10.0)
+H_th_recoil_DUMMY_nocut  = ROOT.TH1D("H_th_recoil_DUMMY_nocut","Theta Recoil (th_bq)", 200, -10.0, 10.0)
+H_th_recoil_DUMMY_nopid  = ROOT.TH1D("H_th_recoil_DUMMY_nopid","Theta Recoil (th_bq)", 200, -10.0, 10.0)
+#H_th_recoil_DUMMY_rand  = ROOT.TH1D("H_th_recoil_DUMMY_rand","Theta Recoil (th_bq)", 200, -10.0, 10.0)
+H_th_recoil_SIMC  = ROOT.TH1D("H_th_recoil_SIMC","Theta Recoil (th_bq)", 200, -10.0, 10.0)
 
 H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss", 200, -0.1, 0.1)
 H_pmiss_DATA_nocut  = ROOT.TH1D("H_pmiss_DATA_nocut","pmiss", 200, -0.1, 0.1)
@@ -526,6 +526,8 @@ H_emiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_emiss_vs_H_ssdelta_DATA","Emiss vs SHMS
 
 H_pmiss_vs_H_hsdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_hsdelta_DATA","Pmiss vs HMS Delta;  Pmiss; HMS Delta", 200, -0.1, 0.1, 200, -20.0, 20.0)
 H_pmiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_ssdelta_DATA","Pmiss vs SHMS Delta;  Pmiss; SHMS Delta", 200, -0.1, 0.1, 200, -20.0, 20.0)
+
+H_hsdelta_vs_H_ssdelta_DATA = ROOT.TH2D("H_hsdelta_vs_H_ssdelta_DATA","HMS Delta vs SHMS Delta;  HMS Delta; SHMS Delta", 200, -20.0,20.0, 200, -20.0, 20.0)
 
 H_raster_x_vs_H_pmiss_DATA = ROOT.TH2D("H_raster_x_vs_H_pmiss_DATA","Raster_X vs pmiss;  pmiss; Raster_X", 200, -0.1,0.1, 200, -0.25,0.25)
 H_raster_x_vs_H_emiss_DATA = ROOT.TH2D("H_raster_x_vs_H_emiss_DATA","Raster_X vs emiss;  emiss; Raster_X", 200, -0.1,0.1, 200, -0.25,0.25)
@@ -621,6 +623,7 @@ for evt in TBRANCH_DATA:
       H_emiss_vs_H_ssdelta_DATA.Fill(evt.emiss, evt.ssdelta)
       H_pmiss_vs_H_hsdelta_DATA.Fill(evt.pmiss, evt.hsdelta)
       H_pmiss_vs_H_ssdelta_DATA.Fill(evt.pmiss, evt.ssdelta)
+      H_hsdelta_vs_H_ssdelta_DATA.Fill(evt.hsdelta, evt.ssdelta)
 
       H_raster_x_vs_H_pmiss_DATA.Fill(evt.pmiss, evt.raster_x)
       H_raster_x_vs_H_emiss_DATA.Fill(evt.emiss, evt.raster_x)
@@ -1565,6 +1568,12 @@ pmiss_vs_delta.cd(2)
 H_pmiss_vs_H_ssdelta_DATA.Draw("colz")
 
 pmiss_vs_delta.Print(outputpdf)
+
+hsdelta_vs_ssdelta = TCanvas()
+
+H_hsdelta_vs_H_ssdelta_DATA.Draw("colz")
+
+hsdelta_vs_ssdelta.Print(outputpdf)
 
 raster_x_vs_miss = TCanvas()
 

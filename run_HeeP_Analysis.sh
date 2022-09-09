@@ -95,7 +95,7 @@ else
     # HARD CODED #
     ##############
     # Defines efficiency table to use
-    EffData="coin_heep_HeePCoin_efficiency_data_2022_06_13.csv"
+    EffData="coin_heep_HeePCoin_efficiency_data_2022_09_09.csv"
     InDATAFilename="Raw_Data_${KIN}.root"
     InDUMMYFilename="Raw_DummyData_${KIN}.root"
     InSIMCFilename="Heep_Coin_${KIN}.root"
@@ -258,7 +258,7 @@ do
     # to get the effective charge per run and saves as an array
     DataChargeVal+=($(python3 findEffectiveCharge.py ${EffData} ${ROOTPREFIX} "$i" -1))
     # Grabs the total effiency value per run and saves as an array
-    DataEffVal+=($(python3 get_efficiency.py "$i" ${EffData}))
+    DataEffVal+=($(python3 getEfficiency.py "$i" ${EffData}))
     DataRunNum+=("$i")
     #echo "${DataChargeVal[@]} mC"
 done
@@ -277,7 +277,7 @@ echo "Calculating dummy total effective charge..."
 for i in "${dummydata[@]}"
 do
     DummyChargeVal+=($(python3 findEffectiveCharge.py ${EffData} ${ROOTPREFIX} "$i" -1))
-    DummyEffVal+=($(python3 get_efficiency.py "$i" ${EffData}))
+    DummyEffVal+=($(python3 getEfficiency.py "$i" ${EffData}))
     DummyRunNum+=($(echo "$i"))
     #echo "${DummyChargeVal[@]} mC"
 done

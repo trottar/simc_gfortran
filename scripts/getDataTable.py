@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 16:15:30 trottar"
+# Time-stamp: "2022-09-26 16:18:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -111,10 +111,16 @@ def calculate_efficiency(runNum,efficiency_table):
 
 def calculate_effError(runNum,efficiency_table):
 
-    tot_efficiency = calculate_efficiency(runNum,efficiency_table)
+    effDict = get_efficiencies(runNum,efficiency_table)[0] # Efficiency dictionary
     effErrorDict = get_efficiencies(runNum,efficiency_table)[1] # Efficiency errors dictionary
 
+    # Calculate total efficiency. The reduce function pretty much iterates on
+    # its arguments which in this case is a lambda function. This lambda function
+    # takes x,y from the list (ie the list of efficiencies) and multiplies them.
+    # This is all pythonic mumbo-jumbo for doing the product of everything in the
+    # list. Enjoy!
+    tot_efficiency = reduce(lambda x, y: x*y, list(effDict.values()))
+
     # Calculate total efficiency error. 
-    #tot_effError = sum(effErrorDict.values())
-    tot_effError = sum(effErrorDict/tot_efficiency) # Error propagation for multiplication
+    tot_effError = tot_efficiency*sum(efferr/eff for efferr,eff in zip(effErrorDict,effDict)) # Error propagation for multiplication
     return tot_effError

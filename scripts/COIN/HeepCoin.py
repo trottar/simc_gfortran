@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 16:23:48 trottar"
+# Time-stamp: "2022-09-26 16:28:40 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -61,10 +61,12 @@ sys.path.append('../')
 from getDataTable import calculate_efficiency,calculate_effError
 
 tot_effError = [calculate_effError(run,efficiency_table) for run in data_runNums.split(' ')]
-tot_efficiency = [calculate_efficiency(run,efficiency_table) for run in data_runNums.split(' ')]
-eff_multiplied = reduce(lambda x, y: x*y, list(tot_efficiency)) # Multiply all efficiency per run
+#tot_efficiency = [calculate_efficiency(run,efficiency_table) for run in data_runNums.split(' ')]
+#eff_multiplied = reduce(lambda x, y: x*y, list(tot_efficiency)) # Multiply all efficiency per run
 
-eff_errProp = eff_multiplied*sum(tot_effError) # Error propagation for multiplication
+#eff_errProp = eff_multiplied*sum(tot_effError) # Error propagation for multiplication
+
+eff_errProp = sum(tot_effError)
 
 print("\n\n",eff_errProp)
 

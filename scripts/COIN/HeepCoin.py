@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 14:14:22 trottar"
+# Time-stamp: "2022-09-26 14:15:33 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -58,7 +58,7 @@ efficiency_table = sys.argv[12]
 sys.path.append('../')
 from getDataTable import calculate_effError
 
-tot_effError = sum([calculate_effError(run,efficiency_table) for run in data_runNums.split(' ')])
+tot_effError = [calculate_effError(run,efficiency_table) for run in data_runNums.split(' ')]
 
 print("\n\n",tot_effError,"\n\n")
 

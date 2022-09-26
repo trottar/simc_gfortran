@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 12:50:31 trottar"
+# Time-stamp: "2022-09-26 13:01:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -58,7 +58,8 @@ G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency.split(' ')), np.array([float(x)
 ################################################################################################################################################
 # Grab and calculate efficiency 
 
-from scripts.getDataTable import calculate_effError
+sys.path.append('../')
+from getDataTable import calculate_effError
 
 tot_effError = calculate_effError(runNum,efficiency_table)
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 13:08:41 trottar"
+# Time-stamp: "2022-09-26 13:09:59 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -50,6 +50,7 @@ InDummy_efficiency = sys.argv[8]
 dummy_runNums = sys.argv[9]
 InSIMCFilename = sys.argv[10]
 OutFilename = sys.argv[11]
+efficiency_table = sys.argv[12]
 
 # Define total efficiency vs run number plots
 G_data_eff = ROOT.TGraph(len(InData_efficiency.split(' ')), np.array([float(x) for x in data_runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]))

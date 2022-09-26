@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 14:16:10 trottar"
+# Time-stamp: "2022-09-26 14:31:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -614,6 +614,7 @@ for evt in TBRANCH_SIMC:
       H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
       H_MMp2_SIMC.Fill(pow(evt.Em, 2) - pow(evt.Pm, 2), evt.Weight)
 
+ibin = 1      
 for evt in TBRANCH_DATA:
 
   #CUTs Definations 
@@ -676,49 +677,45 @@ for evt in TBRANCH_DATA:
       H_MMp2_DATA.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
       #H_MMp2_DATA.Fill(pow(evt.MMp, 2))  
       #H_MMp2_DATA.Fill(evt.Mrecoil)
-
-      print("\n\n",evt)
       
       #####
-      '''
-      H_ct_ep_DATA.SetBinError(evt.CTime_epCoinTime_ROC1)
-      
-      H_ssxfp_DATA.SetBinError(evt.ssxfp)
-      H_ssyfp_DATA.SetBinError(evt.ssyfp)
-      H_ssxpfp_DATA.SetBinError(evt.ssxpfp)
-      H_ssypfp_DATA.SetBinError(evt.ssypfp)
-      H_ssdelta_DATA.SetBinError(evt.ssdelta)
-      H_ssxptar_DATA.SetBinError(evt.ssxptar)
-      H_ssyptar_DATA.SetBinError(evt.ssyptar)
-      
-      H_hsxfp_DATA.SetBinError(evt.hsxfp)
-      H_hsyfp_DATA.SetBinError(evt.hsyfp)
-      H_hsxpfp_DATA.SetBinError(evt.hsxpfp)
-      H_hsypfp_DATA.SetBinError(evt.hsypfp)
-      H_hsdelta_DATA.SetBinError(evt.hsdelta)
-      H_hsxptar_DATA.SetBinError(evt.hsxptar)	
-      H_hsyptar_DATA.SetBinError(evt.hsyptar)
 
-      H_ph_q_DATA.SetBinError(evt.ph_q)
-      H_th_q_DATA.SetBinError(evt.th_q)
-      H_ph_recoil_DATA.SetBinError(evt.ph_recoil)
-      H_th_recoil_DATA.SetBinError(evt.th_recoil)
+      H_ct_ep_DATA.SetBinError(ibin,sum(tot_effError))
       
-      H_pmiss_DATA.SetBinError(evt.pmiss)	
-      H_emiss_DATA.SetBinError(evt.emiss)	
-      #H_emiss_DATA.SetBinError(evt.emiss_nuc)
-      H_pmx_DATA.SetBinError(evt.pmx)
-      H_pmy_DATA.SetBinError(evt.pmy)
-      H_pmz_DATA.SetBinError(evt.pmz)
-      H_Q2_DATA.SetBinError(evt.Q2)
-      H_W_DATA.SetBinError(evt.W)
-      H_epsilon_DATA.SetBinError(evt.epsilon)
-      H_MMp2_DATA.SetBinError(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
-      #H_MMp2_DATA.SetBinError(pow(evt.MMp, 2))  
-      #H_MMp2_DATA.SetBinError(evt.Mrecoil)
+      H_ssxfp_DATA.SetBinError(ibin,sum(tot_effError))
+      H_ssyfp_DATA.SetBinError(ibin,sum(tot_effError))
+      H_ssxpfp_DATA.SetBinError(ibin,sum(tot_effError))
+      H_ssypfp_DATA.SetBinError(ibin,sum(tot_effError))
+      H_ssdelta_DATA.SetBinError(ibin,sum(tot_effError))
+      H_ssxptar_DATA.SetBinError(ibin,sum(tot_effError))
+      H_ssyptar_DATA.SetBinError(ibin,sum(tot_effError))
       
-      sum(tot_effError)
-      '''
+      H_hsxfp_DATA.SetBinError(ibin,sum(tot_effError))
+      H_hsyfp_DATA.SetBinError(ibin,sum(tot_effError))
+      H_hsxpfp_DATA.SetBinError(ibin,sum(tot_effError))
+      H_hsypfp_DATA.SetBinError(ibin,sum(tot_effError))
+      H_hsdelta_DATA.SetBinError(ibin,sum(tot_effError))
+      H_hsxptar_DATA.SetBinError(ibin,sum(tot_effError))
+      H_hsyptar_DATA.SetBinError(ibin,sum(tot_effError))
+
+      H_ph_q_DATA.SetBinError(ibin,sum(tot_effError))
+      H_th_q_DATA.SetBinError(ibin,sum(tot_effError))
+      H_ph_recoil_DATA.SetBinError(ibin,sum(tot_effError))
+      H_th_recoil_DATA.SetBinError(ibin,sum(tot_effError))
+      
+      H_pmiss_DATA.SetBinError(ibin,sum(tot_effError))
+      H_emiss_DATA.SetBinError(ibin,sum(tot_effError))
+      #H_emiss_DATA.SetBinError(ibin,sum(tot_effError))
+      H_pmx_DATA.SetBinError(ibin,sum(tot_effError))
+      H_pmy_DATA.SetBinError(ibin,sum(tot_effError))
+      H_pmz_DATA.SetBinError(ibin,sum(tot_effError))
+      H_Q2_DATA.SetBinError(ibin,sum(tot_effError))
+      H_W_DATA.SetBinError(ibin,sum(tot_effError))
+      H_epsilon_DATA.SetBinError(ibin,sum(tot_effError))
+      H_MMp2_DATA.SetBinError(ibin,sum(tot_effError))
+      #H_MMp2_DATA.SetBinError(ibin,sum(tot_effError))
+      #H_MMp2_DATA.SetBinError(ibin,sum(tot_effError))
+
       '''
       # Random subtraction
       H_ct_ep_vs_H_MMp2_DATA_rand.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 14:53:07 trottar"
+# Time-stamp: "2022-09-26 15:05:53 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -37,6 +37,8 @@ if len(sys.argv)-1!=12:
     sys.exit(1)
 
 ##################################################################################################################################################
+
+DEBUG = False # Flag for no cut plots
 
 # Input params
 heep_kinematics = sys.argv[1]
@@ -625,8 +627,7 @@ for evt in TBRANCH_DATA:
   HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)       
 
   #........................................
-  
-  
+    
   if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
       H_ct_ep_vs_H_MMp2_DATA.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
@@ -1720,40 +1721,45 @@ gPad.SetLogy()
 H_cal_etottracknorm_DATA_nocut.SetLineColor(kCyan)
 H_cal_etottracknorm_DATA_nopid.SetLineColor(kMagenta)
 H_cal_etottracknorm_DATA.Draw()
-H_cal_etottracknorm_DATA_nocut.Draw("same")
-H_cal_etottracknorm_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_cal_etottracknorm_DATA_nocut.Draw("same")
+    H_cal_etottracknorm_DATA_nopid.Draw("same")
 
 c_pid.cd(2)
 H_cer_npeSum_DATA_nocut.SetLineColor(kCyan)
 H_cer_npeSum_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
 H_cer_npeSum_DATA.Draw()
-H_cer_npeSum_DATA_nocut.Draw("same")
-H_cer_npeSum_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_cer_npeSum_DATA_nocut.Draw("same")
+    H_cer_npeSum_DATA_nopid.Draw("same")
 
 c_pid.cd(3)
 P_cal_etottracknorm_DATA_nocut.SetLineColor(kCyan)
 P_cal_etottracknorm_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
 P_cal_etottracknorm_DATA.Draw()
-P_cal_etottracknorm_DATA_nocut.Draw("same")
-P_cal_etottracknorm_DATA_nopid.Draw("same")
+if DEBBUG:
+    P_cal_etottracknorm_DATA_nocut.Draw("same")
+    P_cal_etottracknorm_DATA_nopid.Draw("same")
 
 c_pid.cd(4)
 P_hgcer_npeSum_DATA_nocut.SetLineColor(kCyan)
 P_hgcer_npeSum_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
 P_hgcer_npeSum_DATA.Draw()
-P_hgcer_npeSum_DATA_nocut.Draw("same")
-P_hgcer_npeSum_DATA_nopid.Draw("same")
+if DEBBUG:
+    P_hgcer_npeSum_DATA_nocut.Draw("same")
+    P_hgcer_npeSum_DATA_nopid.Draw("same")
 
 c_pid.cd(5)
 P_aero_npeSum_DATA_nocut.SetLineColor(kCyan)
 P_aero_npeSum_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
 P_aero_npeSum_DATA.Draw()
-P_aero_npeSum_DATA_nocut.Draw("same")
-P_aero_npeSum_DATA_nopid.Draw("same")
+if DEBBUG:
+    P_aero_npeSum_DATA_nocut.Draw("same")
+    P_aero_npeSum_DATA_nopid.Draw("same")
 
 c_pid.cd(6)
 l_pid.SetTextSize(0.05)
@@ -1763,8 +1769,9 @@ log_txt.SetTextSize(0.0335)
 for cut in log_entry:
     log_txt.AddText(cut)
 l_pid.AddEntry(H_cal_etottracknorm_DATA,"p cut")
-l_pid.AddEntry(H_cal_etottracknorm_DATA_nocut,"No cut")
-l_pid.AddEntry(H_cal_etottracknorm_DATA_nopid,"No PID cut")
+if DEBBUG:
+    l_pid.AddEntry(H_cal_etottracknorm_DATA_nocut,"No cut")
+    l_pid.AddEntry(H_cal_etottracknorm_DATA_nopid,"No PID cut")
 log_txt.Draw("same")
 l_pid.Draw("same")
 c_pid.Draw()
@@ -1801,13 +1808,15 @@ H_ct_ep_DATA_nopid.SetLineColor(kMagenta)
 
 H_ct_ep_DATA.Draw("E")
 H_ct_ep_DUMMY.Draw("same")
-H_ct_ep_DATA_nocut.Draw("same")
-H_ct_ep_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_ct_ep_DATA_nocut.Draw("same")
+    H_ct_ep_DATA_nopid.Draw("same")
 
 l_ct_ep.AddEntry(H_ct_ep_DATA,"p cut")
 l_ct_ep.AddEntry(H_ct_ep_DUMMY,"Dummy")
-l_ct_ep.AddEntry(H_ct_ep_DATA_nocut,"No cut")
-l_ct_ep.AddEntry(H_ct_ep_DATA_nopid,"No PID cut")
+if DEBBUG:
+    l_ct_ep.AddEntry(H_ct_ep_DATA_nocut,"No cut")
+    l_ct_ep.AddEntry(H_ct_ep_DATA_nopid,"No PID cut")
 
 l_ct_ep.Draw()
 
@@ -1896,8 +1905,9 @@ H_ssxfp_DUMMY.SetLineColor(kGreen)
 H_ssxfp_SIMC.Draw("E")
 H_ssxfp_DATA.Draw("same")
 H_ssxfp_DUMMY.Draw("same")
-H_ssxfp_DATA_nocut.Draw("same")
-H_ssxfp_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_ssxfp_DATA_nocut.Draw("same")
+    H_ssxfp_DATA_nopid.Draw("same")
 
 b_int_xfp_simc = int(H_ssxfp_SIMC.Integral())
 b_int_xfp_data = int(H_ssxfp_DATA.Integral())
@@ -1908,8 +1918,9 @@ b_int_xfp_data_nopid = int(H_ssxfp_DATA_nopid.Integral())
 l_xfp.AddEntry(H_ssxfp_SIMC,"SIMC, INT = %s" % b_int_xfp_simc)
 l_xfp.AddEntry(H_ssxfp_DATA,"DATA, INT = %s" % b_int_xfp_data)
 l_xfp.AddEntry(H_ssxfp_DUMMY,"DUMMY, INT = %s" % b_int_xfp_dummy)
-l_xfp.AddEntry(H_ssxfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_xfp_data_nocut)
-l_xfp.AddEntry(H_ssxfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_xfp_data_nopid)
+if DEBBUG:
+    l_xfp.AddEntry(H_ssxfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_xfp_data_nocut)
+    l_xfp.AddEntry(H_ssxfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_xfp_data_nopid)
 
 l_xfp.Draw()
 
@@ -1926,8 +1937,9 @@ H_ssyfp_DUMMY.SetLineColor(kGreen)
 H_ssyfp_SIMC.Draw("E")
 H_ssyfp_DATA.Draw("same")
 H_ssyfp_DUMMY.Draw("same")
-H_ssyfp_DATA_nocut.Draw("same")
-H_ssyfp_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_ssyfp_DATA_nocut.Draw("same")
+    H_ssyfp_DATA_nopid.Draw("same")
 
 b_int_yfp_simc = int(H_ssyfp_SIMC.Integral())
 b_int_yfp_data = int(H_ssyfp_DATA.Integral())
@@ -1938,8 +1950,9 @@ b_int_yfp_data_nopid = int(H_ssyfp_DATA_nopid.Integral())
 l_yfp.AddEntry(H_ssyfp_SIMC,"SIMC, INT = %s" % b_int_yfp_simc)
 l_yfp.AddEntry(H_ssyfp_DATA,"DATA, INT = %s" % b_int_yfp_data)
 l_yfp.AddEntry(H_ssyfp_DUMMY,"DUMMY, INT = %s" % b_int_yfp_dummy)
-l_yfp.AddEntry(H_ssyfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_yfp_data_nocut)
-l_yfp.AddEntry(H_ssyfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_yfp_data_nopid)
+if DEBBUG:
+    l_yfp.AddEntry(H_ssyfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_yfp_data_nocut)
+    l_yfp.AddEntry(H_ssyfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_yfp_data_nopid)
 
 l_yfp.Draw()
 
@@ -1955,8 +1968,9 @@ H_ssxpfp_DUMMY.SetLineColor(kGreen)
 
 H_ssxpfp_SIMC.Draw("E")
 H_ssxpfp_DATA.Draw("same")
-H_ssxpfp_DATA_nocut.Draw("same")
-H_ssxpfp_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_ssxpfp_DATA_nocut.Draw("same")
+    H_ssxpfp_DATA_nopid.Draw("same")
 H_ssxpfp_DUMMY.Draw("same")
 
 b_int_xpfp_simc = int(H_ssxpfp_SIMC.Integral())
@@ -1967,8 +1981,9 @@ b_int_xpfp_dummy = int(H_ssxpfp_DUMMY.Integral())
 
 l_xpfp.AddEntry(H_ssxpfp_SIMC,"SIMC, INT = %s" % b_int_xpfp_simc)
 l_xpfp.AddEntry(H_ssxpfp_DATA,"DATA, INT = %s" % b_int_xpfp_data)
-l_xpfp.AddEntry(H_ssxpfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_xpfp_data_nocut)
-l_xpfp.AddEntry(H_ssxpfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_xpfp_data_nopid)
+if DEBBUG:
+    l_xpfp.AddEntry(H_ssxpfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_xpfp_data_nocut)
+    l_xpfp.AddEntry(H_ssxpfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_xpfp_data_nopid)
 l_xpfp.AddEntry(H_ssxpfp_DUMMY,"DUMMY, INT = %s" % b_int_xpfp_dummy)
 
 l_xpfp.Draw()
@@ -1985,8 +2000,9 @@ H_ssypfp_DUMMY.SetLineColor(kGreen)
 
 H_ssypfp_SIMC.Draw("E")
 H_ssypfp_DATA.Draw("same")
-H_ssypfp_DATA_nocut.Draw("same")
-H_ssypfp_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_ssypfp_DATA_nocut.Draw("same")
+    H_ssypfp_DATA_nopid.Draw("same")
 H_ssypfp_DUMMY.Draw("same")
 
 b_int_ypfp_simc = int(H_ssypfp_SIMC.Integral())
@@ -1997,8 +2013,9 @@ b_int_ypfp_dummy = int(H_ssypfp_DUMMY.Integral())
 
 l_ypfp.AddEntry(H_ssypfp_SIMC,"SIMC, INT = %s" % b_int_ypfp_simc)
 l_ypfp.AddEntry(H_ssypfp_DATA,"DATA, INT = %s" % b_int_ypfp_data)
-l_ypfp.AddEntry(H_ssypfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_ypfp_data_nocut)
-l_ypfp.AddEntry(H_ssypfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_ypfp_data_nopid)
+if DEBBUG:
+    l_ypfp.AddEntry(H_ssypfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_ypfp_data_nocut)
+    l_ypfp.AddEntry(H_ssypfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_ypfp_data_nopid)
 l_ypfp.AddEntry(H_ssypfp_DUMMY,"DUMMY, INT = %s" % b_int_ypfp_dummy)
 
 l_ypfp.Draw()
@@ -2015,8 +2032,9 @@ H_hsxfp_DUMMY.SetLineColor(kGreen)
 
 H_hsxfp_SIMC.Draw("E")
 H_hsxfp_DATA.Draw("same")
-H_hsxfp_DATA_nocut.Draw("same")
-H_hsxfp_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_hsxfp_DATA_nocut.Draw("same")
+    H_hsxfp_DATA_nopid.Draw("same")
 H_hsxfp_DUMMY.Draw("same")
 
 b_int_hxfp_simc = int(H_hsxfp_SIMC.Integral())
@@ -2027,8 +2045,9 @@ b_int_hxfp_dummy = int(H_hsxfp_DUMMY.Integral())
 
 l_hxfp.AddEntry(H_hsxfp_SIMC,"SIMC, INT = %s" % b_int_hxfp_simc)
 l_hxfp.AddEntry(H_hsxfp_DATA,"DATA, INT = %s" % b_int_hxfp_data)
-l_hxfp.AddEntry(H_hsxfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hxfp_data_nocut)
-l_hxfp.AddEntry(H_hsxfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hxfp_data_nopid)
+if DEBBUG:
+    l_hxfp.AddEntry(H_hsxfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hxfp_data_nocut)
+    l_hxfp.AddEntry(H_hsxfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hxfp_data_nopid)
 l_hxfp.AddEntry(H_hsxfp_DUMMY,"DUMMY, INT = %s" % b_int_hxfp_dummy)
 
 l_hxfp.Draw()
@@ -2045,8 +2064,9 @@ H_hsyfp_DUMMY.SetLineColor(kGreen)
 
 H_hsyfp_SIMC.Draw("E")
 H_hsyfp_DATA.Draw("same")
-H_hsyfp_DATA_nocut.Draw("same")
-H_hsyfp_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_hsyfp_DATA_nocut.Draw("same")
+    H_hsyfp_DATA_nopid.Draw("same")
 H_hsyfp_DUMMY.Draw("same")
 
 b_int_hyfp_simc = int(H_hsyfp_SIMC.Integral())
@@ -2057,8 +2077,9 @@ b_int_hyfp_dummy = int(H_hsyfp_DUMMY.Integral())
 
 l_hyfp.AddEntry(H_hsyfp_SIMC,"SIMC, INT = %s" % b_int_hyfp_simc)
 l_hyfp.AddEntry(H_hsyfp_DATA,"DATA, INT = %s" % b_int_hyfp_data)
-l_hyfp.AddEntry(H_hsyfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hyfp_data_nocut)
-l_hyfp.AddEntry(H_hsyfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hyfp_data_nopid)
+if DEBBUG:
+    l_hyfp.AddEntry(H_hsyfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hyfp_data_nocut)
+    l_hyfp.AddEntry(H_hsyfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hyfp_data_nopid)
 l_hyfp.AddEntry(H_hsyfp_DUMMY,"DUMMY, INT = %s" % b_int_hyfp_dummy)
 
 l_hyfp.Draw()
@@ -2075,8 +2096,9 @@ H_hsxpfp_DUMMY.SetLineColor(kGreen)
 
 H_hsxpfp_SIMC.Draw("E")
 H_hsxpfp_DATA.Draw("same")
-H_hsxpfp_DATA_nocut.Draw("same")
-H_hsxpfp_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_hsxpfp_DATA_nocut.Draw("same")
+    H_hsxpfp_DATA_nopid.Draw("same")
 H_hsxpfp_DUMMY.Draw("same")
 
 b_int_hxpfp_simc = int(H_hsxpfp_SIMC.Integral())
@@ -2087,8 +2109,9 @@ b_int_hxpfp_dummy = int(H_hsxpfp_DUMMY.Integral())
 
 l_hxpfp.AddEntry(H_hsxpfp_SIMC,"SIMC, INT = %s" % b_int_hxpfp_simc)
 l_hxpfp.AddEntry(H_hsxpfp_DATA,"DATA, INT = %s" % b_int_hxpfp_data)
-l_hxpfp.AddEntry(H_hsxpfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hxpfp_data_nocut)
-l_hxpfp.AddEntry(H_hsxpfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hxpfp_data_nopid)
+if DEBBUG:
+    l_hxpfp.AddEntry(H_hsxpfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hxpfp_data_nocut)
+    l_hxpfp.AddEntry(H_hsxpfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hxpfp_data_nopid)
 l_hxpfp.AddEntry(H_hsxpfp_DUMMY,"DUMMY, INT = %s" % b_int_hxpfp_dummy)
 
 l_hxpfp.Draw()
@@ -2105,8 +2128,9 @@ H_hsypfp_DUMMY.SetLineColor(kGreen)
 
 H_hsypfp_SIMC.Draw("E")
 H_hsypfp_DATA.Draw("same")
-H_hsypfp_DATA_nocut.Draw("same")
-H_hsypfp_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_hsypfp_DATA_nocut.Draw("same")
+    H_hsypfp_DATA_nopid.Draw("same")
 H_hsypfp_DUMMY.Draw("same")
 
 b_int_hypfp_simc = int(H_hsypfp_SIMC.Integral())
@@ -2117,8 +2141,9 @@ b_int_hypfp_dummy = int(H_hsypfp_DUMMY.Integral())
 
 l_hypfp.AddEntry(H_hsypfp_SIMC,"SIMC, INT = %s" % b_int_hypfp_simc)
 l_hypfp.AddEntry(H_hsypfp_DATA,"DATA, INT = %s" % b_int_hypfp_data)
-l_hypfp.AddEntry(H_hsypfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hypfp_data_nocut)
-l_hypfp.AddEntry(H_hsypfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hypfp_data_nopid)
+if DEBBUG:
+    l_hypfp.AddEntry(H_hsypfp_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hypfp_data_nocut)
+    l_hypfp.AddEntry(H_hsypfp_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hypfp_data_nopid)
 l_hypfp.AddEntry(H_hsypfp_DUMMY,"DUMMY, INT = %s" % b_int_hypfp_dummy)
 
 l_hypfp.Draw()
@@ -2135,8 +2160,9 @@ H_ssxptar_DUMMY.SetLineColor(kGreen)
 
 H_ssxptar_SIMC.Draw("E")
 H_ssxptar_DATA.Draw("same")
-H_ssxptar_DATA_nocut.Draw("same")
-H_ssxptar_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_ssxptar_DATA_nocut.Draw("same")
+    H_ssxptar_DATA_nopid.Draw("same")
 H_ssxptar_DUMMY.Draw("same")
 
 b_int_xptar_simc = int(H_ssxptar_SIMC.Integral())
@@ -2147,8 +2173,9 @@ b_int_xptar_dummy = int(H_ssxptar_DUMMY.Integral())
 
 l_xptar.AddEntry(H_ssxptar_SIMC,"SIMC, INT = %s" % b_int_xptar_simc)
 l_xptar.AddEntry(H_ssxptar_DATA,"DATA, INT = %s" % b_int_xptar_data)
-l_xptar.AddEntry(H_ssxptar_DATA_nocut,"DATA (no cut), INT = %s" % b_int_xptar_data_nocut)
-l_xptar.AddEntry(H_ssxptar_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_xptar_data_nopid)
+if DEBBUG:
+    l_xptar.AddEntry(H_ssxptar_DATA_nocut,"DATA (no cut), INT = %s" % b_int_xptar_data_nocut)
+    l_xptar.AddEntry(H_ssxptar_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_xptar_data_nopid)
 l_xptar.AddEntry(H_ssxptar_DUMMY,"DUMMY, INT = %s" % b_int_xptar_dummy)
 
 l_xptar.Draw()
@@ -2165,8 +2192,9 @@ H_ssyptar_DUMMY.SetLineColor(kGreen)
 
 H_ssyptar_SIMC.Draw("E")
 H_ssyptar_DATA.Draw("same")
-H_ssyptar_DATA_nocut.Draw("same")
-H_ssyptar_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_ssyptar_DATA_nocut.Draw("same")
+    H_ssyptar_DATA_nopid.Draw("same")
 H_ssyptar_DUMMY.Draw("same")
 
 b_int_yptar_simc = int(H_ssyptar_SIMC.Integral())
@@ -2177,8 +2205,9 @@ b_int_yptar_dummy = int(H_ssyptar_DUMMY.Integral())
 
 l_yptar.AddEntry(H_ssyptar_SIMC,"SIMC, INT = %s" % b_int_yptar_simc)
 l_yptar.AddEntry(H_ssyptar_DATA,"DATA, INT = %s" % b_int_yptar_data)
-l_yptar.AddEntry(H_ssyptar_DATA_nocut,"DATA (no cut), INT = %s" % b_int_yptar_data_nocut)
-l_yptar.AddEntry(H_ssyptar_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_yptar_data_nopid)
+if DEBBUG:
+    l_yptar.AddEntry(H_ssyptar_DATA_nocut,"DATA (no cut), INT = %s" % b_int_yptar_data_nocut)
+    l_yptar.AddEntry(H_ssyptar_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_yptar_data_nopid)
 l_yptar.AddEntry(H_ssyptar_DUMMY,"DUMMY, INT = %s" % b_int_yptar_dummy)
 
 l_yptar.Draw()
@@ -2195,8 +2224,9 @@ H_hsxptar_DUMMY.SetLineColor(kGreen)
 
 H_hsxptar_SIMC.Draw("E")
 H_hsxptar_DATA.Draw("same")
-H_hsxptar_DATA_nocut.Draw("same")
-H_hsxptar_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_hsxptar_DATA_nocut.Draw("same")
+    H_hsxptar_DATA_nopid.Draw("same")
 H_hsxptar_DUMMY.Draw("same")
 
 b_int_hxptar_simc = int(H_hsxptar_SIMC.Integral())
@@ -2207,8 +2237,9 @@ b_int_hxptar_dummy = int(H_hsxptar_DUMMY.Integral())
 
 l_hxptar.AddEntry(H_hsxptar_SIMC,"SIMC, INT = %s" % b_int_hxptar_simc)
 l_hxptar.AddEntry(H_hsxptar_DATA,"DATA, INT = %s" % b_int_hxptar_data)
-l_hxptar.AddEntry(H_hsxptar_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hxptar_data_nocut)
-l_hxptar.AddEntry(H_hsxptar_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hxptar_data_nopid)
+if DEBBUG:
+    l_hxptar.AddEntry(H_hsxptar_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hxptar_data_nocut)
+    l_hxptar.AddEntry(H_hsxptar_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hxptar_data_nopid)
 l_hxptar.AddEntry(H_hsxptar_DUMMY,"DUMMY, INT = %s" % b_int_hxptar_dummy)
 
 l_hxptar.Draw()
@@ -2225,8 +2256,9 @@ H_hsyptar_DUMMY.SetLineColor(kGreen)
 
 H_hsyptar_SIMC.Draw("E")
 H_hsyptar_DATA.Draw("same")
-H_hsyptar_DATA_nocut.Draw("same")
-H_hsyptar_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_hsyptar_DATA_nocut.Draw("same")
+    H_hsyptar_DATA_nopid.Draw("same")
 H_hsyptar_DUMMY.Draw("same")
 
 b_int_hyptar_simc = int(H_hsyptar_SIMC.Integral())
@@ -2237,8 +2269,9 @@ b_int_hyptar_dummy = int(H_hsyptar_DUMMY.Integral())
 
 l_hyptar.AddEntry(H_hsyptar_SIMC,"SIMC, INT = %s" % b_int_hyptar_simc)
 l_hyptar.AddEntry(H_hsyptar_DATA,"DATA, INT = %s" % b_int_hyptar_data)
-l_hyptar.AddEntry(H_hsyptar_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hyptar_data_nocut)
-l_hyptar.AddEntry(H_hsyptar_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hyptar_data_nopid)
+if DEBBUG:
+    l_hyptar.AddEntry(H_hsyptar_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hyptar_data_nocut)
+    l_hyptar.AddEntry(H_hsyptar_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hyptar_data_nopid)
 l_hyptar.AddEntry(H_hsyptar_DUMMY,"DUMMY, INT = %s" % b_int_hyptar_dummy)
 
 l_hyptar.Draw()
@@ -2255,8 +2288,9 @@ H_ssdelta_DUMMY.SetLineColor(kGreen)
 
 H_ssdelta_SIMC.Draw("E")
 H_ssdelta_DATA.Draw("same")
-H_ssdelta_DATA_nocut.Draw("same")
-H_ssdelta_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_ssdelta_DATA_nocut.Draw("same")
+    H_ssdelta_DATA_nopid.Draw("same")
 H_ssdelta_DUMMY.Draw("same")
 
 b_int_Delta_simc = int(H_ssdelta_SIMC.Integral())
@@ -2267,8 +2301,9 @@ b_int_Delta_dummy = int(H_ssdelta_DUMMY.Integral())
 
 l_Delta.AddEntry(H_ssdelta_SIMC,"SIMC, INT = %s" % b_int_Delta_simc)
 l_Delta.AddEntry(H_ssdelta_DATA,"DATA, INT = %s" % b_int_Delta_data)
-l_Delta.AddEntry(H_ssdelta_DATA_nocut,"DATA (no cut), INT = %s" % b_int_Delta_data_nocut)
-l_Delta.AddEntry(H_ssdelta_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_Delta_data_nopid)
+if DEBBUG:
+    l_Delta.AddEntry(H_ssdelta_DATA_nocut,"DATA (no cut), INT = %s" % b_int_Delta_data_nocut)
+    l_Delta.AddEntry(H_ssdelta_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_Delta_data_nopid)
 l_Delta.AddEntry(H_ssdelta_DUMMY,"DUMMY, INT = %s" % b_int_Delta_dummy)
 
 l_Delta.Draw()
@@ -2285,8 +2320,9 @@ H_hsdelta_DUMMY.SetLineColor(kGreen)
 
 H_hsdelta_SIMC.Draw("E")
 H_hsdelta_DATA.Draw("same")
-H_hsdelta_DATA_nocut.Draw("same")
-H_hsdelta_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_hsdelta_DATA_nocut.Draw("same")
+    H_hsdelta_DATA_nopid.Draw("same")
 H_hsdelta_DUMMY.Draw("same")
 
 b_int_hDelta_simc = int(H_hsdelta_SIMC.Integral())
@@ -2297,8 +2333,9 @@ b_int_hDelta_dummy = int(H_hsdelta_DUMMY.Integral())
 
 l_hDelta.AddEntry(H_hsdelta_SIMC,"SIMC, INT = %s" % b_int_hDelta_simc)
 l_hDelta.AddEntry(H_hsdelta_DATA,"DATA, INT = %s" % b_int_hDelta_data)
-l_hDelta.AddEntry(H_hsdelta_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hDelta_data_nocut)
-l_hDelta.AddEntry(H_hsdelta_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hDelta_data_nopid)
+if DEBBUG:
+    l_hDelta.AddEntry(H_hsdelta_DATA_nocut,"DATA (no cut), INT = %s" % b_int_hDelta_data_nocut)
+    l_hDelta.AddEntry(H_hsdelta_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_hDelta_data_nopid)
 l_hDelta.AddEntry(H_hsdelta_DUMMY,"DUMMY, INT = %s" % b_int_hDelta_dummy)
 
 l_hDelta.Draw()
@@ -2315,8 +2352,9 @@ H_Q2_DUMMY.SetLineColor(kGreen)
 
 H_Q2_SIMC.Draw("E")
 H_Q2_DATA.Draw("same")
-H_Q2_DATA_nocut.Draw("same")
-H_Q2_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_Q2_DATA_nocut.Draw("same")
+    H_Q2_DATA_nopid.Draw("same")
 H_Q2_DUMMY.Draw("same")
 
 b_int_Q2_simc = int(H_Q2_SIMC.Integral())
@@ -2327,8 +2365,9 @@ b_int_Q2_dummy = int(H_Q2_DUMMY.Integral())
 
 l_Q2.AddEntry(H_Q2_SIMC,"SIMC, INT = %s" % b_int_Q2_simc)
 l_Q2.AddEntry(H_Q2_DATA,"DATA, INT = %s" % b_int_Q2_data)
-l_Q2.AddEntry(H_Q2_DATA_nocut,"DATA (no cut), INT = %s" % b_int_Q2_data_nocut)
-l_Q2.AddEntry(H_Q2_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_Q2_data_nopid)
+if DEBBUG:
+    l_Q2.AddEntry(H_Q2_DATA_nocut,"DATA (no cut), INT = %s" % b_int_Q2_data_nocut)
+    l_Q2.AddEntry(H_Q2_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_Q2_data_nopid)
 l_Q2.AddEntry(H_Q2_DUMMY,"DUMMY, INT = %s" % b_int_Q2_dummy)
 
 l_Q2.Draw()
@@ -2345,8 +2384,9 @@ H_epsilon_DUMMY.SetLineColor(kGreen)
 
 H_epsilon_SIMC.Draw("E")
 H_epsilon_DATA.Draw("same")
-H_epsilon_DATA_nocut.Draw("same")
-H_epsilon_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_epsilon_DATA_nocut.Draw("same")
+    H_epsilon_DATA_nopid.Draw("same")
 H_epsilon_DUMMY.Draw("same")
 
 b_int_epsilon_simc = int(H_epsilon_SIMC.Integral())
@@ -2357,8 +2397,9 @@ b_int_epsilon_dummy = int(H_epsilon_DUMMY.Integral())
 
 l_epsilon.AddEntry(H_epsilon_SIMC,"SIMC, INT = %s" % b_int_epsilon_simc)
 l_epsilon.AddEntry(H_epsilon_DATA,"DATA, INT = %s" % b_int_epsilon_data)
-l_epsilon.AddEntry(H_epsilon_DATA_nocut,"DATA (no cut), INT = %s" % b_int_epsilon_data_nocut)
-l_epsilon.AddEntry(H_epsilon_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_epsilon_data_nopid)
+if DEBBUG:
+    l_epsilon.AddEntry(H_epsilon_DATA_nocut,"DATA (no cut), INT = %s" % b_int_epsilon_data_nocut)
+    l_epsilon.AddEntry(H_epsilon_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_epsilon_data_nopid)
 l_epsilon.AddEntry(H_epsilon_DUMMY,"DUMMY, INT = %s" % b_int_epsilon_dummy)
 
 l_epsilon.Draw()
@@ -2375,8 +2416,9 @@ H_MMp2_DUMMY.SetLineColor(kGreen)
 
 H_MMp2_SIMC.Draw("E")
 H_MMp2_DATA.Draw("same")
-H_MMp2_DATA_nocut.Draw("same")
-H_MMp2_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_MMp2_DATA_nocut.Draw("same")
+    H_MMp2_DATA_nopid.Draw("same")
 H_MMp2_DUMMY.Draw("same")
 
 b_int_MMp2_simc = int(H_MMp2_SIMC.Integral())
@@ -2393,13 +2435,15 @@ b_mean_MMp2_dummy = H_MMp2_DUMMY.GetMean()
 
 l_MMp2.AddEntry(H_MMp2_SIMC,"SIMC, INT = %s" % b_int_MMp2_simc)
 l_MMp2.AddEntry(H_MMp2_DATA,"DATA, INT = %s" % b_int_MMp2_data)
-l_MMp2.AddEntry(H_MMp2_DATA_nocut,"DATA (no cut), INT = %s" % b_int_MMp2_data_nocut)
-l_MMp2.AddEntry(H_MMp2_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_MMp2_data_nopid)
+if DEBBUG:
+    l_MMp2.AddEntry(H_MMp2_DATA_nocut,"DATA (no cut), INT = %s" % b_int_MMp2_data_nocut)
+    l_MMp2.AddEntry(H_MMp2_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_MMp2_data_nopid)
 l_MMp2.AddEntry(H_MMp2_DUMMY,"DUMMY, INT = %s" % b_int_MMp2_dummy)
 l_MMp2.AddEntry(H_MMp2_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_MMp2_simc))
 l_MMp2.AddEntry(H_MMp2_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_MMp2_data))
-l_MMp2.AddEntry(H_MMp2_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_MMp2_data_nocut))
-l_MMp2.AddEntry(H_MMp2_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_MMp2_data_nopid))
+if DEBBUG:
+    l_MMp2.AddEntry(H_MMp2_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_MMp2_data_nocut))
+    l_MMp2.AddEntry(H_MMp2_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_MMp2_data_nopid))
 l_MMp2.AddEntry(H_MMp2_DUMMY,"DUMMY, MEAN = {0:.3f}".format(b_mean_MMp2_dummy))
 
 l_MMp2.Draw()
@@ -2416,8 +2460,9 @@ H_ph_q_DUMMY.SetLineColor(kGreen)
 
 H_ph_q_SIMC.Draw("E")
 H_ph_q_DATA.Draw("same")
-H_ph_q_DATA_nocut.Draw("same")
-H_ph_q_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_ph_q_DATA_nocut.Draw("same")
+    H_ph_q_DATA_nopid.Draw("same")
 H_ph_q_DUMMY.Draw("same")
 
 b_int_ph_q_simc = int(H_ph_q_SIMC.Integral())
@@ -2434,13 +2479,15 @@ b_mean_ph_q_dummy = H_ph_q_DUMMY.GetMean()
 
 l_ph_q.AddEntry(H_ph_q_SIMC,"SIMC, INT = %s" % b_int_ph_q_simc)
 l_ph_q.AddEntry(H_ph_q_DATA,"DATA, INT = %s" % b_int_ph_q_data)
-l_ph_q.AddEntry(H_ph_q_DATA_nocut,"DATA (no cut), INT = %s" % b_int_ph_q_data_nocut)
-l_ph_q.AddEntry(H_ph_q_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_ph_q_data_nopid)
+if DEBBUG:
+    l_ph_q.AddEntry(H_ph_q_DATA_nocut,"DATA (no cut), INT = %s" % b_int_ph_q_data_nocut)
+    l_ph_q.AddEntry(H_ph_q_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_ph_q_data_nopid)
 l_ph_q.AddEntry(H_ph_q_DUMMY,"DUMMY, INT = %s" % b_int_ph_q_dummy)
 l_ph_q.AddEntry(H_ph_q_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_ph_q_simc))
 l_ph_q.AddEntry(H_ph_q_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_ph_q_data))
-l_ph_q.AddEntry(H_ph_q_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_ph_q_data_nocut))
-l_ph_q.AddEntry(H_ph_q_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_ph_q_data_nopid))
+if DEBBUG:
+    l_ph_q.AddEntry(H_ph_q_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_ph_q_data_nocut))
+    l_ph_q.AddEntry(H_ph_q_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_ph_q_data_nopid))
 l_ph_q.AddEntry(H_ph_q_DUMMY,"DUMMY, MEAN = {0:.3f}".format(b_mean_ph_q_dummy))
 
 l_ph_q.Draw()
@@ -2457,8 +2504,9 @@ H_th_q_DUMMY.SetLineColor(kGreen)
 
 H_th_q_SIMC.Draw("E")
 H_th_q_DATA.Draw("same")
-H_th_q_DATA_nocut.Draw("same")
-H_th_q_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_th_q_DATA_nocut.Draw("same")
+    H_th_q_DATA_nopid.Draw("same")
 H_th_q_DUMMY.Draw("same")
 
 b_int_th_q_simc = int(H_th_q_SIMC.Integral())
@@ -2475,13 +2523,15 @@ b_mean_th_q_dummy = H_th_q_DUMMY.GetMean()
 
 l_th_q.AddEntry(H_th_q_SIMC,"SIMC, INT = %s" % b_int_th_q_simc)
 l_th_q.AddEntry(H_th_q_DATA,"DATA, INT = %s" % b_int_th_q_data)
-l_th_q.AddEntry(H_th_q_DATA_nocut,"DATA (no cut), INT = %s" % b_int_th_q_data_nocut)
-l_th_q.AddEntry(H_th_q_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_th_q_data_nopid)
+if DEBBUG:
+    l_th_q.AddEntry(H_th_q_DATA_nocut,"DATA (no cut), INT = %s" % b_int_th_q_data_nocut)
+    l_th_q.AddEntry(H_th_q_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_th_q_data_nopid)
 l_th_q.AddEntry(H_th_q_DUMMY,"DUMMY, INT = %s" % b_int_th_q_dummy)
 l_th_q.AddEntry(H_th_q_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_th_q_simc))
 l_th_q.AddEntry(H_th_q_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_th_q_data))
-l_th_q.AddEntry(H_th_q_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_th_q_data_nocut))
-l_th_q.AddEntry(H_th_q_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_th_q_data_nopid))
+if DEBBUG:
+    l_th_q.AddEntry(H_th_q_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_th_q_data_nocut))
+    l_th_q.AddEntry(H_th_q_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_th_q_data_nopid))
 l_th_q.AddEntry(H_th_q_DUMMY,"DUMMY, MEAN = {0:.3f}".format(b_mean_th_q_dummy))
 
 l_th_q.Draw()
@@ -2498,8 +2548,9 @@ H_ph_recoil_DUMMY.SetLineColor(kGreen)
 
 #H_ph_recoil_SIMC.Draw("E")
 H_ph_recoil_DATA.Draw("same")
-H_ph_recoil_DATA_nocut.Draw("same")
-H_ph_recoil_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_ph_recoil_DATA_nocut.Draw("same")
+    H_ph_recoil_DATA_nopid.Draw("same")
 H_ph_recoil_DUMMY.Draw("same")
 
 #b_int_ph_recoil_simc = int(H_ph_recoil_SIMC.Integral())
@@ -2516,13 +2567,15 @@ b_mean_ph_recoil_dummy = H_ph_recoil_DUMMY.GetMean()
 
 #l_ph_recoil.AddEntry(H_ph_recoil_SIMC,"SIMC, INT = %s" % b_int_ph_recoil_simc)
 l_ph_recoil.AddEntry(H_ph_recoil_DATA,"DATA, INT = %s" % b_int_ph_recoil_data)
-l_ph_recoil.AddEntry(H_ph_recoil_DATA_nocut,"DATA (no cut), INT = %s" % b_int_ph_recoil_data_nocut)
-l_ph_recoil.AddEntry(H_ph_recoil_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_ph_recoil_data_nopid)
+if DEBBUG:
+    l_ph_recoil.AddEntry(H_ph_recoil_DATA_nocut,"DATA (no cut), INT = %s" % b_int_ph_recoil_data_nocut)
+    l_ph_recoil.AddEntry(H_ph_recoil_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_ph_recoil_data_nopid)
 l_ph_recoil.AddEntry(H_ph_recoil_DUMMY,"DUMMY, INT = %s" % b_int_ph_recoil_dummy)
 #l_ph_recoil.AddEntry(H_ph_recoil_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_ph_recoil_simc))
 l_ph_recoil.AddEntry(H_ph_recoil_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_ph_recoil_data))
-l_ph_recoil.AddEntry(H_ph_recoil_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_ph_recoil_data_nocut))
-l_ph_recoil.AddEntry(H_ph_recoil_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_ph_recoil_data_nopid))
+if DEBBUG:
+    l_ph_recoil.AddEntry(H_ph_recoil_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_ph_recoil_data_nocut))
+    l_ph_recoil.AddEntry(H_ph_recoil_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_ph_recoil_data_nopid))
 l_ph_recoil.AddEntry(H_ph_recoil_DUMMY,"DUMMY, MEAN = {0:.3f}".format(b_mean_ph_recoil_dummy))
 
 l_ph_recoil.Draw()
@@ -2539,8 +2592,9 @@ H_th_recoil_DUMMY.SetLineColor(kGreen)
 
 #H_th_recoil_SIMC.Draw("E")
 H_th_recoil_DATA.Draw("same")
-H_th_recoil_DATA_nocut.Draw("same")
-H_th_recoil_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_th_recoil_DATA_nocut.Draw("same")
+    H_th_recoil_DATA_nopid.Draw("same")
 H_th_recoil_DUMMY.Draw("same")
 
 #b_int_th_recoil_simc = int(H_th_recoil_SIMC.Integral())
@@ -2557,13 +2611,15 @@ b_mean_th_recoil_dummy = H_th_recoil_DUMMY.GetMean()
 
 #l_th_recoil.AddEntry(H_th_recoil_SIMC,"SIMC, INT = %s" % b_int_th_recoil_simc)
 l_th_recoil.AddEntry(H_th_recoil_DATA,"DATA, INT = %s" % b_int_th_recoil_data)
-l_th_recoil.AddEntry(H_th_recoil_DATA_nocut,"DATA (no cut), INT = %s" % b_int_th_recoil_data_nocut)
-l_th_recoil.AddEntry(H_th_recoil_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_th_recoil_data_nopid)
+if DEBBUG:
+    l_th_recoil.AddEntry(H_th_recoil_DATA_nocut,"DATA (no cut), INT = %s" % b_int_th_recoil_data_nocut)
+    l_th_recoil.AddEntry(H_th_recoil_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_th_recoil_data_nopid)
 l_th_recoil.AddEntry(H_th_recoil_DUMMY,"DUMMY, INT = %s" % b_int_th_recoil_dummy)
 #l_th_recoil.AddEntry(H_th_recoil_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_th_recoil_simc))
 l_th_recoil.AddEntry(H_th_recoil_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_th_recoil_data))
-l_th_recoil.AddEntry(H_th_recoil_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_th_recoil_data_nocut))
-l_th_recoil.AddEntry(H_th_recoil_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_th_recoil_data_nopid))
+if DEBBUG:
+    l_th_recoil.AddEntry(H_th_recoil_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_th_recoil_data_nocut))
+    l_th_recoil.AddEntry(H_th_recoil_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_th_recoil_data_nopid))
 l_th_recoil.AddEntry(H_th_recoil_DUMMY,"DUMMY, MEAN = {0:.3f}".format(b_mean_th_recoil_dummy))
 
 l_th_recoil.Draw()
@@ -2580,8 +2636,9 @@ H_pmiss_DUMMY.SetLineColor(kGreen)
 
 H_pmiss_SIMC.Draw("E")
 H_pmiss_DATA.Draw("same")
-H_pmiss_DATA_nocut.Draw("same")
-H_pmiss_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_pmiss_DATA_nocut.Draw("same")
+    H_pmiss_DATA_nopid.Draw("same")
 H_pmiss_DUMMY.Draw("same")
 
 b_int_pmiss_simc = int(H_pmiss_SIMC.Integral())
@@ -2598,13 +2655,15 @@ b_mean_pmiss_dummy = H_pmiss_DUMMY.GetMean()
 
 l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, INT = %s" % b_int_pmiss_simc)
 l_pmiss.AddEntry(H_pmiss_DATA,"DATA, INT = %s" % b_int_pmiss_data)
-l_pmiss.AddEntry(H_pmiss_DATA_nocut,"DATA (no cut), INT = %s" % b_int_pmiss_data_nocut)
-l_pmiss.AddEntry(H_pmiss_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_pmiss_data_nopid)
+if DEBBUG:
+    l_pmiss.AddEntry(H_pmiss_DATA_nocut,"DATA (no cut), INT = %s" % b_int_pmiss_data_nocut)
+    l_pmiss.AddEntry(H_pmiss_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_pmiss_data_nopid)
 l_pmiss.AddEntry(H_pmiss_DUMMY,"DUMMY, INT = %s" % b_int_pmiss_dummy)
 l_pmiss.AddEntry(H_pmiss_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_pmiss_simc))
 l_pmiss.AddEntry(H_pmiss_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_pmiss_data))
-l_pmiss.AddEntry(H_pmiss_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_pmiss_data_nocut))
-l_pmiss.AddEntry(H_pmiss_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_pmiss_data_nopid))
+if DEBBUG:
+    l_pmiss.AddEntry(H_pmiss_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_pmiss_data_nocut))
+    l_pmiss.AddEntry(H_pmiss_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_pmiss_data_nopid))
 l_pmiss.AddEntry(H_pmiss_DUMMY,"DUMMY, MEAN = {0:.3f}".format(b_mean_pmiss_dummy))
 
 l_pmiss.Draw()
@@ -2621,8 +2680,9 @@ H_emiss_DUMMY.SetLineColor(kGreen)
 
 H_emiss_SIMC.Draw("same")
 H_emiss_DATA.Draw("same")
-H_emiss_DATA_nocut.Draw("same")
-H_emiss_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_emiss_DATA_nocut.Draw("same")
+    H_emiss_DATA_nopid.Draw("same")
 H_emiss_DUMMY.Draw("same")
 
 b_int_emiss_simc = int(H_emiss_SIMC.Integral())
@@ -2639,13 +2699,15 @@ b_mean_emiss_dummy = H_emiss_DUMMY.GetMean()
 
 l_emiss.AddEntry(H_emiss_SIMC,"SIMC, INT = %s" % b_int_emiss_simc)
 l_emiss.AddEntry(H_emiss_DATA,"DATA, INT = %s" % b_int_emiss_data)
-l_emiss.AddEntry(H_emiss_DATA_nocut,"DATA (no cut), INT = %s" % b_int_emiss_data_nocut)
-l_emiss.AddEntry(H_emiss_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_emiss_data_nopid)
+if DEBBUG:
+    l_emiss.AddEntry(H_emiss_DATA_nocut,"DATA (no cut), INT = %s" % b_int_emiss_data_nocut)
+    l_emiss.AddEntry(H_emiss_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_emiss_data_nopid)
 l_emiss.AddEntry(H_emiss_DUMMY,"DUMMY, INT = %s" % b_int_emiss_dummy)
 l_emiss.AddEntry(H_emiss_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_emiss_simc))
 l_emiss.AddEntry(H_emiss_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_emiss_data))
-l_emiss.AddEntry(H_emiss_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_emiss_data_nocut))
-l_emiss.AddEntry(H_emiss_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_emiss_data_nopid))
+if DEBBUG:
+    l_emiss.AddEntry(H_emiss_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_emiss_data_nocut))
+    l_emiss.AddEntry(H_emiss_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_emiss_data_nopid))
 l_emiss.AddEntry(H_emiss_DUMMY,"DUMMY, MEAN = {0:.3f}".format(b_mean_emiss_dummy))
 
 l_emiss.Draw()
@@ -2662,8 +2724,9 @@ H_pmx_DUMMY.SetLineColor(kGreen)
 
 H_pmx_SIMC.Draw("E")
 H_pmx_DATA.Draw("same")
-H_pmx_DATA_nocut.Draw("same")
-H_pmx_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_pmx_DATA_nocut.Draw("same")
+    H_pmx_DATA_nopid.Draw("same")
 H_pmx_DUMMY.Draw("same")
 
 b_int_pmx_simc = int(H_pmx_SIMC.Integral())
@@ -2680,13 +2743,15 @@ b_mean_pmx_dummy = H_pmx_DUMMY.GetMean()
 
 l_pmx.AddEntry(H_pmx_SIMC,"SIMC, INT = %s" % b_int_pmx_simc)
 l_pmx.AddEntry(H_pmx_DATA,"DATA, INT = %s" % b_int_pmx_data)
-l_pmx.AddEntry(H_pmx_DATA_nocut,"DATA (no cut), INT = %s" % b_int_pmx_data_nocut)
-l_pmx.AddEntry(H_pmx_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_pmx_data_nopid)
+if DEBBUG:
+    l_pmx.AddEntry(H_pmx_DATA_nocut,"DATA (no cut), INT = %s" % b_int_pmx_data_nocut)
+    l_pmx.AddEntry(H_pmx_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_pmx_data_nopid)
 l_pmx.AddEntry(H_pmx_DUMMY,"DUMMY, INT = %s" % b_int_pmx_dummy)
 l_pmx.AddEntry(H_pmx_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_pmx_simc))
 l_pmx.AddEntry(H_pmx_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_pmx_data))
-l_pmx.AddEntry(H_pmx_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_pmx_data_nocut))
-l_pmx.AddEntry(H_pmx_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_pmx_data_nopid))
+if DEBBUG:
+    l_pmx.AddEntry(H_pmx_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_pmx_data_nocut))
+    l_pmx.AddEntry(H_pmx_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_pmx_data_nopid))
 l_pmx.AddEntry(H_pmx_DUMMY,"DUMMY, MEAN = {0:.3f}".format(b_mean_pmx_dummy))
 
 l_pmx.Draw()
@@ -2703,8 +2768,9 @@ H_pmy_DUMMY.SetLineColor(kGreen)
 
 H_pmy_SIMC.Draw("E")
 H_pmy_DATA.Draw("same")
-H_pmy_DATA_nocut.Draw("same")
-H_pmy_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_pmy_DATA_nocut.Draw("same")
+    H_pmy_DATA_nopid.Draw("same")
 H_pmy_DUMMY.Draw("same")
 
 b_int_pmy_simc = int(H_pmy_SIMC.Integral())
@@ -2721,13 +2787,15 @@ b_mean_pmy_dummy = H_pmy_DUMMY.GetMean()
 
 l_pmy.AddEntry(H_pmy_SIMC,"SIMC, INT = %s" % b_int_pmy_simc)
 l_pmy.AddEntry(H_pmy_DATA,"DATA, INT = %s" % b_int_pmy_data)
-l_pmy.AddEntry(H_pmy_DATA_nocut,"DATA (no cut), INT = %s" % b_int_pmy_data_nocut)
-l_pmy.AddEntry(H_pmy_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_pmy_data_nopid)
+if DEBBUG:
+    l_pmy.AddEntry(H_pmy_DATA_nocut,"DATA (no cut), INT = %s" % b_int_pmy_data_nocut)
+    l_pmy.AddEntry(H_pmy_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_pmy_data_nopid)
 l_pmy.AddEntry(H_pmy_DUMMY,"DUMMY, INT = %s" % b_int_pmy_dummy)
 l_pmy.AddEntry(H_pmy_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_pmy_simc))
 l_pmy.AddEntry(H_pmy_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_pmy_data))
-l_pmy.AddEntry(H_pmy_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_pmy_data_nocut))
-l_pmy.AddEntry(H_pmy_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_pmy_data_nopid))
+if DEBBUG:
+    l_pmy.AddEntry(H_pmy_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_pmy_data_nocut))
+    l_pmy.AddEntry(H_pmy_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_pmy_data_nopid))
 l_pmy.AddEntry(H_pmy_DUMMY,"DUMMY, MEAN = {0:.3f}".format(b_mean_pmy_dummy))
 
 l_pmy.Draw()
@@ -2744,8 +2812,9 @@ H_pmz_DUMMY.SetLineColor(kGreen)
 
 H_pmz_SIMC.Draw("E")
 H_pmz_DATA.Draw("same")
-H_pmz_DATA_nocut.Draw("same")
-H_pmz_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_pmz_DATA_nocut.Draw("same")
+    H_pmz_DATA_nopid.Draw("same")
 H_pmz_DUMMY.Draw("same")
 
 b_int_pmz_simc = int(H_pmz_SIMC.Integral())
@@ -2762,13 +2831,15 @@ b_mean_pmz_dummy = H_pmz_DUMMY.GetMean()
 
 l_pmz.AddEntry(H_pmz_SIMC,"SIMC, INT = %s" % b_int_pmz_simc)
 l_pmz.AddEntry(H_pmz_DATA,"DATA, INT = %s" % b_int_pmz_data)
-l_pmz.AddEntry(H_pmz_DATA_nocut,"DATA (no cut), INT = %s" % b_int_pmz_data_nocut)
-l_pmz.AddEntry(H_pmz_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_pmz_data_nopid)
+if DEBBUG:
+    l_pmz.AddEntry(H_pmz_DATA_nocut,"DATA (no cut), INT = %s" % b_int_pmz_data_nocut)
+    l_pmz.AddEntry(H_pmz_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_pmz_data_nopid)
 l_pmz.AddEntry(H_pmz_DUMMY,"DUMMY, INT = %s" % b_int_pmz_dummy)
 l_pmz.AddEntry(H_pmz_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_pmz_simc))
 l_pmz.AddEntry(H_pmz_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_pmz_data))
-l_pmz.AddEntry(H_pmz_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_pmz_data_nocut))
-l_pmz.AddEntry(H_pmz_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_pmz_data_nopid))
+if DEBBUG:
+    l_pmz.AddEntry(H_pmz_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_pmz_data_nocut))
+    l_pmz.AddEntry(H_pmz_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_pmz_data_nopid))
 l_pmz.AddEntry(H_pmz_DUMMY,"DUMMY, MEAN = {0:.3f}".format(b_mean_pmz_dummy))
 
 l_pmz.Draw()
@@ -2785,8 +2856,9 @@ H_W_DUMMY.SetLineColor(kGreen)
 
 H_W_SIMC.Draw("E")
 H_W_DATA.Draw("same")
-H_W_DATA_nocut.Draw("same")
-H_W_DATA_nopid.Draw("same")
+if DEBBUG:
+    H_W_DATA_nocut.Draw("same")
+    H_W_DATA_nopid.Draw("same")
 H_W_DUMMY.Draw("same")
 
 b_int_W_simc = int(H_W_SIMC.Integral())
@@ -2803,13 +2875,15 @@ b_mean_W_dummy = H_W_DUMMY.GetMean()
 
 l_W.AddEntry(H_W_SIMC,"SIMC, INT = %s" % b_int_W_simc)
 l_W.AddEntry(H_W_DATA,"DATA, INT = %s" % b_int_W_data)
-l_W.AddEntry(H_W_DATA_nocut,"DATA (no cut), INT = %s" % b_int_W_data_nocut)
-l_W.AddEntry(H_W_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_W_data_nopid)
+if DEBBUG:
+    l_W.AddEntry(H_W_DATA_nocut,"DATA (no cut), INT = %s" % b_int_W_data_nocut)
+    l_W.AddEntry(H_W_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_W_data_nopid)
 l_W.AddEntry(H_W_DUMMY,"DUMMY, INT = %s" % b_int_W_dummy)
 l_W.AddEntry(H_W_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_W_simc))
 l_W.AddEntry(H_W_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_W_data))
-l_W.AddEntry(H_W_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_W_data_nocut))
-l_W.AddEntry(H_W_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_W_data_nopid))
+if DEBBUG:
+    l_W.AddEntry(H_W_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_W_data_nocut))
+    l_W.AddEntry(H_W_DATA_nopid,"DATA (no PID cut), MEAN = {0:.3f}".format(b_mean_W_data_nopid))
 l_W.AddEntry(H_W_DUMMY,"DUMMY, MEAN = {0:.3f}".format(b_mean_W_dummy))
 
 l_W.Draw()

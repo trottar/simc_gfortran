@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 14:15:33 trottar"
+# Time-stamp: "2022-09-26 14:16:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -717,7 +717,7 @@ for evt in TBRANCH_DATA:
       #H_MMp2_DATA.SetBinError(pow(evt.MMp, 2))  
       #H_MMp2_DATA.SetBinError(evt.Mrecoil)
       
-      tot_effError
+      sum(tot_effError)
       '''
       '''
       # Random subtraction

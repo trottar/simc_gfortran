@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 15:30:29 trottar"
+# Time-stamp: "2022-09-26 15:58:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -58,9 +58,13 @@ efficiency_table = sys.argv[12]
 # Grab and calculate efficiency 
 
 sys.path.append('../')
-from getDataTable import calculate_effError
+from getDataTable import calculate_efficiency,calculate_effError
 
 tot_effError = [calculate_effError(run,efficiency_table) for run in data_runNums.split(' ')]
+tot_efficiency = [calculate_efficiency(run,efficiency_table) for run in data_runNums.split(' ')]
+eff_multiplied = reduce(lambda x, y: x*y, list(tot_efficiency)) # Multiply all efficiency per run
+
+eff_errorProp = eff_multiplied*sum([efferr/eff for eff,efferr in zip(tot_efficiency,tot_effError)]) # Error propagation for multiplication
 
 ###############################################################################################################################################
 # Define total efficiency vs run number plots

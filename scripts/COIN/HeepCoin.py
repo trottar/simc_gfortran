@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 15:12:09 trottar"
+# Time-stamp: "2022-09-26 15:18:18 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -614,7 +614,7 @@ for evt in TBRANCH_SIMC:
       H_epsilon_SIMC.Fill(evt.epsilon, evt.Weight)
       H_MMp2_SIMC.Fill(pow(evt.Em, 2) - pow(evt.Pm, 2), evt.Weight)
 
-ibin = 1      
+ibin = 1
 for evt in TBRANCH_DATA:
 
   #CUTs Definations 
@@ -770,6 +770,9 @@ for evt in TBRANCH_DATA:
       P_cal_etottracknorm_vs_P_aero_npeSum_DATA.Fill(evt.P_cal_etottracknorm,evt.P_aero_npeSum)
       P_hgcer_npeSum_vs_P_aero_npeSum_DATA.Fill(evt.P_hgcer_npeSum,evt.P_aero_npeSum)
 
+      ibin+=1
+
+ibin = 1      
 for evt in TBRANCH_DATA_nocut:
 
   H_ct_ep_DATA_nocut.Fill(evt.CTime_epCoinTime_ROC1)
@@ -861,7 +864,9 @@ for evt in TBRANCH_DATA_nocut:
   P_aero_npeSum_DATA_nocut.SetBinError(ibin,sum(tot_effError))
   
   ###################################################################################################################################################
-  
+  ibin+= 1
+
+ibin = 1  
 for evt in TBRANCH_DATA_nopid:
 
   #CUTs Definations 
@@ -871,8 +876,7 @@ for evt in TBRANCH_DATA_nopid:
   HMS_FixCut = (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
   HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)       
 
-  #........................................
-  
+  #........................................  
   
   if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
@@ -965,8 +969,9 @@ for evt in TBRANCH_DATA_nopid:
       P_aero_npeSum_DATA_nopid.SetBinError(ibin,sum(tot_effError))
       
       ###################################################################################################################################################
-      
-      
+      ibin += 1
+
+ibin = 1      
 for evt in TBRANCH_DUMMY:
 
   #......... Define Cuts.................
@@ -1090,7 +1095,9 @@ for evt in TBRANCH_DUMMY:
       #H_MMp2_DUMMY.SetBinError(ibin,sum(tot_effError))
       
       ###################################################################################################################################################
+      ibin += 1
       
+ibin = 1
 for evt in TBRANCH_DUMMY_nocut:
 
   H_ct_ep_DUMMY_nocut.Fill(evt.CTime_epCoinTime_ROC1)
@@ -1168,7 +1175,9 @@ for evt in TBRANCH_DUMMY_nocut:
   #H_MMp2_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
 
   ###################################################################################################################################################
-  
+  ibin += 1
+
+ibin = 1  
 for evt in TBRANCH_DUMMY_nopid:
 
   #......... Define Cuts.................
@@ -1259,6 +1268,7 @@ for evt in TBRANCH_DUMMY_nopid:
       #H_MMp2_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
       
       ###################################################################################################################################################
+      ibin += 1
       
 ################################################################################################################################################
 # Normalize simc by normfactor/nevents

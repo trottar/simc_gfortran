@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 14:31:07 trottar"
+# Time-stamp: "2022-09-26 14:50:05 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -678,7 +678,7 @@ for evt in TBRANCH_DATA:
       #H_MMp2_DATA.Fill(pow(evt.MMp, 2))  
       #H_MMp2_DATA.Fill(evt.Mrecoil)
       
-      #####
+      ###################################################################################################################################################
 
       H_ct_ep_DATA.SetBinError(ibin,sum(tot_effError))
       
@@ -716,6 +716,15 @@ for evt in TBRANCH_DATA:
       #H_MMp2_DATA.SetBinError(ibin,sum(tot_effError))
       #H_MMp2_DATA.SetBinError(ibin,sum(tot_effError))
 
+      H_cal_etottracknorm_DATA.SetBinError(ibin,sum(tot_effError))
+      H_cer_npeSum_DATA.SetBinError(ibin,sum(tot_effError))
+
+      P_cal_etottracknorm_DATA.SetBinError(ibin,sum(tot_effError))
+      P_hgcer_npeSum_DATA.SetBinError(ibin,sum(tot_effError))
+      P_aero_npeSum_DATA.SetBinError(ibin,sum(tot_effError))
+      
+      ###################################################################################################################################################
+      
       '''
       # Random subtraction
       H_ct_ep_vs_H_MMp2_DATA_rand.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
@@ -807,6 +816,53 @@ for evt in TBRANCH_DATA_nocut:
   P_hgcer_npeSum_DATA_nocut.Fill(evt.P_hgcer_npeSum)
   P_aero_npeSum_DATA_nocut.Fill(evt.P_aero_npeSum)
 
+  ###################################################################################################################################################
+
+  H_ct_ep_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+
+  H_ssxfp_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ssyfp_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ssxpfp_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ssypfp_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ssdelta_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ssxptar_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ssyptar_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+
+  H_hsxfp_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_hsyfp_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_hsxpfp_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_hsypfp_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_hsdelta_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_hsxptar_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_hsyptar_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+
+  H_ph_q_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_th_q_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ph_recoil_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_th_recoil_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+
+  H_pmiss_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_emiss_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  #H_emiss_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_pmx_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_pmy_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_pmz_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_Q2_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_W_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_epsilon_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_MMp2_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  #H_MMp2_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  #H_MMp2_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+
+  H_cal_etottracknorm_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  H_cer_npeSum_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+
+  P_cal_etottracknorm_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  P_hgcer_npeSum_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  P_aero_npeSum_DATA_nocut.SetBinError(ibin,sum(tot_effError))
+  
+  ###################################################################################################################################################
+  
 for evt in TBRANCH_DATA_nopid:
 
   #CUTs Definations 
@@ -864,6 +920,53 @@ for evt in TBRANCH_DATA_nopid:
       P_hgcer_npeSum_DATA_nopid.Fill(evt.P_hgcer_npeSum)
       P_aero_npeSum_DATA_nopid.Fill(evt.P_aero_npeSum)
 
+      ###################################################################################################################################################
+
+      H_ct_ep_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      
+      H_ssxfp_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ssyfp_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ssxpfp_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ssypfp_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ssdelta_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ssxptar_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ssyptar_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      
+      H_hsxfp_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_hsyfp_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_hsxpfp_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_hsypfp_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_hsdelta_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_hsxptar_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_hsyptar_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+
+      H_ph_q_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_th_q_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ph_recoil_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_th_recoil_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      
+      H_pmiss_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_emiss_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      #H_emiss_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_pmx_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_pmy_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_pmz_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_Q2_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_W_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_epsilon_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_MMp2_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      #H_MMp2_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      #H_MMp2_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+
+      H_cal_etottracknorm_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      H_cer_npeSum_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+
+      P_cal_etottracknorm_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      P_hgcer_npeSum_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      P_aero_npeSum_DATA_nopid.SetBinError(ibin,sum(tot_effError))
+      
+      ###################################################################################################################################################
+      
       
 for evt in TBRANCH_DUMMY:
 
@@ -949,6 +1052,53 @@ for evt in TBRANCH_DUMMY:
       #H_MMp2_DUMMY_rand.Fill(evt.Mrecoil)
       '''
 
+      ###################################################################################################################################################
+
+      H_ct_ep_DUMMY.SetBinError(ibin,sum(tot_effError))
+      
+      H_ssxfp_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_ssyfp_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_ssxpfp_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_ssypfp_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_ssdelta_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_ssxptar_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_ssyptar_DUMMY.SetBinError(ibin,sum(tot_effError))
+      
+      H_hsxfp_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_hsyfp_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_hsxpfp_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_hsypfp_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_hsdelta_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_hsxptar_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_hsyptar_DUMMY.SetBinError(ibin,sum(tot_effError))
+
+      H_ph_q_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_th_q_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_ph_recoil_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_th_recoil_DUMMY.SetBinError(ibin,sum(tot_effError))
+      
+      H_pmiss_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_emiss_DUMMY.SetBinError(ibin,sum(tot_effError))
+      #H_emiss_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_pmx_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_pmy_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_pmz_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_Q2_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_W_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_epsilon_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_MMp2_DUMMY.SetBinError(ibin,sum(tot_effError))
+      #H_MMp2_DUMMY.SetBinError(ibin,sum(tot_effError))
+      #H_MMp2_DUMMY.SetBinError(ibin,sum(tot_effError))
+
+      H_cal_etottracknorm_DUMMY.SetBinError(ibin,sum(tot_effError))
+      H_cer_npeSum_DUMMY.SetBinError(ibin,sum(tot_effError))
+
+      P_cal_etottracknorm_DUMMY.SetBinError(ibin,sum(tot_effError))
+      P_hgcer_npeSum_DUMMY.SetBinError(ibin,sum(tot_effError))
+      P_aero_npeSum_DUMMY.SetBinError(ibin,sum(tot_effError))
+      
+      ###################################################################################################################################################
+      
 for evt in TBRANCH_DUMMY_nocut:
 
   H_ct_ep_DUMMY_nocut.Fill(evt.CTime_epCoinTime_ROC1)
@@ -987,6 +1137,53 @@ for evt in TBRANCH_DUMMY_nocut:
   #H_MMp2_DUMMY_nocut.Fill(evt.MMp)  
   #H_MMp2_DUMMY_nocut.Fill(evt.Mrecoil)
 
+  ###################################################################################################################################################
+
+  H_ct_ep_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+
+  H_ssxfp_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ssyfp_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ssxpfp_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ssypfp_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ssdelta_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ssxptar_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ssyptar_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+
+  H_hsxfp_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_hsyfp_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_hsxpfp_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_hsypfp_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_hsdelta_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_hsxptar_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_hsyptar_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+
+  H_ph_q_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_th_q_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_ph_recoil_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_th_recoil_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+
+  H_pmiss_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_emiss_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  #H_emiss_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_pmx_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_pmy_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_pmz_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_Q2_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_W_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_epsilon_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_MMp2_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  #H_MMp2_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  #H_MMp2_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+
+  H_cal_etottracknorm_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  H_cer_npeSum_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+
+  P_cal_etottracknorm_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  P_hgcer_npeSum_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+  P_aero_npeSum_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
+
+  ###################################################################################################################################################
+  
 for evt in TBRANCH_DUMMY_nopid:
 
   #......... Define Cuts.................
@@ -1038,6 +1235,53 @@ for evt in TBRANCH_DUMMY_nopid:
       #H_MMp2_DUMMY_nopid.Fill(evt.MMp)  
       #H_MMp2_DUMMY_nopid.Fill(evt.Mrecoil)
 
+      ###################################################################################################################################################
+
+      H_ct_ep_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      
+      H_ssxfp_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ssyfp_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ssxpfp_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ssypfp_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ssdelta_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ssxptar_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ssyptar_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      
+      H_hsxfp_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_hsyfp_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_hsxpfp_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_hsypfp_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_hsdelta_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_hsxptar_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_hsyptar_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+
+      H_ph_q_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_th_q_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_ph_recoil_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_th_recoil_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      
+      H_pmiss_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_emiss_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      #H_emiss_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_pmx_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_pmy_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_pmz_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_Q2_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_W_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_epsilon_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_MMp2_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      #H_MMp2_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      #H_MMp2_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+
+      H_cal_etottracknorm_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      H_cer_npeSum_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+
+      P_cal_etottracknorm_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      P_hgcer_npeSum_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      P_aero_npeSum_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
+      
+      ###################################################################################################################################################
+      
 ################################################################################################################################################
 # Normalize simc by normfactor/nevents
 # Normalize data by effective charge

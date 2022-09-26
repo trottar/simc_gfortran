@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 15:28:11 trottar"
+# Time-stamp: "2022-09-26 15:30:29 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -2483,7 +2483,7 @@ if DEBUG:
     l_ph_q.AddEntry(H_ph_q_DATA_nocut,"DATA (no cut), INT = %s" % b_int_ph_q_data_nocut)
     l_ph_q.AddEntry(H_ph_q_DATA_nopid,"DATA (no PID cut), INT = %s" % b_int_ph_q_data_nopid)
 l_ph_q.AddEntry(H_ph_q_DUMMY,"DUMMY, INT = %s" % b_int_ph_q_dummy)
-l_ph_q.AddEntry(H_ph_q_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_ph_q_simc))
+#l_ph_q.AddEntry(H_ph_q_SIMC,"SIMC, MEAN = {0:.3f}".format(b_mean_ph_q_simc))
 l_ph_q.AddEntry(H_ph_q_DATA,"DATA, MEAN = {0:.3f}".format(b_mean_ph_q_data))
 if DEBUG:
     l_ph_q.AddEntry(H_ph_q_DATA_nocut,"DATA (no cut), MEAN = {0:.3f}".format(b_mean_ph_q_data_nocut))

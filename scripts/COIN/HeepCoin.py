@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 15:23:16 trottar"
+# Time-stamp: "2022-09-26 15:23:29 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -770,7 +770,6 @@ for evt in TBRANCH_DATA:
       P_cal_etottracknorm_vs_P_aero_npeSum_DATA.Fill(evt.P_cal_etottracknorm,evt.P_aero_npeSum)
       P_hgcer_npeSum_vs_P_aero_npeSum_DATA.Fill(evt.P_hgcer_npeSum,evt.P_aero_npeSum)
 
-      print(ibin)
       ibin+=1
 
 ibin = 1      

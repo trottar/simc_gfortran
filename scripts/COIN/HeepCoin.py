@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 16:40:17 trottar"
+# Time-stamp: "2022-09-26 16:45:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -68,7 +68,7 @@ tot_effError = [calculate_effError(run,efficiency_table) for run in data_runNums
 
 eff_errProp = sum(tot_effError) # Error propagation for addition
 
-print("\n\n",eff_errProp)
+print("\n\nTotal Efficiency Uncertainty =",eff_errProp)
 
 ###############################################################################################################################################
 # Define total efficiency vs run number plots
@@ -717,7 +717,7 @@ for evt in TBRANCH_DATA:
       H_pmy_DATA.SetBinError(ibin,eff_errProp)
       H_pmz_DATA.SetBinError(ibin,eff_errProp)
       H_Q2_DATA.SetBinError(ibin,eff_errProp)
-      H_W_DATA.SetBinError(ibin,eff_errProp*evt.W)
+      H_W_DATA.SetBinError(ibin,eff_errProp)
       H_epsilon_DATA.SetBinError(ibin,eff_errProp)
       H_MMp2_DATA.SetBinError(ibin,eff_errProp)
       #H_MMp2_DATA.SetBinError(ibin,eff_errProp)

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 17:04:45 trottar"
+# Time-stamp: "2022-09-26 17:05:44 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -61,10 +61,10 @@ sys.path.append('../')
 from getDataTable import calculate_effError
 
 tot_effError_data = [calculate_effError(run,efficiency_table) for run in data_runNums.split(' ')]
-eff_errProp_data = sum_data(tot_effError) # Error propagation for addition
+eff_errProp_data = sum(tot_effError_data) # Error propagation for addition
 
-tot_effError_data = [calculate_effError(run,efficiency_table) for run in data_runNums.split(' ')]
-eff_errProp_data = sum_data(tot_effError) # Error propagation for addition
+tot_effError_dummy = [calculate_effError(run,efficiency_table) for run in dummy_runNums.split(' ')]
+eff_errProp_dummy = sum(tot_effError_dummy) # Error propagation for addition
 
 print("\n\nTotal Data Efficiency Uncertainty =",eff_errProp_data)
 print("Total Dummy Efficiency Uncertainty =",eff_errProp_dummy)

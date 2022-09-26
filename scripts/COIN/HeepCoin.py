@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 15:21:40 trottar"
+# Time-stamp: "2022-09-26 15:23:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1773,9 +1773,8 @@ log_txt.SetTextSize(0.0335)
 for cut in log_entry:
     log_txt.AddText(cut)
 l_pid.AddEntry(H_cal_etottracknorm_DATA,"p cut")
-if DEBUG:
-    l_pid.AddEntry(H_cal_etottracknorm_DATA_nocut,"No cut")
-    l_pid.AddEntry(H_cal_etottracknorm_DATA_nopid,"No PID cut")
+l_pid.AddEntry(H_cal_etottracknorm_DATA_nocut,"No cut")
+l_pid.AddEntry(H_cal_etottracknorm_DATA_nopid,"No PID cut")
 log_txt.Draw("same")
 l_pid.Draw("same")
 c_pid.Draw()

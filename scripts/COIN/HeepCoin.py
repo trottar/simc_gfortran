@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 15:08:14 trottar"
+# Time-stamp: "2022-09-26 15:12:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1719,45 +1719,40 @@ gPad.SetLogy()
 H_cal_etottracknorm_DATA_nocut.SetLineColor(kCyan)
 H_cal_etottracknorm_DATA_nopid.SetLineColor(kMagenta)
 H_cal_etottracknorm_DATA.Draw()
-if DEBUG:
-    H_cal_etottracknorm_DATA_nocut.Draw("same")
-    H_cal_etottracknorm_DATA_nopid.Draw("same")
+H_cal_etottracknorm_DATA_nocut.Draw("same")
+H_cal_etottracknorm_DATA_nopid.Draw("same")
 
 c_pid.cd(2)
 H_cer_npeSum_DATA_nocut.SetLineColor(kCyan)
 H_cer_npeSum_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
 H_cer_npeSum_DATA.Draw()
-if DEBUG:
-    H_cer_npeSum_DATA_nocut.Draw("same")
-    H_cer_npeSum_DATA_nopid.Draw("same")
+H_cer_npeSum_DATA_nocut.Draw("same")
+H_cer_npeSum_DATA_nopid.Draw("same")
 
 c_pid.cd(3)
 P_cal_etottracknorm_DATA_nocut.SetLineColor(kCyan)
 P_cal_etottracknorm_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
 P_cal_etottracknorm_DATA.Draw()
-if DEBUG:
-    P_cal_etottracknorm_DATA_nocut.Draw("same")
-    P_cal_etottracknorm_DATA_nopid.Draw("same")
+P_cal_etottracknorm_DATA_nocut.Draw("same")
+P_cal_etottracknorm_DATA_nopid.Draw("same")
 
 c_pid.cd(4)
 P_hgcer_npeSum_DATA_nocut.SetLineColor(kCyan)
 P_hgcer_npeSum_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
 P_hgcer_npeSum_DATA.Draw()
-if DEBUG:
-    P_hgcer_npeSum_DATA_nocut.Draw("same")
-    P_hgcer_npeSum_DATA_nopid.Draw("same")
+P_hgcer_npeSum_DATA_nocut.Draw("same")
+P_hgcer_npeSum_DATA_nopid.Draw("same")
 
 c_pid.cd(5)
 P_aero_npeSum_DATA_nocut.SetLineColor(kCyan)
 P_aero_npeSum_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
 P_aero_npeSum_DATA.Draw()
-if DEBUG:
-    P_aero_npeSum_DATA_nocut.Draw("same")
-    P_aero_npeSum_DATA_nopid.Draw("same")
+P_aero_npeSum_DATA_nocut.Draw("same")
+P_aero_npeSum_DATA_nopid.Draw("same")
 
 c_pid.cd(6)
 l_pid.SetTextSize(0.05)
@@ -1806,15 +1801,13 @@ H_ct_ep_DATA_nopid.SetLineColor(kMagenta)
 
 H_ct_ep_DATA.Draw("E")
 H_ct_ep_DUMMY.Draw("same")
-if DEBUG:
-    H_ct_ep_DATA_nocut.Draw("same")
-    H_ct_ep_DATA_nopid.Draw("same")
+H_ct_ep_DATA_nocut.Draw("same")
+H_ct_ep_DATA_nopid.Draw("same")
 
 l_ct_ep.AddEntry(H_ct_ep_DATA,"p cut")
 l_ct_ep.AddEntry(H_ct_ep_DUMMY,"Dummy")
-if DEBUG:
-    l_ct_ep.AddEntry(H_ct_ep_DATA_nocut,"No cut")
-    l_ct_ep.AddEntry(H_ct_ep_DATA_nopid,"No PID cut")
+l_ct_ep.AddEntry(H_ct_ep_DATA_nocut,"No cut")
+l_ct_ep.AddEntry(H_ct_ep_DATA_nopid,"No PID cut")
 
 l_ct_ep.Draw()
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 16:09:16 trottar"
+# Time-stamp: "2022-09-26 16:16:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -64,7 +64,9 @@ tot_effError = [calculate_effError(run,efficiency_table) for run in data_runNums
 tot_efficiency = [calculate_efficiency(run,efficiency_table) for run in data_runNums.split(' ')]
 eff_multiplied = reduce(lambda x, y: x*y, list(tot_efficiency)) # Multiply all efficiency per run
 
-eff_errProp = eff_multiplied*sum([efferr/eff for eff,efferr in zip(tot_efficiency,tot_effError)]) # Error propagation for multiplication
+eff_errProp = eff_multiplied*sum(tot_effError) # Error propagation for multiplication
+
+print("\n\n",eff_errProp)
 
 ###############################################################################################################################################
 # Define total efficiency vs run number plots
@@ -1733,40 +1735,40 @@ gPad.SetLogy()
 H_cal_etottracknorm_DATA_nocut.SetLineColor(kCyan)
 H_cal_etottracknorm_DATA_nopid.SetLineColor(kMagenta)
 H_cal_etottracknorm_DATA.Draw("E")
-H_cal_etottracknorm_DATA_nocut.Draw("same","E")
-H_cal_etottracknorm_DATA_nopid.Draw("same","E")
+H_cal_etottracknorm_DATA_nocut.Draw("same, E")
+H_cal_etottracknorm_DATA_nopid.Draw("same, E")
 
 c_pid.cd(2)
 H_cer_npeSum_DATA_nocut.SetLineColor(kCyan)
 H_cer_npeSum_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
 H_cer_npeSum_DATA.Draw("E")
-H_cer_npeSum_DATA_nocut.Draw("same","E")
-H_cer_npeSum_DATA_nopid.Draw("same","E")
+H_cer_npeSum_DATA_nocut.Draw("same, E")
+H_cer_npeSum_DATA_nopid.Draw("same, E")
 
 c_pid.cd(3)
 P_cal_etottracknorm_DATA_nocut.SetLineColor(kCyan)
 P_cal_etottracknorm_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
 P_cal_etottracknorm_DATA.Draw("E")
-P_cal_etottracknorm_DATA_nocut.Draw("same","E")
-P_cal_etottracknorm_DATA_nopid.Draw("same","E")
+P_cal_etottracknorm_DATA_nocut.Draw("same, E")
+P_cal_etottracknorm_DATA_nopid.Draw("same, E")
 
 c_pid.cd(4)
 P_hgcer_npeSum_DATA_nocut.SetLineColor(kCyan)
 P_hgcer_npeSum_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
 P_hgcer_npeSum_DATA.Draw("E")
-P_hgcer_npeSum_DATA_nocut.Draw("same","E")
-P_hgcer_npeSum_DATA_nopid.Draw("same","E")
+P_hgcer_npeSum_DATA_nocut.Draw("same, E")
+P_hgcer_npeSum_DATA_nopid.Draw("same, E")
 
 c_pid.cd(5)
 P_aero_npeSum_DATA_nocut.SetLineColor(kCyan)
 P_aero_npeSum_DATA_nopid.SetLineColor(kMagenta)
 gPad.SetLogy()
 P_aero_npeSum_DATA.Draw("E")
-P_aero_npeSum_DATA_nocut.Draw("same","E")
-P_aero_npeSum_DATA_nopid.Draw("same","E")
+P_aero_npeSum_DATA_nocut.Draw("same, E")
+P_aero_npeSum_DATA_nopid.Draw("same, E")
 
 c_pid.cd(6)
 l_pid.SetTextSize(0.05)
@@ -1778,8 +1780,8 @@ for cut in log_entry:
 l_pid.AddEntry(H_cal_etottracknorm_DATA,"p cut")
 l_pid.AddEntry(H_cal_etottracknorm_DATA_nocut,"No cut")
 l_pid.AddEntry(H_cal_etottracknorm_DATA_nopid,"No PID cut")
-log_txt.Draw("same","E")
-l_pid.Draw("same","E")
+log_txt.Draw("same, E")
+l_pid.Draw("same, E")
 c_pid.Draw()
 
 c_pid.Print(outputpdf)
@@ -1813,9 +1815,9 @@ H_ct_ep_DATA_nocut.SetLineColor(kCyan)
 H_ct_ep_DATA_nopid.SetLineColor(kMagenta)
 
 H_ct_ep_DATA.Draw("E")
-H_ct_ep_DUMMY.Draw("same","E")
-H_ct_ep_DATA_nocut.Draw("same","E")
-H_ct_ep_DATA_nopid.Draw("same","E")
+H_ct_ep_DUMMY.Draw("same, E")
+H_ct_ep_DATA_nocut.Draw("same, E")
+H_ct_ep_DATA_nopid.Draw("same, E")
 
 l_ct_ep.AddEntry(H_ct_ep_DATA,"p cut")
 l_ct_ep.AddEntry(H_ct_ep_DUMMY,"Dummy")
@@ -1907,11 +1909,11 @@ H_ssxfp_DATA_nopid.SetLineColor(kMagenta)
 H_ssxfp_DUMMY.SetLineColor(kGreen)
 
 H_ssxfp_SIMC.Draw("E")
-H_ssxfp_DATA.Draw("same","E")
-H_ssxfp_DUMMY.Draw("same","E")
+H_ssxfp_DATA.Draw("same, E")
+H_ssxfp_DUMMY.Draw("same, E")
 if DEBUG:
-    H_ssxfp_DATA_nocut.Draw("same","E")
-    H_ssxfp_DATA_nopid.Draw("same","E")
+    H_ssxfp_DATA_nocut.Draw("same, E")
+    H_ssxfp_DATA_nopid.Draw("same, E")
 
 b_int_xfp_simc = int(H_ssxfp_SIMC.Integral())
 b_int_xfp_data = int(H_ssxfp_DATA.Integral())
@@ -1939,11 +1941,11 @@ H_ssyfp_DATA_nopid.SetLineColor(kMagenta)
 H_ssyfp_DUMMY.SetLineColor(kGreen)
 
 H_ssyfp_SIMC.Draw("E")
-H_ssyfp_DATA.Draw("same","E")
-H_ssyfp_DUMMY.Draw("same","E")
+H_ssyfp_DATA.Draw("same, E")
+H_ssyfp_DUMMY.Draw("same, E")
 if DEBUG:
-    H_ssyfp_DATA_nocut.Draw("same","E")
-    H_ssyfp_DATA_nopid.Draw("same","E")
+    H_ssyfp_DATA_nocut.Draw("same, E")
+    H_ssyfp_DATA_nopid.Draw("same, E")
 
 b_int_yfp_simc = int(H_ssyfp_SIMC.Integral())
 b_int_yfp_data = int(H_ssyfp_DATA.Integral())
@@ -1971,11 +1973,11 @@ H_ssxpfp_DATA_nopid.SetLineColor(kMagenta)
 H_ssxpfp_DUMMY.SetLineColor(kGreen)
 
 H_ssxpfp_SIMC.Draw("E")
-H_ssxpfp_DATA.Draw("same","E")
+H_ssxpfp_DATA.Draw("same, E")
 if DEBUG:
-    H_ssxpfp_DATA_nocut.Draw("same","E")
-    H_ssxpfp_DATA_nopid.Draw("same","E")
-H_ssxpfp_DUMMY.Draw("same","E")
+    H_ssxpfp_DATA_nocut.Draw("same, E")
+    H_ssxpfp_DATA_nopid.Draw("same, E")
+H_ssxpfp_DUMMY.Draw("same, E")
 
 b_int_xpfp_simc = int(H_ssxpfp_SIMC.Integral())
 b_int_xpfp_data = int(H_ssxpfp_DATA.Integral())
@@ -2003,11 +2005,11 @@ H_ssypfp_DATA_nopid.SetLineColor(kMagenta)
 H_ssypfp_DUMMY.SetLineColor(kGreen)
 
 H_ssypfp_SIMC.Draw("E")
-H_ssypfp_DATA.Draw("same","E")
+H_ssypfp_DATA.Draw("same, E")
 if DEBUG:
-    H_ssypfp_DATA_nocut.Draw("same","E")
-    H_ssypfp_DATA_nopid.Draw("same","E")
-H_ssypfp_DUMMY.Draw("same","E")
+    H_ssypfp_DATA_nocut.Draw("same, E")
+    H_ssypfp_DATA_nopid.Draw("same, E")
+H_ssypfp_DUMMY.Draw("same, E")
 
 b_int_ypfp_simc = int(H_ssypfp_SIMC.Integral())
 b_int_ypfp_data = int(H_ssypfp_DATA.Integral())
@@ -2035,11 +2037,11 @@ H_hsxfp_DATA_nopid.SetLineColor(kMagenta)
 H_hsxfp_DUMMY.SetLineColor(kGreen)
 
 H_hsxfp_SIMC.Draw("E")
-H_hsxfp_DATA.Draw("same","E")
+H_hsxfp_DATA.Draw("same, E")
 if DEBUG:
-    H_hsxfp_DATA_nocut.Draw("same","E")
-    H_hsxfp_DATA_nopid.Draw("same","E")
-H_hsxfp_DUMMY.Draw("same","E")
+    H_hsxfp_DATA_nocut.Draw("same, E")
+    H_hsxfp_DATA_nopid.Draw("same, E")
+H_hsxfp_DUMMY.Draw("same, E")
 
 b_int_hxfp_simc = int(H_hsxfp_SIMC.Integral())
 b_int_hxfp_data = int(H_hsxfp_DATA.Integral())
@@ -2067,11 +2069,11 @@ H_hsyfp_DATA_nopid.SetLineColor(kMagenta)
 H_hsyfp_DUMMY.SetLineColor(kGreen)
 
 H_hsyfp_SIMC.Draw("E")
-H_hsyfp_DATA.Draw("same","E")
+H_hsyfp_DATA.Draw("same, E")
 if DEBUG:
-    H_hsyfp_DATA_nocut.Draw("same","E")
-    H_hsyfp_DATA_nopid.Draw("same","E")
-H_hsyfp_DUMMY.Draw("same","E")
+    H_hsyfp_DATA_nocut.Draw("same, E")
+    H_hsyfp_DATA_nopid.Draw("same, E")
+H_hsyfp_DUMMY.Draw("same, E")
 
 b_int_hyfp_simc = int(H_hsyfp_SIMC.Integral())
 b_int_hyfp_data = int(H_hsyfp_DATA.Integral())
@@ -2099,11 +2101,11 @@ H_hsxpfp_DATA_nopid.SetLineColor(kMagenta)
 H_hsxpfp_DUMMY.SetLineColor(kGreen)
 
 H_hsxpfp_SIMC.Draw("E")
-H_hsxpfp_DATA.Draw("same","E")
+H_hsxpfp_DATA.Draw("same, E")
 if DEBUG:
-    H_hsxpfp_DATA_nocut.Draw("same","E")
-    H_hsxpfp_DATA_nopid.Draw("same","E")
-H_hsxpfp_DUMMY.Draw("same","E")
+    H_hsxpfp_DATA_nocut.Draw("same, E")
+    H_hsxpfp_DATA_nopid.Draw("same, E")
+H_hsxpfp_DUMMY.Draw("same, E")
 
 b_int_hxpfp_simc = int(H_hsxpfp_SIMC.Integral())
 b_int_hxpfp_data = int(H_hsxpfp_DATA.Integral())
@@ -2131,11 +2133,11 @@ H_hsypfp_DATA_nopid.SetLineColor(kMagenta)
 H_hsypfp_DUMMY.SetLineColor(kGreen)
 
 H_hsypfp_SIMC.Draw("E")
-H_hsypfp_DATA.Draw("same","E")
+H_hsypfp_DATA.Draw("same, E")
 if DEBUG:
-    H_hsypfp_DATA_nocut.Draw("same","E")
-    H_hsypfp_DATA_nopid.Draw("same","E")
-H_hsypfp_DUMMY.Draw("same","E")
+    H_hsypfp_DATA_nocut.Draw("same, E")
+    H_hsypfp_DATA_nopid.Draw("same, E")
+H_hsypfp_DUMMY.Draw("same, E")
 
 b_int_hypfp_simc = int(H_hsypfp_SIMC.Integral())
 b_int_hypfp_data = int(H_hsypfp_DATA.Integral())
@@ -2163,11 +2165,11 @@ H_ssxptar_DATA_nopid.SetLineColor(kMagenta)
 H_ssxptar_DUMMY.SetLineColor(kGreen)
 
 H_ssxptar_SIMC.Draw("E")
-H_ssxptar_DATA.Draw("same","E")
+H_ssxptar_DATA.Draw("same, E")
 if DEBUG:
-    H_ssxptar_DATA_nocut.Draw("same","E")
-    H_ssxptar_DATA_nopid.Draw("same","E")
-H_ssxptar_DUMMY.Draw("same","E")
+    H_ssxptar_DATA_nocut.Draw("same, E")
+    H_ssxptar_DATA_nopid.Draw("same, E")
+H_ssxptar_DUMMY.Draw("same, E")
 
 b_int_xptar_simc = int(H_ssxptar_SIMC.Integral())
 b_int_xptar_data = int(H_ssxptar_DATA.Integral())
@@ -2195,11 +2197,11 @@ H_ssyptar_DATA_nopid.SetLineColor(kMagenta)
 H_ssyptar_DUMMY.SetLineColor(kGreen)
 
 H_ssyptar_SIMC.Draw("E")
-H_ssyptar_DATA.Draw("same","E")
+H_ssyptar_DATA.Draw("same, E")
 if DEBUG:
-    H_ssyptar_DATA_nocut.Draw("same","E")
-    H_ssyptar_DATA_nopid.Draw("same","E")
-H_ssyptar_DUMMY.Draw("same","E")
+    H_ssyptar_DATA_nocut.Draw("same, E")
+    H_ssyptar_DATA_nopid.Draw("same, E")
+H_ssyptar_DUMMY.Draw("same, E")
 
 b_int_yptar_simc = int(H_ssyptar_SIMC.Integral())
 b_int_yptar_data = int(H_ssyptar_DATA.Integral())
@@ -2227,11 +2229,11 @@ H_hsxptar_DATA_nopid.SetLineColor(kMagenta)
 H_hsxptar_DUMMY.SetLineColor(kGreen)
 
 H_hsxptar_SIMC.Draw("E")
-H_hsxptar_DATA.Draw("same","E")
+H_hsxptar_DATA.Draw("same, E")
 if DEBUG:
-    H_hsxptar_DATA_nocut.Draw("same","E")
-    H_hsxptar_DATA_nopid.Draw("same","E")
-H_hsxptar_DUMMY.Draw("same","E")
+    H_hsxptar_DATA_nocut.Draw("same, E")
+    H_hsxptar_DATA_nopid.Draw("same, E")
+H_hsxptar_DUMMY.Draw("same, E")
 
 b_int_hxptar_simc = int(H_hsxptar_SIMC.Integral())
 b_int_hxptar_data = int(H_hsxptar_DATA.Integral())
@@ -2259,11 +2261,11 @@ H_hsyptar_DATA_nopid.SetLineColor(kMagenta)
 H_hsyptar_DUMMY.SetLineColor(kGreen)
 
 H_hsyptar_SIMC.Draw("E")
-H_hsyptar_DATA.Draw("same","E")
+H_hsyptar_DATA.Draw("same, E")
 if DEBUG:
-    H_hsyptar_DATA_nocut.Draw("same","E")
-    H_hsyptar_DATA_nopid.Draw("same","E")
-H_hsyptar_DUMMY.Draw("same","E")
+    H_hsyptar_DATA_nocut.Draw("same, E")
+    H_hsyptar_DATA_nopid.Draw("same, E")
+H_hsyptar_DUMMY.Draw("same, E")
 
 b_int_hyptar_simc = int(H_hsyptar_SIMC.Integral())
 b_int_hyptar_data = int(H_hsyptar_DATA.Integral())
@@ -2291,11 +2293,11 @@ H_ssdelta_DATA_nopid.SetLineColor(kMagenta)
 H_ssdelta_DUMMY.SetLineColor(kGreen)
 
 H_ssdelta_SIMC.Draw("E")
-H_ssdelta_DATA.Draw("same","E")
+H_ssdelta_DATA.Draw("same, E")
 if DEBUG:
-    H_ssdelta_DATA_nocut.Draw("same","E")
-    H_ssdelta_DATA_nopid.Draw("same","E")
-H_ssdelta_DUMMY.Draw("same","E")
+    H_ssdelta_DATA_nocut.Draw("same, E")
+    H_ssdelta_DATA_nopid.Draw("same, E")
+H_ssdelta_DUMMY.Draw("same, E")
 
 b_int_Delta_simc = int(H_ssdelta_SIMC.Integral())
 b_int_Delta_data = int(H_ssdelta_DATA.Integral())
@@ -2323,11 +2325,11 @@ H_hsdelta_DATA_nopid.SetLineColor(kMagenta)
 H_hsdelta_DUMMY.SetLineColor(kGreen)
 
 H_hsdelta_SIMC.Draw("E")
-H_hsdelta_DATA.Draw("same","E")
+H_hsdelta_DATA.Draw("same, E")
 if DEBUG:
-    H_hsdelta_DATA_nocut.Draw("same","E")
-    H_hsdelta_DATA_nopid.Draw("same","E")
-H_hsdelta_DUMMY.Draw("same","E")
+    H_hsdelta_DATA_nocut.Draw("same, E")
+    H_hsdelta_DATA_nopid.Draw("same, E")
+H_hsdelta_DUMMY.Draw("same, E")
 
 b_int_hDelta_simc = int(H_hsdelta_SIMC.Integral())
 b_int_hDelta_data = int(H_hsdelta_DATA.Integral())
@@ -2355,11 +2357,11 @@ H_Q2_DATA_nopid.SetLineColor(kMagenta)
 H_Q2_DUMMY.SetLineColor(kGreen)
 
 H_Q2_SIMC.Draw("E")
-H_Q2_DATA.Draw("same","E")
+H_Q2_DATA.Draw("same, E")
 if DEBUG:
-    H_Q2_DATA_nocut.Draw("same","E")
-    H_Q2_DATA_nopid.Draw("same","E")
-H_Q2_DUMMY.Draw("same","E")
+    H_Q2_DATA_nocut.Draw("same, E")
+    H_Q2_DATA_nopid.Draw("same, E")
+H_Q2_DUMMY.Draw("same, E")
 
 b_int_Q2_simc = int(H_Q2_SIMC.Integral())
 b_int_Q2_data = int(H_Q2_DATA.Integral())
@@ -2387,11 +2389,11 @@ H_epsilon_DATA_nopid.SetLineColor(kMagenta)
 H_epsilon_DUMMY.SetLineColor(kGreen)
 
 H_epsilon_SIMC.Draw("E")
-H_epsilon_DATA.Draw("same","E")
+H_epsilon_DATA.Draw("same, E")
 if DEBUG:
-    H_epsilon_DATA_nocut.Draw("same","E")
-    H_epsilon_DATA_nopid.Draw("same","E")
-H_epsilon_DUMMY.Draw("same","E")
+    H_epsilon_DATA_nocut.Draw("same, E")
+    H_epsilon_DATA_nopid.Draw("same, E")
+H_epsilon_DUMMY.Draw("same, E")
 
 b_int_epsilon_simc = int(H_epsilon_SIMC.Integral())
 b_int_epsilon_data = int(H_epsilon_DATA.Integral())
@@ -2419,11 +2421,11 @@ H_MMp2_DATA_nopid.SetLineColor(kMagenta)
 H_MMp2_DUMMY.SetLineColor(kGreen)
 
 H_MMp2_SIMC.Draw("E")
-H_MMp2_DATA.Draw("same","E")
+H_MMp2_DATA.Draw("same, E")
 if DEBUG:
-    H_MMp2_DATA_nocut.Draw("same","E")
-    H_MMp2_DATA_nopid.Draw("same","E")
-H_MMp2_DUMMY.Draw("same","E")
+    H_MMp2_DATA_nocut.Draw("same, E")
+    H_MMp2_DATA_nopid.Draw("same, E")
+H_MMp2_DUMMY.Draw("same, E")
 
 b_int_MMp2_simc = int(H_MMp2_SIMC.Integral())
 b_int_MMp2_data = int(H_MMp2_DATA.Integral())
@@ -2463,11 +2465,11 @@ H_ph_q_DATA_nopid.SetLineColor(kMagenta)
 H_ph_q_DUMMY.SetLineColor(kGreen)
 
 #H_ph_q_SIMC.Draw("E")
-H_ph_q_DATA.Draw("same","E")
+H_ph_q_DATA.Draw("same, E")
 if DEBUG:
-    H_ph_q_DATA_nocut.Draw("same","E")
-    H_ph_q_DATA_nopid.Draw("same","E")
-H_ph_q_DUMMY.Draw("same","E")
+    H_ph_q_DATA_nocut.Draw("same, E")
+    H_ph_q_DATA_nopid.Draw("same, E")
+H_ph_q_DUMMY.Draw("same, E")
 
 #b_int_ph_q_simc = int(H_ph_q_SIMC.Integral())
 b_int_ph_q_data = int(H_ph_q_DATA.Integral())
@@ -2507,11 +2509,11 @@ H_th_q_DATA_nopid.SetLineColor(kMagenta)
 H_th_q_DUMMY.SetLineColor(kGreen)
 
 H_th_q_SIMC.Draw("E")
-H_th_q_DATA.Draw("same","E")
+H_th_q_DATA.Draw("same, E")
 if DEBUG:
-    H_th_q_DATA_nocut.Draw("same","E")
-    H_th_q_DATA_nopid.Draw("same","E")
-H_th_q_DUMMY.Draw("same","E")
+    H_th_q_DATA_nocut.Draw("same, E")
+    H_th_q_DATA_nopid.Draw("same, E")
+H_th_q_DUMMY.Draw("same, E")
 
 b_int_th_q_simc = int(H_th_q_SIMC.Integral())
 b_int_th_q_data = int(H_th_q_DATA.Integral())
@@ -2551,11 +2553,11 @@ H_ph_recoil_DATA_nopid.SetLineColor(kMagenta)
 H_ph_recoil_DUMMY.SetLineColor(kGreen)
 
 #H_ph_recoil_SIMC.Draw("E")
-H_ph_recoil_DATA.Draw("same","E")
+H_ph_recoil_DATA.Draw("same, E")
 if DEBUG:
-    H_ph_recoil_DATA_nocut.Draw("same","E")
-    H_ph_recoil_DATA_nopid.Draw("same","E")
-H_ph_recoil_DUMMY.Draw("same","E")
+    H_ph_recoil_DATA_nocut.Draw("same, E")
+    H_ph_recoil_DATA_nopid.Draw("same, E")
+H_ph_recoil_DUMMY.Draw("same, E")
 
 #b_int_ph_recoil_simc = int(H_ph_recoil_SIMC.Integral())
 b_int_ph_recoil_data = int(H_ph_recoil_DATA.Integral())
@@ -2595,11 +2597,11 @@ H_th_recoil_DATA_nopid.SetLineColor(kMagenta)
 H_th_recoil_DUMMY.SetLineColor(kGreen)
 
 #H_th_recoil_SIMC.Draw("E")
-H_th_recoil_DATA.Draw("same","E")
+H_th_recoil_DATA.Draw("same, E")
 if DEBUG:
-    H_th_recoil_DATA_nocut.Draw("same","E")
-    H_th_recoil_DATA_nopid.Draw("same","E")
-H_th_recoil_DUMMY.Draw("same","E")
+    H_th_recoil_DATA_nocut.Draw("same, E")
+    H_th_recoil_DATA_nopid.Draw("same, E")
+H_th_recoil_DUMMY.Draw("same, E")
 
 #b_int_th_recoil_simc = int(H_th_recoil_SIMC.Integral())
 b_int_th_recoil_data = int(H_th_recoil_DATA.Integral())
@@ -2639,11 +2641,11 @@ H_pmiss_DATA_nopid.SetLineColor(kMagenta)
 H_pmiss_DUMMY.SetLineColor(kGreen)
 
 H_pmiss_SIMC.Draw("E")
-H_pmiss_DATA.Draw("same","E")
+H_pmiss_DATA.Draw("same, E")
 if DEBUG:
-    H_pmiss_DATA_nocut.Draw("same","E")
-    H_pmiss_DATA_nopid.Draw("same","E")
-H_pmiss_DUMMY.Draw("same","E")
+    H_pmiss_DATA_nocut.Draw("same, E")
+    H_pmiss_DATA_nopid.Draw("same, E")
+H_pmiss_DUMMY.Draw("same, E")
 
 b_int_pmiss_simc = int(H_pmiss_SIMC.Integral())
 b_int_pmiss_data = int(H_pmiss_DATA.Integral())
@@ -2682,12 +2684,12 @@ H_emiss_DATA_nocut.SetLineColor(kCyan)
 H_emiss_DATA_nopid.SetLineColor(kMagenta)
 H_emiss_DUMMY.SetLineColor(kGreen)
 
-H_emiss_SIMC.Draw("same","E")
-H_emiss_DATA.Draw("same","E")
+H_emiss_SIMC.Draw("same, E")
+H_emiss_DATA.Draw("same, E")
 if DEBUG:
-    H_emiss_DATA_nocut.Draw("same","E")
-    H_emiss_DATA_nopid.Draw("same","E")
-H_emiss_DUMMY.Draw("same","E")
+    H_emiss_DATA_nocut.Draw("same, E")
+    H_emiss_DATA_nopid.Draw("same, E")
+H_emiss_DUMMY.Draw("same, E")
 
 b_int_emiss_simc = int(H_emiss_SIMC.Integral())
 b_int_emiss_data = int(H_emiss_DATA.Integral())
@@ -2727,11 +2729,11 @@ H_pmx_DATA_nopid.SetLineColor(kMagenta)
 H_pmx_DUMMY.SetLineColor(kGreen)
 
 H_pmx_SIMC.Draw("E")
-H_pmx_DATA.Draw("same","E")
+H_pmx_DATA.Draw("same, E")
 if DEBUG:
-    H_pmx_DATA_nocut.Draw("same","E")
-    H_pmx_DATA_nopid.Draw("same","E")
-H_pmx_DUMMY.Draw("same","E")
+    H_pmx_DATA_nocut.Draw("same, E")
+    H_pmx_DATA_nopid.Draw("same, E")
+H_pmx_DUMMY.Draw("same, E")
 
 b_int_pmx_simc = int(H_pmx_SIMC.Integral())
 b_int_pmx_data = int(H_pmx_DATA.Integral())
@@ -2771,11 +2773,11 @@ H_pmy_DATA_nopid.SetLineColor(kMagenta)
 H_pmy_DUMMY.SetLineColor(kGreen)
 
 H_pmy_SIMC.Draw("E")
-H_pmy_DATA.Draw("same","E")
+H_pmy_DATA.Draw("same, E")
 if DEBUG:
-    H_pmy_DATA_nocut.Draw("same","E")
-    H_pmy_DATA_nopid.Draw("same","E")
-H_pmy_DUMMY.Draw("same","E")
+    H_pmy_DATA_nocut.Draw("same, E")
+    H_pmy_DATA_nopid.Draw("same, E")
+H_pmy_DUMMY.Draw("same, E")
 
 b_int_pmy_simc = int(H_pmy_SIMC.Integral())
 b_int_pmy_data = int(H_pmy_DATA.Integral())
@@ -2815,11 +2817,11 @@ H_pmz_DATA_nopid.SetLineColor(kMagenta)
 H_pmz_DUMMY.SetLineColor(kGreen)
 
 H_pmz_SIMC.Draw("E")
-H_pmz_DATA.Draw("same","E")
+H_pmz_DATA.Draw("same, E")
 if DEBUG:
-    H_pmz_DATA_nocut.Draw("same","E")
-    H_pmz_DATA_nopid.Draw("same","E")
-H_pmz_DUMMY.Draw("same","E")
+    H_pmz_DATA_nocut.Draw("same, E")
+    H_pmz_DATA_nopid.Draw("same, E")
+H_pmz_DUMMY.Draw("same, E")
 
 b_int_pmz_simc = int(H_pmz_SIMC.Integral())
 b_int_pmz_data = int(H_pmz_DATA.Integral())
@@ -2859,11 +2861,11 @@ H_W_DATA_nopid.SetLineColor(kMagenta)
 H_W_DUMMY.SetLineColor(kGreen)
 
 H_W_SIMC.Draw("E")
-H_W_DATA.Draw("same","E")
+H_W_DATA.Draw("same, E")
 if DEBUG:
-    H_W_DATA_nocut.Draw("same","E")
-    H_W_DATA_nopid.Draw("same","E")
-H_W_DUMMY.Draw("same","E")
+    H_W_DATA_nocut.Draw("same, E")
+    H_W_DATA_nopid.Draw("same, E")
+H_W_DUMMY.Draw("same, E")
 
 b_int_W_simc = int(H_W_SIMC.Integral())
 b_int_W_data = int(H_W_DATA.Integral())

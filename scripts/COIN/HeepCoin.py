@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 15:23:29 trottar"
+# Time-stamp: "2022-09-26 15:28:11 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -2458,26 +2458,26 @@ H_ph_q_DATA_nocut.SetLineColor(kCyan)
 H_ph_q_DATA_nopid.SetLineColor(kMagenta)
 H_ph_q_DUMMY.SetLineColor(kGreen)
 
-H_ph_q_SIMC.Draw("E")
+#H_ph_q_SIMC.Draw("E")
 H_ph_q_DATA.Draw("same")
 if DEBUG:
     H_ph_q_DATA_nocut.Draw("same")
     H_ph_q_DATA_nopid.Draw("same")
 H_ph_q_DUMMY.Draw("same")
 
-b_int_ph_q_simc = int(H_ph_q_SIMC.Integral())
+#b_int_ph_q_simc = int(H_ph_q_SIMC.Integral())
 b_int_ph_q_data = int(H_ph_q_DATA.Integral())
 b_int_ph_q_data_nocut = int(H_ph_q_DATA_nocut.Integral())
 b_int_ph_q_data_nopid = int(H_ph_q_DATA_nopid.Integral())
 b_int_ph_q_dummy = int(H_ph_q_DUMMY.Integral())
 
-b_mean_ph_q_simc = H_ph_q_SIMC.GetMean()
+#b_mean_ph_q_simc = H_ph_q_SIMC.GetMean()
 b_mean_ph_q_data = H_ph_q_DATA.GetMean()
 b_mean_ph_q_data_nocut = H_ph_q_DATA_nocut.GetMean()
 b_mean_ph_q_data_nopid = H_ph_q_DATA_nopid.GetMean()
 b_mean_ph_q_dummy = H_ph_q_DUMMY.GetMean()
 
-l_ph_q.AddEntry(H_ph_q_SIMC,"SIMC, INT = %s" % b_int_ph_q_simc)
+#l_ph_q.AddEntry(H_ph_q_SIMC,"SIMC, INT = %s" % b_int_ph_q_simc)
 l_ph_q.AddEntry(H_ph_q_DATA,"DATA, INT = %s" % b_int_ph_q_data)
 if DEBUG:
     l_ph_q.AddEntry(H_ph_q_DATA_nocut,"DATA (no cut), INT = %s" % b_int_ph_q_data_nocut)

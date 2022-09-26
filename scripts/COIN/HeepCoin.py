@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 13:11:50 trottar"
+# Time-stamp: "2022-09-26 13:26:06 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -52,10 +52,6 @@ InSIMCFilename = sys.argv[10]
 OutFilename = sys.argv[11]
 efficiency_table = sys.argv[12]
 
-# Define total efficiency vs run number plots
-G_data_eff = ROOT.TGraph(len(InData_efficiency.split(' ')), np.array([float(x) for x in data_runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]))
-G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency.split(' ')), np.array([float(x) for x in dummy_runNums.split(' ')]),np.array([float(x) for x in InDummy_efficiency.split(' ')]))
-
 ################################################################################################################################################
 # Grab and calculate efficiency 
 
@@ -65,6 +61,11 @@ from getDataTable import calculate_effError
 tot_effError = [calculate_effError(run,efficiency_table) for run in data_runNums.split(' ')]
 
 print("\n\n",tot_effError,"\n\n")
+
+###############################################################################################################################################
+# Define total efficiency vs run number plots
+G_data_eff = ROOT.TGraphError(len(InData_efficiency.split(' ')), np.array([float(x) for x in data_runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]),[]*len(tot_effError),tot_effError)
+G_dummy_eff = ROOT.TGraphError(len(InDummy_efficiency.split(' ')), np.array([float(x) for x in dummy_runNums.split(' ')]),np.array([float(x) for x in InDummy_efficiency.split(' ')]),[]*len(tot_effError),tot_effError)
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen

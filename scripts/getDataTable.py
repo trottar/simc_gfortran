@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 12:30:41 trottar"
+# Time-stamp: "2022-09-26 13:15:23 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -118,5 +118,5 @@ def calculate_effError(runNum,efficiency_table):
     # takes x,y from the list (ie the list of efficiencies) and multiplies them.
     # This is all pythonic mumbo-jumbo for doing the product of everything in the
     # list. Enjoy!
-    tot_effError = reduce(lambda x, y: x*y, list(effErrorDict.values()))
+    tot_effError = sum(effErrorDict.values()))
     return tot_effError

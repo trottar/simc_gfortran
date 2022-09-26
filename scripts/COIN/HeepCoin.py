@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 14:50:05 trottar"
+# Time-stamp: "2022-09-26 14:53:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1089,13 +1089,6 @@ for evt in TBRANCH_DUMMY:
       H_MMp2_DUMMY.SetBinError(ibin,sum(tot_effError))
       #H_MMp2_DUMMY.SetBinError(ibin,sum(tot_effError))
       #H_MMp2_DUMMY.SetBinError(ibin,sum(tot_effError))
-
-      H_cal_etottracknorm_DUMMY.SetBinError(ibin,sum(tot_effError))
-      H_cer_npeSum_DUMMY.SetBinError(ibin,sum(tot_effError))
-
-      P_cal_etottracknorm_DUMMY.SetBinError(ibin,sum(tot_effError))
-      P_hgcer_npeSum_DUMMY.SetBinError(ibin,sum(tot_effError))
-      P_aero_npeSum_DUMMY.SetBinError(ibin,sum(tot_effError))
       
       ###################################################################################################################################################
       
@@ -1174,13 +1167,6 @@ for evt in TBRANCH_DUMMY_nocut:
   H_MMp2_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
   #H_MMp2_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
   #H_MMp2_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
-
-  H_cal_etottracknorm_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
-  H_cer_npeSum_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
-
-  P_cal_etottracknorm_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
-  P_hgcer_npeSum_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
-  P_aero_npeSum_DUMMY_nocut.SetBinError(ibin,sum(tot_effError))
 
   ###################################################################################################################################################
   
@@ -1272,13 +1258,6 @@ for evt in TBRANCH_DUMMY_nopid:
       H_MMp2_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
       #H_MMp2_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
       #H_MMp2_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
-
-      H_cal_etottracknorm_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
-      H_cer_npeSum_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
-
-      P_cal_etottracknorm_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
-      P_hgcer_npeSum_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
-      P_aero_npeSum_DUMMY_nopid.SetBinError(ibin,sum(tot_effError))
       
       ###################################################################################################################################################
       

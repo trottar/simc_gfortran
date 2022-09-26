@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 15:59:18 trottar"
+# Time-stamp: "2022-09-26 16:01:24 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -66,7 +66,7 @@ eff_multiplied = reduce(lambda x, y: x*y, list(tot_efficiency)) # Multiply all e
 
 eff_errProp = eff_multiplied*sum([efferr/eff for eff,efferr in zip(tot_efficiency,tot_effError)]) # Error propagation for multiplication
 
-print(eff_errorProp)
+print(eff_errProp)
 
 ###############################################################################################################################################
 # Define total efficiency vs run number plots

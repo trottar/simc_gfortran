@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 13:01:30 trottar"
+# Time-stamp: "2022-09-26 13:08:41 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -61,7 +61,9 @@ G_dummy_eff = ROOT.TGraph(len(InDummy_efficiency.split(' ')), np.array([float(x)
 sys.path.append('../')
 from getDataTable import calculate_effError
 
-tot_effError = calculate_effError(runNum,efficiency_table)
+tot_effError = [calculate_effError(run,efficiency_table) for run in data_runNums.split(' ')]
+
+print("\n\n",tot_effError,"\n\n")
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen

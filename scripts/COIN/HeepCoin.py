@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 16:58:15 trottar"
+# Time-stamp: "2022-09-26 17:03:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -58,22 +58,21 @@ efficiency_table = sys.argv[12]
 # Grab and calculate efficiency 
 
 sys.path.append('../')
-from getDataTable import calculate_efficiency,calculate_effError
+from getDataTable import calculate_efficiency
 
-tot_effError = [calculate_effError(run,efficiency_table) for run in data_runNums.split(' ')]
-#tot_efficiency = [calculate_efficiency(run,efficiency_table) for run in data_runNums.split(' ')]
-#eff_multiplied = reduce(lambda x, y: x*y, list(tot_efficiency)) # Multiply all efficiency per run
+tot_effError_data = [calculate_effError(run,efficiency_table) for run in data_runNums.split(' ')]
+eff_errProp_data = sum_data(tot_effError) # Error propagation for addition
 
-#eff_errProp = eff_multiplied*sum(tot_effError) # Error propagation for multiplication
+tot_effError_data = [calculate_effError(run,efficiency_table) for run in data_runNums.split(' ')]
+eff_errProp_data = sum_data(tot_effError) # Error propagation for addition
 
-eff_errProp = sum(tot_effError) # Error propagation for addition
-
-print("\n\nTotal Efficiency Uncertainty =",eff_errProp)
+print("\n\nTotal Data Efficiency Uncertainty =",eff_errProp_data)
+print("Total Dummy Efficiency Uncertainty =",eff_errProp_dummy)
 
 ###############################################################################################################################################
 # Define total efficiency vs run number plots
-G_data_eff = ROOT.TGraphErrors(len(InData_efficiency.split(' ')), np.array([float(x) for x in data_runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]),np.array([0]*len(tot_effError)),np.array(tot_effError)*np.array([float(x) for x in InData_efficiency.split(' ')]))
-G_dummy_eff = ROOT.TGraphErrors(len(InDummy_efficiency.split(' ')), np.array([float(x) for x in dummy_runNums.split(' ')]),np.array([float(x) for x in InDummy_efficiency.split(' ')]),np.array([0]*len(tot_effError)),np.array(tot_effError)*np.array([float(x) for x in InDummy_efficiency.split(' ')]))
+G_data_eff = ROOT.TGraphErrors(len(InData_efficiency.split(' ')), np.array([float(x) for x in data_runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]),np.array([0]*len(tot_effError_data)),np.array(tot_effError_data)*np.array([float(x) for x in InData_efficiency.split(' ')]))
+G_dummy_eff = ROOT.TGraphErrors(len(InDummy_efficiency.split(' ')), np.array([float(x) for x in dummy_runNums.split(' ')]),np.array([float(x) for x in InDummy_efficiency.split(' ')]),np.array([0]*len(tot_effError_dummy)),np.array(tot_effError_dummy)*np.array([float(x) for x in InDummy_efficiency.split(' ')]))
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen

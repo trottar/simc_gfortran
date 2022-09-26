@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 13:26:06 trottar"
+# Time-stamp: "2022-09-26 13:30:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1426,7 +1426,7 @@ G_dummy_eff.SetMarkerColor(kRed)
 G_eff_plt.Add(G_data_eff)
 G_eff_plt.Add(G_dummy_eff)
 
-G_eff_plt.Draw("AP")
+G_eff_plt.Draw("APL")
 
 G_eff_plt.SetTitle(" ;Run Numbers; Total Efficiency")
 

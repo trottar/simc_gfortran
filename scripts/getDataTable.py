@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-26 16:25:50 trottar"
+# Time-stamp: "2022-09-29 18:27:26 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -11,6 +11,7 @@
 # Copyright (c) trottar
 #
 import pandas as pd
+import numpy as np
 from functools import reduce
 import sys,os
 
@@ -122,5 +123,5 @@ def calculate_effError(runNum,efficiency_table):
     tot_efficiency = reduce(lambda x, y: x*y, list(effDict.values()))
 
     # Calculate total efficiency error. 
-    tot_effError = tot_efficiency*sum(float(efferr)/float(eff) for efferr,eff in zip(effErrorDict.values(),effDict.values())) # Error propagation for multiplication
+    tot_effError = tot_efficiency*np.sqrt(sum((float(efferr)/float(eff))*(float(efferr)/float(eff)) for efferr,eff in zip(effErrorDict.values(),effDict.values()))) # Error propagation for multiplication, using quadratic correction
     return tot_effError

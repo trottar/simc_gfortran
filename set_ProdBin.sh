@@ -362,8 +362,8 @@ cd "${SIMCPATH}/scripts/Prod/binning"
 
 # Finally, run the plotting script
 if [[ $t_flag = "true" ]]; then
-    #python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename}
+    python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename}
 fi
 
 cd "${SIMCPATH}"
-#evince "OUTPUT/Analysis/${ANATYPE}LT/${OutFullAnalysisFilename}.pdf"
+evince "OUTPUT/Analysis/${ANATYPE}LT/${OutFullAnalysisFilename}.pdf"

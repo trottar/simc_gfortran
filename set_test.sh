@@ -101,6 +101,8 @@ fi
 grab_input () {
     if [[ $1 = "" ]]; then
 	RunList="Q4p4W2p74center_highe"
+    else
+	RunList="Q4p4W2p74center_highe"
     fi
     echo "Reading input file ${RunList}..."
     INPDIR="${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/${RunList}"

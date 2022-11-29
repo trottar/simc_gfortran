@@ -97,168 +97,199 @@ if [[ $t_flag = "true" ]]; then
     done
     fi
 fi
-
 grab_input () {
-    if [[ $1 = "" ]]; then
-	RunList="??"
-    fi
-    echo "Reading input file ${RunList}..."
+    RunList=$1
+    #echo "Reading input file ${RunList}..."
     INPDIR="${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/${RunList}"
-    RunNumArr=`python3 getRunNumbers.py $INPDIR`
-    return RunNumArr
+    cd "${SIMCPATH}/scripts"
+    RunNumArr=$(python3 getRunNumbers.py $INPDIR)
+    echo $RunNumArr
 }
 
 # Run numbers for left, right, and, center settings
 PHI=("RIGHT" "LEFT" "CENTER")
 for i in "${PHIVAL[@]}"
 do
-    if [[ $EPSILON = "high" ]]; then
-	if [[ $Q2 = "5.5" && $W = "3.02" ]]; then
-	    if [[ $PHI = "RIGHT" ]]; then
-		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "LEFT" ]]; then
-		declare -a data_left=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # LEFT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "CENTER" ]]; then
-		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
-	    fi
+    if [[ $Q2 = "5.5" && $W = "3.02" ]]; then
+	if [[ $PHI = "RIGHT" ]]; then
+	    file_right="Prod_Test"
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Prod_Test )"             # RIGHT, Q2=5.5, W=3.02, high eps
+	elif [[ $PHI = "LEFT" ]]; then
+	    file_left="Prod_Test"
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Prod_Test )"		 # LEFT, Q2=5.5, W=3.02, high eps
+	elif [[ $PHI = "CENTER" ]]; then
+	    file_center="Prod_Test"
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Prod_Test )"		 # CENTER, Q2=5.5, W=3.02, high eps
 	fi
-	if [[ $Q2 = "4.4" && $W = "2.74" ]]; then
-	    if [[ $PHI = "RIGHT" ]]; then
-		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "LEFT" ]]; then
-		declare -a data_left=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # LEFT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "CENTER" ]]; then
-		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
-	    fi
+	KIN="Prod_Test"	
+    fi    
+    #    if [[ $Q2 = "5.5" && $W = "3.02" ]]; then
+    #	if [[ $PHI = "RIGHT" ]]; then
+    #	    file_right="Q5p5W3p02right_${EPSILON}e"
+    #	    IFS=', ' read -r -a data_right <<< "$( grab_input Q5p5W3p02right_${EPSILON}e )"             # RIGHT, Q2=5.5, W=3.02, high eps
+    #	elif [[ $PHI = "LEFT" ]]; then
+    #	    file_left="Q5p5W3p02left_${EPSILON}e"
+    #	    IFS=', ' read -r -a data_left <<< "$( grab_input Q5p5W3p02left_${EPSILON}e )"		 # LEFT, Q2=5.5, W=3.02, high eps
+    #	elif [[ $PHI = "CENTER" ]]; then
+    #	    file_center="Q5p5W3p02center_${EPSILON}e"
+    #	    IFS=', ' read -r -a data_center <<< "$( grab_input Q5p5W3p02center_${EPSILON}e )"		 # CENTER, Q2=5.5, W=3.02, high eps
+    #	fi
+    #	KIN="Q5p5W3p02_${EPSILON}e"	
+    #    fi
+    if [[ $Q2 = "4.4" && $W = "2.74" ]]; then
+	if [[ $PHI = "RIGHT" ]]; then
+	    file_right="Q4p4W2p74right_${EPSILON}e"
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q4p4W2p74right_${EPSILON}e )"		 # RIGHT, Q2=4.4, W=2.74, high eps
+	elif [[ $PHI = "LEFT" ]]; then
+	    file_left="Q4p4W2p74left_${EPSILON}e"
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q4p4W2p74left_${EPSILON}e )"		 # LEFT, Q2=4.4, W=2.74, high eps
+	elif [[ $PHI = "CENTER" ]]; then
+	    file_center="Q4p4W2p74center_${EPSILON}e"
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q4p4W2p74center_${EPSILON}e )"		 # CENTER, Q2=4.4, W=2.74, high eps
 	fi
-	if [[ $Q2 = "3.0" && $W = "3.14" ]]; then
-	    if [[ $PHI = "RIGHT" ]]; then
-		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "LEFT" ]]; then
-		declare -a data_left=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # LEFT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "CENTER" ]]; then
-		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
-	    fi
-	fi
-	if [[ $Q2 = "3.0" && $W = "2.32" ]]; then
-	    if [[ $PHI = "RIGHT" ]]; then
-		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "LEFT" ]]; then
-		declare -a data_left=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # LEFT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "CENTER" ]]; then
-		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
-	    fi
-	fi
-	if [[ $Q2 = "0.5" && $W = "2.40" ]]; then
-	    if [[ $PHI = "RIGHT" ]]; then
-		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "LEFT" ]]; then
-		declare -a data_left=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # LEFT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "CENTER" ]]; then
-		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
-	    fi
-	fi
+	KIN="Q4p4W2p74_${EPSILON}e"	
     fi
+    if [[ $Q2 = "3.0" && $W = "3.14" ]]; then
+	if [[ $PHI = "RIGHT" ]]; then
+	    file_right="Q3W3p14right_${EPSILON}e"
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q3W3p14right_${EPSILON}e )"		 # RIGHT, Q2=3.0, W=3.14, high eps
+	elif [[ $PHI = "LEFT" ]]; then
+	    file_left="Q3W3p14left_${EPSILON}e"
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q3W3p14left_${EPSILON}e )"		 # LEFT, Q2=3.0, W=3.14, high eps
+	elif [[ $PHI = "CENTER" ]]; then
+	    file_center="Q3W3p14center_${EPSILON}e"
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q3W3p14center_${EPSILON}e )"		 # CENTER, Q2=3.0, W=3.14, high eps
+	fi
+	KIN="Q3W3p14_${EPSILON}e"	
+    fi
+    if [[ $Q2 = "3.0" && $W = "2.32" ]]; then
+	if [[ $PHI = "RIGHT" ]]; then
+	    file_right="Q3W2p32right_${EPSILON}e"
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q3W2p32right_${EPSILON}e )"		 # RIGHT, Q2=3.0, W=2.32, high eps
+	elif [[ $PHI = "LEFT" ]]; then
+	    file_left="Q3W2p32left_${EPSILON}e"
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q3W2p32left_${EPSILON}e )"		 # LEFT, Q2=3.0, W=2.32, high eps
+	elif [[ $PHI = "CENTER" ]]; then
+	    file_center="Q3W2p32center_${EPSILON}e"
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q3W2p32center_${EPSILON}e )"		 # CENTER, Q2=3.0, W=2.32, high eps
+	fi
+	KIN="Q3W2p32_${EPSILON}e"	
+    fi
+    if [[ $Q2 = "2.1" && $W = "2.95" ]]; then
+	if [[ $PHI = "RIGHT" ]]; then
+	    file_right="Q2p115W2p95right_${EPSILON}e"
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q2p115W2p95right_${EPSILON}e )"		 # RIGHT, Q2=2.1, W=2.95, high eps
+	elif [[ $PHI = "LEFT" ]]; then
+	    file_left="Q2p115W2p95left_${EPSILON}e"
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q2p115W2p95left_${EPSILON}e )"		 # LEFT, Q2=2.1, W=2.95, high eps
+	elif [[ $PHI = "CENTER" ]]; then
+	    file_center="Q2p115W2p95center_${EPSILON}e"
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q2p115W2p95center_${EPSILON}e )"		 # CENTER, Q2=2.1, W=2.95, high eps
+	fi
+	KIN="Q2p115W2p95_${EPSILON}e"	
+    fi        
+    if [[ $Q2 = "0.5" && $W = "2.40" ]]; then
+	if [[ $PHI = "RIGHT" ]]; then
+	    file_right="Q0p5W2p40right_${EPSILON}e"
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q0p5W2p40right_${EPSILON}e )"		 # RIGHT, Q2=0.5, W=2.40, high eps
+	elif [[ $PHI = "LEFT" ]]; then
+	    file_left="Q0p5W2p40left_${EPSILON}e"
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q0p5W2p40left_${EPSILON}e )"		 # LEFT, Q2=0.5, W=2.40, high eps
+	elif [[ $PHI = "CENTER" ]]; then
+	    file_center="Q0p5W2p40center_${EPSILON}e"
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q0p5W2p40center_${EPSILON}e )"		 # CENTER, Q2=0.5, W=2.40, high eps
+	fi
+	KIN="Q0p5W2p40_${EPSILON}e"	
+    fi    
 done
+
+InDATAFilename="Raw_Data_${KIN}.root"
+OutDATAFilename="Analysed_Data_${KIN}"
+OutFullAnalysisFilename="FullAnalysis_${KIN}"
 
 # When analysis flag is used then the analysis script (Analysed_Prod.py)
 # will create a new root file per run number which are combined using hadd
-if [[ $a_flag = "true" ]]; then	cd "${SIMCPATH}/scripts/Prod"
-    echo
-    echo "Analysing data..."
-    echo
+if [[ $a_flag = "true" ]]; then
 
-    for i in "${data[@]}"
-    do
+    if [ ${#data_right[@]} -eq 0 ]; then
+	cd "${SIMCPATH}/scripts/Prod"
 	echo
-	echo "-----------------------------"
-	echo "Analysing data run $i..."
-	echo "-----------------------------"
+	echo "Analysing right data..."
 	echo
-	python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
-	#root -l <<EOF 
-	#.x $SIMCPATH/Analysed_Prod.C("$InDATAFilename","$OutDATAFilename")
-	#EOF
-    done
-    cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
-    echo
-    echo "Combining root files..."  
-    hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
-    for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Target.root"; done
+	for i in "${data_right[@]}"
+	do
+	    echo
+	    echo "-----------------------------"
+	    echo "Analysing right data run $i..."
+	    echo "-----------------------------"
+	    echo
+	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+	    #root -l <<EOF 
+	    #.x $SIMCPATH/Analysed_Prod.C("$InDATAFilename","$OutDATAFilename")
+	    #EOF
+	done
+	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}"
+	echo
+	echo "Combining root files..."  
+	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Right_Target.root"; done
+    fi
 
-    cd "${SIMCPATH}/scripts/Prod"    
-    echo
-    echo "Analysing dummy data..."
-    echo
+    if [ ${#data_left[@]} -eq 0 ]; then
+	cd "${SIMCPATH}/scripts/Prod"
+	echo
+	echo "Analysing left data..."
+	echo
+	for i in "${data_left[@]}"
+	do
+	    echo
+	    echo "-----------------------------"
+	    echo "Analysing left data run $i..."
+	    echo "-----------------------------"
+	    echo
+	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+	    #root -l <<EOF 
+	    #.x $SIMCPATH/Analysed_Prod.C("$InDATAFilename","$OutDATAFilename")
+	    #EOF
+	done
+	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}"
+	echo
+	echo "Combining root files..."  
+	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Left_Target.root"; done
+    fi
 
-    for i in "${dummydata[@]}"
-    do
+    if [ ${#data_center[@]} -eq 0 ]; then
+	cd "${SIMCPATH}/scripts/Prod"
 	echo
-	echo "-----------------------------------"
-	echo "Analysing dummy data run $i..."
-	echo "-----------------------------------"
+	echo "Analysing center data..."
 	echo
-	python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
-	#root -l <<EOF 
-	#.x $SIMCPATH/Analysed_Prod.C("$InDUMMYFilename","$OutDUMMYFilename")
-	#EOF
-    done
-    cd "${SIMCPATH}/OUTPUT/Analysis/HeeP"
-    echo
-    echo "Combining root files..."
-    hadd -f ${OutDUMMYFilename}.root *_-1_Raw_Data.root
-    for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Dummy.root"; done
+	for i in "${data_center[@]}"
+	do
+	    echo
+	    echo "-----------------------------"
+	    echo "Analysing center data run $i..."
+	    echo "-----------------------------"
+	    echo
+	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+	    #root -l <<EOF 
+	    #.x $SIMCPATH/Analysed_Prod.C("$InDATAFilename","$OutDATAFilename")
+	    #EOF
+	done
+	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}"
+	echo
+	echo "Combining root files..."  
+	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Center_Target.root"; done
+    fi    
+    
 fi
 
 cd "${SIMCPATH}/scripts"
 
-DataChargeVal=()
-DataEffVal=()
-DataRunNum=()
-echo
-echo "Calculating data total effective charge..."
-for i in "${data[@]}"
-do
-    # Calculates total efficiency then applies to the charge for each run number
-    # to get the effective charge per run and saves as an array
-    DataChargeVal+=($(python3 findEffectiveCharge.py ${EffData} ${ROOTPREFIX} "$i" -1))
-    # Grabs the total effiency value per run and saves as an array
-    DataEffVal+=($(python3 getEfficiency.py "$i" ${EffData}))
-    DataRunNum+=("$i")
-    #echo "${DataChargeVal[@]} mC"
-done
-#echo ${DataChargeVal[*]}
-# Sums the array to get the total effective charge
-# Note: this must be done as an array! This is why uC is used at this step
-#       and later converted to C
-DataChargeSum=$(IFS=+; echo "$((${DataChargeVal[*]}))") # Only works for integers
-echo "${DataChargeSum} uC"
-
-# Repeat the above process for dummy
-DummyChargeVal=()
-DummyEffVal=()
-DummyRunNum=()
-echo
-echo "Calculating dummy total effective charge..."
-for i in "${dummydata[@]}"
-do
-    DummyChargeVal+=($(python3 findEffectiveCharge.py ${EffData} ${ROOTPREFIX} "$i" -1))
-    DummyEffVal+=($(python3 getEfficiency.py "$i" ${EffData}))
-    DummyRunNum+=($(echo "$i"))
-    #echo "${DummyChargeVal[@]} mC"
-done
-#echo ${DummyChargeVal[*]}
-DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
-echo "${DummyChargeSum} uC"
-
 # Finally, run the plotting script
-if [[ $s_flag = "true" ]]; then
-    cd "${SIMCPATH}/scripts/SING"
-    python3 HeepSing.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${EffData} ${SPEC}
-else
-    cd "${SIMCPATH}/scripts/Prod"
-    python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${DataRunNum[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" "${DummyRunNum[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${EffData}
-fi
+cd "${SIMCPATH}/scripts/Prod"
+#python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${DataRunNum[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" "${DummyRunNum[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${EffData}
 
 cd "${SIMCPATH}"
-evince "OUTPUT/Analysis/HeeP/${OutFullAnalysisFilename}.pdf"
+#evince "OUTPUT/Analysis/${ANATYPE}/${OutFullAnalysisFilename}.pdf"

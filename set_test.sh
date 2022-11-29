@@ -99,11 +99,7 @@ if [[ $t_flag = "true" ]]; then
 fi
 
 grab_input () {
-    if [[ $1 = "" ]]; then
-	RunList="Q4p4W2p74center_highe"
-    else
-	RunList="Q4p4W2p74center_highe"
-    fi
+    RunList=$1
     #echo "Reading input file ${RunList}..."
     INPDIR="${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/${RunList}"
     cd "${SIMCPATH}/scripts"
@@ -111,68 +107,62 @@ grab_input () {
     echo $RunNumArr
 }
 
-grab_input
-
-IFS=', ' read -r -a array <<< "$( grab_input )"
-
-for i in "${array[@]}"
-do
-    echo
-    echo "-----------------------------"
-    echo "Analysing data run $i..."
-    echo "-----------------------------"
-    echo   
-done
-
 # Run numbers for left, right, and, center settings
 PHI=("RIGHT" "LEFT" "CENTER")
 for i in "${PHIVAL[@]}"
 do
-    if [[ $EPSILON = "high" ]]; then
-	if [[ $Q2 = "5.5" && $W = "3.02" ]]; then
-	    if [[ $PHI = "RIGHT" ]]; then
-		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "LEFT" ]]; then
-		declare -a data_left=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # LEFT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "CENTER" ]]; then
-		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
-	    fi
-	fi
-	if [[ $Q2 = "4.4" && $W = "2.74" ]]; then
-	    if [[ $PHI = "RIGHT" ]]; then
-		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "LEFT" ]]; then
-		declare -a data_left=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # LEFT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "CENTER" ]]; then
-		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
-	    fi
-	fi
-	if [[ $Q2 = "3.0" && $W = "3.14" ]]; then
-	    if [[ $PHI = "RIGHT" ]]; then
-		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "LEFT" ]]; then
-		declare -a data_left=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # LEFT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "CENTER" ]]; then
-		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
-	    fi
-	fi
-	if [[ $Q2 = "3.0" && $W = "2.32" ]]; then
-	    if [[ $PHI = "RIGHT" ]]; then
-		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "LEFT" ]]; then
-		declare -a data_left=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # LEFT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "CENTER" ]]; then
-		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
-	    fi
-	fi
-	if [[ $Q2 = "0.5" && $W = "2.40" ]]; then
-	    if [[ $PHI = "RIGHT" ]]; then
-		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "LEFT" ]]; then
-		declare -a data_left=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # LEFT, Q2=5.5, W=3.02, x=0.40, high eps
-	    elif [[ $PHI = "CENTER" ]]; then
-		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
-	    fi
+    if [[ $Q2 = "5.5" && $W = "3.02" ]]; then
+	if [[ $PHI = "RIGHT" ]]; then
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q5p5W3p02right_${EPSILON}e )"             # RIGHT, Q2=5.5, W=3.02, high eps
+	elif [[ $PHI = "LEFT" ]]; then
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q5p5W3p02left_${EPSILON}e )"		 # LEFT, Q2=5.5, W=3.02, high eps
+	elif [[ $PHI = "CENTER" ]]; then
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q5p5W3p02center_${EPSILON}e )"		 # CENTER, Q2=5.5, W=3.02, high eps
 	fi
     fi
+    if [[ $Q2 = "4.4" && $W = "2.74" ]]; then
+	if [[ $PHI = "RIGHT" ]]; then
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q4p4W2p74right_${EPSILON}e )"		 # RIGHT, Q2=4.4, W=2.74, high eps
+	elif [[ $PHI = "LEFT" ]]; then
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q4p4W2p74left_${EPSILON}e )"		 # LEFT, Q2=4.4, W=2.74, high eps
+	elif [[ $PHI = "CENTER" ]]; then
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q4p4W2p74center_${EPSILON}e )"		 # CENTER, Q2=4.4, W=2.74, high eps
+	fi
+    fi
+    if [[ $Q2 = "3.0" && $W = "3.14" ]]; then
+	if [[ $PHI = "RIGHT" ]]; then
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q3W3p14right_${EPSILON}e )"		 # RIGHT, Q2=3.0, W=3.14, high eps
+	elif [[ $PHI = "LEFT" ]]; then
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q3W3p14left_${EPSILON}e )"		 # LEFT, Q2=3.0, W=3.14, high eps
+	elif [[ $PHI = "CENTER" ]]; then
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q3W3p14center_${EPSILON}e )"		 # CENTER, Q2=3.0, W=3.14, high eps
+	fi
+    fi
+    if [[ $Q2 = "3.0" && $W = "2.32" ]]; then
+	if [[ $PHI = "RIGHT" ]]; then
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q3W2p32right_${EPSILON}e )"		 # RIGHT, Q2=3.0, W=2.32, high eps
+	elif [[ $PHI = "LEFT" ]]; then
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q3W2p32left_${EPSILON}e )"		 # LEFT, Q2=3.0, W=2.32, high eps
+	elif [[ $PHI = "CENTER" ]]; then
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q3W2p32center_${EPSILON}e )"		 # CENTER, Q2=3.0, W=2.32, high eps
+	fi
+    fi
+    if [[ $Q2 = "2.1" && $W = "2.95" ]]; then
+	if [[ $PHI = "RIGHT" ]]; then
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q2p115W2p95right_${EPSILON}e )"		 # RIGHT, Q2=2.1, W=2.95, high eps
+	elif [[ $PHI = "LEFT" ]]; then
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q2p115W2p95left_${EPSILON}e )"		 # LEFT, Q2=2.1, W=2.95, high eps
+	elif [[ $PHI = "CENTER" ]]; then
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q2p115W2p95center_${EPSILON}e )"		 # CENTER, Q2=2.1, W=2.95, high eps
+	fi
+    fi        
+    if [[ $Q2 = "0.5" && $W = "2.40" ]]; then
+	if [[ $PHI = "RIGHT" ]]; then
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q0p5W2p40right_${EPSILON}e )"		 # RIGHT, Q2=0.5, W=2.40, high eps
+	elif [[ $PHI = "LEFT" ]]; then
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q0p5W2p40left_${EPSILON}e )"		 # LEFT, Q2=0.5, W=2.40, high eps
+	elif [[ $PHI = "CENTER" ]]; then
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q0p5W2p40center_${EPSILON}e )"		 # CENTER, Q2=0.5, W=2.40, high eps
+	fi
+    fi    
 done

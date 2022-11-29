@@ -51,6 +51,7 @@ done
 
 # When any flag is used then the user input changes argument order
 if [[ $t_flag = "true" ]]; then
+    echo $1 $2 $3 $4 $5
     EPSILON=$2
     Q2=$3
     W=$4

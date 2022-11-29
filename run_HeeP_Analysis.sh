@@ -172,7 +172,7 @@ if [[ $a_flag = "true" ]]; then
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}.root *_-1_${SPEC}_Raw_Data.root
-	rm -f *_-1_${SPEC}_Raw_Data.root
+	#rm -f *_-1_${SPEC}_Raw_Data.root
 
 	cd "${SIMCPATH}/scripts/SING"    
 	echo
@@ -195,7 +195,7 @@ if [[ $a_flag = "true" ]]; then
 	echo
 	echo "Combining root files..."
 	hadd -f ${OutDUMMYFilename}.root *_-1_${SPEC}_Raw_Data.root
-	rm -f *_-1_${SPEC}_Raw_Data.root	
+	#rm -f *_-1_${SPEC}_Raw_Data.root	
     else
 	cd "${SIMCPATH}/scripts/COIN"
 	echo
@@ -218,7 +218,7 @@ if [[ $a_flag = "true" ]]; then
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
-	rm -f *_-1_Raw_Data.root
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Target.root"; done
 
 	cd "${SIMCPATH}/scripts/COIN"    
 	echo
@@ -241,7 +241,7 @@ if [[ $a_flag = "true" ]]; then
 	echo
 	echo "Combining root files..."
 	hadd -f ${OutDUMMYFilename}.root *_-1_Raw_Data.root
-	rm -f *_-1_Raw_Data.root
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Dummy.root"; done
     fi
 fi
 
@@ -262,6 +262,7 @@ do
     DataRunNum+=("$i")
     #echo "${DataChargeVal[@]} mC"
 done
+#echo ${DataChargeVal[*]}
 # Sums the array to get the total effective charge
 # Note: this must be done as an array! This is why uC is used at this step
 #       and later converted to C
@@ -281,6 +282,7 @@ do
     DummyRunNum+=($(echo "$i"))
     #echo "${DummyChargeVal[@]} mC"
 done
+#echo ${DummyChargeVal[*]}
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers
 echo "${DummyChargeSum} uC"
 

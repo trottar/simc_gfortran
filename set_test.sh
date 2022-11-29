@@ -108,10 +108,10 @@ grab_input () {
     INPDIR="${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/${RunList}"
     cd "${SIMCPATH}/scripts"
     RunNumArr=$(python3 getRunNumbers.py $INPDIR)
-    $RunNumArr
+    echo $RunNumArr
 }
 
-echo $( grab_input )
+grab_input
 
 # Run numbers for left, right, and, center settings
 PHI=("RIGHT" "LEFT" "CENTER")

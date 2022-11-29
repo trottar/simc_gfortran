@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 17:32:20 trottar"
+# Time-stamp: "2022-11-29 17:41:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -184,112 +184,112 @@ def defineHists(phi_setting):
 
     ibin = 1
     for evt in TBRANCH_DATA:
-      '''
-      #CUTs Definations 
-      SHMS_FixCut = (evt.P_hod_goodstarttime == 1) & (evt.P_dc_InsideDipoleExit == 1) # & P_hod_betanotrack > 0.5 & P_hod_betanotrack < 1.4
-      SHMS_Acceptance = (evt.ssdelta>=-10.0) & (evt.ssdelta<=20.0) & (evt.ssxptar>=-0.06) & (evt.ssxptar<=0.06) & (evt.ssyptar>=-0.04) & (evt.ssyptar<=0.04)
 
-      HMS_FixCut = (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
-      HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)       
+        #CUTs Definations 
+        SHMS_FixCut = (evt.P_hod_goodstarttime == 1) & (evt.P_dc_InsideDipoleExit == 1) # & P_hod_betanotrack > 0.5 & P_hod_betanotrack < 1.4
+        SHMS_Acceptance = (evt.ssdelta>=-10.0) & (evt.ssdelta<=20.0) & (evt.ssxptar>=-0.06) & (evt.ssxptar<=0.06) & (evt.ssyptar>=-0.04) & (evt.ssyptar<=0.04)
 
-      #........................................
+        HMS_FixCut = (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
+        HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)       
 
-      if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
-      '''
-      H_ct_ep_vs_H_MMp2_DATA.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
-      H_ct_ep_DATA.Fill(evt.CTime_epCoinTime_ROC1)
+        #........................................
 
-      H_emiss_vs_H_hsdelta_DATA.Fill(evt.emiss, evt.hsdelta)
-      H_emiss_vs_H_ssdelta_DATA.Fill(evt.emiss, evt.ssdelta)
-      H_pmiss_vs_H_hsdelta_DATA.Fill(evt.pmiss, evt.hsdelta)
-      H_pmiss_vs_H_ssdelta_DATA.Fill(evt.pmiss, evt.ssdelta)
-      H_hsdelta_vs_H_ssdelta_DATA.Fill(evt.hsdelta, evt.ssdelta)
+        if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
-      H_raster_x_vs_H_pmiss_DATA.Fill(evt.pmiss, evt.raster_x)
-      H_raster_x_vs_H_emiss_DATA.Fill(evt.emiss, evt.raster_x)
-      H_raster_y_vs_H_pmiss_DATA.Fill(evt.pmiss, evt.raster_y)
-      H_raster_y_vs_H_emiss_DATA.Fill(evt.emiss, evt.raster_y)
-      H_raster_x_vs_H_raster_y_DATA.Fill(evt.raster_x, evt.raster_y)
+          H_ct_ep_vs_H_MMp2_DATA.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
+          H_ct_ep_DATA.Fill(evt.CTime_epCoinTime_ROC1)
 
-      H_ssxfp_DATA.Fill(evt.ssxfp)
-      H_ssyfp_DATA.Fill(evt.ssyfp)
-      H_ssxpfp_DATA.Fill(evt.ssxpfp)
-      H_ssypfp_DATA.Fill(evt.ssypfp)
-      H_ssdelta_DATA.Fill(evt.ssdelta)
-      H_ssxptar_DATA.Fill(evt.ssxptar)
-      H_ssyptar_DATA.Fill(evt.ssyptar)
+          H_emiss_vs_H_hsdelta_DATA.Fill(evt.emiss, evt.hsdelta)
+          H_emiss_vs_H_ssdelta_DATA.Fill(evt.emiss, evt.ssdelta)
+          H_pmiss_vs_H_hsdelta_DATA.Fill(evt.pmiss, evt.hsdelta)
+          H_pmiss_vs_H_ssdelta_DATA.Fill(evt.pmiss, evt.ssdelta)
+          H_hsdelta_vs_H_ssdelta_DATA.Fill(evt.hsdelta, evt.ssdelta)
 
-      H_hsxfp_DATA.Fill(evt.hsxfp)
-      H_hsyfp_DATA.Fill(evt.hsyfp)
-      H_hsxpfp_DATA.Fill(evt.hsxpfp)
-      H_hsypfp_DATA.Fill(evt.hsypfp)
-      H_hsdelta_DATA.Fill(evt.hsdelta)
-      H_hsxptar_DATA.Fill(evt.hsxptar)	
-      H_hsyptar_DATA.Fill(evt.hsyptar)
+          H_raster_x_vs_H_pmiss_DATA.Fill(evt.pmiss, evt.raster_x)
+          H_raster_x_vs_H_emiss_DATA.Fill(evt.emiss, evt.raster_x)
+          H_raster_y_vs_H_pmiss_DATA.Fill(evt.pmiss, evt.raster_y)
+          H_raster_y_vs_H_emiss_DATA.Fill(evt.emiss, evt.raster_y)
+          H_raster_x_vs_H_raster_y_DATA.Fill(evt.raster_x, evt.raster_y)
 
-      H_ph_q_DATA.Fill(evt.ph_q)
-      H_th_q_DATA.Fill(evt.th_q)
-      H_ph_recoil_DATA.Fill(evt.ph_recoil)
-      H_th_recoil_DATA.Fill(evt.th_recoil)
+          H_ssxfp_DATA.Fill(evt.ssxfp)
+          H_ssyfp_DATA.Fill(evt.ssyfp)
+          H_ssxpfp_DATA.Fill(evt.ssxpfp)
+          H_ssypfp_DATA.Fill(evt.ssypfp)
+          H_ssdelta_DATA.Fill(evt.ssdelta)
+          H_ssxptar_DATA.Fill(evt.ssxptar)
+          H_ssyptar_DATA.Fill(evt.ssyptar)
 
-      H_pmiss_DATA.Fill(evt.pmiss)	
-      H_emiss_DATA.Fill(evt.emiss)	
-      #H_emiss_DATA.Fill(evt.emiss_nuc)
-      H_pmx_DATA.Fill(evt.pmx)
-      H_pmy_DATA.Fill(evt.pmy)
-      H_pmz_DATA.Fill(evt.pmz)
-      H_Q2_DATA.Fill(evt.Q2)
-      H_W_DATA.Fill(evt.W)
-      H_epsilon_DATA.Fill(evt.epsilon)
-      H_MMp2_DATA.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
-      #H_MMp2_DATA.Fill(pow(evt.MMp, 2))  
-      #H_MMp2_DATA.Fill(evt.Mrecoil)
+          H_hsxfp_DATA.Fill(evt.hsxfp)
+          H_hsyfp_DATA.Fill(evt.hsyfp)
+          H_hsxpfp_DATA.Fill(evt.hsxpfp)
+          H_hsypfp_DATA.Fill(evt.hsypfp)
+          H_hsdelta_DATA.Fill(evt.hsdelta)
+          H_hsxptar_DATA.Fill(evt.hsxptar)	
+          H_hsyptar_DATA.Fill(evt.hsyptar)
 
-      ###################################################################################################################################################
+          H_ph_q_DATA.Fill(evt.ph_q)
+          H_th_q_DATA.Fill(evt.th_q)
+          H_ph_recoil_DATA.Fill(evt.ph_recoil)
+          H_th_recoil_DATA.Fill(evt.th_recoil)
 
-      # Random subtraction
-      H_ct_ep_vs_H_MMp2_DATA_rand.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
+          H_pmiss_DATA.Fill(evt.pmiss)	
+          H_emiss_DATA.Fill(evt.emiss)	
+          #H_emiss_DATA.Fill(evt.emiss_nuc)
+          H_pmx_DATA.Fill(evt.pmx)
+          H_pmy_DATA.Fill(evt.pmy)
+          H_pmz_DATA.Fill(evt.pmz)
+          H_Q2_DATA.Fill(evt.Q2)
+          H_W_DATA.Fill(evt.W)
+          H_epsilon_DATA.Fill(evt.epsilon)
+          H_MMp2_DATA.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
+          #H_MMp2_DATA.Fill(pow(evt.MMp, 2))  
+          #H_MMp2_DATA.Fill(evt.Mrecoil)
 
-      H_ssxfp_DATA_rand.Fill(evt.ssxfp)
-      H_ssyfp_DATA_rand.Fill(evt.ssyfp)
-      H_ssxpfp_DATA_rand.Fill(evt.ssxpfp)
-      H_ssypfp_DATA_rand.Fill(evt.ssypfp)
-      H_ssdelta_DATA_rand.Fill(evt.ssdelta)
-      H_ssxptar_DATA_rand.Fill(evt.ssxptar)
-      H_ssyptar_DATA_rand.Fill(evt.ssyptar)
+          ###################################################################################################################################################
 
-      H_hsxfp_DATA_rand.Fill(evt.hsxfp)
-      H_hsyfp_DATA_rand.Fill(evt.hsyfp)
-      H_hsxpfp_DATA_rand.Fill(evt.hsxpfp)
-      H_hsypfp_DATA_rand.Fill(evt.hsypfp)
-      H_hsdelta_DATA_rand.Fill(evt.hsdelta)
-      H_hsxptar_DATA_rand.Fill(evt.hsxptar)	
-      H_hsyptar_DATA_rand.Fill(evt.hsyptar)
+          # Random subtraction
+          H_ct_ep_vs_H_MMp2_DATA_rand.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
 
-      H_pmiss_DATA_rand.Fill(evt.pmiss)	
-      H_emiss_DATA_rand.Fill(evt.emiss)	
-      #H_emiss_DATA_rand.Fill(evt.emiss_nuc)
-      H_pmx_DATA_rand.Fill(evt.pmx)
-      H_pmy_DATA_rand.Fill(evt.pmy)
-      H_pmz_DATA_rand.Fill(evt.pmz)
-      H_Q2_DATA_rand.Fill(evt.Q2)
-      H_W_DATA_rand.Fill(evt.W)
-      H_epsilon_DATA_rand.Fill(evt.epsilon)
-      H_MMp2_DATA_rand.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
+          H_ssxfp_DATA_rand.Fill(evt.ssxfp)
+          H_ssyfp_DATA_rand.Fill(evt.ssyfp)
+          H_ssxpfp_DATA_rand.Fill(evt.ssxpfp)
+          H_ssypfp_DATA_rand.Fill(evt.ssypfp)
+          H_ssdelta_DATA_rand.Fill(evt.ssdelta)
+          H_ssxptar_DATA_rand.Fill(evt.ssxptar)
+          H_ssyptar_DATA_rand.Fill(evt.ssyptar)
 
-      H_cal_etottracknorm_DATA.Fill(evt.H_cal_etottracknorm)
-      H_cer_npeSum_DATA.Fill(evt.H_cer_npeSum)
+          H_hsxfp_DATA_rand.Fill(evt.hsxfp)
+          H_hsyfp_DATA_rand.Fill(evt.hsyfp)
+          H_hsxpfp_DATA_rand.Fill(evt.hsxpfp)
+          H_hsypfp_DATA_rand.Fill(evt.hsypfp)
+          H_hsdelta_DATA_rand.Fill(evt.hsdelta)
+          H_hsxptar_DATA_rand.Fill(evt.hsxptar)	
+          H_hsyptar_DATA_rand.Fill(evt.hsyptar)
 
-      P_cal_etottracknorm_DATA.Fill(evt.P_cal_etottracknorm)
-      P_hgcer_npeSum_DATA.Fill(evt.P_hgcer_npeSum)
-      P_aero_npeSum_DATA.Fill(evt.P_aero_npeSum)
+          H_pmiss_DATA_rand.Fill(evt.pmiss)	
+          H_emiss_DATA_rand.Fill(evt.emiss)	
+          #H_emiss_DATA_rand.Fill(evt.emiss_nuc)
+          H_pmx_DATA_rand.Fill(evt.pmx)
+          H_pmy_DATA_rand.Fill(evt.pmy)
+          H_pmz_DATA_rand.Fill(evt.pmz)
+          H_Q2_DATA_rand.Fill(evt.Q2)
+          H_W_DATA_rand.Fill(evt.W)
+          H_epsilon_DATA_rand.Fill(evt.epsilon)
+          H_MMp2_DATA_rand.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
 
-      H_cal_etottracknorm_vs_H_cer_npeSum_DATA.Fill(evt.H_cal_etottracknorm,evt.H_cer_npeSum)
-      P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA.Fill(evt.P_cal_etottracknorm,evt.P_hgcer_npeSum)
-      P_cal_etottracknorm_vs_P_aero_npeSum_DATA.Fill(evt.P_cal_etottracknorm,evt.P_aero_npeSum)
-      P_hgcer_npeSum_vs_P_aero_npeSum_DATA.Fill(evt.P_hgcer_npeSum,evt.P_aero_npeSum)
+          H_cal_etottracknorm_DATA.Fill(evt.H_cal_etottracknorm)
+          H_cer_npeSum_DATA.Fill(evt.H_cer_npeSum)
 
-      ibin+=1
+          P_cal_etottracknorm_DATA.Fill(evt.P_cal_etottracknorm)
+          P_hgcer_npeSum_DATA.Fill(evt.P_hgcer_npeSum)
+          P_aero_npeSum_DATA.Fill(evt.P_aero_npeSum)
+
+          H_cal_etottracknorm_vs_H_cer_npeSum_DATA.Fill(evt.H_cal_etottracknorm,evt.H_cer_npeSum)
+          P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA.Fill(evt.P_cal_etottracknorm,evt.P_hgcer_npeSum)
+          P_cal_etottracknorm_vs_P_aero_npeSum_DATA.Fill(evt.P_cal_etottracknorm,evt.P_aero_npeSum)
+          P_hgcer_npeSum_vs_P_aero_npeSum_DATA.Fill(evt.P_hgcer_npeSum,evt.P_aero_npeSum)
+
+          ibin+=1
 
     '''
     normfac_data = 1/(data_charge)
@@ -354,6 +354,7 @@ def defineHists(phi_setting):
 
     ###
 
+    '''
     # Data Random subtraction
     H_ssxfp_DATA.Add(H_ssxfp_DATA_rand,-1)
     H_ssyfp_DATA.Add(H_ssyfp_DATA_rand,-1)
@@ -379,6 +380,7 @@ def defineHists(phi_setting):
     H_pmz_DATA.Add(H_pmz_DATA_rand,-1)
     H_W_DATA.Add(H_W_DATA_rand,-1)
     H_ct_ep_DATA.Add(H_ct_ep_DATA_rand,-1)
+    '''
     
     histDict = {
         "H_hsdelta_DATA" :     H_hsdelta_DATA,

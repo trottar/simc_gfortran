@@ -26,7 +26,7 @@ HOST=`echo ${PATHFILE_INFO} | cut -d ','  -f15`
 SIMCPATH=`echo ${PATHFILE_INFO} | cut -d ','  -f16`
 
 # Flag definitions (flags: h, a, o, s)
-while getopts 'hat' flag; do
+while getopts 'hdat' flag; do
     case "${flag}" in
         h) 
         echo "--------------------------------------------------------------"
@@ -37,11 +37,13 @@ while getopts 'hat' flag; do
         echo
         echo "The following flags can be called for the heep analysis..."
         echo "    -h, help"
+	echo "    -d, debug"	
         echo "    -a, analyze"	
         echo "    -t, set t-bin (!!!required for script!!!)"
-	echo "        EPSILON=arg1, Q2=arg2, W=arg3, EvtsPerBinRange=arg4"
+	echo "        EPSILON=arg1, Q2=arg2, W=arg3, EvtsPerBinRange=arg4"	
         exit 0
         ;;
+	d) d_flag='true' ;;
 	a) a_flag='true' ;;
         t) t_flag='true' ;;
         *) print_usage
@@ -51,7 +53,7 @@ done
 
 # When any flag is used then the user input changes argument order
 if [[ $t_flag = "true" ]]; then
-    echo $1 $2 $3 $4 $5
+
     EPSILON=$2
     Q2=$3
     W=$4
@@ -99,6 +101,14 @@ if [[ $t_flag = "true" ]]; then
 	echo "No number of events per nominal bin range given, assuming 50k..." 
 	EvtsPerBinRange=50000	
     fi
+elif [[ $d_flag = "true" ]]; then
+    echo
+    echo "-----------------------------"
+    echo
+    echo "!!!!!!! DEBUG TESTING !!!!!!!"
+    echo
+    echo "-----------------------------"
+    echo
 fi
 
 # Function that calls python script to grab run numbers
@@ -122,7 +132,7 @@ echo
 declare -a PHI=("RIGHT" "LEFT" "CENTER")
 for i in "${PHI[@]}"
 do
-    if [[ $Q2 = "5p5" && $W = "3p02" ]]; then
+    if [[ $d_flag = "true" ]]; then
 	if [[ $i = "RIGHT" ]]; then
 	    file_right="Prod_Test"
 	    echo "Reading in run numbers for right file ${file_right}..."
@@ -144,8 +154,7 @@ do
 	fi
 	KIN="Prod_Test"	
     fi    
-    #if [[ $Q2 = "5p5" && $W = "3p02" ]]; then
-    if [[ $Q2 = "TEST" && $W = "3p02" ]]; then
+    if [[ $Q2 = "5p5" && $W = "3p02" ]]; then
 	if [[ $i = "RIGHT" ]]; then
 	    # Define run list based off kinematics selected
 	    file_right="Q5p5W3p02right_${EPSILON}e"
@@ -167,7 +176,7 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    
 	fi
-	KIN="Q5p5W3p02_${EPSILON}e"	
+	KIN="Q5p5W3p02_${EPSILON}e"
     fi
     if [[ $Q2 = "4p4" && $W = "2p74" ]]; then
 	if [[ $i = "RIGHT" ]]; then

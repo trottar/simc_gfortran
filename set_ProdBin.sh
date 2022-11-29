@@ -287,7 +287,7 @@ OutFullAnalysisFilename="FullAnalysis_${KIN}"
 # will create a new root file per run number which are combined using hadd
 if [[ $a_flag = "true" ]]; then
 
-    if [ ${#data_right[@]} -eq 0 ]; then
+    if [ ${#data_right[@]} -ne 0 ]; then
 	cd "${SIMCPATH}/scripts/Prod"
 	echo
 	echo "Analysing right data..."
@@ -311,7 +311,7 @@ if [[ $a_flag = "true" ]]; then
 	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Right_Target.root"; done
     fi
 
-    if [ ${#data_left[@]} -eq 0 ]; then
+    if [ ${#data_left[@]} -ne 0 ]; then
 	cd "${SIMCPATH}/scripts/Prod"
 	echo
 	echo "Analysing left data..."
@@ -335,7 +335,7 @@ if [[ $a_flag = "true" ]]; then
 	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Left_Target.root"; done
     fi
 
-    if [ ${#data_center[@]} -eq 0 ]; then
+    if [ ${#data_center[@]} -ne 0 ]; then
 	cd "${SIMCPATH}/scripts/Prod"
 	echo
 	echo "Analysing center data..."

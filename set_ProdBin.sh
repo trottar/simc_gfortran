@@ -42,7 +42,8 @@ while getopts 'hat' flag; do
 	echo "        EPSILON=arg1, Q2=arg2, W=arg3, NUMBINS=arg4"
         exit 0
         ;;
-        a) t_flag='true' ;;
+	a) a_flag='true' ;;
+        t) t_flag='true' ;;
         *) print_usage
         exit 1 ;;
     esac

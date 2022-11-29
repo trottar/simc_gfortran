@@ -117,6 +117,15 @@ test=$( grab_input )
 
 echo $test
 
+for i in "${test[@]}"
+do
+    echo
+    echo "-----------------------------"
+    echo "Analysing data run $i..."
+    echo "-----------------------------"
+    echo   
+done
+
 # Run numbers for left, right, and, center settings
 PHI=("RIGHT" "LEFT" "CENTER")
 for i in "${PHIVAL[@]}"

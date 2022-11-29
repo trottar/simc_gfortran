@@ -113,7 +113,7 @@ PHI=("RIGHT" "LEFT" "CENTER")
 for i in "${PHIVAL[@]}"
 do
     if [[ $EPSILON = "high" ]]; then
-	if [[ $Q2 = "5.5" & $W = "3.02" ]]; then
+	if [[ $Q2 = "5.5" && $W = "3.02" ]]; then
 	    if [[ $PHI = "RIGHT" ]]; then
 		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
 	    elif [[ $PHI = "LEFT" ]]; then
@@ -122,7 +122,7 @@ do
 		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
 	    fi
 	fi
-	if [[ $Q2 = "4.4" & $W = "2.74" ]]; then
+	if [[ $Q2 = "4.4" && $W = "2.74" ]]; then
 	    if [[ $PHI = "RIGHT" ]]; then
 		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
 	    elif [[ $PHI = "LEFT" ]]; then
@@ -131,7 +131,7 @@ do
 		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
 	    fi
 	fi
-	if [[ $Q2 = "3.0" & $W = "3.14" ]]; then
+	if [[ $Q2 = "3.0" && $W = "3.14" ]]; then
 	    if [[ $PHI = "RIGHT" ]]; then
 		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
 	    elif [[ $PHI = "LEFT" ]]; then
@@ -140,7 +140,7 @@ do
 		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
 	    fi
 	fi
-	if [[ $Q2 = "3.0" & $W = "2.32" ]]; then
+	if [[ $Q2 = "3.0" && $W = "2.32" ]]; then
 	    if [[ $PHI = "RIGHT" ]]; then
 		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
 	    elif [[ $PHI = "LEFT" ]]; then
@@ -149,7 +149,7 @@ do
 		declare -a data_center=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # CENTER, Q2=5.5, W=3.02, x=0.40, high eps	
 	    fi
 	fi
-	if [[ $Q2 = "0.5" & $W = "2.40" ]]; then
+	if [[ $Q2 = "0.5" && $W = "2.40" ]]; then
 	    if [[ $PHI = "RIGHT" ]]; then
 		declare -a data_right=(4827 4828 4855 4856 4857 4858 4859 4860 4862 4863) # RIGHT, Q2=5.5, W=3.02, x=0.40, high eps
 	    elif [[ $PHI = "LEFT" ]]; then

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 18:10:31 trottar"
+# Time-stamp: "2022-11-29 18:16:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -383,7 +383,7 @@ def defineHists(phi_setting):
     '''
     
     histDict = {
-        "H_hsdelta_DATA" :     type(H_hsdelta_DATA),
+        "H_hsdelta_DATA" :     H_hsdelta_DATA,
         "H_hsxptar_DATA" :     H_hsxptar_DATA,
         "H_hsyptar_DATA" :     H_hsyptar_DATA,
         "H_ssxfp_DATA" :     H_ssxfp_DATA  ,
@@ -437,7 +437,7 @@ def defineHists(phi_setting):
         #"InFile_DATA" : InFile_DATA,
     }
 
-    InFile_DATA.Close()
+    #InFile_DATA.Close()
     return histDict
 
 ################################################################################################################################################
@@ -845,7 +845,7 @@ H_ct_ep_DATA.Write()
 
 outHistFile.Close()
 
-#for i,hist in enumerate(histlist):
-#    hist["InFile_DATA"].Close()
+for i,hist in enumerate(histlist):
+    hist["InFile_DATA"].Close()
     
 print ("Processing Complete")

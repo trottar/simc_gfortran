@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 17:18:04 trottar"
+# Time-stamp: "2022-11-29 17:22:50 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -470,7 +470,7 @@ ROOT.gStyle.SetOptStat(0)
 histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
 
 # Plot histograms
-
+'''
 c_pid = TCanvas()
 
 c_pid.Divide(2,3)
@@ -539,7 +539,7 @@ for i,hist in enumerate(histlist):
 c_pid_2d.Draw()
 
 c_pid_2d.Print(outputpdf)
-
+'''
 ct_ep = TCanvas()
 
 for i,hist in enumerate(histlist):

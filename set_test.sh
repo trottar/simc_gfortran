@@ -113,11 +113,7 @@ grab_input () {
 
 grab_input
 
-test=$( grab_input )
-
-echo $test
-
-IFS=', ' read -r -a array <<< "$test"
+IFS=', ' read -r -a array <<< "$grab_input"
 
 for i in "${array[@]}"
 do

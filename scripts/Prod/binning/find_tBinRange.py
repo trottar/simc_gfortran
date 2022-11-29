@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 17:14:25 trottar"
+# Time-stamp: "2022-11-29 17:18:04 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -80,11 +80,11 @@ def defineHists(phi_setting):
 
     InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
 
-    #TBRANCH_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
+    TBRANCH_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_noRF")
-    TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
+    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_RF")
 

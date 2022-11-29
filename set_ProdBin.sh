@@ -111,7 +111,11 @@ grab_runs () {
 }
 
 echo
+echo "---------------------------------------------------------"
+echo
 echo "Beginning analysis for ${Q2}, ${W}, ${EPSILON} setting..."
+echo
+echo "---------------------------------------------------------"
 echo
 
 # Run numbers for left, right, and, center settings

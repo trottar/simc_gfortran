@@ -115,7 +115,7 @@ grab_input
 
 test=$( grab_input )
 
-echo test
+echo $test
 
 # Run numbers for left, right, and, center settings
 PHI=("RIGHT" "LEFT" "CENTER")

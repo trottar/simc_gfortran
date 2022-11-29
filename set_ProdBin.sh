@@ -128,46 +128,64 @@ do
 	    echo "Reading in run numbers for right file ${file_right}..."
 	    IFS=', ' read -r -a data_right <<< "$( grab_runs Prod_Test )"             # RIGHT, Q2=5p5, W=3p02, high eps
 	    echo "Run Numbers: [${data_right[@]}]"
+	    echo
 	elif [[ $i = "LEFT" ]]; then
 	    file_left="Prod_Test"
 	    echo "Reading in run numbers for left file ${file_left}..."
 	    IFS=', ' read -r -a data_left <<< "$( grab_runs Prod_Test )"		 # LEFT, Q2=5p5, W=3p02, high eps
+	    echo "Run Numbers: [${data_left[@]}]"
+	    echo	    
 	elif [[ $i = "CENTER" ]]; then
 	    file_center="Prod_Test"
 	    echo "Reading in run numbers for center file ${file_center}..."
 	    IFS=', ' read -r -a data_center <<< "$( grab_runs Prod_Test )"		 # CENTER, Q2=5p5, W=3p02, high eps
+	    echo "Run Numbers: [${data_center[@]}]"
+	    echo
 	fi
 	KIN="Prod_Test"	
     fi    
-    #    if [[ $Q2 = "5p5" && $W = "3p02" ]]; then
-    #	if [[ $i = "RIGHT" ]]; then
-    #	    file_right="Q5p5W3p02right_${EPSILON}e"
-    #    echo "Reading in run numbers for right file ${file_right}..."
-    #	    IFS=', ' read -r -a data_right <<< "$( grab_runs Q5p5W3p02right_${EPSILON}e )"             # RIGHT, Q2=5p5, W=3p02, high eps
-    #	elif [[ $i = "LEFT" ]]; then
-    #	    file_left="Q5p5W3p02left_${EPSILON}e"
-    #    echo "Reading in run numbers for left file ${file_left}..."
-    #	    IFS=', ' read -r -a data_left <<< "$( grab_runs Q5p5W3p02left_${EPSILON}e )"		 # LEFT, Q2=5p5, W=3p02, high eps
-    #	elif [[ $i = "CENTER" ]]; then
-    #	    file_center="Q5p5W3p02center_${EPSILON}e"
-    #    echo "Reading in run numbers for center file ${file_center}..."
-    #	    IFS=', ' read -r -a data_center <<< "$( grab_runs Q5p5W3p02center_${EPSILON}e )"		 # CENTER, Q2=5p5, W=3p02, high eps
-    #	fi
-    #	KIN="Q5p5W3p02_${EPSILON}e"	
-    #    fi
+    #if [[ $Q2 = "5p5" && $W = "3p02" ]]; then
+    if [[ $Q2 = "TEST" && $W = "3p02" ]]; then
+	if [[ $i = "RIGHT" ]]; then
+	    file_right="Q5p5W3p02right_${EPSILON}e"
+	    echo "Reading in run numbers for right file ${file_right}..."
+	    IFS=', ' read -r -a data_right <<< "$( grab_runs Q5p5W3p02right_${EPSILON}e )"             # RIGHT, Q2=5p5, W=3p02, high eps
+	    echo "Run Numbers: [${data_right[@]}]"
+	    echo	    
+	elif [[ $i = "LEFT" ]]; then
+	    file_left="Q5p5W3p02left_${EPSILON}e"
+	    echo "Reading in run numbers for left file ${file_left}..."
+	    IFS=', ' read -r -a data_left <<< "$( grab_runs Q5p5W3p02left_${EPSILON}e )"		 # LEFT, Q2=5p5, W=3p02, high eps
+	    echo "Run Numbers: [${data_left[@]}]"
+	    echo	    
+	elif [[ $i = "CENTER" ]]; then
+	    file_center="Q5p5W3p02center_${EPSILON}e"
+	    echo "Reading in run numbers for center file ${file_center}..."
+	    IFS=', ' read -r -a data_center <<< "$( grab_runs Q5p5W3p02center_${EPSILON}e )"		 # CENTER, Q2=5p5, W=3p02, high eps
+	    echo "Run Numbers: [${data_center[@]}]"
+	    echo	    
+	fi
+	KIN="Q5p5W3p02_${EPSILON}e"	
+    fi
     if [[ $Q2 = "4p4" && $W = "2p74" ]]; then
 	if [[ $i = "RIGHT" ]]; then
 	    file_right="Q4p4W2p74right_${EPSILON}e"
 	    echo "Reading in run numbers for right file ${file_right}..."
 	    IFS=', ' read -r -a data_right <<< "$( grab_runs Q4p4W2p74right_${EPSILON}e )"		 # RIGHT, Q2=4p4, W=2p74, high eps
+	    echo "Run Numbers: [${data_right[@]}]"
+	    echo	    
 	elif [[ $i = "LEFT" ]]; then
 	    file_left="Q4p4W2p74left_${EPSILON}e"
 	    echo "Reading in run numbers for left file ${file_left}..."
 	    IFS=', ' read -r -a data_left <<< "$( grab_runs Q4p4W2p74left_${EPSILON}e )"		 # LEFT, Q2=4p4, W=2p74, high eps
+	    echo "Run Numbers: [${data_left[@]}]"
+	    echo	    	    
 	elif [[ $i = "CENTER" ]]; then
 	    file_center="Q4p4W2p74center_${EPSILON}e"
 	    echo "Reading in run numbers for center file ${file_center}..."
 	    IFS=', ' read -r -a data_center <<< "$( grab_runs Q4p4W2p74center_${EPSILON}e )"		 # CENTER, Q2=4p4, W=2p74, high eps
+	    echo "Run Numbers: [${data_center[@]}]"
+	    echo	    	    	    
 	fi
 	KIN="Q4p4W2p74_${EPSILON}e"	
     fi
@@ -176,14 +194,20 @@ do
 	    file_right="Q3W3p14right_${EPSILON}e"
 	    echo "Reading in run numbers for right file ${file_right}..."
 	    IFS=', ' read -r -a data_right <<< "$( grab_runs Q3W3p14right_${EPSILON}e )"		 # RIGHT, Q2=3p0, W=3p14, high eps
+	    echo "Run Numbers: [${data_right[@]}]"
+	    echo	    	    	    	    
 	elif [[ $i = "LEFT" ]]; then
 	    file_left="Q3W3p14left_${EPSILON}e"
 	    echo "Reading in run numbers for left file ${file_left}..."
 	    IFS=', ' read -r -a data_left <<< "$( grab_runs Q3W3p14left_${EPSILON}e )"		 # LEFT, Q2=3p0, W=3p14, high eps
+	    echo "Run Numbers: [${data_left[@]}]"
+	    echo	    	    	    	    
 	elif [[ $i = "CENTER" ]]; then
 	    file_center="Q3W3p14center_${EPSILON}e"
 	    echo "Reading in run numbers for center file ${file_center}..."
 	    IFS=', ' read -r -a data_center <<< "$( grab_runs Q3W3p14center_${EPSILON}e )"		 # CENTER, Q2=3p0, W=3p14, high eps
+	    echo "Run Numbers: [${data_center[@]}]"
+	    echo	    	    	    	    
 	fi
 	KIN="Q3W3p14_${EPSILON}e"	
     fi
@@ -192,14 +216,20 @@ do
 	    file_right="Q3W2p32right_${EPSILON}e"
 	    echo "Reading in run numbers for right file ${file_right}..."
 	    IFS=', ' read -r -a data_right <<< "$( grab_runs Q3W2p32right_${EPSILON}e )"		 # RIGHT, Q2=3p0, W=2p32, high eps
+	    echo "Run Numbers: [${data_right[@]}]"
+	    echo	    	    	    	    
 	elif [[ $i = "LEFT" ]]; then
 	    file_left="Q3W2p32left_${EPSILON}e"
 	    echo "Reading in run numbers for left file ${file_left}..."
 	    IFS=', ' read -r -a data_left <<< "$( grab_runs Q3W2p32left_${EPSILON}e )"		 # LEFT, Q2=3p0, W=2p32, high eps
+	    echo "Run Numbers: [${data_left[@]}]"
+	    echo	    	    	    	    
 	elif [[ $i = "CENTER" ]]; then
 	    file_center="Q3W2p32center_${EPSILON}e"
 	    echo "Reading in run numbers for center file ${file_center}..."
 	    IFS=', ' read -r -a data_center <<< "$( grab_runs Q3W2p32center_${EPSILON}e )"		 # CENTER, Q2=3p0, W=2p32, high eps
+	    echo "Run Numbers: [${data_center[@]}]"
+	    echo	    	    	    	    
 	fi
 	KIN="Q3W2p32_${EPSILON}e"	
     fi
@@ -208,14 +238,20 @@ do
 	    file_right="Q2p115W2p95right_${EPSILON}e"
 	    echo "Reading in run numbers for right file ${file_right}..."
 	    IFS=', ' read -r -a data_right <<< "$( grab_runs Q2p115W2p95right_${EPSILON}e )"		 # RIGHT, Q2=2p1, W=2p95, high eps
+	    echo "Run Numbers: [${data_right[@]}]"
+	    echo	    	    	    	    
 	elif [[ $i = "LEFT" ]]; then
 	    file_left="Q2p115W2p95left_${EPSILON}e"
 	    echo "Reading in run numbers for left file ${file_left}..."
 	    IFS=', ' read -r -a data_left <<< "$( grab_runs Q2p115W2p95left_${EPSILON}e )"		 # LEFT, Q2=2p1, W=2p95, high eps
+	    echo "Run Numbers: [${data_left[@]}]"
+	    echo	    	    	    	    
 	elif [[ $i = "CENTER" ]]; then
 	    file_center="Q2p115W2p95center_${EPSILON}e"
 	    echo "Reading in run numbers for center file ${file_center}..."
 	    IFS=', ' read -r -a data_center <<< "$( grab_runs Q2p115W2p95center_${EPSILON}e )"		 # CENTER, Q2=2p1, W=2p95, high eps
+	    echo "Run Numbers: [${data_center[@]}]"
+	    echo	    	    	    	    
 	fi
 	KIN="Q2p115W2p95_${EPSILON}e"	
     fi        
@@ -224,14 +260,20 @@ do
 	    file_right="Q0p5W2p40right_${EPSILON}e"
 	    echo "Reading in run numbers for right file ${file_right}..."
 	    IFS=', ' read -r -a data_right <<< "$( grab_runs Q0p5W2p40right_${EPSILON}e )"		 # RIGHT, Q2=0p5, W=2p40, high eps
+	    echo "Run Numbers: [${data_right[@]}]"
+	    echo	    	    	    	    
 	elif [[ $i = "LEFT" ]]; then
 	    file_left="Q0p5W2p40left_${EPSILON}e"
 	    echo "Reading in run numbers for left file ${file_left}..."
 	    IFS=', ' read -r -a data_left <<< "$( grab_runs Q0p5W2p40left_${EPSILON}e )"		 # LEFT, Q2=0p5, W=2p40, high eps
+	    echo "Run Numbers: [${data_left[@]}]"
+	    echo	    	    	    	    
 	elif [[ $i = "CENTER" ]]; then
 	    file_center="Q0p5W2p40center_${EPSILON}e"
 	    echo "Reading in run numbers for center file ${file_center}..."
 	    IFS=', ' read -r -a data_center <<< "$( grab_runs Q0p5W2p40center_${EPSILON}e )"		 # CENTER, Q2=0p5, W=2p40, high eps
+	    echo "Run Numbers: [${data_center[@]}]"
+	    echo	    	    	    	    
 	fi
 	KIN="Q0p5W2p40_${EPSILON}e"	
     fi    

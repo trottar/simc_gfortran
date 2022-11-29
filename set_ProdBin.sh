@@ -56,9 +56,9 @@ if [[ $t_flag = "true" ]]; then
     W=$4
     NUMBINS=$5
     echo "Epsilon must be - high - low - Case Sensitive!"
-    echo "Q2 must be one of - 5.5 - 4.4 - 3.0 - 2.1 - 0.5"
-    echo "W must be one of - 3.02 - 2.74 - 3.14 - 2.32 - 2.95 - 2.40"
-    if [[ -z "$1" || ! "$EPSILON" =~ high|low ]]; then # Check the 2nd argument was provided and that it's one of the valid options
+    echo "Q2 must be one of - [5.5 - 4.4 - 3.0 - 2.1 - 0.5]"
+    echo "W must be one of - [3.02 - 2.74 - 3.14 - 2.32 - 2.95 - 2.40]"
+    if [[ -z "$2" || ! "$EPSILON" =~ high|low ]]; then # Check the 2nd argument was provided and that it's one of the valid options
     echo ""
     echo "I need a valid epsilon..."
     while true; do
@@ -71,12 +71,12 @@ if [[ $t_flag = "true" ]]; then
 	esac
     done
     fi
-    if [[ -z "$2" || ! "$Q2" =~ 4.4|3.0|2.1|0.5 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
+    if [[ -z "$3" || ! "$Q2" =~ 4.4|3.0|2.1|0.5 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
     echo ""
     echo "I need a valid Q2..."
     while true; do
 	echo ""
-	read -p "Q2 must be one of - 5.5 - 4.4 - 3.0 - 2.1 - 0.5 - or press ctrl-c to exit : " Q2
+	read -p "Q2 must be one of - [5.5 - 4.4 - 3.0 - 2.1 - 0.5] - or press ctrl-c to exit : " Q2
 	case $Q2 in
 	    '');; # If blank, prompt again
 	    '4.4'|'3.0'|'2.1'|'0.5') break;; 
@@ -84,12 +84,12 @@ if [[ $t_flag = "true" ]]; then
 	esac
     done
     fi
-    if [[ -z "$3" || ! "$W" =~ 3.02|2.74|3.14|2.32|2.95|2.40 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
+    if [[ -z "$4" || ! "$W" =~ 3.02|2.74|3.14|2.32|2.95|2.40 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
     echo ""
     echo "I need a valid W..."
     while true; do
 	echo ""
-	read -p "W must be one of - 3.02 - 2.74 - 3.14 - 2.32 - 2.95 - 2.40 - or press ctrl-c to exit : " W
+	read -p "W must be one of - [3.02 - 2.74 - 3.14 - 2.32 - 2.95 - 2.40] - or press ctrl-c to exit : " W
 	case $W in
 	    '');; # If blank, prompt again
 	    '3.02'|'2.74'|'3.14'|'2.32'|'2.95'|'2.40') break;; 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 18:16:27 trottar"
+# Time-stamp: "2022-11-29 18:20:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -434,10 +434,9 @@ def defineHists(phi_setting):
         "P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA" :     P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA,
         "P_cal_etottracknorm_vs_P_aero_npeSum_DATA" :     P_cal_etottracknorm_vs_P_aero_npeSum_DATA,
         "P_hgcer_npeSum_vs_P_aero_npeSum_DATA" :     P_hgcer_npeSum_vs_P_aero_npeSum_DATA,
-        #"InFile_DATA" : InFile_DATA,
+        "InFile_DATA" : InFile_DATA,
     }
 
-    #InFile_DATA.Close()
     return histDict
 
 ################################################################################################################################################

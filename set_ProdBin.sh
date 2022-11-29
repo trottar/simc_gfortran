@@ -71,7 +71,7 @@ if [[ $t_flag = "true" ]]; then
 	    esac
 	done
     fi
-    if [[ -z "$3" || ! "$Q2" =~ 4p4|3p0|2p1|0p5 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
+    if [[ -z "$3" || ! "$Q2" =~ 5p5|4p4|3p0|2p1|0p5 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
 	echo ""
 	echo "I need a valid Q2..."
 	while true; do
@@ -79,7 +79,7 @@ if [[ $t_flag = "true" ]]; then
 	    read -p "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5] - or press ctrl-c to exit : " Q2
 	    case $Q2 in
 		'');; # If blank, prompt again
-		'4p4'|'3p0'|'2p1'|'0p5') break;; # If a valid option, break the loop and continue
+		'5p5'|'4p4'|'3p0'|'2p1'|'0p5') break;; # If a valid option, break the loop and continue
 	    esac
 	done
     fi

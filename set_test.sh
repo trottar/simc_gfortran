@@ -108,7 +108,7 @@ grab_input () {
     return RunNumArr
 }
 
-echo $grab_input
+echo echo ${grab_input} | cut -d ','  -f1
 
 # Run numbers for left, right, and, center settings
 PHI=("RIGHT" "LEFT" "CENTER")

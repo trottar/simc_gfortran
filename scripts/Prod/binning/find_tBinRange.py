@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 18:24:15 trottar"
+# Time-stamp: "2022-11-29 18:30:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -71,6 +71,7 @@ foutname = OUTPATH+"/" + OutFilename + ".root"
 fouttxt  = OUTPATH+"/" + OutFilename + ".txt"
 outputpdf  = OUTPATH+"/" + OutFilename + ".pdf"
 
+################################################################################################################################################
 
 def defineHists(phi_setting):
     ################################################################################################################################################
@@ -456,7 +457,6 @@ for i,hist in enumerate(histlist):
 # Plot histograms
 
 c_pid = TCanvas()
-l_pid = ROOT.TLegend(0.115,0.55,0.33,0.9)
 
 c_pid.Divide(2,3)
 
@@ -486,16 +486,6 @@ c_pid.cd(5)
 gPad.SetLogy()
 for i,hist in enumerate(histlist):
     hist["P_aero_npeSum_DATA"].Draw("same, E1")
-
-c_pid.cd(6)
-l_pid.SetTextSize(0.05)
-log_txt = ROOT.TPaveText(0.,0.3,1.0,0.5,"NDC");
-log_entry = log_entry.replace("[","").replace("]","").replace("'","").replace("{","").replace("}","").split(",")
-log_txt.SetTextSize(0.0335)
-for cut in log_entry:
-    log_txt.AddText(cut)
-
-log_txt.Draw("same, E1")    
         
 c_pid.Draw()
 

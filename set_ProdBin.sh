@@ -57,8 +57,8 @@ if [[ $t_flag = "true" ]]; then
     W=$4
     NUMBINS=$5
     echo "Epsilon must be - high - low - Case Sensitive!"
-    echo "Q2 must be one of - [5.5 - 4.4 - 3.0 - 2.1 - 0.5]"
-    echo "W must be one of - [3.02 - 2.74 - 3.14 - 2.32 - 2.95 - 2.40]"
+    echo "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5]"
+    echo "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40]"
     if [[ -z "$2" || ! "$EPSILON" =~ high|low ]]; then # Check the 2nd argument was provided and that it's one of the valid options
     echo ""
     echo "I need a valid epsilon..."
@@ -72,28 +72,28 @@ if [[ $t_flag = "true" ]]; then
 	esac
     done
     fi
-    if [[ -z "$3" || ! "$Q2" =~ 4.4|3.0|2.1|0.5 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
+    if [[ -z "$3" || ! "$Q2" =~ 4p4|3p0|2p1|0p5 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
     echo ""
     echo "I need a valid Q2..."
     while true; do
 	echo ""
-	read -p "Q2 must be one of - [5.5 - 4.4 - 3.0 - 2.1 - 0.5] - or press ctrl-c to exit : " Q2
+	read -p "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5] - or press ctrl-c to exit : " Q2
 	case $Q2 in
 	    '');; # If blank, prompt again
-	    '4.4'|'3.0'|'2.1'|'0.5') break;; 
+	    '4p4'|'3p0'|'2p1'|'0p5') break;; 
 	    # If a valid option, break the loop and continue
 	esac
     done
     fi
-    if [[ -z "$4" || ! "$W" =~ 3.02|2.74|3.14|2.32|2.95|2.40 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
+    if [[ -z "$4" || ! "$W" =~ 3p02|2p74|3p14|2p32|2p95|2p40 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
     echo ""
     echo "I need a valid W..."
     while true; do
 	echo ""
-	read -p "W must be one of - [3.02 - 2.74 - 3.14 - 2.32 - 2.95 - 2.40] - or press ctrl-c to exit : " W
+	read -p "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40] - or press ctrl-c to exit : " W
 	case $W in
 	    '');; # If blank, prompt again
-	    '3.02'|'2.74'|'3.14'|'2.32'|'2.95'|'2.40') break;; 
+	    '3p02'|'2p74'|'3p14'|'2p32'|'2p95'|'2p40') break;; 
 	    # If a valid option, break the loop and continue
 	esac
     done
@@ -112,94 +112,94 @@ grab_input () {
 PHI=("RIGHT" "LEFT" "CENTER")
 for i in "${PHIVAL[@]}"
 do
-    if [[ $Q2 = "5.5" && $W = "3.02" ]]; then
+    if [[ $Q2 = "5p5" && $W = "3p02" ]]; then
 	if [[ $PHI = "RIGHT" ]]; then
 	    file_right="Prod_Test"
-	    IFS=', ' read -r -a data_right <<< "$( grab_input Prod_Test )"             # RIGHT, Q2=5.5, W=3.02, high eps
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Prod_Test )"             # RIGHT, Q2=5p5, W=3p02, high eps
 	elif [[ $PHI = "LEFT" ]]; then
 	    file_left="Prod_Test"
-	    IFS=', ' read -r -a data_left <<< "$( grab_input Prod_Test )"		 # LEFT, Q2=5.5, W=3.02, high eps
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Prod_Test )"		 # LEFT, Q2=5p5, W=3p02, high eps
 	elif [[ $PHI = "CENTER" ]]; then
 	    file_center="Prod_Test"
-	    IFS=', ' read -r -a data_center <<< "$( grab_input Prod_Test )"		 # CENTER, Q2=5.5, W=3.02, high eps
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Prod_Test )"		 # CENTER, Q2=5p5, W=3p02, high eps
 	fi
 	KIN="Prod_Test"	
     fi    
-    #    if [[ $Q2 = "5.5" && $W = "3.02" ]]; then
+    #    if [[ $Q2 = "5p5" && $W = "3p02" ]]; then
     #	if [[ $PHI = "RIGHT" ]]; then
     #	    file_right="Q5p5W3p02right_${EPSILON}e"
-    #	    IFS=', ' read -r -a data_right <<< "$( grab_input Q5p5W3p02right_${EPSILON}e )"             # RIGHT, Q2=5.5, W=3.02, high eps
+    #	    IFS=', ' read -r -a data_right <<< "$( grab_input Q5p5W3p02right_${EPSILON}e )"             # RIGHT, Q2=5p5, W=3p02, high eps
     #	elif [[ $PHI = "LEFT" ]]; then
     #	    file_left="Q5p5W3p02left_${EPSILON}e"
-    #	    IFS=', ' read -r -a data_left <<< "$( grab_input Q5p5W3p02left_${EPSILON}e )"		 # LEFT, Q2=5.5, W=3.02, high eps
+    #	    IFS=', ' read -r -a data_left <<< "$( grab_input Q5p5W3p02left_${EPSILON}e )"		 # LEFT, Q2=5p5, W=3p02, high eps
     #	elif [[ $PHI = "CENTER" ]]; then
     #	    file_center="Q5p5W3p02center_${EPSILON}e"
-    #	    IFS=', ' read -r -a data_center <<< "$( grab_input Q5p5W3p02center_${EPSILON}e )"		 # CENTER, Q2=5.5, W=3.02, high eps
+    #	    IFS=', ' read -r -a data_center <<< "$( grab_input Q5p5W3p02center_${EPSILON}e )"		 # CENTER, Q2=5p5, W=3p02, high eps
     #	fi
     #	KIN="Q5p5W3p02_${EPSILON}e"	
     #    fi
-    if [[ $Q2 = "4.4" && $W = "2.74" ]]; then
+    if [[ $Q2 = "4p4" && $W = "2p74" ]]; then
 	if [[ $PHI = "RIGHT" ]]; then
 	    file_right="Q4p4W2p74right_${EPSILON}e"
-	    IFS=', ' read -r -a data_right <<< "$( grab_input Q4p4W2p74right_${EPSILON}e )"		 # RIGHT, Q2=4.4, W=2.74, high eps
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q4p4W2p74right_${EPSILON}e )"		 # RIGHT, Q2=4p4, W=2p74, high eps
 	elif [[ $PHI = "LEFT" ]]; then
 	    file_left="Q4p4W2p74left_${EPSILON}e"
-	    IFS=', ' read -r -a data_left <<< "$( grab_input Q4p4W2p74left_${EPSILON}e )"		 # LEFT, Q2=4.4, W=2.74, high eps
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q4p4W2p74left_${EPSILON}e )"		 # LEFT, Q2=4p4, W=2p74, high eps
 	elif [[ $PHI = "CENTER" ]]; then
 	    file_center="Q4p4W2p74center_${EPSILON}e"
-	    IFS=', ' read -r -a data_center <<< "$( grab_input Q4p4W2p74center_${EPSILON}e )"		 # CENTER, Q2=4.4, W=2.74, high eps
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q4p4W2p74center_${EPSILON}e )"		 # CENTER, Q2=4p4, W=2p74, high eps
 	fi
 	KIN="Q4p4W2p74_${EPSILON}e"	
     fi
-    if [[ $Q2 = "3.0" && $W = "3.14" ]]; then
+    if [[ $Q2 = "3p0" && $W = "3p14" ]]; then
 	if [[ $PHI = "RIGHT" ]]; then
 	    file_right="Q3W3p14right_${EPSILON}e"
-	    IFS=', ' read -r -a data_right <<< "$( grab_input Q3W3p14right_${EPSILON}e )"		 # RIGHT, Q2=3.0, W=3.14, high eps
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q3W3p14right_${EPSILON}e )"		 # RIGHT, Q2=3p0, W=3p14, high eps
 	elif [[ $PHI = "LEFT" ]]; then
 	    file_left="Q3W3p14left_${EPSILON}e"
-	    IFS=', ' read -r -a data_left <<< "$( grab_input Q3W3p14left_${EPSILON}e )"		 # LEFT, Q2=3.0, W=3.14, high eps
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q3W3p14left_${EPSILON}e )"		 # LEFT, Q2=3p0, W=3p14, high eps
 	elif [[ $PHI = "CENTER" ]]; then
 	    file_center="Q3W3p14center_${EPSILON}e"
-	    IFS=', ' read -r -a data_center <<< "$( grab_input Q3W3p14center_${EPSILON}e )"		 # CENTER, Q2=3.0, W=3.14, high eps
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q3W3p14center_${EPSILON}e )"		 # CENTER, Q2=3p0, W=3p14, high eps
 	fi
 	KIN="Q3W3p14_${EPSILON}e"	
     fi
-    if [[ $Q2 = "3.0" && $W = "2.32" ]]; then
+    if [[ $Q2 = "3p0" && $W = "2p32" ]]; then
 	if [[ $PHI = "RIGHT" ]]; then
 	    file_right="Q3W2p32right_${EPSILON}e"
-	    IFS=', ' read -r -a data_right <<< "$( grab_input Q3W2p32right_${EPSILON}e )"		 # RIGHT, Q2=3.0, W=2.32, high eps
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q3W2p32right_${EPSILON}e )"		 # RIGHT, Q2=3p0, W=2p32, high eps
 	elif [[ $PHI = "LEFT" ]]; then
 	    file_left="Q3W2p32left_${EPSILON}e"
-	    IFS=', ' read -r -a data_left <<< "$( grab_input Q3W2p32left_${EPSILON}e )"		 # LEFT, Q2=3.0, W=2.32, high eps
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q3W2p32left_${EPSILON}e )"		 # LEFT, Q2=3p0, W=2p32, high eps
 	elif [[ $PHI = "CENTER" ]]; then
 	    file_center="Q3W2p32center_${EPSILON}e"
-	    IFS=', ' read -r -a data_center <<< "$( grab_input Q3W2p32center_${EPSILON}e )"		 # CENTER, Q2=3.0, W=2.32, high eps
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q3W2p32center_${EPSILON}e )"		 # CENTER, Q2=3p0, W=2p32, high eps
 	fi
 	KIN="Q3W2p32_${EPSILON}e"	
     fi
-    if [[ $Q2 = "2.1" && $W = "2.95" ]]; then
+    if [[ $Q2 = "2p1" && $W = "2p95" ]]; then
 	if [[ $PHI = "RIGHT" ]]; then
 	    file_right="Q2p115W2p95right_${EPSILON}e"
-	    IFS=', ' read -r -a data_right <<< "$( grab_input Q2p115W2p95right_${EPSILON}e )"		 # RIGHT, Q2=2.1, W=2.95, high eps
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q2p115W2p95right_${EPSILON}e )"		 # RIGHT, Q2=2p1, W=2p95, high eps
 	elif [[ $PHI = "LEFT" ]]; then
 	    file_left="Q2p115W2p95left_${EPSILON}e"
-	    IFS=', ' read -r -a data_left <<< "$( grab_input Q2p115W2p95left_${EPSILON}e )"		 # LEFT, Q2=2.1, W=2.95, high eps
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q2p115W2p95left_${EPSILON}e )"		 # LEFT, Q2=2p1, W=2p95, high eps
 	elif [[ $PHI = "CENTER" ]]; then
 	    file_center="Q2p115W2p95center_${EPSILON}e"
-	    IFS=', ' read -r -a data_center <<< "$( grab_input Q2p115W2p95center_${EPSILON}e )"		 # CENTER, Q2=2.1, W=2.95, high eps
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q2p115W2p95center_${EPSILON}e )"		 # CENTER, Q2=2p1, W=2p95, high eps
 	fi
 	KIN="Q2p115W2p95_${EPSILON}e"	
     fi        
-    if [[ $Q2 = "0.5" && $W = "2.40" ]]; then
+    if [[ $Q2 = "0p5" && $W = "2p40" ]]; then
 	if [[ $PHI = "RIGHT" ]]; then
 	    file_right="Q0p5W2p40right_${EPSILON}e"
-	    IFS=', ' read -r -a data_right <<< "$( grab_input Q0p5W2p40right_${EPSILON}e )"		 # RIGHT, Q2=0.5, W=2.40, high eps
+	    IFS=', ' read -r -a data_right <<< "$( grab_input Q0p5W2p40right_${EPSILON}e )"		 # RIGHT, Q2=0p5, W=2p40, high eps
 	elif [[ $PHI = "LEFT" ]]; then
 	    file_left="Q0p5W2p40left_${EPSILON}e"
-	    IFS=', ' read -r -a data_left <<< "$( grab_input Q0p5W2p40left_${EPSILON}e )"		 # LEFT, Q2=0.5, W=2.40, high eps
+	    IFS=', ' read -r -a data_left <<< "$( grab_input Q0p5W2p40left_${EPSILON}e )"		 # LEFT, Q2=0p5, W=2p40, high eps
 	elif [[ $PHI = "CENTER" ]]; then
 	    file_center="Q0p5W2p40center_${EPSILON}e"
-	    IFS=', ' read -r -a data_center <<< "$( grab_input Q0p5W2p40center_${EPSILON}e )"		 # CENTER, Q2=0.5, W=2.40, high eps
+	    IFS=', ' read -r -a data_center <<< "$( grab_input Q0p5W2p40center_${EPSILON}e )"		 # CENTER, Q2=0p5, W=2p40, high eps
 	fi
 	KIN="Q0p5W2p40_${EPSILON}e"	
     fi    

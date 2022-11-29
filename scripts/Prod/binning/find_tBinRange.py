@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 17:41:27 trottar"
+# Time-stamp: "2022-11-29 18:03:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -450,6 +450,9 @@ ROOT.gStyle.SetOptStat(0)
 # Plus it makes the code below less repetitive
 histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
 
+print("\n\n",histlist,"\n\n")
+for i,hist in enumerate(histlist):
+    print("\n\n",hist,"\n\n")
 # Plot histograms
 
 c_pid = TCanvas()

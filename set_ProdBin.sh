@@ -39,7 +39,7 @@ while getopts 'hat' flag; do
         echo "    -h, help"
         echo "    -a, analyze"	
         echo "    -t, set t-bin (!!!required for script!!!)"
-	echo "        EPSILON=arg1, Q2=arg2, W=arg3, NUMBINS=arg4"
+	echo "        EPSILON=arg1, Q2=arg2, W=arg3, EvtsPerBinRange=arg4"
         exit 0
         ;;
 	a) a_flag='true' ;;
@@ -55,7 +55,7 @@ if [[ $t_flag = "true" ]]; then
     EPSILON=$2
     Q2=$3
     W=$4
-    NUMBINS=$5
+    EvtsPerBinRange=$5
     echo "Epsilon must be - high - low - Case Sensitive!"
     echo "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5]"
     echo "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40]"
@@ -67,8 +67,7 @@ if [[ $t_flag = "true" ]]; then
 	    read -p "Epsilon must be - high - low - Case Sensitive! - or press ctrl-c to exit : " EPSILON
 	    case $EPSILON in
 		'');; # If blank, prompt again
-		'high'|'low') break;; 
-		# If a valid option, break the loop and continue
+		'high'|'low') break;; # If a valid option, break the loop and continue
 	    esac
 	done
     fi
@@ -80,8 +79,7 @@ if [[ $t_flag = "true" ]]; then
 	    read -p "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5] - or press ctrl-c to exit : " Q2
 	    case $Q2 in
 		'');; # If blank, prompt again
-		'4p4'|'3p0'|'2p1'|'0p5') break;; 
-		# If a valid option, break the loop and continue
+		'4p4'|'3p0'|'2p1'|'0p5') break;; # If a valid option, break the loop and continue
 	    esac
 	done
     fi
@@ -93,10 +91,13 @@ if [[ $t_flag = "true" ]]; then
 	    read -p "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40] - or press ctrl-c to exit : " W
 	    case $W in
 		'');; # If blank, prompt again
-		'3p02'|'2p74'|'3p14'|'2p32'|'2p95'|'2p40') break;; 
-		# If a valid option, break the loop and continue
+		'3p02'|'2p74'|'3p14'|'2p32'|'2p95'|'2p40') break;; # If a valid option, break the loop and continue
 	    esac
 	done
+    fi
+    if [[ $5 -eq "" ]]; then
+	echo "No number of events per nominal bin range given, assuming 50k..." 
+	EvtsPerBinRange=50000	
     fi
 fi
 

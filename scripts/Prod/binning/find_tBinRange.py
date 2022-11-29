@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 18:20:30 trottar"
+# Time-stamp: "2022-11-29 18:24:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -456,6 +456,7 @@ for i,hist in enumerate(histlist):
 # Plot histograms
 
 c_pid = TCanvas()
+l_pid = ROOT.TLegend(0.115,0.55,0.33,0.9)
 
 c_pid.Divide(2,3)
 

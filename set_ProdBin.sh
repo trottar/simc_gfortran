@@ -39,7 +39,7 @@ while getopts 'hat' flag; do
         echo "    -h, help"
         echo "    -a, analyze"	
         echo "    -t, set t-bin (!!!required for script!!!)"
-	echo "        NUMBINS=arg1"
+	echo "        EPSILON=arg1, Q2=arg2, W=arg3, NUMBINS=arg4"
         exit 0
         ;;
         a) t_flag='true' ;;
@@ -50,10 +50,10 @@ done
 
 # When any flag is used then the user input changes argument order
 if [[ $t_flag = "true" ]]; then
-    EPS=$1
-    Q2=$2
-    W=$3
-    NUMBINS=$4
+    EPSILON=$2
+    Q2=$3
+    W=$4
+    NUMBINS=$5
     echo "Epsilon must be - high - low - Case Sensitive!"
     echo "Q2 must be one of - 5.5 - 4.4 - 3.0 - 2.1 - 0.5"
     echo "W must be one of - 3.02 - 2.74 - 3.14 - 2.32 - 2.95 - 2.40"

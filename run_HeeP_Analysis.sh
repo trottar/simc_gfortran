@@ -151,7 +151,7 @@ fi
 # will create a new root file per run number which are combined using hadd
 if [[ $a_flag = "true" ]]; then
     if [[ $s_flag = "true" ]]; then
-	cd "${SIMCPATH}/scripts/SING"
+	cd "${SIMCPATH}/scripts/HeeP/SING"
 	echo
 	echo "Analysing ${SPEC} data..."
 	echo
@@ -174,7 +174,7 @@ if [[ $a_flag = "true" ]]; then
 	hadd -f ${OutDATAFilename}.root *_-1_${SPEC}_Raw_Data.root
 	#rm -f *_-1_${SPEC}_Raw_Data.root
 
-	cd "${SIMCPATH}/scripts/SING"    
+	cd "${SIMCPATH}/scripts/HeeP/SING"    
 	echo
 	echo "Analysing ${SPEC} dummy data..."
 	echo
@@ -197,7 +197,7 @@ if [[ $a_flag = "true" ]]; then
 	hadd -f ${OutDUMMYFilename}.root *_-1_${SPEC}_Raw_Data.root
 	#rm -f *_-1_${SPEC}_Raw_Data.root	
     else
-	cd "${SIMCPATH}/scripts/COIN"
+	cd "${SIMCPATH}/scripts/HeeP/COIN"
 	echo
 	echo "Analysing data..."
 	echo
@@ -220,7 +220,7 @@ if [[ $a_flag = "true" ]]; then
 	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
 	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Target.root"; done
 
-	cd "${SIMCPATH}/scripts/COIN"    
+	cd "${SIMCPATH}/scripts/HeeP/COIN"    
 	echo
 	echo "Analysing dummy data..."
 	echo
@@ -288,10 +288,10 @@ echo "${DummyChargeSum} uC"
 
 # Finally, run the plotting script
 if [[ $s_flag = "true" ]]; then
-    cd "${SIMCPATH}/scripts/SING"
+    cd "${SIMCPATH}/scripts/HeeP/SING"
     python3 HeepSing.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${EffData} ${SPEC}
 else
-    cd "${SIMCPATH}/scripts/COIN"
+    cd "${SIMCPATH}/scripts/HeeP/COIN"
     python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${DataRunNum[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" "${DummyRunNum[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${EffData}
 fi
 

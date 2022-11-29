@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 18:03:15 trottar"
+# Time-stamp: "2022-11-29 18:10:31 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -383,7 +383,7 @@ def defineHists(phi_setting):
     '''
     
     histDict = {
-        "H_hsdelta_DATA" :     H_hsdelta_DATA,
+        "H_hsdelta_DATA" :     type(H_hsdelta_DATA),
         "H_hsxptar_DATA" :     H_hsxptar_DATA,
         "H_hsyptar_DATA" :     H_hsyptar_DATA,
         "H_ssxfp_DATA" :     H_ssxfp_DATA  ,
@@ -453,6 +453,7 @@ histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
 print("\n\n",histlist,"\n\n")
 for i,hist in enumerate(histlist):
     print("\n\n",hist,"\n\n")
+    
 # Plot histograms
 
 c_pid = TCanvas()

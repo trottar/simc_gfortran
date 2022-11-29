@@ -127,7 +127,7 @@ do
 	    file_right="Prod_Test"
 	    echo "Reading in run numbers for right file ${file_right}..."
 	    IFS=', ' read -r -a data_right <<< "$( grab_runs Prod_Test )"             # RIGHT, Q2=5p5, W=3p02, high eps
-	    echo "Run Numbers: [${data_right}]"
+	    echo "Run Numbers: [${data_right[@]}]"
 	elif [[ $i = "LEFT" ]]; then
 	    file_left="Prod_Test"
 	    echo "Reading in run numbers for left file ${file_left}..."

@@ -304,17 +304,15 @@ if [[ $a_flag = "true" ]]; then
 	    echo "-----------------------------"
 	    echo
 	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
-	    #root -l <<EOF 
-	    #.x $SIMCPATH/Analysed_Prod.C("$InDATAFilename","$OutDATAFilename")
-	    #EOF
 	done
 	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
-	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
+	hadd -f ${OutDATAFilename}_Right.root *_-1_Raw_Data.root
 	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Right_Target.root"; done
     fi
 
+    # Checks that array isn't empty
     if [ ${#data_left[@]} -ne 0 ]; then
 	cd "${SIMCPATH}/scripts/Prod"
 	echo
@@ -328,17 +326,15 @@ if [[ $a_flag = "true" ]]; then
 	    echo "-----------------------------"
 	    echo
 	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
-	    #root -l <<EOF 
-	    #.x $SIMCPATH/Analysed_Prod.C("$InDATAFilename","$OutDATAFilename")
-	    #EOF
 	done
 	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
-	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
+	hadd -f ${OutDATAFilename}_Left.root *_-1_Raw_Data.root
 	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Left_Target.root"; done
     fi
-
+    
+    # Checks that array isn't empty
     if [ ${#data_center[@]} -ne 0 ]; then
 	cd "${SIMCPATH}/scripts/Prod"
 	echo
@@ -352,24 +348,22 @@ if [[ $a_flag = "true" ]]; then
 	    echo "-----------------------------"
 	    echo
 	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
-	    #root -l <<EOF 
-	    #.x $SIMCPATH/Analysed_Prod.C("$InDATAFilename","$OutDATAFilename")
-	    #EOF
 	done
 	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
-	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
+	hadd -f ${OutDATAFilename}_Center.root *_-1_Raw_Data.root
 	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Center_Target.root"; done
-    fi    
+    fi
     
 fi
 
-cd "${SIMCPATH}/scripts"
+cd "${SIMCPATH}/scripts/Prod/binning"
 
 # Finally, run the plotting script
-cd "${SIMCPATH}/scripts/Prod"
-#python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${DataRunNum[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" "${DummyRunNum[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${EffData}
+if [[ $t_flag = "true" ]]; then
+    #python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename}
+fi
 
 cd "${SIMCPATH}"
 #evince "OUTPUT/Analysis/${ANATYPE}LT/${OutFullAnalysisFilename}.pdf"

@@ -107,8 +107,7 @@ grab_input () {
     echo "Reading input file ${RunList}..."
     INPDIR="${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/${RunList}"
     cd "${SIMCPATH}/scripts"
-    #RunNumArr=`python3 getRunNumbers.py $INPDIR`
-    RunNumArr=$(python3 getRunNumbers.py $INPDIR)
+    RunNumArr=`python3 getRunNumbers.py $INPDIR`
     ${RunNumArr[*]}
 }
 

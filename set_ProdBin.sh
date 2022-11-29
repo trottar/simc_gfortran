@@ -111,7 +111,7 @@ grab_runs () {
 }
 
 # Run numbers for left, right, and, center settings
-PHI=("RIGHT" "LEFT" "CENTER")
+declare -a PHI=("RIGHT" "LEFT" "CENTER")
 for i in "${PHIVAL[@]}"
 do
     if [[ $Q2 = "5p5" && $W = "3p02" ]]; then

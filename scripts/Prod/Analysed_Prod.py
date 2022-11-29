@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-09-08 04:52:43 trottar"
+# Time-stamp: "2022-11-29 14:09:41 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -71,7 +71,7 @@ cut_f = '/DB/CUTS/run_type/simc_coin_heep.cuts'
 # defining Cuts
 cuts = ["coin_ep_cut_prompt_noRF_nopid","coin_ep_cut_prompt_noRF_pid"]
 
-lt=Root(os.path.realpath(__file__),"SimcCoin",ROOTPrefix,runNum,MaxEvent,cut_f,cuts)
+lt=Root(os.path.realpath(__file__),"Prod",ROOTPrefix,runNum,MaxEvent,cut_f,cuts)
 
 # Add this to all files for more dynamic pathing
 USER=lt.USER # Grab user info for file finding

@@ -101,9 +101,9 @@ if [[ $t_flag = "true" ]]; then
     fi
 fi
 
+# Function that calls python script to grab run numbers
 grab_runs () {
     RunList=$1
-    #echo "Reading input file ${RunList}..."
     INPDIR="${REPLAYPATH}/UTIL_BATCH/InputRunLists/KaonLT_2018_2019/${RunList}"
     cd "${SIMCPATH}/scripts"
     RunNumArr=$(python3 getRunNumbers.py $INPDIR)
@@ -118,7 +118,7 @@ echo
 echo "---------------------------------------------------------"
 echo
 
-# Run numbers for left, right, and, center settings
+# Get run numbers for left, right, and, center settings
 declare -a PHI=("RIGHT" "LEFT" "CENTER")
 for i in "${PHI[@]}"
 do
@@ -147,8 +147,10 @@ do
     #if [[ $Q2 = "5p5" && $W = "3p02" ]]; then
     if [[ $Q2 = "TEST" && $W = "3p02" ]]; then
 	if [[ $i = "RIGHT" ]]; then
+	    # Define run list based off kinematics selected
 	    file_right="Q5p5W3p02right_${EPSILON}e"
 	    echo "Reading in run numbers for right file ${file_right}..."
+	    # Converts python output to bash array
 	    IFS=', ' read -r -a data_right <<< "$( grab_runs Q5p5W3p02right_${EPSILON}e )"             # RIGHT, Q2=5p5, W=3p02, high eps
 	    echo "Run Numbers: [${data_right[@]}]"
 	    echo	    
@@ -279,6 +281,7 @@ do
     fi    
 done
 
+# Define input and output file names
 InDATAFilename="Raw_Data_${KIN}.root"
 OutDATAFilename="Analysed_Data_${KIN}"
 OutFullAnalysisFilename="FullAnalysis_${KIN}"
@@ -287,6 +290,7 @@ OutFullAnalysisFilename="FullAnalysis_${KIN}"
 # will create a new root file per run number which are combined using hadd
 if [[ $a_flag = "true" ]]; then
 
+    # Checks that array isn't empty
     if [ ${#data_right[@]} -ne 0 ]; then
 	cd "${SIMCPATH}/scripts/Prod"
 	echo

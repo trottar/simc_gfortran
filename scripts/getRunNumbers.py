@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 12:13:20 trottar"
+# Time-stamp: "2022-11-29 12:14:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -14,6 +14,7 @@ import sys
 
 inp_f = sys.argv[1]
 
+f_data = ''
 with open(inp_f, 'r') as f:
     for line in f:
         f_data += str(line)+' '

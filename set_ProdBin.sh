@@ -232,7 +232,7 @@ if [[ $a_flag = "true" ]]; then
 	    #.x $SIMCPATH/Analysed_Prod.C("$InDATAFilename","$OutDATAFilename")
 	    #EOF
 	done
-	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}"
+	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
@@ -256,7 +256,7 @@ if [[ $a_flag = "true" ]]; then
 	    #.x $SIMCPATH/Analysed_Prod.C("$InDATAFilename","$OutDATAFilename")
 	    #EOF
 	done
-	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}"
+	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
@@ -280,7 +280,7 @@ if [[ $a_flag = "true" ]]; then
 	    #.x $SIMCPATH/Analysed_Prod.C("$InDATAFilename","$OutDATAFilename")
 	    #EOF
 	done
-	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}"
+	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}.root *_-1_Raw_Data.root
@@ -296,4 +296,4 @@ cd "${SIMCPATH}/scripts/Prod"
 #python3 HeepCoin.py ${KIN} "${OutDATAFilename}.root" $DataChargeSum "${DataEffVal[*]}" "${DataRunNum[*]}" "${OutDUMMYFilename}.root" $DummyChargeSum "${DummyEffVal[*]}" "${DummyRunNum[*]}" ${InSIMCFilename} ${OutFullAnalysisFilename} ${EffData}
 
 cd "${SIMCPATH}"
-#evince "OUTPUT/Analysis/${ANATYPE}/${OutFullAnalysisFilename}.pdf"
+#evince "OUTPUT/Analysis/${ANATYPE}LT/${OutFullAnalysisFilename}.pdf"

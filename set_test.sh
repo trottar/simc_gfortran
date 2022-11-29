@@ -117,7 +117,9 @@ test=$( grab_input )
 
 echo $test
 
-for i in "${test[@]}"
+IFS=', ' read -r -a array <<< "$test"
+
+for i in "${array[@]}"
 do
     echo
     echo "-----------------------------"

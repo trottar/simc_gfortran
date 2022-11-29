@@ -110,6 +110,10 @@ grab_runs () {
     echo $RunNumArr
 }
 
+echo
+echo "Beginning analysis for ${Q2}, ${W}, ${EPSILON} setting..."
+echo
+
 # Run numbers for left, right, and, center settings
 declare -a PHI=("RIGHT" "LEFT" "CENTER")
 for i in "${PHI[@]}"

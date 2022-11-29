@@ -109,7 +109,7 @@ grab_input () {
     cd "${SIMCPATH}/scripts"
     RunNumArr=`python3 getRunNumbers.py $INPDIR`
     #RunNumArr=$(python3 getRunNumbers.py $INPDIR)
-    $RunNumArr
+    ${RunNumArr[*]}
 }
 
 echo $( grab_input )

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 19:59:51 trottar"
+# Time-stamp: "2022-11-29 20:08:18 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -357,6 +357,7 @@ def defineHists(phi_setting):
     '''
     
     histDict = {
+        "phi_setting" : phi_setting,
         "H_hsdelta_DATA" :     H_hsdelta_DATA,
         "H_hsxptar_DATA" :     H_hsxptar_DATA,
         "H_hsyptar_DATA" :     H_hsyptar_DATA,
@@ -409,11 +410,9 @@ ROOT.gStyle.SetOptStat(0)
 # Plus it makes the code below less repetitive
 histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
 
-empty_hist = []
 for i,hist in enumerate(histlist):
-    if not bool(hist):
+    if not bool(hist): # If hist is empty
         histlist.remove(hist)
-        empty_hist.append(i)
         
 # Plot histograms
 
@@ -475,10 +474,12 @@ for i,hist in enumerate(histlist):
 CQ2.Print(outputpdf)
 
 CW = TCanvas()
+l_t = ROOT.TLegend(0.115,0.55,0.33,0.9)
 
 for i,hist in enumerate(histlist):
     hist["H_W_DATA"].SetLineColor(i+1)
     hist["H_W_DATA"].Draw("same, E1")
+    l_pid.AddEntry(hist["H_W_DATA"],"p cut")
 
 CW.Print(outputpdf)
 
@@ -700,50 +701,46 @@ d_Center_Data = outHistFile.mkdir("Center")
 
 d_Right_Data.cd()
 for i,hist in enumerate(histlist):
-    if not bool(empty_hist):
-        for j in empty_hist:
-            if i == j:
-                continue
+    if bool(hist):
         continue
-    else:
-        if i == 1:
-            d_Right_Data.cd()
-        if i == 2:
-            d_Left_Data.cd()
-        if i == 3:
-            d_Center_Data.cd()
-        hist["H_hsdelta_DATA"].Write()
-        hist["H_hsxptar_DATA"].Write()
-        hist["H_hsyptar_DATA"].Write()
-        hist["H_ssxfp_DATA"].Write()
-        hist["H_ssyfp_DATA"].Write()
-        hist["H_ssxpfp_DATA"].Write()
-        hist["H_ssypfp_DATA"].Write()
-        hist["H_hsxfp_DATA"].Write()
-        hist["H_hsyfp_DATA"].Write()
-        hist["H_hsxpfp_DATA"].Write()
-        hist["H_hsypfp_DATA"].Write()
-        hist["H_ssdelta_DATA"].Write()
-        hist["H_ssxptar_DATA"].Write()
-        hist["H_ssyptar_DATA"].Write()
-        hist["H_q_DATA"].Write()
-        hist["H_Q2_DATA"].Write()
-        hist["H_W_DATA"].Write()
-        hist["H_t_DATA"].Write()
-        hist["H_epsilon_DATA"].Write()
-        hist["H_MMp2_DATA"].Write()
-        hist["H_th_DATA"].Write()
-        hist["H_ph_DATA"].Write()
-        hist["H_ph_q_DATA"].Write()
-        hist["H_th_q_DATA"].Write()
-        hist["H_ph_recoil_DATA"].Write()
-        hist["H_th_recoil_DATA"].Write()
-        hist["H_pmiss_DATA"].Write()
-        hist["H_emiss_DATA"].Write()
-        hist["H_pmx_DATA"].Write()
-        hist["H_pmy_DATA"].Write()
-        hist["H_pmz_DATA"].Write()
-        hist["H_ct_ep_DATA"].Write()
+    if hist["phi_setting"] = "Right":
+        d_Right_Data.cd()
+    if hist["phi_setting"] = "Left":
+        d_Left_Data.cd()
+    if hist["phi_setting"] = "Center":
+        d_Center_Data.cd()
+    hist["H_hsdelta_DATA"].Write()
+    hist["H_hsxptar_DATA"].Write()
+    hist["H_hsyptar_DATA"].Write()
+    hist["H_ssxfp_DATA"].Write()
+    hist["H_ssyfp_DATA"].Write()
+    hist["H_ssxpfp_DATA"].Write()
+    hist["H_ssypfp_DATA"].Write()
+    hist["H_hsxfp_DATA"].Write()
+    hist["H_hsyfp_DATA"].Write()
+    hist["H_hsxpfp_DATA"].Write()
+    hist["H_hsypfp_DATA"].Write()
+    hist["H_ssdelta_DATA"].Write()
+    hist["H_ssxptar_DATA"].Write()
+    hist["H_ssyptar_DATA"].Write()
+    hist["H_q_DATA"].Write()
+    hist["H_Q2_DATA"].Write()
+    hist["H_W_DATA"].Write()
+    hist["H_t_DATA"].Write()
+    hist["H_epsilon_DATA"].Write()
+    hist["H_MMp2_DATA"].Write()
+    hist["H_th_DATA"].Write()
+    hist["H_ph_DATA"].Write()
+    hist["H_ph_q_DATA"].Write()
+    hist["H_th_q_DATA"].Write()
+    hist["H_ph_recoil_DATA"].Write()
+    hist["H_th_recoil_DATA"].Write()
+    hist["H_pmiss_DATA"].Write()
+    hist["H_emiss_DATA"].Write()
+    hist["H_pmx_DATA"].Write()
+    hist["H_pmy_DATA"].Write()
+    hist["H_pmz_DATA"].Write()
+    hist["H_ct_ep_DATA"].Write()
 
 outHistFile.Close()
 

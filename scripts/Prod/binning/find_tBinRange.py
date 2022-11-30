@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 00:49:14 trottar"
+# Time-stamp: "2022-11-30 00:54:03 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -175,7 +175,8 @@ def defineHists(phi_setting):
         sys.exit(1)
 
     # Grab t bin range for EvtsPerBinRange evts
-    for evt in TBRANCH_DATA:
+    for i,evt in enumerate(TBRANCH_DATA):
+        progressBar(i, TBRANCH_DATA.GetEntries(), bar_length=50)
         H_t_BinTest.Fill(-evt.MandelT)
         tbinval = np.array(H_t_BinTest).sum()
         for val,binval in zip(np.linspace(0,0.5,201),range(1,len(np.array(H_t_BinTest)))):

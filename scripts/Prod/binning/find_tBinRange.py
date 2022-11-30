@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 20:08:18 trottar"
+# Time-stamp: "2022-11-29 20:09:22 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -703,11 +703,11 @@ d_Right_Data.cd()
 for i,hist in enumerate(histlist):
     if bool(hist):
         continue
-    if hist["phi_setting"] = "Right":
+    if hist["phi_setting"] == "Right":
         d_Right_Data.cd()
-    if hist["phi_setting"] = "Left":
+    if hist["phi_setting"] == "Left":
         d_Left_Data.cd()
-    if hist["phi_setting"] = "Center":
+    if hist["phi_setting"] == "Center":
         d_Center_Data.cd()
     hist["H_hsdelta_DATA"].Write()
     hist["H_hsxptar_DATA"].Write()

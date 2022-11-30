@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 02:13:00 trottar"
+# Time-stamp: "2022-11-30 02:14:53 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -184,10 +184,13 @@ def defineHists(phi_setting):
         Misc.progressBar(i, TBRANCH_DATA.GetEntries())
         
         H_t_BinTest.Fill(-evt.MandelT)
+    
+    for i,evt in enumerate(TBRANCH_DATA):
 
+        tval = -evt.MandelT
         for i,binval in enumerate(np.array(H_t_BinTest)):
-            print(i,binval)
-
+            print(i,binval,tval)
+        
         for val in np.linspace(0,0.5,201):
             #print(((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum())
             if ((EvtsPerBinRange-1000) <= ((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum() <= (EvtsPerBinRange+1000)):

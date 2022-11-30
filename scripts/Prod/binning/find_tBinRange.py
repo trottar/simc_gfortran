@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 03:08:17 trottar"
+# Time-stamp: "2022-11-30 03:12:53 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -114,9 +114,9 @@ def find_tbins():
 
     ################################################################################################################################################
     
-    H_t_Right       = ROOT.TH1D("H_t_Right","-t", 200, 0.0, 1.0)
-    H_t_Left       = ROOT.TH1D("H_t_Left","-t", 200, 0.0, 1.0)
-    H_t_Center       = ROOT.TH1D("H_t_Center","-t", 200, 0.0, 1.0)  
+    #H_t_Right       = ROOT.TH1D("H_t_Right","-t", 200, 0.0, 1.0)
+    #H_t_Left       = ROOT.TH1D("H_t_Left","-t", 200, 0.0, 1.0)
+    #H_t_Center       = ROOT.TH1D("H_t_Center","-t", 200, 0.0, 1.0)  
     
     ################################################################################################################################################
 
@@ -125,22 +125,22 @@ def find_tbins():
     for i,evt in enumerate(TBRANCH_RIGHT_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
-        H_t_Right.Fill(-evt.MandelT)
+        H_t_Right = np.hist(-evt.MandelT,bins=200)
         
-    print("\nCreating left t-bin histogram...")
+    print("Creating left t-bin histogram...")
     # Grab t bin range for EvtsPerBinRange evts
     for i,evt in enumerate(TBRANCH_LEFT_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
-        H_t_Left.Fill(-evt.MandelT)
-        
-    print("\nCreating center t-bin histogram...")
+        H_t_Left = np.hist(-evt.MandelT,bins=200)
+
+    print("Creating center t-bin histogram...")
     # Grab t bin range for EvtsPerBinRange evts
     for i,evt in enumerate(TBRANCH_CENTER_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
-        H_t_Center.Fill(-evt.MandelT)
-
+        H_t_Center = np.hist(-evt.MandelT,bins=200)
+        
     for r,l,c in zip(H_t_Right,H_t_Left,H_t_Center):
 
         def histedges_equalN(x, nbin):

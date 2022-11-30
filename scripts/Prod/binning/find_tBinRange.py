@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 19:00:42 trottar"
+# Time-stamp: "2022-11-29 19:08:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -470,27 +470,32 @@ c_pid.cd(1)
 gPad.SetLogy()
 
 for i,hist in enumerate(histlist):
+    hist["H_cal_etottracknorm_DATA"].SetLineColor(i)
     hist["H_cal_etottracknorm_DATA"].Draw("same, E1")
 
 c_pid.cd(2)
 gPad.SetLogy()
 
 for i,hist in enumerate(histlist):
+    hist["H_cer_npeSum_DATA"].SetLineColor(i)
     hist["H_cer_npeSum_DATA"].Draw("same, E1")
 
 c_pid.cd(3)
 gPad.SetLogy()
 for i,hist in enumerate(histlist):
+    hist["P_cal_etottracknorm_DATA"].SetLineColor(i)
     hist["P_cal_etottracknorm_DATA"].Draw("same, E1")
 
 c_pid.cd(4)
 gPad.SetLogy()
 for i,hist in enumerate(histlist):
+    hist["P_hgcer_npeSum_DATA"].SetLineColor(i)
     hist["P_hgcer_npeSum_DATA"].Draw("same, E1")
 
 c_pid.cd(5)
 gPad.SetLogy()
 for i,hist in enumerate(histlist):
+    hist["P_aero_npeSum_DATA"].SetLineColor(i)
     hist["P_aero_npeSum_DATA"].Draw("same, E1")
         
 c_pid.Draw()
@@ -503,18 +508,22 @@ c_pid_2d.Divide(2,2)
 
 c_pid_2d.cd(1)
 for i,hist in enumerate(histlist):
+    hist["H_cal_etottracknorm_vs_H_cer_npeSum_DATA"].SetLineColor(i)
     hist["H_cal_etottracknorm_vs_H_cer_npeSum_DATA"].Draw("colz")
 
 c_pid_2d.cd(2)
 for i,hist in enumerate(histlist):
+    hist["P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA"].SetLineColor(i)
     hist["P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA"].Draw("colz")
 
 c_pid_2d.cd(3)
 for i,hist in enumerate(histlist):
+    hist["P_cal_etottracknorm_vs_P_aero_npeSum_DATA"].SetLineColor(i)
     hist["P_cal_etottracknorm_vs_P_aero_npeSum_DATA"].Draw("colz")
 
 c_pid_2d.cd(4)
 for i,hist in enumerate(histlist):
+    hist["P_hgcer_npeSum_vs_P_aero_npeSum_DATA"].SetLineColor(i)
     hist["P_hgcer_npeSum_vs_P_aero_npeSum_DATA"].Draw("colz")
 
 c_pid_2d.Draw()
@@ -524,6 +533,7 @@ c_pid_2d.Print(outputpdf)
 ct_ep = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_ct_ep_DATA"].SetLineColor(i)
     hist["H_ct_ep_DATA"].Draw("same, E1")
 
 ct_ep.Print(outputpdf)
@@ -531,6 +541,7 @@ ct_ep.Print(outputpdf)
 ct_ep_mmp = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_ct_ep_vs_H_MMp2_DATA"].SetLineColor(i)
     hist["H_ct_ep_vs_H_MMp2_DATA"].Draw("colz")
 
 ct_ep_mmp.Print(outputpdf)
@@ -541,10 +552,12 @@ emiss_vs_delta.Divide(1,2)
 
 emiss_vs_delta.cd(1)
 for i,hist in enumerate(histlist):
+    hist["H_emiss_vs_H_hsdelta_DATA"].SetLineColor(i)
     hist["H_emiss_vs_H_hsdelta_DATA"].Draw("colz")
 
 emiss_vs_delta.cd(2)
 for i,hist in enumerate(histlist):
+    hist["H_emiss_vs_H_ssdelta_DATA"].SetLineColor(i)
     hist["H_emiss_vs_H_ssdelta_DATA"].Draw("colz")
 
 emiss_vs_delta.Print(outputpdf)
@@ -555,16 +568,19 @@ pmiss_vs_delta.Divide(1,2)
 
 pmiss_vs_delta.cd(1)
 for i,hist in enumerate(histlist):
+    hist["H_pmiss_vs_H_hsdelta_DATA"].SetLineColor(i)
     hist["H_pmiss_vs_H_hsdelta_DATA"].Draw("colz")
 
 pmiss_vs_delta.cd(2)
 for i,hist in enumerate(histlist):
+    hist["H_pmiss_vs_H_ssdelta_DATA"].SetLineColor(i)
     hist["H_pmiss_vs_H_ssdelta_DATA"].Draw("colz")
 
 pmiss_vs_delta.Print(outputpdf)
 
 hsdelta_vs_ssdelta = TCanvas()
 for i,hist in enumerate(histlist):
+    hist["H_hsdelta_vs_H_ssdelta_DATA"].SetLineColor(i)
     hist["H_hsdelta_vs_H_ssdelta_DATA"].Draw("colz")
 
 hsdelta_vs_ssdelta.Print(outputpdf)
@@ -575,10 +591,12 @@ raster_x_vs_miss.Divide(1,2)
 
 raster_x_vs_miss.cd(1)
 for i,hist in enumerate(histlist):
+    hist["H_raster_x_vs_H_pmiss_DATA"].SetLineColor(i)
     hist["H_raster_x_vs_H_pmiss_DATA"].Draw("colz")
 
 raster_x_vs_miss.cd(2)
 for i,hist in enumerate(histlist):
+    hist["H_raster_x_vs_H_emiss_DATA"].SetLineColor(i)
     hist["H_raster_x_vs_H_emiss_DATA"].Draw("colz")
 
 raster_x_vs_miss.Print(outputpdf)
@@ -589,10 +607,12 @@ raster_y_vs_miss.Divide(1,2)
 
 raster_y_vs_miss.cd(1)
 for i,hist in enumerate(histlist):
+    hist["H_raster_y_vs_H_pmiss_DATA"].SetLineColor(i)
     hist["H_raster_y_vs_H_pmiss_DATA"].Draw("colz")
 
 raster_y_vs_miss.cd(2)
 for i,hist in enumerate(histlist):
+    hist["H_raster_y_vs_H_emiss_DATA"].SetLineColor(i)
     hist["H_raster_y_vs_H_emiss_DATA"].Draw("colz")
 
 raster_y_vs_miss.Print(outputpdf)
@@ -603,17 +623,20 @@ raster_x_vs_raster_y.Divide(1,2)
 
 raster_x_vs_raster_y.cd(1)
 for i,hist in enumerate(histlist):
+    hist["H_raster_x_vs_H_raster_y_DATA"].SetLineColor(i)
     hist["H_raster_x_vs_H_raster_y_DATA"].Draw("colz")
 
 raster_x_vs_raster_y.cd(2)
 for i,hist in enumerate(histlist):
-    hist["H_raster_x_vs_H_raster_y_DATA"].Draw("colz")
+    .SetLineColor(i)
+    hist["H_raster_x_vs_H_raster_y_DATA"]    hist["H_raster_x_vs_H_raster_y_DATA"].Draw("colz")
 
 raster_x_vs_raster_y.Print(outputpdf)
 
 xfp = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_ssxfp_DATA"].SetLineColor(i)
     hist["H_ssxfp_DATA"].Draw("same, E1")
 
 xfp.Print(outputpdf)
@@ -621,6 +644,7 @@ xfp.Print(outputpdf)
 yfp = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_ssyfp_DATA"].SetLineColor(i)
     hist["H_ssyfp_DATA"].Draw("same, E1")
 
 yfp.Print(outputpdf)
@@ -628,6 +652,7 @@ yfp.Print(outputpdf)
 xpfp = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_ssxpfp_DATA"].SetLineColor(i)
     hist["H_ssxpfp_DATA"].Draw("same, E1")
     
 xpfp.Print(outputpdf)
@@ -635,6 +660,7 @@ xpfp.Print(outputpdf)
 ypfp = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_ssxpfp_DATA"].SetLineColor(i)
     hist["H_ssxpfp_DATA"].Draw("same, E1")
 
 ypfp.Print(outputpdf)
@@ -642,6 +668,7 @@ ypfp.Print(outputpdf)
 hxfp = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_hsxfp_DATA"].SetLineColor(i)
     hist["H_hsxfp_DATA"].Draw("same, E1")
 
 hxfp.Print(outputpdf)
@@ -649,6 +676,7 @@ hxfp.Print(outputpdf)
 hyfp = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_hsyfp_DATA"].SetLineColor(i)
     hist["H_hsyfp_DATA"].Draw("same, E1")
 
 hyfp.Print(outputpdf)
@@ -656,6 +684,7 @@ hyfp.Print(outputpdf)
 hxpfp = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_hsxpfp_DATA"].SetLineColor(i)
     hist["H_hsxpfp_DATA"].Draw("same, E1")
 
 hxpfp.Print(outputpdf)
@@ -663,6 +692,7 @@ hxpfp.Print(outputpdf)
 hypfp = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_hsypfp_DATA"].SetLineColor(i)
     hist["H_hsypfp_DATA"].Draw("same, E1")
 
 hypfp.Print(outputpdf)
@@ -670,6 +700,7 @@ hypfp.Print(outputpdf)
 xptar = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_ssxptar_DATA"].SetLineColor(i)
     hist["H_ssxptar_DATA"].Draw("same, E1")
 
 xptar.Print(outputpdf)
@@ -677,6 +708,7 @@ xptar.Print(outputpdf)
 yptar = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_ssyptar_DATA"].SetLineColor(i)
     hist["H_ssyptar_DATA"].Draw("same, E1")
 
 yptar.Print(outputpdf)
@@ -684,6 +716,7 @@ yptar.Print(outputpdf)
 hxptar = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_hsxptar_DATA"].SetLineColor(i)
     hist["H_hsxptar_DATA"].Draw("same, E1")
 
 hxptar.Print(outputpdf)
@@ -691,6 +724,7 @@ hxptar.Print(outputpdf)
 hyptar = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_hsyptar_DATA"].SetLineColor(i)
     hist["H_hsyptar_DATA"].Draw("same, E1")
 
 hyptar.Print(outputpdf)
@@ -698,6 +732,7 @@ hyptar.Print(outputpdf)
 Delta = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_ssdelta_DATA"].SetLineColor(i)
     hist["H_ssdelta_DATA"].Draw("same, E1")
 
 Delta.Print(outputpdf)
@@ -705,6 +740,7 @@ Delta.Print(outputpdf)
 hDelta = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_hsdelta_DATA"].SetLineColor(i)
     hist["H_hsdelta_DATA"].Draw("same, E1")
 
 hDelta.Print(outputpdf)
@@ -712,6 +748,7 @@ hDelta.Print(outputpdf)
 CQ2 = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_Q2_DATA"].SetLineColor(i)
     hist["H_Q2_DATA"].Draw("same, E1")
 
 CQ2.Print(outputpdf)
@@ -719,6 +756,7 @@ CQ2.Print(outputpdf)
 Cepsilon = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_epsilon_DATA"].SetLineColor(i)
     hist["H_epsilon_DATA"].Draw("same, E1")
 
 Cepsilon.Print(outputpdf)
@@ -726,6 +764,7 @@ Cepsilon.Print(outputpdf)
 CMMp2 = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_MMp2_DATA"].SetLineColor(i)
     hist["H_MMp2_DATA"].Draw("same, E1")
 
 CMMp2.Print(outputpdf)
@@ -733,6 +772,7 @@ CMMp2.Print(outputpdf)
 Cph_q = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_ph_q_DATA"].SetLineColor(i)
     hist["H_ph_q_DATA"].Draw("same, E1")
 
 Cph_q.Print(outputpdf)
@@ -740,6 +780,7 @@ Cph_q.Print(outputpdf)
 Cth_q = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_th_q_DATA"].SetLineColor(i)
     hist["H_th_q_DATA"].Draw("same, E1")
 
 Cth_q.Print(outputpdf)
@@ -747,6 +788,7 @@ Cth_q.Print(outputpdf)
 Cph_recoil = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_ph_recoil_DATA"].SetLineColor(i)
     hist["H_ph_recoil_DATA"].Draw("same, E1")
 
 Cph_recoil.Print(outputpdf)
@@ -754,6 +796,7 @@ Cph_recoil.Print(outputpdf)
 Cth_recoil = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_th_recoil_DATA"].SetLineColor(i)
     hist["H_th_recoil_DATA"].Draw("same, E1")
 
 Cth_recoil.Print(outputpdf)
@@ -761,6 +804,7 @@ Cth_recoil.Print(outputpdf)
 Cpmiss = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_pmiss_DATA"].SetLineColor(i)
     hist["H_pmiss_DATA"].Draw("same, E1")
 
 Cpmiss.Print(outputpdf)
@@ -768,6 +812,7 @@ Cpmiss.Print(outputpdf)
 Cemiss = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_emiss_DATA"].SetLineColor(i)
     hist["H_emiss_DATA"].Draw("same, E1")
 
 Cemiss.Print(outputpdf)
@@ -775,6 +820,7 @@ Cemiss.Print(outputpdf)
 Cpmiss_x = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_pmx_DATA"].SetLineColor(i)
     hist["H_pmx_DATA"].Draw("same, E1")
 
 Cpmiss_x.Print(outputpdf)
@@ -782,6 +828,7 @@ Cpmiss_x.Print(outputpdf)
 Cpmiss_y = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_pmy_DATA"].SetLineColor(i)
     hist["H_pmy_DATA"].Draw("same, E1")
 
 Cpmiss_y.Print(outputpdf)
@@ -789,6 +836,7 @@ Cpmiss_y.Print(outputpdf)
 Cpmiss_z = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_pmz_DATA"].SetLineColor(i)
     hist["H_pmz_DATA"].Draw("same, E1")
 
 Cpmiss_z.Print(outputpdf)
@@ -796,6 +844,7 @@ Cpmiss_z.Print(outputpdf)
 CW = TCanvas()
 
 for i,hist in enumerate(histlist):
+    hist["H_W_DATA"].SetLineColor(i)
     hist["H_W_DATA"].Draw("same, E1")
 
 CW.Print(outputpdf + ')')

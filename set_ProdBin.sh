@@ -109,6 +109,7 @@ elif [[ $d_flag = "true" ]]; then
     echo
     echo "-----------------------------"
     echo
+    EvtsPerBinRange=50000
 fi
 
 # Function that calls python script to grab run numbers

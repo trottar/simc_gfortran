@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 03:31:21 trottar"
+# Time-stamp: "2022-11-30 03:33:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -127,6 +127,7 @@ def find_tbins():
         # Progress bar
         Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
         H_t_Right.append(-evt.MandelT)
+    H_t_Right = np.array(H_t_Right)        
     H_t_Right,rbins = np.histogram(H_t_Right,bins=200)
 
     H_t_Left = []
@@ -136,6 +137,7 @@ def find_tbins():
         # Progress bar
         Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
         H_t_Left.append(-evt.MandelT)
+    H_t_Left = np.array(H_t_Left)
     H_t_Left,lbins = np.histogram(H_t_Left,bins=200)
 
     H_t_Center = []
@@ -145,7 +147,8 @@ def find_tbins():
         # Progress bar
         Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
         H_t_Center.append(-evt.MandelT)
-    print(H_t_Center)        
+    print(H_t_Center)
+    H_t_Center = np.array(H_t_Center)
     H_t_Center,cbins = np.histogram(H_t_Center,bins=200)
     print(H_t_Center,cbins)
             

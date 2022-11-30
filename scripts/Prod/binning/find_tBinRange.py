@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 00:59:43 trottar"
+# Time-stamp: "2022-11-30 01:00:12 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -56,7 +56,7 @@ ltsep package import and pathing definitions
 
 # Import package for cuts
 from ltsep import Root
-import ltsep.Misc() as msc
+import ltsep.Misc as msc
 
 lt=Root(os.path.realpath(__file__),"Plot_Prod")
 

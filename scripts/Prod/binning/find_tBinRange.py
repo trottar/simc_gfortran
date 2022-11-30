@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 21:01:20 trottar"
+# Time-stamp: "2022-11-29 21:02:14 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -489,10 +489,8 @@ for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     hist["H_t_DATA"].Draw("same, E1")
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
-    y = hist["H_t_DATA"].GetArray()
-    y.SetSize(hist["H_t_DATA"].GetNbinsX())
-    y = np.array(y)
-    l_t.AddEntry(hist["H_t_DATA"],len(hist["H_t_DATA"]))
+    yvals = np.array(hist["H_t_DATA"])[1:-1]
+    l_t.AddEntry(hist["H_t_DATA"],len(yvals))
 
 l_t.Draw()    
 

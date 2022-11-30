@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 19:42:05 trottar"
+# Time-stamp: "2022-11-29 19:44:48 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -112,7 +112,7 @@ def defineHists(phi_setting):
     H_ssyptar_DATA  = ROOT.TH1D("H_ssyptar_DATA","SHMS yptar", 200, -0.04, 0.04)
     H_q_DATA        = ROOT.TH1D("H_q_DATA","q", 200, 0.0, 10.0)
     H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2", 200, 0.0, 10.0)
-        H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 200, 0.0, 10.0)
+    H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 200, 0.0, 10.0)
     H_t_DATA       = ROOT.TH1D("H_t_DATA","-t", 200, 0.0, 1.0)  
     H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 200, 0.5, 1.0)
     H_MMp2_DATA  = ROOT.TH1D("H_MMp2_DATA","(MM)^{2}_{p}", 200, 0.0, 2.0)

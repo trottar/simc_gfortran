@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 21:02:14 trottar"
+# Time-stamp: "2022-11-29 21:05:26 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -490,7 +490,8 @@ for i,hist in enumerate(histlist):
     hist["H_t_DATA"].Draw("same, E1")
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
     yvals = np.array(hist["H_t_DATA"])[1:-1]
-    l_t.AddEntry(hist["H_t_DATA"],len(yvals))
+    print("\n\nHERE",yvals)
+    #l_t.AddEntry(hist["H_t_DATA"],len(yvals))
 
 l_t.Draw()    
 

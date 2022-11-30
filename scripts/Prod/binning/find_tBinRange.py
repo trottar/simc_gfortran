@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 02:32:56 trottar"
+# Time-stamp: "2022-11-30 02:33:17 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -198,7 +198,6 @@ def defineHists(phi_setting):
             
         for i,binval in enumerate(np.array(H_t_BinTest)):
             print(i,binval,tval)
-            if tval[]
             tbin_min = tval[i]
                 tbin_max = tval[i]
         tbin_size = tbin_max-tbin_max

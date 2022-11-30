@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 04:42:01 trottar"
+# Time-stamp: "2022-11-30 04:42:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -515,7 +515,7 @@ ROOT.gStyle.SetOptStat(0)
 # Call histogram function above to define dictonaries for right, left, center settings
 # Put these all into an array so that if we are missing a setting it is easier to remove
 # Plus it makes the code below less repetitive
-#histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
+histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
 
 for i,hist in enumerate(histlist):
     if not bool(hist): # If hist is empty

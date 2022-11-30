@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 05:03:04 trottar"
+# Time-stamp: "2022-11-30 05:03:14 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -612,7 +612,7 @@ for n,b in zip(binned_t[0],binned_t[1]):
     print(b)
     l_t.AddEntry(hist["H_t_DATA"],"%s" % n)
     l_t.AddEntry(hist["H_t_DATA"],"%s" % b)
-    tBin_line = TLine(0,0,0,n)
+    tBin_line = TLine(0,0,0,b)
     tBin_line.SetLineColor(kBlack)
     tBin_line.SetLineWidth(2)
     tBin_line.Draw("same")

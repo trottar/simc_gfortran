@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 00:29:10 trottar"
+# Time-stamp: "2022-11-30 00:33:58 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -81,8 +81,6 @@ def defineHists(phi_setting):
     rootFile = OUTPATH+"/"+InDATAFilename+"_%s.root" % (phi_setting)
     if not os.path.isfile(rootFile):
         return {}
-
-    
 
     InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
 
@@ -183,6 +181,18 @@ def defineHists(phi_setting):
 
         #........................................
 
+        tbinval = np.array(-evt.MandelT).sum()
+        print(len(range(1,len(np.array(-evt.MandelT)))))
+        for val,binval in zip(np.linspace(0,0.5,201),range(1,len(np.array(-evt.MandelT)))):
+            print(val,binval)
+            if ((val<=-evt.MandelT.GetBinCenter(binval)) & ((1-val)<=-evt.MandelT.GetBinCenter(binval))).sum() == EvtsPerBinRange:
+                tbin_min = val
+                tbin_max = 1-val
+                tbin_size = tbin_max-tbin_max
+                print("\n\nHERE",tbin_size)
+                print("HERE",tbin_min)
+                print("HERE",tbin_max)
+        
         if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
             
           H_ct_ep_DATA.Fill(evt.CTime_epCoinTime_ROC1)
@@ -489,17 +499,6 @@ l_t.SetTextSize(0.0335)
 for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
-    tbinval = np.array(hist["H_t_DATA"]).sum()
-    print(len(range(1,len(np.array(hist["H_t_DATA"])))))
-    for val,binval in zip(np.linspace(0,0.5,201),range(1,len(np.array(hist["H_t_DATA"])))):
-        print(val,binval)
-        if ((val<=hist["H_t_DATA"].GetBinCenter(binval)) & ((1-val)<=hist["H_t_DATA"].GetBinCenter(binval))).sum() == EvtsPerBinRange:
-            tbin_min = val
-            tbin_max = 1-val
-            tbin_size = tbin_max-tbin_max
-            print("\n\nHERE",tbin_size)
-            print("HERE",tbin_min)
-            print("HERE",tbin_max)
     hist["H_t_DATA"].Draw("same, E1")            
     
     #l_t.AddEntry(hist["H_t_DATA"],tbinval)

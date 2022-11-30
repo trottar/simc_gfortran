@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 00:22:57 trottar"
+# Time-stamp: "2022-11-30 00:29:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -502,7 +502,7 @@ for i,hist in enumerate(histlist):
             print("HERE",tbin_max)
     hist["H_t_DATA"].Draw("same, E1")            
     
-    l_t.AddEntry(hist["H_t_DATA"],tbinval)
+    #l_t.AddEntry(hist["H_t_DATA"],tbinval)
 
 l_t.Draw()    
 

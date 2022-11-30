@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 19:19:22 trottar"
+# Time-stamp: "2022-11-29 19:28:14 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -111,7 +111,8 @@ def defineHists(phi_setting):
     H_ssxptar_DATA  = ROOT.TH1D("H_ssxptar_DATA","SHMS xptar", 200, -0.1, 0.1)
     H_ssyptar_DATA  = ROOT.TH1D("H_ssyptar_DATA","SHMS yptar", 200, -0.04, 0.04)
     H_q_DATA        = ROOT.TH1D("H_q_DATA","q", 200, 0.0, 10.0)
-    H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2", 200, 0.0, 10.0)  
+    H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2", 200, 0.0, 10.0)
+    H_t_DATA       = ROOT.TH1D("H_t_DATA","t", 200, -1.0, 1.0)  
     H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 200, 0.5, 1.0)
     H_MMp2_DATA  = ROOT.TH1D("H_MMp2_DATA","(MM)^{2}_{p}", 200, -0.01, 0.01)
     H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar", 200, -0.1, 0.1)
@@ -148,7 +149,8 @@ def defineHists(phi_setting):
     H_ssxptar_DATA_rand  = ROOT.TH1D("H_ssxptar_DATA_rand","SHMS xptar", 200, -0.1, 0.1)
     H_ssyptar_DATA_rand  = ROOT.TH1D("H_ssyptar_DATA_rand","SHMS yptar", 200, -0.04, 0.04)
     H_q_DATA_rand        = ROOT.TH1D("H_q_DATA_rand","q", 200, 0.0, 10.0)
-    H_Q2_DATA_rand       = ROOT.TH1D("H_Q2_DATA_rand","Q2", 200, 0.0, 10.0)  
+    H_Q2_DATA_rand       = ROOT.TH1D("H_Q2_DATA_rand","Q2", 200, 0.0, 10.0)
+    H_t_DATA_rand       = ROOT.TH1D("H_t_DATA_rand","t", 200, 0.0, 10.0)  
     H_epsilon_DATA_rand  = ROOT.TH1D("H_epsilon_DATA_rand","epsilon", 200, 0.5, 1.0)
     H_MMp2_DATA_rand  = ROOT.TH1D("H_MMp2_DATA_rand","(MM)^{2}_{p}", 200, -0.01, 0.01)
     H_th_DATA_rand  = ROOT.TH1D("H_th_DATA_rand","X' tar", 200, -0.1, 0.1)
@@ -212,6 +214,7 @@ def defineHists(phi_setting):
           H_pmy_DATA.Fill(evt.pmy)
           H_pmz_DATA.Fill(evt.pmz)
           H_Q2_DATA.Fill(evt.Q2)
+          H_t_DATA.Fill(evt.MandelT)
           H_W_DATA.Fill(evt.W)
           H_epsilon_DATA.Fill(evt.epsilon)
           H_MMp2_DATA.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
@@ -245,6 +248,7 @@ def defineHists(phi_setting):
           H_pmy_DATA_rand.Fill(evt.pmy)
           H_pmz_DATA_rand.Fill(evt.pmz)
           H_Q2_DATA_rand.Fill(evt.Q2)
+          H_t_DATA_rand.Fill(evt.MandelT)
           H_W_DATA_rand.Fill(evt.W)
           H_epsilon_DATA_rand.Fill(evt.epsilon)
           H_MMp2_DATA_rand.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
@@ -275,6 +279,7 @@ def defineHists(phi_setting):
     H_ssdelta_DATA.Scale(normfac_data)
     H_hsdelta_DATA.Scale(normfac_data)
     H_Q2_DATA.Scale(normfac_data)
+    H_t_DATA.Scale(normfac_data)
     H_epsilon_DATA.Scale(normfac_data)
     H_MMp2_DATA.Scale(normfac_data)
     H_ph_q_DATA.Scale(normfac_data)
@@ -308,6 +313,7 @@ def defineHists(phi_setting):
     H_ssdelta_DATA_rand.Scale(normfac_data/nWindows)
     H_hsdelta_DATA_rand.Scale(normfac_data/nWindows)
     H_Q2_DATA_rand.Scale(normfac_data/nWindows)
+    H_t_DATA_rand.Scale(normfac_data/nWindows)
     H_epsilon_DATA_rand.Scale(normfac_data/nWindows)
     H_MMp2_DATA_rand.Scale(normfac_data/nWindows)
     H_pmiss_DATA_rand.Scale(normfac_data/nWindows)
@@ -338,6 +344,7 @@ def defineHists(phi_setting):
     H_ssdelta_DATA.Add(H_ssdelta_DATA_rand,-1)
     H_hsdelta_DATA.Add(H_hsdelta_DATA_rand,-1)
     H_Q2_DATA.Add(H_Q2_DATA_rand,-1)
+    H_t_DATA.Add(H_t_DATA_rand,-1)
     H_epsilon_DATA.Add(H_epsilon_DATA_rand,-1)
     H_MMp2_DATA.Add(H_MMp2_DATA_rand,-1)
     H_pmiss_DATA.Add(H_pmiss_DATA_rand,-1)
@@ -366,6 +373,7 @@ def defineHists(phi_setting):
         "H_ssyptar_DATA" :     H_ssyptar_DATA,
         "H_q_DATA" :     H_q_DATA      ,
         "H_Q2_DATA" :     H_Q2_DATA     ,
+        "H_t_DATA" :     H_t_DATA     ,
         "H_epsilon_DATA" :     H_epsilon_DATA,
         "H_MMp2_DATA" :     H_MMp2_DATA,
         "H_th_DATA" :     H_th_DATA,
@@ -576,6 +584,14 @@ for i,hist in enumerate(histlist):
     hist["H_Q2_DATA"].Draw("same, E1")
 
 CQ2.Print(outputpdf)
+
+Ct = TCanvas()
+
+for i,hist in enumerate(histlist):
+    hist["H_t_DATA"].SetLineColor(i)
+    hist["H_t_DATA"].Draw("same, E1")
+
+Ct.Print(outputpdf)
 
 Cepsilon = TCanvas()
 

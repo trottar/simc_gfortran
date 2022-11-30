@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 04:36:39 trottar"
+# Time-stamp: "2022-11-30 04:42:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -173,6 +173,8 @@ def find_tbins():
     print(rn, rbins)
     print(ln, lbins)
     print(cn, cbins)
+
+    return [n,bins]
     
 def defineHists(phi_setting):
     ################################################################################################################################################
@@ -285,11 +287,9 @@ def defineHists(phi_setting):
         HMS_FixCut = (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
         HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)
 
-        tBin_Cut = (-evt.MandelT>=tbin_min) & (-evt.MandelT<=tbin_max)
-
         #........................................
                 
-        if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance & tBin_Cut):
+        if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
             
           H_ct_ep_DATA.Fill(evt.CTime_epCoinTime_ROC1)
 
@@ -517,9 +517,6 @@ ROOT.gStyle.SetOptStat(0)
 # Plus it makes the code below less repetitive
 #histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
 
-find_tbins()
-
-'''
 for i,hist in enumerate(histlist):
     if not bool(hist): # If hist is empty
         histlist.remove(hist)
@@ -595,12 +592,16 @@ Ct = TCanvas()
 l_t = ROOT.TLegend(0.115,0.55,0.33,0.9)
 l_t.SetTextSize(0.0335)
 
+binned_t = find_tbins()
+
 for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
     hist["H_t_DATA"].Draw("same, E1")            
-    
-    #l_t.AddEntry(hist["H_t_DATA"],tbinval)
+
+for n,b in zip(binned_t[0],binned_t[1]):
+    l_t.AddEntry(hist["H_t_DATA"],n)
+    l_t.AddEntry(hist["H_t_DATA"],b)
 
 l_t.Draw()    
 
@@ -863,4 +864,4 @@ for i,hist in enumerate(histlist):
     hist["InFile_DATA"].Close()
     
 print ("Processing Complete")
-'''
+

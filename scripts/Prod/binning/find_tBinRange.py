@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 03:38:39 trottar"
+# Time-stamp: "2022-11-30 03:41:08 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -127,9 +127,8 @@ def find_tbins():
         # Progress bar
         Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
         if (0.0 <= -evt.MandelT <= 1.0):
-            H_t_Right.append(-evt.MandelT)
-    H_t_Right = np.array(H_t_Right)        
-    H_t_Right,rbins = np.histogram(H_t_Right,bins=200)
+            H_t_Right.append(-evt.MandelT)   
+    rbins,H_t_Right = np.histogram(H_t_Right,bins=200)
 
     H_t_Left = []
     print("\nCreating left t-bin histogram...")
@@ -139,8 +138,7 @@ def find_tbins():
         Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
         if (0.0 <= -evt.MandelT <= 1.0):
             H_t_Left.append(-evt.MandelT)
-    H_t_Left = np.array(H_t_Left)
-    H_t_Left,lbins = np.histogram(H_t_Left,bins=200)
+    lbins,H_t_Left,lbins = np.histogram(H_t_Left,bins=200)
 
     H_t_Center = []
     print("\nCreating center t-bin histogram...")
@@ -150,9 +148,7 @@ def find_tbins():
         Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
         if (0.0 <= -evt.MandelT <= 1.0):
             H_t_Center.append(-evt.MandelT)
-    H_t_Center = np.array(H_t_Center)
-    H_t_Center = np.histogram(H_t_Center,bins=200)
-    print(H_t_Center)
+    lbins,H_t_Center = np.histogram(H_t_Center,bins=200)
             
     for r,l,c in zip(H_t_Right,H_t_Left,H_t_Center):
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 02:52:31 trottar"
+# Time-stamp: "2022-11-30 02:53:06 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -82,7 +82,7 @@ def find_tbins():
     # Define root file trees of interest
 
     for val in ['Right', 'Left', 'Center']:
-        rootFiles = OUTPATH+"/"+InDATAFilename+"_%s.root" % (phi_setting)
+        rootFiles = OUTPATH+"/"+InDATAFilename+"_%s.root" % val
         if not os.path.isfile(rootFile):
             continue
         else:

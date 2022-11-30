@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 02:11:22 trottar"
+# Time-stamp: "2022-11-30 02:11:53 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -185,7 +185,7 @@ def defineHists(phi_setting):
         
         H_t_BinTest.Fill(-evt.MandelT)
 
-        print(H_t_BinTest.sum())
+        print(np.array(H_t_BinTest).sum())
 
         for val in np.linspace(0,0.5,201):
             print(((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum())

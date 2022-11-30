@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 00:57:11 trottar"
+# Time-stamp: "2022-11-30 00:58:52 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -56,9 +56,6 @@ ltsep package import and pathing definitions
 
 # Import package for cuts
 from ltsep import Root
-from ltsep import Misc
-
-msc=Misc()
 
 lt=Root(os.path.realpath(__file__),"Plot_Prod")
 
@@ -179,7 +176,7 @@ def defineHists(phi_setting):
 
     # Grab t bin range for EvtsPerBinRange evts
     for i,evt in enumerate(TBRANCH_DATA):
-        msc.progressBar(i, TBRANCH_DATA.GetEntries())
+        ltsep.Misc().progressBar(i, TBRANCH_DATA.GetEntries())
         H_t_BinTest.Fill(-evt.MandelT)
         tbinval = np.array(H_t_BinTest).sum()
         for val,binval in zip(np.linspace(0,0.5,201),range(1,len(np.array(H_t_BinTest)))):

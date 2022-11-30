@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 21:08:19 trottar"
+# Time-stamp: "2022-11-29 21:33:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -44,6 +44,7 @@ DEBUG = False # Flag for no cut plots
 kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
 OutFilename = sys.argv[3]
+EvtsPerBinRange = sys.argv[4]
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -487,12 +488,18 @@ l_t.SetTextSize(0.05)
 
 for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
-    hist["H_t_DATA"].Draw("same, E1")
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
-    yvals = np.array(hist["H_t_DATA"])[1:-1]
-    print("\n\nHERE",yvals)
-    print("\n\nHERE",yvals.sum())
-    #l_t.AddEntry(hist["H_t_DATA"],len(yvals))
+    print("\n\nHERE",np.array(hist["H_t_DATA"])[0:-1])
+    print("\n\nHERE",np.array(hist["H_t_DATA"])[1:-1])
+    tbinval = np.array(hist["H_t_DATA"])[1:-1].sum()
+    for val in linspace(0,0.5,100):
+        if ((val<=tbinval) & ((1-val)<=tbinval)).sum() > EvtsPerBinRange:
+            tbin_min = val
+            tbin_max = 1-val
+            tbin_size = tbin_max-tbin_max
+    hist["H_t_DATA"].Draw("same, E1")            
+    
+    l_t.AddEntry(hist["H_t_DATA"],tbinval)
 
 l_t.Draw()    
 

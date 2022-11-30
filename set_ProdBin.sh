@@ -371,7 +371,7 @@ cd "${SIMCPATH}/scripts/Prod/binning"
 
 # Finally, run the plotting script
 if [[ $t_flag = "true" || $d_flag = "true" ]]; then
-    python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename}
+    python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${EvtsPerBinRange}
 fi
 
 cd "${SIMCPATH}"

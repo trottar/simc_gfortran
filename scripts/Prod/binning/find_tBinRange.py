@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 21:05:26 trottar"
+# Time-stamp: "2022-11-29 21:08:19 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -491,6 +491,7 @@ for i,hist in enumerate(histlist):
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
     yvals = np.array(hist["H_t_DATA"])[1:-1]
     print("\n\nHERE",yvals)
+    print("\n\nHERE",yvals.sum())
     #l_t.AddEntry(hist["H_t_DATA"],len(yvals))
 
 l_t.Draw()    

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 03:46:02 trottar"
+# Time-stamp: "2022-11-30 03:48:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -157,13 +157,10 @@ def find_tbins():
             npt = len(x)
             return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
 
-        H_t_BinTest = np.hstack((r,l,c))
+        #H_t_BinTest = np.hstack((r,l,c))
         #print("\n\nHERE",r,l,c,H_t_BinTest,"\n\n")
-        
-        for i,binval in enumerate(np.array(H_t_BinTest)[1:]):
-            tval.append(H_t_BinTest.GetBinCenter(i))
 
-    n, bins, patches = plt.hist(tval, histedges_equalN(tval, 5))
+        n, bins, patches = plt.hist(r, histedges_equalN(r, 5))
         
     #n, bins = np.histogram(np.hstack((r,l,c)), bins=5)
     #n, bins, patches = plt.hist(np.hstack((r,l,c)), histedges_equalN(np.hstack((r,l,c)), 5), normed=True)

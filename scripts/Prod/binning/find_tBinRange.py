@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 04:33:15 trottar"
+# Time-stamp: "2022-11-30 04:36:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -162,13 +162,18 @@ def find_tbins():
         H_t_BinTest.append(c)
         #print("\n\nHERE",r,l,c,H_t_BinTest,"\n\n")
     
-    n, bins, patches = plt.hist(H_t_BinTest, histedges_equalN(H_t_BinTest, 5))
-        
-    #n, bins = np.histogram(np.hstack((r,l,c)), bins=5)
-    #n, bins, patches = plt.hist(np.hstack((r,l,c)), histedges_equalN(np.hstack((r,l,c)), 5), normed=True)
+    n, bins, patches = plt.hist(H_t_BinTest, histedges_equalN(H_t_BinTest, 5))    
 
     print("\n\nHERE",n,sorted(bins),"\n\n")
 
+    rn, rbins = np.histogram(H_t_Right, bins=bins)
+    ln, lbins = np.histogram(H_t_Left, bins=bins)
+    cn, cbins = np.histogram(H_t_Center, bins=bins)
+
+    print(rn, rbins)
+    print(ln, lbins)
+    print(cn, cbins)
+    
 def defineHists(phi_setting):
     ################################################################################################################################################
     # Define root file trees of interest

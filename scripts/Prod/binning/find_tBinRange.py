@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 21:41:09 trottar"
+# Time-stamp: "2022-11-29 21:44:04 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -44,7 +44,7 @@ DEBUG = False # Flag for no cut plots
 kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
 OutFilename = sys.argv[3]
-EvtsPerBinRange = sys.argv[4]
+EvtsPerBinRange = int(sys.argv[4])
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen

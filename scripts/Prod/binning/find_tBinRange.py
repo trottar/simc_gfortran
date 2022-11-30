@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 04:49:16 trottar"
+# Time-stamp: "2022-11-30 04:50:04 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -280,7 +280,7 @@ def defineHists(phi_setting):
 
     
     ibin = 1
-    print("\nPlotting % data with proper t-bins..." % phi_setting)
+    print("\nPlotting %s data with proper t-bins..." % phi_setting)
     for i,evt in enumerate(TBRANCH_DATA):
 
         # Progress bar

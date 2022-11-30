@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 23:09:52 trottar"
+# Time-stamp: "2022-11-29 23:13:17 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -491,7 +491,7 @@ for i,hist in enumerate(histlist):
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
     print("\n\nHERE",np.array(hist["H_t_DATA"])[0:-1])
     tbinval = np.array(hist["H_t_DATA"]).sum()
-    for binval in len(np.array(hist["H_t_DATA"])[0:-1]):
+    for binval in xrange(1,len(np.array(hist["H_t_DATA"]))):
         print("HERE",hist["H_t_DATA"].GetBinCenter(binval))
 
     for val in np.linspace(0,0.5,100):

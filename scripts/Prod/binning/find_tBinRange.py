@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 20:09:22 trottar"
+# Time-stamp: "2022-11-29 20:12:08 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -479,7 +479,7 @@ l_t = ROOT.TLegend(0.115,0.55,0.33,0.9)
 for i,hist in enumerate(histlist):
     hist["H_W_DATA"].SetLineColor(i+1)
     hist["H_W_DATA"].Draw("same, E1")
-    l_pid.AddEntry(hist["H_W_DATA"],"p cut")
+    l_t.AddEntry(hist["H_W_DATA"],"p cut")
 
 CW.Print(outputpdf)
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 04:18:26 trottar"
+# Time-stamp: "2022-11-30 04:21:04 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -157,7 +157,7 @@ def find_tbins():
     for r,l,c in zip(H_t_Right,H_t_Left,H_t_Center):
 
         H_t_BinTest = np.hstack((r,l,c))
-        #print("\n\nHERE",r,l,c,H_t_BinTest,"\n\n")
+        print("\n\nHERE",r,l,c,H_t_BinTest,"\n\n")
     
     n, bins, patches = plt.hist(H_t_BinTest, histedges_equalN(H_t_BinTest, 5))
         

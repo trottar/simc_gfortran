@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 19:40:18 trottar"
+# Time-stamp: "2022-11-29 19:42:05 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -112,9 +112,10 @@ def defineHists(phi_setting):
     H_ssyptar_DATA  = ROOT.TH1D("H_ssyptar_DATA","SHMS yptar", 200, -0.04, 0.04)
     H_q_DATA        = ROOT.TH1D("H_q_DATA","q", 200, 0.0, 10.0)
     H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2", 200, 0.0, 10.0)
+        H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 200, 0.0, 10.0)
     H_t_DATA       = ROOT.TH1D("H_t_DATA","-t", 200, 0.0, 1.0)  
     H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 200, 0.5, 1.0)
-    H_MMp2_DATA  = ROOT.TH1D("H_MMp2_DATA","(MM)^{2}_{p}", 200, -0.01, 0.01)
+    H_MMp2_DATA  = ROOT.TH1D("H_MMp2_DATA","(MM)^{2}_{p}", 200, 0.0, 2.0)
     H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar", 200, -0.1, 0.1)
     H_ph_DATA  = ROOT.TH1D("H_ph_DATA","Y' tar", 200, -0.1, 0.1)
     H_ph_q_DATA  = ROOT.TH1D("H_ph_q_DATA","Phi Detected (ph_xq)", 200, -10.0, 10.0)
@@ -126,7 +127,6 @@ def defineHists(phi_setting):
     H_pmx_DATA  = ROOT.TH1D("H_pmx_DATA","pmx", 200, 0.0, 10.0)
     H_pmy_DATA  = ROOT.TH1D("H_pmy_DATA","pmy ", 200, 0.0, 10.0)
     H_pmz_DATA  = ROOT.TH1D("H_pmz_DATA","pmz", 200, 0.0, 10.0)
-    H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 200, 0.7, 1.1)
     H_ct_ep_DATA = ROOT.TH1D("H_ct_ep_DATA", "Electron-Proton CTime", 200, -10, 10)
     H_cal_etottracknorm_DATA = ROOT.TH1D("H_cal_etottracknorm_DATA", "HMS Cal etottracknorm", 200, 0.2, 1.8)
     H_cer_npeSum_DATA = ROOT.TH1D("H_cer_npeSum_DATA", "HMS Cer Npe Sum", 200, 0, 30)
@@ -150,9 +150,10 @@ def defineHists(phi_setting):
     H_ssyptar_DATA_rand  = ROOT.TH1D("H_ssyptar_DATA_rand","SHMS yptar", 200, -0.04, 0.04)
     H_q_DATA_rand        = ROOT.TH1D("H_q_DATA_rand","q", 200, 0.0, 10.0)
     H_Q2_DATA_rand       = ROOT.TH1D("H_Q2_DATA_rand","Q2", 200, 0.0, 10.0)
+    H_W_DATA_rand  = ROOT.TH1D("H_W_DATA_rand","W ", 200, 0.0, 10.0)
     H_t_DATA_rand       = ROOT.TH1D("H_t_DATA_rand","-t", 200, 0.0, 1.0)  
     H_epsilon_DATA_rand  = ROOT.TH1D("H_epsilon_DATA_rand","epsilon", 200, 0.5, 1.0)
-    H_MMp2_DATA_rand  = ROOT.TH1D("H_MMp2_DATA_rand","(MM)^{2}_{p}", 200, -0.01, 0.01)
+    H_MMp2_DATA_rand  = ROOT.TH1D("H_MMp2_DATA_rand","(MM)^{2}_{p}", 200, 0.0, 2.0)
     H_th_DATA_rand  = ROOT.TH1D("H_th_DATA_rand","X' tar", 200, -0.1, 0.1)
     H_ph_DATA_rand  = ROOT.TH1D("H_ph_DATA_rand","Y' tar", 200, -0.1, 0.1)
     H_ph_q_DATA_rand  = ROOT.TH1D("H_ph_q_DATA_rand","Phi Detected (ph_xq)", 200, -10.0, 10.0)
@@ -164,7 +165,6 @@ def defineHists(phi_setting):
     H_pmx_DATA_rand  = ROOT.TH1D("H_pmx_DATA_rand","pmx", 200, 0.0, 10.0)
     H_pmy_DATA_rand  = ROOT.TH1D("H_pmy_DATA_rand","pmy ", 200, 0.0, 10.0)
     H_pmz_DATA_rand  = ROOT.TH1D("H_pmz_DATA_rand","pmz", 200, 0.0, 10.0)
-    H_W_DATA_rand  = ROOT.TH1D("H_W_DATA_rand","W ", 200, 0.7, 1.1)
     H_ct_ep_DATA_rand = ROOT.TH1D("H_ct_ep_DATA_rand", "Electron-Proton CTime", 200, -10, 10)
     
     ################################################################################################################################################

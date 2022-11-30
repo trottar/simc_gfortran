@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 04:42:30 trottar"
+# Time-stamp: "2022-11-30 04:49:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -86,32 +86,34 @@ def find_tbins():
         if not os.path.isfile(rootFile):
             continue
         else:
-            InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
             if val == 'Right':
-                TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
-                #TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
-                #TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
-                #TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_noRF")
-                #TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
-                #TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
-                #TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_RF")
+                InFile_RIGHT_DATA = ROOT.TFile.Open(rootFile, "OPEN")
+                TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Uncut_Kaon_Events")
+                #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_all_noRF")
+                #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_prompt_noRF")
+                #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_rand_noRF")
+                #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_all_RF")
+                #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_prompt_RF")
+                #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_rand_RF")
             if val == 'Left':
-                TBRANCH_LEFT_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
-                #TBRANCH_LEFT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
-                #TBRANCH_LEFT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
-                #TBRANCH_LEFT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_noRF")
-                #TBRANCH_LEFT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
-                #TBRANCH_LEFT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
-                #TBRANCH_LEFT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_RF")
+                InFile_LEFT_DATA = ROOT.TFile.Open(rootFile, "OPEN")
+                TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Uncut_Kaon_Events")
+                #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_all_noRF")
+                #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_prompt_noRF")
+                #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_rand_noRF")
+                #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_all_RF")
+                #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_prompt_RF")
+                #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_rand_RF")                
             if val == 'Center':
-                TBRANCH_CENTER_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
-                #TBRANCH_CENTER_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
-                #TBRANCH_CENTER_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
-                #TBRANCH_CENTER_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_noRF")
-                #TBRANCH_CENTER_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
-                #TBRANCH_CENTER_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
-                #TBRANCH_CENTER_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_RF")                
-
+                InFile_CENTER_DATA = ROOT.TFile.Open(rootFile, "OPEN")
+                TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Uncut_Kaon_Events")
+                #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_all_noRF")
+                #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_prompt_noRF")
+                #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_rand_noRF")
+                #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_all_RF")
+                #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_prompt_RF")
+                #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_rand_RF")
+                
     ################################################################################################################################################
     
     #H_t_Right       = ROOT.TH1D("H_t_Right","-t", 200, 0.0, 1.0)
@@ -150,6 +152,10 @@ def find_tbins():
             H_t_Center.append(-evt.MandelT)
     #cbins,H_t_Center = np.histogram(H_t_Center,bins=200)
 
+    InFile_RIGHT_DATA.Close()
+    InFile_LEFT_DATA.Close()
+    InFile_CENTER_DATA.Close()
+    
     def histedges_equalN(x, nbin):
         npt = len(x)
         return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
@@ -274,7 +280,7 @@ def defineHists(phi_setting):
 
     
     ibin = 1
-    print("Plotting data with proper t-bins...")
+    print("\nPlotting % data with proper t-bins..." % phi_setting)
     for i,evt in enumerate(TBRANCH_DATA):
 
         # Progress bar

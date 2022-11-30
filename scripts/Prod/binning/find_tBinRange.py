@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 21:33:42 trottar"
+# Time-stamp: "2022-11-29 21:34:52 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -32,8 +32,8 @@ from functools import reduce
 ##################################################################################################################################################
 
 # Check the number of arguments provided to the script
-if len(sys.argv)-1!=3:
-    print("!!!!! ERROR !!!!!\n Expected 3 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename\n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=4:
+    print("!!!!! ERROR !!!!!\n Expected 4 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename EvtsPerBinRange\n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################    

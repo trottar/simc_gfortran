@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 01:56:28 trottar"
+# Time-stamp: "2022-11-30 01:57:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -184,7 +184,7 @@ def defineHists(phi_setting):
         Misc.progressBar(i, TBRANCH_DATA.GetEntries())
         
         for val in np.linspace(0,0.5,201):
-            if (EvtsPerBinRange-1000) <= ((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum() <= (EvtsPerBinRange+1000)):
+            if ((EvtsPerBinRange-1000) <= ((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum() <= (EvtsPerBinRange+1000)):
                 tbin_min = val
                 tbin_max = 1-val
                 tbin_size = tbin_max-tbin_max

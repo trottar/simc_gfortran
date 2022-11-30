@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 19:10:18 trottar"
+# Time-stamp: "2022-11-29 19:19:22 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -133,23 +133,6 @@ def defineHists(phi_setting):
     P_hgcer_npeSum_DATA = ROOT.TH1D("P_hgcer_npeSum_DATA", "SHMS HGCer Npe Sum", 200, 0, 50)
     P_aero_npeSum_DATA = ROOT.TH1D("P_aero_npeSum_DATA", "SHMS Aero Npe Sum", 200, 0, 50)
 
-
-    H_ct_ep_vs_H_MMp2_DATA = ROOT.TH2D("H_ct_ep_vs_H_MMp2_DATA","Electron-Proton CTime vs (MM)^{2}_{p}; e p Coin_Time; (MM)^{2}_{p}", 200, -10, 10, 200, -0.1, 0.1)
-    H_emiss_vs_H_hsdelta_DATA = ROOT.TH2D("H_emiss_vs_H_hsdelta_DATA","Emiss vs HMS Delta;  Emiss; HMS Delta", 200, -0.1, 0.1, 200, -20.0, 20.0)
-    H_emiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_emiss_vs_H_ssdelta_DATA","Emiss vs SHMS Delta;  Emiss; SHMS Delta", 200, -0.1, 0.1, 200, -20.0, 20.0)
-    H_pmiss_vs_H_hsdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_hsdelta_DATA","Pmiss vs HMS Delta;  Pmiss; HMS Delta", 200, -0.1, 0.1, 200, -20.0, 20.0)
-    H_pmiss_vs_H_ssdelta_DATA = ROOT.TH2D("H_pmiss_vs_H_ssdelta_DATA","Pmiss vs SHMS Delta;  Pmiss; SHMS Delta", 200, -0.1, 0.1, 200, -20.0, 20.0)
-    H_hsdelta_vs_H_ssdelta_DATA = ROOT.TH2D("H_hsdelta_vs_H_ssdelta_DATA","HMS Delta vs SHMS Delta;  HMS Delta; SHMS Delta", 200, -20.0,20.0, 200, -20.0, 20.0)
-    H_raster_x_vs_H_pmiss_DATA = ROOT.TH2D("H_raster_x_vs_H_pmiss_DATA","Raster_X vs pmiss;  pmiss; Raster_X", 200, -0.1,0.1, 200, -0.25,0.25)
-    H_raster_x_vs_H_emiss_DATA = ROOT.TH2D("H_raster_x_vs_H_emiss_DATA","Raster_X vs emiss;  emiss; Raster_X", 200, -0.1,0.1, 200, -0.25,0.25)
-    H_raster_y_vs_H_pmiss_DATA = ROOT.TH2D("H_raster_y_vs_H_pmiss_DATA","Raster_Y vs pmiss;  pmiss; Raster_Y", 200, -0.1,0.1, 200, -0.05,0.25)
-    H_raster_y_vs_H_emiss_DATA = ROOT.TH2D("H_raster_y_vs_H_emiss_DATA","Raster_Y vs emiss;  emiss; Raster_Y", 200, -0.1,0.1, 200, -0.05,0.25)
-    H_raster_x_vs_H_raster_y_DATA = ROOT.TH2D("H_raster_x_vs_H_raster_y_DATA","Raster_X vs Raster_Y;  Raster_X; Raster_Y", 200, -0.25,0.25, 200, -0.05,0.25)
-    H_cal_etottracknorm_vs_H_cer_npeSum_DATA = ROOT.TH2D("H_cal_etottracknorm_vs_H_cer_npeSum_DATA","HMS Cal etottracknorm vs HMS Cer Npe Sum;  HMS Cal etottracknorm; HMS Cer Npe Sum", 200, 0.2, 1.8, 200, 0, 30)
-    P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA = ROOT.TH2D("P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA","SHMS Cal etottracknorm vs SHMS HGCer Npe Sum;  SHMS Cal etottracknorm; SHMS HGCer Npe Sum", 200, 0, 1, 200, 0, 50)
-    P_cal_etottracknorm_vs_P_aero_npeSum_DATA = ROOT.TH2D("P_cal_etottracknorm_vs_P_aero_npeSum_DATA","SHMS Cal etottracknorm vs SHMS Aero Npe Sum;  SHMS Cal etottracknorm; SHMS Aero Npe Sum", 200, 0, 1, 200, 0, 50)
-    P_hgcer_npeSum_vs_P_aero_npeSum_DATA = ROOT.TH2D("P_hgcer_npeSum_vs_P_aero_npeSum_DATA","SHMS HGCer Npe Sum vs SHMS Aero Npe Sum;  SHMS HGCer Npe Sum; SHMS Aero Npe Sum", 200, 0, 50, 200, 0, 50)
-
     H_hsdelta_DATA_rand  = ROOT.TH1D("H_hsdelta_DATA_rand","HMS Delta", 200, -20.0, 20.0)
     H_hsxptar_DATA_rand  = ROOT.TH1D("H_hsxptar_DATA_rand","HMS xptar", 200, -0.1, 0.1)
     H_hsyptar_DATA_rand  = ROOT.TH1D("H_hsyptar_DATA_rand","HMS yptar", 200, -0.1, 0.1)
@@ -181,8 +164,6 @@ def defineHists(phi_setting):
     H_pmz_DATA_rand  = ROOT.TH1D("H_pmz_DATA_rand","pmz", 200, -0.1, 0.1)
     H_W_DATA_rand  = ROOT.TH1D("H_W_DATA_rand","W ", 200, 0.7, 1.1)
     H_ct_ep_DATA_rand = ROOT.TH1D("H_ct_ep_DATA_rand", "Electron-Proton CTime", 200, -10, 10)
-
-    H_ct_ep_vs_H_MMp2_DATA_rand = ROOT.TH2D("H_ct_ep_vs_H_MMp2_DATA_rand","Electron-Proton CTime vs (MM)^{2}_{p}; e p Coin_Time; (MM)^{2}_{p}", 200, -10, 10, 200, -0.1, 0.1)
     
     ################################################################################################################################################
     # Fill histograms for various trees called above
@@ -200,21 +181,8 @@ def defineHists(phi_setting):
         #........................................
 
         if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
-
-          H_ct_ep_vs_H_MMp2_DATA.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
+            
           H_ct_ep_DATA.Fill(evt.CTime_epCoinTime_ROC1)
-
-          H_emiss_vs_H_hsdelta_DATA.Fill(evt.emiss, evt.hsdelta)
-          H_emiss_vs_H_ssdelta_DATA.Fill(evt.emiss, evt.ssdelta)
-          H_pmiss_vs_H_hsdelta_DATA.Fill(evt.pmiss, evt.hsdelta)
-          H_pmiss_vs_H_ssdelta_DATA.Fill(evt.pmiss, evt.ssdelta)
-          H_hsdelta_vs_H_ssdelta_DATA.Fill(evt.hsdelta, evt.ssdelta)
-
-          H_raster_x_vs_H_pmiss_DATA.Fill(evt.pmiss, evt.raster_x)
-          H_raster_x_vs_H_emiss_DATA.Fill(evt.emiss, evt.raster_x)
-          H_raster_y_vs_H_pmiss_DATA.Fill(evt.pmiss, evt.raster_y)
-          H_raster_y_vs_H_emiss_DATA.Fill(evt.emiss, evt.raster_y)
-          H_raster_x_vs_H_raster_y_DATA.Fill(evt.raster_x, evt.raster_y)
 
           H_ssxfp_DATA.Fill(evt.ssxfp)
           H_ssyfp_DATA.Fill(evt.ssyfp)
@@ -253,7 +221,6 @@ def defineHists(phi_setting):
           ###################################################################################################################################################
 
           # Random subtraction
-          H_ct_ep_vs_H_MMp2_DATA_rand.Fill(evt.CTime_epCoinTime_ROC1, evt.MMp)
 
           H_ssxfp_DATA_rand.Fill(evt.ssxfp)
           H_ssyfp_DATA_rand.Fill(evt.ssyfp)
@@ -288,11 +255,6 @@ def defineHists(phi_setting):
           P_cal_etottracknorm_DATA.Fill(evt.P_cal_etottracknorm)
           P_hgcer_npeSum_DATA.Fill(evt.P_hgcer_npeSum)
           P_aero_npeSum_DATA.Fill(evt.P_aero_npeSum)
-
-          H_cal_etottracknorm_vs_H_cer_npeSum_DATA.Fill(evt.H_cal_etottracknorm,evt.H_cer_npeSum)
-          P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA.Fill(evt.P_cal_etottracknorm,evt.P_hgcer_npeSum)
-          P_cal_etottracknorm_vs_P_aero_npeSum_DATA.Fill(evt.P_cal_etottracknorm,evt.P_aero_npeSum)
-          P_hgcer_npeSum_vs_P_aero_npeSum_DATA.Fill(evt.P_hgcer_npeSum,evt.P_aero_npeSum)
 
           ibin+=1
 
@@ -424,21 +386,6 @@ def defineHists(phi_setting):
         "P_cal_etottracknorm_DATA" :     P_cal_etottracknorm_DATA,
         "P_hgcer_npeSum_DATA" :     P_hgcer_npeSum_DATA,
         "P_aero_npeSum_DATA" :     P_aero_npeSum_DATA,
-        "H_ct_ep_vs_H_MMp2_DATA" :     H_ct_ep_vs_H_MMp2_DATA,
-        "H_emiss_vs_H_hsdelta_DATA" :     H_emiss_vs_H_hsdelta_DATA,
-        "H_emiss_vs_H_ssdelta_DATA" :     H_emiss_vs_H_ssdelta_DATA,
-        "H_pmiss_vs_H_hsdelta_DATA" :     H_pmiss_vs_H_hsdelta_DATA,
-        "H_pmiss_vs_H_ssdelta_DATA" :     H_pmiss_vs_H_ssdelta_DATA,
-        "H_hsdelta_vs_H_ssdelta_DATA" :     H_hsdelta_vs_H_ssdelta_DATA,
-        "H_raster_x_vs_H_pmiss_DATA" :     H_raster_x_vs_H_pmiss_DATA,
-        "H_raster_x_vs_H_emiss_DATA" :     H_raster_x_vs_H_emiss_DATA,
-        "H_raster_y_vs_H_pmiss_DATA" :     H_raster_y_vs_H_pmiss_DATA,
-        "H_raster_y_vs_H_emiss_DATA" :     H_raster_y_vs_H_emiss_DATA,
-        "H_raster_x_vs_H_raster_y_DATA" :     H_raster_x_vs_H_raster_y_DATA,
-        "H_cal_etottracknorm_vs_H_cer_npeSum_DATA" :     H_cal_etottracknorm_vs_H_cer_npeSum_DATA,
-        "P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA" :     P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA,
-        "P_cal_etottracknorm_vs_P_aero_npeSum_DATA" :     P_cal_etottracknorm_vs_P_aero_npeSum_DATA,
-        "P_hgcer_npeSum_vs_P_aero_npeSum_DATA" :     P_hgcer_npeSum_vs_P_aero_npeSum_DATA,
         "InFile_DATA" : InFile_DATA,
     }
 
@@ -502,30 +449,6 @@ c_pid.Draw()
 
 c_pid.Print(outputpdf + '(')
 
-c_pid_2d = TCanvas()
-
-c_pid_2d.Divide(2,2)
-
-c_pid_2d.cd(1)
-for i,hist in enumerate(histlist):
-    hist["H_cal_etottracknorm_vs_H_cer_npeSum_DATA"].Draw("colz")
-
-c_pid_2d.cd(2)
-for i,hist in enumerate(histlist):
-    hist["P_cal_etottracknorm_vs_P_hgcer_npeSum_DATA"].Draw("colz")
-
-c_pid_2d.cd(3)
-for i,hist in enumerate(histlist):
-    hist["P_cal_etottracknorm_vs_P_aero_npeSum_DATA"].Draw("colz")
-
-c_pid_2d.cd(4)
-for i,hist in enumerate(histlist):
-    hist["P_hgcer_npeSum_vs_P_aero_npeSum_DATA"].Draw("colz")
-
-c_pid_2d.Draw()
-
-c_pid_2d.Print(outputpdf)
-
 ct_ep = TCanvas()
 
 for i,hist in enumerate(histlist):
@@ -533,89 +456,6 @@ for i,hist in enumerate(histlist):
     hist["H_ct_ep_DATA"].Draw("same, E1")
 
 ct_ep.Print(outputpdf)
-
-ct_ep_mmp = TCanvas()
-
-for i,hist in enumerate(histlist):
-    hist["H_ct_ep_vs_H_MMp2_DATA"].Draw("colz")
-
-ct_ep_mmp.Print(outputpdf)
-
-emiss_vs_delta = TCanvas()
-
-emiss_vs_delta.Divide(1,2)
-
-emiss_vs_delta.cd(1)
-for i,hist in enumerate(histlist):
-    hist["H_emiss_vs_H_hsdelta_DATA"].Draw("colz")
-
-emiss_vs_delta.cd(2)
-for i,hist in enumerate(histlist):
-    hist["H_emiss_vs_H_ssdelta_DATA"].Draw("colz")
-
-emiss_vs_delta.Print(outputpdf)
-
-pmiss_vs_delta = TCanvas()
-
-pmiss_vs_delta.Divide(1,2)
-
-pmiss_vs_delta.cd(1)
-for i,hist in enumerate(histlist):
-    hist["H_pmiss_vs_H_hsdelta_DATA"].Draw("colz")
-
-pmiss_vs_delta.cd(2)
-for i,hist in enumerate(histlist):
-    hist["H_pmiss_vs_H_ssdelta_DATA"].Draw("colz")
-
-pmiss_vs_delta.Print(outputpdf)
-
-hsdelta_vs_ssdelta = TCanvas()
-for i,hist in enumerate(histlist):
-    hist["H_hsdelta_vs_H_ssdelta_DATA"].Draw("colz")
-
-hsdelta_vs_ssdelta.Print(outputpdf)
-
-raster_x_vs_miss = TCanvas()
-
-raster_x_vs_miss.Divide(1,2)
-
-raster_x_vs_miss.cd(1)
-for i,hist in enumerate(histlist):
-    hist["H_raster_x_vs_H_pmiss_DATA"].Draw("colz")
-
-raster_x_vs_miss.cd(2)
-for i,hist in enumerate(histlist):
-    hist["H_raster_x_vs_H_emiss_DATA"].Draw("colz")
-
-raster_x_vs_miss.Print(outputpdf)
-
-raster_y_vs_miss = TCanvas()
-
-raster_y_vs_miss.Divide(1,2)
-
-raster_y_vs_miss.cd(1)
-for i,hist in enumerate(histlist):
-    hist["H_raster_y_vs_H_pmiss_DATA"].Draw("colz")
-
-raster_y_vs_miss.cd(2)
-for i,hist in enumerate(histlist):
-    hist["H_raster_y_vs_H_emiss_DATA"].Draw("colz")
-
-raster_y_vs_miss.Print(outputpdf)
-
-raster_x_vs_raster_y = TCanvas()
-
-raster_x_vs_raster_y.Divide(1,2)
-
-raster_x_vs_raster_y.cd(1)
-for i,hist in enumerate(histlist):
-    hist["H_raster_x_vs_H_raster_y_DATA"].Draw("colz")
-
-raster_x_vs_raster_y.cd(2)
-for i,hist in enumerate(histlist):
-    hist["H_raster_x_vs_H_raster_y_DATA"].Draw("colz")
-
-raster_x_vs_raster_y.Print(outputpdf)
 
 xfp = TCanvas()
 

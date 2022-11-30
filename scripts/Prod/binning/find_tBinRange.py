@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 02:56:49 trottar"
+# Time-stamp: "2022-11-30 02:57:57 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -143,7 +143,7 @@ def find_tbins():
 
     for r,l,c in zip(H_t_Right,H_t_Left,H_t_Center):
         
-        n, bins = np.histogram(np.hstack((r,l,c)), bins=5)[1]
+        n, bins = np.histogram(np.hstack((r,l,c)), bins=5)
 
         print("\n\nHERE",n,bins,"\n\n")
 

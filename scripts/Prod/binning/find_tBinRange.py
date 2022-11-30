@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 00:33:58 trottar"
+# Time-stamp: "2022-11-30 00:38:56 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -165,9 +165,28 @@ def defineHists(phi_setting):
     H_pmy_DATA_rand  = ROOT.TH1D("H_pmy_DATA_rand","pmy ", 200, 0.0, 10.0)
     H_pmz_DATA_rand  = ROOT.TH1D("H_pmz_DATA_rand","pmz", 200, 0.0, 10.0)
     H_ct_ep_DATA_rand = ROOT.TH1D("H_ct_ep_DATA_rand", "Electron-Proton CTime", 200, -10, 10)
+
+    H_t_BinTest       = ROOT.TH1D("H_t_BinTest","-t", 200, 0.0, 1.0)  
+    
+    ################################################################################################################################################
+    for evt in TBRANCH_DATA:
+        H_t_BinTest.Fill(-evt.MandelT)
+        tbinval = np.array(H_t_BinTest).sum()
+        print(len(range(1,len(np.array(H_t_BinTest)))))
+        for val,binval in zip(np.linspace(0,0.5,201),range(1,len(np.array(H_t_BinTest)))):
+            print(val,binval)
+            if ((val<=H_t_BinTest.GetBinCenter(binval)) & ((1-val)<=H_t_BinTest.GetBinCenter(binval))).sum() == EvtsPerBinRange:
+                tbin_min = val
+                tbin_max = 1-val
+                tbin_size = tbin_max-tbin_max
+                print("\n\nHERE",tbin_size)
+                print("HERE",tbin_min)
+                print("HERE",tbin_max)
+
     
     ################################################################################################################################################
     # Fill histograms for various trees called above
+
     
     ibin = 1
     for evt in TBRANCH_DATA:
@@ -177,23 +196,13 @@ def defineHists(phi_setting):
         SHMS_Acceptance = (evt.ssdelta>=-10.0) & (evt.ssdelta<=20.0) & (evt.ssxptar>=-0.06) & (evt.ssxptar<=0.06) & (evt.ssyptar>=-0.04) & (evt.ssyptar<=0.04)
 
         HMS_FixCut = (evt.H_hod_goodstarttime == 1) & (evt.H_dc_InsideDipoleExit == 1)
-        HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)       
+        HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)
+
+        tBin_Cut = (-evt.MandelT>=tbin_min) & (-evt.MandelT<=tbin_max)
 
         #........................................
-
-        tbinval = np.array(-evt.MandelT).sum()
-        print(len(range(1,len(np.array(-evt.MandelT)))))
-        for val,binval in zip(np.linspace(0,0.5,201),range(1,len(np.array(-evt.MandelT)))):
-            print(val,binval)
-            if ((val<=-evt.MandelT.GetBinCenter(binval)) & ((1-val)<=-evt.MandelT.GetBinCenter(binval))).sum() == EvtsPerBinRange:
-                tbin_min = val
-                tbin_max = 1-val
-                tbin_size = tbin_max-tbin_max
-                print("\n\nHERE",tbin_size)
-                print("HERE",tbin_min)
-                print("HERE",tbin_max)
-        
-        if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
+                
+        if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance & tBin_Cut):
             
           H_ct_ep_DATA.Fill(evt.CTime_epCoinTime_ROC1)
 

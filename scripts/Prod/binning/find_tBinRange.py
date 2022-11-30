@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 18:30:30 trottar"
+# Time-stamp: "2022-11-29 19:00:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -78,6 +78,10 @@ def defineHists(phi_setting):
     # Define root file trees of interest
 
     rootFile = OUTPATH+"/"+InDATAFilename+"_%s.root" % (phi_setting)
+    if not os.path.isfile(rootFile):
+        return {}
+
+    
 
     InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
 
@@ -450,10 +454,12 @@ ROOT.gStyle.SetOptStat(0)
 # Plus it makes the code below less repetitive
 histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
 
-print("\n\n",histlist,"\n\n")
+empty_hist = []
 for i,hist in enumerate(histlist):
-    print("\n\n",hist,"\n\n")
-    
+    if not bool(hist):
+        histlist.remove(hist)
+        empty_hist.append(i)
+        
 # Plot histograms
 
 c_pid = TCanvas()
@@ -798,40 +804,55 @@ CW.Print(outputpdf + ')')
 # Create new root file with trees representing cut simc and data used above. Good for those who see python as...problematic
 
 outHistFile = ROOT.TFile.Open(foutname, "RECREATE")
-d_Data = outHistFile.mkdir("Data")
+d_Right_Data = outHistFile.mkdir("Right")
+d_Left_Data = outHistFile.mkdir("Left")
+d_Center_Data = outHistFile.mkdir("Center")
 
-d_Data.cd()
-H_hsdelta_DATA.Write()
-H_hsxptar_DATA.Write()
-H_hsyptar_DATA.Write()
-H_ssxfp_DATA.Write()
-H_ssyfp_DATA.Write()
-H_ssxpfp_DATA.Write()
-H_ssypfp_DATA.Write()
-H_hsxfp_DATA.Write()
-H_hsyfp_DATA.Write()
-H_hsxpfp_DATA.Write()
-H_hsypfp_DATA.Write()
-H_ssdelta_DATA.Write()
-H_ssxptar_DATA.Write()
-H_ssyptar_DATA.Write()
-H_q_DATA.Write()
-H_Q2_DATA.Write()
-H_epsilon_DATA.Write()
-H_MMp2_DATA.Write()
-H_th_DATA.Write()
-H_ph_DATA.Write()
-H_ph_q_DATA.Write()
-H_th_q_DATA.Write()
-H_ph_recoil_DATA.Write()
-H_th_recoil_DATA.Write()
-H_pmiss_DATA.Write()
-H_emiss_DATA.Write()
-H_pmx_DATA.Write()
-H_pmy_DATA.Write()
-H_pmz_DATA.Write()
-H_W_DATA.Write()
-H_ct_ep_DATA.Write()
+d_Right_Data.cd()
+for i,hist in enumerate(histlist):
+    if not bool(empty_hist):
+        for j in empty_hist:
+            if i == j:
+                continue
+        continue
+    else:
+        if i == 1:
+            d_Right_Data.cd()
+        if i == 2:
+            d_Left_Data.cd()
+        if i == 3:
+            d_Center_Data.cd()
+        hist["H_hsdelta_DATA"].Write()
+        hist["H_hsxptar_DATA"].Write()
+        hist["H_hsyptar_DATA"].Write()
+        hist["H_ssxfp_DATA"].Write()
+        hist["H_ssyfp_DATA"].Write()
+        hist["H_ssxpfp_DATA"].Write()
+        hist["H_ssypfp_DATA"].Write()
+        hist["H_hsxfp_DATA"].Write()
+        hist["H_hsyfp_DATA"].Write()
+        hist["H_hsxpfp_DATA"].Write()
+        hist["H_hsypfp_DATA"].Write()
+        hist["H_ssdelta_DATA"].Write()
+        hist["H_ssxptar_DATA"].Write()
+        hist["H_ssyptar_DATA"].Write()
+        hist["H_q_DATA"].Write()
+        hist["H_Q2_DATA"].Write()
+        hist["H_epsilon_DATA"].Write()
+        hist["H_MMp2_DATA"].Write()
+        hist["H_th_DATA"].Write()
+        hist["H_ph_DATA"].Write()
+        hist["H_ph_q_DATA"].Write()
+        hist["H_th_q_DATA"].Write()
+        hist["H_ph_recoil_DATA"].Write()
+        hist["H_th_recoil_DATA"].Write()
+        hist["H_pmiss_DATA"].Write()
+        hist["H_emiss_DATA"].Write()
+        hist["H_pmx_DATA"].Write()
+        hist["H_pmy_DATA"].Write()
+        hist["H_pmz_DATA"].Write()
+        hist["H_W_DATA"].Write()
+        hist["H_ct_ep_DATA"].Write()
 
 outHistFile.Close()
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 05:16:35 trottar"
+# Time-stamp: "2022-11-30 05:21:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -598,7 +598,7 @@ CW.Print(outputpdf)
 
 Ct = TCanvas()
 l_t = ROOT.TLegend(0.115,0.55,0.33,0.9)
-l_t.SetTextSize(0.0335)
+l_t.SetTextSize(0.0235)
 
 binned_t = find_tbins()
 
@@ -608,11 +608,9 @@ for i,hist in enumerate(histlist):
     hist["H_t_DATA"].Draw("same, E1")            
 
 for n,b in zip(binned_t[0],binned_t[1]):
-    print(n)
-    print(b)
-    l_t.AddEntry(hist["H_t_DATA"],"%.0f" % n)
-    l_t.AddEntry(hist["H_t_DATA"],"%.2f" % b)
-    tBin_line = TLine(0,0,n,b)
+    l_t.AddEntry(hist["H_t_DATA"],"Evts = %.0f" % n)
+    l_t.AddEntry(hist["H_t_DATA"],"BinCenter = %.2f" % b)
+    tBin_line = TLine(b,0,b,n)
     tBin_line.SetLineColor(kBlack)
     tBin_line.SetLineWidth(2)
     tBin_line.Draw("same")

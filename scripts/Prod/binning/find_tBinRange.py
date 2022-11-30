@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 02:54:12 trottar"
+# Time-stamp: "2022-11-30 02:56:49 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -127,14 +127,14 @@ def find_tbins():
         Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
         H_t_Right.Fill(-evt.MandelT)
         
-    print("Creating Left t-bin histogram...")
+    print("\nCreating Left t-bin histogram...")
     # Grab t bin range for EvtsPerBinRange evts
     for i,evt in enumerate(TBRANCH_LEFT_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
         H_t_Left.Fill(-evt.MandelT)
         
-    print("Creating Center t-bin histogram...")
+    print("\nCreating Center t-bin histogram...")
     # Grab t bin range for EvtsPerBinRange evts
     for i,evt in enumerate(TBRANCH_CENTER_DATA):
         # Progress bar
@@ -143,9 +143,9 @@ def find_tbins():
 
     for r,l,c in zip(H_t_Right,H_t_Left,H_t_Center):
         
-        bins=np.histogram(np.hstack((r,l,c)), bins=5)[1]
+        n, bins = np.histogram(np.hstack((r,l,c)), bins=5)[1]
 
-        print("\n\nHERE",bins,"\n\n")
+        print("\n\nHERE",n,bins,"\n\n")
 
         '''
         def histedges_equalN(x, nbin):
@@ -158,9 +158,7 @@ def find_tbins():
 
         n, bins, patches = plt.hist(tval, histedges_equalN(tval, 5))
         print("\n\nHERE",n,bins,"\n\n")
-    
-            
-        
+                       
         for val in np.linspace(0,0.5,201):
             #print(((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum())
             if ((EvtsPerBinRange-1000) <= ((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum() <= (EvtsPerBinRange+1000)):

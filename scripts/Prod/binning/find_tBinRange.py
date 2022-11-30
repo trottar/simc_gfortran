@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 19:44:48 trottar"
+# Time-stamp: "2022-11-29 19:50:53 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -394,9 +394,10 @@ def defineHists(phi_setting):
         "P_cal_etottracknorm_DATA" :     P_cal_etottracknorm_DATA,
         "P_hgcer_npeSum_DATA" :     P_hgcer_npeSum_DATA,
         "P_aero_npeSum_DATA" :     P_aero_npeSum_DATA,
-        "InFile_DATA" : InFile_DATA,
+        #"InFile_DATA" : InFile_DATA,
     }
 
+    InFile_DATA.Close()
     return histDict
 
 ################################################################################################################################################
@@ -746,7 +747,7 @@ for i,hist in enumerate(histlist):
 
 outHistFile.Close()
 
-for i,hist in enumerate(histlist):
-    hist["InFile_DATA"].Close()
+#for i,hist in enumerate(histlist):
+#    hist["InFile_DATA"].Close()
     
 print ("Processing Complete")

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 02:17:09 trottar"
+# Time-stamp: "2022-11-30 02:32:56 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -184,9 +184,26 @@ def defineHists(phi_setting):
         Misc.progressBar(i, TBRANCH_DATA.GetEntries())
         
         H_t_BinTest.Fill(-evt.MandelT)
-        
+
+        def histedges_equalN(x, nbin):
+            npt = len(x)
+            return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
+
+        tval = np.array()
         for i,binval in enumerate(np.array(H_t_BinTest)):
-            print(i,binval,H_t_BinTest.GetBinCenter(i))
+            tval.append(H_t_BinTest.GetBinCenter(i))
+
+        n, bins, patches = plt.hist(tval, histedges_equalN(tval, 5))
+        print("\n\nHERE",n,bins,"\n\n")
+            
+        for i,binval in enumerate(np.array(H_t_BinTest)):
+            print(i,binval,tval)
+            if tval[]
+            tbin_min = tval[i]
+                tbin_max = tval[i]
+        tbin_size = tbin_max-tbin_max
+            
+            
         
         for val in np.linspace(0,0.5,201):
             #print(((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum())

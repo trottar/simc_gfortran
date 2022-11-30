@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 03:42:04 trottar"
+# Time-stamp: "2022-11-30 03:44:47 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -150,6 +150,7 @@ def find_tbins():
             H_t_Center.append(-evt.MandelT)
     lbins,H_t_Center = np.histogram(H_t_Center,bins=200)
             
+    tval = []
     for r,l,c in zip(H_t_Right,H_t_Left,H_t_Center):
 
         def histedges_equalN(x, nbin):
@@ -157,17 +158,17 @@ def find_tbins():
             return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
 
         H_t_BinTest = np.hstack((r,l,c))
-        print("\n\nHERE",r,l,c,H_t_BinTest,"\n\n")
-        tval = []
+        #print("\n\nHERE",r,l,c,H_t_BinTest,"\n\n")
+        
         for i,binval in enumerate(np.array(H_t_BinTest)[1:]):
             tval.append(H_t_BinTest.GetBinCenter(i))
 
-        n, bins, patches = plt.hist(tval, histedges_equalN(tval, 5))
+    n, bins, patches = plt.hist(tval, histedges_equalN(tval, 5))
         
-        #n, bins = np.histogram(np.hstack((r,l,c)), bins=5)
-        #n, bins, patches = plt.hist(np.hstack((r,l,c)), histedges_equalN(np.hstack((r,l,c)), 5), normed=True)
+    #n, bins = np.histogram(np.hstack((r,l,c)), bins=5)
+    #n, bins, patches = plt.hist(np.hstack((r,l,c)), histedges_equalN(np.hstack((r,l,c)), 5), normed=True)
 
-        print("\n\nHERE",n,bins,"\n\n")
+    print("\n\nHERE",n,bins,"\n\n")
 
         '''
         def histedges_equalN(x, nbin):

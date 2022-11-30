@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 20:36:54 trottar"
+# Time-stamp: "2022-11-29 20:55:31 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -170,6 +170,8 @@ def defineHists(phi_setting):
     ################################################################################################################################################
     # Fill histograms for various trees called above
 
+    NumEvts = TBRANCH_DATA.GetEntries()
+    
     ibin = 1
     for evt in TBRANCH_DATA:
 
@@ -396,7 +398,7 @@ def defineHists(phi_setting):
         "P_hgcer_npeSum_DATA" :     P_hgcer_npeSum_DATA,
         "P_aero_npeSum_DATA" :     P_aero_npeSum_DATA,
         "InFile_DATA" : InFile_DATA,
-        "TBRANCH_DATA" : TBRANCH_DATA
+        "NumEvts" : NumEvts
     }
 
     return histDict
@@ -490,7 +492,7 @@ for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     hist["H_t_DATA"].Draw("same, E1")
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
-    l_t.AddEntry(hist["H_t_DATA"],hist["TBRANCH_DATA"].GetEntries())
+    l_t.AddEntry(hist["H_t_DATA"],hist["NumEvts"])
 
 l_t.Draw()    
 

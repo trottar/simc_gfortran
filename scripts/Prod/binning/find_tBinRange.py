@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 03:41:08 trottar"
+# Time-stamp: "2022-11-30 03:42:04 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -138,7 +138,7 @@ def find_tbins():
         Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
         if (0.0 <= -evt.MandelT <= 1.0):
             H_t_Left.append(-evt.MandelT)
-    lbins,H_t_Left,lbins = np.histogram(H_t_Left,bins=200)
+    lbins,H_t_Left = np.histogram(H_t_Left,bins=200)
 
     H_t_Center = []
     print("\nCreating center t-bin histogram...")

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 02:57:57 trottar"
+# Time-stamp: "2022-11-30 03:01:08 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -142,8 +142,15 @@ def find_tbins():
         H_t_Center.Fill(-evt.MandelT)
 
     for r,l,c in zip(H_t_Right,H_t_Left,H_t_Center):
+
+        def histedges_equalN(x, nbin):
+            npt = len(x)
+            return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
         
-        n, bins = np.histogram(np.hstack((r,l,c)), bins=5)
+        
+        #n, bins = np.histogram(np.hstack((r,l,c)), bins=5)
+        n, bins, patches = plt.hist(np.hstack((r,l,c)), histedges_equalN(np.hstack((r,l,c)), 5), normed=True)
+        plt.hist(x)
 
         print("\n\nHERE",n,bins,"\n\n")
 

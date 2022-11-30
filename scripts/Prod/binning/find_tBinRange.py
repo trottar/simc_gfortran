@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 05:21:39 trottar"
+# Time-stamp: "2022-11-30 05:30:19 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -607,13 +607,13 @@ for i,hist in enumerate(histlist):
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
     hist["H_t_DATA"].Draw("same, E1")            
 
+tBin_line = TLine()    
 for n,b in zip(binned_t[0],binned_t[1]):
     l_t.AddEntry(hist["H_t_DATA"],"Evts = %.0f" % n)
     l_t.AddEntry(hist["H_t_DATA"],"BinCenter = %.2f" % b)
-    tBin_line = TLine(b,0,b,n)
     tBin_line.SetLineColor(kBlack)
     tBin_line.SetLineWidth(2)
-    tBin_line.Draw("same")
+    tBin_line.DrawLine(b,0,b,1000)
 
 
 l_t.Draw()    

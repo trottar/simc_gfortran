@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 02:33:39 trottar"
+# Time-stamp: "2022-11-30 02:35:11 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -189,7 +189,7 @@ def defineHists(phi_setting):
             npt = len(x)
             return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
 
-        tval = np.array()
+        tval = []
         for i,binval in enumerate(np.array(H_t_BinTest)):
             tval.append(H_t_BinTest.GetBinCenter(i))
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 00:07:14 trottar"
+# Time-stamp: "2022-11-30 00:12:34 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -492,8 +492,7 @@ for i,hist in enumerate(histlist):
     tbinval = np.array(hist["H_t_DATA"]).sum()
     for val,binval in zip(hist["H_t_DATA"],range(1,len(np.array(hist["H_t_DATA"])))):
         print(val,binval)
-        #if ((val<=hist["H_t_DATA"].GetBinCenter(hist["H_t_DATA"].GetBinCenter(binval))) & ((1-val)<=hist["H_t_DATA"].GetBinCenter(hist["H_t_DATA"].GetBinCenter(binval)))).sum() == EvtsPerBinRange:
-        if ((val<=hist["H_t_DATA"].GetBinCenter(binval)) & ((1-val)<=hist["H_t_DATA"].GetBinCenter(binval))).sum() == EvtsPerBinRange:
+        if ((val<=hist["H_t_DATA"].GetBinCenter(hist["H_t_DATA"].GetBinCenter(binval))) & ((1-val)<=hist["H_t_DATA"].GetBinCenter(hist["H_t_DATA"].GetBinCenter(binval)))).sum() == EvtsPerBinRange:
             tbin_min = val
             tbin_max = 1-val
             tbin_size = tbin_max-tbin_max
@@ -502,7 +501,7 @@ for i,hist in enumerate(histlist):
             print("HERE",tbin_max)
     hist["H_t_DATA"].Draw("same, E1")            
     
-    l_t.AddEntry(hist["H_t_DATA"],tbinval)
+    #l_t.AddEntry(hist["H_t_DATA"],tbinval)
 
 l_t.Draw()    
 

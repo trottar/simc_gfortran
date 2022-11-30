@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 20:24:58 trottar"
+# Time-stamp: "2022-11-29 20:25:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -181,7 +181,7 @@ def defineHists(phi_setting):
         HMS_Acceptance = (evt.hsdelta>=-8.0) & (evt.hsdelta<=8.0) & (evt.hsxptar>=-0.08) & (evt.hsxptar<=0.08) & (evt.hsyptar>=-0.045) & (evt.hsyptar<=0.045)       
 
         #........................................
-        print("\n\nHERE",evt.MandelT.GetEntries())
+
         if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
             
           H_ct_ep_DATA.Fill(evt.CTime_epCoinTime_ROC1)

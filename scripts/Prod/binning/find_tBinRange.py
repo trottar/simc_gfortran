@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 22:58:59 trottar"
+# Time-stamp: "2022-11-29 23:09:52 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -489,9 +489,11 @@ l_t.SetTextSize(0.0335)
 for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
-    print("\n\nHERE",hist["H_t_DATA"].GetBinCenter())
-    print("HERE",np.array(hist["H_t_DATA"])[0:-1])
+    print("\n\nHERE",np.array(hist["H_t_DATA"])[0:-1])
     tbinval = np.array(hist["H_t_DATA"]).sum()
+    for binval in len(np.array(hist["H_t_DATA"])[0:-1]):
+        print("HERE",hist["H_t_DATA"].GetBinCenter(binval))
+
     for val in np.linspace(0,0.5,100):
         if ((val<=tbinval) & ((1-val)<=tbinval)).sum() > EvtsPerBinRange:
             tbin_min = val

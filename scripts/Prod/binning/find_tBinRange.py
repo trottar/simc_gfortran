@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 03:17:55 trottar"
+# Time-stamp: "2022-11-30 03:23:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -120,27 +120,33 @@ def find_tbins():
     
     ################################################################################################################################################
 
+    H_t_Right = []
     print("Creating right t-bin histogram...")
     # Grab t bin range for EvtsPerBinRange evts
     for i,evt in enumerate(TBRANCH_RIGHT_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
-        H_t_Right,rbins = np.histogram(-evt.MandelT,bins=200)
-        
-    print("\nCreating left t-bin histogram...")
+        H_t_Right.append(-evt.MandelT)
+    rn,rbins = np.histogram(H_t_Right,bins=200)
+
+    H_t_Left = []
+    print("Creating left t-bin histogram...")
     # Grab t bin range for EvtsPerBinRange evts
     for i,evt in enumerate(TBRANCH_LEFT_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
-        H_t_Left,lbins = np.histogram(-evt.MandelT,bins=200)
+        H_t_Left.append(-evt.MandelT)
+    ln,lbins = np.histogram(H_t_Left,bins=200)
 
-    print("\nCreating center t-bin histogram...")
+    H_t_Center = []
+    print("Creating center t-bin histogram...")
     # Grab t bin range for EvtsPerBinRange evts
     for i,evt in enumerate(TBRANCH_CENTER_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
-        H_t_Center,cbins = np.histogram(-evt.MandelT,bins=200)
-        
+        H_t_Center.append(-evt.MandelT)
+    cn,cbins = np.histogram(H_t_Center,bins=200)
+            
     for r,l,c in zip(H_t_Right,H_t_Left,H_t_Center):
 
         def histedges_equalN(x, nbin):

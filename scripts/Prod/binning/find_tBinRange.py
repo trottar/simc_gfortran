@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 04:50:04 trottar"
+# Time-stamp: "2022-11-30 04:55:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -280,7 +280,7 @@ def defineHists(phi_setting):
 
     
     ibin = 1
-    print("\nPlotting %s data with proper t-bins..." % phi_setting)
+    print("\nPlotting %s data..." % phi_setting)
     for i,evt in enumerate(TBRANCH_DATA):
 
         # Progress bar
@@ -523,6 +523,8 @@ ROOT.gStyle.SetOptStat(0)
 # Plus it makes the code below less repetitive
 histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
 
+print("\n\n")
+
 for i,hist in enumerate(histlist):
     if not bool(hist): # If hist is empty
         histlist.remove(hist)
@@ -606,8 +608,10 @@ for i,hist in enumerate(histlist):
     hist["H_t_DATA"].Draw("same, E1")            
 
 for n,b in zip(binned_t[0],binned_t[1]):
-    l_t.AddEntry(hist["H_t_DATA"],n)
-    l_t.AddEntry(hist["H_t_DATA"],b)
+    print(n)
+    print(b)
+    l_t.AddEntry(hist["H_t_DATA"],"%s" % n)
+    l_t.AddEntry(hist["H_t_DATA"],"%s" % b)
 
 l_t.Draw()    
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 01:01:09 trottar"
+# Time-stamp: "2022-11-30 01:05:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -56,6 +56,7 @@ ltsep package import and pathing definitions
 
 # Import package for cuts
 from ltsep import Root
+# Import package for progress bar
 from ltsep import Misc
 
 lt=Root(os.path.realpath(__file__),"Plot_Prod")
@@ -175,9 +176,13 @@ def defineHists(phi_setting):
     if TBRANCH_DATA.GetEntries() <= EvtsPerBinRange:
         sys.exit(1)
 
+    print("Finding proper t-bins...")
     # Grab t bin range for EvtsPerBinRange evts
     for i,evt in enumerate(TBRANCH_DATA):
+
+        # Progress bar
         Misc.progressBar(i, TBRANCH_DATA.GetEntries())
+        
         H_t_BinTest.Fill(-evt.MandelT)
         tbinval = np.array(H_t_BinTest).sum()
         for val,binval in zip(np.linspace(0,0.5,201),range(1,len(np.array(H_t_BinTest)))):
@@ -194,8 +199,12 @@ def defineHists(phi_setting):
 
     
     ibin = 1
-    for evt in TBRANCH_DATA:
+    print("Plotting data with proper t-bins...")
+    for i,evt in enumerate(TBRANCH_DATA):
 
+        # Progress bar
+        Misc.progressBar(i, TBRANCH_DATA.GetEntries())
+        
         #CUTs Definations 
         SHMS_FixCut = (evt.P_hod_goodstarttime == 1) & (evt.P_dc_InsideDipoleExit == 1) # & P_hod_betanotrack > 0.5 & P_hod_betanotrack < 1.4
         SHMS_Acceptance = (evt.ssdelta>=-10.0) & (evt.ssdelta<=20.0) & (evt.ssxptar>=-0.06) & (evt.ssxptar<=0.06) & (evt.ssyptar>=-0.04) & (evt.ssyptar<=0.04)

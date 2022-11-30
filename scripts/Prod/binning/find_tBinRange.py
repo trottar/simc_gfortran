@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 03:45:26 trottar"
+# Time-stamp: "2022-11-30 03:46:02 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -170,29 +170,29 @@ def find_tbins():
 
     print("\n\nHERE",n,bins,"\n\n")
 
-        '''
-        def histedges_equalN(x, nbin):
-            npt = len(x)
-            return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
+    '''
+    def histedges_equalN(x, nbin):
+        npt = len(x)
+        return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
 
-        tval = []
-        for i,binval in enumerate(np.array(H_t_BinTest)[1:-1]):
-            tval.append(H_t_BinTest.GetBinCenter(i))
+    tval = []
+    for i,binval in enumerate(np.array(H_t_BinTest)[1:-1]):
+        tval.append(H_t_BinTest.GetBinCenter(i))
 
-        n, bins, patches = plt.hist(tval, histedges_equalN(tval, 5))
-        print("\n\nHERE",n,bins,"\n\n")
-                       
-        for val in np.linspace(0,0.5,201):
-            #print(((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum())
-            if ((EvtsPerBinRange-1000) <= ((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum() <= (EvtsPerBinRange+1000)):
-                tbin_min = val
-                tbin_max = 1-val
-                tbin_size = tbin_max-tbin_max
-       
-        print("\n\nHERE",tbin_size)
-        print("HERE",tbin_min)
-        print("HERE",tbin_max)
-        '''
+    n, bins, patches = plt.hist(tval, histedges_equalN(tval, 5))
+    print("\n\nHERE",n,bins,"\n\n")
+
+    for val in np.linspace(0,0.5,201):
+        #print(((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum())
+        if ((EvtsPerBinRange-1000) <= ((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum() <= (EvtsPerBinRange+1000)):
+            tbin_min = val
+            tbin_max = 1-val
+            tbin_size = tbin_max-tbin_max
+
+    print("\n\nHERE",tbin_size)
+    print("HERE",tbin_min)
+    print("HERE",tbin_max)
+    '''
 
 def defineHists(phi_setting):
     ################################################################################################################################################

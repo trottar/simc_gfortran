@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 02:36:13 trottar"
+# Time-stamp: "2022-11-30 02:51:11 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -75,6 +75,103 @@ fouttxt  = OUTPATH+"/" + OutFilename + ".txt"
 outputpdf  = OUTPATH+"/" + OutFilename + ".pdf"
 
 ################################################################################################################################################
+
+def find_tbins():
+
+    ################################################################################################################################################
+    # Define root file trees of interest
+
+    for val in ['Right', 'Left', 'Center']:
+        rootFiles = OUTPATH+"/"+InDATAFilename+"_%s.root" % (phi_setting)
+        if not os.path.isfile(rootFile):
+            continue
+        else:
+            InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
+            if val == 'Right':
+                TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
+                #TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
+                #TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
+                #TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_noRF")
+                #TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
+                #TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
+                #TBRANCH_RIGHT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_RF")
+            if val == 'Left':
+                TBRANCH_LEFT_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
+                #TBRANCH_LEFT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
+                #TBRANCH_LEFT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
+                #TBRANCH_LEFT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_noRF")
+                #TBRANCH_LEFT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
+                #TBRANCH_LEFT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
+                #TBRANCH_LEFT_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_RF")
+            if val == 'Center':
+                TBRANCH_CENTER_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
+                #TBRANCH_CENTER_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
+                #TBRANCH_CENTER_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
+                #TBRANCH_CENTER_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_noRF")
+                #TBRANCH_CENTER_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
+                #TBRANCH_CENTER_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
+                #TBRANCH_CENTER_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_RF")                
+
+    ################################################################################################################################################
+    
+    H_t_Right       = ROOT.TH1D("H_t_Right","-t", 200, 0.0, 1.0)
+    H_t_Left       = ROOT.TH1D("H_t_Left","-t", 200, 0.0, 1.0)
+    H_t_Center       = ROOT.TH1D("H_t_Center","-t", 200, 0.0, 1.0)  
+    
+    ################################################################################################################################################
+
+    print("Creating Right t-bin histogram...")
+    # Grab t bin range for EvtsPerBinRange evts
+    for i,evt in enumerate(TBRANCH_RIGHT_DATA):
+        # Progress bar
+        Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
+        H_t_Right.Fill(-evt.MandelT)
+        
+    print("Creating Left t-bin histogram...")
+    # Grab t bin range for EvtsPerBinRange evts
+    for i,evt in enumerate(TBRANCH_LEFT_DATA):
+        # Progress bar
+        Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
+        H_t_Left.Fill(-evt.MandelT)
+        
+    print("Creating Center t-bin histogram...")
+    # Grab t bin range for EvtsPerBinRange evts
+    for i,evt in enumerate(TBRANCH_CENTER_DATA):
+        # Progress bar
+        Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
+        H_t_Center.Fill(-evt.MandelT)
+
+    for r,l,c in zip(H_t_Right,H_t_Left,H_t_Center):
+        
+        bins=np.histogram(np.hstack((r,l,c)), bins=5)[1]
+
+        print("\n\nHERE",bins,"\n\n")
+
+        '''
+        def histedges_equalN(x, nbin):
+            npt = len(x)
+            return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
+
+        tval = []
+        for i,binval in enumerate(np.array(H_t_BinTest)[1:-1]):
+            tval.append(H_t_BinTest.GetBinCenter(i))
+
+        n, bins, patches = plt.hist(tval, histedges_equalN(tval, 5))
+        print("\n\nHERE",n,bins,"\n\n")
+    
+            
+        
+        for val in np.linspace(0,0.5,201):
+            #print(((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum())
+            if ((EvtsPerBinRange-1000) <= ((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum() <= (EvtsPerBinRange+1000)):
+                tbin_min = val
+                tbin_max = 1-val
+                tbin_size = tbin_max-tbin_max
+        '''
+    print("\n\nHERE",tbin_size)
+    print("HERE",tbin_min)
+    print("HERE",tbin_max)
+
 
 def defineHists(phi_setting):
     ################################################################################################################################################
@@ -168,46 +265,6 @@ def defineHists(phi_setting):
     H_pmz_DATA_rand  = ROOT.TH1D("H_pmz_DATA_rand","pmz", 200, 0.0, 10.0)
     H_ct_ep_DATA_rand = ROOT.TH1D("H_ct_ep_DATA_rand", "Electron-Proton CTime", 200, -10, 10)
 
-    H_t_BinTest       = ROOT.TH1D("H_t_BinTest","-t", 200, 0.0, 1.0)  
-    
-    ################################################################################################################################################
-
-    # Check if number of events is less than events per bin range
-    if TBRANCH_DATA.GetEntries() <= EvtsPerBinRange:
-        sys.exit(1)
-
-    print("Finding proper t-bins...")
-    # Grab t bin range for EvtsPerBinRange evts
-    for i,evt in enumerate(TBRANCH_DATA):
-
-        # Progress bar
-        Misc.progressBar(i, TBRANCH_DATA.GetEntries())
-        
-        H_t_BinTest.Fill(-evt.MandelT)
-
-        def histedges_equalN(x, nbin):
-            npt = len(x)
-            return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
-
-        tval = []
-        for i,binval in enumerate(np.array(H_t_BinTest)[1:-1]):
-            tval.append(H_t_BinTest.GetBinCenter(i))
-
-        n, bins, patches = plt.hist(tval, histedges_equalN(tval, 5))
-        print("\n\nHERE",n,bins,"\n\n")
-    
-            
-        
-        for val in np.linspace(0,0.5,201):
-            #print(((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum())
-            if ((EvtsPerBinRange-1000) <= ((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum() <= (EvtsPerBinRange+1000)):
-                tbin_min = val
-                tbin_max = 1-val
-                tbin_size = tbin_max-tbin_max
-
-    print("\n\nHERE",tbin_size)
-    print("HERE",tbin_min)
-    print("HERE",tbin_max)
     
     ################################################################################################################################################
     # Fill histograms for various trees called above

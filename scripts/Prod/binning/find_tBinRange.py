@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 20:25:36 trottar"
+# Time-stamp: "2022-11-29 20:31:50 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -489,7 +489,7 @@ for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     hist["H_t_DATA"].Draw("same, E1")
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
-    l_t.AddEntry(hist["H_t_DATA"],hist["H_t_DATA"].GetEntries())
+    l_t.AddEntry(hist["H_t_DATA"],hist["InFile_DATA"].GetEntries())
 
 l_t.Draw()    
 

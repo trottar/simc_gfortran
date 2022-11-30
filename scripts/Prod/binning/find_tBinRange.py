@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 21:55:18 trottar"
+# Time-stamp: "2022-11-29 21:58:45 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -489,7 +489,7 @@ l_t.SetTextSize(0.0335)
 for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
-    print("\n\nHERE",hist["H_t_DATA"])
+    print("\n\nHERE",np.array(hist["H_t_DATA"]))
     print("HERE",np.array(hist["H_t_DATA"])[0:-1])
     tbinval = np.array(hist["H_t_DATA"])[0:-1].sum()
     for val in np.linspace(0,0.5,100):

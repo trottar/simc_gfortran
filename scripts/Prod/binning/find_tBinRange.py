@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 03:29:41 trottar"
+# Time-stamp: "2022-11-30 03:31:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -145,6 +145,7 @@ def find_tbins():
         # Progress bar
         Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
         H_t_Center.append(-evt.MandelT)
+    print(H_t_Center)        
     H_t_Center,cbins = np.histogram(H_t_Center,bins=200)
     print(H_t_Center,cbins)
             

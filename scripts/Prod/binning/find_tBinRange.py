@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 04:22:36 trottar"
+# Time-stamp: "2022-11-30 04:23:56 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -128,7 +128,7 @@ def find_tbins():
         Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
         if (0.0 <= -evt.MandelT <= 1.0):
             H_t_Right.append(-evt.MandelT)   
-    #rbins,H_t_Right = np.histogram(H_t_Right,bins=200)
+    rbins,H_t_Right = np.histogram(H_t_Right,bins=200)
 
     H_t_Left = []
     print("\nCreating left t-bin histogram...")
@@ -138,7 +138,7 @@ def find_tbins():
         Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
         if (0.0 <= -evt.MandelT <= 1.0):
             H_t_Left.append(-evt.MandelT)
-    #lbins,H_t_Left = np.histogram(H_t_Left,bins=200)
+    lbins,H_t_Left = np.histogram(H_t_Left,bins=200)
 
     H_t_Center = []
     print("\nCreating center t-bin histogram...")
@@ -148,7 +148,7 @@ def find_tbins():
         Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
         if (0.0 <= -evt.MandelT <= 1.0):
             H_t_Center.append(-evt.MandelT)
-    #cbins,H_t_Center = np.histogram(H_t_Center,bins=200)
+    cbins,H_t_Center = np.histogram(H_t_Center,bins=200)
 
     def histedges_equalN(x, nbin):
         npt = len(x)

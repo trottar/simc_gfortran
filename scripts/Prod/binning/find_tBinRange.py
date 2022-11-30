@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 20:15:36 trottar"
+# Time-stamp: "2022-11-29 20:22:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -474,22 +474,24 @@ for i,hist in enumerate(histlist):
 CQ2.Print(outputpdf)
 
 CW = TCanvas()
-l_t = ROOT.TLegend(0.115,0.55,0.33,0.9)
 
 for i,hist in enumerate(histlist):
     hist["H_W_DATA"].SetLineColor(i+1)
     hist["H_W_DATA"].Draw("same, E1")
-    l_t.AddEntry(hist["H_W_DATA"],"p cut")
-
-l_t.Draw()    
     
 CW.Print(outputpdf)
 
 Ct = TCanvas()
+l_t = ROOT.TLegend(0.115,0.55,0.33,0.9)
+l_t.SetTextSize(0.05)
 
 for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     hist["H_t_DATA"].Draw("same, E1")
+    l_t.AddEntry(hist["H_W_DATA"],hist["phi_setting"])
+    l_t.AddEntry(hist["H_W_DATA"],hist["H_W_DATA"].GetEntries())
+
+l_t.Draw()    
 
 Ct.Print(outputpdf)
 

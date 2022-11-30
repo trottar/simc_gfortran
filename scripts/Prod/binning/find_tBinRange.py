@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 20:12:08 trottar"
+# Time-stamp: "2022-11-29 20:15:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -481,6 +481,8 @@ for i,hist in enumerate(histlist):
     hist["H_W_DATA"].Draw("same, E1")
     l_t.AddEntry(hist["H_W_DATA"],"p cut")
 
+l_t.Draw()    
+    
 CW.Print(outputpdf)
 
 Ct = TCanvas()

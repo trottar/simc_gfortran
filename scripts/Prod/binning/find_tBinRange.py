@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 01:47:55 trottar"
+# Time-stamp: "2022-11-30 01:56:28 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -183,15 +183,16 @@ def defineHists(phi_setting):
         # Progress bar
         Misc.progressBar(i, TBRANCH_DATA.GetEntries())
         
-        H_t_BinTest.Fill(-evt.MandelT)
-        tbinval = np.array(H_t_BinTest).sum()
-        for val,binval in zip(np.linspace(0,0.5,201),range(1,len(np.array(H_t_BinTest)))):
-            print(((val<=H_t_BinTest) & ((1-val)<=H_t_BinTest)))
-            #print(((val<=H_t_BinTest.GetBinCenter(binval)) & ((1-val)<=H_t_BinTest.GetBinCenter(binval))))
-            if ((EvtsPerBinRange-1000) <= ((val<=H_t_BinTest.GetBinCenter(binval)) & ((1-val)<=H_t_BinTest.GetBinCenter(binval))).sum() <= (EvtsPerBinRange+1000)):
+        for val in np.linspace(0,0.5,201):
+            if (EvtsPerBinRange-1000) <= ((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum() <= (EvtsPerBinRange+1000)):
                 tbin_min = val
                 tbin_max = 1-val
                 tbin_size = tbin_max-tbin_max
+   
+            
+        
+        #H_t_BinTest.Fill(-evt.MandelT)
+
     print("\n\nHERE",tbin_size)
     print("HERE",tbin_min)
     print("HERE",tbin_max)

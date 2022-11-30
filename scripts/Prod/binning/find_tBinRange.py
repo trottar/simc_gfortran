@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 02:51:11 trottar"
+# Time-stamp: "2022-11-30 02:52:31 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -167,11 +167,11 @@ def find_tbins():
                 tbin_min = val
                 tbin_max = 1-val
                 tbin_size = tbin_max-tbin_max
+       
+        print("\n\nHERE",tbin_size)
+        print("HERE",tbin_min)
+        print("HERE",tbin_max)
         '''
-    print("\n\nHERE",tbin_size)
-    print("HERE",tbin_min)
-    print("HERE",tbin_max)
-
 
 def defineHists(phi_setting):
     ################################################################################################################################################
@@ -514,8 +514,11 @@ ROOT.gStyle.SetOptStat(0)
 # Call histogram function above to define dictonaries for right, left, center settings
 # Put these all into an array so that if we are missing a setting it is easier to remove
 # Plus it makes the code below less repetitive
-histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
+#histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
 
+find_tbins()
+
+'''
 for i,hist in enumerate(histlist):
     if not bool(hist): # If hist is empty
         histlist.remove(hist)
@@ -859,3 +862,4 @@ for i,hist in enumerate(histlist):
     hist["InFile_DATA"].Close()
     
 print ("Processing Complete")
+'''

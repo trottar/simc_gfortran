@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 21:34:52 trottar"
+# Time-stamp: "2022-11-29 21:41:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -492,7 +492,7 @@ for i,hist in enumerate(histlist):
     print("\n\nHERE",np.array(hist["H_t_DATA"])[0:-1])
     print("\n\nHERE",np.array(hist["H_t_DATA"])[1:-1])
     tbinval = np.array(hist["H_t_DATA"])[1:-1].sum()
-    for val in linspace(0,0.5,100):
+    for val in np.linspace(0,0.5,100):
         if ((val<=tbinval) & ((1-val)<=tbinval)).sum() > EvtsPerBinRange:
             tbin_min = val
             tbin_max = 1-val

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 00:48:35 trottar"
+# Time-stamp: "2022-11-30 00:49:14 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -179,7 +179,7 @@ def defineHists(phi_setting):
         H_t_BinTest.Fill(-evt.MandelT)
         tbinval = np.array(H_t_BinTest).sum()
         for val,binval in zip(np.linspace(0,0.5,201),range(1,len(np.array(H_t_BinTest)))):
-            if ((val<=H_t_BinTest.GetBinCenter(binval)) & ((1-val)<=H_t_BinTest.GetBinCenter(binval))).sum() == EvtsPerBinRange:
+            if (EvtsPerBinRange-1000 <= (val<=H_t_BinTest.GetBinCenter(binval)) & ((1-val)<=H_t_BinTest.GetBinCenter(binval))).sum() <= EvtsPerBinRange+1000:
                 tbin_min = val
                 tbin_max = 1-val
                 tbin_size = tbin_max-tbin_max

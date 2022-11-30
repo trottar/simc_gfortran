@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 19:50:53 trottar"
+# Time-stamp: "2022-11-29 19:59:51 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -394,10 +394,9 @@ def defineHists(phi_setting):
         "P_cal_etottracknorm_DATA" :     P_cal_etottracknorm_DATA,
         "P_hgcer_npeSum_DATA" :     P_hgcer_npeSum_DATA,
         "P_aero_npeSum_DATA" :     P_aero_npeSum_DATA,
-        #"InFile_DATA" : InFile_DATA,
+        "InFile_DATA" : InFile_DATA,
     }
 
-    InFile_DATA.Close()
     return histDict
 
 ################################################################################################################################################
@@ -474,6 +473,14 @@ for i,hist in enumerate(histlist):
     hist["H_Q2_DATA"].Draw("same, E1")
 
 CQ2.Print(outputpdf)
+
+CW = TCanvas()
+
+for i,hist in enumerate(histlist):
+    hist["H_W_DATA"].SetLineColor(i+1)
+    hist["H_W_DATA"].Draw("same, E1")
+
+CW.Print(outputpdf)
 
 Ct = TCanvas()
 
@@ -681,15 +688,7 @@ for i,hist in enumerate(histlist):
     hist["H_pmz_DATA"].SetLineColor(i+1)
     hist["H_pmz_DATA"].Draw("same, E1")
 
-Cpmiss_z.Print(outputpdf)
-
-CW = TCanvas()
-
-for i,hist in enumerate(histlist):
-    hist["H_W_DATA"].SetLineColor(i+1)
-    hist["H_W_DATA"].Draw("same, E1")
-
-CW.Print(outputpdf + ')')
+Cpmiss_z.Print(outputpdf+')')
 
 #############################################################################################################################################
 # Create new root file with trees representing cut simc and data used above. Good for those who see python as...problematic
@@ -729,6 +728,8 @@ for i,hist in enumerate(histlist):
         hist["H_ssyptar_DATA"].Write()
         hist["H_q_DATA"].Write()
         hist["H_Q2_DATA"].Write()
+        hist["H_W_DATA"].Write()
+        hist["H_t_DATA"].Write()
         hist["H_epsilon_DATA"].Write()
         hist["H_MMp2_DATA"].Write()
         hist["H_th_DATA"].Write()
@@ -742,12 +743,11 @@ for i,hist in enumerate(histlist):
         hist["H_pmx_DATA"].Write()
         hist["H_pmy_DATA"].Write()
         hist["H_pmz_DATA"].Write()
-        hist["H_W_DATA"].Write()
         hist["H_ct_ep_DATA"].Write()
 
 outHistFile.Close()
 
-#for i,hist in enumerate(histlist):
-#    hist["InFile_DATA"].Close()
+for i,hist in enumerate(histlist):
+    hist["InFile_DATA"].Close()
     
 print ("Processing Complete")

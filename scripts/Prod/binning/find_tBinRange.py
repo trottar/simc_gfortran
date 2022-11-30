@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 04:31:11 trottar"
+# Time-stamp: "2022-11-30 04:33:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -167,31 +167,7 @@ def find_tbins():
     #n, bins = np.histogram(np.hstack((r,l,c)), bins=5)
     #n, bins, patches = plt.hist(np.hstack((r,l,c)), histedges_equalN(np.hstack((r,l,c)), 5), normed=True)
 
-    print("\n\nHERE",n,bins.sort(),"\n\n")
-
-    '''
-    def histedges_equalN(x, nbin):
-        npt = len(x)
-        return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
-
-    tval = []
-    for i,binval in enumerate(np.array(H_t_BinTest)[1:-1]):
-        tval.append(H_t_BinTest.GetBinCenter(i))
-
-    n, bins, patches = plt.hist(tval, histedges_equalN(tval, 5))
-    print("\n\nHERE",n,bins,"\n\n")
-
-    for val in np.linspace(0,0.5,201):
-        #print(((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum())
-        if ((EvtsPerBinRange-1000) <= ((val<=(-evt.MandelT)) & (1-val<=(-evt.MandelT))).sum() <= (EvtsPerBinRange+1000)):
-            tbin_min = val
-            tbin_max = 1-val
-            tbin_size = tbin_max-tbin_max
-
-    print("\n\nHERE",tbin_size)
-    print("HERE",tbin_min)
-    print("HERE",tbin_max)
-    '''
+    print("\n\nHERE",n,sorted(bins),"\n\n")
 
 def defineHists(phi_setting):
     ################################################################################################################################################

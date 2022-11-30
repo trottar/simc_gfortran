@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 00:40:18 trottar"
+# Time-stamp: "2022-11-30 00:48:35 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -169,6 +169,12 @@ def defineHists(phi_setting):
     H_t_BinTest       = ROOT.TH1D("H_t_BinTest","-t", 200, 0.0, 1.0)  
     
     ################################################################################################################################################
+
+    # Check if number of events is less than events per bin range
+    if TBRANCH_DATA.GetEntries() <= EvtsPerBinRange:
+        sys.exit(1)
+
+    # Grab t bin range for EvtsPerBinRange evts
     for evt in TBRANCH_DATA:
         H_t_BinTest.Fill(-evt.MandelT)
         tbinval = np.array(H_t_BinTest).sum()
@@ -177,10 +183,9 @@ def defineHists(phi_setting):
                 tbin_min = val
                 tbin_max = 1-val
                 tbin_size = tbin_max-tbin_max
-                print("\n\nHERE",tbin_size)
-                print("HERE",tbin_min)
-                print("HERE",tbin_max)
-
+    print("\n\nHERE",tbin_size)
+    print("HERE",tbin_min)
+    print("HERE",tbin_max)
     
     ################################################################################################################################################
     # Fill histograms for various trees called above

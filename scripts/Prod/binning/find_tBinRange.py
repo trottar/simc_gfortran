@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 23:53:10 trottar"
+# Time-stamp: "2022-11-29 23:54:23 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -490,9 +490,9 @@ for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
     tbinval = np.array(hist["H_t_DATA"]).sum()
-    for val,float(binval) in zip(np.linspace(0,0.5,200),range(1,len(np.array(hist["H_t_DATA"])))):
-        print(val,binval)
-        if ((val<=hist["H_t_DATA"].GetBinCenter(hist["H_t_DATA"].GetBinCenter(binval))) & ((1-val)<=hist["H_t_DATA"].GetBinCenter(hist["H_t_DATA"].GetBinCenter(binval)))).sum() == EvtsPerBinRange:
+    for val,binval in zip(np.linspace(0,0.5,200),range(1,len(np.array(hist["H_t_DATA"])))):
+        print(val,float(binval))
+        if ((val<=hist["H_t_DATA"].GetBinCenter(hist["H_t_DATA"].GetBinCenter(float(binval)))) & ((1-val)<=hist["H_t_DATA"].GetBinCenter(hist["H_t_DATA"].GetBinCenter(float(binval))))).sum() == EvtsPerBinRange:
             tbin_min = val
             tbin_max = 1-val
             tbin_size = tbin_max-tbin_max

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 02:33:17 trottar"
+# Time-stamp: "2022-11-30 02:33:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -195,13 +195,7 @@ def defineHists(phi_setting):
 
         n, bins, patches = plt.hist(tval, histedges_equalN(tval, 5))
         print("\n\nHERE",n,bins,"\n\n")
-            
-        for i,binval in enumerate(np.array(H_t_BinTest)):
-            print(i,binval,tval)
-            tbin_min = tval[i]
-                tbin_max = tval[i]
-        tbin_size = tbin_max-tbin_max
-            
+    
             
         
         for val in np.linspace(0,0.5,201):

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 23:19:13 trottar"
+# Time-stamp: "2022-11-29 23:33:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -489,16 +489,16 @@ l_t.SetTextSize(0.0335)
 for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
-    print("\n\nHERE",np.array(hist["H_t_DATA"])[0:-1])
     tbinval = np.array(hist["H_t_DATA"]).sum()
-    for binval in range(1,len(np.array(hist["H_t_DATA"]))):
-        print("HERE",hist["H_t_DATA"].GetBinCenter(binval))
-
-    for val in np.linspace(0,0.5,100):
-        if ((val<=tbinval) & ((1-val)<=tbinval)).sum() > EvtsPerBinRange:
+    tval = np.array([])
+    for val,binval in zip(np.linspace(0,0.5,200),range(1,len(np.array(hist["H_t_DATA"])))):
+        if ((val<=tval) & ((1-val)<=hist["H_t_DATA"].GetBinCenter(hist["H_t_DATA"].GetBinCenter(binval)))).sum() == EvtsPerBinRange:
             tbin_min = val
             tbin_max = 1-val
             tbin_size = tbin_max-tbin_max
+            print("\n\nHERE",tbin_size)
+            print("HERE",tbin_min)
+            print("HERE",tbin_max)
     hist["H_t_DATA"].Draw("same, E1")            
     
     l_t.AddEntry(hist["H_t_DATA"],tbinval)

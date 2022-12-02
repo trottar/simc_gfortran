@@ -95,7 +95,8 @@ else
     # HARD CODED #
     ##############
     # Defines efficiency table to use
-    EffData="coin_heep_HeePCoin_efficiency_data_2022_09_09.csv"
+    #EffData="coin_heep_HeePCoin_efficiency_data_2022_09_09.csv"
+    EffData="coin_heep_HeePCoin_efficiency_data_2022_12_02.csv"
     InDATAFilename="Raw_Data_${KIN}.root"
     InDUMMYFilename="Raw_DummyData_${KIN}.root"
     InSIMCFilename="Heep_Coin_${KIN}.root"

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 16:52:57 trottar"
+# Time-stamp: "2022-12-05 18:35:43 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -628,12 +628,12 @@ G_eff_plt.Draw("AP")
 G_eff_plt.SetTitle(" ;Run Numbers; Total Efficiency")
 
 i=0
-while i <= G_eff_plt.GetXaxis().GetXmax():
-    bin_ix = G_eff_plt.GetXaxis().FindBin(i)
-    for i,hist in enumerate(histlist):
-        if str(i) in hist["runNums"]: 
-            G_eff_plt.GetXaxis().SetBinLabel(bin_ix,"%d" % i)
-    i+=1
+for i,hist in enumerate(histlist):
+    while i <= G_eff_plt.GetXaxis().GetXmax():
+        bin_ix = G_eff_plt.GetXaxis().FindBin(i)
+            if str(i) in hist["runNums"]: 
+                G_eff_plt.GetXaxis().SetBinLabel(bin_ix,"%d" % i)
+        i+=1
 
 G_eff_plt.GetYaxis().SetTitleOffset(1.5)
 G_eff_plt.GetXaxis().SetTitleOffset(1.5)

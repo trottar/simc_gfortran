@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 13:44:58 trottar"
+# Time-stamp: "2022-12-05 13:58:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -356,7 +356,7 @@ def defineHists(phi_setting):
           H_t_DATA_rand.Fill(-evt.MandelT)
           H_W_DATA_rand.Fill(evt.W)
           H_epsilon_DATA_rand.Fill(evt.epsilon)
-          H_MMk_DATA_rand.Fill(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  
+          H_MMk_DATA_rand.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  )
 
           H_cal_etottracknorm_DATA.Fill(evt.H_cal_etottracknorm)
           H_cer_npeSum_DATA.Fill(evt.H_cer_npeSum)

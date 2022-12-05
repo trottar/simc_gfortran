@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-30 05:35:24 trottar"
+# Time-stamp: "2022-12-05 13:35:00 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -184,11 +184,11 @@ def defineHists(phi_setting):
 
     InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
 
-    TBRANCH_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
+    #TBRANCH_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_noRF")
-    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
+    TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_RF")
 
@@ -213,7 +213,7 @@ def defineHists(phi_setting):
     H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2", 200, 0.0, 10.0)
     H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 200, 0.0, 10.0)
     H_t_DATA       = ROOT.TH1D("H_t_DATA","-t", 200, 0.0, 1.0)  
-    H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 200, 0.5, 1.0)
+    H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 200, 0., 1.0)
     H_MMp2_DATA  = ROOT.TH1D("H_MMp2_DATA","(MM)^{2}_{p}", 200, 0.0, 2.0)
     H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar", 200, -0.1, 0.1)
     H_ph_DATA  = ROOT.TH1D("H_ph_DATA","Y' tar", 200, -0.1, 0.1)
@@ -251,7 +251,7 @@ def defineHists(phi_setting):
     H_Q2_DATA_rand       = ROOT.TH1D("H_Q2_DATA_rand","Q2", 200, 0.0, 10.0)
     H_W_DATA_rand  = ROOT.TH1D("H_W_DATA_rand","W ", 200, 0.0, 10.0)
     H_t_DATA_rand       = ROOT.TH1D("H_t_DATA_rand","-t", 200, 0.0, 1.0)  
-    H_epsilon_DATA_rand  = ROOT.TH1D("H_epsilon_DATA_rand","epsilon", 200, 0.5, 1.0)
+    H_epsilon_DATA_rand  = ROOT.TH1D("H_epsilon_DATA_rand","epsilon", 200, 0., 1.0)
     H_MMp2_DATA_rand  = ROOT.TH1D("H_MMp2_DATA_rand","(MM)^{2}_{p}", 200, 0.0, 2.0)
     H_th_DATA_rand  = ROOT.TH1D("H_th_DATA_rand","X' tar", 200, -0.1, 0.1)
     H_ph_DATA_rand  = ROOT.TH1D("H_ph_DATA_rand","Y' tar", 200, -0.1, 0.1)

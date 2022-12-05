@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 13:58:25 trottar"
+# Time-stamp: "2022-12-05 14:13:45 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -32,8 +32,8 @@ from functools import reduce
 ##################################################################################################################################################
 
 # Check the number of arguments provided to the script
-if len(sys.argv)-1!=4:
-    print("!!!!! ERROR !!!!!\n Expected 4 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename EvtsPerBinRange\n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=7:
+    print("!!!!! ERROR !!!!!\n Expected 7 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename NumtBins runNumRight runNumLeft runNumCenter\n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################    
@@ -44,7 +44,10 @@ DEBUG = False # Flag for no cut plots
 kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
 OutFilename = sys.argv[3]
-EvtsPerBinRange = int(sys.argv[4])
+NumtBins = int(sys.argv[4])
+runNumRight = int(sys.argv[5])
+runNumLeft = int(sys.argv[6])
+runNumCenter = int(sys.argv[7])
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -124,7 +127,7 @@ def find_tbins():
 
     H_t_Right = []
     print("Creating right t-bin histogram...")
-    # Grab t bin range for EvtsPerBinRange evts
+    # Grab t bin range
     for i,evt in enumerate(TBRANCH_RIGHT_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
@@ -134,7 +137,7 @@ def find_tbins():
 
     H_t_Left = []
     print("\nCreating left t-bin histogram...")
-    # Grab t bin range for EvtsPerBinRange evts
+    # Grab t bin range
     for i,evt in enumerate(TBRANCH_LEFT_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
@@ -144,7 +147,7 @@ def find_tbins():
 
     H_t_Center = []
     print("\nCreating center t-bin histogram...")
-    # Grab t bin range for EvtsPerBinRange evts
+    # Grab t bin range
     for i,evt in enumerate(TBRANCH_CENTER_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
@@ -166,7 +169,7 @@ def find_tbins():
         H_t_BinTest.append(l)
         H_t_BinTest.append(c)
     
-    n, bins, patches = plt.hist(H_t_BinTest, histedges_equalN(H_t_BinTest, 5))    
+    n, bins, patches = plt.hist(H_t_BinTest, histedges_equalN(H_t_BinTest, NumtBins))    
 
     rn, rbins = np.histogram(H_t_Right, bins=bins)
     ln, lbins = np.histogram(H_t_Left, bins=bins)
@@ -175,6 +178,68 @@ def find_tbins():
     return [n,bins]
     
 def defineHists(phi_setting):
+
+    ###############################################################################################################################################
+    # Grab windows for random subtraction
+
+    if phi_setting == "Right":
+        runNum = runNumRight
+    if phi_setting == "Left":
+        runNum = runNumLeft
+    if phi_setting == "Center":
+        runNum = runNumCenter
+
+    try:
+        runNum
+    except:
+        print("ERROR: No valid run number for this setting!")
+        sys.exit(1)
+
+    # Section for grabing Prompt/Random selection parameters from PARAM file
+    PARAMPATH = "%s/DB/PARAM" % UTILPATH
+    print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], SIMCPATH))
+    TimingCutFile = "%s/Timing_Parameters.csv" % PARAMPATH # This should match the param file actually being used!
+    TimingCutf = open(TimingCutFile)
+    try:
+        TimingCutFile
+    except NameError:
+        print("!!!!! ERRROR !!!!!\n One (or more) of the cut files not found!\n!!!!! ERRORR !!!!!")
+        sys.exit(2)
+    print("Reading timing cuts from %s" % TimingCutFile)
+    PromptWindow = [0, 0]
+    RandomWindows = [0, 0, 0, 0]
+    linenum = 0 # Count line number we're on
+    TempPar = -1 # To check later
+    for line in TimingCutf: # Read all lines in the cut file
+        linenum += 1 # Add one to line number at start of loop
+        if(linenum > 1): # Skip first line
+            line = line.partition('#')[0] # Treat anything after a # as a comment and ignore it
+            line = line.rstrip()
+            array = line.split(",") # Convert line into an array, anything after a comma is a new entry 
+            if(int(runNum) in range (int(array[0]), int(array[1])+1)): # Check if run number for file is within any of the ranges specified in the cut file
+                TempPar += 2 # If run number is in range, set to non -1 value
+                BunchSpacing = float(array[2])
+                CoinOffset = float(array[3]) # Coin offset value
+                nSkip = float(array[4]) # Number of random windows skipped 
+                nWindows = float(array[5]) # Total number of random windows
+                PromptPeak = float(array[6]) # Pion CT prompt peak positon 
+    TimingCutf.close() # After scanning all lines in file, close file
+
+    if(TempPar == -1): # If value is still -1, run number provided din't match any ranges specified so exit 
+        print("!!!!! ERROR !!!!!\n Run number specified does not fall within a set of runs for which cuts are defined in %s\n!!!!! ERROR !!!!!" % TimingCutFile)
+        sys.exit(3)
+    elif(TempPar > 1):
+        print("!!! WARNING!!! Run number was found within the range of two (or more) line entries of %s !!! WARNING !!!" % TimingCutFile)
+        print("The last matching entry will be treated as the input, you should ensure this is what you want")
+
+    # From our values from the file, reconstruct our windows 
+    PromptWindow[0] = PromptPeak - (BunchSpacing/2) - CoinOffset
+    PromptWindow[1] = PromptPeak + (BunchSpacing/2) + CoinOffset
+    RandomWindows[0] = PromptPeak - (BunchSpacing/2) - CoinOffset - (nSkip*BunchSpacing) - ((nWindows/2)*BunchSpacing)
+    RandomWindows[1] = PromptPeak - (BunchSpacing/2) - CoinOffset - (nSkip*BunchSpacing)
+    RandomWindows[2] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing)
+    RandomWindows[3] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing) + ((nWindows/2)*BunchSpacing)
+
     ################################################################################################################################################
     # Define root file trees of interest
 

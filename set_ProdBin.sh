@@ -40,7 +40,7 @@ while getopts 'hdat' flag; do
 	echo "    -d, debug"	
         echo "    -a, analyze"	
         echo "    -t, set t-bin (!!!required for script!!!)"
-	echo "        EPSILON=arg1, Q2=arg2, W=arg3, EvtsPerBinRange=arg4"	
+	echo "        EPSILON=arg1, Q2=arg2, W=arg3, NumtBins=arg4"	
         exit 0
         ;;
 	d) d_flag='true' ;;
@@ -57,7 +57,7 @@ if [[ $t_flag = "true" ]]; then
     EPSILON=$2
     Q2=$3
     W=$4
-    EvtsPerBinRange=$5
+    NumtBins=$5
     echo "Epsilon must be - high - low - Case Sensitive!"
     echo "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5]"
     echo "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40]"
@@ -99,7 +99,7 @@ if [[ $t_flag = "true" ]]; then
     fi
     if [[ $5 -eq "" ]]; then
 	echo "No number of events per nominal bin range given, assuming 50k..." 
-	EvtsPerBinRange=50000	
+	NumtBins=5
     fi
 elif [[ $d_flag = "true" ]]; then
     echo
@@ -109,8 +109,14 @@ elif [[ $d_flag = "true" ]]; then
     echo
     echo "-----------------------------"
     echo
-    EvtsPerBinRange=50000
+    NumtBins=5
 fi
+
+##############
+# HARD CODED #
+##############
+# Efficiency csv file
+EffData="coin_production_Prod_efficiency_data_2022_09_09.csv"
 
 # Function that calls python script to grab run numbers
 grab_runs () {
@@ -313,7 +319,7 @@ if [[ $a_flag = "true" ]]; then
 	    echo "Analysing right data run $i..."
 	    echo "-----------------------------"
 	    echo
-	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log
+	    python3 Analysed_Prod.py "$i" | tee ../../log/Analysed_Prod_$i.log	    
 	done
 	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
@@ -368,11 +374,82 @@ if [[ $a_flag = "true" ]]; then
     
 fi
 
+cd "${SIMCPATH}/scripts"
+
+# Checks that array isn't empty
+if [ ${#data_right[@]} -ne 0 ]; then
+    DataChargeValRight=()
+    DataEffValRight=()
+    echo
+    echo "Calculating data total effective charge right..."
+    for i in "${data[@]}"
+    do
+	# Calculates total efficiency then applies to the charge for each run number
+	# to get the effective charge per run and saves as an array
+	DataChargeValRight+=($(python3 findEffectiveCharge.py ${EffData} "replay_coin_production" "$i" -1))
+	# Grabs the total effiency value per run and saves as an array
+	DataEffValRight+=($(python3 getEfficiency.py "$i" ${EffData}))
+	#echo "${DataChargeVal[@]} mC"
+    done
+    #echo ${DataChargeVal[*]}
+    # Sums the array to get the total effective charge
+    # Note: this must be done as an array! This is why uC is used at this step
+    #       and later converted to C
+    DataChargeSumRight=$(IFS=+; echo "$((${DataChargeValRight[*]}))") # Only works for integers
+    echo "Total Charge Right: ${DataChargeSumRight} uC"
+fi
+
+# Checks that array isn't empty
+if [ ${#data_left[@]} -ne 0 ]; then
+    DataChargeValLeft=()
+    DataEffValLeft=()
+    echo
+    echo "Calculating data total effective charge left..."
+    for i in "${data[@]}"
+    do
+	# Calculates total efficiency then applies to the charge for each run number
+	# to get the effective charge per run and saves as an array
+	DataChargeValLeft+=($(python3 findEffectiveCharge.py ${EffData} "replay_coin_production" "$i" -1))
+	# Grabs the total effiency value per run and saves as an array
+	DataEffValLeft+=($(python3 getEfficiency.py "$i" ${EffData}))
+	#echo "${DataChargeVal[@]} mC"
+    done
+    #echo ${DataChargeVal[*]}
+    # Sums the array to get the total effective charge
+    # Note: this must be done as an array! This is why uC is used at this step
+    #       and later converted to C
+    DataChargeSumLeft=$(IFS=+; echo "$((${DataChargeValLeft[*]}))") # Only works for integers
+    echo "Total Charge Left: ${DataChargeSumLeft} uC"
+fi
+
+# Checks that array isn't empty
+if [ ${#data_center[@]} -ne 0 ]; then
+    DataChargeValCenter=()
+    DataEffValCenter=()
+    echo
+    echo "Calculating data total effective charge center..."
+    for i in "${data[@]}"
+    do
+	# Calculates total efficiency then applies to the charge for each run number
+	# to get the effective charge per run and saves as an array
+	DataChargeValCenter+=($(python3 findEffectiveCharge.py ${EffData} "replay_coin_production" "$i" -1))
+	# Grabs the total effiency value per run and saves as an array
+	DataEffValCenter+=($(python3 getEfficiency.py "$i" ${EffData}))
+	#echo "${DataChargeVal[@]} mC"
+    done
+    #echo ${DataChargeVal[*]}
+    # Sums the array to get the total effective charge
+    # Note: this must be done as an array! This is why uC is used at this step
+    #       and later converted to C
+    DataChargeSumCenter=$(IFS=+; echo "$((${DataChargeValCenter[*]}))") # Only works for integers
+    echo "Total Charge Center: ${DataChargeSumCenter} uC"
+fi
+
 cd "${SIMCPATH}/scripts/Prod/binning"
 
 # Finally, run the plotting script
 if [[ $t_flag = "true" || $d_flag = "true" ]]; then
-    python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${EvtsPerBinRange}
+    python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${NumtBins} ${data_right} ${data_left} ${data_center}
 fi
 
 cd "${SIMCPATH}"

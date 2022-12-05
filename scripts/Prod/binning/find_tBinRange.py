@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 14:13:45 trottar"
+# Time-stamp: "2022-12-05 15:30:49 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -32,8 +32,8 @@ from functools import reduce
 ##################################################################################################################################################
 
 # Check the number of arguments provided to the script
-if len(sys.argv)-1!=7:
-    print("!!!!! ERROR !!!!!\n Expected 7 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename NumtBins runNumRight runNumLeft runNumCenter\n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=10:
+    print("!!!!! ERROR !!!!!\n Expected 7 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename NumtBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center\n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################    
@@ -48,6 +48,9 @@ NumtBins = int(sys.argv[4])
 runNumRight = int(sys.argv[5])
 runNumLeft = int(sys.argv[6])
 runNumCenter = int(sys.argv[7])
+data_charge_right = int(sys.argv[8])/1000
+data_charge_left = int(sys.arg[9])/1000
+data_charge_center = int(sys.argv[10])/1000
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -432,8 +435,12 @@ def defineHists(phi_setting):
 
           ibin+=1
 
-    '''
-    normfac_data = 1/(data_charge)
+    if phi_setting == "Right":
+        normfac_data = 1/(data_charge_right)
+    if phi_setting == "Left":
+        normfac_data = 1/(data_charge_left)
+    if phi_setting == "Center":
+        normfac_data = 1/(data_charge_center)        
     H_ssxfp_DATA.Scale(normfac_data)
     H_ssyfp_DATA.Scale(normfac_data)
     H_ssxpfp_DATA.Scale(normfac_data)
@@ -463,10 +470,7 @@ def defineHists(phi_setting):
     H_pmz_DATA.Scale(normfac_data)
     H_W_DATA.Scale(normfac_data)
     H_ct_ep_DATA.Scale(normfac_data)
-    '''
 
-
-    '''
     # Data Random subtraction
     H_ssxfp_DATA_rand.Scale(normfac_data/nWindows)
     H_ssyfp_DATA_rand.Scale(normfac_data/nWindows)
@@ -493,11 +497,8 @@ def defineHists(phi_setting):
     H_pmz_DATA_rand.Scale(normfac_data/nWindows)
     H_W_DATA_rand.Scale(normfac_data/nWindows)
     #H_ct_ep_DATA_rand.Scale(normfac_data/nWindows)
-    '''
 
     ###
-
-    '''
     # Data Random subtraction
     H_ssxfp_DATA.Add(H_ssxfp_DATA_rand,-1)
     H_ssyfp_DATA.Add(H_ssyfp_DATA_rand,-1)
@@ -524,7 +525,6 @@ def defineHists(phi_setting):
     H_pmz_DATA.Add(H_pmz_DATA_rand,-1)
     H_W_DATA.Add(H_W_DATA_rand,-1)
     H_ct_ep_DATA.Add(H_ct_ep_DATA_rand,-1)
-    '''
     
     histDict = {
         "phi_setting" : phi_setting,

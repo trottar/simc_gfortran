@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 16:38:47 trottar"
+# Time-stamp: "2022-12-05 16:52:57 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -620,6 +620,7 @@ eff_plt.SetGrid()
 for i,hist in enumerate(histlist):
     hist["G_data_eff"].SetMarkerStyle(21)
     hist["G_data_eff"].SetMarkerSize(1)
+    hist["G_data_eff"].SetMarkerColor(i+1)
     G_eff_plt.Add(hist["G_data_eff"])
 
 G_eff_plt.Draw("AP")

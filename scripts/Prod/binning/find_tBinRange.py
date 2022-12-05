@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 15:34:54 trottar"
+# Time-stamp: "2022-12-05 16:08:57 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -32,8 +32,8 @@ from functools import reduce
 ##################################################################################################################################################
 
 # Check the number of arguments provided to the script
-if len(sys.argv)-1!=10:
-    print("!!!!! ERROR !!!!!\n Expected 7 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename NumtBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center\n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=14:
+    print("!!!!! ERROR !!!!!\n Expected 7 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename NumtBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table\n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################    
@@ -49,8 +49,12 @@ runNumRight = int(sys.argv[5])
 runNumLeft = int(sys.argv[6])
 runNumCenter = int(sys.argv[7])
 data_charge_right = int(sys.argv[8])/1000
-data_charge_left = int(sys.argv[9])/1000
+data_charge_left = int(sys.argvx2[9])/1000
 data_charge_center = int(sys.argv[10])/1000
+InData_efficiency_right = sys.argv[11]
+InData_efficiency_left = sys.argv[12]
+InData_efficiency_center = sys.argv[13]
+efficiency_table = sys.argv[14]
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -182,21 +186,38 @@ def find_tbins():
     
 def defineHists(phi_setting):
 
+    ################################################################################################################################################
+    # Grab and calculate efficiency
+
+    
+    if phi_setting == "Right":
+        runNums= runNumRight
+        runNum = runNumRight.split(' ')[0]
+        InData_efficiency = InData_efficiency_right
+    if phi_setting == "Left":
+        runNums= runNumLeft
+        runNum = runNumLeft.split(' ')[0]
+        InData_efficiency = InData_efficiency_left
+    if phi_setting == "Center":
+        runNums= runNumCenter
+        runNum = runNumCenter.split(' ')[0]
+        InData_efficiency = InData_efficiency_center
+
+    sys.path.append('../../')
+    from getDataTable import calculate_effError
+
+    tot_effError_data = [calculate_effError(run,efficiency_table) for run in runNums.split(' ')]
+    #print(InData_efficiency)
+    #print(tot_effError_data)
+    eff_errProp_data = sum(tot_effError_data) # Error propagation for addition
+
+    print("\n\nTotal Data Efficiency Uncertainty =",eff_errProp_data)
+
+    # Define total efficiency vs run number plots
+    G_data_eff = ROOT.TGraphErrors(len(InData_efficiency.split(' ')), np.array([float(x) for x in runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]),np.array([0]*len(tot_effError_data)),np.array(tot_effError_data)*np.array([float(x) for x in InData_efficiency.split(' ')]))
+
     ###############################################################################################################################################
     # Grab windows for random subtraction
-
-    if phi_setting == "Right":
-        runNum = runNumRight
-    if phi_setting == "Left":
-        runNum = runNumLeft
-    if phi_setting == "Center":
-        runNum = runNumCenter
-
-    try:
-        runNum
-    except:
-        print("ERROR: No valid run number for this setting!")
-        sys.exit(1)
 
     # Section for grabing Prompt/Random selection parameters from PARAM file
     PARAMPATH = "%s/DB/PARAM" % UTILPATH
@@ -528,6 +549,9 @@ def defineHists(phi_setting):
     
     histDict = {
         "phi_setting" : phi_setting,
+        "runNums" : runNums.split(' '),
+        "InData_efficiency" : InData_efficiency.split(' '),
+        "G_data_eff" : G_data_eff,
         "H_hsdelta_DATA" :     H_hsdelta_DATA,
         "H_hsxptar_DATA" :     H_hsxptar_DATA,
         "H_hsyptar_DATA" :     H_hsyptar_DATA,
@@ -585,9 +609,43 @@ print("\n\n")
 for i,hist in enumerate(histlist):
     if not bool(hist): # If hist is empty
         histlist.remove(hist)
+
+eff_plt = TCanvas()
+G_eff_plt = ROOT.TMultiGraph()
+l_eff_plt = ROOT.TLegend(0.115,0.55,0.33,0.9)
+
+eff_plt.SetGrid()
+
+for i,hist in enumerate(histlist):
+    hist["G_data_eff"].SetMarkerStyle(21)
+    hist["G_data_eff"].SetMarkerSize(1)
+    G_eff_plt.Add(hist["G_data_eff"])
+
+G_eff_plt.Draw("AP")
+
+G_eff_plt.SetTitle(" ;Run Numbers; Total Efficiency")
+
+i=0
+while i <= G_eff_plt.GetXaxis().GetXmax():
+    bin_ix = G_eff_plt.GetXaxis().FindBin(i)
+    for i,hist in enumerate(histlist):
+        if str(i) in hist["runNums"]: 
+            G_eff_plt.GetXaxis().SetBinLabel(bin_ix,"%d" % i)
+    i+=1
+
+G_eff_plt.GetYaxis().SetTitleOffset(1.5)
+G_eff_plt.GetXaxis().SetTitleOffset(1.5)
+G_eff_plt.GetXaxis().SetLabelSize(0.04)
+
+for i,hist in enumerate(histlist):
+    l_eff_plt.AddEntry(hist["G_data_eff"],"Data")
+
+l_eff_plt.Draw()
+
+eff_plt.Print(outputpdf + '(')
+
         
 # Plot histograms
-
 c_pid = TCanvas()
 
 c_pid.Divide(2,3)
@@ -626,7 +684,7 @@ for i,hist in enumerate(histlist):
         
 c_pid.Draw()
 
-c_pid.Print(outputpdf + '(')
+c_pid.Print(outputpdf)
 
 ct_ep = TCanvas()
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 16:29:02 trottar"
+# Time-stamp: "2022-12-05 16:35:41 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -46,9 +46,9 @@ kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
 OutFilename = sys.argv[3]
 NumtBins = int(sys.argv[4])
-runNumRight = int(sys.argv[5])
-runNumLeft = int(sys.argv[6])
-runNumCenter = int(sys.argv[7])
+runNumRight = sys.argv[5]
+runNumLeft = sys.argv[6]
+runNumCenter = sys.argv[7]
 data_charge_right = int(sys.argv[8])/1000
 data_charge_left = int(sys.argvx2[9])/1000
 data_charge_center = int(sys.argv[10])/1000

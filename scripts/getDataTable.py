@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 15:06:59 trottar"
+# Time-stamp: "2022-12-05 15:07:58 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -51,7 +51,7 @@ def get_efficiencies(runNum,efficiency_table):
     # Define dictionary of efficiency values
     effDict ={
         # HMS Detectors
-        #"HMS_Cer_ALL_Elec_Eff" : eff_data["HMS_Cer_ALL_Elec_Eff"].iloc[0],# Off for prod
+        "HMS_Cer_ALL_Elec_Eff" : eff_data["HMS_Cer_ALL_Elec_Eff"].iloc[0],
         #"HMS_Cer_COIN_Elec_Eff" : eff_data["HMS_Cer_COIN_Elec_Eff"].iloc[0],
         #"HMS_Cer_SING_Elec_Eff" : eff_data["HMS_Cer_SING_Elec_Eff"].iloc[0],
         "HMS_Elec_ALL_TRACK_EFF" : eff_data["HMS_Elec_ALL_TRACK_EFF"].iloc[0],
@@ -77,7 +77,7 @@ def get_efficiencies(runNum,efficiency_table):
     # Define dictionary of efficiency uncertainty values
     effErrorDict ={
         # HMS Detectors
-        #"HMS_Cer_ALL_Elec_Eff_ERROR" : eff_data["HMS_Cer_ALL_Elec_Eff_ERROR"].iloc[0],# Off for prod
+        "HMS_Cer_ALL_Elec_Eff_ERROR" : eff_data["HMS_Cer_ALL_Elec_Eff_ERROR"].iloc[0],
         #"HMS_Cer_COIN_Elec_Eff_ERROR" : eff_data["HMS_Cer_COIN_Elec_Eff_ERROR"].iloc[0],
         #"HMS_Cer_SING_Elec_Eff_ERROR" : eff_data["HMS_Cer_SING_Elec_Eff_ERROR"].iloc[0],
         "HMS_Elec_ALL_TRACK_EFF_ERROR" : eff_data["HMS_Elec_ALL_TRACK_EFF_ERROR"].iloc[0],

@@ -449,7 +449,7 @@ cd "${SIMCPATH}/scripts/Prod/binning"
 
 # Finally, run the plotting script
 if [[ $t_flag = "true" || $d_flag = "true" ]]; then
-    python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${NumtBins} ${data_right[*]} ${data_left[*]} ${data_center[*]} ${DataChargeSumRight} ${DataChargeSumLeft} ${DataChargeSumCenter} ${DataEffValRight[*]} ${DataEffValLeft[*]} ${DataEffValCenter[*]} ${EffData}
+    python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${NumtBins} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" ${DataChargeSumRight} ${DataChargeSumLeft} ${DataChargeSumCenter} "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData}
 fi
 
 cd "${SIMCPATH}"

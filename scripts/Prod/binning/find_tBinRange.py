@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 18:35:43 trottar"
+# Time-stamp: "2022-12-05 18:38:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -631,8 +631,8 @@ i=0
 for i,hist in enumerate(histlist):
     while i <= G_eff_plt.GetXaxis().GetXmax():
         bin_ix = G_eff_plt.GetXaxis().FindBin(i)
-            if str(i) in hist["runNums"]: 
-                G_eff_plt.GetXaxis().SetBinLabel(bin_ix,"%d" % i)
+        if str(i) in hist["runNums"]: 
+            G_eff_plt.GetXaxis().SetBinLabel(bin_ix,"%d" % i)
         i+=1
 
 G_eff_plt.GetYaxis().SetTitleOffset(1.5)

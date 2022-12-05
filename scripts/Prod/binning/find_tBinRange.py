@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 15:30:49 trottar"
+# Time-stamp: "2022-12-05 15:34:54 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -49,7 +49,7 @@ runNumRight = int(sys.argv[5])
 runNumLeft = int(sys.argv[6])
 runNumCenter = int(sys.argv[7])
 data_charge_right = int(sys.argv[8])/1000
-data_charge_left = int(sys.arg[9])/1000
+data_charge_left = int(sys.argv[9])/1000
 data_charge_center = int(sys.argv[10])/1000
 
 ###############################################################################################################################################

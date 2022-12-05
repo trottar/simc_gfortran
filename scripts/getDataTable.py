@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 15:10:31 trottar"
+# Time-stamp: "2022-12-05 15:13:23 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -48,8 +48,6 @@ def get_efficiencies(runNum,efficiency_table):
     eff_data = eff_data[eff_data['Run_Number'] == int(runNum)]
     #print(eff_data)
 
-    '''
-    #Heep
     # Define dictionary of efficiency values
     effDict ={
         # HMS Detectors
@@ -97,57 +95,7 @@ def get_efficiencies(runNum,efficiency_table):
         #"SHMS_CPULT_ERROR" : eff_data["SHMS_CPULT_ERROR"].iloc[0],
         "Non_Scaler_EDTM_Live_Time_ERROR" : eff_data["Non_Scaler_EDTM_Live_Time_ERROR"].iloc[0],
     }    
-    '''
 
-    # Prod
-    # Define dictionary of efficiency values
-    effDict ={
-        # HMS Detectors
-        #"HMS_Cer_ALL_Elec_Eff" : eff_data["HMS_Cer_ALL_Elec_Eff"].iloc[0],
-        #"HMS_Cer_COIN_Elec_Eff" : eff_data["HMS_Cer_COIN_Elec_Eff"].iloc[0],
-        #"HMS_Cer_SING_Elec_Eff" : eff_data["HMS_Cer_SING_Elec_Eff"].iloc[0],
-        #"HMS_Elec_ALL_TRACK_EFF" : eff_data["HMS_Elec_ALL_TRACK_EFF"].iloc[0],
-        #"HMS_Elec_COIN_TRACK_EFF" : eff_data["HMS_Elec_COIN_TRACK_EFF"].iloc[0],
-        #"HMS_Elec_SING_TRACK_EFF" : eff_data["HMS_Elec_SING_TRACK_EFF"].iloc[0],
-        #"HMS_Hodo_3_of_4_EFF" : eff_data["HMS_Hodo_3_of_4_EFF"].iloc[0],
-        #"HMS_Hodo_4_of_4_EFF" : eff_data["HMS_Hodo_4_of_4_EFF"].iloc[0],
-        # SHMS Detectors
-        #"SHMS_Aero_Prot_Eff" : eff_data["SHMS_Aero_Prot_Eff"].iloc[0], # Very low ~40-70%
-        #"SHMS_Hadron_ALL_TRACK_EFF" : eff_data["SHMS_Hadron_ALL_TRACK_EFF"].iloc[0],
-        #"SHMS_Hodo_3_of_4_EFF" : eff_data["SHMS_Hodo_3_of_4_EFF"].iloc[0],
-        #"SHMS_Hodo_4_of_4_EFF" : eff_data["SHMS_Hodo_4_of_4_EFF"].iloc[0],
-        #"SHMS_Prot_ALL_TRACK_EFF" : eff_data["SHMS_Prot_ALL_TRACK_EFF"].iloc[0],
-        #"SHMS_Prot_COIN_TRACK_EFF" : eff_data["SHMS_Prot_COIN_TRACK_EFF"].iloc[0],
-        #"SHMS_Prot_SING_TRACK_EFF" : eff_data["SHMS_Prot_SING_TRACK_EFF"].iloc[0],
-        # Livetimes
-        #"COIN_CPULT" : eff_data["COIN_CPULT"].iloc[0], # Using TLT
-        #"HMS_CPULT" : eff_data["HMS_CPULT"].iloc[0], # Oddly very low, ~6%
-        #"SHMS_CPULT" : eff_data["SHMS_CPULT"].iloc[0], # Oddly very low, ~6%
-        "Non_Scaler_EDTM_Live_Time" : eff_data["Non_Scaler_EDTM_Live_Time"].iloc[0],
-    }
-
-    # Define dictionary of efficiency uncertainty values
-    effErrorDict ={
-        # HMS Detectors
-        #"HMS_Cer_ALL_Elec_Eff_ERROR" : eff_data["HMS_Cer_ALL_Elec_Eff_ERROR"].iloc[0],
-        #"HMS_Cer_COIN_Elec_Eff_ERROR" : eff_data["HMS_Cer_COIN_Elec_Eff_ERROR"].iloc[0],
-        #"HMS_Cer_SING_Elec_Eff_ERROR" : eff_data["HMS_Cer_SING_Elec_Eff_ERROR"].iloc[0],
-        #"HMS_Elec_ALL_TRACK_EFF_ERROR" : eff_data["HMS_Elec_ALL_TRACK_EFF_ERROR"].iloc[0],
-        #"HMS_Elec_COIN_TRACK_EFF_ERROR" : eff_data["HMS_Elec_COIN_TRACK_EFF_ERROR"].iloc[0],
-        #"HMS_Elec_SING_TRACK_EFF_ERROR" : eff_data["HMS_Elec_SING_TRACK_EFF_ERROR"].iloc[0],
-        # SHMS Detectors
-        #"SHMS_Aero_Prot_Eff_ERROR" : eff_data["SHMS_Aero_Prot_Eff_ERROR"].iloc[0],
-        #"SHMS_Hadron_ALL_TRACK_EFF_ERROR" : eff_data["SHMS_Hadron_ALL_TRACK_EFF_ERROR"].iloc[0],
-        #"SHMS_Prot_ALL_TRACK_EFF_ERROR" : eff_data["SHMS_Prot_ALL_TRACK_EFF_ERROR"].iloc[0],
-        #"SHMS_Prot_COIN_TRACK_EFF_ERROR" : eff_data["SHMS_Prot_COIN_TRACK_EFF_ERROR"].iloc[0],
-        #"SHMS_Prot_SING_TRACK_EFF_ERROR" : eff_data["SHMS_Prot_SING_TRACK_EFF_ERROR"].iloc[0],
-        # Livetimes
-        #"COIN_CPULT_ERROR" : eff_data["COIN_CPULT_ERROR"].iloc[0],
-        #"HMS_CPULT_ERROR" : eff_data["HMS_CPULT_ERROR"].iloc[0],
-        #"SHMS_CPULT_ERROR" : eff_data["SHMS_CPULT_ERROR"].iloc[0],
-        "Non_Scaler_EDTM_Live_Time_ERROR" : eff_data["Non_Scaler_EDTM_Live_Time_ERROR"].iloc[0],
-    }
-    
     return [effDict,effErrorDict]
 
 def calculate_efficiency(runNum,efficiency_table):

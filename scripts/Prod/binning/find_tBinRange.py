@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 18:38:30 trottar"
+# Time-stamp: "2022-12-05 18:56:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -30,8 +30,6 @@ from ROOT import kBlack, kCyan, kRed, kGreen, kMagenta
 from functools import reduce
 
 ##################################################################################################################################################
-
-print(len(sys.argv))
 # Check the number of arguments provided to the script
 if len(sys.argv)-1!=14:
     print("!!!!! ERROR !!!!!\n Expected 14 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename NumtBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table\n!!!!! ERROR !!!!!")
@@ -640,7 +638,7 @@ G_eff_plt.GetXaxis().SetTitleOffset(1.5)
 G_eff_plt.GetXaxis().SetLabelSize(0.04)
 
 for i,hist in enumerate(histlist):
-    l_eff_plt.AddEntry(hist["G_data_eff"],"Data")
+    l_eff_plt.AddEntry(hist["G_data_eff"],hist["phi_setting"])
 
 l_eff_plt.Draw()
 

@@ -382,7 +382,7 @@ if [ ${#data_right[@]} -ne 0 ]; then
     DataEffValRight=()
     echo
     echo "Calculating data total effective charge right..."
-    for i in "${data[@]}"
+    for i in "${data_right[@]}"
     do
 	# Calculates total efficiency then applies to the charge for each run number
 	# to get the effective charge per run and saves as an array
@@ -405,7 +405,7 @@ if [ ${#data_left[@]} -ne 0 ]; then
     DataEffValLeft=()
     echo
     echo "Calculating data total effective charge left..."
-    for i in "${data[@]}"
+    for i in "${data_left[@]}"
     do
 	# Calculates total efficiency then applies to the charge for each run number
 	# to get the effective charge per run and saves as an array
@@ -428,7 +428,7 @@ if [ ${#data_center[@]} -ne 0 ]; then
     DataEffValCenter=()
     echo
     echo "Calculating data total effective charge center..."
-    for i in "${data[@]}"
+    for i in "${data_center[@]}"
     do
 	# Calculates total efficiency then applies to the charge for each run number
 	# to get the effective charge per run and saves as an array

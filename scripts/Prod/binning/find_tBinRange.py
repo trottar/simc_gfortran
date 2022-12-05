@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 16:35:41 trottar"
+# Time-stamp: "2022-12-05 16:38:47 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -50,7 +50,7 @@ runNumRight = sys.argv[5]
 runNumLeft = sys.argv[6]
 runNumCenter = sys.argv[7]
 data_charge_right = int(sys.argv[8])/1000
-data_charge_left = int(sys.argvx2[9])/1000
+data_charge_left = int(sys.argv[9])/1000
 data_charge_center = int(sys.argv[10])/1000
 InData_efficiency_right = sys.argv[11]
 InData_efficiency_left = sys.argv[12]

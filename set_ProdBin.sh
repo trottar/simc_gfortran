@@ -116,7 +116,7 @@ fi
 # HARD CODED #
 ##############
 # Efficiency csv file
-EffData="coin_production_Prod_efficiency_data_2022_09_09.csv"
+EffData="coin_production_Prod_efficiency_data_2022_12_05.csv"
 
 # Function that calls python script to grab run numbers
 grab_runs () {

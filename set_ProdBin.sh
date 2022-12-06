@@ -432,7 +432,6 @@ if [ ${#data_center[@]} -ne 0 ]; then
     do
 	# Calculates total efficiency then applies to the charge for each run number
 	# to get the effective charge per run and saves as an array
-	echo $i
 	DataChargeValCenter+=($(python3 findEffectiveCharge.py ${EffData} "replay_coin_production" "$i" -1))
 	# Grabs the total effiency value per run and saves as an array
 	DataEffValCenter+=($(python3 getEfficiency.py "$i" ${EffData}))

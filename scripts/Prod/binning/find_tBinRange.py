@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-06 01:06:29 trottar"
+# Time-stamp: "2022-12-06 01:13:05 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -206,7 +206,11 @@ def defineHists(phi_setting):
     sys.path.append('../../')
     from getDataTable import calculate_effError
 
-    tot_effError_data = [calculate_effError(run,efficiency_table) for run in runNums.split(' ')]
+    #tot_effError_data = [calculate_effError(run,efficiency_table) for run in runNums.split(' ')]
+    tot_effError_data = []
+    for run in runNums.split(' '):
+        print(run)
+        tot_effError_data.append(calculate_effError(run,efficiency_table) )
     #print(InData_efficiency)
     #print(tot_effError_data)
     eff_errProp_data = sum(tot_effError_data) # Error propagation for addition

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-06 00:59:36 trottar"
+# Time-stamp: "2022-12-06 01:04:46 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -47,12 +47,6 @@ def get_efficiencies(runNum,efficiency_table):
     # Redefine table to be only the run number of interest
     eff_data = eff_data[eff_data['Run_Number'] == int(runNum)]
     #print(eff_data)
-    try:
-        eff_data["Non_Scaler_EDTM_Live_Time"].iloc[0]
-    except IndexError:
-        #print("Error: %s does not appear to exist." % runNum)
-        return
-        
 
     # Define dictionary of efficiency values
     effDict ={
@@ -106,11 +100,8 @@ def get_efficiencies(runNum,efficiency_table):
 
 def calculate_efficiency(runNum,efficiency_table):
 
-    try:
-        effDict = get_efficiencies(runNum,efficiency_table)[0] # Efficiency dictionary
-    except TypeError:
-        return 1
-    
+    effDict = get_efficiencies(runNum,efficiency_table)[0] # Efficiency dictionary
+
     # Calculate total efficiency. The reduce function pretty much iterates on
     # its arguments which in this case is a lambda function. This lambda function
     # takes x,y from the list (ie the list of efficiencies) and multiplies them.
@@ -121,11 +112,8 @@ def calculate_efficiency(runNum,efficiency_table):
 
 def calculate_effError(runNum,efficiency_table):
 
-    try:
-        effDict = get_efficiencies(runNum,efficiency_table)[0] # Efficiency dictionary
-        effErrorDict = get_efficiencies(runNum,efficiency_table)[1] # Efficiency errors dictionary
-    except TypeError:
-        return 1
+    effDict = get_efficiencies(runNum,efficiency_table)[0] # Efficiency dictionary
+    effErrorDict = get_efficiencies(runNum,efficiency_table)[1] # Efficiency errors dictionary
 
     # Calculate total efficiency. The reduce function pretty much iterates on
     # its arguments which in this case is a lambda function. This lambda function

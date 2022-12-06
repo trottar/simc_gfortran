@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-06 01:30:26 trottar"
+# Time-stamp: "2022-12-06 01:43:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -167,6 +167,7 @@ def find_tbins():
 
     H_t_BinTest = []
     for r,l,c in zip(H_t_Right,H_t_Left,H_t_Center):
+        print(r,l,c)
         H_t_BinTest.append(r)
         H_t_BinTest.append(l)
         H_t_BinTest.append(c)

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 22:52:38 trottar"
+# Time-stamp: "2022-12-05 23:09:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -51,7 +51,7 @@ def get_efficiencies(runNum,efficiency_table):
         eff_data["Non_Scaler_EDTM_Live_Time"].iloc[0]
     except IndexError:
         #print("Error: %s does not appear to exist." % runNum)
-        return [{},{}]
+        return
         
 
     # Define dictionary of efficiency values
@@ -108,6 +108,11 @@ def calculate_efficiency(runNum,efficiency_table):
 
     effDict = get_efficiencies(runNum,efficiency_table)[0] # Efficiency dictionary
 
+    try:
+        effDict
+    except IndexError:
+        return 1
+    
     # Calculate total efficiency. The reduce function pretty much iterates on
     # its arguments which in this case is a lambda function. This lambda function
     # takes x,y from the list (ie the list of efficiencies) and multiplies them.

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 23:00:45 trottar"
+# Time-stamp: "2022-12-05 23:08:18 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -40,11 +40,6 @@ UTILPATH=lt.UTILPATH
 from getDataTable import calculate_efficiency
 
 tot_efficiency = calculate_efficiency(runNum,efficiency_table)
-
-try:
-    tot_efficiency
-except TypeError:
-    tot_efficiency = 1
 
 ################################################################################################################################################
 

@@ -98,7 +98,7 @@ if [[ $t_flag = "true" ]]; then
 	done
     fi
     if [[ $5 -eq "" ]]; then
-	echo "No number of events per nominal bin range given, assuming 50k..." 
+	echo "No number of events per nominal bin range given, assuming 5 t-bins..." 
 	NumtBins=5
     fi
 elif [[ $d_flag = "true" ]]; then

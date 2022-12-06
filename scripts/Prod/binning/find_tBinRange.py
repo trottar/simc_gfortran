@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-06 01:13:05 trottar"
+# Time-stamp: "2022-12-06 01:18:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -186,6 +186,24 @@ def find_tbins():
     
 def defineHists(phi_setting):
 
+
+    ################################################################################################################################################
+    # Define root file trees of interest
+
+    rootFile = OUTPATH+"/"+InDATAFilename+"_%s.root" % (phi_setting)
+    if not os.path.isfile(rootFile):
+        return {}
+
+    InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
+
+    #TBRANCH_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
+    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
+    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
+    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_noRF")
+    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
+    TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
+    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_RF")
+    
     ################################################################################################################################################
     # Grab and calculate efficiency
 
@@ -267,23 +285,6 @@ def defineHists(phi_setting):
     RandomWindows[1] = PromptPeak - (BunchSpacing/2) - CoinOffset - (nSkip*BunchSpacing)
     RandomWindows[2] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing)
     RandomWindows[3] = PromptPeak + (BunchSpacing/2) + CoinOffset + (nSkip*BunchSpacing) + ((nWindows/2)*BunchSpacing)
-
-    ################################################################################################################################################
-    # Define root file trees of interest
-
-    rootFile = OUTPATH+"/"+InDATAFilename+"_%s.root" % (phi_setting)
-    if not os.path.isfile(rootFile):
-        return {}
-
-    InFile_DATA = ROOT.TFile.Open(rootFile, "OPEN")
-
-    #TBRANCH_DATA  = InFile_DATA.Get("Uncut_Kaon_Events")
-    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
-    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
-    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_noRF")
-    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
-    TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
-    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_RF")
 
     ################################################################################################################################################
     # Plot definitions

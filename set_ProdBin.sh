@@ -135,6 +135,9 @@ echo
 echo "---------------------------------------------------------"
 echo
 
+data_right=()
+data_left=()
+data_center=()
 # Get run numbers for left, right, and, center settings
 declare -a PHI=("RIGHT" "LEFT" "CENTER")
 for i in "${PHI[@]}"

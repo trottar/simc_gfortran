@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 19:29:49 trottar"
+# Time-stamp: "2022-12-05 19:39:49 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -137,7 +137,7 @@ def find_tbins():
     for i,evt in enumerate(TBRANCH_RIGHT_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
-        if (0.0 <= -evt.MandelT <= 1.0):
+        if (0.0 <= -evt.MandelT <= 1.5):
             H_t_Right.append(-evt.MandelT)   
     #rbins,H_t_Right = np.histogram(H_t_Right,bins=200)
 
@@ -147,7 +147,7 @@ def find_tbins():
     for i,evt in enumerate(TBRANCH_LEFT_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
-        if (0.0 <= -evt.MandelT <= 1.0):
+        if (0.0 <= -evt.MandelT <= 1.5):
             H_t_Left.append(-evt.MandelT)
     #lbins,H_t_Left = np.histogram(H_t_Left,bins=200)
 
@@ -157,7 +157,7 @@ def find_tbins():
     for i,evt in enumerate(TBRANCH_CENTER_DATA):
         # Progress bar
         Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
-        if (0.0 <= -evt.MandelT <= 1.0):
+        if (0.0 <= -evt.MandelT <= 1.5):
             H_t_Center.append(-evt.MandelT)
     #cbins,H_t_Center = np.histogram(H_t_Center,bins=200)
 
@@ -300,7 +300,7 @@ def defineHists(phi_setting):
     H_q_DATA        = ROOT.TH1D("H_q_DATA","q", 200, 0.0, 10.0)
     H_Q2_DATA       = ROOT.TH1D("H_Q2_DATA","Q2", 200, 0.0, 10.0)
     H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 200, 0.0, 10.0)
-    H_t_DATA       = ROOT.TH1D("H_t_DATA","-t", 200, -1.0, 5.0)  
+    H_t_DATA       = ROOT.TH1D("H_t_DATA","-t", 200, -1.0, 1.5)  
     H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 200, 0., 1.0)
     H_MMk_DATA  = ROOT.TH1D("H_MMk_DATA","MM_{K}", 200, 0.0, 2.0)
     H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar", 200, -0.1, 0.1)
@@ -338,7 +338,7 @@ def defineHists(phi_setting):
     H_q_DATA_rand        = ROOT.TH1D("H_q_DATA_rand","q", 200, 0.0, 10.0)
     H_Q2_DATA_rand       = ROOT.TH1D("H_Q2_DATA_rand","Q2", 200, 0.0, 10.0)
     H_W_DATA_rand  = ROOT.TH1D("H_W_DATA_rand","W ", 200, 0.0, 10.0)
-    H_t_DATA_rand       = ROOT.TH1D("H_t_DATA_rand","-t", 200, -1.0, 5.0)  
+    H_t_DATA_rand       = ROOT.TH1D("H_t_DATA_rand","-t", 200, -1.0, 1.5)  
     H_epsilon_DATA_rand  = ROOT.TH1D("H_epsilon_DATA_rand","epsilon", 200, 0., 1.0)
     H_MMk_DATA_rand  = ROOT.TH1D("H_MMk_DATA_rand","MM_{K}", 200, 0.0, 2.0)
     H_th_DATA_rand  = ROOT.TH1D("H_th_DATA_rand","X' tar", 200, -0.1, 0.1)

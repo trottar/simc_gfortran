@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 20:09:00 trottar"
+# Time-stamp: "2022-12-05 22:03:48 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -31,10 +31,11 @@ from functools import reduce
 
 ##################################################################################################################################################
 # Check the number of arguments provided to the script
+'''
 if len(sys.argv)-1!=14:
     print("!!!!! ERROR !!!!!\n Expected 14 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename NumtBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table\n!!!!! ERROR !!!!!")
     sys.exit(1)
-
+'''
 ##################################################################################################################################################    
 
 DEBUG = False # Flag for no cut plots
@@ -353,7 +354,6 @@ def defineHists(phi_setting):
     H_pmy_DATA_rand  = ROOT.TH1D("H_pmy_DATA_rand","pmy ", 200, 0.0, 10.0)
     H_pmz_DATA_rand  = ROOT.TH1D("H_pmz_DATA_rand","pmz", 200, 0.0, 10.0)
     H_ct_ep_DATA_rand = ROOT.TH1D("H_ct_ep_DATA_rand", "Electron-Proton CTime", 200, -10, 10)
-
     
     ################################################################################################################################################
     # Fill histograms for various trees called above

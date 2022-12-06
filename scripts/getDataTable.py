@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 23:09:27 trottar"
+# Time-stamp: "2022-12-05 23:16:24 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -106,11 +106,9 @@ def get_efficiencies(runNum,efficiency_table):
 
 def calculate_efficiency(runNum,efficiency_table):
 
-    effDict = get_efficiencies(runNum,efficiency_table)[0] # Efficiency dictionary
-
     try:
-        effDict
-    except IndexError:
+        effDict = get_efficiencies(runNum,efficiency_table)[0] # Efficiency dictionary
+    except TypeError:
         return 1
     
     # Calculate total efficiency. The reduce function pretty much iterates on

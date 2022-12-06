@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-05 22:44:56 trottar"
+# Time-stamp: "2022-12-05 22:52:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -50,9 +50,8 @@ def get_efficiencies(runNum,efficiency_table):
     try:
         eff_data["Non_Scaler_EDTM_Live_Time"].iloc[0]
     except IndexError:
-        print("Error: %s does not appear to exist." % runNum)
-        sys.exit(0)
-        
+        #print("Error: %s does not appear to exist." % runNum)
+        return [{},{}]
         
 
     # Define dictionary of efficiency values

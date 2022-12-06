@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-06 01:18:16 trottar"
+# Time-stamp: "2022-12-06 01:30:26 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -90,8 +90,13 @@ def find_tbins():
 
     ################################################################################################################################################
     # Define root file trees of interest
+    
+    H_t_Right = []
+    H_t_Left = []
+    H_t_Center = []
 
-    for val in ['Right', 'Left', 'Center']:
+    #for val in ['Right', 'Left', 'Center']:
+    for val in settingList:
         rootFile = OUTPATH+"/"+InDATAFilename+"_%s.root" % val
         if not os.path.isfile(rootFile):
             continue
@@ -105,6 +110,17 @@ def find_tbins():
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_all_RF")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_prompt_RF")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_rand_RF")
+                print("Creating right t-bin histogram...")
+                # Grab t bin range
+                for i,evt in enumerate(TBRANCH_RIGHT_DATA):
+                    # Progress bar
+                    Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
+                    if (0.0 <= -evt.MandelT <= 1.5):
+                        H_t_Right.append(-evt.MandelT)   
+                #rbins,H_t_Right = np.histogram(H_t_Right,bins=200)
+                
+                InFile_RIGHT_DATA.Close()    
+                
             if val == 'Left':
                 InFile_LEFT_DATA = ROOT.TFile.Open(rootFile, "OPEN")
                 TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Uncut_Kaon_Events")
@@ -113,7 +129,17 @@ def find_tbins():
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_rand_noRF")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_all_RF")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_prompt_RF")
-                #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_rand_RF")                
+                #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_rand_RF")
+                print("\nCreating left t-bin histogram...")
+                # Grab t bin range
+                for i,evt in enumerate(TBRANCH_LEFT_DATA):
+                    # Progress bar
+                    Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
+                    if (0.0 <= -evt.MandelT <= 1.5):
+                        H_t_Left.append(-evt.MandelT)
+                #lbins,H_t_Left = np.histogram(H_t_Left,bins=200)
+                InFile_LEFT_DATA.Close()
+                
             if val == 'Center':
                 InFile_CENTER_DATA = ROOT.TFile.Open(rootFile, "OPEN")
                 TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Uncut_Kaon_Events")
@@ -123,49 +149,18 @@ def find_tbins():
                 #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_all_RF")
                 #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_prompt_RF")
                 #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_rand_RF")
+                print("\nCreating center t-bin histogram...")
+                # Grab t bin range
+                for i,evt in enumerate(TBRANCH_CENTER_DATA):
+                    # Progress bar
+                    Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
+                    if (0.0 <= -evt.MandelT <= 1.5):
+                        H_t_Center.append(-evt.MandelT)
+                #cbins,H_t_Center = np.histogram(H_t_Center,bins=200)
+                InFile_CENTER_DATA.Close()                
                 
     ################################################################################################################################################
-    
-    #H_t_Right       = ROOT.TH1D("H_t_Right","-t", 200, 0.0, 1.0)
-    #H_t_Left       = ROOT.TH1D("H_t_Left","-t", 200, 0.0, 1.0)
-    #H_t_Center       = ROOT.TH1D("H_t_Center","-t", 200, 0.0, 1.0)  
-    
-    ################################################################################################################################################
 
-    H_t_Right = []
-    print("Creating right t-bin histogram...")
-    # Grab t bin range
-    for i,evt in enumerate(TBRANCH_RIGHT_DATA):
-        # Progress bar
-        Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
-        if (0.0 <= -evt.MandelT <= 1.5):
-            H_t_Right.append(-evt.MandelT)   
-    #rbins,H_t_Right = np.histogram(H_t_Right,bins=200)
-
-    H_t_Left = []
-    print("\nCreating left t-bin histogram...")
-    # Grab t bin range
-    for i,evt in enumerate(TBRANCH_LEFT_DATA):
-        # Progress bar
-        Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
-        if (0.0 <= -evt.MandelT <= 1.5):
-            H_t_Left.append(-evt.MandelT)
-    #lbins,H_t_Left = np.histogram(H_t_Left,bins=200)
-
-    H_t_Center = []
-    print("\nCreating center t-bin histogram...")
-    # Grab t bin range
-    for i,evt in enumerate(TBRANCH_CENTER_DATA):
-        # Progress bar
-        Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
-        if (0.0 <= -evt.MandelT <= 1.5):
-            H_t_Center.append(-evt.MandelT)
-    #cbins,H_t_Center = np.histogram(H_t_Center,bins=200)
-
-    InFile_RIGHT_DATA.Close()
-    InFile_LEFT_DATA.Close()
-    InFile_CENTER_DATA.Close()
-    
     def histedges_equalN(x, nbin):
         npt = len(x)
         return np.interp(np.linspace(0, npt, nbin + 1),np.arange(npt),np.sort(x))
@@ -610,9 +605,13 @@ histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
 
 print("\n\n")
 
+settingList = []
 for i,hist in enumerate(histlist):
     if not bool(hist): # If hist is empty
         histlist.remove(hist)
+    else:
+        settingList.append(hist["phi_setting"])
+        
 
 eff_plt = TCanvas()
 G_eff_plt = ROOT.TMultiGraph()

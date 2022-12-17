@@ -1360,7 +1360,7 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	recon%uq%x = - recon%e%P*recon%ue%x / recon%q
 	recon%uq%y = - recon%e%P*recon%ue%y / recon%q
 	recon%uq%z =(recon%Ein - recon%e%P*recon%ue%z)/ recon%q
-	
+
 c	if (doing_pion .or. doing_kaon .or. doing_delta .or. doing_rho .or. doing_semi) then
 c	   W2 = targ%mtar_struck**2 + 2.*targ%mtar_struck*recon%nu - recon%Q2
 c	else
@@ -1547,7 +1547,6 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 
 	if (debug(4)) write(6,*)'comp_rec_ev: at 8'
 
-	
 ! Compute the Pm vector in in SIMC LAB system, with x down, and y to the left.
 ! Computer Parallel, Perpendicular, and Out of Plane componenants.
 ! Parallel is component along q_hat.  Out/plane is component along

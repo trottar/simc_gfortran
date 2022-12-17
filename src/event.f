@@ -1368,8 +1368,7 @@ c	   W2 = targ%M**2 + 2.*targ%M*recon%nu - recon%Q2
 c	endif
 
 c Everyone else in the world calculates W using the proton mass.
-!       W2 = mp**2 + 2.*mp*recon%nu - recon%Q2
-	W2 = mp**2 + 2.*Mh*recon%nu - recon%Q2
+	W2 = mp**2 + 2.*mp*recon%nu - recon%Q2
 
 	recon%W = sqrt(abs(W2)) * W2/abs(W2) 
 	recon%xbj = recon%Q2/2./Mp/recon%nu
@@ -1591,7 +1590,8 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! This Em for pi/kaon gives roughly E_m + E_rec + T_{A-1}  (I think)
 	if (doing_hyd_elast) then
 	  recon%Trec = 0.0
-	  recon%Em = recon%nu + targ%M - recon%p%E - recon%Trec
+!       recon%Em = recon%nu + targ%M - recon%p%E - recon%Trec
+	  recon%Em = recon%nu + targ%Mtar_struck - recon%p%E
 	else if (doing_deuterium .or. doing_heavy) then
 	  recon%Trec = sqrt(recon%Pm**2+targ%Mrec**2) - targ%Mrec
 	  recon%Em = recon%nu + targ%Mtar_struck - recon%p%E - recon%Trec

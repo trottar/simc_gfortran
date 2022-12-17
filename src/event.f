@@ -1356,12 +1356,11 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	if (debug(5)) write(6,*)'comp_rec_ev: Ein,E,uez=',recon%Ein,recon%e%E,recon%ue%z
 	recon%nu = recon%Ein - recon%e%E
 	recon%Q2 = 2*recon%Ein*recon%e%E*(1-recon%ue%z)
-!       recon%q	= sqrt(recon%Q2 + recon%nu**2)
-	recon%q	= -sqrt(recon%Q2) 
-	recon%uq%x = recon%e%P*recon%ue%x / recon%q
-	recon%uq%y = recon%e%P*recon%ue%y / recon%q
-	recon%uq%z = -(recon%Ein - recon%e%P*recon%ue%z)/ recon%q
-
+	recon%q	= sqrt(recon%Q2 + recon%nu**2)
+	recon%uq%x = - recon%e%P*recon%ue%x / recon%q
+	recon%uq%y = - recon%e%P*recon%ue%y / recon%q
+	recon%uq%z =(recon%Ein - recon%e%P*recon%ue%z)/ recon%q
+	
 c	if (doing_pion .or. doing_kaon .or. doing_delta .or. doing_rho .or. doing_semi) then
 c	   W2 = targ%mtar_struck**2 + 2.*targ%mtar_struck*recon%nu - recon%Q2
 c	else
@@ -1548,6 +1547,19 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 
 	if (debug(4)) write(6,*)'comp_rec_ev: at 8'
 
+
+	A1x = 0 + qx
+	A1y = 0 + qy
+	A1z = targ%Mtar_struck + qz
+
+	Bx = A1x - recon%p%P*px
+	By = A1y - recon%p%P*py
+	Bz = A1z - recon%p%P*pz
+
+	recon%Pmx = -Bx
+	recon%Pmy = -By
+	recon%Pmz = -Bz
+	
 ! Compute the Pm vector in in SIMC LAB system, with x down, and y to the left.
 ! Computer Parallel, Perpendicular, and Out of Plane componenants.
 ! Parallel is component along q_hat.  Out/plane is component along
@@ -1555,9 +1567,9 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! Perp. component is what's left: along (q_hat) x (oop_hat).
 ! So looking along q, out of plane is down, perp. is left.
 
-	recon%Pmx = recon%p%P*px - recon%q*qx
-	recon%Pmy = recon%p%P*py - recon%q*qy
-	recon%Pmz = recon%p%P*pz - recon%q*qz
+!       recon%Pmx = -(recon%p%P*px - recon%q*qx)
+!       recon%Pmy = -(recon%p%P*py - recon%q*qy)
+!       recon%Pmz = -recon%p%P*pz - recon%q*qz
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!

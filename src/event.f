@@ -1368,7 +1368,8 @@ c	   W2 = targ%M**2 + 2.*targ%M*recon%nu - recon%Q2
 c	endif
 
 c Everyone else in the world calculates W using the proton mass.
-	W2 = mp**2 + 2.*mp*recon%nu - recon%Q2
+!       W2 = mp**2 + 2.*mp*recon%nu - recon%Q2
+	W2 = mp**2 + 2.*Mh*recon%nu - recon%Q2
 
 	recon%W = sqrt(abs(W2)) * W2/abs(W2) 
 	recon%xbj = recon%Q2/2./Mp/recon%nu

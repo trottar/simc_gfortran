@@ -1406,7 +1406,7 @@ c Everyone else in the world calculates W using the proton mass.
 	qx = -recon%uq%y		!convert to 'replay' coord. system
 	qy =  recon%uq%x
 	qz =  recon%uq%z
-	px = -recon%up%y
+	px = -recon%up%y		!convert to 'replay' coord. system
 	py =  recon%up%x
 	pz =  recon%up%z
 
@@ -1554,16 +1554,16 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! Perp. component is what's left: along (q_hat) x (oop_hat).
 ! So looking along q, out of plane is down, perp. is left.
 
-	recon%Pmx = -(recon%p%P*recon%up%x - recon%q*recon%uq%x) ! Negative sign for convention to match hcana
-	recon%Pmy = -(recon%p%P*recon%up%y - recon%q*recon%uq%y) ! Negative sign for convention to match hcana
-	recon%Pmz = -(recon%p%P*recon%up%z - recon%q*recon%uq%z) ! Negative sign for convention to match hcana
+	recon%Pmx = recon%p%P*px - recon%q*qx
+	recon%Pmy = recon%p%P*py - recon%q*qy
+	recon%Pmz = recon%p%P*pz - recon%q*qz
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!
 
-	oop_x = -recon%uq%y	! oop_x = q_y *(z_hat x y_hat) = q_y *-(x_hat)
-	oop_y =  recon%uq%x	! oop_y = q_x *(z_hat x x_hat) = q_x * (y_hat)
-	recon%PmPar = (recon%Pmx*recon%uq%x + recon%Pmy*recon%uq%y + recon%Pmz*recon%uq%z)
+	oop_x = qx	! oop_x = q_y *(z_hat x y_hat) = q_y *-(x_hat)
+	oop_y =  qy	! oop_y = q_x *(z_hat x x_hat) = q_x * (y_hat)
+	recon%PmPar = (recon%Pmx*qx + recon%Pmy*qy + recon%Pmz*qz)
 	recon%PmOop = (recon%Pmx*oop_x + recon%Pmy*oop_y) / sqrt(oop_x**2+oop_y**2)
 	recon%PmPer = sqrt( max(0.e0, recon%Pm**2 - recon%PmPar**2 - recon%PmOop**2 ) )
 

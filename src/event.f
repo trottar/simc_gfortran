@@ -1548,13 +1548,13 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	if (debug(4)) write(6,*)'comp_rec_ev: at 8'
 
 
-	A1x = 0 + qx
-	A1y = 0 + qy
-	A1z = targ%Mtar_struck + qz
+	APrimex = 0. + qx
+	APrimey = 0. + qy
+	APrimez = targ%Mtar_struck + qz
 
-	Bx = A1x - recon%p%P
-	By = A1y - recon%p%P
-	Bz = A1z - recon%p%P
+	Bx = APrimex - recon%p%P
+	By = APrimey - recon%p%P
+	Bz = APrimez - recon%p%P
 
 	recon%Pmx = Bx*qx
 	recon%Pmy = By*qy

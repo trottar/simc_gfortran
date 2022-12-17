@@ -1552,13 +1552,13 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	A1y = 0 + qy
 	A1z = targ%Mtar_struck + qz
 
-	Bx = A1x - recon%p%P*px
-	By = A1y - recon%p%P*py
-	Bz = A1z - recon%p%P*pz
+	Bx = A1x - recon%p%P
+	By = A1y - recon%p%P
+	Bz = A1z - recon%p%P
 
-	recon%Pmx = -Bx
-	recon%Pmy = -By
-	recon%Pmz = -Bz
+	recon%Pmx = -Bx*qx
+	recon%Pmy = -By*qy
+	recon%Pmz = -Bz*qz
 	
 ! Compute the Pm vector in in SIMC LAB system, with x down, and y to the left.
 ! Computer Parallel, Perpendicular, and Out of Plane componenants.

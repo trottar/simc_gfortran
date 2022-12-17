@@ -1354,8 +1354,7 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 ! The q vector
 
 	if (debug(5)) write(6,*)'comp_rec_ev: Ein,E,uez=',recon%Ein,recon%e%E,recon%ue%z
-!       recon%nu = recon%Ein - recon%e%E
-	recon%nu = -(recon%Ein - recon%e%E)
+	recon%nu = recon%Ein - recon%e%E
 	recon%Q2 = 2*recon%Ein*recon%e%E*(1-recon%ue%z)
 	recon%q	= sqrt(recon%Q2 + recon%nu**2)
 	recon%uq%x = - recon%e%P*recon%ue%x / recon%q

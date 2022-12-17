@@ -1547,18 +1547,9 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 
 	if (debug(4)) write(6,*)'comp_rec_ev: at 8'
 
-
-	APrimex = 0. + qx
-	APrimey = 0. + qy
-	APrimez = targ%Mtar_struck + qz
-
-	Bx = APrimex - recon%p%P
-	By = APrimey - recon%p%P
-	Bz = APrimez - recon%p%P
-
-	recon%Pmx = Bx*qx
-	recon%Pmy = By*qy
-	recon%Pmz = Bz*qz
+	recon%Pmx = ((0. + recon%q*qx) - recon%p%P*px)*qx
+	recon%Pmy = ((0. + recon%q*qy) - recon%p%P*py)*qy
+	recon%Pmz = ((targ%Mtar_struck + recon%q*qz) - recon%p%P*pz)*qz
 	
 ! Compute the Pm vector in in SIMC LAB system, with x down, and y to the left.
 ! Computer Parallel, Perpendicular, and Out of Plane componenants.

@@ -1357,10 +1357,10 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	recon%nu = recon%Ein - recon%e%E
 	recon%Q2 = 2*recon%Ein*recon%e%E*(1-recon%ue%z)
 !       recon%q	= sqrt(recon%Q2 + recon%nu**2)
-	recon%q	= -sqrt(recon%Q2)
-	recon%uq%x = - recon%e%P*recon%ue%x / recon%q
-	recon%uq%y = - recon%e%P*recon%ue%y / recon%q
-	recon%uq%z =(recon%Ein - recon%e%P*recon%ue%z)/ recon%q
+	recon%q	= -sqrt(recon%Q2) 
+	recon%uq%x = recon%e%P*recon%ue%x / recon%q
+	recon%uq%y = recon%e%P*recon%ue%y / recon%q
+	recon%uq%z = -(recon%Ein - recon%e%P*recon%ue%z)/ recon%q
 
 c	if (doing_pion .or. doing_kaon .or. doing_delta .or. doing_rho .or. doing_semi) then
 c	   W2 = targ%mtar_struck**2 + 2.*targ%mtar_struck*recon%nu - recon%Q2

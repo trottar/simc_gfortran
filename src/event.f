@@ -1299,6 +1299,312 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	return
 	end
 
+!---------------------------------------------------------------------
+
+	subroutine complete_recon_hcana(recon,success)
+
+	implicit none
+	include 'simulate.inc'
+
+	real*8 p_new_x,p_new_y,new_x_x,new_x_y,new_x_z
+	real*8 new_y_x,new_y_y,new_y_z,dummy
+	real*8 targ_new_x,targ_new_y
+	real*8 px,py,pz,qx,qy,qz
+	real*8 targx,targy,targz
+	real*8 W2
+	real*8 oop_x,oop_y
+	real*8 mm,mmA,mm2,mmA2,t
+
+	logical success
+	type(event)::	recon
+
+!-----------------------------------------------------------------------
+! Calculate everything left in the /event/ structure, given
+!	recon.Ein, and the following for both recon.e AND recon.p:
+! delta,xptar,yptar, z,P,E,theta,phi (with E,P corrected for eloss, if desired).
+!
+! The SINGLE element of /event/ NOT computed here is sigcc (for (e,e'p)).
+!
+!-----------------------------------------------------------------------
+
+! Initialize
+
+	success = .false.
+
+	recon%Ein = Ebeam_vertex_ave	!lowered by most probable eloss (init.f)
+
+! ... unit vector components of outgoing e,p
+! ... z is DOWNSTREAM, x is DOWN and y is LEFT looking downstream.
+
+C Ebeam_vertex_ave has been shifted to account for Coulomb effects
+C In general, the Hall C analyzer does not correct for this
+C If you do NOT apply an energy shift in the ENGINE to account
+C for Coulomb corrections, make sure the line below is NOT commented out.
+	recon%Ein = Ebeam_vertex_ave - targ%Coulomb%ave
+
+	if (debug(4)) write(6,*)'comp_rec_ev: at 1'
+	recon%ue%x = sin(recon%e%theta)*cos(recon%e%phi)
+	recon%ue%y = sin(recon%e%theta)*sin(recon%e%phi)
+	recon%ue%z = cos(recon%e%theta)
+	recon%up%x = -sin(recon%p%theta)*cos(recon%p%phi) ! Flipped sign to match convention
+	recon%up%y = -sin(recon%p%theta)*sin(recon%p%phi) ! Flipped sign to match convention
+	recon%up%z = -cos(recon%p%theta) ! Flipped sign to match convention
+	if (debug(4)) write(6,*)'comp_rec_ev: at 2'
+
+! The q vector
+
+	if (debug(5)) write(6,*)'comp_rec_ev: Ein,E,uez=',recon%Ein,recon%e%E,recon%ue%z
+	recon%nu = recon%Ein - recon%e%E
+	recon%Q2 = 2*recon%Ein*recon%e%E*(1-recon%ue%z)
+	recon%q	= sqrt(recon%Q2 + recon%nu**2)
+	recon%uq%x = - recon%e%P*recon%ue%x / recon%q
+	recon%uq%y = - recon%e%P*recon%ue%y / recon%q
+	recon%uq%z =(recon%Ein - recon%e%P*recon%ue%z)/ recon%q
+
+c	if (doing_pion .or. doing_kaon .or. doing_delta .or. doing_rho .or. doing_semi) then
+c	   W2 = targ%mtar_struck**2 + 2.*targ%mtar_struck*recon%nu - recon%Q2
+c	else
+c	   W2 = targ%M**2 + 2.*targ%M*recon%nu - recon%Q2
+c	endif
+
+c Everyone else in the world calculates W using the proton mass.
+	W2 = mp**2 + 2.*mp*recon%nu - recon%Q2
+
+	recon%W = sqrt(abs(W2)) * W2/abs(W2) 
+	recon%xbj = recon%Q2/2./Mp/recon%nu
+	if (debug(4)) write(6,*)'comp_rec_ev: at 5'
+
+! Now complete the p side
+
+	if(doing_phsp)then
+	  recon%p%P=spec%p%P
+	  recon%p%E=sqrt(Mh2+recon%p%P**2)
+	  if (debug(4)) write(6,*)'comp_rec_ev: at 7.5',Mh2,recon%p%E
+	endif
+
+! Compute some pion/kaon stuff.
+
+	recon%epsilon=1./(1. + 2.*(1+recon%nu**2/recon%Q2)*tan(recon%e%theta/2.)**2)
+	recon%theta_pq=acos(min(1.0,recon%up%x*recon%uq%x+recon%up%y*recon%uq%y+recon%up%z*recon%uq%z))
+
+! CALCULATE ANGLE PHI BETWEEN SCATTERING PLANE AND REACTION PLANE.
+! Therefore, define a new system with the z axis parallel to q, and
+! the x axis inside the q-z-plane: z' = q, y' = q X z, x' = y' X q
+! this gives phi the way it is usually defined, i.e. phi=0 for in-plane
+! particles closer to the downstream beamline than q.
+! phi=90 is above the horizontal plane when q points to the right, and
+! below the horizontal plane when q points to the left.
+! Also take into account the different definitions of x, y and z in
+! replay and SIMC:
+! As seen looking downstream:		replay	SIMC	(old_simc)
+!				x	right	down	(left)
+!				y	down	left	(up)
+!				z	all have z pointing downstream
+!
+! SO: x_replay=-y_simc, y_replay=x_simc, z_replay= z_simc
+
+	qx = -recon%uq%y		!convert to 'replay' coord. system
+	qy =  recon%uq%x
+	qz =  recon%uq%z
+	px = -recon%up%y
+	py =  recon%up%x
+	pz =  recon%up%z
+
+	dummy=sqrt((qx**2+qy**2)*(qx**2+qy**2+qz**2))
+	new_x_x = -qx*qz/dummy
+	new_x_y = -qy*qz/dummy
+	new_x_z = (qx**2 + qy**2)/dummy
+
+	dummy   = sqrt(qx**2 + qy**2)
+	new_y_x =  qy/dummy
+	new_y_y = -qx/dummy
+	new_y_z =  0.0
+
+	p_new_x = px*new_x_x + py*new_x_y + pz*new_x_z
+	p_new_y = px*new_y_x + py*new_y_y + pz*new_y_z
+
+	if ((p_new_x**2+p_new_y**2).eq.0.) then
+	  recon%phi_pq = 0.0
+	else
+	  recon%phi_pq = acos(p_new_x/sqrt(p_new_x**2+p_new_y**2))
+	endif
+	if (p_new_y.lt.0.) then
+	  recon%phi_pq = 2*pi - recon%phi_pq
+	endif
+
+
+	if(using_tgt_field) then !calculate polarized-target specific azimuthal angles
+
+! CALCULATE ANGLE PHI BETWEEN SCATTERING PLANE AND TARGET POL.
+! Take into account the different definitions of x, y and z in
+! replay and SIMC:
+! As seen looking downstream:		replay	SIMC	(old_simc)
+!				x	right	down	(left)
+!				y	down	left	(up)
+!				z	all have z pointing downstream
+!
+! SO: x_replay=-y_simc, y_replay=x_simc, z_replay= z_simc
+
+	   qx = -recon%uq%y	!convert to 'replay' coord. system
+	   qy =  recon%uq%x
+	   qz =  recon%uq%z
+
+C In-plane target
+	   targx = -targ_pol*sin(abs(targ_Bangle)) ! 'replay' coordinates
+	   targy = 0.0
+	   targz = targ_pol*cos(abs(targ_Bangle)) 
+
+C out of plane target
+c	targx = 0.0       ! 'replay' coordinates
+c	targy = -targ_pol*sin(abs(targ_Bangle)) 
+c	targz = targ_pol*cos(abs(targ_Bangle)) 
+
+	   dummy=sqrt((qx**2+qy**2)*(qx**2+qy**2+qz**2))
+	   new_x_x = -qx*qz/dummy
+	   new_x_y = -qy*qz/dummy
+	   new_x_z = (qx**2 + qy**2)/dummy
+
+	   dummy   = sqrt(qx**2 + qy**2)
+	   new_y_x =  qy/dummy
+	   new_y_y = -qx/dummy
+	   new_y_z =  0.0
+
+	   p_new_x = targx*new_x_x + targy*new_x_y + targz*new_x_z
+	   p_new_y = targx*new_y_x + targy*new_y_y + targz*new_y_z
+	   
+
+	   recon%phi_targ = atan2(p_new_y,p_new_x)
+	   if(recon%phi_targ.lt.0.) recon%phi_targ = 2.*pi + recon%phi_targ
+
+
+! CALCULATE ANGLE BETA BETWEEN REACTION PLANE AND (TRANSVERSE) TARGET 
+! POLARIZATION.
+! Also take into account the different definitions of x, y and z in
+! replay and SIMC:
+! As seen looking downstream:		replay	SIMC	(old_simc)
+!				x	right	down	(left)
+!				y	down	left	(up)
+!				z	all have z pointing downstream
+!
+! SO: x_replay=-y_simc, y_replay=x_simc, z_replay= z_simc
+
+	   qx = -recon%uq%y	!convert to 'replay' coord. system
+	   qy =  recon%uq%x
+	   qz =  recon%uq%z
+
+	   targx = -targ_pol*sin(abs(targ_Bangle)) ! 'replay' coordinates
+	   targy = 0.0
+	   targz = targ_pol*cos(abs(targ_Bangle)) 
+
+c	targx = 0.0              ! 'replay' coordinates
+c	targy = -targ_pol*sin(abs(targ_Bangle))
+c	targz = targ_pol*cos(abs(targ_Bangle)) 
+
+
+	   px = -recon%up%y
+	   py =  recon%up%x
+	   pz =  recon%up%z
+
+	   dummy   = sqrt((qy*pz-qz*py)**2 + (qz*px-qx*pz)**2 + (qx*py-qy*px)**2)
+	   new_y_x =  (qy*pz-qz*py)/dummy
+	   new_y_y =  (qz*px-qx*pz)/dummy
+	   new_y_z =  (qx*py-qy*px)/dummy
+
+	   dummy   = sqrt((new_y_y*qz-new_y_z*qy)**2 + (new_y_z*qx-new_y_x*qz)**2
+     >  	+ (new_y_x*qy-new_y_y*qx)**2)
+
+	   new_x_x = (new_y_y*qz - new_y_z*qy)/dummy
+	   new_x_y = (new_y_z*qx - new_y_x*qz)/dummy
+	   new_x_z = (new_y_x*qy - new_y_y*qx)/dummy
+
+
+	   targ_new_x = targx*new_x_x + targy*new_x_y + targz*new_x_z
+	   targ_new_y = targx*new_y_x + targy*new_y_y + targz*new_y_z
+
+	   recon%beta = atan2(targ_new_y,targ_new_x)
+	   if(recon%beta.lt.0.) recon%beta = 2.*pi + recon%beta
+
+CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) angles
+	   recon%phi_s = recon%phi_pq-recon%phi_targ
+	   if(recon%phi_s .lt. 0.) recon%phi_s = 2*pi+recon%phi_s
+
+	   recon%phi_c = recon%phi_pq+recon%phi_targ
+	   if(recon%phi_c .gt. 2.*pi) recon%phi_c = recon%phi_c-2*pi
+	   if(recon%phi_c .lt. 0.) recon%phi_c = 2*pi+recon%phi_c
+
+	   dummy = sqrt((qx**2+qy**2+qz**2))*sqrt((targx**2+targy**2+targz**2))
+	   recon%theta_tarq = acos((qx*targx+qy*targy+qz*targz)/dummy)
+	endif !polarized-target specific stuff
+
+	if (debug(2)) then
+	  write(6,*)'comp_rec_ev: nu =',recon%nu
+	  write(6,*)'comp_rec_ev: Q2 =',recon%Q2
+	  write(6,*)'comp_rec_ev: theta_e =',recon%e%theta
+	  write(6,*)'comp_rec_ev: epsilon =',recon%epsilon
+	  write(6,*)'comp_rec_ev: theta_pq =',recon%theta_pq
+	  write(6,*)'comp_rec_ev: phi_pq =',recon%phi_pq
+	endif
+
+	if (debug(4)) write(6,*)'comp_rec_ev: at 8'
+
+! Compute the Pm vector in in SIMC LAB system, with x down, and y to the left.
+! Computer Parallel, Perpendicular, and Out of Plane componenants.
+! Parallel is component along q_hat.  Out/plane is component along
+! (e_hat) x (q_hat)  (oop_x,oop_y are components of out/plane unit vector)
+! Perp. component is what's left: along (q_hat) x (oop_hat).
+! So looking along q, out of plane is down, perp. is left.
+
+	recon%Pmx = -(recon%p%P*recon%up%x - recon%q*recon%uq%x) ! Negative sign for convention to match hcana
+	recon%Pmy = -(recon%p%P*recon%up%y - recon%q*recon%uq%y) ! Negative sign for convention to match hcana
+	recon%Pmz = -(recon%p%P*recon%up%z - recon%q*recon%uq%z) ! Negative sign for convention to match hcana
+	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
+
+!STILL NEED SIGN FOR PmPer!!!!!!
+
+	oop_x = -recon%uq%y	! oop_x = q_y *(z_hat x y_hat) = q_y *-(x_hat)
+	oop_y =  recon%uq%x	! oop_y = q_x *(z_hat x x_hat) = q_x * (y_hat)
+	recon%PmPar = (recon%Pmx*recon%uq%x + recon%Pmy*recon%uq%y + recon%Pmz*recon%uq%z)
+	recon%PmOop = (recon%Pmx*oop_x + recon%Pmy*oop_y) / sqrt(oop_x**2+oop_y**2)
+	recon%PmPer = sqrt( max(0.e0, recon%Pm**2 - recon%PmPar**2 - recon%PmOop**2 ) )
+
+	if (doing_pion .or. doing_kaon .or. doing_delta .or. doing_rho .or. doing_semi) then
+	  recon%Em = recon%nu + targ%Mtar_struck - recon%p%E
+          mm2 = recon%Em**2 - recon%Pm**2
+          mm  = sqrt(abs(mm2)) * abs(mm2)/mm2
+          mmA2= (recon%nu + targ%M - recon%p%E)**2 - recon%Pm**2
+          mmA = sqrt(abs(mmA2)) * abs(mmA2)/mmA2
+          t = recon%Q2 - Mh2
+     >      + 2*(recon%nu*recon%p%E - recon%p%P*recon%q*cos(recon%theta_pq))
+	  ntup%mm = mm
+	  ntup%mmA = mmA
+	  ntup%t = t
+	endif
+
+	if(doing_semi.or.doing_rho) then
+	   recon%zhad = recon%p%E/recon%nu
+	   recon%pt2 = recon%p%P**2*(1.0-cos(recon%theta_pq)**2)
+	endif
+
+! Calculate Trec, Em. Trec for (A-1) system (eep), or for struck nucleon (pi/K)
+! Note that there are other ways to calculate 'Em' for the pion/kaon case.
+! This Em for pi/kaon gives roughly E_m + E_rec + T_{A-1}  (I think)
+	if (doing_hyd_elast) then
+	  recon%Trec = 0.0
+	  recon%Em = recon%nu + targ%M - recon%p%E - recon%Trec
+	else if (doing_deuterium .or. doing_heavy) then
+	  recon%Trec = sqrt(recon%Pm**2+targ%Mrec**2) - targ%Mrec
+	  recon%Em = recon%nu + targ%Mtar_struck - recon%p%E - recon%Trec
+	else if (doing_pion .or. doing_kaon .or. doing_delta .or. doing_rho) then
+	  recon%Em = recon%nu + targ%Mtar_struck - recon%p%E
+	endif
+
+	if (debug(5)) write(6,*) 'recon%Pm,recon%Trec,recon%Em',recon%Pm,recon%Trec,recon%Em
+	if (debug(4)) write(6,*)'comp_rec_ev: at 10'
+
+	success=.true.
+	return
+	end
+	
 !------------------------------------------------------------------------
 
 	subroutine complete_main(force_sigcc,main,vertex,vertex0,recon,success)

@@ -1346,9 +1346,9 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	recon%ue%x = sin(recon%e%theta)*cos(recon%e%phi)
 	recon%ue%y = sin(recon%e%theta)*sin(recon%e%phi)
 	recon%ue%z = cos(recon%e%theta)
-	recon%up%x = -sin(recon%p%theta)*cos(recon%p%phi) ! Flipped sign to match convention
-	recon%up%y = -sin(recon%p%theta)*sin(recon%p%phi) ! Flipped sign to match convention
-	recon%up%z = -cos(recon%p%theta) ! Flipped sign to match convention
+	recon%up%x = sin(recon%p%theta)*cos(recon%p%phi)
+	recon%up%y = sin(recon%p%theta)*sin(recon%p%phi)
+	recon%up%z = cos(recon%p%theta)
 	if (debug(4)) write(6,*)'comp_rec_ev: at 2'
 
 ! The q vector

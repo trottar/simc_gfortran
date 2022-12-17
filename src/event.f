@@ -1340,7 +1340,7 @@ C Ebeam_vertex_ave has been shifted to account for Coulomb effects
 C In general, the Hall C analyzer does not correct for this
 C If you do NOT apply an energy shift in the ENGINE to account
 C for Coulomb corrections, make sure the line below is NOT commented out.
-!       recon%Ein = Ebeam_vertex_ave - targ%Coulomb%ave
+	recon%Ein = Ebeam_vertex_ave - targ%Coulomb%ave
 
 	if (debug(4)) write(6,*)'comp_rec_ev: at 1'
 	recon%ue%x = sin(recon%e%theta)*cos(recon%e%phi)

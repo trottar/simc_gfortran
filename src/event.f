@@ -513,7 +513,8 @@ C DJG spectrometer
 	  vertex%p%phi = atan2(vertex%up%y,vertex%up%x)
 	  if (vertex%p%phi.lt.0.) vertex%p%phi=vertex%p%phi+2.*pi
 !       call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
-	  call SetCentralAngles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
+!       call SetCentralAngles(vertex%p%theta,vertex%p%phi)
+	  call SetCentralAngles(spec%p%theta,spec%p%phi)
 	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,rotmat)
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
@@ -1886,16 +1887,10 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 	
-
-	subroutine SetCentralAngles(theta0,phi0,dx,dy,theta,phi)
+	subroutine SetCentralAngles(theta,phi)
 	
 !       Declare variables
-	real*8 dx,dy		!dx/dy (xptar/yptar) for event.
-	real*8 theta0,phi0	!central physics angles of spectrometer.
 	real*8 theta,phi	!physics angles for event.
-	real*8 x,y,z				!intermediate variables.
-	real*8 x0,y0,z0				!intermediate variables.
-	real*8 cos_dtheta,y_event
 	real, dimension(3,3) :: rotmat ! rotation matrix
 
 	include 'constants.inc'
@@ -1912,20 +1907,6 @@ C If using Coulomb corrections, include focusing factor
 	rotmat(3,1) = (sin(theta)*cos(theta)*sin(phi))/norm
 	rotmat(3,2) = -(sin(theta)*cos(phi))/norm
 	rotmat(3,3) = cos(theta)
-
-		x = sin(theta)*cos(phi)
-	y = sin(theta)*sin(phi)
-	z = cos(theta)
-	x0 = sin(theta0)*cos(phi0)
-	y0 = sin(theta0)*sin(phi0)
-	z0 = cos(theta0)
-
-	cos_dtheta = x*x0 + y*y0 + z*z0
-	dx = x / cos_dtheta
-	dy = sqrt(1/cos_dtheta**2-1.-dx**2)
-
-	y_event = y/cos_dtheta	!projected to plane perp. to spectrometer.
-	if (y_event .lt. y0) dy = -dy
 
 	return
 	end

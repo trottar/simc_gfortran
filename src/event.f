@@ -123,7 +123,9 @@
 	type(event):: vertex, orig
 
 	real*8 nsig_max
-	parameter(nsig_max=3.0e0)      !max #/sigma for gaussian ran #s.
+	parameter(nsig_max=3.0e0) !max #/sigma for gaussian ran #s.
+
+	real, dimension(3,3) :: rotmat ! rotation matrix
 
 
 ! Randomize the position of the interaction inside the available region.
@@ -511,7 +513,6 @@ C DJG spectrometer
      >	    write(6,*) 'cos(phi)=',vertex%up%x/sin(vertex%p%theta)
 	  vertex%p%phi = atan2(vertex%up%y,vertex%up%x)
 	  if (vertex%p%phi.lt.0.) vertex%p%phi=vertex%p%phi+2.*pi
-	  real, dimension(3,3) :: rotmat
 !       call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  call SetCentralAngles(spec%p%theta,spec%p%phi,vertex%p%theta,vertex%p%phi)
 	  call rotate3d(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,rotmat

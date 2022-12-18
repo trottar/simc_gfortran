@@ -1934,16 +1934,14 @@ C If using Coulomb corrections, include focusing factor
 	pfz = upmag*upz0/sqrt(dx**2+dy**2+dz**2)
 
 	pf = [pfx,pfy,pfz]
+	v = [dx,dy,dz]
 
 !       v0 = rotmat*pf
 	do i = 1, 3
 	   v0(i) = sum(rotmat(i,:) * pf)
 	end do
 	
-!	v = v*v0
-	do i = 1, 3
-	   v(i) = v(i)+v0(i)
-	end do	
+	v = v*v0	
 
 	dx = v(1)
 	dy = v(2)

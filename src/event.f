@@ -511,8 +511,7 @@ C DJG spectrometer
      >	    write(6,*) 'cos(phi)=',vertex%up%x/sin(vertex%p%theta)
 	  vertex%p%phi = atan2(vertex%up%y,vertex%up%x)
 	  if (vertex%p%phi.lt.0.) vertex%p%phi=vertex%p%phi+2.*pi
-	  call spectrometer_angles(spec%p%theta,spec%p%phi,
-     &		vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
+!       call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
 	  if (debug(4)) write(6,*)'comp_ev: at 6'
@@ -1869,12 +1868,14 @@ C If using Coulomb corrections, include focusing factor
 
 	include 'constants.inc'
 
-	x = sin(theta)*cos(phi)
-	y = sin(theta)*sin(phi)
-	z = cos(theta)
-	x0 = sin(theta0)*cos(phi0)
-	y0 = sin(theta0)*sin(phi0)
-	z0 = cos(theta0)
+!	x = sin(theta)*cos(phi)
+!	y = sin(theta)*sin(phi)
+!	z = cos(theta)
+!	x0 = sin(theta0)*cos(phi0)
+!	y0 = sin(theta0)*sin(phi0)
+!	z0 = cos(theta0)
+
+	
 
 	cos_dtheta = x*x0 + y*y0 + z*z0
 	dx = x / cos_dtheta

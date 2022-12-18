@@ -1943,7 +1943,8 @@ C If using Coulomb corrections, include focusing factor
 	
 	v = v*v0	
 
-	dx = v(1)
+!	dx = v(1)
+	dx = 1.0
 	dy = v(2)
 	dz = v(3)
 	

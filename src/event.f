@@ -1932,11 +1932,9 @@ C If using Coulomb corrections, include focusing factor
 
 	dz = 1.0
 	
-	pfx = upmag/sqrt(dx**2+dy**2+dz**2)
-	write(6,*) 'sqrt(dx**2+dy**2+dz**2):',sqrt(dx**2+dy**2+dz**2)
-	write(6,*) 'pfx:',pfx
-	pfy = upmag/sqrt(dx**2+dy**2+dz**2)
-	pfz = upmag/sqrt(dx**2+dy**2+dz**2)
+	pfx = upmag*upx0/sqrt(dx**2+dy**2+dz**2)
+	pfy = upmag*upy0/sqrt(dx**2+dy**2+dz**2)
+	pfz = upmag*upz0/sqrt(dx**2+dy**2+dz**2)
 
 	pf = [pfx,pfy,pfz]
 	v = [dx,dy,dz]
@@ -1949,6 +1947,9 @@ C If using Coulomb corrections, include focusing factor
 	write(6,*) 'pf:',pf(1)
 	write(6,*) 'v0:',v0(1)
 	write(6,*) 'v:',v(1)
+	write(6,*) 'sqrt(dx**2+dy**2+dz**2):',sqrt(dx**2+dy**2+dz**2)
+	write(6,*) 'pfx:',pfx
+	write(6,*) 'rotmat:',rotmat
 	
 	v = v*v0	
 	write(6,*) 'before dx:',dx

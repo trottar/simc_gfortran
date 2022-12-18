@@ -1889,9 +1889,9 @@ C If using Coulomb corrections, include focusing factor
 	subroutine rotate3d(pfmag,uqx,uqy,uqz,theta0,phi0,dx0,dy0,dz0,theta,phi)
 	
 !       Declare variables
-	real, dimension(3) :: pf ! final proton momentum, vector
-	real*8 pfx,pfy,pfz	! final proton momentum
-	real*8 pfmag		!  final proton momentum
+	real, dimension(3) :: pf ! normalized inal proton momentum, vector
+	real*8 pfx,pfy,pfz	! normalized final proton momentum
+	real*8 pfmag		! final proton momentum magnitude
 	real*8 uqx,uqy,uqz	! q componenants
 	real*8 theta0,phi0	! central physics angles of spectrometer.
 	real*8 theta,phi	! physics angles for event.
@@ -1903,9 +1903,9 @@ C If using Coulomb corrections, include focusing factor
 
 	include 'constants.inc'
 
-	pfx = pfmag*uqx
-	pfy = pfmag*uqy
-	pfz = pfmag*uqz
+	pfx = pfmag*uqx/sqrt(dx0**2+dy0**2+dz0**2)
+	pfy = pfmag*uqy/sqrt(dx0**2+dy0**2+dz0**2)
+	pfz = pfmag*uqz/sqrt(dx0**2+dy0**2+dz0**2)
 
 	pf = [pfx,pfy,pfz]
 
@@ -1922,7 +1922,7 @@ C If using Coulomb corrections, include focusing factor
 	rotmat(3,2) = -(sin(theta)*cos(phi))/norm
 	rotmat(3,3) = cos(theta)
 
-	v = v*(rotmat*pf/sqrt(dx0**2+dy0**2+dz0**2))
+	v = v*(rotmat*pf)
 
 	dx = v(1)
 	dy = v(2)

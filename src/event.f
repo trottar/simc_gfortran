@@ -1899,6 +1899,7 @@ C If using Coulomb corrections, include focusing factor
 	real*8 dx,dy,dz		! dx/dy (xptar/yptar) for event after rotation
 	real*8 dx0,dy0,dz0	! dx0/dy0 (xptar/yptar) for event, dz0=1
 	real, dimension(3,3) :: rotmat ! rotation matrix
+	real, dimension(3) :: v0	! intermediate variables.
 	real, dimension(3) :: v	! intermediate variables.
 
 	include 'constants.inc'
@@ -1924,7 +1925,8 @@ C If using Coulomb corrections, include focusing factor
 	rotmat(3,2) = -(sin(theta)*cos(phi))/norm
 	rotmat(3,3) = cos(theta)
 
-	v = v*(rotmat*pf)
+	v0 = rotmat*pf
+	v = v*v0
 
 	dx = v(1)
 	dy = v(2)

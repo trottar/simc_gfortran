@@ -514,6 +514,7 @@ C DJG spectrometer
 	  if (vertex%p%phi.lt.0.) vertex%p%phi=vertex%p%phi+2.*pi
 	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
 	  write(6,*) 'vertex%p%P:',vertex%p%P
+	  write(6,*) 'vertex%p%up%x:',vertex%p%up%x
 	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  call SetCentralAngles(vertex%p%theta,vertex%p%phi)
 	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,rotmat)
@@ -1931,7 +1932,7 @@ C If using Coulomb corrections, include focusing factor
 
 	dz = 1.0
 	
-	pfx = upmag/sqrt(dx**2+dy**2+dz**2)
+	pfx = upmag*upx0/sqrt(dx**2+dy**2+dz**2)
 	write(6,*) 'pfx:',pfx
 	pfy = upmag*upy0/sqrt(dx**2+dy**2+dz**2)
 	pfz = upmag*upz0/sqrt(dx**2+dy**2+dz**2)

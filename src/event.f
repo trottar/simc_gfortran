@@ -511,8 +511,10 @@ C DJG spectrometer
      >	    write(6,*) 'cos(phi)=',vertex%up%x/sin(vertex%p%theta)
 	  vertex%p%phi = atan2(vertex%up%y,vertex%up%x)
 	  if (vertex%p%phi.lt.0.) vertex%p%phi=vertex%p%phi+2.*pi
-	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
-	  call rotate3d(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
+	  real, dimension(3,3) :: rotmat
+!       call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
+	  call SetCentralAngles(spec%p%theta,spec%p%phi,vertex%p%theta,vertex%p%phi)
+	  call rotate3d(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,rotmat
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
 	  if (debug(4)) write(6,*)'comp_ev: at 6'
@@ -1852,8 +1854,6 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-
-
 	subroutine spectrometer_angles(theta0,phi0,dx,dy,theta,phi)
 
 !Generate spectrometer angles from physics angles in lab frame.
@@ -1885,6 +1885,32 @@ C If using Coulomb corrections, include focusing factor
 
 	return
 	end
+	
+
+	subroutine SetCentralAngles(theta0,phi0,theta,phi)
+	
+!       Declare variables
+	real*8 theta0,phi0	! central physics angles of spectrometer.
+	real*8 theta,phi	! physics angles for event.
+	real, dimension(3,3), intent(out) :: rotmat ! rotation matrix
+
+	include 'constants.inc'
+
+	norm = sqrt(cos(theta)**2+(sin(theta)**2)*cos(phi)**2)
+	
+!       Calculate the rotation matrix
+	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
+	rotmat(1,2) = cos(theta)/norm
+	rotmat(1,3) = sin(theta)*cos(phi)
+	rotmat(2,1) = -norm
+	rotmat(2,2) = 0.0
+	rotmat(2,3) = sin(theta)*sin(phi)
+	rotmat(3,1) = (sin(theta)*cos(theta)*sin(phi))/norm
+	rotmat(3,2) = -(sin(theta)*cos(phi))/norm
+	rotmat(3,3) = cos(theta)
+
+	return
+	end
 
 	subroutine rotate3d(upmag,up0x,upy0,upz0,dx0,dy0,theta,phi)
 	
@@ -1893,8 +1919,6 @@ C If using Coulomb corrections, include focusing factor
 	real*8 pfx,pfy,pfz	! normalized final proton momentum
 	real*8 upmag		! proton magnitude
 	real*8 upx0,upy0,upz0	! proton vector componenants
-!       real*8 theta0,phi0	! central physics angles of spectrometer.
-	real*8 theta,phi	! physics angles for event.
 	real*8 norm		! normalization term
 	real*8 dx,dy,dz		! dx/dy (xptar/yptar) for event after rotation
 	real*8 dx0,dy0,dz0	! dx0/dy0 (xptar/yptar) for event, dz0=1
@@ -1912,19 +1936,6 @@ C If using Coulomb corrections, include focusing factor
 
 	pf = [pfx,pfy,pfz]
 
-	norm = sqrt(cos(theta)**2+(sin(theta)**2)*cos(phi)**2)
-	
-!       Calculate the rotation matrix
-	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
-	rotmat(1,2) = cos(theta)/norm
-	rotmat(1,3) = sin(theta)*cos(phi)
-	rotmat(2,1) = -norm
-	rotmat(2,2) = 0.0
-	rotmat(2,3) = sin(theta)*sin(phi)
-	rotmat(3,1) = (sin(theta)*cos(theta)*sin(phi))/norm
-	rotmat(3,2) = -(sin(theta)*cos(phi))/norm
-	rotmat(3,3) = cos(theta)
-
 !       v0 = rotmat*pf
 	do i = 1, 3
 	   v0(i) = sum(rotmat(i,:) * pf)
@@ -1938,3 +1949,4 @@ C If using Coulomb corrections, include focusing factor
 
 	return
 	end
+	

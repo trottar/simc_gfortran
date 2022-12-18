@@ -1925,7 +1925,10 @@ C If using Coulomb corrections, include focusing factor
 	rotmat(3,2) = -(sin(theta)*cos(phi))/norm
 	rotmat(3,3) = cos(theta)
 
-	v0 = rotmat*pf
+!       v0 = rotmat*pf
+	do i = 1, 3
+	   v0(i) = sum(rotmat(i,:) * pf)
+	end do
 	v = v*v0
 
 	dx = v(1)

@@ -1932,8 +1932,9 @@ C If using Coulomb corrections, include focusing factor
 
 	dz = 1.0
 	
-	pfx = upmag*upx0
-	write(6,*) 'pfx:',pfx/sqrt(dx**2+dy**2+dz**2)
+	pfx = upmag*upx0/sqrt(dx**2+dy**2+dz**2)
+	write(6,*) 'sqrt(dx**2+dy**2+dz**2):',sqrt(dx**2+dy**2+dz**2)
+	write(6,*) 'pfx:',pfx
 	pfy = upmag*upy0/sqrt(dx**2+dy**2+dz**2)
 	pfz = upmag*upz0/sqrt(dx**2+dy**2+dz**2)
 

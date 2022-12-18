@@ -1913,7 +1913,7 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine rotate3d(upmag,up0x,upy0,upz0,dx0,dy0,rotmat
+	subroutine rotate3d(upmag,up0x,upy0,upz0,dx0,dy0,rotmat)
 	
 !       Declare variables
 	real, dimension(3) :: pf ! normalized inal proton momentum, vector

@@ -1942,9 +1942,9 @@ C If using Coulomb corrections, include focusing factor
 	end do
 	
 	v = v*v0	
-	write(6,*) 'dx: at 6',dx
+	write(6,*) 'before dx: at 6',dx
 	dx = v(1)
-	write(6,*) 'dx: at 6',dx
+	write(6,*) 'after dx: at 6',dx
 	dy = v(2)
 	dz = v(3)
 	

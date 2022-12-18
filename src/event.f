@@ -513,6 +513,7 @@ C DJG spectrometer
 	  vertex%p%phi = atan2(vertex%up%y,vertex%up%x)
 	  if (vertex%p%phi.lt.0.) vertex%p%phi=vertex%p%phi+2.*pi
 	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
+	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
 	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  call SetCentralAngles(vertex%p%theta,vertex%p%phi)
 !       call SetCentralAngles(spec%p%theta,spec%p%phi)
@@ -1886,7 +1887,7 @@ C If using Coulomb corrections, include focusing factor
 	write(6,*) 'spec dx:',dx
 
 	y_event = y/cos_dtheta	!projected to plane perp. to spectrometer.
-	if (y_event .lt. y0) dy = -dy
+!       if (y_event .lt. y0) dy = -dy
 
 	return
 	end

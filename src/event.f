@@ -1940,11 +1940,14 @@ C If using Coulomb corrections, include focusing factor
 	   v0(i) = sum(rotmat(i,:) * pf)
 	end do
 	
-	v = v*v0
+!	v = v*v0
+	do i = 1, 3
+	   v(i) = v0(i)
+	end do	
 
 	dx = v(1)
 	dy = v(2)
-!	dz = v(3)
+	dz = v(3)
 	
 	return
 	end

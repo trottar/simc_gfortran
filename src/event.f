@@ -511,6 +511,7 @@ C DJG spectrometer
      >	    write(6,*) 'cos(phi)=',vertex%up%x/sin(vertex%p%theta)
 	  vertex%p%phi = atan2(vertex%up%y,vertex%up%x)
 	  if (vertex%p%phi.lt.0.) vertex%p%phi=vertex%p%phi+2.*pi
+	  call rotate3d(pf,spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,1.0,vertex%p%theta,vertex%p%phi)
 !       call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
@@ -1868,14 +1869,12 @@ C If using Coulomb corrections, include focusing factor
 
 	include 'constants.inc'
 
-!	x = sin(theta)*cos(phi)
-!	y = sin(theta)*sin(phi)
-!	z = cos(theta)
-!	x0 = sin(theta0)*cos(phi0)
-!	y0 = sin(theta0)*sin(phi0)
-!	z0 = cos(theta0)
-
-	
+	x = sin(theta)*cos(phi)
+	y = sin(theta)*sin(phi)
+	z = cos(theta)
+	x0 = sin(theta0)*cos(phi0)
+	y0 = sin(theta0)*sin(phi0)
+	z0 = cos(theta0)
 
 	cos_dtheta = x*x0 + y*y0 + z*z0
 	dx = x / cos_dtheta
@@ -1885,4 +1884,39 @@ C If using Coulomb corrections, include focusing factor
 	if (y_event .lt. y0) dy = -dy
 
 	return
+	end
+
+	subroutine rotate3d(pf,theta0,phi0,dx0,dy0,dz0,theta,phi)
+	
+!       Declare variables
+	real*8 pf		! final proton momentum
+	real*8 theta0,phi0	! central physics angles of spectrometer.
+	real*8 theta,phi	! physics angles for event.
+	real*8 norm		! normalization term
+	real*8 dx,dy,dz		! dx/dy (xptar/yptar) for event after rotation
+	real*8 dx0,dy0,dz0	! dx0/dy0 (xptar/yptar) for event, dz0=1
+	real, dimension(3,3), intent(out) :: rotmat ! rotation matrix
+	real, dimension(3) :: v	! intermediate variables.
+
+	include 'constants.inc'
+
+	norm = sqrt(cos(theta)**2+(sin(theta)**2)*cos(phi)**2)
+	
+!       Calculate the rotation matrix
+	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
+	rotmat(1,2) = cos(theta)/norm
+	rotmat(1,3) = sin(theta)*cos(phi)
+	rotmat(2,1) = -norm
+	rotmat(2,2) = 0.0
+	rotmat(2,3) = sin(theta)*sin(phi)
+	rotmat(3,1) = (sin(theta)*cos(theta)*sin(phi))/norm
+	rotmat(3,2) = -(sin(theta)*cos(phi))/norm
+	rotmat(3,3) = cos(theta)
+
+	v = v*(rotmat*pf/sqrt(dx0**2+dy0**2+dz0**2))
+
+	dx = v(1)
+	dy = v(2)
+	dz = v(3)
+	
 	end

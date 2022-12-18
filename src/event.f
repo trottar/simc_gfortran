@@ -125,8 +125,6 @@
 	real*8 nsig_max
 	parameter(nsig_max=3.0e0) !max #/sigma for gaussian ran #s.
 
-	real, dimension(3,3) :: rotmat ! rotation matrix
-
 
 ! Randomize the position of the interaction inside the available region.
 ! gen.xwid and gen.ywid are the intrinsic beam widths (one sigma value).
@@ -364,6 +362,7 @@ C modified 5/15/06 for poinct
 
 	call complete_ev(main,vertex,success)
 
+	real, dimension(3,3) :: rotmat ! rotation matrix	
 
 	main%sigcc = 1.0
 

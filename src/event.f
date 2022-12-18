@@ -429,7 +429,7 @@ C DJG spectrometer
 	real*8 W2
 	real*8 grnd		!random # generator.
 
-	real, dimension(3,3) :: rotmat ! rotation matrix	
+	real, dimension(3,3), intent(out) :: rotmat ! rotation matrix	
 	
 	logical success
 	type(event_main):: main
@@ -1892,7 +1892,7 @@ C If using Coulomb corrections, include focusing factor
 !       Declare variables
 	real*8 theta0,phi0	! central physics angles of spectrometer.
 	real*8 theta,phi	! physics angles for event.
-	real, dimension(3,3), intent(out) :: rotmat ! rotation matrix
+	real, dimension(3,3) :: rotmat ! rotation matrix
 
 	include 'constants.inc'
 

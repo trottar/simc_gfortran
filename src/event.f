@@ -511,7 +511,8 @@ C DJG spectrometer
      >	    write(6,*) 'cos(phi)=',vertex%up%x/sin(vertex%p%theta)
 	  vertex%p%phi = atan2(vertex%up%y,vertex%up%x)
 	  if (vertex%p%phi.lt.0.) vertex%p%phi=vertex%p%phi+2.*pi
-	  call rotate3d([vertex%p%P*vertex%uq%x,vertex%p%P*vertex%uq%y,vertex%p%P*vertex%uq%z],spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,1.0,vertex%p%theta,vertex%p%phi)
+	  call rotate3d(vertex%p%P*vertex%uq%x,vertex%p%P*vertex%uq%y,vertex%p%P*vertex%uq%z,
+	  & spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,1.0,vertex%p%theta,vertex%p%phi)
 !       call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
@@ -1886,10 +1887,11 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine rotate3d(pf,theta0,phi0,dx0,dy0,dz0,theta,phi)
+	subroutine rotate3d(pfx,pfy,pfz,theta0,phi0,dx0,dy0,dz0,theta,phi)
 	
 !       Declare variables
-	real, dimension(3) :: pf ! final proton momentum
+	real, dimension(3) :: pf ! final proton momentum, vector
+	real*8 pfx,pfy,pfz	! final proton momentum
 	real*8 theta0,phi0	! central physics angles of spectrometer.
 	real*8 theta,phi	! physics angles for event.
 	real*8 norm		! normalization term
@@ -1899,6 +1901,8 @@ C If using Coulomb corrections, include focusing factor
 	real, dimension(3) :: v	! intermediate variables.
 
 	include 'constants.inc'
+
+	pf = [pfx,pfy,pfz]
 
 	norm = sqrt(cos(theta)**2+(sin(theta)**2)*cos(phi)**2)
 	

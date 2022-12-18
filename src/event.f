@@ -362,8 +362,6 @@ C modified 5/15/06 for poinct
 
 	call complete_ev(main,vertex,success)
 
-	real, dimension(3,3) :: rotmat ! rotation matrix	
-
 	main%sigcc = 1.0
 
 	if (debug(2)) write(6,*)'gen: initial success =',success
@@ -431,6 +429,8 @@ C DJG spectrometer
 	real*8 W2
 	real*8 grnd		!random # generator.
 
+	real, dimension(3,3) :: rotmat ! rotation matrix	
+	
 	logical success
 	type(event_main):: main
 	type(event)::	vertex

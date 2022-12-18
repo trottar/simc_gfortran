@@ -511,7 +511,7 @@ C DJG spectrometer
      >	    write(6,*) 'cos(phi)=',vertex%up%x/sin(vertex%p%theta)
 	  vertex%p%phi = atan2(vertex%up%y,vertex%up%x)
 	  if (vertex%p%phi.lt.0.) vertex%p%phi=vertex%p%phi+2.*pi
-	  call rotate3d(vertex%p%P,vertex%uq%x,vertex%uq%y,vertex%uq%z,spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,1.0,vertex%p%theta,vertex%p%phi)
+	  call rotate3d(vertex%p%P,vertex%uq%x,vertex%uq%y,vertex%uq%z,spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 !       call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
@@ -1886,7 +1886,7 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine rotate3d(pfmag,uqx,uqy,uqz,theta0,phi0,dx0,dy0,dz0,theta,phi)
+	subroutine rotate3d(pfmag,uqx,uqy,uqz,theta0,phi0,dx0,dy0,theta,phi)
 	
 !       Declare variables
 	real, dimension(3) :: pf ! normalized inal proton momentum, vector
@@ -1903,6 +1903,8 @@ C If using Coulomb corrections, include focusing factor
 
 	include 'constants.inc'
 
+	dz0 = 1.0
+	
 	pfx = pfmag*uqx/sqrt(dx0**2+dy0**2+dz0**2)
 	pfy = pfmag*uqy/sqrt(dx0**2+dy0**2+dz0**2)
 	pfz = pfmag*uqz/sqrt(dx0**2+dy0**2+dz0**2)

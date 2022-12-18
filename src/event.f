@@ -1912,7 +1912,7 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine TransportToLab(upmag,up0x,upy0,upz0,dx0,dy0,rotmat)
+	subroutine TransportToLab(upmag,up0x,upy0,upz0,dx,dy,rotmat)
 	
 !       Declare variables
 	real, dimension(3) :: pf ! normalized inal proton momentum, vector
@@ -1921,18 +1921,17 @@ C If using Coulomb corrections, include focusing factor
 	real*8 upx0,upy0,upz0	! proton vector componenants
 	real*8 norm		! normalization term
 	real*8 dx,dy,dz		! dx/dy (xptar/yptar) for event after rotation
-	real*8 dx0,dy0,dz0	! dx0/dy0 (xptar/yptar) for event, dz0=1
 	real, dimension(3,3) :: rotmat ! rotation matrix
 	real, dimension(3) :: v0	! intermediate variables.
 	real, dimension(3) :: v	! intermediate variables.
 
 	include 'constants.inc'
 
-	dz0 = 1.0
+	dz = 1.0
 	
-	pfx = upmag*upx0/sqrt(dx0**2+dy0**2+dz0**2)
-	pfy = upmag*upy0/sqrt(dx0**2+dy0**2+dz0**2)
-	pfz = upmag*upz0/sqrt(dx0**2+dy0**2+dz0**2)
+	pfx = upmag*upx0/sqrt(dx**2+dy**2+dz**2)
+	pfy = upmag*upy0/sqrt(dx**2+dy**2+dz**2)
+	pfz = upmag*upz0/sqrt(dx**2+dy**2+dz**2)
 
 	pf = [pfx,pfy,pfz]
 

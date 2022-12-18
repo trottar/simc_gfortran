@@ -1889,7 +1889,7 @@ C If using Coulomb corrections, include focusing factor
 	subroutine rotate3d(pf,theta0,phi0,dx0,dy0,dz0,theta,phi)
 	
 !       Declare variables
-	real*8 pf		! final proton momentum
+	real, dimension(3) :: pf ! final proton momentum
 	real*8 theta0,phi0	! central physics angles of spectrometer.
 	real*8 theta,phi	! physics angles for event.
 	real*8 norm		! normalization term

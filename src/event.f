@@ -1886,13 +1886,13 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine rotate3d(pfmag,up0x,up0y,up0z,theta0,phi0,dx0,dy0,theta,phi)
+	subroutine rotate3d(upmag,up0x,upy0,upz0,theta0,phi0,dx0,dy0,theta,phi)
 	
 !       Declare variables
 	real, dimension(3) :: pf ! normalized inal proton momentum, vector
 	real*8 pfx,pfy,pfz	! normalized final proton momentum
-	real*8 pfmag		! final proton momentum magnitude
-	real*8 up0x,up0y,up0z	! proton vector componenants
+	real*8 upmag		! proton magnitude
+	real*8 upx0,upy0,upz0	! proton vector componenants
 	real*8 theta0,phi0	! central physics angles of spectrometer.
 	real*8 theta,phi	! physics angles for event.
 	real*8 norm		! normalization term
@@ -1905,9 +1905,9 @@ C If using Coulomb corrections, include focusing factor
 
 	dz0 = 1.0
 	
-	pfx = pfmag*up0x/sqrt(dx0**2+dy0**2+dz0**2)
-	pfy = pfmag*up0y/sqrt(dx0**2+dy0**2+dz0**2)
-	pfz = pfmag*up0z/sqrt(dx0**2+dy0**2+dz0**2)
+	pfx = upmag*upx0/sqrt(dx0**2+dy0**2+dz0**2)
+	pfy = upmag*upy0/sqrt(dx0**2+dy0**2+dz0**2)
+	pfz = upmag*upz0/sqrt(dx0**2+dy0**2+dz0**2)
 
 	pf = [pfx,pfy,pfz]
 

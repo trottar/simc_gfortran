@@ -1942,7 +1942,7 @@ C If using Coulomb corrections, include focusing factor
 	
 !	v = v*v0
 	do i = 1, 3
-	   v(i) = v0(i)
+	   v(i) = v(i)+v0(i)
 	end do	
 
 	dx = v(1)

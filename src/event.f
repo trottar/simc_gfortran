@@ -516,6 +516,7 @@ C DJG spectrometer
 	  call SetCentralAngles(vertex%p%theta,vertex%p%phi)
 !       call SetCentralAngles(spec%p%theta,spec%p%phi)
 !       call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,rotmat)
+	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
 	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,rotmat)
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
@@ -1942,9 +1943,9 @@ C If using Coulomb corrections, include focusing factor
 	end do
 	
 	v = v*v0	
-	write(6,*) 'before dx: at 6',dx
+	write(6,*) 'before dx:',dx
 	dx = v(1)
-	write(6,*) 'after dx: at 6',dx
+	write(6,*) 'after dx:',dx
 	dy = v(2)
 	dz = v(3)
 	

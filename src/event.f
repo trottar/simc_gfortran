@@ -1395,9 +1395,6 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	fB = fA1 - fX
 
 	q_vec = [fQ(1),fQ(2),fQ(3)]
-
-	write(6,*) 'kf_vec:',kf_vec
-	write(6,*) 'q_vec:',q_vec
 	
 	xq = [fX(1),fX(2),fX(3)]
 	bq = [fB(1),fB(2),fB(3)]
@@ -2037,13 +2034,10 @@ C If using Coulomb corrections, include focusing factor
 	
 	subroutine SetZAxis(axis, axPlane, rot_vec)
 
-	real, dimension(3) :: axis, axPlane, rot_vec
+	real, dimension(3) :: axis, zxPlane, rot_vec
 	real, dimension(3) :: xAxis, yAxis, zAxis
 	real, dimension(3,3) :: mat, inv_mat
 	real*8 det
-
-	write(6,*) 'axis:',axis
-	write(6,*) 'zxPlane:',zxPlane
 	
 	xAxis = zxPlane
 	yAxis = [0.0,0.0,0.0]
@@ -2087,16 +2081,16 @@ C If using Coulomb corrections, include focusing factor
 	inv_mat(3,2) = (mat(1,2)*mat(3,1) - mat(3,2)*mat(1,1))/det
 	inv_mat(3,3) = (mat(1,1)*mat(2,2) - mat(2,1)*mat(1,2))/det	
 
-	write(6,*) 'xAxis:',xAxis
-	write(6,*) 'yAxis:',yAxis
-	write(6,*) 'zAxis:',zAxis
-	write(6,*) 'mat:',mat
-	write(6,*) 'inv_mat:',inv_mat
-	write(6,*) 'before rot_vec:',rot_vec
+!	write(6,*) 'xAxis:',xAxis
+!	write(6,*) 'yAxis:',yAxis
+!	write(6,*) 'zAxis:',zAxis
+!	write(6,*) 'mat:',mat
+!	write(6,*) 'inv_mat:',inv_mat
+!	write(6,*) 'before rot_vec:',rot_vec
 	do i = 1, 3
 	   rot_vec(i) = sum(inv_mat(i,:) * rot_vec)
 	end do
-	write(6,*) 'after rot_vec:',rot_vec
+!	write(6,*) 'after rot_vec:',rot_vec
 
 	return
 	end

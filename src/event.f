@@ -2020,7 +2020,7 @@ C If using Coulomb corrections, include focusing factor
 	subroutine SetZAxis(axis, axPlane, rot_vec)
 
 	real, dimension(3) :: axis, axPlane, rot_vec
-	real*8 :: xAxis(3,1), yAxis(3,1), zAxis(3,1)
+	real, dimension(3) :: xAxis, yAxis, zAxis
 	real, dimension(3,3) :: mat, inv_mat
 	real*8 det
 

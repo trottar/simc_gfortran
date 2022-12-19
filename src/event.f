@@ -2063,7 +2063,7 @@ C If using Coulomb corrections, include focusing factor
 	subroutine MakeBasis(xAxis,yAxis,zAxis)
 	
 	real, dimension(3) :: xAxis, yAxis, zAxis
-	real, dimension(3) :: cross_x,cross_y,cross_z
+	real*8 cross_x,cross_y,cross_z
 	real*8 xmag,ymax,zmag
 
 	xmag = sqrt(xAxis(1)**2+xAxis(2)**2+xAxis(3)**2)

@@ -2056,7 +2056,8 @@ C If using Coulomb corrections, include focusing factor
 	inv_mat(3,2) = (mat(1,2)*mat(3,1) - mat(3,2)*mat(1,1))/det
 	inv_mat(3,3) = (mat(1,1)*mat(2,2) - mat(2,1)*mat(1,2))/det	
 
-	write(6,*) 'before rot_vec:',rot_vec
+	write(6,*) 'inv_mat:',inv_mat
+	write(6,*) 'mat:',mat
 	do i = 1, 3
 	   rot_vec(i) = sum(inv_mat(i,:) * rot_vec)
 	end do

@@ -1363,6 +1363,11 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	recon%up%z = cos(recon%p%theta)
 	if (debug(4)) write(6,*)'comp_rec_ev: at 2'
 
+	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
+!       write(6,*) 'RotToLab%:',RotToLab
+!	call TransportToLab(recon%p%P,px,py,pz,recon%p%xptar,recon%p%yptar,RotToLab)
+	call TransportToLab(recon%p%P,recon%up%x,recon%up%y,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab)
+	
 ! The q vector
 
 	if (debug(5)) write(6,*)'comp_rec_ev: Ein,E,uez=',recon%Ein,recon%e%E,recon%ue%z
@@ -1558,12 +1563,6 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	endif
 
 	if (debug(4)) write(6,*)'comp_rec_ev: at 8'
-
-
-	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
-!       write(6,*) 'RotToLab%:',RotToLab
-!	call TransportToLab(recon%p%P,px,py,pz,recon%p%xptar,recon%p%yptar,RotToLab)
-	call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
 	
 ! Compute the Pm vector in in SIMC LAB system, with x down, and y to the left.
 ! Computer Parallel, Perpendicular, and Out of Plane componenants.

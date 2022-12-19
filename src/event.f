@@ -517,6 +517,7 @@ C DJG spectrometer
 	  write(6,*) 'vertex%up%x:',vertex%up%x
 	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  call SetCentralAngles(vertex%p%theta,vertex%p%phi)
+	  write(6,*) 'rotmat:',rotmat
 	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,rotmat)
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
@@ -1915,7 +1916,6 @@ C If using Coulomb corrections, include focusing factor
 	rotmat(3,2) = -(sin(theta)*cos(phi))/norm
 	rotmat(3,3) = cos(theta)
 
-	rotmat = rotmat
 	write(6,*) 'rotmat:',rotmat
 
 	return

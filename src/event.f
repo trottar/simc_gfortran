@@ -1917,8 +1917,7 @@ C If using Coulomb corrections, include focusing factor
 	rotmat(3,3) = cos(theta)
 
 	write(6,*) 'cent rotmat:',rotmat
-
-	return
+	
 	end
 
 	subroutine TransportToLab(upmag,up0x,upy0,upz0,dx,dy,rotmat)

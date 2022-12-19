@@ -519,7 +519,7 @@ C DJG spectrometer
 !	  call SetCentralAngles(vertex%p%theta,vertex%p%phi)
 	  write(6,*) 'RotToLab%:',RotToLab
 !       call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,rotmat)
-	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
+	  call TransportToLab(vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
 	  if (debug(4)) write(6,*)'comp_ev: at 6'
@@ -1922,7 +1922,7 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine TransportToLab(upmag,up0x,upy0,upz0,dx,dy,theta,phi)
+	subroutine TransportToLab(up0x,upy0,upz0,dx,dy,theta,phi)
 	
 !       Declare variables
 	real, dimension(3) :: pf ! normalized inal proton momentum, vector
@@ -1955,10 +1955,14 @@ C If using Coulomb corrections, include focusing factor
 	
 	dz = 1.0
 	
-	pfx = upmag*upx0/sqrt(dx**2+dy**2+dz**2)
-	pfy = upmag*upy0/sqrt(dx**2+dy**2+dz**2)
-	pfz = upmag*upz0/sqrt(dx**2+dy**2+dz**2)
+!	pfx = upmag*upx0/sqrt(dx**2+dy**2+dz**2)
+!	pfy = upmag*upy0/sqrt(dx**2+dy**2+dz**2)
+!	pfz = upmag*upz0/sqrt(dx**2+dy**2+dz**2)
 
+	pfx = upx0/sqrt(dx**2+dy**2+dz**2)
+	pfy = upy0/sqrt(dx**2+dy**2+dz**2)
+	pfz = upz0/sqrt(dx**2+dy**2+dz**2)
+	
 	pf = [pfx,pfy,pfz]
 	v = [dx,dy,dz]
 

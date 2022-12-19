@@ -516,7 +516,7 @@ C DJG spectrometer
 !	  write(6,*) 'vertex%p%P:',vertex%p%P
 !	  write(6,*) 'vertex%up%x:',vertex%up%x
 	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)	  
-!       call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
+	  call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
 	  call SetCentralAngles(spec%p%theta,spec%p%phi,RotToLab)
 !	  write(6,*) 'RotToLab%:',RotToLab
 	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
@@ -1917,7 +1917,7 @@ C If using Coulomb corrections, include focusing factor
 	rotmat(3,2) = -sin(theta)*cos(phi)/norm
 	rotmat(3,3) = cos(theta)
 
-!	write(6,*) 'cent rotmat:',rotmat
+	write(6,*) 'cent rotmat:',rotmat
 
 	return
 	end

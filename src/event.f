@@ -515,15 +515,15 @@ C DJG spectrometer
 !	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
 !	  write(6,*) 'vertex%p%P:',vertex%p%P
 !	  write(6,*) 'vertex%up%x:',vertex%up%x
-	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
+!	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  
 	call SetCentralAngles(vertex%e%theta,vertex%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
-	call TransportToLab(vertex%e%P,vertex%ue%x,vertex%ue%y,vertex%ue%z,recon%e%xptar,recon%e%yptar,RotToLab)
+	call TransportToLab(vertex%e%P,vertex%ue%x,vertex%ue%y,vertex%ue%z,vertex%e%xptar,vertex%e%yptar,RotToLab)
 	
 	call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
 !       write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(vertex%p%P,-vertex%up%y,vertex%up%x,vertex%up%z,recon%p%xptar,recon%p%yptar,RotToLab)
+	call TransportToLab(vertex%p%P,-vertex%up%y,vertex%up%x,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
 	
 !	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
 !	  write(6,*) 'vertex%p%P:',vertex%p%P

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-19 00:22:18 trottar"
+# Time-stamp: "2022-12-19 00:57:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -474,15 +474,15 @@ H_th_recoil_DUMMY_nopid  = ROOT.TH1D("H_th_recoil_DUMMY_nopid","Theta Recoil (th
 #H_th_recoil_DUMMY_rand  = ROOT.TH1D("H_th_recoil_DUMMY_rand","Theta Recoil (th_bq)", 200, -10.0, 10.0)
 H_th_recoil_SIMC  = ROOT.TH1D("H_th_recoil_SIMC","Theta Recoil (th_bq)", 200, -10.0, 10.0)
 
-H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss", 200, -0.1, 0.1)
-H_pmiss_DATA_nocut  = ROOT.TH1D("H_pmiss_DATA_nocut","pmiss", 200, -0.1, 0.1)
-H_pmiss_DATA_nopid  = ROOT.TH1D("H_pmiss_DATA_nopid","pmiss", 200, -0.1, 0.1)
-#H_pmiss_DATA_rand  = ROOT.TH1D("H_pmiss_DATA_rand","pmiss", 200, -0.1, 0.1)
-H_pmiss_DUMMY  = ROOT.TH1D("H_pmiss_DUMMY","pmiss", 200, -0.1, 0.1)
-H_pmiss_DUMMY_nocut  = ROOT.TH1D("H_pmiss_DUMMY_nocut","pmiss", 200, -0.1, 0.1)
-H_pmiss_DUMMY_nopid  = ROOT.TH1D("H_pmiss_DUMMY_nopid","pmiss", 200, -0.1, 0.1)
-#H_pmiss_DUMMY_rand  = ROOT.TH1D("H_pmiss_DUMMY_rand","pmiss", 200, -0.1, 0.1)
-H_pmiss_SIMC  = ROOT.TH1D("H_pmiss_SIMC","pmiss", 200, -0.1, 0.1)
+H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss", 200, -10, 10)
+H_pmiss_DATA_nocut  = ROOT.TH1D("H_pmiss_DATA_nocut","pmiss", 200, -10, 10)
+H_pmiss_DATA_nopid  = ROOT.TH1D("H_pmiss_DATA_nopid","pmiss", 200, -10, 10)
+#H_pmiss_DATA_rand  = ROOT.TH1D("H_pmiss_DATA_rand","pmiss", 200, -10, 10)
+H_pmiss_DUMMY  = ROOT.TH1D("H_pmiss_DUMMY","pmiss", 200, -10, 10)
+H_pmiss_DUMMY_nocut  = ROOT.TH1D("H_pmiss_DUMMY_nocut","pmiss", 200, -10, 10)
+H_pmiss_DUMMY_nopid  = ROOT.TH1D("H_pmiss_DUMMY_nopid","pmiss", 200, -10, 10)
+#H_pmiss_DUMMY_rand  = ROOT.TH1D("H_pmiss_DUMMY_rand","pmiss", 200, -10, 10)
+H_pmiss_SIMC  = ROOT.TH1D("H_pmiss_SIMC","pmiss", 200, -10, 10)
 
 H_emiss_DATA  = ROOT.TH1D("H_emiss_DATA","emiss", 200, -0.1, 0.1)
 H_emiss_DATA_nocut  = ROOT.TH1D("H_emiss_DATA_nocut","emiss", 200, -0.1, 0.1)

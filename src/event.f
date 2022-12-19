@@ -2035,7 +2035,7 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 	
-	subroutine SetZAxis(axis, axPlane, rot_vec)
+	subroutine SetZAxis(axis, zxPlane, rot_vec)
 
 	real, dimension(3) :: axis, zxPlane, rot_vec
 	real, dimension(3) :: xAxis, yAxis, zAxis

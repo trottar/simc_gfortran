@@ -429,7 +429,7 @@ C DJG spectrometer
 	real*8 W2
 	real*8 grnd		!random # generator.
 
-	real*8 :: rotmat(3,3) ! rotation matrix	
+	real*8 :: RotToLab(3,3) ! rotation matrix	
 	
 	logical success
 	type(event_main):: main
@@ -517,8 +517,8 @@ C DJG spectrometer
 	  write(6,*) 'vertex%up%x:',vertex%up%x
 	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  call SetCentralAngles(vertex%p%theta,vertex%p%phi)
-	  write(6,*) 'rotmat%:',rotmat
-	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,rotmat)
+	  write(6,*) 'RotToLab%:',RotToLab
+	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
 	  if (debug(4)) write(6,*)'comp_ev: at 6'

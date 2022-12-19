@@ -1615,8 +1615,8 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 !	recon%Pmy = fB(2)
 !	recon%Pmz = fB(3)
 	recon%Pmx = -bq(1)
-	recon%Pmy = -bq(1)
-	recon%Pmz = -bq(1)
+	recon%Pmy = -bq(2)
+	recon%Pmz = -bq(3)
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!

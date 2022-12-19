@@ -2021,7 +2021,8 @@ C If using Coulomb corrections, include focusing factor
 
 	real, dimension(3) :: axis, axPlane, rot_vec
 	real, dimension(3) :: xAxis, yAxis, zAxis
-	real, dimension(3,3) :: mat, det, inv_mat
+	real, dimension(3,3) :: mat, inv_mat
+	real*8 det
 
 	xAxis = zxPlane
 	zAxis = axis
@@ -2039,7 +2040,7 @@ C If using Coulomb corrections, include focusing factor
 	mat(3,3) = zAxis(3)
 	
 	det = mat(1,1)*(mat(2,2)*mat(3,3) - mat(3,2)*mat(2,3)) - mat(1,2)*(mat(2,1)*mat(3,3) - mat(3,1)*mat(2,3)) + mat(1,3)*(mat(2,1)*mat(3,2) - mat(3,1)*mat(2,2))
-
+	
 	inv_mat(1,1) = (mat(2,2)*mat(3,3) - mat(3,2)*mat(2,3))/det
 	inv_mat(1,2) = (mat(1,3)*mat(3,2) - mat(3,3)*mat(1,2))/det
 	inv_mat(1,3) = (mat(1,2)*mat(2,3) - mat(2,2)*mat(1,3))/det

@@ -1364,11 +1364,11 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	if (debug(4)) write(6,*)'comp_rec_ev: at 2'
 
 	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
-!       write(6,*) 'RotToLab%:',RotToLab
+       write(6,*) 'e RotToLab%:',RotToLab
 	call TransportToLab(recon%e%P,recon%ue%x,recon%ue%y,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab)
 	
 	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
-!       write(6,*) 'RotToLab%:',RotToLab
+       write(6,*) 'p RotToLab%:',RotToLab
 	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab)
 	
 ! The q vector
@@ -1976,9 +1976,9 @@ C If using Coulomb corrections, include focusing factor
 !	write(6,*) 'pfx:',pfx
 !	write(6,*) 'rotmat:',rotmat
 		
-!	write(6,*) 'before dx:',dx
+	write(6,*) 'before dx:',dx
 	dx = v(1)
-!	write(6,*) 'after dx:',dx
+	write(6,*) 'after dx:',dx
 	dy = v(2)
 	dz = v(3)
 	

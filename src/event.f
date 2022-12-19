@@ -515,7 +515,7 @@ C DJG spectrometer
 !	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
 !	  write(6,*) 'vertex%p%P:',vertex%p%P
 !	  write(6,*) 'vertex%up%x:',vertex%up%x
-!	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
+	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  
 	  call SetCentralAngles(vertex%e%theta,vertex%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab

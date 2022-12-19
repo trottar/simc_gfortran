@@ -1405,7 +1405,7 @@ c Everyone else in the world calculates W using the proton mass.
 	  if (debug(4)) write(6,*)'comp_rec_ev: at 7.5',Mh2,recon%p%E
 	endif
 
-	ki = sqrt((recon%Ein/1000)**2-me**2)
+	ki = sqrt((recon%e%E/1000)**2-me**2)  ! Convert MeV to GeV
 
 !	write(6,*) 'recon%Ein:',recon%Ein
 !	write(6,*) 'recon%e%E:',recon%e%E
@@ -2009,9 +2009,9 @@ C If using Coulomb corrections, include focusing factor
 
 	dz = 1.0
 
-	pfx = pmag*px0/(sqrt(dx**2+dy**2+dz**2)*1000)
-	pfy = pmag*py0/(sqrt(dx**2+dy**2+dz**2)*1000)
-	pfz = pmag*pz0/(sqrt(dx**2+dy**2+dz**2)*1000)
+	pfx = pmag*px0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
+	pfy = pmag*py0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
+	pfz = pmag*pz0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
 	
 !	pfx = px0/sqrt(dx**2+dy**2+dz**2)
 !	pfy = py0/sqrt(dx**2+dy**2+dz**2)

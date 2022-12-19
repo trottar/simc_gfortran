@@ -2067,7 +2067,7 @@ C If using Coulomb corrections, include focusing factor
 	real*8 xmag,ymax,zmag
 
 	xmag = sqrt(xAxis(1)**2+xAxis(2)**2+xAxis(3)**2)
-	ymag = sqrt(yAyis(1)**2+yAyis(2)**2+yAyis(3)**2)
+	ymag = sqrt(yAxis(1)**2+yAxis(2)**2+yAxis(3)**2)
 	zmag = sqrt(zAzis(1)**2+zAzis(2)**2+zAzis(3)**2)
 
 	zAxis = zAxis*(1.0/zmag)

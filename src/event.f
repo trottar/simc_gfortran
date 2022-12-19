@@ -515,14 +515,14 @@ C DJG spectrometer
 !	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
 !	  write(6,*) 'vertex%p%P:',vertex%p%P
 !	  write(6,*) 'vertex%up%x:',vertex%up%x
-!	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)	  
+	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)	  
 !       call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
-	  call SetCentralAngles(spec%p%theta,spec%p%phi,RotToLab)
+!	  call SetCentralAngles(spec%p%theta,spec%p%phi,RotToLab)
 !	  write(6,*) 'RotToLab%:',RotToLab
-	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
-	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
-	  write(6,*) 'vertex%p%P:',vertex%p%P
-	  write(6,*) 'vertex%up%x:',vertex%up%x	  
+!	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
+!	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
+!	  write(6,*) 'vertex%p%P:',vertex%p%P
+!	  write(6,*) 'vertex%up%x:',vertex%up%x	  
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
 	  if (debug(4)) write(6,*)'comp_ev: at 6'
@@ -1019,6 +1019,8 @@ C DJG stinkin' Jacobian!
 	real*8 oop_x,oop_y
 	real*8 mm,mmA,mm2,mmA2,t
 
+	real*8 :: RotToLab(3,3) ! rotation matrix	
+	
 	logical success
 	type(event)::	recon
 
@@ -1557,6 +1559,12 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 
 	if (debug(4)) write(6,*)'comp_rec_ev: at 8'
 
+	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
+!       write(6,*) 'RotToLab%:',RotToLab
+	call TransportToLab(recon%p%P,recon%up%x,recon%up%y,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab)
+
+
+	
 ! Compute the Pm vector in in SIMC LAB system, with x down, and y to the left.
 ! Computer Parallel, Perpendicular, and Out of Plane componenants.
 ! Parallel is component along q_hat.  Out/plane is component along

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-19 00:19:39 trottar"
+# Time-stamp: "2022-12-19 00:22:18 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1280,8 +1280,7 @@ for evt in TBRANCH_DUMMY_nopid:
 # Normalize simc by normfactor/nevents
 # Normalize data by effective charge
 
-#normfac_simc = (simc_normfactor)/(simc_nevents)
-normfac_simc = 1
+normfac_simc = (simc_normfactor)/(simc_nevents)
 H_ssxfp_SIMC.Scale(normfac_simc)                                                                                                                                   
 H_ssyfp_SIMC.Scale(normfac_simc)                                                                                                                                  
 H_ssxpfp_SIMC.Scale(normfac_simc)                                                                                                                              
@@ -1309,8 +1308,7 @@ H_epsilon_SIMC.Scale(normfac_simc)
 H_MMp2_SIMC.Scale(normfac_simc)
 
 dummy_target_corr = 4.8579
-#normfac_dummy = 1/(dummy_charge*dummy_target_corr)
-normfac_dummy = 1
+normfac_dummy = 1/(dummy_charge*dummy_target_corr)
 H_ssxfp_DUMMY.Scale(normfac_dummy)
 H_ssyfp_DUMMY.Scale(normfac_dummy)
 H_ssxpfp_DUMMY.Scale(normfac_dummy)
@@ -1397,8 +1395,7 @@ H_W_DUMMY_nopid.Scale(normfac_dummy)
 H_ct_ep_DUMMY_nocut.Scale(normfac_dummy)
 H_ct_ep_DUMMY_nopid.Scale(normfac_dummy)
 
-#normfac_data = 1/(data_charge)
-normfac_data = 1
+normfac_data = 1/(data_charge)
 H_ssxfp_DATA.Scale(normfac_data)
 H_ssyfp_DATA.Scale(normfac_data)
 H_ssxpfp_DATA.Scale(normfac_data)

@@ -2028,7 +2028,7 @@ C If using Coulomb corrections, include focusing factor
 	real*8 det
 
 	xAxis = zxPlane
-	yAxis = [0.0,1.0,0.0]
+	yAxis = [0.0,0.0,0.0]
 	zAxis = axis
 
 	call MakeBasis(xAxis,yAxis,zAxis)

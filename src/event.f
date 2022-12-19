@@ -1395,6 +1395,9 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	fB = fA1 - fX
 
 	q_vec = [fQ(1),fQ(2),fQ(3)]
+
+	write(6,*) 'kf_vec:',kf_vec
+	write(6,*) 'q_vec:',q_vec
 	
 	xq = [fX(1),fX(2),fX(3)]
 	bq = [fB(1),fB(2),fB(3)]
@@ -2038,6 +2041,9 @@ C If using Coulomb corrections, include focusing factor
 	real, dimension(3) :: xAxis, yAxis, zAxis
 	real, dimension(3,3) :: mat, inv_mat
 	real*8 det
+
+	write(6,*) 'axis:',axis
+	write(6,*) 'zxPlane:',zxPlane
 	
 	xAxis = zxPlane
 	yAxis = [0.0,0.0,0.0]

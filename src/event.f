@@ -1365,7 +1365,7 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 
 	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
 !       write(6,*) 'RotToLab%:',RotToLab
-	call TransportToLab(recon%e%P,recon%up%x,recon%up%y,recon%up%z,recon%e%xptar,recon%e%yptar,RotToLab)
+	call TransportToLab(recon%e%P,recon%ue%x,recon%ue%y,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab)
 	
 	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
 !       write(6,*) 'RotToLab%:',RotToLab

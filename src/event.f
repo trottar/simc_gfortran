@@ -1915,6 +1915,8 @@ C If using Coulomb corrections, include focusing factor
 	rotmat(3,2) = -(sin(theta)*cos(phi))/norm
 	rotmat(3,3) = cos(theta)
 
+	write(6,*) 'rotmat:',rotmat
+
 	return
 	end
 

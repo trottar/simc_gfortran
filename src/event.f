@@ -2077,7 +2077,9 @@ C If using Coulomb corrections, include focusing factor
 	cross_y = yAxis(3)*zAxis(1)-yAxis(1)*zAxis(3)
 	cross_z = yAxis(1)*zAxis(2)-yAxis(2)*zAxis(1)
 	
-	xAxis = [cross_x,cross_y,cross_z]
+	xAxis(1) = cross_x
+	xAxis(2) = cross_y
+	xAxis(3) = cross_z
 
 	return
 	end

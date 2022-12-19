@@ -1880,15 +1880,25 @@ C If using Coulomb corrections, include focusing factor
 	y0 = sin(theta0)*sin(phi0)
 	z0 = cos(theta0)
 
-	cos_dtheta = x*x0 + y*y0 + z*z0
-	dx = x / cos_dtheta
-	dy = sqrt(1/cos_dtheta**2-1.-dx**2)
+!	cos_dtheta = x*x0 + y*y0 + z*z0
+!	dx = x / cos_dtheta
+!	dy = sqrt(1/cos_dtheta**2-1.-dx**2)
 
 !	write(6,*) 'spec dx:',dx
+
+!	y_event = y/cos_dtheta	!projected to plane perp. to spectrometer.
+!	if (y_event .lt. y0) dy = -dy
+
+	cos_dtheta = x*x0 + y*y0 + z*z0
+	dx = x
+	dy = sqrt(1/cos_dtheta**2-1.-dx**2)
+
+	write(6,*) 'spec dx:',dx
 
 	y_event = y/cos_dtheta	!projected to plane perp. to spectrometer.
 	if (y_event .lt. y0) dy = -dy
 
+	
 	return
 	end
 	

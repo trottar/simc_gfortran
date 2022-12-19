@@ -517,13 +517,13 @@ C DJG spectrometer
 !	  write(6,*) 'vertex%up%x:',vertex%up%x
 	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  
-!	call SetCentralAngles(vertex%e%theta,vertex%e%phi,RotToLab)
+	call SetCentralAngles(vertex%e%theta,vertex%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
-!	call TransportToLab(vertex%e%P,vertex%ue%x,vertex%ue%y,vertex%ue%z,vertex%e%xptar,vertex%e%yptar,RotToLab)
+	call TransportToLab(vertex%ue%x,vertex%ue%y,vertex%ue%z,vertex%e%xptar,vertex%e%yptar,RotToLab)
 	
-!	call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
+	call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
 !       write(6,*) 'p RotToLab%:',RotToLab
-!	call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
+	call TransportToLab(vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
 	
 !	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
 !	  write(6,*) 'vertex%p%P:',vertex%p%P
@@ -1375,9 +1375,9 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 
 	ki = sqrt(recon%Ein**2-me**2)
 	
-	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
+!	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
-	call TransportToLab(-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab)
+!	call TransportToLab(-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab)
 
 	fP = [0.0,0.0,ki,me]
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
@@ -1386,9 +1386,9 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	fQ = fP-fP1
 	fA1 = fA+fQ
 	
-	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
+!	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
 !       write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab)
+!	call TransportToLab(-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab)
 
 	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
 	fB = fA1 - fX

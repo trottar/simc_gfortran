@@ -1377,7 +1377,7 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	
 	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
-	call TransportToLab(-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab)
+	call TransportToLab(-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
 
 	fP = [0.0,0.0,ki,me]
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
@@ -1388,7 +1388,7 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	
 	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
 !       write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab)
+	call TransportToLab(-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
 
 	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
 	fB = fA1 - fX
@@ -1960,7 +1960,7 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine TransportToLab(upx0,upy0,upz0,dx,dy,rotmat)
+	subroutine TransportToLab(upx0,upy0,upz0,dx,dy,rotmat,v)
 	
 !       Declare variables
 	real, dimension(3) :: pf ! normalized inal proton momentum, vector
@@ -1997,10 +1997,10 @@ C If using Coulomb corrections, include focusing factor
 !	write(6,*) 'rotmat:',rotmat
 		
 !	write(6,*) 'before dx:',dx
-	dx = v(1)
+!	dx = v(1)
 !	write(6,*) 'after dx:',dx
-	dy = v(2)
-	dz = v(3)
+!	dy = v(2)
+!	dz = v(3)
 	
 	return
 	end

@@ -2040,8 +2040,8 @@ C If using Coulomb corrections, include focusing factor
 	mat(3,3) = zAxis(3)
 	
 	det = mat(1,1)*(mat(2,2)*mat(3,3) - mat(3,2)*mat(2,3))
-	&      - mat(1,2)*(mat(2,1)*mat(3,3) - mat(3,1)*mat(2,3))
-	&      + mat(1,3)*(mat(2,1)*mat(3,2) - mat(3,1)*mat(2,2))
+      &      - mat(1,2)*(mat(2,1)*mat(3,3) - mat(3,1)*mat(2,3))
+      &      + mat(1,3)*(mat(2,1)*mat(3,2) - mat(3,1)*mat(2,2))
 	
 	inv_mat(1,1) = (mat(2,2)*mat(3,3) - mat(3,2)*mat(2,3))/det
 	inv_mat(1,2) = (mat(1,3)*mat(3,2) - mat(3,3)*mat(1,2))/det

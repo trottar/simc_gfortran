@@ -1384,6 +1384,8 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
 	fA = [0.0,0.0,0.0,targ%M]
 
+	write(6,*) 'kf_vec:',kf_vec
+	
 	fQ = fP-fP1
 	fA1 = fA+fQ
 	

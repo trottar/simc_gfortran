@@ -516,8 +516,7 @@ C DJG spectrometer
 !	  write(6,*) 'vertex%p%P:',vertex%p%P
 !	  write(6,*) 'vertex%up%x:',vertex%up%x
 	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
-!       call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
-	  call SetCentralAngles(spec%p%theta,spec%p%phi,RotToLab)
+	  call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
 !	  write(6,*) 'RotToLab%:',RotToLab
 	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
@@ -1902,7 +1901,7 @@ C If using Coulomb corrections, include focusing factor
 
 	include 'constants.inc'
 
-	norm = sqrt(cos(theta)**2+(sin(theta)**2)*cos(phi)**2)
+	norm = sqrt((cos(theta)**2)+(sin(theta)**2)*(cos(phi)**2))
 
 !	write(6,*) 'cent norm:', norm
 	
@@ -1913,8 +1912,8 @@ C If using Coulomb corrections, include focusing factor
 	rotmat(2,1) = -norm
 	rotmat(2,2) = 0.0
 	rotmat(2,3) = sin(theta)*sin(phi)
-	rotmat(3,1) = (sin(theta)*cos(theta)*sin(phi))/norm
-	rotmat(3,2) = -(sin(theta)*cos(phi))/norm
+	rotmat(3,1) = sin(theta)*cos(theta)*sin(phi)/norm
+	rotmat(3,2) = -sin(theta)*cos(phi)/norm
 	rotmat(3,3) = cos(theta)
 
 !	write(6,*) 'cent rotmat:',rotmat
@@ -1948,11 +1947,12 @@ C If using Coulomb corrections, include focusing factor
 	pfz = upz0/sqrt(dx**2+dy**2+dz**2)	
 
 	pf = [pfx,pfy,pfz]
-	v = [dx,dy,dz]
+	v0 = [dx,dy,dz]
 
+	v0 = v0*pf
 !       v0 = rotmat*pf
 	do i = 1, 3
-	   v0(i) = sum(rotmat(i,:) * pf)
+	   v(i) = sum(rotmat(i,:) * v0)
 	end do
 	
 !	write(6,*) 'pf:',pf
@@ -1961,11 +1961,10 @@ C If using Coulomb corrections, include focusing factor
 !	write(6,*) 'sqrt(dx**2+dy**2+dz**2):',sqrt(dx**2+dy**2+dz**2)
 !	write(6,*) 'pfx:',pfx
 !	write(6,*) 'rotmat:',rotmat
-	
-	v = v*v0	
-!	write(6,*) 'before dx:',dx
+		
+	write(6,*) 'before dx:',dx
 	dx = v(1)
-!	write(6,*) 'after dx:',dx
+	write(6,*) 'after dx:',dx
 	dy = v(2)
 	dz = v(3)
 	

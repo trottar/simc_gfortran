@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-18 23:57:33 trottar"
+# Time-stamp: "2022-12-19 00:01:50 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1280,7 +1280,8 @@ for evt in TBRANCH_DUMMY_nopid:
 # Normalize simc by normfactor/nevents
 # Normalize data by effective charge
 
-normfac_simc = (simc_normfactor)/(simc_nevents)
+#normfac_simc = (simc_normfactor)/(simc_nevents)
+normfac_simc = 1
 H_ssxfp_SIMC.Scale(normfac_simc)                                                                                                                                   
 H_ssyfp_SIMC.Scale(normfac_simc)                                                                                                                                  
 H_ssxpfp_SIMC.Scale(normfac_simc)                                                                                                                              
@@ -2641,11 +2642,11 @@ H_pmiss_DATA_nopid.SetLineColor(kMagenta)
 H_pmiss_DUMMY.SetLineColor(kGreen)
 
 H_pmiss_SIMC.Draw("E1")
-#H_pmiss_DATA.Draw("same, E1")
+H_pmiss_DATA.Draw("same, E1")
 if DEBUG:
     H_pmiss_DATA_nocut.Draw("same, E1")
     H_pmiss_DATA_nopid.Draw("same, E1")
-#H_pmiss_DUMMY.Draw("same, E1")
+H_pmiss_DUMMY.Draw("same, E1")
 
 b_int_pmiss_simc = int(H_pmiss_SIMC.Integral())
 b_int_pmiss_data = int(H_pmiss_DATA.Integral())

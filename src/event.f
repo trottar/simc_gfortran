@@ -1379,11 +1379,11 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 !       write(6,*) 'e RotToLab%:',RotToLab
 	call TransportToLab(-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
 
-	fP0 = [0.0,0.0,ki,me]
+	fP = [0.0,0.0,ki,me]
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
 	fA = [0.0,0.0,0.0,targ%M]
 
-	fQ = fP0-fP1
+	fQ = fP-fP1
 	fA1 = fA+fQ
 	
 	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)

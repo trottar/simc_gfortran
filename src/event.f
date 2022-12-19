@@ -1386,8 +1386,6 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	
 	fQ = fP-fP1
 	fA1 = fA+fQ
-
-	write(6,*) 'fQ:',fQ
 	
 	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
 !       write(6,*) 'p RotToLab%:',RotToLab
@@ -1398,6 +1396,8 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 
 	q_vec = [fQ(1),fQ(2),fQ(3)]
 
+	write(6,*) 'q_vec:',q_vec
+	
 	xq = [fX(1),fX(2),fX(3)]
 	bq = [fB(1),fB(2),fB(3)]
 

@@ -516,10 +516,14 @@ C DJG spectrometer
 !	  write(6,*) 'vertex%p%P:',vertex%p%P
 !	  write(6,*) 'vertex%up%x:',vertex%up%x
 	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)	  
-!       call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
-!	  call SetCentralAngles(spec%p%theta,spec%p%phi,RotToLab)
-!	  write(6,*) 'RotToLab%:',RotToLab
-!	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
+	  call SetCentralAngles(vertex%e%theta,vertex%e%phi,RotToLab)
+!       write(6,*) 'e RotToLab%:',RotToLab
+	  call TransportToLab(vertex%e%P,vertex%ue%x,vertex%ue%y,vertex%ue%z,vertex%e%xptar,vertex%e%yptar,RotToLab)
+	
+	  call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
+!       write(6,*) 'p RotToLab%:',RotToLab
+	  call TransportToLab(vertex%p%P,-vertex%up%y,vertex%up%x,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
+
 !	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
 !	  write(6,*) 'vertex%p%P:',vertex%p%P
 !	  write(6,*) 'vertex%up%x:',vertex%up%x	  
@@ -1363,13 +1367,13 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	recon%up%z = cos(recon%p%theta)
 	if (debug(4)) write(6,*)'comp_rec_ev: at 2'
 
-	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
-       write(6,*) 'e RotToLab%:',RotToLab
-	call TransportToLab(recon%e%P,recon%ue%x,recon%ue%y,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab)
+!	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
+!       write(6,*) 'e RotToLab%:',RotToLab
+!	call TransportToLab(recon%e%P,recon%ue%x,recon%ue%y,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab)
 	
-	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
-       write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab)
+!	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
+!       write(6,*) 'p RotToLab%:',RotToLab
+!	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab)
 	
 ! The q vector
 
@@ -1976,9 +1980,9 @@ C If using Coulomb corrections, include focusing factor
 !	write(6,*) 'pfx:',pfx
 !	write(6,*) 'rotmat:',rotmat
 		
-	write(6,*) 'before dx:',dx
+!	write(6,*) 'before dx:',dx
 	dx = v(1)
-	write(6,*) 'after dx:',dx
+!	write(6,*) 'after dx:',dx
 	dy = v(2)
 	dz = v(3)
 	

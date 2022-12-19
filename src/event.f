@@ -1897,7 +1897,7 @@ C If using Coulomb corrections, include focusing factor
 !       Declare variables
 	real*8 theta,phi	!physics angles for event.
 	real*8 norm
-	real, dimension(3,3) :: rotmat ! rotation matrix
+	real, dimension(3,3), intent(in) :: rotmat ! rotation matrix
 
 	include 'constants.inc'
 
@@ -1917,7 +1917,8 @@ C If using Coulomb corrections, include focusing factor
 	rotmat(3,3) = cos(theta)
 
 	write(6,*) 'cent rotmat:',rotmat
-	
+
+	return
 	end
 
 	subroutine TransportToLab(upmag,up0x,upy0,upz0,dx,dy,rotmat)

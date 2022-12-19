@@ -2009,9 +2009,9 @@ C If using Coulomb corrections, include focusing factor
 
 	dz = 1.0
 
-	pfx = pmag*px0/sqrt(dx**2+dy**2+dz**2)
-	pfy = pmag*py0/sqrt(dx**2+dy**2+dz**2)
-	pfz = pmag*pz0/sqrt(dx**2+dy**2+dz**2)	
+	pfx = pmag*px0/(sqrt(dx**2+dy**2+dz**2)*1000)
+	pfy = pmag*py0/(sqrt(dx**2+dy**2+dz**2)*1000)
+	pfz = pmag*pz0/(sqrt(dx**2+dy**2+dz**2)*1000)
 	
 !	pfx = px0/sqrt(dx**2+dy**2+dz**2)
 !	pfy = py0/sqrt(dx**2+dy**2+dz**2)

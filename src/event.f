@@ -516,9 +516,10 @@ C DJG spectrometer
 	  write(6,*) 'vertex%p%P:',vertex%p%P
 	  write(6,*) 'vertex%up%x:',vertex%up%x
 	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
-	  call SetCentralAngles(vertex%p%theta,vertex%p%phi)
+!	  call SetCentralAngles(vertex%p%theta,vertex%p%phi)
 	  write(6,*) 'RotToLab%:',RotToLab
-	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
+!       call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,rotmat)
+	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
 	  if (debug(4)) write(6,*)'comp_ev: at 6'
@@ -1897,7 +1898,7 @@ C If using Coulomb corrections, include focusing factor
 !       Declare variables
 	real*8 theta,phi	!physics angles for event.
 	real*8 norm
-	real, dimension(3,3), intent(out) :: rotmat ! rotation matrix
+	real, dimension(3,3) :: rotmat ! rotation matrix
 
 	include 'constants.inc'
 
@@ -1921,7 +1922,7 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine TransportToLab(upmag,up0x,upy0,upz0,dx,dy,rotmat)
+	subroutine TransportToLab(upmag,up0x,upy0,upz0,dx,dy,theta,phi)
 	
 !       Declare variables
 	real, dimension(3) :: pf ! normalized inal proton momentum, vector
@@ -1933,9 +1934,25 @@ C If using Coulomb corrections, include focusing factor
 	real, dimension(3,3) :: rotmat ! rotation matrix
 	real, dimension(3) :: v0	! intermediate variables.
 	real, dimension(3) :: v	! intermediate variables.
+	real*8 theta,phi	!physics angles for event.
 
 	include 'constants.inc'
 
+	norm = sqrt(cos(theta)**2+(sin(theta)**2)*cos(phi)**2)
+
+	write(6,*) 'cent norm:', norm
+	
+!       Calculate the rotation matrix
+	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
+	rotmat(1,2) = cos(theta)/norm
+	rotmat(1,3) = sin(theta)*cos(phi)
+	rotmat(2,1) = -norm
+	rotmat(2,2) = 0.0
+	rotmat(2,3) = sin(theta)*sin(phi)
+	rotmat(3,1) = (sin(theta)*cos(theta)*sin(phi))/norm
+	rotmat(3,2) = -(sin(theta)*cos(phi))/norm
+	rotmat(3,3) = cos(theta)
+	
 	dz = 1.0
 	
 	pfx = upmag*upx0/sqrt(dx**2+dy**2+dz**2)

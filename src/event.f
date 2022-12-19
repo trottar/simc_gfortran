@@ -1396,6 +1396,7 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 
 	q_vec = [fQ(1),fQ(2),fQ(3)]
 
+	write(6,*) 'kf_vec:',kf_vec
 	write(6,*) 'q_vec:',q_vec
 	
 	xq = [fX(1),fX(2),fX(3)]

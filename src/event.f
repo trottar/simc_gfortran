@@ -1962,9 +1962,9 @@ C If using Coulomb corrections, include focusing factor
 !	write(6,*) 'pfx:',pfx
 !	write(6,*) 'rotmat:',rotmat
 		
-	write(6,*) 'before dx:',dx
+!	write(6,*) 'before dx:',dx
 	dx = v(1)
-	write(6,*) 'after dx:',dx
+!	write(6,*) 'after dx:',dx
 	dy = v(2)
 	dz = v(3)
 	

@@ -1406,6 +1406,9 @@ c Everyone else in the world calculates W using the proton mass.
 	endif
 
 	ki = sqrt(recon%Ein**2-me**2)
+
+	write(6,*) 'me:',me
+	write(6,*) 'mp:',mp
 	
 	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab

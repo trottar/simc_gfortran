@@ -2042,15 +2042,14 @@ C If using Coulomb corrections, include focusing factor
 	real, dimension(3,3) :: mat, inv_mat
 	real*8 det
 
-	write(6,*) 'axis:',axis
-	write(6,*) 'zxPlane:',zxPlane
+!	write(6,*) 'axis:',axis
+!	write(6,*) 'zxPlane:',zxPlane
 	
 	xAxis = zxPlane
 	yAxis = [0.0,0.0,0.0]
 	zAxis = axis
 
-	call MakeBasis(xAxis,yAxis,zAxis)
-	
+	call MakeBasis(xAxis,yAxis,zAxis)	
 
 	mat(1,1) = xAxis(1)
 	mat(1,2) = yAxis(1)
@@ -2087,16 +2086,16 @@ C If using Coulomb corrections, include focusing factor
 	inv_mat(3,2) = (mat(1,2)*mat(3,1) - mat(3,2)*mat(1,1))/det
 	inv_mat(3,3) = (mat(1,1)*mat(2,2) - mat(2,1)*mat(1,2))/det	
 
-	write(6,*) 'xAxis:',xAxis
-	write(6,*) 'yAxis:',yAxis
-	write(6,*) 'zAxis:',zAxis
-	write(6,*) 'mat:',mat
-	write(6,*) 'inv_mat:',inv_mat
-	write(6,*) 'before rot_vec:',rot_vec
+!	write(6,*) 'xAxis:',xAxis
+!	write(6,*) 'yAxis:',yAxis
+!	write(6,*) 'zAxis:',zAxis
+!	write(6,*) 'mat:',mat
+!	write(6,*) 'inv_mat:',inv_mat
+!	write(6,*) 'before rot_vec:',rot_vec
 	do i = 1, 3
 	   rot_vec(i) = sum(inv_mat(i,:) * rot_vec)
 	end do
-	write(6,*) 'after rot_vec:',rot_vec
+!	write(6,*) 'after rot_vec:',rot_vec
 
 	return
 	end

@@ -1942,7 +1942,6 @@ C If using Coulomb corrections, include focusing factor
 	real*8 pfx,pfy,pfz	! normalized final proton momentum
 	real*8 upmag		! proton magnitude
 	real*8 upx0,upy0,upz0	! proton vector componenants
-	real*8 norm		! normalization term
 	real*8 dx,dy,dz		! dx/dy (xptar/yptar) for event after rotation
 	real, dimension(3,3) :: rotmat ! rotation matrix
 	real, dimension(3) :: v0	! intermediate variables.

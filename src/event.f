@@ -2042,6 +2042,9 @@ C If using Coulomb corrections, include focusing factor
 	real, dimension(3,3) :: mat, inv_mat
 	real*8 det
 
+	write(6,*) 'axis:',axis
+	write(6,*) 'zxPlane:',zxPlane
+	
 	xAxis = zxPlane
 	yAxis = [0.0,0.0,0.0]
 	zAxis = axis

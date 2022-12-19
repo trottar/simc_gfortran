@@ -1901,7 +1901,7 @@ C If using Coulomb corrections, include focusing factor
 
 	norm = sqrt(cos(theta)**2+(sin(theta)**2)*cos(phi)**2)
 
-	write(6,*) 'norm:',cos(theta)**2+(sin(theta)**2)*cos(phi)**2
+	write(6,*) 'norm:', sqrt(cos(theta)**2+(sin(theta)**2)*cos(phi)**2)
 	
 !       Calculate the rotation matrix
 	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm

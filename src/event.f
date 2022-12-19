@@ -1947,9 +1947,9 @@ C If using Coulomb corrections, include focusing factor
 	   v0(i) = sum(rotmat(i,:) * pf)
 	end do
 	
-	write(6,*) 'pf:',pf(1)
-	write(6,*) 'v0:',v0(1)
-	write(6,*) 'v:',v(1)
+	write(6,*) 'pf:',pf
+	write(6,*) 'v0:',v0
+	write(6,*) 'v:',v
 	write(6,*) 'sqrt(dx**2+dy**2+dz**2):',sqrt(dx**2+dy**2+dz**2)
 	write(6,*) 'pfx:',pfx
 	write(6,*) 'rotmat:',rotmat

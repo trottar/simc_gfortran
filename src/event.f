@@ -2107,13 +2107,23 @@ C If using Coulomb corrections, include focusing factor
 	real*8 cross_x,cross_y,cross_z
 	real*8 xmag,ymax,zmag
 
-	xmag = sqrt(xAxis(1)**2+xAxis(2)**2+xAxis(3)**2)
-	ymag = sqrt(yAxis(1)**2+yAxis(2)**2+yAxis(3)**2)
-	zmag = sqrt(zAxis(1)**2+zAxis(2)**2+zAxis(3)**2)
 
+	zmag = sqrt(zAxis(1)**2+zAxis(2)**2+zAxis(3)**2)
 	zAxis = zAxis*(1.0/zmag)
+
+	xmag = sqrt(xAxis(1)**2+xAxis(2)**2+xAxis(3)**2)
+
+!       (z cross x)/xmag
+	cross_x = (zAxis(2)*xAxis(3)-zAxis(3)*xAxis(2))/xmag
+	cross_y = (zAxis(3)*xAxis(1)-zAxis(1)*xAxis(3))/xmag
+	cross_z = (zAxis(1)*xAxis(2)-zAxis(2)*xAxis(1))/xmag
+
+	yAxis = [cross_x,cross_y,cross_z]
+	
+	ymag = sqrt(yAxis(1)**2+yAxis(2)**2+yAxis(3)**2)
 	yAxis = yAxis*(1.0/ymag)
 
+!       y cross z
 	cross_x = yAxis(2)*zAxis(3)-yAxis(3)*zAxis(2)
 	cross_y = yAxis(3)*zAxis(1)-yAxis(1)*zAxis(3)
 	cross_z = yAxis(1)*zAxis(2)-yAxis(2)*zAxis(1)

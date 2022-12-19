@@ -1611,15 +1611,15 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 !	recon%Pmx = ((recon%p%P*py - recon%q*qy)*qx-(recon%p%P*px - recon%q*qx)*qy) / sqrt(qy**2+qx**2)
 !	recon%Pmy = ((recon%p%P*py - recon%q*qy)*qx+(recon%p%P*px - recon%q*qx)*qy) / sqrt(qy**2+qx**2)
 !	recon%Pmz = recon%p%P*pz - recon%q*qz
- 	recon%Pmx = recon%q*qx
- 	recon%Pmy = recon%q*qy
- 	recon%Pmz = recon%q*qz	
+! 	recon%Pmx = -recon%q*qx
+! 	recon%Pmy = -recon%q*qy
+! 	recon%Pmz = -recon%q*qz	
 !	recon%Pmx = fB(1) ! Lab
 !	recon%Pmy = fB(2) ! Lab
 !	recon%Pmz = fB(3) ! Lab
-!	recon%Pmx = -bq(1) ! wrt q
-!	recon%Pmy = -bq(2) ! wrt q
-!	recon%Pmz = -bq(3) ! wrt q
+	recon%Pmx = -bq(1) ! wrt q
+	recon%Pmy = -bq(2) ! wrt q
+	recon%Pmz = -bq(3) ! wrt q
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!
@@ -2055,10 +2055,12 @@ C If using Coulomb corrections, include focusing factor
 	inv_mat(3,1) = (mat(2,1)*mat(3,2) - mat(3,1)*mat(2,2))/det
 	inv_mat(3,2) = (mat(1,2)*mat(3,1) - mat(3,2)*mat(1,1))/det
 	inv_mat(3,3) = (mat(1,1)*mat(2,2) - mat(2,1)*mat(1,2))/det	
-	
+
+	write(6,*) 'before rot_vec:',rot_vec
 	do i = 1, 3
 	   rot_vec(i) = sum(inv_mat(i,:) * rot_vec)
 	end do
+	write(6,*) 'after rot_vec:',rot_vec
 
 	return
 	end

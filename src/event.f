@@ -1330,6 +1330,11 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	real*8 oop_x,oop_y
 	real*8 mm,mmA,mm2,mmA2,t
 
+	
+!       Hcana varaibles
+	real*8 ki		! Initial proton momentum
+	real, dimension(3) :: kf_vec,Pf_vec
+	real, dimension(4) :: fQ,fP,fP1,fA,fA1,fX,fB
 	real*8 :: RotToLab(3,3) ! rotation matrix
 	
 	logical success
@@ -1368,13 +1373,25 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	recon%up%z = cos(recon%p%theta)
 	if (debug(4)) write(6,*)'comp_rec_ev: at 2'
 
+	ki = sqrt(recon%Ein**2-me**2)
+	
 	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
-	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab)
+	call TransportToLab(-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
+
+	fP0 = [0.0,0.0,ki,me]
+	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
+	fA = [0.0,0.0,0.0,targ%M]
+
+	fQ = fP0-fP1
+	fA1 = fA+fQ
 	
 	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
 !       write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab)
+	call TransportToLab(-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
+
+	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
+	fB = fA1 - fX
 	
 ! The q vector
 
@@ -1579,12 +1596,15 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! Perp. component is what's left: along (q_hat) x (oop_hat).
 ! So looking along q, out of plane is down, perp. is left.
 
-	recon%Pmx = recon%p%P*px - recon%q*qx
-	recon%Pmy = recon%p%P*py - recon%q*qy
-	recon%Pmz = recon%p%P*pz - recon%q*qz
+!	recon%Pmx = recon%p%P*px - recon%q*qx
+!	recon%Pmy = recon%p%P*py - recon%q*qy
+!	recon%Pmz = recon%p%P*pz - recon%q*qz
 !	recon%Pmx = ((recon%p%P*py - recon%q*qy)*qx-(recon%p%P*px - recon%q*qx)*qy) / sqrt(qy**2+qx**2)
 !	recon%Pmy = ((recon%p%P*py - recon%q*qy)*qx+(recon%p%P*px - recon%q*qx)*qy) / sqrt(qy**2+qx**2)
 !	recon%Pmz = recon%p%P*pz - recon%q*qz
+	recon%Pmx = fB(1)
+	recon%Pmy = fB(2)
+	recon%Pmz = fB(3)
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!
@@ -1940,7 +1960,7 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine TransportToLab(upmag,up0x,upy0,upz0,dx,dy,rotmat)
+	subroutine TransportToLab(up0x,upy0,upz0,dx,dy,rotmat,v)
 	
 !       Declare variables
 	real, dimension(3) :: pf ! normalized inal proton momentum, vector
@@ -1956,10 +1976,6 @@ C If using Coulomb corrections, include focusing factor
 
 	dz = 1.0
 	
-!	pfx = upmag*upx0/sqrt(dx**2+dy**2+dz**2)
-!	pfy = upmag*upy0/sqrt(dx**2+dy**2+dz**2)
-!	pfz = upmag*upz0/sqrt(dx**2+dy**2+dz**2)
-
 	pfx = upx0/sqrt(dx**2+dy**2+dz**2)
 	pfy = upy0/sqrt(dx**2+dy**2+dz**2)
 	pfz = upz0/sqrt(dx**2+dy**2+dz**2)	
@@ -1981,10 +1997,10 @@ C If using Coulomb corrections, include focusing factor
 !	write(6,*) 'rotmat:',rotmat
 		
 !	write(6,*) 'before dx:',dx
-	dx = v(1)
+!	dx = v(1)
 !	write(6,*) 'after dx:',dx
-	dy = v(2)
-	dz = v(3)
+!	dy = v(2)
+!	dz = v(3)
 	
 	return
 	end

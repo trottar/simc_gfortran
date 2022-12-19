@@ -1333,7 +1333,8 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	
 !       Hcana varaibles
 	real*8 ki		! Initial proton momentum
-	real, dimension(3) :: kf_vec,Pf_vec
+	real, dimension(3) :: kf_vec,Pf_vec,q_vec
+	real, dimension(3) :: xq,bq
 	real, dimension(4) :: fQ,fP,fP1,fA,fA1,fX,fB
 	real*8 :: RotToLab(3,3) ! rotation matrix
 	
@@ -1392,6 +1393,14 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 
 	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
 	fB = fA1 - fX
+
+	q_vec = [fQ(1),fQ(2),fQ(3)]
+
+	xq = [fX(1),fX(2),fX(3)]
+	bq = [fB(1),fB(2),fB(3)]
+
+	call SetZAxis(q_vec,kf_vec,xq)
+	call SetZAxis(q_vec,kf_vec,bq)	
 	
 ! The q vector
 
@@ -1596,15 +1605,18 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! Perp. component is what's left: along (q_hat) x (oop_hat).
 ! So looking along q, out of plane is down, perp. is left.
 
-	recon%Pmx = recon%p%P*px - recon%q*qx
-	recon%Pmy = recon%p%P*py - recon%q*qy
-	recon%Pmz = recon%p%P*pz - recon%q*qz
+!	recon%Pmx = recon%p%P*px - recon%q*qx
+!	recon%Pmy = recon%p%P*py - recon%q*qy
+!	recon%Pmz = recon%p%P*pz - recon%q*qz
 !	recon%Pmx = ((recon%p%P*py - recon%q*qy)*qx-(recon%p%P*px - recon%q*qx)*qy) / sqrt(qy**2+qx**2)
 !	recon%Pmy = ((recon%p%P*py - recon%q*qy)*qx+(recon%p%P*px - recon%q*qx)*qy) / sqrt(qy**2+qx**2)
 !	recon%Pmz = recon%p%P*pz - recon%q*qz
 !	recon%Pmx = fB(1)
 !	recon%Pmy = fB(2)
 !	recon%Pmz = fB(3)
+	recon%Pmx = -bq(1)
+	recon%Pmy = -bq(1)
+	recon%Pmz = -bq(1)
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!
@@ -2005,3 +2017,66 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 	
+	subroutine SetZAxis(axis, axPlane, rot_vec)
+
+	real, dimension(3) :: axis, axPlane, rot_vec
+	real, dimension(3) :: xAxis, yAxis, zAxis
+	real, dimension(3,3) :: mat, det, inv_mat
+
+	xAxis = zxPlane
+	zAxis = axis
+
+	call MakeBasis(xAxis,yAxis,zAxis)
+	
+	mat(1,1) = xAxis(1)
+	mat(1,2) = xAxis(2)
+	mat(1,3) = xAxis(3)
+	mat(2,1) = yAxis(1)
+	mat(2,2) = yAxis(2)
+	mat(2,3) = yAxis(3)
+	mat(3,1) = zAxis(1)
+	mat(3,2) = zAxis(2)
+	mat(3,3) = zAxis(3)
+	
+	det = mat(1,1)*(mat(2,2)*mat(3,3) - mat(3,2)*mat(2,3)) - &
+	mat(1,2)*(mat(2,1)*mat(3,3) - mat(3,1)*mat(2,3)) + &
+	mat(1,3)*(mat(2,1)*mat(3,2) - mat(3,1)*mat(2,2))
+
+	inv_mat(1,1) = (mat(2,2)*mat(3,3) - mat(3,2)*mat(2,3))/det
+	inv_mat(1,2) = (mat(1,3)*mat(3,2) - mat(3,3)*mat(1,2))/det
+	inv_mat(1,3) = (mat(1,2)*mat(2,3) - mat(2,2)*mat(1,3))/det
+	inv_mat(2,1) = (mat(2,3)*mat(3,1) - mat(3,3)*mat(2,1))/det
+	inv_mat(2,2) = (mat(1,1)*mat(3,3) - mat(3,1)*mat(1,3))/det
+	inv_mat(2,3) = (mat(1,3)*mat(2,1) - mat(2,3)*mat(1,1))/det
+	inv_mat(3,1) = (mat(2,1)*mat(3,2) - mat(3,1)*mat(2,2))/det
+	inv_mat(3,2) = (mat(1,2)*mat(3,1) - mat(3,2)*mat(1,1))/det
+	inv_mat(3,3) = (mat(1,1)*mat(2,2) - mat(2,1)*mat(1,2))/det	
+	
+	do i = 1, 3
+	   rot_vec(i) = sum(inv_mat(i,:) * rot_vec)
+	end do
+
+	return
+	end
+
+	subroutine MakeBasis(xAxis,yAxis,zAxis)
+	
+	real, dimension(3) :: xAxis, yAxis, zAxis
+	real, dimension(3) :: cross_x,cross_y,cross_z
+	real*8 xmag,ymax,zmag
+
+	xmag = sqrt(xAxis(1)**2+xAxis(2)**2+xAxis(3)**2)
+	ymag = sqrt(yAyis(1)**2+yAyis(2)**2+yAyis(3)**2)
+	zmag = sqrt(zAzis(1)**2+zAzis(2)**2+zAzis(3)**2)
+
+	zAxis = zAxis*(1.0/zmag)
+	yAxis = yAxis*(1.0/ymag)
+
+	cross_x = yAxis(2)*zAxis(3)-yAxis(3)*zAxis(2)
+	cross_y = yAxis(3)*zAxis(1)-yAxis(1)*zAxis(3)
+	cross_z = yAxis(1)*zAxis(2)-yAxis(2)*zAxis(1)
+	
+	xAxis = [cross_x,cross_y,cross_z]
+
+	return
+	end

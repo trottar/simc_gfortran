@@ -1611,12 +1611,15 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 !	recon%Pmx = ((recon%p%P*py - recon%q*qy)*qx-(recon%p%P*px - recon%q*qx)*qy) / sqrt(qy**2+qx**2)
 !	recon%Pmy = ((recon%p%P*py - recon%q*qy)*qx+(recon%p%P*px - recon%q*qx)*qy) / sqrt(qy**2+qx**2)
 !	recon%Pmz = recon%p%P*pz - recon%q*qz
-!	recon%Pmx = fB(1)
-!	recon%Pmy = fB(2)
-!	recon%Pmz = fB(3)
-	recon%Pmx = -bq(1)
-	recon%Pmy = -bq(2)
-	recon%Pmz = -bq(3)
+ 	recon%Pmx = recon%q*qx
+ 	recon%Pmy = recon%q*qy
+ 	recon%Pmz = recon%q*qz	
+!	recon%Pmx = fB(1) ! Lab
+!	recon%Pmy = fB(2) ! Lab
+!	recon%Pmz = fB(3) ! Lab
+!	recon%Pmx = -bq(1) ! wrt q
+!	recon%Pmy = -bq(2) ! wrt q
+!	recon%Pmz = -bq(3) ! wrt q
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!

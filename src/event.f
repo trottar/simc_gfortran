@@ -516,13 +516,9 @@ C DJG spectrometer
 	  write(6,*) 'vertex%p%P:',vertex%p%P
 	  write(6,*) 'vertex%up%x:',vertex%up%x
 	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
-	  call SetCentralAngles(vertex%p%theta,vertex%p%phi)
+	  call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
 	  write(6,*) 'RotToLab%:',RotToLab
-!       call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,rotmat)
-	  call TransportToLab(vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
-	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
-	  write(6,*) 'vertex%p%P:',vertex%p%P
-	  write(6,*) 'vertex%up%x:',vertex%up%x	  
+	  call TransportToLab(vertex%p%P,vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
 	  if (debug(4)) write(6,*)'comp_ev: at 6'
@@ -1896,7 +1892,7 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 	
-	subroutine SetCentralAngles(theta,phi)
+	subroutine SetCentralAngles(theta,phi,rotmat)
 	
 !       Declare variables
 	real*8 theta,phi	!physics angles for event.
@@ -1925,7 +1921,7 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine TransportToLab(up0x,upy0,upz0,dx,dy,theta,phi)
+	subroutine TransportToLab(upmag,up0x,upy0,upz0,dx,dy,rotmat)
 	
 !       Declare variables
 	real, dimension(3) :: pf ! normalized inal proton momentum, vector
@@ -1937,33 +1933,15 @@ C If using Coulomb corrections, include focusing factor
 	real, dimension(3,3) :: rotmat ! rotation matrix
 	real, dimension(3) :: v0	! intermediate variables.
 	real, dimension(3) :: v	! intermediate variables.
-	real*8 theta,phi	!physics angles for event.
 
 	include 'constants.inc'
 
-	norm = sqrt(cos(theta)**2+(sin(theta)**2)*cos(phi)**2)
-	
-!       Calculate the rotation matrix
-	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
-	rotmat(1,2) = cos(theta)/norm
-	rotmat(1,3) = sin(theta)*cos(phi)
-	rotmat(2,1) = -norm
-	rotmat(2,2) = 0.0
-	rotmat(2,3) = sin(theta)*sin(phi)
-	rotmat(3,1) = (sin(theta)*cos(theta)*sin(phi))/norm
-	rotmat(3,2) = -(sin(theta)*cos(phi))/norm
-	rotmat(3,3) = cos(theta)
-	
 	dz = 1.0
 	
-!	pfx = upmag*upx0/sqrt(dx**2+dy**2+dz**2)
-!	pfy = upmag*upy0/sqrt(dx**2+dy**2+dz**2)
-!	pfz = upmag*upz0/sqrt(dx**2+dy**2+dz**2)
+	pfx = upmag*upx0/sqrt(dx**2+dy**2+dz**2)
+	pfy = upmag*upy0/sqrt(dx**2+dy**2+dz**2)
+	pfz = upmag*upz0/sqrt(dx**2+dy**2+dz**2)
 
-	pfx = upx0/sqrt(dx**2+dy**2+dz**2)
-	pfy = upy0/sqrt(dx**2+dy**2+dz**2)
-	pfz = upz0/sqrt(dx**2+dy**2+dz**2)
-	
 	pf = [pfx,pfy,pfz]
 	v = [dx,dy,dz]
 
@@ -1971,8 +1949,7 @@ C If using Coulomb corrections, include focusing factor
 	do i = 1, 3
 	   v0(i) = sum(rotmat(i,:) * pf)
 	end do
-
-	write(6,*) 'cent norm:', norm
+	
 	write(6,*) 'pf:',pf
 	write(6,*) 'v0:',v0
 	write(6,*) 'v:',v

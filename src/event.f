@@ -1407,6 +1407,9 @@ c Everyone else in the world calculates W using the proton mass.
 
 	ki = sqrt(recon%e%E**2-me**2)
 
+	write(6,*) 'recon%Ein:',recon%Ein
+	write(6,*) 'recon%e%E:',recon%e%E
+
 	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
 	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
@@ -1620,9 +1623,9 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 !	recon%Pmx = fB(1) ! Lab
 !	recon%Pmy = fB(2) ! Lab
 !	recon%Pmz = fB(3) ! Lab
-	recon%Pmx = bq(1) ! wrt q
-	recon%Pmy = bq(2) ! wrt q
-	recon%Pmz = bq(3) ! wrt q
+	recon%Pmx = -bq(1) ! wrt q
+	recon%Pmy = -bq(2) ! wrt q
+	recon%Pmz = -bq(3) ! wrt q
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!

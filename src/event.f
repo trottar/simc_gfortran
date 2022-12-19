@@ -1373,37 +1373,6 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	recon%up%y = sin(recon%p%theta)*sin(recon%p%phi)
 	recon%up%z = cos(recon%p%theta)
 	if (debug(4)) write(6,*)'comp_rec_ev: at 2'
-
-	ki = sqrt(recon%Ein**2-me**2)
-	
-	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
-!       write(6,*) 'e RotToLab%:',RotToLab
-	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
-
-	fP = [0.0,0.0,ki,me]
-	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
-	fA = [0.0,0.0,0.0,targ%M]
-	
-	fQ = fP-fP1
-	fA1 = fA+fQ
-	
-	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
-!       write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(recon%e%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
-
-	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
-	fB = fA1 - fX
-
-	q_vec = [fQ(1),fQ(2),fQ(3)]
-
-!	write(6,*) 'kf_vec:',kf_vec
-!	write(6,*) 'q_vec:',q_vec
-	
-	xq = [fX(1),fX(2),fX(3)]
-	bq = [fB(1),fB(2),fB(3)]
-
-	call SetZAxis(q_vec,kf_vec,xq)
-	call SetZAxis(q_vec,kf_vec,bq)	
 	
 ! The q vector
 
@@ -1436,6 +1405,37 @@ c Everyone else in the world calculates W using the proton mass.
 	  if (debug(4)) write(6,*)'comp_rec_ev: at 7.5',Mh2,recon%p%E
 	endif
 
+	ki = sqrt(recon%Ein**2-me**2)
+	
+	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
+!       write(6,*) 'e RotToLab%:',RotToLab
+	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
+
+	fP = [0.0,0.0,ki,me]
+	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
+	fA = [0.0,0.0,0.0,targ%M]
+	
+	fQ = fP-fP1
+	fA1 = fA+fQ
+	
+	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
+!       write(6,*) 'p RotToLab%:',RotToLab
+	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
+
+	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
+	fB = fA1 - fX
+
+	q_vec = [fQ(1),fQ(2),fQ(3)]
+
+!	write(6,*) 'kf_vec:',kf_vec
+!	write(6,*) 'q_vec:',q_vec
+	
+	xq = [fX(1),fX(2),fX(3)]
+	bq = [fB(1),fB(2),fB(3)]
+
+	call SetZAxis(q_vec,kf_vec,xq)
+	call SetZAxis(q_vec,kf_vec,bq)	
+	
 ! Compute some pion/kaon stuff.
 
 	recon%epsilon=1./(1. + 2.*(1+recon%nu**2/recon%Q2)*tan(recon%e%theta/2.)**2)
@@ -1990,13 +1990,13 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine TransportToLab(upmag,upx0,upy0,upz0,dx,dy,rotmat,v)
+	subroutine TransportToLab(pmag,px0,py0,pz0,dx,dy,rotmat,v)
 	
 !       Declare variables
 	real, dimension(3) :: pf ! normalized inal proton momentum, vector
 	real*8 pfx,pfy,pfz	! normalized final proton momentum
-	real*8 upmag		! proton magnitude
-	real*8 upx0,upy0,upz0	! proton vector componenants
+	real*8 pmag		! proton magnitude
+	real*8 px0,py0,pz0	! proton vector componenants
 	real*8 dx,dy,dz		! dx/dy (xptar/yptar) for event after rotation
 	real, dimension(3,3) :: rotmat ! rotation matrix
 	real, dimension(3) :: v0	! intermediate variables.
@@ -2006,13 +2006,13 @@ C If using Coulomb corrections, include focusing factor
 
 	dz = 1.0
 
-	pfx = upmag*upx0/sqrt(dx**2+dy**2+dz**2)
-	pfy = upmag*upy0/sqrt(dx**2+dy**2+dz**2)
-	pfz = upmag*upz0/sqrt(dx**2+dy**2+dz**2)	
+	pfx = pmag*px0/sqrt(dx**2+dy**2+dz**2)
+	pfy = pmag*py0/sqrt(dx**2+dy**2+dz**2)
+	pfz = pmag*pz0/sqrt(dx**2+dy**2+dz**2)	
 	
-!	pfx = upx0/sqrt(dx**2+dy**2+dz**2)
-!	pfy = upy0/sqrt(dx**2+dy**2+dz**2)
-!	pfz = upz0/sqrt(dx**2+dy**2+dz**2)	
+!	pfx = px0/sqrt(dx**2+dy**2+dz**2)
+!	pfy = py0/sqrt(dx**2+dy**2+dz**2)
+!	pfz = pz0/sqrt(dx**2+dy**2+dz**2)	
 
 	pf = [pfx,pfy,pfz]
 	v0 = [dx,dy,dz]

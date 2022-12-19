@@ -1405,10 +1405,10 @@ c Everyone else in the world calculates W using the proton mass.
 	  if (debug(4)) write(6,*)'comp_rec_ev: at 7.5',Mh2,recon%p%E
 	endif
 
-	ki = sqrt(recon%e%E**2-me**2)
+	ki = sqrt((recon%Ein/1000)**2-me**2)
 
-	write(6,*) 'recon%Ein:',recon%Ein
-	write(6,*) 'recon%e%E:',recon%e%E
+!	write(6,*) 'recon%Ein:',recon%Ein
+!	write(6,*) 'recon%e%E:',recon%e%E
 
 	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab

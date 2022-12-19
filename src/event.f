@@ -1363,13 +1363,13 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	recon%up%z = cos(recon%p%theta)
 	if (debug(4)) write(6,*)'comp_rec_ev: at 2'
 
-	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
+!	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
-	call TransportToLab(recon%e%P,recon%ue%x,recon%ue%y,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab)
+!	call TransportToLab(recon%e%P,recon%ue%x,recon%ue%y,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab)
 	
-	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
+!	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
 !       write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab)
+!	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab)
 	
 ! The q vector
 

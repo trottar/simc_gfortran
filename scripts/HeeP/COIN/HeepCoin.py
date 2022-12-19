@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-18 23:05:16 trottar"
+# Time-stamp: "2022-12-18 23:07:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1280,7 +1280,7 @@ for evt in TBRANCH_DUMMY_nopid:
 # Normalize simc by normfactor/nevents
 # Normalize data by effective charge
 
-normfac_simc = (simc_normfactor/1000)/(simc_nevents)
+normfac_simc = (simc_normfactor)/(simc_nevents)
 H_ssxfp_SIMC.Scale(normfac_simc)                                                                                                                                   
 H_ssyfp_SIMC.Scale(normfac_simc)                                                                                                                                  
 H_ssxpfp_SIMC.Scale(normfac_simc)                                                                                                                              

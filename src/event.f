@@ -1412,11 +1412,15 @@ c Everyone else in the world calculates W using the proton mass.
 !	write(6,*) 'recon%e%E:',recon%e%E
 !	write(6,*) 'recon%e%P:',recon%e%P
 !	write(6,*) 'spec%e%P:',spec%e%P
+!	write(6,*) '-recon%ue%y:',-recon%ue%y
+!	write(6,*) 'recon%p%E:',recon%p%E
+!	write(6,*) 'recon%p%P:',recon%p%P
+!	write(6,*) 'spec%p%P:',spec%p%P
+!	write(6,*) '-recon%up%y:',-recon%up%y	
 
 	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
-!	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
-	call TransportToLab(spec%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
+	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
 
 	fP = [0.0,0.0,ki,me]
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
@@ -1662,10 +1666,10 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! Note that there are other ways to calculate 'Em' for the pion/kaon case.
 ! This Em for pi/kaon gives roughly E_m + E_rec + T_{A-1}  (I think)
 	if (doing_hyd_elast) then
-!       recon%Trec = 0.0
-!       recon%Em = recon%nu + targ%M - recon%p%E - recon%Trec
-	   recon%Trec = sqrt(recon%Pm**2+targ%Mrec**2) - targ%Mrec
-	   recon%Em = recon%nu + targ%Mtar_struck - recon%p%E - recon%Trec
+	   recon%Trec = 0.0
+	   recon%Em = recon%nu + targ%M - recon%p%E - recon%Trec
+!       recon%Trec = sqrt(recon%Pm**2+targ%Mrec**2) - targ%Mrec
+!       recon%Em = recon%nu + targ%Mtar_struck - recon%p%E - recon%Trec
 	else if (doing_deuterium .or. doing_heavy) then
 	  recon%Trec = sqrt(recon%Pm**2+targ%Mrec**2) - targ%Mrec
 	  recon%Em = recon%nu + targ%Mtar_struck - recon%p%E - recon%Trec

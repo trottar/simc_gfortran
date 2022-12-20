@@ -1631,9 +1631,9 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 !	recon%Pmx = fB(1) ! Lab
 !	recon%Pmy = fB(2) ! Lab
 !	recon%Pmz = fB(3) ! Lab
-	recon%Pmx = -bq(1)*100 ! wrt q, 100 to adjust peak
-	recon%Pmy = -bq(2)*100 ! wrt q, 100 to adjust peak
-	recon%Pmz = -bq(3)*100 ! wrt q, 100 to adjust peak
+	recon%Pmx = -bq(1) ! wrt q, 100 to adjust peak
+	recon%Pmy = -bq(2) ! wrt q, 100 to adjust peak
+	recon%Pmz = -bq(3) ! wrt q, 100 to adjust peak
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!
@@ -1975,26 +1975,26 @@ C If using Coulomb corrections, include focusing factor
 	
 !       Calculate the rotation matrix
 !	x^
-!	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
-!	rotmat(1,2) = cos(theta)/norm
-!	rotmat(1,3) = sin(theta)*cos(phi)
-!	rotmat(2,1) = -norm
-!	rotmat(2,2) = 0.0
-!	rotmat(2,3) = sin(theta)*sin(phi)
-!	rotmat(3,1) = sin(theta)*cos(theta)*sin(phi)/norm
-!	rotmat(3,2) = -sin(theta)*cos(phi)/norm
-!	rotmat(3,3) = cos(theta)
+	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
+	rotmat(1,2) = cos(theta)/norm
+	rotmat(1,3) = sin(theta)*cos(phi)
+	rotmat(2,1) = -norm
+	rotmat(2,2) = 0.0
+	rotmat(2,3) = sin(theta)*sin(phi)
+	rotmat(3,1) = sin(theta)*cos(theta)*sin(phi)/norm
+	rotmat(3,2) = -sin(theta)*cos(phi)/norm
+	rotmat(3,3) = cos(theta)
 
 ! 	x->
-	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
-	rotmat(1,2) = -norm
-	rotmat(1,3) = sin(theta)*cos(theta)*sin(phi)/norm
-	rotmat(2,1) = cos(theta)/norm
-	rotmat(2,2) = 0.0
-	rotmat(2,3) = -sin(theta)*cos(phi)/norm
-	rotmat(3,1) = sin(theta)*cos(phi)
-	rotmat(3,2) = sin(theta)*sin(phi)
-	rotmat(3,3) = cos(theta)
+!	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
+!	rotmat(1,2) = -norm
+!	rotmat(1,3) = sin(theta)*cos(theta)*sin(phi)/norm
+!	rotmat(2,1) = cos(theta)/norm
+!	rotmat(2,2) = 0.0
+!	rotmat(2,3) = -sin(theta)*cos(phi)/norm
+!	rotmat(3,1) = sin(theta)*cos(phi)
+!	rotmat(3,2) = sin(theta)*sin(phi)
+!	rotmat(3,3) = cos(theta)
 
 !	write(6,*) 'cent rotmat:',rotmat
 

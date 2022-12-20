@@ -1975,26 +1975,26 @@ C If using Coulomb corrections, include focusing factor
 	
 !       Calculate the rotation matrix
 !	x^
-	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
-	rotmat(1,2) = cos(theta)/norm
-	rotmat(1,3) = sin(theta)*cos(phi)
-	rotmat(2,1) = -norm
-	rotmat(2,2) = 0.0
-	rotmat(2,3) = sin(theta)*sin(phi)
-	rotmat(3,1) = sin(theta)*cos(theta)*sin(phi)/norm
-	rotmat(3,2) = -sin(theta)*cos(phi)/norm
-	rotmat(3,3) = cos(theta)
+!	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
+!	rotmat(1,2) = cos(theta)/norm
+!	rotmat(1,3) = sin(theta)*cos(phi)
+!	rotmat(2,1) = -norm
+!	rotmat(2,2) = 0.0
+!	rotmat(2,3) = sin(theta)*sin(phi)
+!	rotmat(3,1) = sin(theta)*cos(theta)*sin(phi)/norm
+!	rotmat(3,2) = -sin(theta)*cos(phi)/norm
+!	rotmat(3,3) = cos(theta)
 
 ! 	x->
-!	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
-!	rotmat(1,2) = -norm
-!	rotmat(1,3) = sin(theta)*cos(theta)*sin(phi)/norm
-!	rotmat(2,1) = cos(theta)/norm
-!	rotmat(2,2) = 0.0
-!	rotmat(2,3) = -sin(theta)*cos(phi)/norm
-!	rotmat(3,1) = sin(theta)*cos(phi)
-!	rotmat(3,2) = sin(theta)*sin(phi)
-!	rotmat(3,3) = cos(theta)
+	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
+	rotmat(1,2) = -norm
+	rotmat(1,3) = sin(theta)*cos(theta)*sin(phi)/norm
+	rotmat(2,1) = cos(theta)/norm
+	rotmat(2,2) = 0.0
+	rotmat(2,3) = -sin(theta)*cos(phi)/norm
+	rotmat(3,1) = sin(theta)*cos(phi)
+	rotmat(3,2) = sin(theta)*sin(phi)
+	rotmat(3,3) = cos(theta)
 
 !	write(6,*) 'cent rotmat:',rotmat
 
@@ -2066,26 +2066,26 @@ C If using Coulomb corrections, include focusing factor
 
 	call MakeBasis(xAxis,yAxis,zAxis)	
 
-!	mat(1,1) = xAxis(1)
-!	mat(1,2) = yAxis(1)
-!	mat(1,3) = zAxis(1)
-!	mat(2,1) = xAxis(2)
-!	mat(2,2) = yAxis(2)
-!	mat(2,3) = zAxis(2)
-!	mat(3,1) = xAxis(3)
-!	mat(3,2) = yAxis(3)
-!	mat(3,3) = zAxis(3)
+	mat(1,1) = xAxis(1)
+	mat(1,2) = yAxis(1)
+	mat(1,3) = zAxis(1)
+	mat(2,1) = xAxis(2)
+	mat(2,2) = yAxis(2)
+	mat(2,3) = zAxis(2)
+	mat(3,1) = xAxis(3)
+	mat(3,2) = yAxis(3)
+	mat(3,3) = zAxis(3)
 	
 !       x ->
-	mat(1,1) = xAxis(1)
-	mat(1,2) = xAxis(2)
-	mat(1,3) = xAxis(3)
-	mat(2,1) = yAxis(1)
-	mat(2,2) = yAxis(2)
-	mat(2,3) = yAxis(3)
-	mat(3,1) = zAxis(1)
-	mat(3,2) = zAxis(2)
-	mat(3,3) = zAxis(3)
+!	mat(1,1) = xAxis(1)
+!	mat(1,2) = xAxis(2)
+!	mat(1,3) = xAxis(3)
+!	mat(2,1) = yAxis(1)
+!	mat(2,2) = yAxis(2)
+!	mat(2,3) = yAxis(3)
+!	mat(3,1) = zAxis(1)
+!	mat(3,2) = zAxis(2)
+!	mat(3,3) = zAxis(3)
 	
 	det = mat(1,1)*(mat(2,2)*mat(3,3) - mat(3,2)*mat(2,3))
      >      - mat(1,2)*(mat(2,1)*mat(3,3) - mat(3,1)*mat(2,3)) 

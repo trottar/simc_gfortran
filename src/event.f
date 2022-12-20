@@ -1330,7 +1330,7 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	real*8 oop_x,oop_y
 	real*8 mm,mmA,mm2,mmA2,t
 
-	
+	type(event):: vertex
 !       Hcana varaibles
 	real*8 ki		! Initial proton momentum
 	real, dimension(3) :: kf_vec,Pf_vec,q_vec
@@ -1405,22 +1405,22 @@ c Everyone else in the world calculates W using the proton mass.
 	  if (debug(4)) write(6,*)'comp_rec_ev: at 7.5',Mh2,recon%p%E
 	endif
 
-	ki = sqrt((recon%Ein/1000)**2-me**2)  ! Convert MeV to GeV	
-!	ki = sqrt((recon%e%E/1000)**2-me**2)  ! Convert MeV to GeV
+	ki = sqrt((vertex%Ein/1000)**2-me**2)  ! Convert MeV to GeV	
+!	ki = sqrt((vertex%e%E/1000)**2-me**2)  ! Convert MeV to GeV
 
-	write(6,*) 'recon%Ein:',recon%Ein
-	write(6,*) 'recon%e%E:',recon%e%E
-	write(6,*) 'recon%e%P:',recon%e%P
+	write(6,*) 'vertex%Ein:',vertex%Ein
+	write(6,*) 'vertex%e%E:',vertex%e%E
+	write(6,*) 'vertex%e%P:',vertex%e%P
 	write(6,*) 'spec%e%P:',spec%e%P
-	write(6,*) '-recon%ue%y:',-recon%ue%y
-	write(6,*) 'recon%p%E:',recon%p%E
-	write(6,*) 'recon%p%P:',recon%p%P
+	write(6,*) '-vertex%ue%y:',-vertex%ue%y
+	write(6,*) 'vertex%p%E:',vertex%p%E
+	write(6,*) 'vertex%p%P:',vertex%p%P
 	write(6,*) 'spec%p%P:',spec%p%P
-	write(6,*) '-recon%up%y:',-recon%up%y	
+	write(6,*) '-vertex%up%y:',-vertex%up%y	
 
-	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
+	call SetCentralAngles(vertex%e%theta,vertex%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
-	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
+	call TransportToLab(vertex%e%P,-vertex%ue%y,vertex%ue%x,vertex%ue%z,vertex%e%xptar,vertex%e%yptar,RotToLab,kf_vec)
 
 	fP = [0.0,0.0,ki,me]
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
@@ -1429,9 +1429,9 @@ c Everyone else in the world calculates W using the proton mass.
 	fQ = fP-fP1
 	fA1 = fA+fQ
 	
-	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
+	call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
 !       write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
+	call TransportToLab(vertex%p%P,-vertex%up%y,vertex%up%x,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab,Pf_vec)
 
 	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
 	fB = fA1 - fX
@@ -2017,13 +2017,13 @@ C If using Coulomb corrections, include focusing factor
 
 	dz = 1.0
 
-!	pfx = pmag*px0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
-!	pfy = pmag*py0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
-!	pfz = pmag*pz0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
+	pfx = pmag*px0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
+	pfy = pmag*py0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
+	pfz = pmag*pz0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
 	
-	pfx = px0/sqrt(dx**2+dy**2+dz**2)
-	pfy = py0/sqrt(dx**2+dy**2+dz**2)
-	pfz = pz0/sqrt(dx**2+dy**2+dz**2)	
+!	pfx = px0/sqrt(dx**2+dy**2+dz**2)
+!	pfy = py0/sqrt(dx**2+dy**2+dz**2)
+!	pfz = pz0/sqrt(dx**2+dy**2+dz**2)	
 
 	pf = [pfx,pfy,pfz]
 	v0 = [dx,dy,dz]

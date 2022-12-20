@@ -1670,7 +1670,7 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	if (doing_hyd_elast) then
 !       recon%Trec = 0.0
 !       recon%Em = recon%nu + targ%M - recon%p%E - recon%Trec
-	   recon%Em = recon%nu + fA(4) - fX(4)
+	   recon%Em = targ%M + fA(4) - fX(4)
 !       recon%Trec = sqrt(recon%Pm**2+targ%Mrec**2) - targ%Mrec
 !       recon%Em = recon%nu + targ%Mtar_struck - recon%p%E - recon%Trec
 	else if (doing_deuterium .or. doing_heavy) then

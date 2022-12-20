@@ -1408,15 +1408,15 @@ c Everyone else in the world calculates W using the proton mass.
 	ki = sqrt((recon%Ein/1000)**2-me**2)  ! Convert MeV to GeV	
 !	ki = sqrt((recon%e%E/1000)**2-me**2)  ! Convert MeV to GeV
 
-!	write(6,*) 'recon%Ein:',recon%Ein
-!	write(6,*) 'recon%e%E:',recon%e%E
-!	write(6,*) 'recon%e%P:',recon%e%P
-!	write(6,*) 'spec%e%P:',spec%e%P
-!	write(6,*) '-recon%ue%y:',-recon%ue%y
-!	write(6,*) 'recon%p%E:',recon%p%E
-!	write(6,*) 'recon%p%P:',recon%p%P
-!	write(6,*) 'spec%p%P:',spec%p%P
-!	write(6,*) '-recon%up%y:',-recon%up%y	
+	write(6,*) 'recon%Ein:',recon%Ein
+	write(6,*) 'recon%e%E:',recon%e%E
+	write(6,*) 'recon%e%P:',recon%e%P
+	write(6,*) 'spec%e%P:',spec%e%P
+	write(6,*) '-recon%ue%y:',-recon%ue%y
+	write(6,*) 'recon%p%E:',recon%p%E
+	write(6,*) 'recon%p%P:',recon%p%P
+	write(6,*) 'spec%p%P:',spec%p%P
+	write(6,*) '-recon%up%y:',-recon%up%y	
 
 	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab

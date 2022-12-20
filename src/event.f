@@ -2109,7 +2109,7 @@ C If using Coulomb corrections, include focusing factor
 !	write(6,*) 'before rot_vec:',rot_vec
 	do i = 1, 3
 	   rot_vec(i) = sum(inv_mat(i,:) * rot_vec)
-	   rot_vec(i) = rot_vec(i)*1000 ! Convert GeV to MeV
+!	   rot_vec(i) = rot_vec(i)*1000 ! Convert GeV to MeV
 	end do
 !	write(6,*) 'after rot_vec:',rot_vec
 

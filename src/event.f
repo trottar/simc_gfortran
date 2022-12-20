@@ -1405,22 +1405,22 @@ c Everyone else in the world calculates W using the proton mass.
 	  if (debug(4)) write(6,*)'comp_rec_ev: at 7.5',Mh2,recon%p%E
 	endif
 
-	ki = sqrt((vertex%Ein/1000)**2-me**2)  ! Convert MeV to GeV	
-!	ki = sqrt((vertex%e%E/1000)**2-me**2)  ! Convert MeV to GeV
+	ki = sqrt((recon%Ein/1000)**2-me**2)  ! Convert MeV to GeV	
+!	ki = sqrt((recon%e%E/1000)**2-me**2)  ! Convert MeV to GeV
 
-	write(6,*) 'vertex%Ein:',vertex%Ein
-	write(6,*) 'vertex%e%E:',vertex%e%E
-	write(6,*) 'vertex%e%P:',vertex%e%P
+	write(6,*) 'recon%Ein:',recon%Ein
+	write(6,*) 'recon%e%E:',recon%e%E
+	write(6,*) 'recon%e%P:',recon%e%P
 	write(6,*) 'spec%e%P:',spec%e%P
-	write(6,*) '-vertex%ue%y:',-vertex%ue%y
-	write(6,*) 'vertex%p%E:',vertex%p%E
-	write(6,*) 'vertex%p%P:',vertex%p%P
+	write(6,*) '-recon%ue%y:',-recon%ue%y
+	write(6,*) 'recon%p%E:',recon%p%E
+	write(6,*) 'recon%p%P:',recon%p%P
 	write(6,*) 'spec%p%P:',spec%p%P
-	write(6,*) '-vertex%up%y:',-vertex%up%y	
+	write(6,*) '-recon%up%y:',-recon%up%y	
 
-	call SetCentralAngles(vertex%e%theta,vertex%e%phi,RotToLab)
+	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
-	call TransportToLab(vertex%e%P,-vertex%ue%y,vertex%ue%x,vertex%ue%z,vertex%e%xptar,vertex%e%yptar,RotToLab,kf_vec)
+	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
 
 	fP = [0.0,0.0,ki,me]
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
@@ -1429,9 +1429,9 @@ c Everyone else in the world calculates W using the proton mass.
 	fQ = fP-fP1
 	fA1 = fA+fQ
 	
-	call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
+	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
 !       write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(vertex%p%P,-vertex%up%y,vertex%up%x,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab,Pf_vec)
+	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
 
 	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
 	fB = fA1 - fX
@@ -2109,6 +2109,7 @@ C If using Coulomb corrections, include focusing factor
 !	write(6,*) 'before rot_vec:',rot_vec
 	do i = 1, 3
 	   rot_vec(i) = sum(inv_mat(i,:) * rot_vec)
+	   rot_vec(i) = rot_vec(i)*1000 ! Convert GeV to MeV
 	end do
 !	write(6,*) 'after rot_vec:',rot_vec
 

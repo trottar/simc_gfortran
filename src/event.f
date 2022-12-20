@@ -1637,9 +1637,9 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! 	recon%Pmx = -recon%q*qx
 ! 	recon%Pmy = -recon%q*qy
 ! 	recon%Pmz = -recon%q*qz	
-	recon%Pmx = -bq(1)/10 ! wrt q, 100 to adjust peak
-	recon%Pmy = -bq(2)/10 ! wrt q, 100 to adjust peak
-	recon%Pmz = -bq(3)/10 ! wrt q, 100 to adjust peak
+	recon%Pmx = -bq(1) ! wrt q, 100 to adjust peak
+	recon%Pmy = -bq(2) ! wrt q, 100 to adjust peak
+	recon%Pmz = -bq(3) ! wrt q, 100 to adjust peak
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!
@@ -2109,16 +2109,16 @@ C If using Coulomb corrections, include focusing factor
 	inv_mat(3,2) = (mat(1,2)*mat(3,1) - mat(3,2)*mat(1,1))/det
 	inv_mat(3,3) = (mat(1,1)*mat(2,2) - mat(2,1)*mat(1,2))/det	
 
-	write(6,*) 'xAxis:',xAxis
-	write(6,*) 'yAxis:',yAxis
-	write(6,*) 'zAxis:',zAxis
-	write(6,*) 'mat:',mat
-	write(6,*) 'inv_mat:',inv_mat
-	write(6,*) 'before rot_vec:',rot_vec
+!	write(6,*) 'xAxis:',xAxis
+!	write(6,*) 'yAxis:',yAxis
+!	write(6,*) 'zAxis:',zAxis
+!	write(6,*) 'mat:',mat
+!	write(6,*) 'inv_mat:',inv_mat
+!	write(6,*) 'before rot_vec:',rot_vec
 	do i = 1, 3
 	   rot_vec(i) = sum(inv_mat(i,:) * rot_vec)
 	end do
-	write(6,*) 'after rot_vec:',rot_vec
+!	write(6,*) 'after rot_vec:',rot_vec
 
 	return
 	end

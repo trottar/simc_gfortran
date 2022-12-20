@@ -1373,40 +1373,9 @@ C for Coulomb corrections, make sure the line below is NOT commented out.
 	recon%up%y = sin(recon%p%theta)*sin(recon%p%phi)
 	recon%up%z = cos(recon%p%theta)
 	if (debug(4)) write(6,*)'comp_rec_ev: at 2'
-	
-! The q vector
 
-	if (debug(5)) write(6,*)'comp_rec_ev: Ein,E,uez=',recon%Ein,recon%e%E,recon%ue%z
-	recon%nu = recon%Ein - recon%e%E
-	recon%Q2 = 2*recon%Ein*recon%e%E*(1-recon%ue%z)
-	recon%q	= sqrt(recon%Q2 + recon%nu**2)
-	recon%uq%x = - recon%e%P*recon%ue%x / recon%q
-	recon%uq%y = - recon%e%P*recon%ue%y / recon%q
-	recon%uq%z =(recon%Ein - recon%e%P*recon%ue%z)/ recon%q
-
-c	if (doing_pion .or. doing_kaon .or. doing_delta .or. doing_rho .or. doing_semi) then
-c	   W2 = targ%mtar_struck**2 + 2.*targ%mtar_struck*recon%nu - recon%Q2
-c	else
-c	   W2 = targ%M**2 + 2.*targ%M*recon%nu - recon%Q2
-c	endif
-
-c Everyone else in the world calculates W using the proton mass.
-	W2 = mp**2 + 2.*mp*recon%nu - recon%Q2
-
-	recon%W = sqrt(abs(W2)) * W2/abs(W2) 
-	recon%xbj = recon%Q2/2./Mp/recon%nu
-	if (debug(4)) write(6,*)'comp_rec_ev: at 5'
-
-! Now complete the p side
-
-	if(doing_phsp)then
-	  recon%p%P=spec%p%P
-	  recon%p%E=sqrt(Mh2+recon%p%P**2)
-	  if (debug(4)) write(6,*)'comp_rec_ev: at 7.5',Mh2,recon%p%E
-	endif
-
-!	ki = sqrt((recon%Ein)**2-me**2)
-	ki = sqrt((recon%e%E)**2-me**2)
+	ki = sqrt((recon%Ein)**2-me**2)
+!	ki = sqrt((recon%e%E)**2-me**2)
 
 !	write(6,*) 'recon%Ein:',recon%Ein
 !	write(6,*) 'recon%e%E:',recon%e%E
@@ -1455,6 +1424,38 @@ c Everyone else in the world calculates W using the proton mass.
 
 	call SetZAxis(q_vec,kf1_vec,xq)
 	call SetZAxis(q_vec,kf1_vec,bq)	
+
+	
+! The q vector
+
+	if (debug(5)) write(6,*)'comp_rec_ev: Ein,E,uez=',recon%Ein,recon%e%E,recon%ue%z
+	recon%nu = recon%Ein - recon%e%E
+	recon%Q2 = 2*recon%Ein*recon%e%E*(1-recon%ue%z)
+	recon%q	= sqrt(recon%Q2 + recon%nu**2)
+	recon%uq%x = - recon%e%P*recon%ue%x / recon%q
+	recon%uq%y = - recon%e%P*recon%ue%y / recon%q
+	recon%uq%z =(recon%Ein - recon%e%P*recon%ue%z)/ recon%q
+
+c	if (doing_pion .or. doing_kaon .or. doing_delta .or. doing_rho .or. doing_semi) then
+c	   W2 = targ%mtar_struck**2 + 2.*targ%mtar_struck*recon%nu - recon%Q2
+c	else
+c	   W2 = targ%M**2 + 2.*targ%M*recon%nu - recon%Q2
+c	endif
+
+c Everyone else in the world calculates W using the proton mass.
+	W2 = mp**2 + 2.*mp*recon%nu - recon%Q2
+
+	recon%W = sqrt(abs(W2)) * W2/abs(W2) 
+	recon%xbj = recon%Q2/2./Mp/recon%nu
+	if (debug(4)) write(6,*)'comp_rec_ev: at 5'
+
+! Now complete the p side
+
+	if(doing_phsp)then
+	  recon%p%P=spec%p%P
+	  recon%p%E=sqrt(Mh2+recon%p%P**2)
+	  if (debug(4)) write(6,*)'comp_rec_ev: at 7.5',Mh2,recon%p%E
+	endif
 	
 ! Compute some pion/kaon stuff.
 

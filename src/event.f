@@ -1433,7 +1433,7 @@ c Everyone else in the world calculates W using the proton mass.
 !       write(6,*) 'p RotToLab%:',RotToLab
 	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
 
-	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
+	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),targ%Mtar_struck]
 	fB = fA1 - fX
 
 !	recon%Pmx = fB(1) ! Lab
@@ -1670,7 +1670,7 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	if (doing_hyd_elast) then
 !       recon%Trec = 0.0
 !       recon%Em = recon%nu + targ%M - recon%p%E - recon%Trec
-	   recon%Em = targ%M + fA(4) - fX(4)
+	   recon%Em = recon%nu + fA(4) - fX(4)
 !       recon%Trec = sqrt(recon%Pm**2+targ%Mrec**2) - targ%Mrec
 !       recon%Em = recon%nu + targ%Mtar_struck - recon%p%E - recon%Trec
 	else if (doing_deuterium .or. doing_heavy) then

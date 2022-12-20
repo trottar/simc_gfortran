@@ -1631,9 +1631,9 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 !	recon%Pmx = fB(1) ! Lab
 !	recon%Pmy = fB(2) ! Lab
 !	recon%Pmz = fB(3) ! Lab
-	recon%Pmx = -bq(1) ! wrt q
-	recon%Pmy = -bq(2) ! wrt q
-	recon%Pmz = -bq(3) ! wrt q
+	recon%Pmx = -bq(1)*1000 ! wrt q
+	recon%Pmy = -bq(2)*1000 ! wrt q
+	recon%Pmz = -bq(3)*1000 ! wrt q
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!
@@ -2109,7 +2109,6 @@ C If using Coulomb corrections, include focusing factor
 !	write(6,*) 'before rot_vec:',rot_vec
 	do i = 1, 3
 	   rot_vec(i) = sum(inv_mat(i,:) * rot_vec)
-!	   rot_vec(i) = rot_vec(i)*1000 ! Convert GeV to MeV
 	end do
 !	write(6,*) 'after rot_vec:',rot_vec
 

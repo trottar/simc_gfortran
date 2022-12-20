@@ -1631,9 +1631,9 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 !	recon%Pmx = fB(1) ! Lab
 !	recon%Pmy = fB(2) ! Lab
 !	recon%Pmz = fB(3) ! Lab
-	recon%Pmx = -bq(1)*100 ! wrt q
-	recon%Pmy = -bq(2)*100 ! wrt q
-	recon%Pmz = -bq(3)*100 ! wrt q
+	recon%Pmx = -bq(1)*100 ! wrt q, 100 to adjust peak
+	recon%Pmy = -bq(2)*100 ! wrt q, 100 to adjust peak
+	recon%Pmz = -bq(3)*100 ! wrt q, 100 to adjust peak
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!
@@ -2066,26 +2066,26 @@ C If using Coulomb corrections, include focusing factor
 
 	call MakeBasis(xAxis,yAxis,zAxis)	
 
-	mat(1,1) = xAxis(1)
-	mat(1,2) = yAxis(1)
-	mat(1,3) = zAxis(1)
-	mat(2,1) = xAxis(2)
-	mat(2,2) = yAxis(2)
-	mat(2,3) = zAxis(2)
-	mat(3,1) = xAxis(3)
-	mat(3,2) = yAxis(3)
-	mat(3,3) = zAxis(3)
+!	mat(1,1) = xAxis(1)
+!	mat(1,2) = yAxis(1)
+!	mat(1,3) = zAxis(1)
+!	mat(2,1) = xAxis(2)
+!	mat(2,2) = yAxis(2)
+!	mat(2,3) = zAxis(2)
+!	mat(3,1) = xAxis(3)
+!	mat(3,2) = yAxis(3)
+!	mat(3,3) = zAxis(3)
 	
 !       x ->
-!	mat(1,1) = xAxis(1)
-!	mat(1,2) = xAxis(2)
-!	mat(1,3) = xAxis(3)
-!	mat(2,1) = yAxis(1)
-!	mat(2,2) = yAxis(2)
-!	mat(2,3) = yAxis(3)
-!	mat(3,1) = zAxis(1)
-!	mat(3,2) = zAxis(2)
-!	mat(3,3) = zAxis(3)
+	mat(1,1) = xAxis(1)
+	mat(1,2) = xAxis(2)
+	mat(1,3) = xAxis(3)
+	mat(2,1) = yAxis(1)
+	mat(2,2) = yAxis(2)
+	mat(2,3) = yAxis(3)
+	mat(3,1) = zAxis(1)
+	mat(3,2) = zAxis(2)
+	mat(3,3) = zAxis(3)
 	
 	det = mat(1,1)*(mat(2,2)*mat(3,3) - mat(3,2)*mat(2,3))
      >      - mat(1,2)*(mat(2,1)*mat(3,3) - mat(3,1)*mat(2,3)) 

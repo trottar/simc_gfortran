@@ -1425,6 +1425,10 @@ c Everyone else in the world calculates W using the proton mass.
 	fP = [0.0,0.0,ki,me]
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
 	fA = [0.0,0.0,0.0,targ%M]
+
+	write(6,*) 'me:',me
+	write(6,*) 'mp:',mp
+	write(6,*) 'targ%M:',targ%M
 	
 	fQ = fP-fP1
 	fA1 = fA+fQ
@@ -1433,7 +1437,7 @@ c Everyone else in the world calculates W using the proton mass.
 !       write(6,*) 'p RotToLab%:',RotToLab
 	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
 
-	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),targ%Mtar_struck]
+	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
 	fB = fA1 - fX
 
 !	recon%Pmx = fB(1) ! Lab

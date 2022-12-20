@@ -1405,8 +1405,8 @@ c Everyone else in the world calculates W using the proton mass.
 	  if (debug(4)) write(6,*)'comp_rec_ev: at 7.5',Mh2,recon%p%E
 	endif
 
-	ki = sqrt((recon%Ein)**2-me**2)
-!	ki = sqrt((recon%e%E)**2-me**2)
+!	ki = sqrt((recon%Ein)**2-me**2)
+	ki = sqrt((recon%e%E)**2-me**2)
 
 !	write(6,*) 'recon%Ein:',recon%Ein
 !	write(6,*) 'recon%e%E:',recon%e%E
@@ -1420,7 +1420,7 @@ c Everyone else in the world calculates W using the proton mass.
 
 	call SetCentralAngles(spec%e%theta,spec%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
-	call TransportToLab(spec%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
+	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
 
 	fP = [0.0,0.0,ki,me]
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
@@ -1435,7 +1435,7 @@ c Everyone else in the world calculates W using the proton mass.
 	
 	call SetCentralAngles(spec%p%theta,spec%p%phi,RotToLab)
 !       write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(spec%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
+	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
 
 	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
 	fB = fA1 - fX

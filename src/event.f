@@ -1637,9 +1637,9 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! 	recon%Pmx = -recon%q*qx
 ! 	recon%Pmy = -recon%q*qy
 ! 	recon%Pmz = -recon%q*qz	
-	recon%Pmx = -bq(1)/100 ! wrt q, 100 to adjust peak
-	recon%Pmy = -bq(2)/100 ! wrt q, 100 to adjust peak
-	recon%Pmz = -bq(3)/100 ! wrt q, 100 to adjust peak
+	recon%Pmx = -bq(1)/10 ! wrt q, 100 to adjust peak
+	recon%Pmy = -bq(2)/10 ! wrt q, 100 to adjust peak
+	recon%Pmz = -bq(3)/10 ! wrt q, 100 to adjust peak
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!
@@ -2073,6 +2073,7 @@ C If using Coulomb corrections, include focusing factor
 
 	call MakeBasis(xAxis,yAxis,zAxis)	
 
+!       x^
 	mat(1,1) = xAxis(1)
 	mat(1,2) = yAxis(1)
 	mat(1,3) = zAxis(1)
@@ -2140,6 +2141,9 @@ C If using Coulomb corrections, include focusing factor
 	cross_z = (zAxis(1)*xAxis(2)-zAxis(2)*xAxis(1))/xmag
 
 	yAxis = [cross_x,cross_y,cross_z]
+
+	write(6,*) 'xAxis:',xAxis
+	write(6,*) 'yAxis:',yAxis
 	
 	ymag = sqrt(yAxis(1)**2+yAxis(2)**2+yAxis(3)**2)
 	yAxis = yAxis*(1.0/ymag)
@@ -2150,6 +2154,7 @@ C If using Coulomb corrections, include focusing factor
 	cross_z = yAxis(1)*zAxis(2)-yAxis(2)*zAxis(1)
 	
 	xAxis = [cross_x,cross_y,cross_z]
+	write(6,*) 'xAxis:',xAxis
 
 	return
 	end

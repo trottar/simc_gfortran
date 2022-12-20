@@ -1418,7 +1418,7 @@ c Everyone else in the world calculates W using the proton mass.
 !	write(6,*) 'spec%p%P:',spec%p%P
 !	write(6,*) '-recon%up%y:',-recon%up%y	
 
-	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
+	call SetCentralAngles(spec%e%theta,spec%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
 	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
 
@@ -1433,7 +1433,7 @@ c Everyone else in the world calculates W using the proton mass.
 	fQ = fP-fP1
 	fA1 = fA+fQ
 	
-	call SetCentralAngles(recon%p%theta,recon%p%phi,RotToLab)
+	call SetCentralAngles(spec%p%theta,spec%p%phi,RotToLab)
 !       write(6,*) 'p RotToLab%:',RotToLab
 	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
 
@@ -1637,9 +1637,9 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! 	recon%Pmx = -recon%q*qx
 ! 	recon%Pmy = -recon%q*qy
 ! 	recon%Pmz = -recon%q*qz	
-	recon%Pmx = -bq(1)/10 ! wrt q, 100 to adjust peak
-	recon%Pmy = -bq(2)/10 ! wrt q, 100 to adjust peak
-	recon%Pmz = -bq(3)/10 ! wrt q, 100 to adjust peak
+	recon%Pmx = -bq(1) ! wrt q, 10 to adjust peak
+	recon%Pmy = -bq(2) ! wrt q, 10 to adjust peak
+	recon%Pmz = -bq(3) ! wrt q, 10 to adjust peak
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!

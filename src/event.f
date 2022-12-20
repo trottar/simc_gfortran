@@ -1426,9 +1426,9 @@ c Everyone else in the world calculates W using the proton mass.
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
 	fA = [0.0,0.0,0.0,targ%M]
 
-	write(6,*) 'me:',me
-	write(6,*) 'mp:',mp
-	write(6,*) 'targ%M:',targ%M
+!	write(6,*) 'me:',me
+!	write(6,*) 'mp:',mp
+!	write(6,*) 'targ%M:',targ%M
 	
 	fQ = fP-fP1
 	fA1 = fA+fQ

@@ -1408,10 +1408,10 @@ c Everyone else in the world calculates W using the proton mass.
 	ki = sqrt((recon%Ein/1000)**2-me**2)  ! Convert MeV to GeV	
 !	ki = sqrt((recon%e%E/1000)**2-me**2)  ! Convert MeV to GeV
 
-	write(6,*) 'recon%Ein:',recon%Ein
-	write(6,*) 'recon%e%E:',recon%e%E
-	write(6,*) 'recon%e%P:',recon%e%P
-	write(6,*) 'spec%e%P:',spec%e%P
+!	write(6,*) 'recon%Ein:',recon%Ein
+!	write(6,*) 'recon%e%E:',recon%e%E
+!	write(6,*) 'recon%e%P:',recon%e%P
+!	write(6,*) 'spec%e%P:',spec%e%P
 
 	call SetCentralAngles(recon%e%theta,recon%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
@@ -2013,13 +2013,13 @@ C If using Coulomb corrections, include focusing factor
 
 	dz = 1.0
 
-	pfx = pmag*px0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
-	pfy = pmag*py0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
-	pfz = pmag*pz0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
+!	pfx = pmag*px0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
+!	pfy = pmag*py0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
+!	pfz = pmag*pz0/(sqrt(dx**2+dy**2+dz**2)*1000) ! Convert MeV to GeV
 	
-!	pfx = px0/sqrt(dx**2+dy**2+dz**2)
-!	pfy = py0/sqrt(dx**2+dy**2+dz**2)
-!	pfz = pz0/sqrt(dx**2+dy**2+dz**2)	
+	pfx = px0/sqrt(dx**2+dy**2+dz**2)
+	pfy = py0/sqrt(dx**2+dy**2+dz**2)
+	pfz = pz0/sqrt(dx**2+dy**2+dz**2)	
 
 	pf = [pfx,pfy,pfz]
 	v0 = [dx,dy,dz]

@@ -1333,7 +1333,7 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	type(event):: vertex
 !       Hcana varaibles
 	real*8 ki		! Initial proton momentum
-	real, dimension(3) :: kf_vec,Pf_vec,q_vec
+	real, dimension(3) :: kf_vec,Pf_vec,q_vec,kf1_vec
 	real, dimension(3) :: xq,bq
 	real, dimension(4) :: fQ,fP,fP1,fA,fA1,fX,fB
 	real*8 :: RotToLab(3,3) ! rotation matrix
@@ -1436,16 +1436,21 @@ c Everyone else in the world calculates W using the proton mass.
 	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
 	fB = fA1 - fX
 
+!	recon%Pmx = fB(1) ! Lab
+!	recon%Pmy = fB(2) ! Lab
+!	recon%Pmz = fB(3) ! Lab
+	
 	q_vec = [fQ(1),fQ(2),fQ(3)]
+	kf1_vec = [fP1(1),fP1(2),fP1(3)]
 
-!	write(6,*) 'kf_vec:',kf_vec
+!	write(6,*) 'kf1_vec:',kf1_vec
 !	write(6,*) 'q_vec:',q_vec
 	
 	xq = [fX(1),fX(2),fX(3)]
 	bq = [fB(1),fB(2),fB(3)]
 
-	call SetZAxis(q_vec,kf_vec,xq)
-	call SetZAxis(q_vec,kf_vec,bq)	
+	call SetZAxis(q_vec,kf1_vec,xq)
+	call SetZAxis(q_vec,kf1_vec,bq)	
 	
 ! Compute some pion/kaon stuff.
 
@@ -1628,9 +1633,6 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! 	recon%Pmx = -recon%q*qx
 ! 	recon%Pmy = -recon%q*qy
 ! 	recon%Pmz = -recon%q*qz	
-!	recon%Pmx = fB(1) ! Lab
-!	recon%Pmy = fB(2) ! Lab
-!	recon%Pmz = fB(3) ! Lab
 	recon%Pmx = -bq(1) ! wrt q, 100 to adjust peak
 	recon%Pmy = -bq(2) ! wrt q, 100 to adjust peak
 	recon%Pmz = -bq(3) ! wrt q, 100 to adjust peak

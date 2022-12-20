@@ -515,7 +515,7 @@ C DJG spectrometer
 !	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
 !	  write(6,*) 'vertex%p%P:',vertex%p%P
 !	  write(6,*) 'vertex%up%x:',vertex%up%x
-	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
+!	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
 	  
 !	  call SetCentralAngles(vertex%e%theta,vertex%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
@@ -1405,8 +1405,7 @@ c Everyone else in the world calculates W using the proton mass.
 	  if (debug(4)) write(6,*)'comp_rec_ev: at 7.5',Mh2,recon%p%E
 	endif
 
-	ki = recon%Ein
-!	ki = sqrt((recon%Ein)**2-me**2)
+	ki = sqrt((recon%Ein)**2-me**2)
 !	ki = sqrt((recon%e%E)**2-me**2)
 
 !	write(6,*) 'recon%Ein:',recon%Ein

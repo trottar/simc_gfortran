@@ -1637,9 +1637,9 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 ! 	recon%Pmx = -recon%q*qx
 ! 	recon%Pmy = -recon%q*qy
 ! 	recon%Pmz = -recon%q*qz	
-	recon%Pmx = -bq(1)/10 ! wrt q, 10 to adjust peak
-	recon%Pmy = -bq(2)/10 ! wrt q, 10 to adjust peak
-	recon%Pmz = -bq(3)/10 ! wrt q, 10 to adjust peak
+	recon%Pmx = -bq(1) ! wrt q, 10 to adjust peak
+	recon%Pmy = -bq(2) ! wrt q, 10 to adjust peak
+	recon%Pmz = -bq(3) ! wrt q, 10 to adjust peak
 	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
 
 !STILL NEED SIGN FOR PmPer!!!!!!

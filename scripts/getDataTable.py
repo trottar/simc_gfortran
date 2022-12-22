@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-22 11:56:13 trottar"
+# Time-stamp: "2022-12-22 13:49:52 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -51,9 +51,9 @@ def get_ebeam(runNum,efficiency_table):
     return eff_data["Beam_Energy"]
 
 ################################################################################################################################################
-# Grab thpq value
+# Grab pTheta value
 
-def get_thpq(runNum,efficiency_table):
+def get_pTheta(runNum,efficiency_table):
     
     inp_f = UTILPATH+"/scripts/efficiency/OUTPUTS/%s" % efficiency_table
 

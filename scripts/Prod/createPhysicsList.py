@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-22 13:46:49 trottar"
+# Time-stamp: "2022-12-22 14:25:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -49,7 +49,7 @@ ChargeValLeft = sys.argv[24].split(" ")
 ChargeValCenter = sys.argv[25].split(" ")
 ChargeErrRight = sys.argv[26].split(" ")
 ChargeErrLeft = sys.argv[27].split(" ")
-ChargeErrCenter = sys.argv[28].split(" ")
+#ChargeErrCenter = sys.argv[28].split(" ")
 
 ################################################################################################################################################
 '''

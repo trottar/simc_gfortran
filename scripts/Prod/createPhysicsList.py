@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-22 15:17:02 trottar"
+# Time-stamp: "2022-12-22 15:24:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -68,9 +68,9 @@ UTILPATH=lt.UTILPATH
 thpq_right = []
 thpq_left = []
 thpq_center = []
-for i,pTh_c in PThetaValCenter:
-    thpq_right.append(pTh_c-PThetaValRight[i])
-    thpq_left.append(pTh_c+PThetaValLeft[i])
+for i,pTh_c in pThetaValCenter:
+    thpq_right.append(pTh_c-pThetaValRight[i])
+    thpq_left.append(pTh_c+pThetaValLeft[i])
     thpq_center.append(pTh_c)
     
 

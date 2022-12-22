@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-22 15:31:16 trottar"
+# Time-stamp: "2022-12-22 15:37:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -69,9 +69,9 @@ thpq_right = []
 thpq_left = []
 thpq_center = []
 for i,pTh_c in enumerate(pThetaValCenter):
-    thpq_right.append(pTh_c-pThetaValRight[i])
-    thpq_left.append(pTh_c+pThetaValLeft[i])
-    thpq_center.append(pTh_c)
+    thpq_right.append(float(pTh_c)-float(pThetaValRight[i]))
+    thpq_left.append(float(pTh_c)+float(pThetaValLeft[i]))
+    thpq_center.append(float(pTh_c))
     
 
 # Open a file in write mode

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-22 14:35:29 trottar"
+# Time-stamp: "2022-12-22 15:17:02 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -17,7 +17,7 @@ import sys, os
 User Inputs
 '''
 
-Q2 = sys.argv[1]
+Q2 = sys.argv[1].replace("p",".")
 POL = sys.argv[2]
 EPSVAL = sys.argv[3]
 TMIN = sys.argv[4]

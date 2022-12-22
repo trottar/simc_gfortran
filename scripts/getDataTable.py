@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-22 13:49:52 trottar"
+# Time-stamp: "2022-12-22 15:03:20 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -48,7 +48,7 @@ def get_ebeam(runNum,efficiency_table):
     eff_data = eff_data[eff_data['Run_Number'] == int(runNum)]
     #print(eff_data)
 
-    return eff_data["Beam_Energy"]
+    return eff_data["Beam_Energy"].iloc[0]
 
 ################################################################################################################################################
 # Grab pTheta value
@@ -69,7 +69,7 @@ def get_pTheta(runNum,efficiency_table):
     eff_data = eff_data[eff_data['Run_Number'] == int(runNum)]
     #print(eff_data)
 
-    return eff_data["SHMS_Angle"]
+    return eff_data["SHMS_Angle"].iloc[0]
 
 ################################################################################################################################################
 # Define efficiencies

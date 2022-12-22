@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-22 15:24:42 trottar"
+# Time-stamp: "2022-12-22 15:31:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -68,7 +68,7 @@ UTILPATH=lt.UTILPATH
 thpq_right = []
 thpq_left = []
 thpq_center = []
-for i,pTh_c in pThetaValCenter:
+for i,pTh_c in enumerate(pThetaValCenter):
     thpq_right.append(pTh_c-pThetaValRight[i])
     thpq_left.append(pTh_c+pThetaValLeft[i])
     thpq_center.append(pTh_c)
@@ -77,19 +77,19 @@ for i,pTh_c in pThetaValCenter:
 # Open a file in write mode
 with open('physics_lists/list.settings', 'a') as f:
     # Write the value of the variable to the file
-    for i,thpq in thpq_right:
+    for i,thpq in enumerate(thpq_right):
         f.write(POL," ",Q2," ",EPSVAL," ",thpq," ",TMIN," ",TMAX," ",NumtBins," ",Kset)
-    for i,thpq in thpq_left:
+    for i,thpq in enumerate(thpq_left):
         f.write(POL," ",Q2," ",EPSVAL," ",thpq," ",TMIN," ",TMAX," ",NumtBins," ",Kset)
-    for i,thpq in thpq_center:
+    for i,thpq in enumerate(thpq_center):
         f.write(POL," ",Q2," ",EPSVAL," ",thpq," ",TMIN," ",TMAX," ",NumtBins," ",Kset)        
 
 # Open a file in write mode
 with open('physics_lists/lists/list.%s_%s' % (Q2.replace(".",""),EPSVAL.replace("0.","")), 'a') as f:
     # Write the value of the variable to the file
-    for i,thpq in thpq_right:
+    for i,thpq in enumerate(thpq_right):
         f.write(runNumRight[i]," ",Q2," ",EbeamValRight[i]," ",ChargeValRight[i]," ",ChargeErrRight[i]," ",EffValRight[i]," ",EffErrRight[i]," ",EPSVAL)
-    for i,thpq in thpq_left:
+    for i,thpq in enumerate(thpq_left):
         f.write(runNumLeft[i]," ",Q2," ",EbeamValLeft[i]," ",ChargeValLeft[i]," ",ChargeErrLeft[i]," ",EffValLeft[i]," ",EffErrLeft[i]," ",EPSVAL)
-    for i,thpq in thpq_center:
+    for i,thpq in enumerate(thpq_center):
         f.write(runNumCenter[i]," ",Q2," ",EbeamValCenter[i]," ",ChargeValCenter[i]," ",ChargeErrCenter[i]," ",EffValCenter[i]," ",EffErrCenter[i]," ",EPSVAL)        

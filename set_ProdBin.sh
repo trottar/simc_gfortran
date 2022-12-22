@@ -501,6 +501,7 @@ if [[ $t_flag = "true" || $d_flag = "true" ]]; then
     fi
 fi
 
+echo "${DataChargeErrCenter[*]}"
 cd "${SIMCPATH}/scripts/Prod/"
 python3 createPhysicsList.py  ${Q2} ${POL} ${EPSVAL} ${TMIN} ${TMAX} ${NumtBins} ${Kset} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" "${DatapThetaValRight[*]}" "${DatapThetaValLeft[*]}" "${DatapThetaValCenter[*]}" "${DataEbeamValRight[*]}" "${DataEbeamValLeft[*]}" "${DataEbeamValCenter[*]}" "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" "${DataEffErrRight[*]}" "${DataEffErrLeft[*]}" "${DataEffErrCenter[*]}" "${DataChargeValRight[*]}" "${DataChargeValLeft[*]}" "${DataChargeValCenter[*]}" "${DataChargeErrRight[*]}" "${DataChargeErrLeft[*]}" "${DataChargeErrCenter[*]}"
 

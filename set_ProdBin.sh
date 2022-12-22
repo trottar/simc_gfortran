@@ -490,18 +490,18 @@ if [ ${#data_center[@]} -ne 0 ]; then
     echo "Total Charge Center: ${DataChargeSumCenter} uC"
 fi
 
-cd "${SIMCPATH}/scripts/Prod/binning"
-
 # Finally, run the plotting script
 # Checks that array isn't empty
 if [[ $t_flag = "true" || $d_flag = "true" ]]; then
     if [ ${#data_right[@]} -eq 0 ]; then
+	cd "${SIMCPATH}/scripts/Prod/binning"
 	python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${NumtBins} "0" "${data_left[*]}" "${data_center[*]}" "0" ${DataChargeSumLeft} ${DataChargeSumCenter} "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData}
     else
 	python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${NumtBins} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" ${DataChargeSumRight} ${DataChargeSumLeft} ${DataChargeSumCenter} "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData}
     fi
 fi
 
+cd "${SIMCPATH}/scripts/Prod/"
 python3 createPhysicsList.py  ${Q2} ${POL} ${EPSVAL} ${TMIN} ${TMAX} ${NumtBins} ${Kset} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" "${DatapThetaValRight[*]}" "${DatapThetaValLeft[*]}" "${DatapThetaValCenter[*]}" "${DataEbeamValRight[*]}" "${DataEbeamValLeft[*]}" "${DataEbeamValCenter[*]}" "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" "${DataEffErrRight[*]}" "${DataEffErrLeft[*]}" "${DataEffErrCenter[*]}" "${DataChargeValRight[*]}" "${DataChargeValLeft[*]}" "${DataChargeValCenter[*]}" "${DataChargeErrRight[*]}" "${DataChargeErrLeft[*]}" "${DataChargeErrCenter[*]}"
 
 cd "${SIMCPATH}"

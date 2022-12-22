@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-22 15:37:30 trottar"
+# Time-stamp: "2022-12-22 15:56:40 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -65,14 +65,9 @@ UTILPATH=lt.UTILPATH
 
 ################################################################################################################################################
 
-thpq_right = []
-thpq_left = []
-thpq_center = []
-for i,pTh_c in enumerate(pThetaValCenter):
-    thpq_right.append(float(pTh_c)-float(pThetaValRight[i]))
-    thpq_left.append(float(pTh_c)+float(pThetaValLeft[i]))
-    thpq_center.append(float(pTh_c))
-    
+thpq_right = pThetaValCenter[0]-pThetaValRight[0]
+thpq_left = pThetaValCenter[0]+pThetaValLeft[0]
+thpq_center = pThetaValCenter[0]    
 
 # Open a file in write mode
 with open('physics_lists/list.settings', 'a') as f:

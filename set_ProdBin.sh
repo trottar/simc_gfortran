@@ -501,6 +501,35 @@ if [[ $t_flag = "true" || $d_flag = "true" ]]; then
     fi
 fi
 
+echo ${Q2}
+echo ${POL}
+echo ${EPSVAL}
+echo ${TMIN}
+echo ${TMAX}
+echo ${NumtBins}
+echo ${Kset}
+echo "${data_right[*]}"
+echo "${data_left[*]}"
+echo "${data_center[*]}"
+echo "${DatapThetaValRight[*]}"
+echo "${DatapThetaValLeft[*]}"
+echo "${DatapThetaValCenter[*]}"
+echo "${DataEbeamValRight[*]}"
+echo "${DataEbeamValLeft[*]}"
+echo "${DataEbeamValCenter[*]}"
+echo "${DataEffValRight[*]}"
+echo "${DataEffValLeft[*]}"
+echo "${DataEffValCenter[*]}"
+echo "${DataEffErrRight[*]}"
+echo "${DataEffErrLeft[*]}"
+echo "${DataEffErrCenter[*]}"
+echo "${DataChargeValRight[*]}"
+echo "${DataChargeValLeft[*]}"
+echo "${DataChargeValCenter[*]}"
+echo "${DataChargeErrRight[*]}"
+echo "${DataChargeErrLeft[*]}"
+echo "${DataChargeErrCenter[*]}"
+fi
 cd "${SIMCPATH}/scripts/Prod/"
 if [ ${#data_right[@]} -eq 0 ]; then
     python3 createPhysicsList.py ${Q2} ${POL} ${EPSVAL} ${TMIN} ${TMAX} ${NumtBins} ${Kset} "0" "${data_left[*]}" "${data_center[*]}" "0" "${DatapThetaValLeft[*]}" "${DatapThetaValCenter[*]}" "0" "${DataEbeamValLeft[*]}" "${DataEbeamValCenter[*]}" "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" "0" "${DataEffErrLeft[*]}" "${DataEffErrCenter[*]}" "0" "${DataChargeValLeft[*]}" "${DataChargeValCenter[*]}" "0" "${DataChargeErrLeft[*]}" "${DataChargeErrCenter[*]}"

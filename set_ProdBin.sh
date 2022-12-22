@@ -172,7 +172,7 @@ do
 	    # Converts python output to bash array
 	    IFS=', ' read -r -a data_right <<< "$( grab_runs Q5p5W3p02right_${EPSILON}e )"             # RIGHT, Q2=5p5, W=3p02
 	    echo "Run Numbers: [${data_right[@]}]"
-	    echo	    
+	    echo
 	elif [[ $i = "LEFT" ]]; then
 	    file_left="Q5p5W3p02left_${EPSILON}e"
 	    echo "Reading in run numbers for left file ${file_left}..."
@@ -186,6 +186,7 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    
 	fi
+	EPSVAL=0.40
 	KIN="Q5p5W3p02_${EPSILON}e"
     fi
     if [[ $Q2 = "4p4" && $W = "2p74" ]]; then
@@ -208,6 +209,7 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    	    	    
 	fi
+	EPSVAL=0.40
 	KIN="Q4p4W2p74_${EPSILON}e"	
     fi
     if [[ $Q2 = "3p0" && $W = "3p14" ]]; then
@@ -230,6 +232,7 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    	    	    	    
 	fi
+	EPSVAL=0.25
 	KIN="Q3W3p14_${EPSILON}e"	
     fi
     if [[ $Q2 = "3p0" && $W = "2p32" ]]; then
@@ -252,6 +255,7 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    	    	    	    
 	fi
+	EPSVAL=0.40
 	KIN="Q3W2p32_${EPSILON}e"	
     fi
     if [[ $Q2 = "2p1" && $W = "2p95" ]]; then
@@ -274,6 +278,7 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    	    	    	    
 	fi
+	EPSVAL=0.21
 	KIN="Q2p115W2p95_${EPSILON}e"	
     fi        
     if [[ $Q2 = "0p5" && $W = "2p40" ]]; then
@@ -296,6 +301,7 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    	    	    	    
 	fi
+	EPSVAL=0.09
 	KIN="Q0p5W2p40_${EPSILON}e"	
     fi    
 done
@@ -377,12 +383,22 @@ if [[ $a_flag = "true" ]]; then
     
 fi
 
+# Define global variables for lt_analysis scripts
+POL="+1" # All KaonLT is positive polarity
+TMIN=0.010
+TMAX=0.400
+KSet=1 # Arbitrary value
+
 cd "${SIMCPATH}/scripts"
 
 # Checks that array isn't empty
 if [ ${#data_right[@]} -ne 0 ]; then
     DataChargeValRight=()
+    DataChargeErrRight=()
     DataEffValRight=()
+    DataEffErrRight=()
+    DatapThetaValRight=()
+    DataEbeamValRight=()
     echo
     echo "Calculating data total effective charge right..."
     for i in "${data_right[@]}"
@@ -390,8 +406,14 @@ if [ ${#data_right[@]} -ne 0 ]; then
 	# Calculates total efficiency then applies to the charge for each run number
 	# to get the effective charge per run and saves as an array
 	DataChargeValRight+=($(python3 findEffectiveCharge.py ${EffData} "replay_coin_production" "$i" -1))
+	DataChargeErrRight+=(1)
 	# Grabs the total effiency value per run and saves as an array
-	DataEffValRight+=($(python3 getEfficiency.py "$i" ${EffData}))
+	DataEffValRight+=($(python3 getEfficiencyValue.py "$i" ${EffData} "efficiency"))
+	DataEffErrRight+=(1)
+	# Grabs pTheta value per run
+	DatapThetaValRight+=($(python3 getEfficiencyValue.py "$i" ${EffData} "pTheta"))
+	# Grabs ebeam value per run
+	DataEbeamValRight+=($(python3 getEfficiencyValue.py "$i" ${EffData} "ebeam"))
 	#echo "${DataChargeVal[@]} mC"
     done
     #echo ${DataChargeVal[*]}
@@ -405,7 +427,11 @@ fi
 # Checks that array isn't empty
 if [ ${#data_left[@]} -ne 0 ]; then
     DataChargeValLeft=()
+    DataChargeErrLeft=()
     DataEffValLeft=()
+    DataEffErrLeft=()
+    DatapThetaValLeft=()
+    DataEbeamValLeft=()
     echo
     echo "Calculating data total effective charge left..."
     for i in "${data_left[@]}"
@@ -413,8 +439,14 @@ if [ ${#data_left[@]} -ne 0 ]; then
 	# Calculates total efficiency then applies to the charge for each run number
 	# to get the effective charge per run and saves as an array
 	DataChargeValLeft+=($(python3 findEffectiveCharge.py ${EffData} "replay_coin_production" "$i" -1))
+	DataChargeErrLeft+=(1)
 	# Grabs the total effiency value per run and saves as an array
-	DataEffValLeft+=($(python3 getEfficiency.py "$i" ${EffData}))
+	DataEffValLeft+=($(python3 getEfficiencyValue.py "$i" ${EffData} "efficiency"))
+	DataEffErrLeft+=(1)
+	# Grabs pTheta value per run
+	DatapThetaValLeft+=($(python3 getEfficiencyValue.py "$i" ${EffData} "pTheta"))
+	# Grabs ebeam value per run
+	DataEbeamValLeft+=($(python3 getEfficiencyValue.py "$i" ${EffData} "ebeam"))
 	#echo "${DataChargeVal[@]} mC"
     done
     #echo ${DataChargeVal[*]}
@@ -428,7 +460,11 @@ fi
 # Checks that array isn't empty
 if [ ${#data_center[@]} -ne 0 ]; then
     DataChargeValCenter=()
+    DataChargeErrCenter=()
     DataEffValCenter=()
+    DataEffErrCenter=()
+    DatapThetaValCenter=()
+    DataEbeamValCenter=()
     echo
     echo "Calculating data total effective charge center..."
     for i in "${data_center[@]}"
@@ -436,8 +472,14 @@ if [ ${#data_center[@]} -ne 0 ]; then
 	# Calculates total efficiency then applies to the charge for each run number
 	# to get the effective charge per run and saves as an array
 	DataChargeValCenter+=($(python3 findEffectiveCharge.py ${EffData} "replay_coin_production" "$i" -1))
+	DataChargeErrCenter+=(1)
 	# Grabs the total effiency value per run and saves as an array
-	DataEffValCenter+=($(python3 getEfficiency.py "$i" ${EffData}))
+	DataEffValCenter+=($(python3 getEfficiencyValue.py "$i" ${EffData} "efficiency"))
+	DataEffErrCenter+=(1)
+	# Grabs pTheta value per run
+	DatapThetaValCenter+=($(python3 getEfficiencyValue.py "$i" ${EffData} "pTheta"))
+	# Grabs ebeam value per run
+	DataEbeamValCenter+=($(python3 getEfficiencyValue.py "$i" ${EffData} "ebeam"))
 	#echo "${DataChargeVal[@]} mC"
     done
     #echo ${DataChargeVal[*]}
@@ -460,5 +502,8 @@ if [[ $t_flag = "true" || $d_flag = "true" ]]; then
     fi
 fi
 
+python3 createPhysicsList.py  ${Q2} ${POL} ${EPSVAL} ${TMIN} ${TMAX} ${NumtBins} ${Kset} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" "${DatapThetaValRight[*]}" "${DatapThetaValLeft[*]}" "${DatapThetaValCenter[*]}" "${DataEbeamValRight[*]}" "${DataEbeamValLeft[*]}" "${DataEbeamValCenter[*]}" "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" "${DataEffErrRight[*]}" "${DataEffErrLeft[*]}" "${DataEffErrCenter[*]}" "${DataChargeValRight[*]}" "${DataChargeValLeft[*]}" "${DataChargeValCenter[*]}" "${DataChargeErrRight[*]}" "${DataChargeErrLeft[*]}" "${DataChargeErrCenter[*]}"
+
 cd "${SIMCPATH}"
 evince "OUTPUT/Analysis/${ANATYPE}LT/${OutFullAnalysisFilename}.pdf"
+

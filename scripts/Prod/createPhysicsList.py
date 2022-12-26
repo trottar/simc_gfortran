@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-22 15:56:40 trottar"
+# Time-stamp: "2022-12-22 16:30:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -65,9 +65,9 @@ UTILPATH=lt.UTILPATH
 
 ################################################################################################################################################
 
-thpq_right = pThetaValCenter[0]-pThetaValRight[0]
-thpq_left = pThetaValCenter[0]+pThetaValLeft[0]
-thpq_center = pThetaValCenter[0]    
+thpq_right = float(pThetaValCenter[0])-float(pThetaValRight[0])
+thpq_left = float(pThetaValCenter[0])+float(pThetaValLeft[0])
+thpq_center = float(pThetaValCenter[0])
 
 # Open a file in write mode
 with open('physics_lists/list.settings', 'a') as f:

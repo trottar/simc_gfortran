@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-26 12:53:24 trottar"
+# Time-stamp: "2022-12-26 13:02:22 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -65,23 +65,23 @@ UTILPATH=lt.UTILPATH
 
 ################################################################################################################################################
 
-thpq_right = float(pThetaValCenter[0])-float(pThetaValRight[0])
-thpq_left = float(pThetaValCenter[0])+float(pThetaValLeft[0])
-thpq_center = float(pThetaValCenter[0])
+thpq_right = -abs(float(pThetaValCenter[0])-float(pThetaValRight[0]))
+thpq_left = abs(float(pThetaValCenter[0])-float(pThetaValLeft[0]))
+thpq_center = 0.000
 
 # Open a file in write mode
 with open('physics_lists/list.settings', 'w') as f:
     # Write the value of the variable to the file
-    f.write("{} {} {} {} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_right,TMIN,TMAX,NumtBins,Kset))
-    f.write("{} {} {} {} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_left,TMIN,TMAX,NumtBins,Kset))
-    f.write("{} {} {} {} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_center,TMIN,TMAX,NumtBins,Kset))
+    f.write("{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_right,TMIN,TMAX,NumtBins,Kset))
+    f.write("{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_left,TMIN,TMAX,NumtBins,Kset))
+    f.write("{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_center,TMIN,TMAX,NumtBins,Kset))
 
 # Open a file in write mode
 with open('physics_lists/lists/list.%s_%s' % (Q2.replace(".",""),EPSVAL.replace("0.","")), 'w') as f:
     # Write the value of the variable to the file
     for i,thpq in enumerate(EbeamValRight):
-        f.write("{} {} {} {} {} {} {} {}\n".format(runNumRight[i],Q2,EbeamValRight[i],ChargeValRight[i],ChargeErrRight[i],EffValRight[i],EffErrRight[i],EPSVAL))
+        f.write("{} {} {} {} {} {:.5f} {} {}\n".format(runNumRight[i],Q2,EbeamValRight[i],ChargeValRight[i],ChargeErrRight[i],EffValRight[i],EffErrRight[i],EPSVAL))
     for i,thpq in enumerate(EbeamValLeft):
-        f.write("{} {} {} {} {} {} {} {}\n".format(runNumLeft[i],Q2,EbeamValLeft[i],ChargeValLeft[i],ChargeErrLeft[i],EffValLeft[i],EffErrLeft[i],EPSVAL))
+        f.write("{} {} {} {} {} {:.5f} {} {}\n".format(runNumLeft[i],Q2,EbeamValLeft[i],ChargeValLeft[i],ChargeErrLeft[i],EffValLeft[i],EffErrLeft[i],EPSVAL))
     for i,thpq in enumerate(EbeamValCenter):
-        f.write("{} {} {} {} {} {} {} {}\n".format(runNumCenter[i],Q2,EbeamValCenter[i],ChargeValCenter[i],ChargeErrCenter[i],EffValCenter[i],EffErrCenter[i],EPSVAL)) 
+        f.write("{} {} {} {} {} {:.5f} {} {}\n".format(runNumCenter[i],Q2,EbeamValCenter[i],ChargeValCenter[i],ChargeErrCenter[i],EffValCenter[i],EffErrCenter[i],EPSVAL)) 

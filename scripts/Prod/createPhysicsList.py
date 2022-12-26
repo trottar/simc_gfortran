@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-26 12:07:48 trottar"
+# Time-stamp: "2022-12-26 12:17:02 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -72,16 +72,16 @@ thpq_center = float(pThetaValCenter[0])
 # Open a file in write mode
 with open('physics_lists/list.settings', 'a') as f:
     # Write the value of the variable to the file
-    f.write(POL," ",Q2," ",EPSVAL," ",thpq_right," ",TMIN," ",TMAX," ",NumtBins," ",Kset)
-    f.write(POL," ",Q2," ",EPSVAL," ",thpq_left," ",TMIN," ",TMAX," ",NumtBins," ",Kset)
-    f.write(POL," ",Q2," ",EPSVAL," ",thpq_center," ",TMIN," ",TMAX," ",NumtBins," ",Kset)
+    f.write("" % (POL," ",Q2," ",EPSVAL," ",thpq_right," ",TMIN," ",TMAX," ",NumtBins," ",Kset))
+    f.write("" % (POL," ",Q2," ",EPSVAL," ",thpq_left," ",TMIN," ",TMAX," ",NumtBins," ",Kset))
+    f.write("" % (POL," ",Q2," ",EPSVAL," ",thpq_center," ",TMIN," ",TMAX," ",NumtBins," ",Kset))
 
 # Open a file in write mode
 with open('physics_lists/lists/list.%s_%s' % (Q2.replace(".",""),EPSVAL.replace("0.","")), 'a') as f:
     # Write the value of the variable to the file
     for i,thpq in enumerate(EbeamValRight):
-        f.write(runNumRight[i]," ",Q2," ",EbeamValRight[i]," ",ChargeValRight[i]," ",ChargeErrRight[i]," ",EffValRight[i]," ",EffErrRight[i]," ",EPSVAL)
+        f.write("" % (runNumRight[i]," ",Q2," ",EbeamValRight[i]," ",ChargeValRight[i]," ",ChargeErrRight[i]," ",EffValRight[i]," ",EffErrRight[i]," ",EPSVAL))
     for i,thpq in enumerate(EbeamValLeft):
-        f.write(runNumLeft[i]," ",Q2," ",EbeamValLeft[i]," ",ChargeValLeft[i]," ",ChargeErrLeft[i]," ",EffValLeft[i]," ",EffErrLeft[i]," ",EPSVAL)
+        f.write("" % (runNumLeft[i]," ",Q2," ",EbeamValLeft[i]," ",ChargeValLeft[i]," ",ChargeErrLeft[i]," ",EffValLeft[i]," ",EffErrLeft[i]," ",EPSVAL))
     for i,thpq in enumerate(EbeamValCenter):
-        f.write(runNumCenter[i]," ",Q2," ",EbeamValCenter[i]," ",ChargeValCenter[i]," ",ChargeErrCenter[i]," ",EffValCenter[i]," ",EffErrCenter[i]," ",EPSVAL)        
+        f.write("" % (runNumCenter[i]," ",Q2," ",EbeamValCenter[i]," ",ChargeValCenter[i]," ",ChargeErrCenter[i]," ",EffValCenter[i]," ",EffErrCenter[i]," ",EPSVAL)) 

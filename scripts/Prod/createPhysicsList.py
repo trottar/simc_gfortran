@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-26 12:53:00 trottar"
+# Time-stamp: "2022-12-26 12:53:24 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -70,14 +70,14 @@ thpq_left = float(pThetaValCenter[0])+float(pThetaValLeft[0])
 thpq_center = float(pThetaValCenter[0])
 
 # Open a file in write mode
-with open('physics_lists/list.settings', 'a') as f:
+with open('physics_lists/list.settings', 'w') as f:
     # Write the value of the variable to the file
     f.write("{} {} {} {} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_right,TMIN,TMAX,NumtBins,Kset))
     f.write("{} {} {} {} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_left,TMIN,TMAX,NumtBins,Kset))
     f.write("{} {} {} {} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_center,TMIN,TMAX,NumtBins,Kset))
 
 # Open a file in write mode
-with open('physics_lists/lists/list.%s_%s' % (Q2.replace(".",""),EPSVAL.replace("0.","")), 'a') as f:
+with open('physics_lists/lists/list.%s_%s' % (Q2.replace(".",""),EPSVAL.replace("0.","")), 'w') as f:
     # Write the value of the variable to the file
     for i,thpq in enumerate(EbeamValRight):
         f.write("{} {} {} {} {} {} {} {}\n".format(runNumRight[i],Q2,EbeamValRight[i],ChargeValRight[i],ChargeErrRight[i],EffValRight[i],EffErrRight[i],EPSVAL))

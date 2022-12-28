@@ -509,5 +509,5 @@ else
 fi
 
 cd "${SIMCPATH}"
-evince "OUTPUT/Analysis/${ANATYPE}LT/${OutFullAnalysisFilename}.pdf"
+#evince "OUTPUT/Analysis/${ANATYPE}LT/${OutFullAnalysisFilename}.pdf"
 

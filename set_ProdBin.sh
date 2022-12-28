@@ -130,7 +130,7 @@ grab_runs () {
 echo
 echo "---------------------------------------------------------"
 echo
-echo "Beginning analysis for ${Q2}, ${W}, ${EPSILON} setting..."
+echo "Beginning analysis for Q2=${Q2}, W=${W}, ${EPSILON} setting..."
 echo
 echo "---------------------------------------------------------"
 echo

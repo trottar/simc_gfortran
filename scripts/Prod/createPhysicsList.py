@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-26 13:28:32 trottar"
+# Time-stamp: "2022-12-28 13:44:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -65,22 +65,24 @@ UTILPATH=lt.UTILPATH
 
 ################################################################################################################################################
 
+# Define thpq vector relative to middle setting
 thpq_right = -abs(float(pThetaValCenter[0])-float(pThetaValRight[0]))
 thpq_left = abs(float(pThetaValCenter[0])-float(pThetaValLeft[0]))
 thpq_center = 0.000
 
 # Open a file in write mode
-with open('physics_lists/list.settings', 'w') as f:
+with open('physics_lists/list.settings', 'a') as f:
     # Write the value of the variable to the file
     f.write("{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_right,TMIN,TMAX,NumtBins,Kset))
     f.write("{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_left,TMIN,TMAX,NumtBins,Kset))
     f.write("{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_center,TMIN,TMAX,NumtBins,Kset))
 
 # Open a file in write mode
-with open('physics_lists/lists/list.%s_%s' % (Q2.replace(".",""),EPSVAL.replace("0.","")), 'w') as f:
+with open('physics_lists/lists/list.%s_%s' % (Q2.replace(".",""),EPSVAL.replace("0.","")), 'a') as f:
     # Write the value of the variable to the file
     for i,thpq in enumerate(EbeamValRight):
-        f.write("{} {} {} {} {} {:.5f} {} {}\n".format(runNumRight[i],Q2,EbeamValRight[i],float(ChargeValRight[i])/1000000,ChargeErrRight[i],float(EffValRight[i]),EffErrRight[i],EPSVAL))
+        # convert charge to Coulombs (10^-6C=1uC)
+        f.write("{} {} {} {} {} {:.5f} {} {}\n".format(runNumRight[i],Q2,EbeamValRight[i],float(ChargeValRight[i])/1000000,ChargeErrRight[i],float(EffValRight[i]),EffErrRight[i],EPSVAL)) 
     for i,thpq in enumerate(EbeamValLeft):
         f.write("{} {} {} {} {} {:.5f} {} {}\n".format(runNumLeft[i],Q2,EbeamValLeft[i],float(ChargeValLeft[i])/1000000,ChargeErrLeft[i],float(EffValLeft[i]),EffErrLeft[i],EPSVAL))
     for i,thpq in enumerate(EbeamValCenter):

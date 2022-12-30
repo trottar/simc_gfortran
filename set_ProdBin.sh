@@ -52,7 +52,7 @@ while getopts 'hdat' flag; do
 done
 
 # When any flag is used then the user input changes argument order
-if [[ $t_flag = "true" ]]; then
+if [[ $t_flag = "true" || $a_flag = "true" ]]; then
 
     EPSILON=$2
     Q2=$3
@@ -110,6 +110,55 @@ elif [[ $d_flag = "true" ]]; then
     echo "-----------------------------"
     echo
     NumtBins=5
+else
+    
+    EPSILON=$1
+    Q2=$2
+    W=$3
+    NumtBins=$4
+    echo "Epsilon must be - high - low - Case Sensitive!"
+    echo "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5]"
+    echo "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40]"
+    if [[ -z "$1" || ! "$EPSILON" =~ high|low ]]; then # Check the 1st argument was provided and that it's one of the valid options
+	echo ""
+	echo "I need a valid epsilon..."
+	while true; do
+	    echo ""
+	    read -p "Epsilon must be - high - low - Case Sensitive! - or press ctrl-c to exit : " EPSILON
+	    case $EPSILON in
+		'');; # If blank, prompt again
+		'high'|'low') break;; # If a valid option, break the loop and continue
+	    esac
+	done
+    fi
+    if [[ -z "$2" || ! "$Q2" =~ 5p5|4p4|3p0|2p1|0p5 ]]; then # Check the 2nd argument was provided and that it's one of the valid options
+	echo ""
+	echo "I need a valid Q2..."
+	while true; do
+	    echo ""
+	    read -p "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5] - or press ctrl-c to exit : " Q2
+	    case $Q2 in
+		'');; # If blank, prompt again
+		'5p5'|'4p4'|'3p0'|'2p1'|'0p5') break;; # If a valid option, break the loop and continue
+	    esac
+	done
+    fi
+    if [[ -z "$3" || ! "$W" =~ 3p02|2p74|3p14|2p32|2p95|2p40 ]]; then # Check the 3rd argument was provided and that it's one of the valid options
+	echo ""
+	echo "I need a valid W..."
+	while true; do
+	    echo ""
+	    read -p "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40] - or press ctrl-c to exit : " W
+	    case $W in
+		'');; # If blank, prompt again
+		'3p02'|'2p74'|'3p14'|'2p32'|'2p95'|'2p40') break;; # If a valid option, break the loop and continue
+	    esac
+	done
+    fi
+    if [[ $4 -eq "" ]]; then
+	echo "No number of events per nominal bin range given, assuming 5 t-bins..." 
+	NumtBins=5
+    fi    
 fi
 
 ##############
@@ -383,6 +432,9 @@ if [[ $a_flag = "true" ]]; then
     
 fi
 
+##############
+# HARD CODED #
+##############
 # Define global variables for lt_analysis scripts
 POL="+1" # All KaonLT is positive polarity
 TMIN=0.010

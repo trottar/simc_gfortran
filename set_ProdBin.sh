@@ -499,7 +499,7 @@ if [ ${#data_left[@]} -ne 0 ]; then
 	DatapThetaValLeft+=($(python3 getEfficiencyValue.py "$i" ${EffData} "pTheta"))
 	# Grabs ebeam value per run
 	DataEbeamValLeft+=($(python3 getEfficiencyValue.py "$i" ${EffData} "ebeam"))
-	#echo "${DataChargeVal[@]} uC"
+	echo "${DataChargeVal[@]} uC"
     done
     #echo ${DataChargeVal[*]}
     # Sums the array to get the total effective charge

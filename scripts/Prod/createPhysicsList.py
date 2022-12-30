@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-30 11:58:46 trottar"
+# Time-stamp: "2022-12-30 13:22:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -89,8 +89,11 @@ with open('physics_lists/lists/list.%s_%s' % (Q2.replace(".",""),EPSVAL.replace(
     # Write the value of the variable to the file
     for i,thpq in enumerate(EbeamValRight):
         # convert charge to Coulombs (10^-6C=1uC)
-        f.write("{} {} {} {} {} {:.5f} {} {}\n".format(runNumRight[i],Q2,EbeamValRight[i],float(ChargeValRight[i])/1000000,ChargeErrRight[i],float(EffValRight[i]),EffErrRight[i],EPSVAL)) 
+        f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
+            .format(runNumRight[i],Q2,EbeamValRight[i],float(ChargeValRight[i])/1000000,ChargeErrRight[i],float(EffValRight[i]),EffErrRight[i],EPSVAL,thpq_right)) 
     for i,thpq in enumerate(EbeamValLeft):
-        f.write("{} {} {} {} {} {:.5f} {} {}\n".format(runNumLeft[i],Q2,EbeamValLeft[i],float(ChargeValLeft[i])/1000000,ChargeErrLeft[i],float(EffValLeft[i]),EffErrLeft[i],EPSVAL))
+        f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
+            .format(runNumLeft[i],Q2,EbeamValLeft[i],float(ChargeValLeft[i])/1000000,ChargeErrLeft[i],float(EffValLeft[i]),EffErrLeft[i],EPSVAL,thpq_left))
     for i,thpq in enumerate(EbeamValCenter):
-        f.write("{} {} {} {} {} {:.5f} {} {}\n".format(runNumCenter[i],Q2,EbeamValCenter[i],float(ChargeValCenter[i])/1000000,ChargeErrCenter[i],float(EffValCenter[i]),EffErrCenter[i],EPSVAL)) 
+        f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
+            .format(runNumCenter[i],Q2,EbeamValCenter[i],float(ChargeValCenter[i])/1000000,ChargeErrCenter[i],float(EffValCenter[i]),EffErrCenter[i],EPSVAL,thpq_center)) 

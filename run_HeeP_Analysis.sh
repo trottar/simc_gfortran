@@ -259,7 +259,7 @@ do
     # to get the effective charge per run and saves as an array
     DataChargeVal+=($(python3 findEffectiveCharge.py ${EffData} ${ROOTPREFIX} "$i" -1))
     # Grabs the total effiency value per run and saves as an array
-    DataEffVal+=($(python3 getEfficiency.py "$i" ${EffData}))
+    DataEffVal+=($(python3 getEff1iciencyValue.py "$i" ${EffData} "efficiency"))
     DataRunNum+=("$i")
     #echo "${DataChargeVal[@]} mC"
 done

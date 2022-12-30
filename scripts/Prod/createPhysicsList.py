@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-28 13:44:42 trottar"
+# Time-stamp: "2022-12-30 11:58:46 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -11,6 +11,13 @@
 # Copyright (c) trottar
 #
 import sys, os
+
+##################################################################################################################################################
+
+# Check the number of arguments provided to the script
+if len(sys.argv)-1!=28:
+    print("!!!!! ERROR !!!!!\n Expected 28 arguments\n Usage is with - Q2 POL EPSVAL TMIN TMAX NumtBins Kset runNumRight runNumLeft runNumCenter pThetaValRight pThetaValLeft pThetaValCenter EbeamValRight EbeamValLeft EbeamValCenter EffValRight EffValLeft EffValCenter EffErrRight EffErrLeft EffErrCenter ChargeValRight ChargeValLeft ChargeValCenter ChargeErrRight ChargeErrLeft ChargeErrCenter \n!!!!! ERROR !!!!!")
+    sys.exit(1)
 
 ################################################################################################################################################
 '''

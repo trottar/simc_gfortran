@@ -458,15 +458,15 @@ if [ ${#data_right[@]} -ne 0 ]; then
 	# Calculates total efficiency then applies to the charge for each run number
 	# to get the effective charge per run and saves as an array
 	DataChargeValRight+=($(python3 findEffectiveCharge.py ${EffData} "replay_coin_production" "$i" -1))
-	DataChargeErrRight+=(1)
+	DataChargeErrRight+=(1) # HERE! These uncertainties are set to unity until the replays are updated with proper uncertainties
 	# Grabs the total effiency value per run and saves as an array
 	DataEffValRight+=($(python3 getEfficiencyValue.py "$i" ${EffData} "efficiency"))
-	DataEffErrRight+=(1)
+	DataEffErrRight+=(1) # HERE! These uncertainties are set to unity until the replays are updated with proper uncertainties
 	# Grabs pTheta value per run
 	DatapThetaValRight+=($(python3 getEfficiencyValue.py "$i" ${EffData} "pTheta"))
 	# Grabs ebeam value per run
 	DataEbeamValRight+=($(python3 getEfficiencyValue.py "$i" ${EffData} "ebeam"))
-	#echo "${DataChargeVal[@]} mC"
+	#echo "${DataChargeVal[@]} uC"
     done
     #echo ${DataChargeVal[*]}
     # Sums the array to get the total effective charge
@@ -491,15 +491,15 @@ if [ ${#data_left[@]} -ne 0 ]; then
 	# Calculates total efficiency then applies to the charge for each run number
 	# to get the effective charge per run and saves as an array
 	DataChargeValLeft+=($(python3 findEffectiveCharge.py ${EffData} "replay_coin_production" "$i" -1))
-	DataChargeErrLeft+=(1)
+	DataChargeErrLeft+=(1) # HERE! These uncertainties are set to unity until the replays are updated with proper uncertainties
 	# Grabs the total effiency value per run and saves as an array
 	DataEffValLeft+=($(python3 getEfficiencyValue.py "$i" ${EffData} "efficiency"))
-	DataEffErrLeft+=(1)
+	DataEffErrLeft+=(1) # HERE! These uncertainties are set to unity until the replays are updated with proper uncertainties
 	# Grabs pTheta value per run
 	DatapThetaValLeft+=($(python3 getEfficiencyValue.py "$i" ${EffData} "pTheta"))
 	# Grabs ebeam value per run
 	DataEbeamValLeft+=($(python3 getEfficiencyValue.py "$i" ${EffData} "ebeam"))
-	#echo "${DataChargeVal[@]} mC"
+	#echo "${DataChargeVal[@]} uC"
     done
     #echo ${DataChargeVal[*]}
     # Sums the array to get the total effective charge
@@ -524,15 +524,15 @@ if [ ${#data_center[@]} -ne 0 ]; then
 	# Calculates total efficiency then applies to the charge for each run number
 	# to get the effective charge per run and saves as an array
 	DataChargeValCenter+=($(python3 findEffectiveCharge.py ${EffData} "replay_coin_production" "$i" -1))
-	DataChargeErrCenter+=(1)
+	DataChargeErrCenter+=(1) # HERE! These uncertainties are set to unity until the replays are updated with proper uncertainties
 	# Grabs the total effiency value per run and saves as an array
 	DataEffValCenter+=($(python3 getEfficiencyValue.py "$i" ${EffData} "efficiency"))
-	DataEffErrCenter+=(1)
+	DataEffErrCenter+=(1) # HERE! These uncertainties are set to unity until the replays are updated with proper uncertainties
 	# Grabs pTheta value per run
 	DatapThetaValCenter+=($(python3 getEfficiencyValue.py "$i" ${EffData} "pTheta"))
 	# Grabs ebeam value per run
 	DataEbeamValCenter+=($(python3 getEfficiencyValue.py "$i" ${EffData} "ebeam"))
-	#echo "${DataChargeVal[@]} mC"
+	#echo "${DataChargeVal[@]} uC"
     done
     #echo ${DataChargeVal[*]}
     # Sums the array to get the total effective charge
@@ -542,7 +542,7 @@ if [ ${#data_center[@]} -ne 0 ]; then
     echo "Total Charge Center: ${DataChargeSumCenter} uC"
 fi
 
-# Finally, run the plotting script
+# Run the plotting script if t-flag enabled
 # Checks that array isn't empty
 if [[ $t_flag = "true" || $d_flag = "true" ]]; then
     cd "${SIMCPATH}/scripts/Prod/binning"    
@@ -553,6 +553,7 @@ if [[ $t_flag = "true" || $d_flag = "true" ]]; then
     fi
 fi
 
+# Create input for lt_analysis code
 cd "${SIMCPATH}/scripts/Prod/"
 if [ ${#data_right[@]} -eq 0 ]; then
     python3 createPhysicsList.py ${Q2} ${POL} ${EPSVAL} ${TMIN} ${TMAX} ${NumtBins} ${KSet} "0" "${data_left[*]}" "${data_center[*]}" "0" "${DatapThetaValLeft[*]}" "${DatapThetaValCenter[*]}" "0" "${DataEbeamValLeft[*]}" "${DataEbeamValCenter[*]}" "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" "0" "${DataEffErrLeft[*]}" "${DataEffErrCenter[*]}" "0" "${DataChargeValLeft[*]}" "${DataChargeValCenter[*]}" "0" "${DataChargeErrLeft[*]}" "${DataChargeErrCenter[*]}"
@@ -560,6 +561,8 @@ else
     python3 createPhysicsList.py ${Q2} ${POL} ${EPSVAL} ${TMIN} ${TMAX} ${NumtBins} ${KSet} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" "${DatapThetaValRight[*]}" "${DatapThetaValLeft[*]}" "${DatapThetaValCenter[*]}" "${DataEbeamValRight[*]}" "${DataEbeamValLeft[*]}" "${DataEbeamValCenter[*]}" "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" "${DataEffErrRight[*]}" "${DataEffErrLeft[*]}" "${DataEffErrCenter[*]}" "${DataChargeValRight[*]}" "${DataChargeValLeft[*]}" "${DataChargeValCenter[*]}" "${DataChargeErrRight[*]}" "${DataChargeErrLeft[*]}" "${DataChargeErrCenter[*]}"
 fi
 
-cd "${SIMCPATH}"
-#evince "OUTPUT/Analysis/${ANATYPE}LT/${OutFullAnalysisFilename}.pdf"
+if [[ $t_flag = "true" || $d_flag = "true" ]]; then
+    cd "${SIMCPATH}"
+    evince "OUTPUT/Analysis/${ANATYPE}LT/${OutFullAnalysisFilename}.pdf"
+fi
 

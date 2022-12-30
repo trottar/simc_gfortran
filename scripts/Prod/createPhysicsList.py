@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-30 13:40:05 trottar"
+# Time-stamp: "2022-12-30 16:10:44 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -57,10 +57,6 @@ ChargeValCenter = sys.argv[25].split(" ")
 ChargeErrRight = sys.argv[26].split(" ")
 ChargeErrLeft = sys.argv[27].split(" ")
 ChargeErrCenter = sys.argv[28].split(" ")
-
-print(runNumRight)
-print(runNumLeft)
-print(runNumCenter)
 
 ################################################################################################################################################
 '''

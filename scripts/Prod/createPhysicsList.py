@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-30 13:35:36 trottar"
+# Time-stamp: "2022-12-30 13:40:05 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -83,29 +83,29 @@ thpq_center = 0.000
 
 # Open a file in write mode
 with open('physics_lists/list.settings', 'a') as f:
-    if float(runNumRight) != 0.0:
+    if float(runNumRight[0]) != 0.0:
         # Write the value of the variable to the file
         f.write("{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_right,TMIN,TMAX,NumtBins,Kset))
-    if float(runNumLeft) != 0.0:
+    if float(runNumLeft[0]) != 0.0:
         f.write("{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_left,TMIN,TMAX,NumtBins,Kset))
-    if float(runNumCenter) != 0.0:
+    if float(runNumCenter[0]) != 0.0:
         f.write("{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_center,TMIN,TMAX,NumtBins,Kset))
 
 # Open a file in write mode
 with open('physics_lists/lists/list.%s_%s' % (Q2.replace(".",""),EPSVAL.replace("0.","")), 'a') as f:
-    if float(runNumRight) != 0.0:
+    if float(runNumRight[0]) != 0.0:
         # Write the value of the variable to the file
         for i,thpq in enumerate(EbeamValRight):
             # convert uC to C (10^-6C=1uC)
             f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
                     .format(runNumRight[i],Q2,EbeamValRight[i],float(ChargeValRight[i])/1000000,ChargeErrRight[i], \
                             float(EffValRight[i]),EffErrRight[i],EPSVAL,thpq_right))
-    if float(runNumLeft) != 0.0:
+    if float(runNumLeft[0]) != 0.0:
         for i,thpq in enumerate(EbeamValLeft):
             f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
                     .format(runNumLeft[i],Q2,EbeamValLeft[i],float(ChargeValLeft[i])/1000000,ChargeErrLeft[i], \
                             float(EffValLeft[i]),EffErrLeft[i],EPSVAL,thpq_left))
-    if float(runNumCenter) != 0.0:
+    if float(runNumCenter[0]) != 0.0:
         for i,thpq in enumerate(EbeamValCenter):
             f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
                     .format(runNumCenter[i],Q2,EbeamValCenter[i],float(ChargeValCenter[i])/1000000,ChargeErrCenter[i], \

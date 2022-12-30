@@ -261,7 +261,7 @@ do
     # Grabs the total effiency value per run and saves as an array
     DataEffVal+=($(python3 getEfficiencyValue.py "$i" ${EffData} "efficiency"))
     DataRunNum+=("$i")
-    #echo "${DataChargeVal[@]} mC"
+    #echo "${DataChargeVal[@]} uC"
 done
 #echo ${DataChargeVal[*]}
 # Sums the array to get the total effective charge
@@ -279,9 +279,9 @@ echo "Calculating dummy total effective charge..."
 for i in "${dummydata[@]}"
 do
     DummyChargeVal+=($(python3 findEffectiveCharge.py ${EffData} ${ROOTPREFIX} "$i" -1))
-    DummyEffVal+=($(python3 getEfficiency.py "$i" ${EffData}))
+    DummyEffVal+=($(python3 getEfficiencyValue.py "$i" ${EffData} "efficiency"))
     DummyRunNum+=($(echo "$i"))
-    #echo "${DummyChargeVal[@]} mC"
+    #echo "${DummyChargeVal[@]} uC"
 done
 #echo ${DummyChargeVal[*]}
 DummyChargeSum=$(IFS=+; echo "$((${DummyChargeVal[*]}))") # Only works for integers

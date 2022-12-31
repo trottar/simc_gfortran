@@ -98,10 +98,6 @@ if [[ $t_flag = "true" || $a_flag = "true" ]]; then
 	    esac
 	done
     fi
-    if [[ $5 -eq "" ]]; then
-	echo "No number of events per nominal bin range given, assuming 5 t-bins..." 
-	NumtBins=5
-    fi
     if [[ $6 -eq "" ]]; then
 	echo "No target given, assuming LH2..." 
 	TargetType="lh2"
@@ -160,10 +156,6 @@ else
 		'3p02'|'2p74'|'3p14'|'2p32'|'2p95'|'2p40') break;; # If a valid option, break the loop and continue
 	    esac
 	done
-    fi
-    if [[ $4 -eq "" ]]; then
-	echo "No number of events per nominal bin range given, assuming 5 t-bins..." 
-	NumtBins=5
     fi
     if [[ $5 -eq "" ]]; then
 	echo "No target given, assuming LH2..." 

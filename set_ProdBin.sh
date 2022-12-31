@@ -157,10 +157,6 @@ else
 	    esac
 	done
     fi
-    if [[ $5 -eq "" ]]; then
-	echo "No target given, assuming LH2..." 
-	TargetType="lh2"
-    fi    
 fi
 
 ##############

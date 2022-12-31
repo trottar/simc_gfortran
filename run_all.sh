@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-31 11:12:46 trottar"
+# Time-stamp: "2022-12-31 11:14:17 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -11,7 +11,7 @@
 # Copyright (c) trottar
 #
 
-SIMCPATH="/u/group/c-kaonlt/USERS/trottar/simc_gfortran"
+SIMCPATH="/u/group/c-kaonlt/USERS/${USER}/simc_gfortran"
 
 cd "${SIMCPATH}"
 

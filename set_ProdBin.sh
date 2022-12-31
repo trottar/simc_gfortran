@@ -159,7 +159,8 @@ fi
 # HARD CODED #
 ##############
 # Efficiency csv file
-EffData="coin_production_Prod_efficiency_data_2022_12_05.csv"
+#EffData="coin_production_Prod_efficiency_data_2022_12_05.csv"
+EffData="coin_production_Prod_efficiency_data_2022_12_30.csv"
 
 # Function that calls python script to grab run numbers
 grab_runs () {
@@ -545,6 +546,7 @@ if [ ${#data_right[@]} -ne 0 ]; then
     echo "Calculating data total effective charge right..."
     for i in "${data_right[@]}"
     do
+	echo $i
 	# Calculates total efficiency then applies to the charge for each run number
 	# to get the effective charge per run and saves as an array
 	DataChargeValRight+=($(python3 findEffectiveCharge.py ${EffData} "replay_coin_production" "$i" -1))

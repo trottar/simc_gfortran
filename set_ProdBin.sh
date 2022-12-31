@@ -546,7 +546,6 @@ if [ ${#data_right[@]} -ne 0 ]; then
     echo "Calculating data total effective charge right..."
     for i in "${data_right[@]}"
     do
-	echo $i
 	# Calculates total efficiency then applies to the charge for each run number
 	# to get the effective charge per run and saves as an array
 	DataChargeValRight+=($(python3 findEffectiveCharge.py ${EffData} "replay_coin_production" "$i" -1))

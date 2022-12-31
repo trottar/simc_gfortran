@@ -98,10 +98,6 @@ if [[ $t_flag = "true" || $a_flag = "true" ]]; then
 	    esac
 	done
     fi
-    if [[ $6 -eq "" ]]; then
-	echo "No target given, assuming LH2..." 
-	TargetType="lh2"
-    fi
 elif [[ $d_flag = "true" ]]; then
     echo
     echo "-----------------------------"

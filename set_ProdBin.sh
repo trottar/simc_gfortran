@@ -474,7 +474,7 @@ if [[ $a_flag = "true" ]]; then
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}_Right.root *_-1_Raw_Data.root
-	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Right_Target.root"; done
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Proc.root"; done
     fi
 
     # Checks that array isn't empty
@@ -496,7 +496,7 @@ if [[ $a_flag = "true" ]]; then
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}_Left.root *_-1_Raw_Data.root
-	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Left_Target.root"; done
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Proc.root"; done
     fi
     
     # Checks that array isn't empty
@@ -518,7 +518,7 @@ if [[ $a_flag = "true" ]]; then
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}_Center.root *_-1_Raw_Data.root
-	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Center_Target.root"; done
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Raw_Proc.root"; done
     fi
     
 fi

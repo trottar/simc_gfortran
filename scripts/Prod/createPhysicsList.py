@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-30 16:10:44 trottar"
+# Time-stamp: "2022-12-30 18:27:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -15,8 +15,8 @@ import sys, os
 ##################################################################################################################################################
 
 # Check the number of arguments provided to the script
-if len(sys.argv)-1!=28:
-    print("!!!!! ERROR !!!!!\n Expected 28 arguments\n Usage is with - Q2 POL EPSVAL TMIN TMAX NumtBins Kset runNumRight runNumLeft runNumCenter pThetaValRight pThetaValLeft pThetaValCenter EbeamValRight EbeamValLeft EbeamValCenter EffValRight EffValLeft EffValCenter EffErrRight EffErrLeft EffErrCenter ChargeValRight ChargeValLeft ChargeValCenter ChargeErrRight ChargeErrLeft ChargeErrCenter \n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=29:
+    print("!!!!! ERROR !!!!!\n Expected 29 arguments\n Usage is with - Q2 POL EPSVAL TMIN TMAX NumtBins Kset runNumRight runNumLeft runNumCenter pThetaValRight pThetaValLeft pThetaValCenter EbeamValRight EbeamValLeft EbeamValCenter EffValRight EffValLeft EffValCenter EffErrRight EffErrLeft EffErrCenter ChargeValRight ChargeValLeft ChargeValCenter ChargeErrRight ChargeErrLeft ChargeErrCenter \n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ################################################################################################################################################
@@ -58,6 +58,8 @@ ChargeErrRight = sys.argv[26].split(" ")
 ChargeErrLeft = sys.argv[27].split(" ")
 ChargeErrCenter = sys.argv[28].split(" ")
 
+TargetType = sys.argv[29]
+
 ################################################################################################################################################
 '''
 ltsep package import and pathing definitions
@@ -87,22 +89,43 @@ with open('physics_lists/list.settings', 'a') as f:
     if float(runNumCenter[0]) != 0.0:
         f.write("{} {} {} {:.3f} {} {} {} {}\n".format(POL,Q2,EPSVAL,thpq_center,TMIN,TMAX,NumtBins,Kset))
 
-# Open a file in write mode
-with open('physics_lists/lists/list.%s_%s' % (Q2.replace(".",""),EPSVAL.replace("0.","")), 'a') as f:
-    if float(runNumRight[0]) != 0.0:
-        # Write the value of the variable to the file
-        for i,thpq in enumerate(EbeamValRight):
-            # convert uC to C (10^-6C=1uC)
-            f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
-                    .format(runNumRight[i],Q2,EbeamValRight[i],float(ChargeValRight[i])/1000000,ChargeErrRight[i], \
-                            float(EffValRight[i]),EffErrRight[i],EPSVAL,thpq_right))
-    if float(runNumLeft[0]) != 0.0:
-        for i,thpq in enumerate(EbeamValLeft):
-            f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
-                    .format(runNumLeft[i],Q2,EbeamValLeft[i],float(ChargeValLeft[i])/1000000,ChargeErrLeft[i], \
-                            float(EffValLeft[i]),EffErrLeft[i],EPSVAL,thpq_left))
-    if float(runNumCenter[0]) != 0.0:
-        for i,thpq in enumerate(EbeamValCenter):
-            f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
-                    .format(runNumCenter[i],Q2,EbeamValCenter[i],float(ChargeValCenter[i])/1000000,ChargeErrCenter[i], \
-                            float(EffValCenter[i]),EffErrCenter[i],EPSVAL,thpq_center)) 
+if TargetType == "dummy":
+    # Open a file in write mode
+    with open('physics_lists/lists/list.dummy_%s_%s' % (Q2.replace(".",""),EPSVAL.replace("0.","")), 'a') as f:
+        if float(runNumRight[0]) != 0.0:
+            # Write the value of the variable to the file
+            for i,thpq in enumerate(EbeamValRight):
+                # convert uC to C (10^-6C=1uC)
+                f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
+                        .format(runNumRight[i],Q2,EbeamValRight[i],float(ChargeValRight[i])/1000000,ChargeErrRight[i], \
+                                float(EffValRight[i]),EffErrRight[i],EPSVAL,thpq_right))
+        if float(runNumLeft[0]) != 0.0:
+            for i,thpq in enumerate(EbeamValLeft):
+                f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
+                        .format(runNumLeft[i],Q2,EbeamValLeft[i],float(ChargeValLeft[i])/1000000,ChargeErrLeft[i], \
+                                float(EffValLeft[i]),EffErrLeft[i],EPSVAL,thpq_left))
+        if float(runNumCenter[0]) != 0.0:
+            for i,thpq in enumerate(EbeamValCenter):
+                f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
+                        .format(runNumCenter[i],Q2,EbeamValCenter[i],float(ChargeValCenter[i])/1000000,ChargeErrCenter[i], \
+                                float(EffValCenter[i]),EffErrCenter[i],EPSVAL,thpq_center)) 
+else:
+    # Open a file in write mode
+    with open('physics_lists/lists/list.%s_%s' % (Q2.replace(".",""),EPSVAL.replace("0.","")), 'a') as f:
+        if float(runNumRight[0]) != 0.0:
+            # Write the value of the variable to the file
+            for i,thpq in enumerate(EbeamValRight):
+                # convert uC to C (10^-6C=1uC)
+                f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
+                        .format(runNumRight[i],Q2,EbeamValRight[i],float(ChargeValRight[i])/1000000,ChargeErrRight[i], \
+                                float(EffValRight[i]),EffErrRight[i],EPSVAL,thpq_right))
+        if float(runNumLeft[0]) != 0.0:
+            for i,thpq in enumerate(EbeamValLeft):
+                f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
+                        .format(runNumLeft[i],Q2,EbeamValLeft[i],float(ChargeValLeft[i])/1000000,ChargeErrLeft[i], \
+                                float(EffValLeft[i]),EffErrLeft[i],EPSVAL,thpq_left))
+        if float(runNumCenter[0]) != 0.0:
+            for i,thpq in enumerate(EbeamValCenter):
+                f.write("{} {} {} {} {} {:.5f} {} {} {:.3f}\n" \
+                        .format(runNumCenter[i],Q2,EbeamValCenter[i],float(ChargeValCenter[i])/1000000,ChargeErrCenter[i], \
+                                float(EffValCenter[i]),EffErrCenter[i],EPSVAL,thpq_center)) 

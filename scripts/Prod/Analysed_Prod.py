@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-11-29 16:35:02 trottar"
+# Time-stamp: "2023-01-01 18:31:19 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -232,9 +232,9 @@ def main():
             # Uncomment the line below if you want .csv file output, WARNING the files can be very large and take a long time to process!                                                                      
             #pd.DataFrame(data.get(data_keys[i])).to_csv("%s/%s_%s.csv" % (OUTPATH, data_keys[i], runNum), header=DFHeader, index=False) # Convert array to panda dataframe and write to csv with correct header                                                                                                      
         if (i == 0):
-            pd.DataFrame(data.get(data_keys[i]), columns = DFHeader, index = None).to_root("%s/%s_%s_Raw_Data.root" % (OUTPATH, runNum, MaxEvent), key ="%s" % data_keys[i])
+            pd.DataFrame(data.get(data_keys[i]), columns = DFHeader, index = None).to_root("%s/%s_%s_Raw_Proc.root" % (OUTPATH, runNum, MaxEvent), key ="%s" % data_keys[i])
         elif (i != 0):
-            pd.DataFrame(data.get(data_keys[i]), columns = DFHeader, index = None).to_root("%s/%s_%s_Raw_Data.root" % (OUTPATH, runNum, MaxEvent), key ="%s" % data_keys[i], mode ='a')
+            pd.DataFrame(data.get(data_keys[i]), columns = DFHeader, index = None).to_root("%s/%s_%s_Raw_Proc.root" % (OUTPATH, runNum, MaxEvent), key ="%s" % data_keys[i], mode ='a')
 
 if __name__ == '__main__':
     main()

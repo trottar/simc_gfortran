@@ -448,7 +448,7 @@ do
 done
 
 # Define input and output file names
-InDATAFilename="Raw_Proc_${KIN}.root"
+InDATAFilename="Proc_Data_${KIN}.root"
 OutDATAFilename="Analysed_Data_${KIN}"
 OutFullAnalysisFilename="FullAnalysis_${KIN}"
 
@@ -475,7 +475,7 @@ if [[ $a_flag = "true" ]]; then
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}_Right.root *_-1_Raw_Data.root
-	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Proc.root}_-1_Raw_Proc.root"; done
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
     fi
 
     # Checks that array isn't empty
@@ -497,7 +497,7 @@ if [[ $a_flag = "true" ]]; then
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}_Left.root *_-1_Raw_Data.root
-	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Proc.root}_-1_Raw_Proc.root"; done
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
     fi
     
     # Checks that array isn't empty
@@ -519,7 +519,7 @@ if [[ $a_flag = "true" ]]; then
 	echo
 	echo "Combining root files..."  
 	hadd -f ${OutDATAFilename}_Center.root *_-1_Raw_Data.root
-	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Proc.root}_-1_Raw_Proc.root"; done
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
     fi
     
 fi

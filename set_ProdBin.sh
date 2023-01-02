@@ -449,7 +449,7 @@ done
 
 # Define input and output file names
 InDATAFilename="Proc_Data_${KIN}.root"
-OutDATAFilename="Analysed_Data_${KIN}"
+OutDATAFilename="Analysed_Data2_${KIN}"
 OutFullAnalysisFilename="FullAnalysis_${KIN}"
 
 # When analysis flag is used then the analysis script (Analysed_Prod.py)

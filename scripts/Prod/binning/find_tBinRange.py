@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2022-12-06 02:07:55 trottar"
+# Time-stamp: "2023-01-03 14:41:26 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -305,7 +305,7 @@ def defineHists(phi_setting):
     H_W_DATA  = ROOT.TH1D("H_W_DATA","W ", 200, 0.0, 10.0)
     H_t_DATA       = ROOT.TH1D("H_t_DATA","-t", 200, -1.0, 1.5)  
     H_epsilon_DATA  = ROOT.TH1D("H_epsilon_DATA","epsilon", 200, 0., 1.0)
-    H_MMk_DATA  = ROOT.TH1D("H_MMk_DATA","MM_{K}", 200, 0.0, 2.0)
+    H_MM_DATA  = ROOT.TH1D("H_MM_DATA","MM_{K}", 200, 0.0, 2.0)
     H_th_DATA  = ROOT.TH1D("H_th_DATA","X' tar", 200, -0.1, 0.1)
     H_ph_DATA  = ROOT.TH1D("H_ph_DATA","Y' tar", 200, -0.1, 0.1)
     H_ph_q_DATA  = ROOT.TH1D("H_ph_q_DATA","Phi Detected (ph_xq)", 200, -10.0, 10.0)
@@ -343,7 +343,7 @@ def defineHists(phi_setting):
     H_W_DATA_rand  = ROOT.TH1D("H_W_DATA_rand","W ", 200, 0.0, 10.0)
     H_t_DATA_rand       = ROOT.TH1D("H_t_DATA_rand","-t", 200, -1.0, 1.5)  
     H_epsilon_DATA_rand  = ROOT.TH1D("H_epsilon_DATA_rand","epsilon", 200, 0., 1.0)
-    H_MMk_DATA_rand  = ROOT.TH1D("H_MMk_DATA_rand","MM_{K}", 200, 0.0, 2.0)
+    H_MM_DATA_rand  = ROOT.TH1D("H_MM_DATA_rand","MM_{K}", 200, 0.0, 2.0)
     H_th_DATA_rand  = ROOT.TH1D("H_th_DATA_rand","X' tar", 200, -0.1, 0.1)
     H_ph_DATA_rand  = ROOT.TH1D("H_ph_DATA_rand","Y' tar", 200, -0.1, 0.1)
     H_ph_q_DATA_rand  = ROOT.TH1D("H_ph_q_DATA_rand","Phi Detected (ph_xq)", 200, -10.0, 10.0)
@@ -379,7 +379,7 @@ def defineHists(phi_setting):
                 
         if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
             
-          H_ct_ep_DATA.Fill(evt.CTime_epCoinTime_ROC1)
+          H_ct_ep_DATA.Fill(evt.CTime_ROC1)
 
           H_ssxfp_DATA.Fill(evt.ssxfp)
           H_ssyfp_DATA.Fill(evt.ssyfp)
@@ -412,9 +412,9 @@ def defineHists(phi_setting):
           H_t_DATA.Fill(-evt.MandelT)
           H_W_DATA.Fill(evt.W)
           H_epsilon_DATA.Fill(evt.epsilon)
-          H_MMk_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))
-          #H_MMk_DATA.Fill(pow(evt.MMk, 2))  
-          #H_MMk_DATA.Fill(evt.Mrecoil)
+          H_MM_DATA.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2)))
+          #H_MM_DATA.Fill(pow(evt.MM, 2))  
+          #H_MM_DATA.Fill(evt.Mrecoil)
 
           ###################################################################################################################################################
 
@@ -446,7 +446,7 @@ def defineHists(phi_setting):
           H_t_DATA_rand.Fill(-evt.MandelT)
           H_W_DATA_rand.Fill(evt.W)
           H_epsilon_DATA_rand.Fill(evt.epsilon)
-          H_MMk_DATA_rand.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  )
+          H_MM_DATA_rand.Fill(np.sqrt(pow(evt.emiss, 2) - pow(evt.pmiss, 2))  )
 
           H_cal_etottracknorm_DATA.Fill(evt.H_cal_etottracknorm)
           H_cer_npeSum_DATA.Fill(evt.H_cer_npeSum)
@@ -480,7 +480,7 @@ def defineHists(phi_setting):
     H_Q2_DATA.Scale(normfac_data)
     H_t_DATA.Scale(normfac_data)
     H_epsilon_DATA.Scale(normfac_data)
-    H_MMk_DATA.Scale(normfac_data)
+    H_MM_DATA.Scale(normfac_data)
     H_ph_q_DATA.Scale(normfac_data)
     H_th_q_DATA.Scale(normfac_data)
     H_ph_recoil_DATA.Scale(normfac_data)
@@ -511,7 +511,7 @@ def defineHists(phi_setting):
     H_Q2_DATA_rand.Scale(normfac_data/nWindows)
     H_t_DATA_rand.Scale(normfac_data/nWindows)
     H_epsilon_DATA_rand.Scale(normfac_data/nWindows)
-    H_MMk_DATA_rand.Scale(normfac_data/nWindows)
+    H_MM_DATA_rand.Scale(normfac_data/nWindows)
     H_pmiss_DATA_rand.Scale(normfac_data/nWindows)
     H_emiss_DATA_rand.Scale(normfac_data/nWindows)
     H_pmx_DATA_rand.Scale(normfac_data/nWindows)
@@ -539,7 +539,7 @@ def defineHists(phi_setting):
     H_Q2_DATA.Add(H_Q2_DATA_rand,-1)
     H_t_DATA.Add(H_t_DATA_rand,-1)
     H_epsilon_DATA.Add(H_epsilon_DATA_rand,-1)
-    H_MMk_DATA.Add(H_MMk_DATA_rand,-1)
+    H_MM_DATA.Add(H_MM_DATA_rand,-1)
     H_pmiss_DATA.Add(H_pmiss_DATA_rand,-1)
     H_emiss_DATA.Add(H_emiss_DATA_rand,-1)
     H_pmx_DATA.Add(H_pmx_DATA_rand,-1)
@@ -571,7 +571,7 @@ def defineHists(phi_setting):
         "H_Q2_DATA" :     H_Q2_DATA     ,
         "H_t_DATA" :     H_t_DATA     ,
         "H_epsilon_DATA" :     H_epsilon_DATA,
-        "H_MMk_DATA" :     H_MMk_DATA,
+        "H_MM_DATA" :     H_MM_DATA,
         "H_th_DATA" :     H_th_DATA,
         "H_ph_DATA" :     H_ph_DATA,
         "H_ph_q_DATA" :     H_ph_q_DATA,
@@ -749,13 +749,13 @@ for i,hist in enumerate(histlist):
 
 Cepsilon.Print(outputpdf)
 
-CMMk = TCanvas()
+CMM = TCanvas()
 
 for i,hist in enumerate(histlist):
-    hist["H_MMk_DATA"].SetLineColor(i+1)
-    hist["H_MMk_DATA"].Draw("same, E1")
+    hist["H_MM_DATA"].SetLineColor(i+1)
+    hist["H_MM_DATA"].Draw("same, E1")
 
-CMMk.Print(outputpdf)
+CMM.Print(outputpdf)
 
 xfp = TCanvas()
 
@@ -978,7 +978,7 @@ for i,hist in enumerate(histlist):
     hist["H_W_DATA"].Write()
     hist["H_t_DATA"].Write()
     hist["H_epsilon_DATA"].Write()
-    hist["H_MMk_DATA"].Write()
+    hist["H_MM_DATA"].Write()
     hist["H_th_DATA"].Write()
     hist["H_ph_DATA"].Write()
     hist["H_ph_q_DATA"].Write()

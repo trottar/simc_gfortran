@@ -243,7 +243,11 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    
 	fi
-	EPSVAL=0.40
+	if [[ ${EPSILON} == "low" ]]; then
+	    EPSVAL=0.1838
+	else
+	    EPSVAL=0.5291
+	fi
 	if [[ $TargetType = "dummy" ]]; then
 	    KIN="Q5p5W3p02_${EPSILON}e_dummy"
 	else
@@ -282,7 +286,11 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    	    	    
 	fi
-	EPSVAL=0.40
+	if [[ ${EPSILON} == "low" ]]; then
+	    EPSVAL=0.4805
+	else
+	    EPSVAL=0.7148
+	fi
 	if [[ $TargetType = "dummy" ]]; then
 	    KIN="Q4p4W2p74_${EPSILON}e_dummy"
 	else
@@ -321,7 +329,11 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    	    	    	    
 	fi
-	EPSVAL=0.25
+	if [[ ${EPSILON} == "low" ]]; then
+	    EPSVAL=0.3935
+	else
+	    EPSVAL=0.6668
+	fi
 	if [[ $TargetType = "dummy" ]]; then
 	    KIN="Q3W3p14_${EPSILON}e_dummy"
 	else
@@ -360,7 +372,11 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    	    	    	    
 	fi
-	EPSVAL=0.40
+	if [[ ${EPSILON} == "low" ]]; then
+	    EPSVAL=0.5736
+	else
+	    EPSVAL=0.8791
+	fi
 	if [[ $TargetType = "dummy" ]]; then
 	    KIN="Q3W2p32_${EPSILON}e_dummy"
 	else
@@ -399,7 +415,11 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    	    	    	    
 	fi
-	EPSVAL=0.21
+	if [[ ${EPSILON} == "low" ]]; then
+	    EPSVAL=0.2477
+	else
+	    EPSVAL=0.7864
+	fi
 	if [[ $TargetType = "dummy" ]]; then
 	    KIN="Q2p115W2p95_${EPSILON}e_dummy"
 	else
@@ -438,7 +458,11 @@ do
 	    echo "Run Numbers: [${data_center[@]}]"
 	    echo	    	    	    	    
 	fi
-	EPSVAL=0.09
+	if [[ ${EPSILON} == "low" ]]; then
+	    EPSVAL=0.4515
+	else
+	    EPSVAL=0.6979
+	fi
 	if [[ $TargetType = "dummy" ]]; then
 	    KIN="Q0p5W2p40_${EPSILON}e_dummy"
 	else
@@ -449,7 +473,7 @@ done
 
 # Define input and output file names
 InDATAFilename="Proc_Data_${KIN}.root"
-OutDATAFilename="Analysed_Data3_${KIN}"
+OutDATAFilename="Analysed_Data_${KIN}"
 OutFullAnalysisFilename="FullAnalysis_${KIN}"
 
 # When analysis flag is used then the analysis script (Analysed_Prod.py)
@@ -474,8 +498,8 @@ if [[ $a_flag = "true" ]]; then
 	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
-	hadd -f ${OutDATAFilename}_Right.root *_-1_Raw_Data3.root
-	for i in *_-1_Raw_Data3.root; do mv -- "$i" "${i%_-1_Raw_Data3.root}_-1_Proc_Data.root"; done
+	hadd -f ${OutDATAFilename}_Right.root *_-1_Raw_Data.root
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
     fi
 
     # Checks that array isn't empty
@@ -496,8 +520,8 @@ if [[ $a_flag = "true" ]]; then
 	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
-	hadd -f ${OutDATAFilename}_Left.root *_-1_Raw_Data3.root
-	for i in *_-1_Raw_Data3.root; do mv -- "$i" "${i%_-1_Raw_Data3.root}_-1_Proc_Data.root"; done
+	hadd -f ${OutDATAFilename}_Left.root *_-1_Raw_Data.root
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
     fi
     
     # Checks that array isn't empty
@@ -518,8 +542,8 @@ if [[ $a_flag = "true" ]]; then
 	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
-	hadd -f ${OutDATAFilename}_Center.root *_-1_Raw_Data3.root
-	for i in *_-1_Raw_Data3.root; do mv -- "$i" "${i%_-1_Raw_Data3.root}_-1_Proc_Data.root"; done
+	hadd -f ${OutDATAFilename}_Center.root *_-1_Raw_Data.root
+	for i in *_-1_Raw_Data.root; do mv -- "$i" "${i%_-1_Raw_Data.root}_-1_Proc_Data.root"; done
     fi
     
 fi

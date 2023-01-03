@@ -449,7 +449,7 @@ done
 
 # Define input and output file names
 InDATAFilename="Proc_Data_${KIN}.root"
-OutDATAFilename="Analysed_Data4_${KIN}"
+OutDATAFilename="Analysed_Data3_${KIN}"
 OutFullAnalysisFilename="FullAnalysis_${KIN}"
 
 # When analysis flag is used then the analysis script (Analysed_Prod.py)
@@ -474,8 +474,8 @@ if [[ $a_flag = "true" ]]; then
 	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
-	hadd -f ${OutDATAFilename}_Right.root *_-1_Raw_Data4.root
-	for i in *_-1_Raw_Data4.root; do mv -- "$i" "${i%_-1_Raw_Data4.root}_-1_Proc_Data.root"; done
+	hadd -f ${OutDATAFilename}_Right.root *_-1_Raw_Data3.root
+	for i in *_-1_Raw_Data3.root; do mv -- "$i" "${i%_-1_Raw_Data3.root}_-1_Proc_Data.root"; done
     fi
 
     # Checks that array isn't empty
@@ -496,8 +496,8 @@ if [[ $a_flag = "true" ]]; then
 	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
-	hadd -f ${OutDATAFilename}_Left.root *_-1_Raw_Data4.root
-	for i in *_-1_Raw_Data4.root; do mv -- "$i" "${i%_-1_Raw_Data4.root}_-1_Proc_Data.root"; done
+	hadd -f ${OutDATAFilename}_Left.root *_-1_Raw_Data3.root
+	for i in *_-1_Raw_Data3.root; do mv -- "$i" "${i%_-1_Raw_Data3.root}_-1_Proc_Data.root"; done
     fi
     
     # Checks that array isn't empty
@@ -518,8 +518,8 @@ if [[ $a_flag = "true" ]]; then
 	cd "${SIMCPATH}/OUTPUT/Analysis/${ANATYPE}LT"
 	echo
 	echo "Combining root files..."  
-	hadd -f ${OutDATAFilename}_Center.root *_-1_Raw_Data4.root
-	for i in *_-1_Raw_Data4.root; do mv -- "$i" "${i%_-1_Raw_Data4.root}_-1_Proc_Data.root"; done
+	hadd -f ${OutDATAFilename}_Center.root *_-1_Raw_Data3.root
+	for i in *_-1_Raw_Data3.root; do mv -- "$i" "${i%_-1_Raw_Data3.root}_-1_Proc_Data.root"; done
     fi
     
 fi

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-03 19:41:07 trottar"
+# Time-stamp: "2023-01-03 19:42:46 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -91,7 +91,7 @@ with open('physics_lists/list.settings', 'a') as f:
 
 if TargetType == "dummy":
     # Open a file in write mode
-    with open('physics_lists/lists/list.dummy_%s_%.0f' % (Q2.replace(".",""),float(EPSVAL/100), 'a') as f:
+    with open('physics_lists/lists/list.dummy_{}_{:.0f}'.format(Q2.replace(".",""),float(EPSVAL)/100), 'a') as f:
         if float(runNumRight[0]) != 0.0:
             # Write the value of the variable to the file
             for i,thpq in enumerate(EbeamValRight):

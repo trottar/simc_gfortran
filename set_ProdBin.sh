@@ -554,7 +554,7 @@ fi
 # Define global variables for lt_analysis scripts
 POL="+1" # All KaonLT is positive polarity
 TMIN=0.010
-TMAX=0.400
+TMAX=0.990
 KSet=1 # Arbitrary value
 
 cd "${SIMCPATH}/scripts"

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-03 19:44:25 trottar"
+# Time-stamp: "2023-01-03 19:52:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -111,7 +111,7 @@ if TargetType == "dummy":
                                 float(EffValCenter[i]),EffErrCenter[i],EPSVAL,thpq_center)) 
 else:
     # Open a file in write mode
-    with open('physics_lists/lists/list.%s_%s' % (Q2.replace(".",""),EPSVAL.replace("0.","")), 'a') as f:
+    with open('physics_lists/lists/list.{}_{:.0f}'.format(Q2.replace(".",""),float(EPSVAL)*100), 'a') as f:
         if float(runNumRight[0]) != 0.0:
             # Write the value of the variable to the file
             for i,thpq in enumerate(EbeamValRight):

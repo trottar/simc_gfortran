@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-03 14:41:26 trottar"
+# Time-stamp: "2023-01-10 11:32:59 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -617,7 +617,7 @@ for i,hist in enumerate(histlist):
 
 eff_plt = TCanvas()
 G_eff_plt = ROOT.TMultiGraph()
-l_eff_plt = ROOT.TLegend(0.115,0.75,0.33,0.9)
+l_eff_plt = ROOT.TLegend(0.115,0.35,0.33,0.5)
 
 eff_plt.SetGrid()
 

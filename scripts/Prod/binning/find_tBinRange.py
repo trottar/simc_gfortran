@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-10 11:34:08 trottar"
+# Time-stamp: "2023-01-10 11:40:22 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -727,13 +727,14 @@ Ct = TCanvas()
 l_t = ROOT.TLegend(0.115,0.55,0.33,0.9)
 l_t.SetTextSize(0.0235)
 
-binned_t = find_tbins()
+#binned_t = find_tbins()
 
 for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
     hist["H_t_DATA"].Draw("same, E1")            
 
+'''
 tBin_line = TLine()    
 for n,b in zip(binned_t[0],binned_t[1]):
     l_t.AddEntry(hist["H_t_DATA"],"Evts = %.0f" % n)
@@ -742,7 +743,7 @@ for n,b in zip(binned_t[0],binned_t[1]):
     tBin_line.SetLineWidth(2)
     tBin_line.DrawLine(b,0,b,1000)
 
-
+'''
 l_t.Draw()    
 
 Ct.Print(outputpdf)

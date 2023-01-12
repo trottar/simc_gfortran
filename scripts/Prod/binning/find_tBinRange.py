@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 11:27:40 trottar"
+# Time-stamp: "2023-01-12 11:31:54 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -190,9 +190,9 @@ def find_tbins():
 
     lines = []
     with open("{}/scripts/Prod/physics_lists/t_bin_interval".format(SIMCPATH), "w") as file:
-        file.write("{}\t{}\t{}".format(Q2,NumtBins,NumPhiBins))
-        for t in range(0,NumtBins):
-            lines.append("\t{}".format(bins))
+        file.write("{}\t{}\t{}\n".format(Q2,NumtBins,NumPhiBins))
+        for i,t in enumerate(bins):
+            lines.append("\t{}".format(t))
         print("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬%s" % lines )
         file.writelines(lines)
     

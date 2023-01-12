@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 16:18:41 trottar"
+# Time-stamp: "2023-01-12 16:21:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1027,10 +1027,6 @@ tradius = TGaxis(0,0,0.575,0,t_lo,t_hi,10,"-+")
 tradius.SetLineColor(2)
 tradius.SetLabelColor(2)
 tradius.Draw()
-phizero = TLine(0,0,0.6,0) 
-phizero.SetLineColor(kBlack)
-phizero.SetLineWidth(2)
-phizero.Draw()
 
 Cpht.Print(outputpdf+')')
 

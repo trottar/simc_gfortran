@@ -40,7 +40,7 @@ while getopts 'hdat' flag; do
 	echo "    -d, debug"	
         echo "    -a, analyze"	
         echo "    -t, set t-bin (!!!required for script!!!)"
-	echo "        EPSILON=arg1, Q2=arg2, W=arg3, NumtBins=arg4"	
+	echo "        EPSILON=arg1, Q2=arg2, W=arg3"	
         exit 0
         ;;
 	d) d_flag='true' ;;
@@ -57,7 +57,6 @@ if [[ $t_flag = "true" || $a_flag = "true" ]]; then
     EPSILON=$2
     Q2=$3
     W=$4
-    NumtBins=$5
     TargetType=$(echo "$6" | tr '[:upper:]' '[:lower:]')
     echo "Epsilon must be - high - low - Case Sensitive!"
     echo "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5]"
@@ -98,21 +97,12 @@ if [[ $t_flag = "true" || $a_flag = "true" ]]; then
 	    esac
 	done
     fi
-elif [[ $d_flag = "true" ]]; then
-    echo
-    echo "-----------------------------"
-    echo
-    echo "!!!!!!! DEBUG TESTING !!!!!!!"
-    echo
-    echo "-----------------------------"
-    echo
-    NumtBins=5
+    
 else
     
     EPSILON=$1
     Q2=$2
     W=$3
-    NumtBins=$4
     TargetType=$(echo "$5" | tr '[:upper:]' '[:lower:]')
     echo "Epsilon must be - high - low - Case Sensitive!"
     echo "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5]"
@@ -158,6 +148,9 @@ fi
 ##############
 # HARD CODED #
 ##############
+NumtBins=5
+NumPhiBins=16
+
 # Efficiency csv file
 #EffData="coin_production_Prod_efficiency_data_2022_12_05.csv"
 #EffData="coin_production_Prod_efficiency_data_2022_12_30.csv"
@@ -663,9 +656,9 @@ fi
 if [[ $t_flag = "true" || $d_flag = "true" ]]; then
     cd "${SIMCPATH}/scripts/Prod/binning"    
     if [ ${#data_right[@]} -eq 0 ]; then
-	python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${NumtBins} "0" "${data_left[*]}" "${data_center[*]}" "0" ${DataChargeSumLeft} ${DataChargeSumCenter} "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData}
+	python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${NumtBins} ${NumPhiBins} "0" "${data_left[*]}" "${data_center[*]}" "0" ${DataChargeSumLeft} ${DataChargeSumCenter} "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData}
     else
-	python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${NumtBins} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" ${DataChargeSumRight} ${DataChargeSumLeft} ${DataChargeSumCenter} "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData}
+	python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${NumtBins} ${NumPhiBins} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" ${DataChargeSumRight} ${DataChargeSumLeft} ${DataChargeSumCenter} "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData}
     fi
 fi
 

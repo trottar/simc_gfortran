@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-10 11:40:22 trottar"
+# Time-stamp: "2023-01-12 11:17:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -23,7 +23,7 @@ import ROOT
 import scipy
 import scipy.integrate as integrate
 import matplotlib.pyplot as plt
-import sys, math, os, subprocess
+import sys, math, os, subprocess, re
 import array
 from ROOT import TCanvas, TColor, TGaxis, TH1F, TH2F, TPad, TStyle, gStyle, gPad, TGaxis, TLine, TMath, TPaveText, TArc, TGraphPolar 
 from ROOT import kBlack, kCyan, kRed, kGreen, kMagenta
@@ -45,16 +45,17 @@ kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
 OutFilename = sys.argv[3]
 NumtBins = int(sys.argv[4])
-runNumRight = sys.argv[5]
-runNumLeft = sys.argv[6]
-runNumCenter = sys.argv[7]
-data_charge_right = int(sys.argv[8])/1000
-data_charge_left = int(sys.argv[9])/1000
-data_charge_center = int(sys.argv[10])/1000
-InData_efficiency_right = sys.argv[11]
-InData_efficiency_left = sys.argv[12]
-InData_efficiency_center = sys.argv[13]
-efficiency_table = sys.argv[14]
+NumPhiBins = int(sys.argv[5])
+runNumRight = sys.argv[6]
+runNumLeft = sys.argv[7]
+runNumCenter = sys.argv[8]
+data_charge_right = int(sys.argv[9])/1000
+data_charge_left = int(sys.argv[10])/1000
+data_charge_center = int(sys.argv[11])/1000
+InData_efficiency_right = sys.argv[12]
+InData_efficiency_left = sys.argv[13]
+InData_efficiency_center = sys.argv[14]
+efficiency_table = sys.argv[15]
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -103,67 +104,61 @@ def find_tbins():
         else:
             if val == 'Right':
                 InFile_RIGHT_DATA = ROOT.TFile.Open(rootFile, "OPEN")
-                TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Uncut_Kaon_Events")
+                #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Uncut_Kaon_Events")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_all_noRF")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_prompt_noRF")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_rand_noRF")
-                #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_all_RF")
+                TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_all_RF")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_prompt_RF")
                 #TBRANCH_RIGHT_DATA  = InFile_RIGHT_DATA.Get("Cut_Kaon_Events_rand_RF")
                 print("Creating right t-bin histogram...")
                 # Grab t bin range
-                '''
                 for i,evt in enumerate(TBRANCH_RIGHT_DATA):
                     # Progress bar
                     Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
                     if (0.0 <= -evt.MandelT <= 1.5):
                         H_t_Right.append(-evt.MandelT)   
-                '''
                 #rbins,H_t_Right = np.histogram(H_t_Right,bins=200)
                 
-                InFile_RIGHT_DATA.Close()    
+                InFile_RIGHT_DATA.Close()            
                 
             if val == 'Left':
                 InFile_LEFT_DATA = ROOT.TFile.Open(rootFile, "OPEN")
-                TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Uncut_Kaon_Events")
+                #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Uncut_Kaon_Events")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_all_noRF")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_prompt_noRF")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_rand_noRF")
-                #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_all_RF")
+                TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_all_RF")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_prompt_RF")
                 #TBRANCH_LEFT_DATA  = InFile_LEFT_DATA.Get("Cut_Kaon_Events_rand_RF")
                 print("\nCreating left t-bin histogram...")
                 # Grab t bin range
-                '''
                 for i,evt in enumerate(TBRANCH_LEFT_DATA):
                     # Progress bar
                     Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
                     if (0.0 <= -evt.MandelT <= 1.5):
                         H_t_Left.append(-evt.MandelT)
-                '''
                 #lbins,H_t_Left = np.histogram(H_t_Left,bins=200)
                 InFile_LEFT_DATA.Close()
                 
             if val == 'Center':
                 InFile_CENTER_DATA = ROOT.TFile.Open(rootFile, "OPEN")
-                TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Uncut_Kaon_Events")
+                #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Uncut_Kaon_Events")
                 #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_all_noRF")
                 #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_prompt_noRF")
                 #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_rand_noRF")
-                #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_all_RF")
+                TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_all_RF")
                 #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_prompt_RF")
                 #TBRANCH_CENTER_DATA  = InFile_CENTER_DATA.Get("Cut_Kaon_Events_rand_RF")
                 print("\nCreating center t-bin histogram...")
                 # Grab t bin range
-                '''
                 for i,evt in enumerate(TBRANCH_CENTER_DATA):
                     # Progress bar
                     Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
                     if (0.0 <= -evt.MandelT <= 1.5):
                         H_t_Center.append(-evt.MandelT)
-                '''
                 #cbins,H_t_Center = np.histogram(H_t_Center,bins=200)
-                InFile_CENTER_DATA.Close()                
+                InFile_CENTER_DATA.Close()        
                 
     ################################################################################################################################################
 
@@ -189,6 +184,18 @@ def find_tbins():
     ln, lbins = np.histogram(H_t_Left, bins=bins)
     cn, cbins = np.histogram(H_t_Center, bins=bins)
 
+    re_kin = re.split("Q|W|_",kinematics)
+    Q2 = re_kin[0].replace("p",".")
+    W = re_kin[1].replace("p",".")
+
+    lines = []
+    with open("t_bin_interval", "w") as file:
+        file.write("{}\t{}\t{}".format(Q2,NumtBins,NumPhiBins))
+        for t in range(0,NumtBins):
+            lines.append("\t{}".format(bins))
+        file.writelines(lines)
+    
+    
     return [n,bins]
     
 def defineHists(phi_setting):
@@ -207,8 +214,8 @@ def defineHists(phi_setting):
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_noRF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_noRF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_noRF")
-    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
-    TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
+    TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_all_RF")
+    #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_prompt_RF")
     #TBRANCH_DATA  = InFile_DATA.Get("Cut_Kaon_Events_rand_RF")
     
     ################################################################################################################################################
@@ -655,7 +662,6 @@ for i,hist in enumerate(histlist):
 l_eff_plt.Draw()
 
 eff_plt.Print(outputpdf + '(')
-
         
 # Plot histograms
 c_pid = TCanvas()
@@ -727,14 +733,13 @@ Ct = TCanvas()
 l_t = ROOT.TLegend(0.115,0.55,0.33,0.9)
 l_t.SetTextSize(0.0235)
 
-#binned_t = find_tbins()
+binned_t = find_tbins()
 
 for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
     hist["H_t_DATA"].Draw("same, E1")            
 
-'''
 tBin_line = TLine()    
 for n,b in zip(binned_t[0],binned_t[1]):
     l_t.AddEntry(hist["H_t_DATA"],"Evts = %.0f" % n)
@@ -743,7 +748,6 @@ for n,b in zip(binned_t[0],binned_t[1]):
     tBin_line.SetLineWidth(2)
     tBin_line.DrawLine(b,0,b,1000)
 
-'''
 l_t.Draw()    
 
 Ct.Print(outputpdf)

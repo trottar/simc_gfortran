@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 13:18:35 trottar"
+# Time-stamp: "2023-01-12 13:27:45 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -734,24 +734,27 @@ l_t = ROOT.TLegend(0.115,0.55,0.33,0.9)
 l_t.SetTextSize(0.0235)
 
 binned_t = find_tbins()
-
+binmax = []
 for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
-    hist["H_t_DATA"].Draw("same, E1")            
+    hist["H_t_DATA"].Draw("same, E1")    
+    binmax.append(hist["H_t_DATA"].GetMaximumBin())
 
+binmax = max(binmax)
+    
 tBin_line = TLine()
-print("¬¬¬¬¬¬¬¬¬¬¬¬¬",binned_t[1])
+# binned_t[0] is missing a value for the final bin
+# so adding the first element allows the zip to include all bins
+# this is okay because the number of events per bin should be the same
 binned_t0 = list(binned_t[0])
 binned_t0.append(binned_t[0][0])
-print("¬¬¬¬¬¬¬¬¬¬¬¬¬",list(zip(binned_t0,binned_t[1])))
 for n,b in zip(binned_t0,binned_t[1]):
-    print("¬¬¬¬¬¬¬¬¬¬¬¬",b)
     l_t.AddEntry(hist["H_t_DATA"],"Evts = %.0f" % n)
     l_t.AddEntry(hist["H_t_DATA"],"BinCenter = %.2f" % b)
     tBin_line.SetLineColor(kBlack)
     tBin_line.SetLineWidth(2)
-    tBin_line.DrawLine(b,0,b,1000)
+    tBin_line.DrawLine(b,0,b,binmax)
 
 l_t.Draw()    
 

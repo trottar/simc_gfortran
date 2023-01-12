@@ -57,7 +57,7 @@ if [[ $t_flag = "true" || $a_flag = "true" ]]; then
     EPSILON=$2
     Q2=$3
     W=$4
-    TargetType=$(echo "$6" | tr '[:upper:]' '[:lower:]')
+    TargetType=$(echo "$5" | tr '[:upper:]' '[:lower:]')
     echo "Epsilon must be - high - low - Case Sensitive!"
     echo "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5]"
     echo "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40]"
@@ -103,7 +103,7 @@ else
     EPSILON=$1
     Q2=$2
     W=$3
-    TargetType=$(echo "$5" | tr '[:upper:]' '[:lower:]')
+    TargetType=$(echo "$4" | tr '[:upper:]' '[:lower:]')
     echo "Epsilon must be - high - low - Case Sensitive!"
     echo "Q2 must be one of - [5p5 - 4p4 - 3p0 - 2p1 - 0p5]"
     echo "W must be one of - [3p02 - 2p74 - 3p14 - 2p32 - 2p95 - 2p40]"

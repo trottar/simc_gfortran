@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 13:27:45 trottar"
+# Time-stamp: "2023-01-12 13:29:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -742,6 +742,8 @@ for i,hist in enumerate(histlist):
     binmax.append(hist["H_t_DATA"].GetMaximumBin())
 
 binmax = max(binmax)
+
+print("¬¬¬¬¬¬¬¬",binmax)
     
 tBin_line = TLine()
 # binned_t[0] is missing a value for the final bin

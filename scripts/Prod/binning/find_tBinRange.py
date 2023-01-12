@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 13:43:59 trottar"
+# Time-stamp: "2023-01-12 13:46:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -750,7 +750,8 @@ tBin_line = TLine()
 # this is okay because the number of events per bin should be the same
 binned_t0 = list(binned_t[0])
 binned_t0.append(binned_t[0][0])
-for n,b in zip(binned_t0,binned_t[1]):
+for i,(n,b) in enumerate(zip(binned_t0,binned_t[1])):
+    l_t.AddEntry(hist["H_t_DATA"],"Bin Num %s" % i )
     l_t.AddEntry(hist["H_t_DATA"],"Evts = %.0f" % n)
     l_t.AddEntry(hist["H_t_DATA"],"BinCenter = %.2f" % b)
     tBin_line.SetLineColor(4)

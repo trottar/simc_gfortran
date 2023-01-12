@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 13:32:22 trottar"
+# Time-stamp: "2023-01-12 13:34:37 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -755,7 +755,7 @@ for n,b in zip(binned_t0,binned_t[1]):
     l_t.AddEntry(hist["H_t_DATA"],"BinCenter = %.2f" % b)
     tBin_line.SetLineColor(kBlack)
     tBin_line.SetLineWidth(2)
-    tBin_line.DrawLine(b,0,b,binmax)
+    tBin_line.DrawLine(b,0,b,ROOT.gPad.GetUymax())
 
 l_t.Draw()    
 

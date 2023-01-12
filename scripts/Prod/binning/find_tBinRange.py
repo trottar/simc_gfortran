@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 13:51:32 trottar"
+# Time-stamp: "2023-01-12 13:52:59 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -749,12 +749,12 @@ tBin_line = TLine()
 binned_t0 = list(binned_t[0])
 binned_t0.append(binned_t[0][0])
 for i,(n,b) in enumerate(zip(binned_t0,binned_t[1])):
-    l_t.AddEntry(" ","Bin Num %s" % i )
-    l_t.AddEntry(" ","Evts = %.0f" % n)
-    l_t.AddEntry(" ","BinCenter = %.2f" % b)
     tBin_line.SetLineColor(4)
     tBin_line.SetLineWidth(4)
     tBin_line.DrawLine(b,0,b,binmax)
+    l_t.AddEntry(tBin_line,"Bin Num %s" % i )
+    l_t.AddEntry(tBin_line,"Evts = %.0f" % n)
+    l_t.AddEntry(tBin_line,"BinCenter = %.2f" % b)
 
 l_t.Draw()    
 

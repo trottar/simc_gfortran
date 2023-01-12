@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 13:46:25 trottar"
+# Time-stamp: "2023-01-12 13:47:45 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -730,7 +730,7 @@ for i,hist in enumerate(histlist):
 CW.Print(outputpdf)
 
 Ct = TCanvas()
-l_t = ROOT.TLegend(0.115,0.55,0.33,0.9)
+l_t = ROOT.TLegend(0.115,0.55,0.33,0.95)
 l_t.SetTextSize(0.0235)
 
 binned_t = find_tbins()

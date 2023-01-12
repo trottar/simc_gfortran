@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 15:36:44 trottar"
+# Time-stamp: "2023-01-12 15:39:34 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -401,8 +401,8 @@ def defineHists(phi_setting):
         if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
 
           MM_vs_CoinTime_DATA.Fill(evt.MM, evt.CTime_ROC1)
-          CoinTime_vs_beta_DATA.Fill(evt.CTime_ROC1,evt.P_gtr_beta)
-          P_MM_vs_beta_DATA.Fill(evt.MM,evt.P_gtr_beta)
+          CoinTime_vs_beta_DATA.Fill(evt.CTime_ROC1,evt.P_gtr_eta)
+          P_MM_vs_beta_DATA.Fill(evt.MM,evt.P_gtr_eta)
           phiq_vs_t_DATA.Fill(evt.ph_q, -evt.MandelT)
             
           H_ct_ep_DATA.Fill(evt.CTime_ROC1)
@@ -976,7 +976,7 @@ Cpmiss_z.Print(outputpdf)
 Cpht = TCanvas()
 
 for i,hist in enumerate(histlist):
-    hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(minrangeuser,maxrangeuser)
+    hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(0.0,1.5)
     hist["phiq_vs_t_DATA"].Draw("same, SURF2 POL")
 
 Cpht.Print(outputpdf+')')

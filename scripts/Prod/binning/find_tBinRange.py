@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 16:29:35 trottar"
+# Time-stamp: "2023-01-12 16:33:34 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -979,10 +979,10 @@ Cpmiss_z.Print(outputpdf)
 
 Cpht = TCanvas()
 
-for i,hist in enumerate(histlist):
-    hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(tmin,tmax)
-    hist["phiq_vs_t_DATA"].Draw("same, SURF2 POL")
-    
+#for i,hist in enumerate(histlist):
+#    hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(tmin,tmax)
+#    hist["phiq_vs_t_DATA"].Draw("same, SURF2 POL")
+histlist["phiq_vs_t_DATA"][0].Draw("same, SURF2 POL")   
 # Section for polar plotting
 gStyle.SetPalette(55)
 gPad.SetTheta(90)

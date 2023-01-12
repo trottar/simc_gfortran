@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 14:11:38 trottar"
+# Time-stamp: "2023-01-12 15:35:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -369,6 +369,14 @@ def defineHists(phi_setting):
     H_pmy_DATA_rand  = ROOT.TH1D("H_pmy_DATA_rand","pmy ", 200, -10.0, 10.0)
     H_pmz_DATA_rand  = ROOT.TH1D("H_pmz_DATA_rand","pmz", 200, -10.0, 10.0)
     H_ct_ep_DATA_rand = ROOT.TH1D("H_ct_ep_DATA_rand", "Electron-Proton CTime", 200, -10, 10)
+
+    ################################################################################################################################################
+    # 2D histograms
+
+    MM_vs_CoinTime_DATA = ROOT.TH2D("MM_vs_CoinTime_DATA","Missing Mass vs CTime; MM; Coin_Time",100, 0, 2, 100, -2, 2)
+    CoinTime_vs_beta_DATA = ROOT.TH2D("CoinTime_vs_beta_DATA", "CTime vs SHMS #beta; Coin_Time; SHMS_#beta", 100, -2, 2, 100, 0.6, 1.4)
+    P_MM_vs_beta_DATA = ROOT.TH2D("P_MM_vs_beta_DATA", "Missing Mass vs SHMS #beta; MM; SHMS_#beta", 100, 0, 2, 200, 0, 2)
+    phiq_vs_t_DATA = ROOT.TH2D("phiq_vs_t_DATA","; #phi ;t", 12, -3.14, 3.14, 24, 0.0, 1.2)
     
     ################################################################################################################################################
     # Fill histograms for various trees called above
@@ -391,6 +399,11 @@ def defineHists(phi_setting):
         #........................................
                 
         if(HMS_FixCut & HMS_Acceptance & SHMS_FixCut & SHMS_Acceptance):
+
+          MM_vs_CoinTime_DATA.Fill(event.MM, event.CTime_ROC1)
+          CoinTime_vs_beta_DATA.Fill(event.CTime_ROC1,event.P_gtr_beta)
+          P_MM_vs_beta_DATA.Fill(event.MM,event.P_gtr_beta)
+          phiq_vs_t_DATA.Fill(event.ph_q, -event.MandelT)
             
           H_ct_ep_DATA.Fill(evt.CTime_ROC1)
 
@@ -958,7 +971,16 @@ for i,hist in enumerate(histlist):
     hist["H_pmz_DATA"].SetLineColor(i+1)
     hist["H_pmz_DATA"].Draw("same, E1")
 
-Cpmiss_z.Print(outputpdf+')')
+Cpmiss_z.Print(outputpdf)
+
+Cpht = TCanvas()
+
+for i,hist in enumerate(histlist):
+    hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(minrangeuser,maxrangeuser)
+    hist["phiq_vs_t_DATA"].Draw("same, SURF2 POL")
+
+Cpht.Print(outputpdf+')')
+
 
 #############################################################################################################################################
 # Create new root file with trees representing cut simc and data used above. Good for those who see python as...problematic

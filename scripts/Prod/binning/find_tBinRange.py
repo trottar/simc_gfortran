@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 16:25:25 trottar"
+# Time-stamp: "2023-01-12 16:29:35 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -376,7 +376,7 @@ def defineHists(phi_setting):
     MM_vs_CoinTime_DATA = ROOT.TH2D("MM_vs_CoinTime_DATA","Missing Mass vs CTime; MM; Coin_Time",100, 0, 2, 100, -2, 2)
     CoinTime_vs_beta_DATA = ROOT.TH2D("CoinTime_vs_beta_DATA", "CTime vs SHMS #beta; Coin_Time; SHMS_#beta", 100, -2, 2, 100, 0.6, 1.4)
     P_MM_vs_beta_DATA = ROOT.TH2D("P_MM_vs_beta_DATA", "Missing Mass vs SHMS #beta; MM; SHMS_#beta", 100, 0, 2, 200, 0, 2)
-    phiq_vs_t_DATA = ROOT.TH2D("phiq_vs_t_DATA","; #phi ;t", 12, -3.14, 3.14, 24, 0.0, 1.2)
+    phiq_vs_t_DATA = ROOT.TH2D("phiq_vs_t_DATA","; #phi ;t", 12, -3.14, 3.14, 24, tmin, tmax)
     
     ################################################################################################################################################
     # Fill histograms for various trees called above
@@ -979,11 +979,8 @@ Cpmiss_z.Print(outputpdf)
 
 Cpht = TCanvas()
 
-t_lo = 0.10
-t_hi = 0.99
-
 for i,hist in enumerate(histlist):
-    hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(t_lo,t_hi)
+    hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(tmin,tmax)
     hist["phiq_vs_t_DATA"].Draw("same, SURF2 POL")
     
 # Section for polar plotting
@@ -1023,7 +1020,7 @@ for k in range(0, 7):
      Arc.SetLineWidth(2)
      # To change the arc radius we have to change number 0.825 in the lower line.
      Arc.DrawArc(0,0,0.825*(k+1)/(10),0.,360.,"same")
-tradius = TGaxis(0,0,0.575,0,t_lo,t_hi,10,"-+")
+tradius = TGaxis(0,0,0.575,0,tmin,tmax,10,"-+")
 tradius.SetLineColor(2)
 tradius.SetLabelColor(2)
 tradius.Draw()

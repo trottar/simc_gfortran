@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 13:31:09 trottar"
+# Time-stamp: "2023-01-12 13:32:22 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -739,7 +739,7 @@ for i,hist in enumerate(histlist):
     hist["H_t_DATA"].SetLineColor(i+1)
     l_t.AddEntry(hist["H_t_DATA"],hist["phi_setting"])
     hist["H_t_DATA"].Draw("same, E1")    
-    binmax.append(hist["H_t_DATA"].GetXaxis().GetBinCenter(hist["H_t_DATA"].GetMaximumBin()))
+    binmax.append(hist["H_t_DATA"].GetYaxis().GetBinCenter(hist["H_t_DATA"].GetMaximumBin()))
 binmax = max(binmax)
 
 print("¬¬¬¬¬¬¬¬",binmax)

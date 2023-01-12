@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 16:53:40 trottar"
+# Time-stamp: "2023-01-12 16:59:23 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1021,7 +1021,7 @@ for k in range(0, 7):
      # To change the arc radius we have to change number 0.825 in the lower line.
      Arc.DrawArc(0,0,0.825*(k+1)/(10),0.,360.,"same")
 for i,(n,b) in enumerate(zip(binned_t0,binned_t[1])):
-     Arc.SetLineColor(4)
+     Arc.SetLineColor(3)
      Arc.SetLineWidth(2)
      # To change the arc radius we have to change number 0.825 in the lower line.
      Arc.DrawArc(0,0,0.825*b*(i+1)/10,0.,360.,"same")    

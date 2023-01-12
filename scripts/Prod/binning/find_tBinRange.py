@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 12:03:27 trottar"
+# Time-stamp: "2023-01-12 12:06:46 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -745,7 +745,7 @@ for i,hist in enumerate(histlist):
 
 tBin_line = TLine()
 print("¬¬¬¬¬¬¬¬¬¬¬¬¬",binned_t[1])
-print("¬¬¬¬¬¬¬¬¬¬¬¬¬",zip(binned_t[0],binned_t[1]))
+print("¬¬¬¬¬¬¬¬¬¬¬¬¬",list(zip(binned_t[0],binned_t[1])))
 for n,b in zip(binned_t[0],binned_t[1]):
     print("¬¬¬¬¬¬¬¬¬¬¬¬",b)
     l_t.AddEntry(hist["H_t_DATA"],"Evts = %.0f" % n)

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 16:21:10 trottar"
+# Time-stamp: "2023-01-12 16:25:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -979,8 +979,8 @@ Cpmiss_z.Print(outputpdf)
 
 Cpht = TCanvas()
 
-t_lo = 0.1
-t_hi = 5.0
+t_lo = 0.10
+t_hi = 0.99
 
 for i,hist in enumerate(histlist):
     hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(t_lo,t_hi)

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 11:41:06 trottar"
+# Time-stamp: "2023-01-12 11:43:54 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -44,8 +44,8 @@ DEBUG = False # Flag for no cut plots
 kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
 OutFilename = sys.argv[3]
-tmin = sys.argv[4]
-tmax = sys.argv[5] 
+tmin = float(sys.argv[4])
+tmax = float(sys.argv[5])
 NumtBins = int(sys.argv[6])
 NumPhiBins = int(sys.argv[7])
 runNumRight = sys.argv[8]

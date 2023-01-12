@@ -175,6 +175,7 @@ echo
 echo "---------------------------------------------------------"
 echo
 echo "Beginning analysis for Q2=${Q2}, W=${W}, ${EPSILON} setting..."
+echo
 echo "                       Number of t bins: ${NumtBins}"
 echo "                       Range of t: ${TMIN}-${TMAX}"
 echo "                       Number of Phi bins: ${NumPhiBins}"

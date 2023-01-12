@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 11:35:20 trottar"
+# Time-stamp: "2023-01-12 11:41:06 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -32,8 +32,8 @@ from functools import reduce
 ##################################################################################################################################################
 # Check the number of arguments provided to the script
 
-if len(sys.argv)-1!=15:
-    print("!!!!! ERROR !!!!!\n Expected 15 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename NumtBins NumPhiBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table\n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=17:
+    print("!!!!! ERROR !!!!!\n Expected 17 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename tmin tmax NumtBins NumPhiBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table\n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################    
@@ -44,18 +44,20 @@ DEBUG = False # Flag for no cut plots
 kinematics = sys.argv[1]
 InDATAFilename = sys.argv[2]
 OutFilename = sys.argv[3]
-NumtBins = int(sys.argv[4])
-NumPhiBins = int(sys.argv[5])
-runNumRight = sys.argv[6]
-runNumLeft = sys.argv[7]
-runNumCenter = sys.argv[8]
-data_charge_right = int(sys.argv[9])/1000
-data_charge_left = int(sys.argv[10])/1000
-data_charge_center = int(sys.argv[11])/1000
-InData_efficiency_right = sys.argv[12]
-InData_efficiency_left = sys.argv[13]
-InData_efficiency_center = sys.argv[14]
-efficiency_table = sys.argv[15]
+tmin = sys.argv[4]
+tmax = sys.argv[5] 
+NumtBins = int(sys.argv[6])
+NumPhiBins = int(sys.argv[7])
+runNumRight = sys.argv[8]
+runNumLeft = sys.argv[9]
+runNumCenter = sys.argv[10]
+data_charge_right = int(sys.argv[11])/1000
+data_charge_left = int(sys.argv[12])/1000
+data_charge_center = int(sys.argv[13])/1000
+InData_efficiency_right = sys.argv[14]
+InData_efficiency_left = sys.argv[15]
+InData_efficiency_center = sys.argv[16]
+efficiency_table = sys.argv[17]
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -116,7 +118,7 @@ def find_tbins():
                 for i,evt in enumerate(TBRANCH_RIGHT_DATA):
                     # Progress bar
                     Misc.progressBar(i, TBRANCH_RIGHT_DATA.GetEntries())
-                    if (0.0 <= -evt.MandelT <= 1.5):
+                    if (tmin <= -evt.MandelT <= tmax):
                         H_t_Right.append(-evt.MandelT)   
                 #rbins,H_t_Right = np.histogram(H_t_Right,bins=200)
                 
@@ -136,7 +138,7 @@ def find_tbins():
                 for i,evt in enumerate(TBRANCH_LEFT_DATA):
                     # Progress bar
                     Misc.progressBar(i, TBRANCH_LEFT_DATA.GetEntries())
-                    if (0.0 <= -evt.MandelT <= 1.5):
+                    if (tmin <= -evt.MandelT <= tmax):
                         H_t_Left.append(-evt.MandelT)
                 #lbins,H_t_Left = np.histogram(H_t_Left,bins=200)
                 InFile_LEFT_DATA.Close()
@@ -155,7 +157,7 @@ def find_tbins():
                 for i,evt in enumerate(TBRANCH_CENTER_DATA):
                     # Progress bar
                     Misc.progressBar(i, TBRANCH_CENTER_DATA.GetEntries())
-                    if (0.0 <= -evt.MandelT <= 1.5):
+                    if (tmin <= -evt.MandelT <= tmax):
                         H_t_Center.append(-evt.MandelT)
                 #cbins,H_t_Center = np.histogram(H_t_Center,bins=200)
                 InFile_CENTER_DATA.Close()        

@@ -151,6 +151,12 @@ fi
 NumtBins=5
 NumPhiBins=16
 
+# Define global variables for lt_analysis scripts
+POL="+1" # All KaonLT is positive polarity
+TMIN=0.010
+TMAX=0.990
+KSet=1 # Arbitrary value
+
 # Efficiency csv file
 #EffData="coin_production_Prod_efficiency_data_2022_12_05.csv"
 #EffData="coin_production_Prod_efficiency_data_2022_12_30.csv"
@@ -543,15 +549,6 @@ if [[ $a_flag = "true" ]]; then
     
 fi
 
-##############
-# HARD CODED #
-##############
-# Define global variables for lt_analysis scripts
-POL="+1" # All KaonLT is positive polarity
-TMIN=0.010
-TMAX=0.990
-KSet=1 # Arbitrary value
-
 cd "${SIMCPATH}/scripts"
 
 # Checks that array isn't empty
@@ -658,9 +655,9 @@ fi
 if [[ $t_flag = "true" || $d_flag = "true" ]]; then
     cd "${SIMCPATH}/scripts/Prod/binning"    
     if [ ${#data_right[@]} -eq 0 ]; then
-	python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${NumtBins} ${NumPhiBins} "0" "${data_left[*]}" "${data_center[*]}" "0" ${DataChargeSumLeft} ${DataChargeSumCenter} "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData}
+	python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${TMIN} ${TMAX} ${NumtBins} ${NumPhiBins} "0" "${data_left[*]}" "${data_center[*]}" "0" ${DataChargeSumLeft} ${DataChargeSumCenter} "0" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData}
     else
-	python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${NumtBins} ${NumPhiBins} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" ${DataChargeSumRight} ${DataChargeSumLeft} ${DataChargeSumCenter} "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData}
+	python3 find_tBinRange.py ${KIN} ${OutDATAFilename} ${OutFullAnalysisFilename} ${TMIN} ${TMAX} ${NumtBins} ${NumPhiBins} "${data_right[*]}" "${data_left[*]}" "${data_center[*]}" ${DataChargeSumRight} ${DataChargeSumLeft} ${DataChargeSumCenter} "${DataEffValRight[*]}" "${DataEffValLeft[*]}" "${DataEffValCenter[*]}" ${EffData}
     fi
 fi
 

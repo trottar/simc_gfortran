@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 15:42:36 trottar"
+# Time-stamp: "2023-01-12 15:45:05 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -982,6 +982,52 @@ Cpht = TCanvas()
 for i,hist in enumerate(histlist):
     hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(0.0,1.5)
     hist["phiq_vs_t_DATA"].Draw("same, SURF2 POL")
+    
+# Section for polar plotting
+gStyle.SetPalette(55)
+gPad.SetTheta(90)
+gPad.SetPhi(180)
+tvsphi_title = TPaveText(0.0277092,0.89779,0.096428,0.991854,"NDC")
+tvsphi_title.AddText("-t vs #phi")
+tvsphi_title.Draw()
+ptphizero = TPaveText(0.923951,0.513932,0.993778,0.574551,"NDC")
+ptphizero.AddText("#phi = 0")
+ptphizero.Draw()
+phihalfk = TLine(0,0,0,0.6)
+phihalfk.SetLineColor(kBlack)
+phihalfk.SetLineWidth(2)
+phihalfk.Draw()
+ptphihalfk = TPaveText(0.417855,0.901876,0.486574,0.996358,"NDC")
+ptphihalfk.AddText("#phi = #frac{K}{2}")
+ptphihalfk.Draw()
+phik = TLine(0,0,-0.6,0)
+phik.SetLineColor(kBlack)
+phik.SetLineWidth(2)
+phik.Draw()
+ptphik = TPaveText(0.0277092,0.514217,0.096428,0.572746,"NDC")
+ptphik.AddText("#phi = K")
+ptphik.Draw()
+phithreek = TLine(0,0,0,-0.6)
+phithreek.SetLineColor(kBlack)
+phithreek.SetLineWidth(2)
+phithreek.Draw()
+ptphithreek = TPaveText(0.419517,0.00514928,0.487128,0.0996315,"NDC")
+ptphithreek.AddText("#phi = #frac{3K}{2}")
+ptphithreek.Draw()
+Arc = TArc()
+for k in range(0, 7):
+     Arc.SetFillStyle(0)
+     Arc.SetLineWidth(2)
+     # To change the arc radius we have to change number 0.825 in the lower line.
+     Arc.DrawArc(0,0,0.825*(k+1)/(10),0.,360.,"same")
+tradius = TGaxis(0,0,0.575,0,0,0.7,10,"-+")
+tradius.SetLineColor(2)
+tradius.SetLabelColor(2)
+tradius.Draw()
+phizero = TLine(0,0,0.6,0) 
+phizero.SetLineColor(kBlack)
+phizero.SetLineWidth(2)
+phizero.Draw()
 
 Cpht.Print(outputpdf+')')
 

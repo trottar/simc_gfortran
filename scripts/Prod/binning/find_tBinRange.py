@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 13:56:29 trottar"
+# Time-stamp: "2023-01-12 14:11:38 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -327,9 +327,9 @@ def defineHists(phi_setting):
     H_th_recoil_DATA  = ROOT.TH1D("H_th_recoil_DATA","Theta Recoil (th_bq)", 200, -10.0, 10.0)
     H_pmiss_DATA  = ROOT.TH1D("H_pmiss_DATA","pmiss", 200, 0.0, 10.0)
     H_emiss_DATA  = ROOT.TH1D("H_emiss_DATA","emiss", 200, 0.0, 10.0)
-    H_pmx_DATA  = ROOT.TH1D("H_pmx_DATA","pmx", 200, 0.0, 10.0)
-    H_pmy_DATA  = ROOT.TH1D("H_pmy_DATA","pmy ", 200, 0.0, 10.0)
-    H_pmz_DATA  = ROOT.TH1D("H_pmz_DATA","pmz", 200, 0.0, 10.0)
+    H_pmx_DATA  = ROOT.TH1D("H_pmx_DATA","pmx", 200, -10.0, 10.0)
+    H_pmy_DATA  = ROOT.TH1D("H_pmy_DATA","pmy ", 200, -10.0, 10.0)
+    H_pmz_DATA  = ROOT.TH1D("H_pmz_DATA","pmz", 200, -10.0, 10.0)
     H_ct_ep_DATA = ROOT.TH1D("H_ct_ep_DATA", "Electron-Proton CTime", 200, -10, 10)
     H_cal_etottracknorm_DATA = ROOT.TH1D("H_cal_etottracknorm_DATA", "HMS Cal etottracknorm", 200, 0.2, 1.8)
     H_cer_npeSum_DATA = ROOT.TH1D("H_cer_npeSum_DATA", "HMS Cer Npe Sum", 200, 0, 30)
@@ -365,9 +365,9 @@ def defineHists(phi_setting):
     H_th_recoil_DATA_rand  = ROOT.TH1D("H_th_recoil_DATA_rand","Theta Recoil (th_bq)", 200, -10.0, 10.0)
     H_pmiss_DATA_rand  = ROOT.TH1D("H_pmiss_DATA_rand","pmiss", 200, 0.0, 10.0)
     H_emiss_DATA_rand  = ROOT.TH1D("H_emiss_DATA_rand","emiss", 200, 0.0, 10.0)
-    H_pmx_DATA_rand  = ROOT.TH1D("H_pmx_DATA_rand","pmx", 200, 0.0, 10.0)
-    H_pmy_DATA_rand  = ROOT.TH1D("H_pmy_DATA_rand","pmy ", 200, 0.0, 10.0)
-    H_pmz_DATA_rand  = ROOT.TH1D("H_pmz_DATA_rand","pmz", 200, 0.0, 10.0)
+    H_pmx_DATA_rand  = ROOT.TH1D("H_pmx_DATA_rand","pmx", 200, -10.0, 10.0)
+    H_pmy_DATA_rand  = ROOT.TH1D("H_pmy_DATA_rand","pmy ", 200, -10.0, 10.0)
+    H_pmz_DATA_rand  = ROOT.TH1D("H_pmz_DATA_rand","pmz", 200, -10.0, 10.0)
     H_ct_ep_DATA_rand = ROOT.TH1D("H_ct_ep_DATA_rand", "Electron-Proton CTime", 200, -10, 10)
     
     ################################################################################################################################################

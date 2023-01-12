@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 16:11:25 trottar"
+# Time-stamp: "2023-01-12 16:14:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -980,7 +980,7 @@ Cpmiss_z.Print(outputpdf)
 Cpht = TCanvas()
 
 for i,hist in enumerate(histlist):
-    hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(0.0,5.0)
+    hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(tmin,tmax)
     hist["phiq_vs_t_DATA"].Draw("same, SURF2 POL")
     
 # Section for polar plotting
@@ -1020,7 +1020,7 @@ for k in range(0, 7):
      Arc.SetLineWidth(2)
      # To change the arc radius we have to change number 0.825 in the lower line.
      Arc.DrawArc(0,0,0.825*(k+1)/(10),0.,360.,"same")
-tradius = TGaxis(0,0,0.575,0,0,0.7,10,"-+")
+tradius = TGaxis(0,0,0.575,0,tmin,tmax,10,"-+")
 tradius.SetLineColor(2)
 tradius.SetLabelColor(2)
 tradius.Draw()

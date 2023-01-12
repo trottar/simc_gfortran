@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 12:11:16 trottar"
+# Time-stamp: "2023-01-12 13:18:35 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -23,7 +23,7 @@ import ROOT
 import scipy
 import scipy.integrate as integrate
 import matplotlib.pyplot as plt
-import sys, math, os, subprocess, re
+import sys, math, os, subprocess
 import array
 from ROOT import TCanvas, TColor, TGaxis, TH1F, TH2F, TPad, TStyle, gStyle, gPad, TGaxis, TLine, TMath, TPaveText, TArc, TGraphPolar 
 from ROOT import kBlack, kCyan, kRed, kGreen, kMagenta
@@ -32,8 +32,8 @@ from functools import reduce
 ##################################################################################################################################################
 # Check the number of arguments provided to the script
 
-if len(sys.argv)-1!=17:
-    print("!!!!! ERROR !!!!!\n Expected 17 arguments\n Usage is with - KIN OutDATAFilename.root OutFullAnalysisFilename tmin tmax NumtBins NumPhiBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table\n!!!!! ERROR !!!!!")
+if len(sys.argv)-1!=19:
+    print("!!!!! ERROR !!!!!\n Expected 19 arguments\n Usage is with - KIN Q2 EPSVAL OutDATAFilename.root OutFullAnalysisFilename tmin tmax NumtBins NumPhiBins runNumRight runNumLeft runNumCenter data_charge_right data_charge_left data_charge_center InData_efficiency_right InData_efficiency_left InData_efficiency_center efficiency_table\n!!!!! ERROR !!!!!")
     sys.exit(1)
 
 ##################################################################################################################################################    
@@ -42,22 +42,24 @@ DEBUG = False # Flag for no cut plots
 
 # Input params
 kinematics = sys.argv[1]
-InDATAFilename = sys.argv[2]
-OutFilename = sys.argv[3]
-tmin = float(sys.argv[4])
-tmax = float(sys.argv[5])
-NumtBins = int(sys.argv[6])
-NumPhiBins = int(sys.argv[7])
-runNumRight = sys.argv[8]
-runNumLeft = sys.argv[9]
-runNumCenter = sys.argv[10]
-data_charge_right = int(sys.argv[11])/1000
-data_charge_left = int(sys.argv[12])/1000
-data_charge_center = int(sys.argv[13])/1000
-InData_efficiency_right = sys.argv[14]
-InData_efficiency_left = sys.argv[15]
-InData_efficiency_center = sys.argv[16]
-efficiency_table = sys.argv[17]
+Q2 = sys.argv[2]
+EPSVAL = sys.argv[3]
+InDATAFilename = sys.argv[4]
+OutFilename = sys.argv[5]
+tmin = float(sys.argv[6])
+tmax = float(sys.argv[7])
+NumtBins = int(sys.argv[8])
+NumPhiBins = int(sys.argv[9])
+runNumRight = sys.argv[10]
+runNumLeft = sys.argv[11]
+runNumCenter = sys.argv[12]
+data_charge_right = int(sys.argv[13])/1000
+data_charge_left = int(sys.argv[14])/1000
+data_charge_center = int(sys.argv[15])/1000
+InData_efficiency_right = sys.argv[16]
+InData_efficiency_left = sys.argv[17]
+InData_efficiency_center = sys.argv[18]
+efficiency_table = sys.argv[19]
 
 ###############################################################################################################################################
 ROOT.gROOT.SetBatch(ROOT.kTRUE) # Set ROOT to batch mode explicitly, does not splash anything to screen
@@ -186,18 +188,13 @@ def find_tbins():
     ln, lbins = np.histogram(H_t_Left, bins=bins)
     cn, cbins = np.histogram(H_t_Center, bins=bins)
 
-    re_kin = re.split("Q|W|_",kinematics)
-    Q2 = re_kin[0].replace("p",".")
-    W = re_kin[1].replace("p",".")
-
     # Write t_bin_interval for lt_analysis scripts
     lines = []
-    with open("{}/scripts/Prod/physics_lists/t_bin_interval".format(SIMCPATH), "w") as file:
+    with open("{}/scripts/Prod/physics_lists/t_bin_interval_{}_{:.0f}".format(SIMCPATH,Q2.replace("p",""),float(EPSVAL)*100), "w") as file:
         file.write("{}\t{}\t{}\n".format(Q2,NumtBins,NumPhiBins))
         for i,t in enumerate(bins):
             lines.append("\t{:.2f}".format(float(t)))
         file.writelines(lines)
-    
     
     return [n,bins]
     

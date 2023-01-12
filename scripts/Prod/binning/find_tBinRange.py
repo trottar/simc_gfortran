@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 11:33:24 trottar"
+# Time-stamp: "2023-01-12 11:35:20 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -185,15 +185,16 @@ def find_tbins():
     cn, cbins = np.histogram(H_t_Center, bins=bins)
 
     re_kin = re.split("Q|W|_",kinematics)
+    print("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬",re_kin)
     Q2 = re_kin[0].replace("p",".")
     W = re_kin[1].replace("p",".")
 
+    # Write t_bin_interval for lt_analysis scripts
     lines = []
     with open("{}/scripts/Prod/physics_lists/t_bin_interval".format(SIMCPATH), "w") as file:
         file.write("{}\t{}\t{}\n".format(Q2,NumtBins,NumPhiBins))
         for i,t in enumerate(bins):
             lines.append("\t{:.2f}".format(float(t)))
-        print("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬%s" % lines )
         file.writelines(lines)
     
     

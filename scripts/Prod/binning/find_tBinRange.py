@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 13:49:35 trottar"
+# Time-stamp: "2023-01-12 13:51:32 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -741,8 +741,6 @@ for i,hist in enumerate(histlist):
     hist["H_t_DATA"].Draw("same, E1")    
     binmax.append(hist["H_t_DATA"].GetMaximum())
 binmax = max(binmax)
-
-print("¬¬¬¬¬¬¬¬",binmax)
     
 tBin_line = TLine()
 # binned_t[0] is missing a value for the final bin
@@ -751,9 +749,9 @@ tBin_line = TLine()
 binned_t0 = list(binned_t[0])
 binned_t0.append(binned_t[0][0])
 for i,(n,b) in enumerate(zip(binned_t0,binned_t[1])):
-    l_t.AddEntry("Bin Num %s" % i )
-    l_t.AddEntry("Evts = %.0f" % n)
-    l_t.AddEntry("BinCenter = %.2f" % b)
+    l_t.AddEntry(" ","Bin Num %s" % i )
+    l_t.AddEntry(" ","Evts = %.0f" % n)
+    l_t.AddEntry(" ","BinCenter = %.2f" % b)
     tBin_line.SetLineColor(4)
     tBin_line.SetLineWidth(4)
     tBin_line.DrawLine(b,0,b,binmax)

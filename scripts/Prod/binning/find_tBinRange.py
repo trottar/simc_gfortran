@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 16:33:34 trottar"
+# Time-stamp: "2023-01-12 16:40:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -979,10 +979,10 @@ Cpmiss_z.Print(outputpdf)
 
 Cpht = TCanvas()
 
-#for i,hist in enumerate(histlist):
-#    hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(tmin,tmax)
-#    hist["phiq_vs_t_DATA"].Draw("same, SURF2 POL")
-histlist["phiq_vs_t_DATA"][0].Draw("same, SURF2 POL")   
+for i,hist in enumerate(histlist):
+    hist["phiq_vs_t_DATA"].GetYaxis().SetRangeUser(tmin,tmax)
+    hist["phiq_vs_t_DATA"].Draw("same, SURF2 POL")
+    
 # Section for polar plotting
 gStyle.SetPalette(55)
 gPad.SetTheta(90)
@@ -1015,11 +1015,16 @@ ptphithreek = TPaveText(0.419517,0.00514928,0.487128,0.0996315,"NDC")
 ptphithreek.AddText("#phi = #frac{3K}{2}")
 ptphithreek.Draw()
 Arc = TArc()
-for k in range(0, 7):
+for k in range(0, 10):
      Arc.SetFillStyle(0)
      Arc.SetLineWidth(2)
      # To change the arc radius we have to change number 0.825 in the lower line.
      Arc.DrawArc(0,0,0.825*(k+1)/(10),0.,360.,"same")
+for i,(n,b) in enumerate(zip(binned_t0,binned_t[1])):
+     Arc.SetLineColor(4)
+     Arc.SetLineWidth(2)
+     # To change the arc radius we have to change number 0.825 in the lower line.
+     Arc.DrawArc(0,0,0.825*b,0.,360.,"same")    
 tradius = TGaxis(0,0,0.575,0,tmin,tmax,10,"-+")
 tradius.SetLineColor(2)
 tradius.SetLabelColor(2)

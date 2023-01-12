@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-12 15:39:34 trottar"
+# Time-stamp: "2023-01-12 15:42:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -616,6 +616,10 @@ def defineHists(phi_setting):
         "P_cal_etottracknorm_DATA" :     P_cal_etottracknorm_DATA,
         "P_hgcer_npeSum_DATA" :     P_hgcer_npeSum_DATA,
         "P_aero_npeSum_DATA" :     P_aero_npeSum_DATA,
+        "MM_vs_CoinTime_DATA" : MM_vs_CoinTime_DATA,
+        "CoinTime_vs_beta_DATA" : CoinTime_vs_beta_DATA,
+        "P_MM_vs_beta_DATA" : P_MM_vs_beta_DATA,
+        "phiq_vs_t_DATA" : phiq_vs_t_DATA,
         "InFile_DATA" : InFile_DATA,
     }
 

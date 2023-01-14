@@ -30,7 +30,7 @@ while getopts 'hdat' flag; do
     case "${flag}" in
         h) 
         echo "--------------------------------------------------------------"
-        echo "./set_ProdBin.sh -{flags} {variable arguments, see help}"
+        echo "./run_Prod_Analysis.sh -{flags} {variable arguments, see help}"
 	echo
         echo "Description: Plots data vs simc"
         echo "--------------------------------------------------------------"

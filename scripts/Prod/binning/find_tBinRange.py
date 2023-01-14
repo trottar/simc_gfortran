@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-13 21:06:33 trottar"
+# Time-stamp: "2023-01-13 21:34:58 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -633,7 +633,10 @@ ROOT.gStyle.SetOptStat(0)
 # Call histogram function above to define dictonaries for right, left, center settings
 # Put these all into an array so that if we are missing a setting it is easier to remove
 # Plus it makes the code below less repetitive
-histlist = [defineHists("Right"),defineHists("Left"),defineHists("Center")]
+phisetlist = ["Right","Left","Center"]
+histlist = []
+for phiset in phisetlist:
+    histlist.append(defineHists("Right"))
 
 print("\n\n")
 
@@ -978,6 +981,7 @@ for i,hist in enumerate(histlist):
 Cpmiss_z.Print(outputpdf)
 
 Cmmct = TCanvas()
+mmct_title = TPaveText(0.0277092,0.89779,0.096428,0.991854,"NDC")
 
 Cmmct.Divide(2,2)
 
@@ -985,10 +989,12 @@ for i,hist in enumerate(histlist):
     Cmmct.cd(i+1)
     hist["MM_vs_CoinTime_DATA"].SetLineColor(i+1)
     hist["MM_vs_CoinTime_DATA"].Draw("same, COLZ")
+    mmct_title.AddText(phisetlist[i])
 
 Cmmct.Print(outputpdf)
 
 Cctbeta = TCanvas()
+ctbeta_title = TPaveText(0.0277092,0.89779,0.096428,0.991854,"NDC")
 
 Cctbeta.Divide(2,2)
 
@@ -996,10 +1002,12 @@ for i,hist in enumerate(histlist):
     Cctbeta.cd(i+1)
     hist["CoinTime_vs_beta_DATA"].SetLineColor(i+1)
     hist["CoinTime_vs_beta_DATA"].Draw("same, COLZ")
+    ctbeta_title.AddText(phisetlist[i)]
 
 Cctbeta.Print(outputpdf)
 
 Cmmbeta = TCanvas()
+mmbeta_title = TPaveText(0.0277092,0.89779,0.096428,0.991854,"NDC")
 
 Cmmbeta.Divide(2,2)
 
@@ -1007,6 +1015,7 @@ for i,hist in enumerate(histlist):
     Cmmbeta.cd(i+1)
     hist["MM_vs_beta_DATA"].SetLineColor(i+1)
     hist["MM_vs_beta_DATA"].Draw("same, COLZ")
+    mmbeta_title.AddText(phisetlist[i])
 
 Cmmbeta.Print(outputpdf)
 

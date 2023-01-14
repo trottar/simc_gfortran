@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-13 19:51:18 trottar"
+# Time-stamp: "2023-01-13 19:56:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1015,12 +1015,14 @@ ptphithreek = TPaveText(0.419517,0.00514928,0.487128,0.0996315,"NDC")
 ptphithreek.AddText("#phi = #frac{3K}{2}")
 ptphithreek.Draw()
 Arc = TArc()
-for k in range(0, 10):
+for k in range(0, 5):
      Arc.SetFillStyle(0)
      Arc.SetLineWidth(2)
      # To change the arc radius we have to change number 0.825 in the lower line.
-     Arc.DrawArc(0,0,0.825*(k+1)/(10),0.,360.,"same")
-     print("¬¬¬¬¬¬¬¬",(0.825*k*(i+1)/10),k)
+     Arc.DrawArc(0,0,1.0*(k+1)/(10),0.,360.,"same")
+     print("¬¬¬¬¬¬¬¬",(1.0*k*(i+1)/10),k)
+     #Arc.DrawArc(0,0,0.825*(k+1)/(10),0.,360.,"same")
+     #print("¬¬¬¬¬¬¬¬",(0.825*k*(i+1)/10),k)
 for i,(n,b) in enumerate(zip(binned_t0,binned_t[1])):
      Arc.SetLineColor(3)
      Arc.SetLineWidth(2)

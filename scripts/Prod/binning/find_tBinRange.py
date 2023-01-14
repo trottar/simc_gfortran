@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-13 22:15:40 trottar"
+# Time-stamp: "2023-01-13 22:50:31 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -981,7 +981,6 @@ for i,hist in enumerate(histlist):
 Cpmiss_z.Print(outputpdf)
 
 Cmmct = TCanvas()
-mmct_title = ROOT.TLegend(0.115,0.35,0.33,0.5)
 
 Cmmct.Divide(2,2)
 
@@ -989,12 +988,11 @@ for i,hist in enumerate(histlist):
     Cmmct.cd(i+1)
     hist["MM_vs_CoinTime_DATA"].SetLineColor(i+1)
     hist["MM_vs_CoinTime_DATA"].Draw("same, COLZ")
-    mmct_title.AddEntry(hist["MM_vs_CoinTime_DATA"],phisetlist[i])
+    hist["MM_vs_CoinTime_DATA"].SetNameTitle(phisetlist[i])
 
 Cmmct.Print(outputpdf)
 
 Cctbeta = TCanvas()
-ctbeta_title = ROOT.TLegend(0.115,0.35,0.33,0.5)
 
 Cctbeta.Divide(2,2)
 
@@ -1002,12 +1000,11 @@ for i,hist in enumerate(histlist):
     Cctbeta.cd(i+1)
     hist["CoinTime_vs_beta_DATA"].SetLineColor(i+1)
     hist["CoinTime_vs_beta_DATA"].Draw("same, COLZ")
-    ctbeta_title.AddEntry(hist["CoinTime_vs_beta_DATA"],phisetlist[i])
+    hist["CoinTime_vs_beta_DATA"].SetNameTitle(phisetlist[i])
 
 Cctbeta.Print(outputpdf)
 
 Cmmbeta = TCanvas()
-mmbeta_title = ROOT.TLegend(0.115,0.35,0.33,0.5)
 
 Cmmbeta.Divide(2,2)
 
@@ -1015,7 +1012,7 @@ for i,hist in enumerate(histlist):
     Cmmbeta.cd(i+1)
     hist["MM_vs_beta_DATA"].SetLineColor(i+1)
     hist["MM_vs_beta_DATA"].Draw("same, COLZ")
-    mmbeta_title.AddEntry(hist["MM_vs_beta_DATA"],phisetlist[i])
+    hist["MM_vs_beta_DATA"].SetNameTitle(phisetlist[i])
 
 Cmmbeta.Print(outputpdf)
 

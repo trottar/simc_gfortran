@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-13 21:34:58 trottar"
+# Time-stamp: "2023-01-13 21:37:56 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1002,7 +1002,7 @@ for i,hist in enumerate(histlist):
     Cctbeta.cd(i+1)
     hist["CoinTime_vs_beta_DATA"].SetLineColor(i+1)
     hist["CoinTime_vs_beta_DATA"].Draw("same, COLZ")
-    ctbeta_title.AddText(phisetlist[i)]
+    ctbeta_title.AddText(phisetlist[i])
 
 Cctbeta.Print(outputpdf)
 

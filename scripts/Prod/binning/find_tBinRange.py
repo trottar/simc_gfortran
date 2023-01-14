@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-13 22:50:31 trottar"
+# Time-stamp: "2023-01-13 22:55:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -988,7 +988,7 @@ for i,hist in enumerate(histlist):
     Cmmct.cd(i+1)
     hist["MM_vs_CoinTime_DATA"].SetLineColor(i+1)
     hist["MM_vs_CoinTime_DATA"].Draw("same, COLZ")
-    hist["MM_vs_CoinTime_DATA"].SetNameTitle(phisetlist[i])
+    hist["MM_vs_CoinTime_DATA"].SetTitle(phisetlist[i])
 
 Cmmct.Print(outputpdf)
 
@@ -1000,7 +1000,7 @@ for i,hist in enumerate(histlist):
     Cctbeta.cd(i+1)
     hist["CoinTime_vs_beta_DATA"].SetLineColor(i+1)
     hist["CoinTime_vs_beta_DATA"].Draw("same, COLZ")
-    hist["CoinTime_vs_beta_DATA"].SetNameTitle(phisetlist[i])
+    hist["CoinTime_vs_beta_DATA"].SetTitle(phisetlist[i])
 
 Cctbeta.Print(outputpdf)
 
@@ -1012,7 +1012,7 @@ for i,hist in enumerate(histlist):
     Cmmbeta.cd(i+1)
     hist["MM_vs_beta_DATA"].SetLineColor(i+1)
     hist["MM_vs_beta_DATA"].Draw("same, COLZ")
-    hist["MM_vs_beta_DATA"].SetNameTitle(phisetlist[i])
+    hist["MM_vs_beta_DATA"].SetTitle(phisetlist[i])
 
 Cmmbeta.Print(outputpdf)
 

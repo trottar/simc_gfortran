@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-13 19:56:21 trottar"
+# Time-stamp: "2023-01-13 20:01:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1029,7 +1029,8 @@ for i,(n,b) in enumerate(zip(binned_t0,binned_t[1])):
      # To change the arc radius we have to change number 0.825 in the lower line.
      Arc.DrawArc(0,0,b,0.,360.,"same")
      print("¬¬¬¬¬¬¬¬",(0.825*b*(i+1)/10),b)
-tradius = TGaxis(0,0,0.575,0,tmin,tmax,10,"-+")
+#tradius = TGaxis(0,0,0.575,0,tmin,tmax,10,"-+")
+tradius = TGaxis(0,0,1.0,0,tmin,tmax,10,"-+")
 tradius.SetLineColor(2)
 tradius.SetLabelColor(2)
 tradius.Draw()

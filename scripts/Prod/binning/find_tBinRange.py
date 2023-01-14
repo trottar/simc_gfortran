@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-13 21:42:22 trottar"
+# Time-stamp: "2023-01-13 21:44:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -247,7 +247,9 @@ def defineHists(phi_setting):
 
     # Define total efficiency vs run number plots
     G_data_eff = ROOT.TGraphErrors(len(InData_efficiency.split(' ')), np.array([float(x) for x in runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]),np.array([0]*len(tot_effError_data)),np.array(tot_effError_data)*np.array([float(x) for x in InData_efficiency.split(' ')]))
+    
     print(G_data_eff)
+    
     ###############################################################################################################################################
     # Grab windows for random subtraction
 

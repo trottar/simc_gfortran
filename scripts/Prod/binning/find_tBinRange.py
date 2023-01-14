@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-13 22:09:53 trottar"
+# Time-stamp: "2023-01-13 22:15:40 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -1029,7 +1029,7 @@ for i,hist in enumerate(histlist):
 gStyle.SetPalette(55)
 gPad.SetTheta(90)
 gPad.SetPhi(180)
-tvsphi_title = ROOT.TLegend(0.115,0.35,0.33,0.5)
+tvsphi_title = TPaveText(0.0277092,0.89779,0.096428,0.991854,"NDC")
 tvsphi_title.AddText("-t vs #phi")
 tvsphi_title.Draw()
 ptphizero = TPaveText(0.923951,0.513932,0.993778,0.574551,"NDC")

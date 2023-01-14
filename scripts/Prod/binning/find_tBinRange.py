@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-13 20:18:20 trottar"
+# Time-stamp: "2023-01-13 21:06:33 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -375,7 +375,7 @@ def defineHists(phi_setting):
 
     MM_vs_CoinTime_DATA = ROOT.TH2D("MM_vs_CoinTime_DATA","Missing Mass vs CTime; MM; Coin_Time",100, 0, 2, 100, -2, 2)
     CoinTime_vs_beta_DATA = ROOT.TH2D("CoinTime_vs_beta_DATA", "CTime vs SHMS #beta; Coin_Time; SHMS_#beta", 100, -2, 2, 100, 0.6, 1.4)
-    P_MM_vs_beta_DATA = ROOT.TH2D("P_MM_vs_beta_DATA", "Missing Mass vs SHMS #beta; MM; SHMS_#beta", 100, 0, 2, 200, 0, 2)
+    MM_vs_beta_DATA = ROOT.TH2D("MM_vs_beta_DATA", "Missing Mass vs SHMS #beta; MM; SHMS_#beta", 100, 0, 2, 200, 0, 2)
     phiq_vs_t_DATA = ROOT.TH2D("phiq_vs_t_DATA","; #phi ;t", 12, -3.14, 3.14, 24, tmin, tmax)
     
     ################################################################################################################################################
@@ -402,7 +402,7 @@ def defineHists(phi_setting):
 
           MM_vs_CoinTime_DATA.Fill(evt.MM, evt.CTime_ROC1)
           CoinTime_vs_beta_DATA.Fill(evt.CTime_ROC1,evt.P_gtr_eta)
-          P_MM_vs_beta_DATA.Fill(evt.MM,evt.P_gtr_eta)
+          MM_vs_beta_DATA.Fill(evt.MM,evt.P_gtr_eta)
           phiq_vs_t_DATA.Fill(evt.ph_q, -evt.MandelT)
             
           H_ct_ep_DATA.Fill(evt.CTime_ROC1)
@@ -618,7 +618,7 @@ def defineHists(phi_setting):
         "P_aero_npeSum_DATA" :     P_aero_npeSum_DATA,
         "MM_vs_CoinTime_DATA" : MM_vs_CoinTime_DATA,
         "CoinTime_vs_beta_DATA" : CoinTime_vs_beta_DATA,
-        "P_MM_vs_beta_DATA" : P_MM_vs_beta_DATA,
+        "MM_vs_beta_DATA" : MM_vs_beta_DATA,
         "phiq_vs_t_DATA" : phiq_vs_t_DATA,
         "InFile_DATA" : InFile_DATA,
     }
@@ -976,6 +976,39 @@ for i,hist in enumerate(histlist):
     hist["H_pmz_DATA"].Draw("same, E1")
 
 Cpmiss_z.Print(outputpdf)
+
+Cmmct = TCanvas()
+
+Cmmct.Divide(2,2)
+
+for i,hist in enumerate(histlist):
+    Cmmct.cd(i+1)
+    hist["MM_vs_CoinTime_DATA"].SetLineColor(i+1)
+    hist["MM_vs_CoinTime_DATA"].Draw("same, COLZ")
+
+Cmmct.Print(outputpdf)
+
+Cctbeta = TCanvas()
+
+Cctbeta.Divide(2,2)
+
+for i,hist in enumerate(histlist):
+    Cctbeta.cd(i+1)
+    hist["CoinTime_vs_beta_DATA"].SetLineColor(i+1)
+    hist["CoinTime_vs_beta_DATA"].Draw("same, COLZ")
+
+Cctbeta.Print(outputpdf)
+
+Cmmbeta = TCanvas()
+
+Cmmbeta.Divide(2,2)
+
+for i,hist in enumerate(histlist):
+    Cmmbeta.cd(i+1)
+    hist["MM_vs_beta_DATA"].SetLineColor(i+1)
+    hist["MM_vs_beta_DATA"].Draw("same, COLZ")
+
+Cmmbeta.Print(outputpdf)
 
 Cpht = TCanvas()
 

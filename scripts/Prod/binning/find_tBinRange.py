@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-13 21:58:40 trottar"
+# Time-stamp: "2023-01-13 22:09:53 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -247,7 +247,6 @@ def defineHists(phi_setting):
 
     # Define total efficiency vs run number plots
     G_data_eff = ROOT.TGraphErrors(len(InData_efficiency.split(' ')), np.array([float(x) for x in runNums.split(' ')]),np.array([float(x) for x in InData_efficiency.split(' ')]),np.array([0]*len(tot_effError_data)),np.array(tot_effError_data)*np.array([float(x) for x in InData_efficiency.split(' ')]))
-    print("~~~~~~~~~~~~~~~~~~~~~",G_data_eff)
     
     ###############################################################################################################################################
     # Grab windows for random subtraction
@@ -982,7 +981,7 @@ for i,hist in enumerate(histlist):
 Cpmiss_z.Print(outputpdf)
 
 Cmmct = TCanvas()
-mmct_title = TPaveText(0.0277092,0.89779,0.096428,0.991854,"NDC")
+mmct_title = ROOT.TLegend(0.115,0.35,0.33,0.5)
 
 Cmmct.Divide(2,2)
 
@@ -990,12 +989,12 @@ for i,hist in enumerate(histlist):
     Cmmct.cd(i+1)
     hist["MM_vs_CoinTime_DATA"].SetLineColor(i+1)
     hist["MM_vs_CoinTime_DATA"].Draw("same, COLZ")
-    mmct_title.AddText(phisetlist[i])
+    mmct_title.AddEntry(hist["MM_vs_CoinTime_DATA"],phisetlist[i])
 
 Cmmct.Print(outputpdf)
 
 Cctbeta = TCanvas()
-ctbeta_title = TPaveText(0.0277092,0.89779,0.096428,0.991854,"NDC")
+ctbeta_title = ROOT.TLegend(0.115,0.35,0.33,0.5)
 
 Cctbeta.Divide(2,2)
 
@@ -1003,12 +1002,12 @@ for i,hist in enumerate(histlist):
     Cctbeta.cd(i+1)
     hist["CoinTime_vs_beta_DATA"].SetLineColor(i+1)
     hist["CoinTime_vs_beta_DATA"].Draw("same, COLZ")
-    ctbeta_title.AddText(phisetlist[i])
+    ctbeta_title.AddEntry(hist["CoinTime_vs_beta_DATA"],phisetlist[i])
 
 Cctbeta.Print(outputpdf)
 
 Cmmbeta = TCanvas()
-mmbeta_title = TPaveText(0.0277092,0.89779,0.096428,0.991854,"NDC")
+mmbeta_title = ROOT.TLegend(0.115,0.35,0.33,0.5)
 
 Cmmbeta.Divide(2,2)
 
@@ -1016,7 +1015,7 @@ for i,hist in enumerate(histlist):
     Cmmbeta.cd(i+1)
     hist["MM_vs_beta_DATA"].SetLineColor(i+1)
     hist["MM_vs_beta_DATA"].Draw("same, COLZ")
-    mmbeta_title.AddText(phisetlist[i])
+    mmbeta_title.AddEntry(hist["MM_vs_beta_DATA"],phisetlist[i])
 
 Cmmbeta.Print(outputpdf)
 
@@ -1030,7 +1029,7 @@ for i,hist in enumerate(histlist):
 gStyle.SetPalette(55)
 gPad.SetTheta(90)
 gPad.SetPhi(180)
-tvsphi_title = TPaveText(0.0277092,0.89779,0.096428,0.991854,"NDC")
+tvsphi_title = ROOT.TLegend(0.115,0.35,0.33,0.5)
 tvsphi_title.AddText("-t vs #phi")
 tvsphi_title.Draw()
 ptphizero = TPaveText(0.923951,0.513932,0.993778,0.574551,"NDC")

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2023-01-13 21:53:50 trottar"
+# Time-stamp: "2023-01-13 21:58:40 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -637,7 +637,7 @@ ROOT.gStyle.SetOptStat(0)
 phisetlist = ["Right","Left","Center"]
 histlist = []
 for phiset in phisetlist:
-    histlist.append(defineHists("Right"))
+    histlist.append(defineHists(phiset))
 
 print("\n\n")
 

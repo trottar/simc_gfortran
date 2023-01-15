@@ -1222,10 +1222,10 @@ c	call complete_ev(main0,vertex0,success)
 c	if (debug(2)) write(6,*)'calc_cent: done with complete_ev'
 c	if (.not.success) stop 'COMPLETE_EV failed trying to complete a CENTRAL event!'
 
-!       call complete_recon_ev(vertex0,success)
-!       if (debug(2)) write(6,*)'calc_cent: done with complete_recon_ev'
-	call complete_recon_hcana(vertex0,success)
-	if (debug(2)) write(6,*)'calc_cent: done with complete_recon_hcana'
+       call complete_recon_ev(vertex0,success)
+       if (debug(2)) write(6,*)'calc_cent: done with complete_recon_ev'
+!	call complete_recon_hcana(vertex0,success)
+!	if (debug(2)) write(6,*)'calc_cent: done with complete_recon_hcana'
 	if (.not.success) stop 'COMPLETE_EV failed trying to complete a CENTRAL event!'
 	central%Q2 = vertex0%Q2
 	central%q = vertex0%q

@@ -215,8 +215,8 @@ cdg	call time (timestring1(11:23))
 ! ... calculate everything else about the event
 
 	  if (success) then
-!       call complete_recon_ev(recon,success)
-	     call complete_recon_hcana(recon,success)
+	     call complete_recon_ev(recon,success)
+!	     call complete_recon_hcana(recon,success)
 	  endif
 
 	  if(debug(2)) write(6,*)'sim: after comp_ev, success =',success

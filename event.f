@@ -1410,7 +1410,7 @@ c Everyone else in the world calculates W using the proton mass.
 !	write(6,*) 'spec%p%P:',spec%p%P
 !	write(6,*) '-recon%up%y:',-recon%up%y	
 	
-	call SetCentralAngles(-spec%e%theta, 0.0, RotToLab)
+!	call SetCentralAngles(-spec%e%theta, 0.0, RotToLab)
 !	write(6,*) 'e RotToLab%:',RotToLab
 	call TransportToLab(recon%e%P, recon%e%xptar, recon%e%yptar, RotToLab, kf_vec)
 

@@ -1997,43 +1997,43 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine GeoToSph(th_geo, ph_geo, th_sph, ph_sph)
+	subroutine GeoToSph(thetaGeo, phiGeo, thetaSph, phiSph)
 
-!       Convert geographical to spherical angles. Units are rad.
-!       th_geo and ph_geo can be anything.
-!       th_sph is in [0,pi], ph_sph in [-pi,pi].
+!       Convert Geographical to Spherical angles. Units are rad.
+!       thetaGeo and phiGeo can be anything.
+!       thetaSph is in [0,pi], phiSph in [-pi,pi].
 !       https://hallaweb.jlab.org/podd/doc/html_v15/src/THaAnalysisObject.cxx.html#qBvmFB
 
 	
 !       Declare variables
-	real*8 th_geo, ph_geo ! Geographical angles
-	real*8 th_sph, ph_sph ! Spherical Coordinates
+	real*8 thetaGeo, phiGeo ! Geographical angles
+	real*8 thetaSph, phiSph ! Spherical Coordinates
 	real*8 ct, cp
 	real*8 tmp
 
 	include 'constants.inc'
 	
-	ct = cos(th_geo)
-	cp = cos(ph_geo)
+	ct = cos(thetaGeo)
+	cp = cos(phiGeo)
 
 	tmp = ct*cp
 
-	th_sph = acos(tmp)
+	thetaSph = acos(tmp)
 
 	tmp = sqrt(1.0 - tmp*tmp)
 
 	if (abs(tmp) < 1.0D-6) then
-	   ph_sph = 0.0
+	   phiSph = 0.0
 	else
-	   ph_sph = acos(sqrt(1.0-ct*ct)*cp/tmp)
+	   phiSph = acos(sqrt(1.0-ct*ct)*cp/tmp)
 	endif
 
-	if (th_geo/twopi-floor(th_geo/twopi) > 0.5) then
-	   ph_sph = pi-ph_sph
+	if (thetaGeo/twopi-floor(thetaGeo/twopi) > 0.5) then
+	   phiSph = pi-phiSph
 	endif
 
-	if (ph_geo/twopi-floor(ph_geo/twopi) > 0.5) then
-	   ph_sph = -ph_sph
+	if (phiGeo/twopi-floor(phiGeo/twopi) > 0.5) then
+	   phiSph = -phiSph
 	endif
 	
 	return

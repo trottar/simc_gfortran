@@ -516,15 +516,7 @@ C DJG spectrometer
 !	  write(6,*) 'vertex%p%P:',vertex%p%P
 !	  write(6,*) 'vertex%up%x:',vertex%up%x
 	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
-	  
-	  call SetCentralAngles(vertex%e%theta,vertex%e%phi,RotToLab)
-!       write(6,*) 'e RotToLab%:',RotToLab
-	  call TransportToLab(vertex%ue%x,vertex%ue%y,vertex%ue%z,vertex%e%xptar,vertex%e%yptar,RotToLab)
-	
-	  call SetCentralAngles(vertex%p%theta,vertex%p%phi,RotToLab)
-!       write(6,*) 'p RotToLab%:',RotToLab
-	  call TransportToLab(vertex%up%x,vertex%up%y,vertex%up%z,vertex%p%xptar,vertex%p%yptar,RotToLab)
-	
+	 	
 !	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
 !	  write(6,*) 'vertex%p%P:',vertex%p%P
 !	  write(6,*) 'vertex%up%x:',vertex%up%x	  
@@ -1420,6 +1412,7 @@ c Everyone else in the world calculates W using the proton mass.
 
 	call SetCentralAngles(spec%e%theta,spec%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
+!	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
 	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
 
 	fP = [0.0,0.0,ki,me]

@@ -2007,12 +2007,10 @@ C If using Coulomb corrections, include focusing factor
 !       Declare variables
 	real*8 th_geo, ph_geo ! Geographical angles
 	real*8 th_sph, ph_sph ! Spherical Coordinates
-	real*8 twopi, ct, cp
+	real*8 ct, cp
 	real*8 tmp
 
 	include 'constants.inc'
-
-	twopi = 2*pi
 	
 	ct = cos(th_geo)
 	cp = cos(ph_geo)

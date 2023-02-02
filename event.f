@@ -1971,9 +1971,13 @@ C If using Coulomb corrections, include focusing factor
 	include 'constants.inc'
 
 ! 	Convert deg to rad
-	thetaGeo = theta*pi/180
-	phiGeo = phi*pi/180
+!	thetaGeo = theta*pi/180
+!	phiGeo = phi*pi/180
 
+	thetaGeo = theta
+	phiGeo = phi
+
+	
 	call GeoToSph(thetaGeo, phiGeo, thetaSph, phiSph)
 
 	norm = sqrt((cos(thetaSph)**2)+(sin(thetaSph)**2)*(cos(phiSph)**2))

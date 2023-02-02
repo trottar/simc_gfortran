@@ -1410,10 +1410,10 @@ c Everyone else in the world calculates W using the proton mass.
 !	write(6,*) 'spec%p%P:',spec%p%P
 !	write(6,*) '-recon%up%y:',-recon%up%y	
 	
-	call SetCentralAngles(spec%e%theta,0.0,RotToLab)
+	call SetCentralAngles(-spec%e%theta,0.0,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
 !	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
-	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
+	call TransportToLab(recon%e%P,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
 
 	fP = [0.0,0.0,ki,me]
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
@@ -1428,7 +1428,7 @@ c Everyone else in the world calculates W using the proton mass.
 	
 	call SetCentralAngles(spec%p%theta,0.0,RotToLab)
 !       write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(recon%p%P,-recon%up%y,recon%up%x,recon%up%z,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
+	call TransportToLab(recon%p%P,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
 
 	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
 	fB = fA1 - fX
@@ -2038,41 +2038,31 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 	
-	subroutine TransportToLab(pmag,px0,py0,pz0,dx,dy,rotmat,v)
+	subroutine TransportToLab(pmag,dx,dy,rotmat,v)
 	
 !       Declare variables
 	real, dimension(3) :: pf ! normalized inal proton momentum, vector
 	real*8 pfx,pfy,pfz	! normalized final proton momentum
 	real*8 pmag		! proton magnitude
-	real*8 px0,py0,pz0	! proton vector componenants
 	real*8 dx,dy,dz		! dx/dy (xptar/yptar) for event after rotation
 	real, dimension(3,3) :: rotmat ! rotation matrix
-	real, dimension(3) :: v0	! intermediate variables.
 	real, dimension(3) :: v	! intermediate variables.
 
 	include 'constants.inc'
 
 	dz = 1.0
-
-!	pfx = pmag*px0/sqrt(dx**2+dy**2+dz**2)
-!	pfy = pmag*py0/sqrt(dx**2+dy**2+dz**2)
-!	pfz = pmag*pz0/sqrt(dx**2+dy**2+dz**2)
 	
 	pfx = pmag*dx/sqrt(dx**2+dy**2+dz**2)
 	pfy = pmag*dy/sqrt(dx**2+dy**2+dz**2)
 	pfz = pmag*dz/sqrt(dx**2+dy**2+dz**2)
 
 	pf = [pfx,pfy,pfz]
-	v0 = [dx,dy,dz]
-
-	v0 = v0*pf
 
 	do i = 1, 3
 	   v(i) = sum(rotmat(i,:) * pf)
 	end do
 	
 !	write(6,*) 'pf:',pf
-!	write(6,*) 'v0:',v0
 !	write(6,*) 'v:',v
 !	write(6,*) 'sqrt(dx**2+dy**2+dz**2):',sqrt(dx**2+dy**2+dz**2)
 !	write(6,*) 'pfx:',pfx

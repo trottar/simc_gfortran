@@ -1969,12 +1969,12 @@ C If using Coulomb corrections, include focusing factor
 	real*8 thetaGeo, phiGeo ! Geographical angles
 	real*8 thetaSph, phiSph ! Spherical Coordinates
 	
+	include 'constants.inc'
+	
 	thetaGeo = theta*180/pi
 	phiGeo = phi*180/pi
 
 	call GeoToSph(thetaGeo, phiGeo, thetaSph, phiSph)
-
-	include 'constants.inc'
 
 	norm = sqrt((cos(thetaSph)**2)+(sin(thetaSph)**2)*(cos(phiSph)**2))
 

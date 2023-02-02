@@ -1425,10 +1425,12 @@ c Everyone else in the world calculates W using the proton mass.
 	fQ = fP-fP1
 	fA1 = fA+fQ
 	
-!	call SetCentralAngles(spec%p%theta, 0.0, RotToLab)
+	call SetCentralAngles(spec%p%theta, 0.0, RotToLab)
 !	write(6,*) 'p RotToLab%:',RotToLab
 	call TransportToLab(recon%p%P, recon%p%xptar, recon%p%yptar, RotToLab, Pf_vec)
 
+	write(6,*) 'Pf_vec:', Pf_vec
+	
 	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
 	fB = fA1 - fX
 
@@ -1445,7 +1447,7 @@ c Everyone else in the world calculates W using the proton mass.
 	xq = [fX(1),fX(2),fX(3)]
 	bq = [fB(1),fB(2),fB(3)]
 
-	write(6,*) 'bq:', bq
+!	write(6,*) 'bq:', bq
 
 	call SetZAxis(q_vec,kf1_vec,xq)
 	call SetZAxis(q_vec,kf1_vec,bq)	

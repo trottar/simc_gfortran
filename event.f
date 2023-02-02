@@ -1410,9 +1410,9 @@ c Everyone else in the world calculates W using the proton mass.
 !	write(6,*) 'spec%p%P:',spec%p%P
 !	write(6,*) '-recon%up%y:',-recon%up%y	
 	
-	call SetCentralAngles(-spec%e%theta,0.0,RotToLab)
-!       write(6,*) 'e RotToLab%:',RotToLab
-	call TransportToLab(recon%e%P,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
+!	call SetCentralAngles(-spec%e%theta, 0.0, RotToLab)
+	write(6,*) 'e RotToLab%:',RotToLab
+	call TransportToLab(recon%e%P, recon%e%xptar, recon%e%yptar, RotToLab, kf_vec)
 
 	fP = [0.0,0.0,ki,me]
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
@@ -1425,9 +1425,9 @@ c Everyone else in the world calculates W using the proton mass.
 	fQ = fP-fP1
 	fA1 = fA+fQ
 	
-	call SetCentralAngles(spec%p%theta,0.0,RotToLab)
-!       write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(recon%p%P,recon%p%xptar,recon%p%yptar,RotToLab,Pf_vec)
+!	call SetCentralAngles(spec%p%theta, 0.0, RotToLab)
+	write(6,*) 'p RotToLab%:',RotToLab
+	call TransportToLab(recon%p%P, recon%p%xptar, recon%p%yptar, RotToLab, Pf_vec)
 
 	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
 	fB = fA1 - fX
@@ -1973,6 +1973,7 @@ C If using Coulomb corrections, include focusing factor
 ! 	Convert deg to rad
 	thetaGeo = theta*pi/180
 	phiGeo = phi*pi/180
+
 	
 	call GeoToSph(thetaGeo, phiGeo, thetaSph, phiSph)
 
@@ -1996,43 +1997,43 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-	subroutine GeoToSph(thetaGeo, phiGeo, thetaSph, phiSph)
+	subroutine GeoToSph(th_geo, ph_geo, th_sph, ph_sph)
 
-!       Convert Geographical to Spherical angles. Units are rad.
-!       thetaGeo and phiGeo can be anything.
-!       thetaSph is in [0,pi], phiSph in [-pi,pi].
+!       Convert geographical to spherical angles. Units are rad.
+!       th_geo and ph_geo can be anything.
+!       th_sph is in [0,pi], ph_sph in [-pi,pi].
 !       https://hallaweb.jlab.org/podd/doc/html_v15/src/THaAnalysisObject.cxx.html#qBvmFB
 
 	
 !       Declare variables
-	real*8 thetaGeo, phiGeo ! Geographical angles
-	real*8 thetaSph, phiSph ! Spherical Coordinates
+	real*8 th_geo, ph_geo ! Geographical angles
+	real*8 th_sph, ph_sph ! Spherical Coordinates
 	real*8 ct, cp
 	real*8 tmp
 
 	include 'constants.inc'
 	
-	ct = cos(thetaGeo)
-	cp = cos(phiGeo)
+	ct = cos(th_geo)
+	cp = cos(ph_geo)
 
 	tmp = ct*cp
 
-	thetaSph = acos(tmp)
+	th_sph = acos(tmp)
 
 	tmp = sqrt(1.0 - tmp*tmp)
 
 	if (abs(tmp) < 1.0D-6) then
-	   phiSph = 0.0
+	   ph_sph = 0.0
 	else
-	   phiSph = acos(sqrt(1.0-ct*ct)*cp/tmp)
+	   ph_sph = acos(sqrt(1.0-ct*ct)*cp/tmp)
 	endif
 
-	if (thetaGeo/twopi-floor(thetaGeo/twopi) > 0.5) then
-	   phiSph = pi-phiSph
+	if (th_geo/twopi-floor(th_geo/twopi) > 0.5) then
+	   ph_sph = pi-ph_sph
 	endif
 
-	if (phiGeo/twopi-floor(phiGeo/twopi) > 0.5) then
-	   phiSph = -phiSph
+	if (ph_geo/twopi-floor(ph_geo/twopi) > 0.5) then
+	   ph_sph = -ph_sph
 	endif
 	
 	return

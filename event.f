@@ -1409,7 +1409,7 @@ c Everyone else in the world calculates W using the proton mass.
 !	write(6,*) 'recon%p%P:',recon%p%P
 !	write(6,*) 'spec%p%P:',spec%p%P
 !	write(6,*) '-recon%up%y:',-recon%up%y	
-
+	
 	call SetCentralAngles(spec%e%theta,spec%e%phi,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
 !	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
@@ -1966,29 +1966,80 @@ C If using Coulomb corrections, include focusing factor
 	real*8 theta,phi	!physics angles for event.
 	real*8 norm
 	real, dimension(3,3) :: rotmat ! rotation matrix
+	real*8 thetaGeo, phiGeo ! Geographical angles
+	real*8 thetaSph, phiSph ! Spherical Coordinates
+	
+	thetaGeo = theta*180/pi
+	phiGeo = phi*180/pi
+
+	call GeoToSph(thetaGeo, phiGeo, thetaSph, phiSph)
 
 	include 'constants.inc'
 
-	norm = sqrt((cos(theta)**2)+(sin(theta)**2)*(cos(phi)**2))
+	norm = sqrt((cos(thetaSph)**2)+(sin(thetaSph)**2)*(cos(phiSph)**2))
 
 !	write(6,*) 'cent norm:', norm
 	
 !       Calculate the rotation matrix
-	rotmat(1,1) = ((sin(theta)**2)*sin(phi)*cos(phi))/norm
-	rotmat(1,2) = cos(theta)/norm
-	rotmat(1,3) = sin(theta)*cos(phi)
+	rotmat(1,1) = ((sin(thetaSph)**2)*sin(phiSph)*cos(phiSph))/norm
+	rotmat(1,2) = cos(thetaSph)/norm
+	rotmat(1,3) = sin(thetaSph)*cos(phiSph)
 	rotmat(2,1) = -norm
 	rotmat(2,2) = 0.0
-	rotmat(2,3) = sin(theta)*sin(phi)
-	rotmat(3,1) = sin(theta)*cos(theta)*sin(phi)/norm
-	rotmat(3,2) = -sin(theta)*cos(phi)/norm
-	rotmat(3,3) = cos(theta)
+	rotmat(2,3) = sin(thetaSph)*sin(phiSph)
+	rotmat(3,1) = sin(thetaSph)*cos(thetaSph)*sin(phiSph)/norm
+	rotmat(3,2) = -sin(thetaSph)*cos(phiSph)/norm
+	rotmat(3,3) = cos(thetaSph)
 
 !	write(6,*) 'cent rotmat:',rotmat
 
 	return
 	end
 
+	subroutine GeoToSph(th_geo, ph_geo, th_sph, ph_sph)
+
+!       Convert geographical to spherical angles. Units are rad.
+!       th_geo and ph_geo can be anything.
+!       th_sph is in [0,pi], ph_sph in [-pi,pi].
+!       https://hallaweb.jlab.org/podd/doc/html_v15/src/THaAnalysisObject.cxx.html#qBvmFB
+
+	
+!       Declare variables
+	real*8 th_geo, ph_geo ! Geographical angles
+	real*8 th_sph, ph_sph ! Spherical Coordinates
+	real*8 twopi, ct, cp
+	real*8 tmp
+
+	include 'constants.inc'
+
+	twopi = 2*pi
+	
+	ct = cos(th_geo)
+	cp = cos(ph_geo)
+
+	tmp = ct*cp
+
+	th_sph = acos(tmp)
+
+	tmp = sqrt(1.0 - tmp*tmp)
+
+	if (abs(tmp) < 1.0D-6) then
+	   ph_sph = 0.0
+	else
+	   ph_sph = acos(sqrt(1.0-ct*ct)*cp/tmp)
+	endif
+
+	if (th_geo/twopi-floor(th_geo/twopi) > 0.5) then
+	   ph_sph = pi-ph_sph
+	endif
+
+	if (ph_geo/twopi-floor(ph_geo/twopi) > 0.5) then
+	   ph_sph = -ph_sph
+	endif
+	
+	return
+	end
+	
 	subroutine TransportToLab(pmag,px0,py0,pz0,dx,dy,rotmat,v)
 	
 !       Declare variables

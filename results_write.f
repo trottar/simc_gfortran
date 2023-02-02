@@ -56,11 +56,8 @@
 !	  Pm_Heepz = (recon%Pmy*recon%uq%y+recon%Pmz*recon%uq%z)/ sqrt(recon%uq%y**2+recon%uq%z**2)
 !	  Pm_Heepx = recon%Pmx
 !	  Pm_Heepy = (recon%Pmz*recon%uq%y-recon%Pmy*recon%uq%z)/ sqrt(recon%uq%y**2+recon%uq%z**2)
-!	  Pm_Heepx = recon%Pmx
-!	  Pm_Heepy = recon%Pmy
-!       Pm_Heepz = recon%Pmz
-	  Pm_Heepx = -recon%Pmx
-	  Pm_Heepy = -recon%Pmy
+	  Pm_Heepx = recon%Pmx
+	  Pm_Heepy = recon%Pmy
 	  Pm_Heepz = recon%Pmz
 	endif
 

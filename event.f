@@ -1425,7 +1425,7 @@ c Everyone else in the world calculates W using the proton mass.
 	fQ = fP-fP1
 	fA1 = fA+fQ
 	
-!	call SetCentralAngles(spec%p%theta, 0.0, RotToLab)
+	call SetCentralAngles(spec%p%theta, 0.0, RotToLab)
 !	write(6,*) 'p RotToLab%:',RotToLab
 	call TransportToLab(recon%p%P, recon%p%xptar, recon%p%yptar, RotToLab, Pf_vec)
 
@@ -2067,11 +2067,11 @@ C If using Coulomb corrections, include focusing factor
 	   v(i) = sum(rotmat(i,:) * pf)
 	end do
 	
-!	write(6,*) 'pf:',pf
-!	write(6,*) 'v:',v
+	write(6,*) 'pf:',pf
+	write(6,*) 'v:',v
 !	write(6,*) 'sqrt(dx**2+dy**2+dz**2):',sqrt(dx**2+dy**2+dz**2)
 !	write(6,*) 'pfx:',pfx
-!	write(6,*) 'rotmat:',rotmat
+	write(6,*) 'rotmat:',rotmat
 		
 !	write(6,*) 'before dx:',dx
 !	dx = v(1)

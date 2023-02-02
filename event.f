@@ -1412,7 +1412,6 @@ c Everyone else in the world calculates W using the proton mass.
 	
 	call SetCentralAngles(-spec%e%theta,0.0,RotToLab)
 !       write(6,*) 'e RotToLab%:',RotToLab
-!	call TransportToLab(recon%e%P,-recon%ue%y,recon%ue%x,recon%ue%z,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
 	call TransportToLab(recon%e%P,recon%e%xptar,recon%e%yptar,RotToLab,kf_vec)
 
 	fP = [0.0,0.0,ki,me]
@@ -1970,9 +1969,10 @@ C If using Coulomb corrections, include focusing factor
 	real*8 thetaSph, phiSph ! Spherical Coordinates
 	
 	include 'constants.inc'
-	
-	thetaGeo = theta*180/pi
-	phiGeo = phi*180/pi
+
+! 	Convert deg to rad
+	thetaGeo = theta*pi/180
+	phiGeo = phi*pi/180
 
 	call GeoToSph(thetaGeo, phiGeo, thetaSph, phiSph)
 

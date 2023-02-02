@@ -1425,7 +1425,7 @@ c Everyone else in the world calculates W using the proton mass.
 	fQ = fP-fP1
 	fA1 = fA+fQ
 	
-	call SetCentralAngles(spec%p%theta, 0.0, RotToLab)
+!	call SetCentralAngles(spec%p%theta, 0.0, RotToLab)
 	write(6,*) 'p RotToLab%:',RotToLab
 	call TransportToLab(recon%p%P, recon%p%xptar, recon%p%yptar, RotToLab, Pf_vec)
 

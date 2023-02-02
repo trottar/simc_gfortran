@@ -1971,11 +1971,8 @@ C If using Coulomb corrections, include focusing factor
 	include 'constants.inc'
 
 ! 	Convert deg to rad
-!	thetaGeo = theta*pi/180
-!	phiGeo = phi*pi/180
-
-	thetaGeo = theta
-	phiGeo = phi
+	thetaGeo = theta*pi/180
+	phiGeo = phi*pi/180
 
 	
 	call GeoToSph(thetaGeo, phiGeo, thetaSph, phiSph)
@@ -1995,7 +1992,7 @@ C If using Coulomb corrections, include focusing factor
 	rotmat(3,2) = -sin(thetaSph)*cos(phiSph)/norm
 	rotmat(3,3) = cos(thetaSph)
 
-!	write(6,*) 'cent rotmat:',rotmat
+	write(6,*) '!!!!!!!!!!cent rotmat:',rotmat
 
 	return
 	end

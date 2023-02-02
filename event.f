@@ -1328,7 +1328,8 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	real, dimension(3) :: kf_vec,Pf_vec,q_vec,kf1_vec
 	real, dimension(3) :: xq,bq
 	real, dimension(4) :: fQ,fP,fP1,fA,fA1,fX,fB
-	real*8 :: RotToLab(3,3) ! rotation matrix
+	real*8 :: eRotToLab(3,3) ! e rotation matrix
+	real*8 :: pRotToLab(3,3) ! p rotation matrix
 	
 	logical success
 	type(event)::	recon
@@ -1410,9 +1411,9 @@ c Everyone else in the world calculates W using the proton mass.
 !	write(6,*) 'spec%p%P:',spec%p%P
 !	write(6,*) '-recon%up%y:',-recon%up%y	
 	
-	call SetCentralAngles(-spec%e%theta, 0.0, RotToLab)
-!	write(6,*) 'e RotToLab%:',RotToLab
-	call TransportToLab(recon%e%P, recon%e%xptar, recon%e%yptar, RotToLab, kf_vec)
+	call SetCentralAngles(-spec%e%theta, 0.0, eRotToLab)
+!	write(6,*) 'e eRotToLab%:',eRotToLab
+	call TransportToLab(recon%e%P, recon%e%xptar, recon%e%yptar, eRotToLab, kf_vec)
 
 	fP = [0.0,0.0,ki,me]
 	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
@@ -1425,9 +1426,9 @@ c Everyone else in the world calculates W using the proton mass.
 	fQ = fP-fP1
 	fA1 = fA+fQ
 	
-!	call SetCentralAngles(spec%p%theta, 0.0, RotToLab)
-	write(6,*) 'p RotToLab%:',RotToLab
-	call TransportToLab(recon%p%P, recon%p%xptar, recon%p%yptar, RotToLab, Pf_vec)
+!	call SetCentralAngles(spec%p%theta, 0.0, pRotToLab)
+	write(6,*) 'p pRotToLab%:',pRotToLab
+	call TransportToLab(recon%p%P, recon%p%xptar, recon%p%yptar, pRotToLab, Pf_vec)
 
 	write(6,*) 'Pf_vec:', Pf_vec
 	

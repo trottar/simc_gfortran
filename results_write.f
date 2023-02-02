@@ -53,12 +53,12 @@
 	if (doing_hyd_elast .or. doing_deuterium .or. doing_heavy) then
 	  poftheta = Mp*Ebeam / (2*ebeam*sin(recon%e%theta/2.)**2 + Mp)
 	  corrsing = recon%e%P - poftheta
-	  Pm_Heepz = (recon%Pmy*recon%uq%y+recon%Pmz*recon%uq%z)/ sqrt(recon%uq%y**2+recon%uq%z**2)
-	  Pm_Heepx = recon%Pmx
-	  Pm_Heepy = (recon%Pmz*recon%uq%y-recon%Pmy*recon%uq%z)/ sqrt(recon%uq%y**2+recon%uq%z**2)
+!	  Pm_Heepz = (recon%Pmy*recon%uq%y+recon%Pmz*recon%uq%z)/ sqrt(recon%uq%y**2+recon%uq%z**2)
 !	  Pm_Heepx = recon%Pmx
-!	  Pm_Heepy = recon%Pmy
-!	  Pm_Heepz = recon%Pmz
+!	  Pm_Heepy = (recon%Pmz*recon%uq%y-recon%Pmy*recon%uq%z)/ sqrt(recon%uq%y**2+recon%uq%z**2)
+	  Pm_Heepx = recon%Pmx
+	  Pm_Heepy = recon%Pmy
+	  Pm_Heepz = recon%Pmz
 	endif
 
 	if(electron_arm.eq.1 .or. electron_arm.eq.3.or. electron_arm.eq.7)then !electron = right side.

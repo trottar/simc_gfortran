@@ -2026,7 +2026,8 @@ C If using Coulomb corrections, include focusing factor
 	v0 = v0*pf
 
 	do i = 1, 3
-	   v(i) = sum(rotmat(i,:) * v0)
+!       v(i) = sum(rotmat(i,:) * v0)
+	   v(i) = sum(rotmat(i,:) * pf)
 	end do
 	
 !	write(6,*) 'pf:',pf

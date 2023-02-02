@@ -61,7 +61,7 @@
 !       Pm_Heepz = recon%Pmz
 	  Pm_Heepx = -recon%Pmx
 	  Pm_Heepy = -recon%Pmy
-	  Pm_Heepz = -recon%Pmz
+	  Pm_Heepz = recon%Pmz
 	endif
 
 	if(electron_arm.eq.1 .or. electron_arm.eq.3.or. electron_arm.eq.7)then !electron = right side.

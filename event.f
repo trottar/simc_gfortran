@@ -1410,7 +1410,7 @@ c Everyone else in the world calculates W using the proton mass.
 !	write(6,*) 'spec%p%P:',spec%p%P
 !	write(6,*) '-recon%up%y:',-recon%up%y	
 	
-!	call SetCentralAngles(-spec%e%theta, 0.0, RotToLab)
+	call SetCentralAngles(-spec%e%theta, 0.0, RotToLab)
 !	write(6,*) 'e RotToLab%:',RotToLab
 	call TransportToLab(recon%e%P, recon%e%xptar, recon%e%yptar, RotToLab, kf_vec)
 
@@ -1425,7 +1425,7 @@ c Everyone else in the world calculates W using the proton mass.
 	fQ = fP-fP1
 	fA1 = fA+fQ
 	
-!	call SetCentralAngles(spec%p%theta, 0.0, RotToLab)
+	call SetCentralAngles(spec%p%theta, 0.0, RotToLab)
 !	write(6,*) 'p RotToLab%:',RotToLab
 	call TransportToLab(recon%p%P, recon%p%xptar, recon%p%yptar, RotToLab, Pf_vec)
 
@@ -1444,6 +1444,8 @@ c Everyone else in the world calculates W using the proton mass.
 	
 	xq = [fX(1),fX(2),fX(3)]
 	bq = [fB(1),fB(2),fB(3)]
+
+	write(6,*) 'bq:', bq
 
 	call SetZAxis(q_vec,kf1_vec,xq)
 	call SetZAxis(q_vec,kf1_vec,bq)	
@@ -2067,7 +2069,7 @@ C If using Coulomb corrections, include focusing factor
 !	write(6,*) 'v:',v
 !	write(6,*) 'sqrt(dx**2+dy**2+dz**2):',sqrt(dx**2+dy**2+dz**2)
 !	write(6,*) 'pfx:',pfx
-	write(6,*) 'rotmat:',rotmat
+!	write(6,*) 'rotmat:',rotmat
 		
 !	write(6,*) 'before dx:',dx
 !	dx = v(1)

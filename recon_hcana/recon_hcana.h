@@ -17,6 +17,9 @@ class recon_hcana
   ~recon_hcana();
   
   void grabHistData(TString InSIMCHistname);
+
+  //Utilities Functions for String Parsing
+  string getString(char x);
   vector <string> FindString(TString keyword, TString fname);
   vector <string> split(string str, char del=':');
   void buildFileName(){

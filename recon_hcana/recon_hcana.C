@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:30:11 trottar"
+ * Time-stamp: "2023-02-08 16:30:51 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -19,7 +19,7 @@
 using namespace std;
 
 recon_hcana::recon_hcana() {
-  string kinematics = "Q5p5W3p02right_highe";
+  string kinematics = "Q5p5W3p02_highe";
   string phi_setting = "Right";
   vector<string> kinematics_split;
   stringstream kinematics_stream(kinematics);

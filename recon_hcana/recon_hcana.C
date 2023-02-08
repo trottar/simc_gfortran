@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:30:51 trottar"
+ * Time-stamp: "2023-02-08 16:33:23 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -93,3 +93,13 @@ void recon_hcana::grabHistData(string InSIMCHistname) {
   cout << "normfac: " << simc_normfactor << endl;
   
 }
+
+
+recon_hcana::~recon_hcana()
+{
+  //Destructor
+
+  delete InSIMCFilename; InSIMCFilename = NULL;
+  delete InSIMCHistname; InSIMCHistname = NULL;
+  delete InSIMCRootname; InSIMCRootname = NULL;
+}  

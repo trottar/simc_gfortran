@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:26:34 trottar"
+ * Time-stamp: "2023-02-08 17:27:27 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -29,8 +29,8 @@ recon_hcana::recon_hcana() {
   cout << "InSIMCRootname: " << InSIMCRootname << endl;
 
 
-  simc_nevents = stod(split(FindString("Ngen",InSIMCHistname)[0], '=')[1]);
-  simc_normfactor = stod(split(FindString("normfac",InSIMCHistname)[0], '=')[1]);
+  simc_nevents = stod(split(FindString("Ngen",InSIMCHistname), '=')[1]);
+  simc_normfactor = stod(split(FindString("normfac",InSIMCHistname), '=')[1]);
   
   cout << "Ngen: " << simc_nevents << endl;
   cout << "normfac: " << simc_normfactor << endl;
@@ -83,7 +83,6 @@ vector <string> recon_hcana::FindString(TString keyword, TString fname)
 	
 	line_found.push_back(line);
 	cout << line << endl;
-	cout << line_found << endl;
 	
 
       } //end if statement

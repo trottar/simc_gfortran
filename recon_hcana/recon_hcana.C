@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:34:22 trottar"
+ * Time-stamp: "2023-02-08 17:46:55 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -35,12 +35,25 @@ recon_hcana::recon_hcana() {
   cout << "Ngen: " << simc_nevents << endl;
   cout << "normfac: " << simc_normfactor << endl;
   
-  /*
+  ReadTree();
+  EventLoop();
+  WriteHist();
+  
+}
+
+void recon_hcana::ReadTree(){
+  
+  cout << "Calling ReadTree() . . . " << endl;
+
   TFile *f = new TFile(InSIMCRootname,"UPDATE");
   TTree *tree = (TTree*)f->Get("h10");
   Int_t x;
   
-  tree->SetBranchAddress("x",&x);
+  tree->SetBranchAddress("Q2",&x);
+
+}
+
+void recon_hcana::EventLoop(){
   
   for (Int_t i=0;i<tree->GetEntries();i++) {
     tree->GetEntry(i);
@@ -48,10 +61,15 @@ recon_hcana::recon_hcana() {
     tree->Fill();
   }
 
+}
+
+void recon_hcana::WriteHist(){
+  
   tree->Write("",TObject::kOverwrite);
   f->Close();
-  */
 }
+
+void recon_hcana::()
 
 //_______________________________________________________________________________________
 vector <string> recon_hcana::FindString(TString keyword, TString fname)

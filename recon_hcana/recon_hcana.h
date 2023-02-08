@@ -22,6 +22,7 @@ class recon_hcana
   string getString(char x);
   vector <string> FindString(TString keyword, TString fname);
   vector <string> split(string str, char del=':');
+  
   void buildFileName(){
 
     string kinematics = "Q5p5W3p02_highe";
@@ -39,6 +40,10 @@ class recon_hcana
     InSIMCFilename = "../OUTPUTS/Prod_Coin_" + kinematics_split[0] + phi_setting + "_" + kinematics_split[1];
 
   }
+
+  void ReadTree();
+  void EventLoop();
+  void WriteHist();
   
   TString InSIMCFilename;
   TString InSIMCHistname;

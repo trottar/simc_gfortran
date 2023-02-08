@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:47:30 trottar"
+ * Time-stamp: "2023-02-08 16:48:48 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -58,6 +58,7 @@ void recon_hcana::grabHistData(TString InSIMCHistname) {
   if (f_simc.is_open()) {
     string line;
     while (getline(f_simc, line)) {
+      cout << "line: " << line << endl;
       if (line.find("Ngen") != string::npos) {
         stringstream line_stream(line);
         string keyword;

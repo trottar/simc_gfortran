@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:48:32 trottar"
+ * Time-stamp: "2023-02-08 17:49:11 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -68,9 +68,6 @@ void recon_hcana::WriteHist(){
   f->Close();
 }
 
-void recon_hcana::()
-
-//_______________________________________________________________________________________
 vector <string> recon_hcana::FindString(TString keyword, TString fname)
 {
 

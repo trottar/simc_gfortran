@@ -10,8 +10,13 @@ class recon_hcana
   recon_hcana();
   ~recon_hcana();
 
-  void grabHistData(string InSIMCHistname);
+  void buildFileName(String InSIMCFilename);
+  void grabHistData(TString InSIMCHistname);
 
+  TString InSIMCFilename;
+  TString InSIMCHistname;
+  TString InSIMCRootname;
+  
 };
 
 #endif  //RECON_HCANA_H

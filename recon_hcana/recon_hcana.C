@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:33:23 trottar"
+ * Time-stamp: "2023-02-08 16:37:46 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -19,22 +19,11 @@
 using namespace std;
 
 recon_hcana::recon_hcana() {
-  string kinematics = "Q5p5W3p02_highe";
-  string phi_setting = "Right";
-  vector<string> kinematics_split;
-  stringstream kinematics_stream(kinematics);
-  string kinematics_part;
 
-  while (getline(kinematics_stream, kinematics_part, '_')) {
-    kinematics_split.push_back(kinematics_part);
-  }
+  buildFileName(TString InSIMCFilename);
 
-  transform(phi_setting.begin(), phi_setting.end(), phi_setting.begin(), [](unsigned char c) { return std::tolower(c); });
-  
-  string InSIMCFilename = "../OUTPUTS/Prod_Coin_" + kinematics_split[0] + phi_setting + "_" + kinematics_split[1];
-
-  string InSIMCHistname = InSIMCFilename + ".hist";
-  string InSIMCRootname = InSIMCFilename + ".root";
+  InSIMCHistname = InSIMCFilename + ".hist";
+  InSIMCRootname = InSIMCFilename + ".root";
   cout << "InSIMCFilename: " << InSIMCFilename << endl;
   cout << "InSIMCHistname: " << InSIMCHistname << endl;
   cout << "InSIMCRootname: " << InSIMCRootname << endl;
@@ -60,25 +49,43 @@ recon_hcana::recon_hcana() {
   */
 }
 
-void recon_hcana::grabHistData(string InSIMCHistname) {
+void recon_hcana::buildFileName(TString InSIMCFilename){
+
+  TString kinematics = "Q5p5W3p02_highe";
+  TString phi_setting = "Right";
+  vector<TString> kinematics_split;
+  TStringstream kinematics_stream(kinematics);
+  TString kinematics_part;
+  
+  while (getline(kinematics_stream, kinematics_part, '_')) {
+    kinematics_split.push_back(kinematics_part);
+  }
+
+  transform(phi_setting.begin(), phi_setting.end(), phi_setting.begin(), [](unsigned char c) { return std::tolower(c); });
+  
+  InSIMCFilename = "../OUTPUTS/Prod_Coin_" + kinematics_split[0] + phi_setting + "_" + kinematics_split[1];
+  
+}
+
+void recon_hcana::grabHistData(TString InSIMCHistname) {
 
   ifstream f_simc(InSIMCHistname);
   int simc_nevents = 0;
   float simc_normfactor = 0.0;
 
   if (f_simc.is_open()) {
-    string line;
+    TString line;
     while (getline(f_simc, line)) {
-      if (line.find("Ngen") != string::npos) {
+      if (line.find("Ngen") != TString::npos) {
         stringstream line_stream(line);
-        string keyword;
+        TString keyword;
         int value;
         line_stream >> keyword >> value;
         simc_nevents = value;
       }
-      if (line.find("normfac") != string::npos) {
+      if (line.find("normfac") != TString::npos) {
         stringstream line_stream(line);
-        string keyword;
+        TString keyword;
         float value;
         line_stream >> keyword >> value;
         simc_normfactor = value;

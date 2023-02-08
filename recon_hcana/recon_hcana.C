@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:25:16 trottar"
+ * Time-stamp: "2023-02-08 17:25:51 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -71,7 +71,6 @@ vector <string> recon_hcana::FindString(TString keyword, TString fname)
 
   while(getline(ifile, line))
     {
-      cout << line << endl;
       //Check 1st character of found string
       TString cmt = line[0];
       
@@ -83,6 +82,7 @@ vector <string> recon_hcana::FindString(TString keyword, TString fname)
       if(found!=-1){
 	
 	line_found.push_back(line);
+	cout << line << endl;
 	
 
       } //end if statement

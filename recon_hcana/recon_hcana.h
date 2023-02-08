@@ -13,3 +13,5 @@ class recon_hcana
   void grabHistData(string InSIMCHistname);
 
 }
+
+#endif  //RECON_HCANA_H

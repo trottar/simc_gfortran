@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 18:35:18 trottar"
+ * Time-stamp: "2023-02-08 18:49:01 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -47,8 +47,12 @@ void recon_hcana::ReadTree(){
 
   f = new TFile(InSIMCRootname,"UPDATE");
   tree = (TTree*)f->Get("h10"); 
+
+  nentries = tree->GetEntries()
   
   tree->SetBranchAddress("Q2",&x);
+
+  newTree = tree->CloneTree(0);
 
   cout << "Ending ReadTree() . . . " << endl;
 
@@ -58,13 +62,13 @@ void recon_hcana::EventLoop(){
 
   cout << "Calling EventLoop() . . . " << endl;
   
-  for (Int_t i=0;i<tree->GetEntries();i++) {
+  for (Int_t i=0;i<nentries;i++) {
     
     // Progress bar
     if(i%1000==0) {	    
       int barWidth = 25;
-      progress = ((double)i/(double)tree->GetEntries());	    
-      // cout<<i<<"/"<<tree->GetEntries()<<endl;
+      progress = ((double)i/(double)nentries);	    
+      // cout<<i<<"/"<<nentries<<endl;
       // cout << progress << endl;
       cout << "[";
       double pos = barWidth * progress;
@@ -79,9 +83,9 @@ void recon_hcana::EventLoop(){
 
     tree->GetEntry(i);
     x=x*2;
-    
+    newTree->Fill();  
   }
-  tree->Fill();
+  
   cout << "Ending EventLoop() . . . " << endl;
 }
 
@@ -89,7 +93,8 @@ void recon_hcana::WriteHist(){
 
   cout << "Calling WriteHist() . . . " << endl;
   
-  tree->Write("",TObject::kOverwrite);
+  //tree->Write("",TObject::kOverwrite);
+  newTree->Write();
   f->Close();
 
   cout << "Ending WriteHist() . . . " << endl;

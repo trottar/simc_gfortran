@@ -47,6 +47,9 @@ class recon_hcana
 
   TFile *f;
   TTree *tree;
+  TTree *newTree;
+
+  Int_t nentries;
   
   Float_t x;
   
@@ -54,7 +57,7 @@ class recon_hcana
   TString InSIMCHistname;
   TString InSIMCRootname;
 
-  int simc_nevents;
+  Int_t simc_nevents;
   Double_t simc_normfactor;
 
   // Progress bar

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:16:40 trottar"
+ * Time-stamp: "2023-02-08 17:18:19 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -54,7 +54,7 @@ recon_hcana::recon_hcana() {
 }
 
 //_______________________________________________________________________________________
-vector <string> recon_hcana::FindString(string keyword, string fname)
+vector <string> recon_hcana::FindString(TString keyword, TString fname)
 {
 
   //Method: Finds string keyword in a given txt file. 

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:37:46 trottar"
+ * Time-stamp: "2023-02-08 16:38:51 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -20,7 +20,7 @@ using namespace std;
 
 recon_hcana::recon_hcana() {
 
-  buildFileName(TString InSIMCFilename);
+  buildFileName(InSIMCFilename);
 
   InSIMCHistname = InSIMCFilename + ".hist";
   InSIMCRootname = InSIMCFilename + ".root";

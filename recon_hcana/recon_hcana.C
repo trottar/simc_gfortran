@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:22:35 trottar"
+ * Time-stamp: "2023-02-08 16:23:49 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -18,7 +18,7 @@
 
 using namespace std;
 
-int recon_hcana() {
+int recon_hcana::recon_hcana() {
   string kinematics = "Q5p5W3p02_lowe";
   string phi_setting = "Right";
   vector<string> kinematics_split;
@@ -61,7 +61,7 @@ int recon_hcana() {
   return 0;
 }
 
-int grabHistData(string InSIMCHistname) {
+int recon_hcana::grabHistData(string InSIMCHistname) {
 
   ifstream f_simc(InSIMCHistname);
   int simc_nevents = 0;

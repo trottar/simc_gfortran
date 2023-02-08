@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:40:45 trottar"
+ * Time-stamp: "2023-02-08 16:42:05 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -106,7 +106,5 @@ recon_hcana::~recon_hcana()
 {
   //Destructor
 
-  delete InSIMCFilename; InSIMCFilename = NULL;
-  delete InSIMCHistname; InSIMCHistname = NULL;
-  delete InSIMCRootname; InSIMCRootname = NULL;
+  //delete File; File = NULL;
 }  

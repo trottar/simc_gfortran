@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:18:19 trottar"
+ * Time-stamp: "2023-02-08 17:20:12 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -91,6 +91,45 @@ vector <string> recon_hcana::FindString(TString keyword, TString fname)
 
   return line_found;
 
+}
+
+vector <string> analyze::split(string str, char del=':')
+{
+
+  //method to split a string into a vetor of strings separated by a delimiter del
+  //Returns a vector of strings, whose elements are separated by the delimiter del.
+
+  string temp1, temp2;
+
+  vector <string> parse_word;
+  int del_pos;  //delimiter position
+    
+    for (int i=0; i < str.size(); i++){
+
+      //Get position of delimiter
+      if(str[i]==del){
+	del_pos = i;
+      }
+
+    }
+
+    for (int i=0; i < str.size(); i++){
+
+      //append char to a string for char left of the delimiter
+      if(i<del_pos){
+	temp1.append(getString(str[i]));
+      }      
+
+      //append char to a string for char right of the delimiter
+      else if(i>del_pos){
+	temp2.append(getString(str[i]));
+      }
+
+    }
+    parse_word.push_back(temp1);
+    parse_word.push_back(temp2);
+    
+    return parse_word;
 }
 
 recon_hcana::~recon_hcana()

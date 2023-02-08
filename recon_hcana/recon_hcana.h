@@ -18,6 +18,7 @@ class recon_hcana
   
   void grabHistData(TString InSIMCHistname);
   vector <string> FindString(TString keyword, TString fname);
+  vector <string> split(string str, char del=':');
   void buildFileName(){
 
     string kinematics = "Q5p5W3p02_highe";

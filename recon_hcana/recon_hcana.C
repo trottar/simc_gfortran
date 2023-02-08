@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:24:11 trottar"
+ * Time-stamp: "2023-02-08 17:25:16 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -78,7 +78,7 @@ vector <string> recon_hcana::FindString(TString keyword, TString fname)
       found = line.find(keyword);
       
       if(found<0||found>1000){found=-1;} //not found
-      if(cmt==";" || cmt=="#" || cmt=="!") {found=-1;}  //Found commented line. So Skip
+      //if(cmt==";" || cmt=="#" || cmt=="!") {found=-1;}  //Found commented line. So Skip
 
       if(found!=-1){
 	

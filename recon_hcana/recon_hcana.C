@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:21:23 trottar"
+ * Time-stamp: "2023-02-08 16:22:35 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -39,6 +39,9 @@ int recon_hcana() {
   cout << "InSIMCHistname: " << InSIMCHistname << endl;
   cout << "InSIMCRootname: " << InSIMCRootname << endl;
 
+
+  grabHistData(InSIMCHistname);
+  
   /*
   TFile *f = new TFile(InSIMCRootname,"UPDATE");
   TTree *tree = (TTree*)f->Get("h10");
@@ -58,7 +61,7 @@ int recon_hcana() {
   return 0;
 }
 
-int grabHistData(InSIMCHistname) {
+int grabHistData(string InSIMCHistname) {
 
   ifstream f_simc(InSIMCHistname);
   int simc_nevents = 0;

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:46:55 trottar"
+ * Time-stamp: "2023-02-08 17:48:32 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -45,9 +45,8 @@ void recon_hcana::ReadTree(){
   
   cout << "Calling ReadTree() . . . " << endl;
 
-  TFile *f = new TFile(InSIMCRootname,"UPDATE");
-  TTree *tree = (TTree*)f->Get("h10");
-  Int_t x;
+  f = new TFile(InSIMCRootname,"UPDATE");
+  tree = (TTree*)f->Get("h10"); 
   
   tree->SetBranchAddress("Q2",&x);
 

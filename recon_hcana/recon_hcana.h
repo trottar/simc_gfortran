@@ -44,6 +44,11 @@ class recon_hcana
   void ReadTree();
   void EventLoop();
   void WriteHist();
+
+  TFile *f;
+  TTree *tree;
+  
+  Int_t x;
   
   TString InSIMCFilename;
   TString InSIMCHistname;

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:21:33 trottar"
+ * Time-stamp: "2023-02-08 17:21:56 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -132,7 +132,7 @@ vector <string> recon_hcana::split(string str, char del=':')
     return parse_word;
 }
 
-string analyze::getString(char x)
+string recon_hcana::getString(char x)
 {
   //method to convert a character to a string
   string s(1,x);

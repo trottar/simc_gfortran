@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:38:51 trottar"
+ * Time-stamp: "2023-02-08 16:39:37 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -54,7 +54,7 @@ void recon_hcana::buildFileName(TString InSIMCFilename){
   TString kinematics = "Q5p5W3p02_highe";
   TString phi_setting = "Right";
   vector<TString> kinematics_split;
-  TStringstream kinematics_stream(kinematics);
+  stringstream kinematics_stream(kinematics);
   TString kinematics_part;
   
   while (getline(kinematics_stream, kinematics_part, '_')) {

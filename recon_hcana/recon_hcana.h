@@ -48,7 +48,7 @@ class recon_hcana
   TFile *f;
   TTree *tree;
   
-  Double_t x;
+  Float_t x;
   
   TString InSIMCFilename;
   TString InSIMCHistname;

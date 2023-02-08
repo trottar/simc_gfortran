@@ -44,8 +44,8 @@ class recon_hcana
   TString InSIMCHistname;
   TString InSIMCRootname;
 
-  TString simc_nevents;
-  TString simc_normfactor;
+  int simc_nevents;
+  Double_t simc_normfactor;
   
 };
 

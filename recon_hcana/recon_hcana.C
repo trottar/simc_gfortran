@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:59:42 trottar"
+ * Time-stamp: "2023-02-08 18:00:32 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -58,7 +58,7 @@ void recon_hcana::EventLoop(){
     
     // Progress bar
     if(i%1000==0) {	    
-      int barWidth = 70;
+      int barWidth = 25;
       progress = ((double)i/(double)tree->GetEntries());	    
       // cout<<i<<"/"<<tree->GetEntries()<<endl;
       // cout << progress << endl;

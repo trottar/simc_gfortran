@@ -56,6 +56,9 @@ class recon_hcana
 
   int simc_nevents;
   Double_t simc_normfactor;
+
+  // Progress bar
+  double progress=0.0;
   
 };
 

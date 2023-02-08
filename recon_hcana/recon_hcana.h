@@ -17,7 +17,7 @@ class recon_hcana
   ~recon_hcana();
 
   void grabHistData(TString InSIMCHistname);
-  void buildFileName(TString InSIMCFilename){
+  void buildFileName(){
 
     string kinematics = "Q5p5W3p02_highe";
     string phi_setting = "Right";

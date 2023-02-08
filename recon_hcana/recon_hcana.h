@@ -10,6 +10,6 @@ class recon_hcana
   recon_hcana();
   ~recon_hcana();
 
-  void grabHistData(string InSIMCHistname)
+  void grabHistData(string InSIMCHistname);
 
 }

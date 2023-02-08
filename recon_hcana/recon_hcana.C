@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:16:02 trottar"
+ * Time-stamp: "2023-02-08 16:21:23 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -10,6 +10,7 @@
  */
 
 #include<iostream>
+#include <fstream>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -54,5 +55,40 @@ int recon_hcana() {
   tree->Write("",TObject::kOverwrite);
   f->Close();
   */
+  return 0;
+}
+
+int grabHistData(InSIMCHistname) {
+
+  ifstream f_simc(InSIMCHistname);
+  int simc_nevents = 0;
+  float simc_normfactor = 0.0;
+
+  if (f_simc.is_open()) {
+    string line;
+    while (getline(f_simc, line)) {
+      if (line.find("Ngen") != string::npos) {
+        stringstream line_stream(line);
+        string keyword;
+        int value;
+        line_stream >> keyword >> value;
+        simc_nevents = value;
+      }
+      if (line.find("normfac") != string::npos) {
+        stringstream line_stream(line);
+        string keyword;
+        float value;
+        line_stream >> keyword >> value;
+        simc_normfactor = value;
+      }
+    }
+    f_simc.close();
+  } else {
+    cerr << "Error: unable to open file " << InSIMCHistname << endl;
+  }
+
+  cout << "Ngen: " << simc_nevents << endl;
+  cout << "normfac: " << simc_normfactor << endl;
+  
   return 0;
 }

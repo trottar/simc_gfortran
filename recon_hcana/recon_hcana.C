@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:28:59 trottar"
+ * Time-stamp: "2023-02-08 17:29:41 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -30,7 +30,7 @@ recon_hcana::recon_hcana() {
 
 
   simc_nevents = stod(split(FindString("Ngen",InSIMCHistname)[0], '=')[1]);
-  cout << FindString("Ngen",InSIMCHistname)[0] << endl;
+  cout << split(FindString("Ngen",InSIMCHistname)[0], '=') << endl;
   simc_normfactor = stod(split(FindString("normfac",InSIMCHistname)[0], '=')[1]);
   
   cout << "Ngen: " << simc_nevents << endl;

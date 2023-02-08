@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:20:12 trottar"
+ * Time-stamp: "2023-02-08 17:20:43 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -93,7 +93,7 @@ vector <string> recon_hcana::FindString(TString keyword, TString fname)
 
 }
 
-vector <string> analyze::split(string str, char del=':')
+vector <string> recon_hcana::split(string str, char del=':')
 {
 
   //method to split a string into a vetor of strings separated by a delimiter del

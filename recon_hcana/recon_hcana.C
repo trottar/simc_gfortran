@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 18:00:32 trottar"
+ * Time-stamp: "2023-02-08 18:19:27 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -53,6 +53,8 @@ void recon_hcana::ReadTree(){
 }
 
 void recon_hcana::EventLoop(){
+
+  cout << "Calling EventLoop() . . . " << endl;
   
   for (Int_t i=0;i<tree->GetEntries();i++) {
     
@@ -81,6 +83,8 @@ void recon_hcana::EventLoop(){
 }
 
 void recon_hcana::WriteHist(){
+
+  cout << "Calling WriteHist() . . . " << endl;
   
   tree->Write("",TObject::kOverwrite);
   f->Close();

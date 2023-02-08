@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 17:56:10 trottar"
+ * Time-stamp: "2023-02-08 17:58:51 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -57,10 +57,10 @@ void recon_hcana::EventLoop(){
   for (Int_t i=0;i<tree->GetEntries();i++) {
     
     // Progress bar
-    if(iEvt%1000==0) {	    
+    if(i%1000==0) {	    
       int barWidth = 70;
-      progress = ((double)iEvt/(double)NEvts);	    
-      // cout<<iEvt<<"/"<<NEvts<<endl;
+      progress = ((double)i/(double)NEvts);	    
+      // cout<<i<<"/"<<NEvts<<endl;
       // cout << progress << endl;
       cout << "[";
       double pos = barWidth * progress;

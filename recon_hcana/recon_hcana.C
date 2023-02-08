@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:42:05 trottar"
+ * Time-stamp: "2023-02-08 16:44:32 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -47,24 +47,6 @@ recon_hcana::recon_hcana() {
   tree->Write("",TObject::kOverwrite);
   f->Close();
   */
-}
-
-void recon_hcana::buildFileName(TString InSIMCFilename){
-
-  string kinematics = "Q5p5W3p02_highe";
-  string phi_setting = "Right";
-  vector<string> kinematics_split;
-  stringstream kinematics_stream(kinematics);
-  string kinematics_part;
-  
-  while (getline(kinematics_stream, kinematics_part, '_')) {
-    kinematics_split.push_back(kinematics_part);
-  }
-
-  transform(phi_setting.begin(), phi_setting.end(), phi_setting.begin(), [](unsigned char c) { return std::tolower(c); });
-  
-  InSIMCFilename = "../OUTPUTS/Prod_Coin_" + kinematics_split[0] + phi_setting + "_" + kinematics_split[1];
-  
 }
 
 void recon_hcana::grabHistData(TString InSIMCHistname) {

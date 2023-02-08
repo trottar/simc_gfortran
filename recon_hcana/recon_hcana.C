@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:39:37 trottar"
+ * Time-stamp: "2023-02-08 16:40:45 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -51,11 +51,11 @@ recon_hcana::recon_hcana() {
 
 void recon_hcana::buildFileName(TString InSIMCFilename){
 
-  TString kinematics = "Q5p5W3p02_highe";
-  TString phi_setting = "Right";
-  vector<TString> kinematics_split;
+  string kinematics = "Q5p5W3p02_highe";
+  string phi_setting = "Right";
+  vector<string> kinematics_split;
   stringstream kinematics_stream(kinematics);
-  TString kinematics_part;
+  string kinematics_part;
   
   while (getline(kinematics_stream, kinematics_part, '_')) {
     kinematics_split.push_back(kinematics_part);
@@ -74,18 +74,18 @@ void recon_hcana::grabHistData(TString InSIMCHistname) {
   float simc_normfactor = 0.0;
 
   if (f_simc.is_open()) {
-    TString line;
+    string line;
     while (getline(f_simc, line)) {
-      if (line.find("Ngen") != TString::npos) {
+      if (line.find("Ngen") != string::npos) {
         stringstream line_stream(line);
-        TString keyword;
+        string keyword;
         int value;
         line_stream >> keyword >> value;
         simc_nevents = value;
       }
-      if (line.find("normfac") != TString::npos) {
+      if (line.find("normfac") != string::npos) {
         stringstream line_stream(line);
-        TString keyword;
+        string keyword;
         float value;
         line_stream >> keyword >> value;
         simc_normfactor = value;

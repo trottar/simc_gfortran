@@ -15,8 +15,9 @@ class recon_hcana
   //Consructor / Destructor
   recon_hcana();
   ~recon_hcana();
-
+  
   void grabHistData(TString InSIMCHistname);
+  vector <string> FindString(string keyword, string fname);
   void buildFileName(){
 
     string kinematics = "Q5p5W3p02_highe";
@@ -38,6 +39,9 @@ class recon_hcana
   TString InSIMCFilename;
   TString InSIMCHistname;
   TString InSIMCRootname;
+
+  TString simc_nevents;
+  TString simc_normfactor;
   
 };
 

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:50:03 trottar"
+ * Time-stamp: "2023-02-08 17:16:40 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -29,7 +29,11 @@ recon_hcana::recon_hcana() {
   cout << "InSIMCRootname: " << InSIMCRootname << endl;
 
 
-  grabHistData(InSIMCHistname);
+  simc_nevents = stod(split(FindString("Ngen",InSIMCHistname)[0], '=')[1]);
+  simc_normfactor = stod(split(FindString("normfac",InSIMCHistname)[0], '=')[1]);
+  
+  cout << "Ngen: " << simc_nevents << endl;
+  cout << "normfac: " << simc_normfactor << endl;
   
   /*
   TFile *f = new TFile(InSIMCRootname,"UPDATE");
@@ -49,42 +53,45 @@ recon_hcana::recon_hcana() {
   */
 }
 
-void recon_hcana::grabHistData(TString InSIMCHistname) {
+//_______________________________________________________________________________________
+vector <string> recon_hcana::FindString(string keyword, string fname)
+{
 
-  ifstream f_simc(InSIMCHistname);
-  int simc_nevents = 0;
-  float simc_normfactor = 0.0;
-
-  if (f_simc.is_open()) {
-    string line;
-    while (getline(f_simc, line)) {
-      if (line.find("Ngen") != string::npos) {
-	cout << "line: " << line << endl;
-        stringstream line_stream(line);
-        string keyword;
-        int value;
-        line_stream >> keyword >> value;
-        simc_nevents = value;
-      }
-      if (line.find("normfac") != string::npos) {
-	cout << "line: " << line << endl;
-        stringstream line_stream(line);
-        string keyword;
-        float value;
-        line_stream >> keyword >> value;
-        simc_normfactor = value;
-      }
-    }
-    f_simc.close();
-  } else {
-    cerr << "Error: unable to open file " << InSIMCHistname << endl;
-  }
-
-  cout << "Ngen: " << simc_nevents << endl;
-  cout << "normfac: " << simc_normfactor << endl;
+  //Method: Finds string keyword in a given txt file. 
+  //Returns the lines (stored in a vector) in which the keyword was found. Lines are counted from 0. 
   
-}
+  ifstream ifile(fname);
 
+  vector <string> line_found; //vector to store in which lines was the keyword found
+  
+  int line_cnt = 0;
+  string line;                  //line string to read
+  
+  int found = -1; //position of found keyword
+
+  while(getline(ifile, line))
+    {
+      //Check 1st character of found string
+      TString cmt = line[0];
+      
+      found = line.find(keyword);
+      
+      if(found<0||found>1000){found=-1;} //not found
+      if(cmt==";" || cmt=="#" || cmt=="!") {found=-1;}  //Found commented line. So Skip
+
+      if(found!=-1){
+	
+	line_found.push_back(line);
+	
+
+      } //end if statement
+    
+      line_cnt++;
+    } //end readlines
+
+  return line_found;
+
+}
 
 recon_hcana::~recon_hcana()
 {

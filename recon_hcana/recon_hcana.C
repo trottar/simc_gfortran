@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 16:26:29 trottar"
+ * Time-stamp: "2023-02-08 16:29:14 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -31,7 +31,7 @@ recon_hcana::recon_hcana() {
 
   transform(phi_setting.begin(), phi_setting.end(), phi_setting.begin(), [](unsigned char c) { return std::tolower(c); });
   
-  string InSIMCFilename = "OUTPUTS/Prod_Coin_" + kinematics_split[0] + phi_setting + "_" + kinematics_split[1];
+  string InSIMCFilename = "../OUTPUTS/Prod_Coin_" + kinematics_split[0] + phi_setting + "_" + kinematics_split[1];
 
   string InSIMCHistname = InSIMCFilename + ".hist";
   string InSIMCRootname = InSIMCFilename + ".root";

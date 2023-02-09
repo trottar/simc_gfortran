@@ -29,7 +29,7 @@ class recon_hcana
   vector <string> split(string str, char del=':');
   vector <double> num_split(string str);
   
-  void buildFileName(){
+  void buildFileName(string reaction){
 
     if (reaction = "heep"){
       

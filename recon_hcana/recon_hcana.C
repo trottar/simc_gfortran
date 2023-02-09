@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 18:07:24 trottar"
+ * Time-stamp: "2023-02-09 18:07:54 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -284,8 +284,7 @@ void recon_hcana::WriteHist(){
   
   //tree->Write("",TObject::kOverwrite);
   newTree->Write();
-  tree->Delete(;
-	       )
+  tree->Delete();
   f->Close();
 
   cout << "Ending WriteHist() . . . " << endl;

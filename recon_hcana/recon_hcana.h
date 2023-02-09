@@ -32,9 +32,7 @@ class recon_hcana
 
   void buildFileName(){
 
-    TString reaction = "heep";
-
-    if (reaction = "heep"){
+    if (reaction == "heep"){
       
       TString kinematics = "10p6";
       InSIMCFilename = "../OUTPUTS/Heep_Coin_" + kinematics;

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 20:57:45 trottar"
+ * Time-stamp: "2023-02-08 21:03:04 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -31,11 +31,11 @@ recon_hcana::recon_hcana() {
 
   simc_nevents = stod(split(FindString("Ngen",InSIMCHistname)[0], '=')[1]);
   simc_normfactor = stod(split(FindString("normfac",InSIMCHistname)[0], '=')[1]);
-  Ein = stod(split(FindString("Ebeam",InSIMCHistname)[0], '=')[1]);
-  kf = stod(split(FindString("momentum",InSIMCHistname)[0], '=')[1]);
-  e_th = stod(split(FindString("angle",InSIMCHistname)[0], '=')[1]);
-  Pf = stod(split(FindString("momentum",InSIMCHistname)[0], '=')[1]);
-  h_th = stod(split(FindString("angle",InSIMCHistname)[0], '=')[1]);
+  Ein = stod(num_split(split(FindString("Ebeam",InSIMCHistname)[0], '=')[1])[0]);
+  kf = stod(num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0]);
+  e_th = stod(num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[0]);
+  Pf = stod(num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0]);
+  h_th = stod((split(FindString("angle",InSIMCHistname)[0], '=')[1])[0]);
 
   cout << split(FindString("Ebeam",InSIMCHistname)[0], '=')[1] << endl;
   cout << split(FindString("momentum",InSIMCHistname)[0], '=')[1] << endl;
@@ -216,8 +216,7 @@ void recon_hcana::WriteHist(){
 //---------------AUXILIARY FUNCTIONS TO CALCULATE Pmx, Pmy, Pmz in SIMC (same as HCANA) -------------------
 
 //_____________________________________________________
-void recon_hcana::GeoToSph( Double_t  th_geo, Double_t  ph_geo, Double_t& th_sph, Double_t& ph_sph)
-{
+void recon_hcana::GeoToSph( Double_t  th_geo, Double_t  ph_geo, Double_t& th_sph, Double_t& ph_sph){
   
   // Convert geographical to spherical angles. Units are rad.
   
@@ -232,8 +231,7 @@ void recon_hcana::GeoToSph( Double_t  th_geo, Double_t  ph_geo, Double_t& th_sph
 }
 
 //_______________________________________________________________
-void recon_hcana::SetCentralAngles(Double_t th_cent=0, Double_t ph_cent=0)
-{
+void recon_hcana::SetCentralAngles(Double_t th_cent=0, Double_t ph_cent=0){
   
   fThetaGeo = TMath::DegToRad()*th_cent; fPhiGeo = TMath::DegToRad()*ph_cent;
   GeoToSph( fThetaGeo, fPhiGeo, fThetaSph, fPhiSph );
@@ -252,8 +250,8 @@ void recon_hcana::SetCentralAngles(Double_t th_cent=0, Double_t ph_cent=0)
 }
 
 //____________________________________________________________________________________
-void recon_hcana::TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TVector3& pvect) 
-{
+void recon_hcana::TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TVector3& pvect) {
+  
   TVector3 v( xptar, yptar, 1.0 );
   v *= p/TMath::Sqrt( 1.0+xptar*xptar+yptar*yptar );
   pvect = fToLabRot * v;
@@ -264,8 +262,7 @@ void recon_hcana::TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TV
 
 //----------------------------------UTILITIES FUNCTIONS--------------------------------------
 
-vector <string> recon_hcana::FindString(TString keyword, TString fname)
-{
+vector <string> recon_hcana::FindString(TString keyword, TString fname){
 
   //Method: Finds string keyword in a given txt file. 
   //Returns the lines (stored in a vector) in which the keyword was found. Lines are counted from 0. 
@@ -303,8 +300,7 @@ vector <string> recon_hcana::FindString(TString keyword, TString fname)
 
 }
 
-vector <string> recon_hcana::split(string str, char del=':')
-{
+vector <string> recon_hcana::split(string str, char del=':'){
 
   //method to split a string into a vetor of strings separated by a delimiter del
   //Returns a vector of strings, whose elements are separated by the delimiter del.
@@ -336,29 +332,32 @@ vector <string> recon_hcana::split(string str, char del=':')
       }
 
     }
-    istringstream stream(temp1);
-    double value1;
-    while (stream >> value1) {
-      parse_word.push_back(value1);
-    } 
-    istringstream stream(temp2);
-    double value2;
-    while (stream >> value2) {
-      parse_word.push_back(value2);
-    }
+    
+    parse_word.push_back(temp1);
+    parse_word.push_back(temp2);
     
     return parse_word;
 }
 
-string recon_hcana::getString(char x)
-{
+vector <string> recon_hcana::num_split(string str){
+
+  istringstream stream(str);
+  vector<double> values;
+  double value;
+  while (stream >> value) {
+    values.push_back(value);
+  }
+
+  return values
+}
+
+string recon_hcana::getString(char x){
   //method to convert a character to a string
   string s(1,x);
   return s;
 }
 
-recon_hcana::~recon_hcana()
-{
+recon_hcana::~recon_hcana(){
   //Destructor
 
   //delete File; File = NULL;

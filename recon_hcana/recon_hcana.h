@@ -66,7 +66,6 @@ class recon_hcana
 
   Int_t nentries;
 
-  /*
   Float_t hsdelta;
   Float_t hsyptar;
   Float_t hsxptar;
@@ -100,29 +99,17 @@ class recon_hcana
   Float_t Pm;
   Float_t thetapq;
   Float_t phipq;
-  Float_t missmass;
-  Float_t mmnuc;
-  Float_t phad;
-  Float_t t;
-  Float_t pmpar;
-  Float_t pmper;
-  Float_t pmoop;
+  Float_t corrsing;
+  Float_t Pmx;
+  Float_t Pmy;
+  Float_t Pmz;
+  Float_t PmPar;
+  Float_t PmPer;
+  Float_t PmOop;
   Float_t fry;
   Float_t radphot;
-  Float_t pfermi;
-  Float_t siglab;
-  Float_t sigcm;
+  Float_t sigcc;
   Float_t Weight;
-  Float_t decdist;
-  Float_t Mhadron;
-  Float_t pdotqhat;
-  Float_t Q2i;
-  Float_t Wi;
-  Float_t ti;
-  Float_t phipqi;
-  Float_t saghai;
-  Float_t factor;
-  */
   
   TString InSIMCFilename;
   TString InSIMCHistname;

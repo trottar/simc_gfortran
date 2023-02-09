@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 21:44:00 trottar"
+ * Time-stamp: "2023-02-08 21:47:48 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -62,63 +62,51 @@ void recon_hcana::ReadTree(){
 
   nentries = tree->GetEntries();
 
-  /*
-  tree->SetBranchAddress("hsdelta", &hsdelta   );
-  tree->SetBranchAddress("hsyptar", &hsyptar   );
-  tree->SetBranchAddress("hsxptar", &hsxptar   );
-  tree->SetBranchAddress("hsytar", &hsytar    );
-  tree->SetBranchAddress("hsxfp", &hsxfp     );
-  tree->SetBranchAddress("hsxpfp", &hsxpfp    );
-  tree->SetBranchAddress("hsyfp", &hsyfp     );
-  tree->SetBranchAddress("hsypfp", &hsypfp    );
-  tree->SetBranchAddress("hsdeltai", &hsdeltai  );
-  tree->SetBranchAddress("hsyptari", &hsyptari  );
-  tree->SetBranchAddress("hsxptari", &hsxptari  );
-  tree->SetBranchAddress("hsytari", &hsytari   );
-  tree->SetBranchAddress("ssdelta", &ssdelta   );
-  tree->SetBranchAddress("ssyptar", &ssyptar   );
-  tree->SetBranchAddress("ssxptar", &ssxptar   );
-  tree->SetBranchAddress("ssytar", &ssytar    );
-  tree->SetBranchAddress("ssxfp", &ssxfp     );
-  tree->SetBranchAddress("ssxpfp", &ssxpfp    );
-  tree->SetBranchAddress("ssyfp", &ssyfp     );
-  tree->SetBranchAddress("ssypfp", &ssypfp    );
-  tree->SetBranchAddress("ssdeltai", &ssdeltai  );
-  tree->SetBranchAddress("ssyptari", &ssyptari  );
-  tree->SetBranchAddress("ssxptari", &ssxptari  );
-  tree->SetBranchAddress("ssytari", &ssytari   );
-  tree->SetBranchAddress("q", &q         );
-  tree->SetBranchAddress("nu", &nu        );
-  tree->SetBranchAddress("Q2", &Q2        );
-  tree->SetBranchAddress("W", &W         );
-  tree->SetBranchAddress("epsilon", &epsilon   );
-  tree->SetBranchAddress("Em", &Em        );
-  tree->SetBranchAddress("Pm", &Pm        );
-  tree->SetBranchAddress("thetapq", &thetapq   );
-  tree->SetBranchAddress("phipq", &phipq     );
-  tree->SetBranchAddress("missmass", &missmass  );
-  tree->SetBranchAddress("mmnuc", &mmnuc     );
-  tree->SetBranchAddress("phad", &phad      );
-  tree->SetBranchAddress("t", &t         );
-  tree->SetBranchAddress("pmpar", &pmpar     );
-  tree->SetBranchAddress("pmper", &pmper     );
-  tree->SetBranchAddress("pmoop", &pmoop     );
-  tree->SetBranchAddress("fry", &fry       );
-  tree->SetBranchAddress("radphot", &radphot   );
-  tree->SetBranchAddress("pfermi", &pfermi    );
-  tree->SetBranchAddress("siglab", &siglab    );
-  tree->SetBranchAddress("sigcm", &sigcm     );
-  tree->SetBranchAddress("Weight", &Weight    );
-  tree->SetBranchAddress("decdist", &decdist   );
-  tree->SetBranchAddress("Mhadron", &Mhadron   );
-  tree->SetBranchAddress("pdotqhat", &pdotqhat  );
-  tree->SetBranchAddress("Q2i", &Q2i       );
-  tree->SetBranchAddress("Wi", &Wi        );
-  tree->SetBranchAddress("ti", &ti        );
-  tree->SetBranchAddress("phipqi", &phipqi    );
-  tree->SetBranchAddress("saghai", &saghai    );
-  tree->SetBranchAddress("factor", &factor    );  
-  */
+  tree->SetBranchAddress("hsdelta", &hsdelta);
+  tree->SetBranchAddress("hsyptar", &hsyptar);
+  tree->SetBranchAddress("hsxptar", &hsxptar);
+  tree->SetBranchAddress("hsytar", &hsytar);
+  tree->SetBranchAddress("hsxfp", &hsxfp);
+  tree->SetBranchAddress("hsxpfp", &hsxpfp);
+  tree->SetBranchAddress("hsyfp", &hsyfp);
+  tree->SetBranchAddress("hsypfp", &hsypfp);
+  tree->SetBranchAddress("hsdeltai", &hsdeltai);
+  tree->SetBranchAddress("hsyptari", &hsyptari);
+  tree->SetBranchAddress("hsxptari", &hsxptari);
+  tree->SetBranchAddress("hsytari", &hsytari);
+  tree->SetBranchAddress("ssdelta", &ssdelta);
+  tree->SetBranchAddress("ssyptar", &ssyptar);
+  tree->SetBranchAddress("ssxptar", &ssxptar);
+  tree->SetBranchAddress("ssytar", &ssytar);
+  tree->SetBranchAddress("ssxfp", &ssxfp);
+  tree->SetBranchAddress("ssxpfp", &ssxpfp);
+  tree->SetBranchAddress("ssyfp", &ssyfp);
+  tree->SetBranchAddress("ssypfp", &ssypfp);
+  tree->SetBranchAddress("ssdeltai", &ssdeltai);
+  tree->SetBranchAddress("ssyptari", &ssyptari);
+  tree->SetBranchAddress("ssxptari", &ssxptari);
+  tree->SetBranchAddress("ssytari", &ssytari);
+  tree->SetBranchAddress("q", &q);
+  tree->SetBranchAddress("nu", &nu);
+  tree->SetBranchAddress("Q2", &Q2);
+  tree->SetBranchAddress("W", &W);
+  tree->SetBranchAddress("epsilon", &epsilon);
+  tree->SetBranchAddress("Em", &Em);
+  tree->SetBranchAddress("Pm", &Pm);
+  tree->SetBranchAddress("thetapq", &thetapq);
+  tree->SetBranchAddress("phipq", &phipq);
+  tree->SetBranchAddress("corrsing", &corrsing);
+  tree->SetBranchAddress("Pmx", &Pmx);
+  tree->SetBranchAddress("Pmy", &Pmy);
+  tree->SetBranchAddress("Pmz", &Pmz);
+  tree->SetBranchAddress("PmPar", &PmPar);
+  tree->SetBranchAddress("PmPer", &PmPer);
+  tree->SetBranchAddress("PmOop", &PmOop);
+  tree->SetBranchAddress("fry", &fry);
+  tree->SetBranchAddress("radphot", &radphot);
+  tree->SetBranchAddress("sigcc", &sigcc);
+  tree->SetBranchAddress("Weight", &Weight);  
+  
   newTree = tree->CloneTree(0);
 
   cout << "Ending ReadTree() . . . " << endl;

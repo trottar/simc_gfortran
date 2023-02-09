@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 21:15:04 trottar"
+ * Time-stamp: "2023-02-08 21:21:12 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -57,10 +57,11 @@ void recon_hcana::ReadTree(){
   cout << "Calling ReadTree() . . . " << endl;
 
   f = new TFile(InSIMCRootname,"UPDATE");
-  tree = (TTree*)f->Get("h10"); 
+  tree = (TTree*)f->Get("h10");
+  tree->GetListOfBranches()->Print();
 
   nentries = tree->GetEntries();
-  
+
   tree->SetBranchAddress("Q2",&Q2);
 
   newTree = tree->CloneTree(0);
@@ -184,8 +185,6 @@ void recon_hcana::EventLoop(){
     ph_pq   = xq.Phi();     //"out-of-plane angle", "phi_pq"                                                                    
     th_nq = bq.Theta();   // theta_nq                                                                                                     
     ph_nq   = bq.Phi();     //phi_nq
-
-
 
     p_miss_q = -bq;
 

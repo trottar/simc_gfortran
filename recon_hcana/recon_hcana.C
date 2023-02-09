@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 21:11:29 trottar"
+ * Time-stamp: "2023-02-08 21:12:30 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -34,8 +34,8 @@ recon_hcana::recon_hcana() {
   Ein = stod(split(FindString("Ebeam",InSIMCHistname)[0], '=')[1]);
   kf = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0];
   e_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[0];
-  Pf = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0];
-  h_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[0];
+  Pf = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[1];
+  h_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[1];
 
   cout << split(FindString("Ebeam",InSIMCHistname)[0], '=')[1] << endl;
   cout << split(FindString("momentum",InSIMCHistname)[0], '=')[1] << endl;

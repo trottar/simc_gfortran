@@ -11,8 +11,6 @@ class recon_hcana
 {
   
  public:
-
-  TString reaction = "heep";
   
   //Consructor / Destructor
   recon_hcana(TString reaction);
@@ -31,7 +29,9 @@ class recon_hcana
   vector <string> split(string str, char del=':');
   vector <double> num_split(string str);
   
-  void buildFileName(TString reaction){
+  void buildFileName(){
+
+    TString reaction = "heep";
 
     if (reaction = "heep"){
       
@@ -60,6 +60,8 @@ class recon_hcana
   void EventLoop();
   void WriteHist();
 
+  TString reaction = "heep";
+  
   TFile *f;
   TTree *tree;
   TTree *newTree;

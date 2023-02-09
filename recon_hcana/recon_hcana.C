@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 13:02:50 trottar"
+ * Time-stamp: "2023-02-09 13:04:30 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -329,7 +329,16 @@ void recon_hcana::TransportToLab( Float_t p, Float_t xptar, Float_t yptar, TVect
   
   TVector3 v( xptar, yptar, 1.0 );
   v *= p/TMath::Sqrt( 1.0+xptar*xptar+yptar*yptar );
+
+  cout << "v.X(): " << v.X() << endl;
+  cout << "v.Y(): " << v.Y() << endl;
+  cout << "v.Z(): " << v.Z() << endl;
+  
   pvect = fToLabRot * v;
+
+  cout << "pvect.X(): " << pvect.X() << endl;
+  cout << "pvect.Y(): " << pvect.Y() << endl;
+  cout << "pvect.Z(): " << pvect.Z() << endl;  
 }
 
 //------------------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 13:04:30 trottar"
+ * Time-stamp: "2023-02-09 13:10:33 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -192,6 +192,11 @@ void recon_hcana::EventLoop(){
     SetCentralAngles(e_th, e_ph); // ERROR HERE
     TransportToLab(kf, hsxptar, hsyptar, kf_vec); // ERROR HERE
 
+
+    if ((kf_vec.X() != kf_vec.X()) || (kf_vec.Y() != kf_vec.Y()) || (kf_vec.Z() != kf_vec.Z())){
+      break;
+    }
+    
     cout << "kf_vec.X(): " << kf_vec.X() << endl;
     cout << "kf_vec.Y(): " << kf_vec.Y() << endl;
     cout << "kf_vec.Z(): " << kf_vec.Z() << endl;
@@ -206,13 +211,18 @@ void recon_hcana::EventLoop(){
     //Get Detected Particle 4-momentum
     SetCentralAngles(h_th, h_ph);
     TransportToLab(Pf, ssxptar, ssyptar, Pf_vec);
+
+    if ((Pf_vec.X() != Pf_vec.X()) || (Pf_vec.Y() != Pf_vec.Y()) || (Pf_vec.Z() != Pf_vec.Z())){
+      break;
+    }
+    
     fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
     fB = fA1 - fX;                 //4-MOMENTUM OF UNDETECTED PARTICLE 
 
     Pmx_lab = fB.X();
     Pmy_lab = fB.Y(); 
     Pmz_lab = fB.Z(); 
-
+  
     cout << "Pmx_lab: " << Pmx_lab << endl;
     cout << "Pmy_lab: " << Pmy_lab << endl;
     cout << "Pmz_lab: " << Pmz_lab << endl;
@@ -310,7 +320,7 @@ void recon_hcana::SetCentralAngles(Float_t th_cent=0, Float_t ph_cent=0){
   sp = fSinPhSph = TMath::Sin( fPhiSph );   cp = fCosPhSph = TMath::Cos( fPhiSph );
   
   Float_t norm = TMath::Sqrt(ct*ct + st*st*cp*cp);
-
+  
   cout << "norm: " << norm << endl;
   
   TVector3 nx( st*st*sp*cp/norm, -norm, st*ct*sp/norm );

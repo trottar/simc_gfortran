@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 18:22:41 trottar"
+ * Time-stamp: "2023-02-09 18:23:18 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -110,7 +110,7 @@ void recon_hcana::ReadTree(){
   
   newTree = tree->CloneTree(0);
 
-  newTree->SetName("recon_hcana")
+  newTree->SetName("recon_hcana");
 
   cout << "Ending ReadTree() . . . " << endl;
 

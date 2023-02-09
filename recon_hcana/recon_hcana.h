@@ -11,9 +11,9 @@ class recon_hcana
 {
   
  public:
-  
+
   //Consructor / Destructor
-  recon_hcana(TString reaction);
+  recon_hcana();
   ~recon_hcana();
   
   void grabHistData(TString InSIMCHistname);
@@ -31,28 +31,19 @@ class recon_hcana
   
   void buildFileName(){
 
-    TString reaction = "heep";
+    string kinematics = "Q5p5W3p02_highe";
+    string phi_setting = "Right";
+    vector<string> kinematics_split;
+    stringstream kinematics_stream(kinematics);
+    string kinematics_part;
 
-    if (reaction = "heep"){
-      
-      TString kinematics = "10p6";
-      InSIMCFilename = "../OUTPUTS/Heep_Coin_" + kinematics;
-      
-    }else{
+    while (getline(kinematics_stream, kinematics_part, '_')) {
+      kinematics_split.push_back(kinematics_part);
+    }
 
-      string kinematics = "Q5p5W3p02_highe";
-      string phi_setting = "Right";
-      vector<string> kinematics_split;
-      stringstream kinematics_stream(kinematics);
-      string kinematics_part;
-      
-      while (getline(kinematics_stream, kinematics_part, '_')) {
-	kinematics_split.push_back(kinematics_part);
-      }
+    transform(phi_setting.begin(), phi_setting.end(), phi_setting.begin(), [](unsigned char c) { return std::tolower(c); });
 
-      transform(phi_setting.begin(), phi_setting.end(), phi_setting.begin(), [](unsigned char c) { return std::tolower(c); });
-      
-      InSIMCFilename = "../OUTPUTS/Prod_Coin_" + kinematics_split[0] + phi_setting + "_" + kinematics_split[1];
+    InSIMCFilename = "../OUTPUTS/Prod_Coin_" + kinematics_split[0] + phi_setting + "_" + kinematics_split[1];
 
   }
 
@@ -60,8 +51,6 @@ class recon_hcana
   void EventLoop();
   void WriteHist();
 
-  TString reaction = "heep";
-  
   TFile *f;
   TTree *tree;
   TTree *newTree;
@@ -133,6 +122,8 @@ class recon_hcana
 
   // Progress bar
   double progress=0.0;
+
+  TString reaction = "heep";
 
   //Primary Kinematics (electron kinematics) (USED BY DATA AND SIMC)
   Double_t theta_e;              //Central electron arm angle relative to +z (hall coord. system)

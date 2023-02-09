@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 12:58:53 trottar"
+ * Time-stamp: "2023-02-09 13:02:50 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -310,6 +310,9 @@ void recon_hcana::SetCentralAngles(Float_t th_cent=0, Float_t ph_cent=0){
   sp = fSinPhSph = TMath::Sin( fPhiSph );   cp = fCosPhSph = TMath::Cos( fPhiSph );
   
   Float_t norm = TMath::Sqrt(ct*ct + st*st*cp*cp);
+
+  cout << "norm: " << norm << endl;
+  
   TVector3 nx( st*st*sp*cp/norm, -norm, st*ct*sp/norm );
   TVector3 ny( ct/norm,          0.0,   -st*cp/norm   );
   TVector3 nz( st*cp,            st*sp, ct            );

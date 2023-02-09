@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 21:12:30 trottar"
+ * Time-stamp: "2023-02-08 21:15:04 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -24,6 +24,7 @@ recon_hcana::recon_hcana() {
 
   InSIMCHistname = InSIMCFilename + ".hist";
   InSIMCRootname = InSIMCFilename + ".root";
+  
   cout << "InSIMCFilename: " << InSIMCFilename << endl;
   cout << "InSIMCHistname: " << InSIMCHistname << endl;
   cout << "InSIMCRootname: " << InSIMCRootname << endl;
@@ -37,10 +38,6 @@ recon_hcana::recon_hcana() {
   Pf = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[1];
   h_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[1];
 
-  cout << split(FindString("Ebeam",InSIMCHistname)[0], '=')[1] << endl;
-  cout << split(FindString("momentum",InSIMCHistname)[0], '=')[1] << endl;
-  cout << split(FindString("angle",InSIMCHistname)[0], '=')[1] << endl;
-  
   cout << "Ngen: " << simc_nevents << endl;
   cout << "normfac: " << simc_normfactor << endl;
   cout << "Ein: " << Ein << endl;
@@ -49,9 +46,9 @@ recon_hcana::recon_hcana() {
   cout << "Pf: " << Pf << endl;
   cout << "h_th: " << h_th << endl;  
   
-  //ReadTree();
-  //EventLoop();
-  //WriteHist();
+  ReadTree();
+  EventLoop();
+  WriteHist();
   
 }
 
@@ -64,7 +61,7 @@ void recon_hcana::ReadTree(){
 
   nentries = tree->GetEntries();
   
-  tree->SetBranchAddress("Q2",&x);
+  tree->SetBranchAddress("Q2",&Q2);
 
   newTree = tree->CloneTree(0);
 

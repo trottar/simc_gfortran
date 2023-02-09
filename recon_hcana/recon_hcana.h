@@ -65,7 +65,8 @@ class recon_hcana
   TTree *newTree;
 
   Int_t nentries;
-  
+
+  /*
   Float_t hsdelta;
   Float_t hsyptar;
   Float_t hsxptar;
@@ -121,6 +122,7 @@ class recon_hcana
   Float_t phipqi;
   Float_t saghai;
   Float_t factor;
+  */
   
   TString InSIMCFilename;
   TString InSIMCHistname;

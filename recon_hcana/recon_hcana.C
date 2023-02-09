@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 02:37:09 trottar"
+ * Time-stamp: "2023-02-09 12:55:30 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -304,6 +304,10 @@ void recon_hcana::SetCentralAngles(Float_t th_cent=0, Float_t ph_cent=0){
   TVector3 nx( st*st*sp*cp/norm, -norm, st*ct*sp/norm );
   TVector3 ny( ct/norm,          0.0,   -st*cp/norm   );
   TVector3 nz( st*cp,            st*sp, ct            );
+
+  cout << "nx.X(): " << nx.X() << endl;
+  cout << "nx.Y(): " << nx.Y() << endl;
+  cout << "nx.Z(): " << nx.Z() << endl;
   
   fToLabRot.SetToIdentity().RotateAxes( nx, ny, nz );
 }

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 20:44:25 trottar"
+ * Time-stamp: "2023-02-08 20:46:39 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -44,11 +44,11 @@ recon_hcana::recon_hcana() {
   cout << stod(split(FindString("angle",InSIMCHistname)[0], '=')[1]) << endl;
   
   cout << "Ngen: " << simc_nevents << endl;
-  cout << "normfac: " << simc << endl;
+  cout << "normfac: " << simc_normfactor << endl;
   cout << "Ein: " << Ein << endl;
   cout << "kf: " << kf << endl;
   cout << "e_th: " << e_th << endl;
-  cout << "Pk: " << Pk << endl;
+  cout << "Pf: " << Pf << endl;
   cout << "h_th: " << h_th << endl;  
   
   //ReadTree();

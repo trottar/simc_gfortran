@@ -15,7 +15,7 @@ class recon_hcana
   TString reaction = "heep";
   
   //Consructor / Destructor
-  recon_hcana();
+  recon_hcana(TString reaction);
   ~recon_hcana();
   
   void grabHistData(TString InSIMCHistname);

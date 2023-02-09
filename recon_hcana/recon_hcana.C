@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 21:09:35 trottar"
+ * Time-stamp: "2023-02-08 21:11:29 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -32,10 +32,10 @@ recon_hcana::recon_hcana() {
   simc_nevents = stod(split(FindString("Ngen",InSIMCHistname)[0], '=')[1]);
   simc_normfactor = stod(split(FindString("normfac",InSIMCHistname)[0], '=')[1]);
   Ein = stod(split(FindString("Ebeam",InSIMCHistname)[0], '=')[1]);
-  kf = stod(num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0]);
-  e_th = stod(num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[0]);
-  Pf = stod(num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0]);
-  h_th = stod(num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[0]);
+  kf = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0];
+  e_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[0];
+  Pf = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0];
+  h_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[0];
 
   cout << split(FindString("Ebeam",InSIMCHistname)[0], '=')[1] << endl;
   cout << split(FindString("momentum",InSIMCHistname)[0], '=')[1] << endl;

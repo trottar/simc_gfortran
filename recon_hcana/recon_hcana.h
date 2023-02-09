@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include "TVector3.h"
 
 class recon_hcana
 {

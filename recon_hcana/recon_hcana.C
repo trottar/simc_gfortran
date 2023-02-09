@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 23:13:10 trottar"
+ * Time-stamp: "2023-02-09 02:37:09 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -189,8 +189,8 @@ void recon_hcana::EventLoop(){
     //---------Calculate Pmx, Pmy, Pmz in the Lab, and in the q-system----------------
 
     //Calculate electron final momentum 3-vector
-    SetCentralAngles(e_th, e_ph);
-    TransportToLab(kf, hsxptar, hsyptar, kf_vec);
+    SetCentralAngles(e_th, e_ph); // ERROR HERE
+    TransportToLab(kf, hsxptar, hsyptar, kf_vec); // ERROR HERE
 
     cout << "kf_vec.X(): " << kf_vec.X() << endl;
     cout << "kf_vec.Y(): " << kf_vec.Y() << endl;

@@ -143,6 +143,10 @@ class recon_hcana
 
   Double_t ztar_diff;
 
+  //X,Y Projection to Dipole Exit in HMS/SHMS
+  Double_t xdip_hms, ydip_hms;
+  Double_t xdip_shms, ydip_shms;  
+
   //Light-Cone Momentum Variables
   Double_t PmPar;     //parallel component of recoil momentum relative to q-vector
   Double_t PmPerp;    //transverse component of recoil momentum relative to q-vector

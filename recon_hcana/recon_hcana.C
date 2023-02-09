@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 18:49:34 trottar"
+ * Time-stamp: "2023-02-08 20:42:08 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -31,13 +31,29 @@ recon_hcana::recon_hcana() {
 
   simc_nevents = stod(split(FindString("Ngen",InSIMCHistname)[0], '=')[1]);
   simc_normfactor = stod(split(FindString("normfac",InSIMCHistname)[0], '=')[1]);
+  Ein = stod(split(FindString("Ebeam",InSIMCHistname)[0], '=')[1]);
+  kf = stod(split(FindString("momentum",InSIMCHistname)[0], '=')[1]);
+  e_th = stod(split(FindString("angle",InSIMCHistname)[0], '=')[1]);
+  Pf = stod(split(FindString("momentum",InSIMCHistname)[0], '=')[1]);
+  h_th = stod(split(FindString("angle",InSIMCHistname)[0], '=')[1]);
+
+  cout << stod(split(FindString("Ebeam",InSIMCHistname)[0], '=')[1]) << endl;
+  cout << stod(split(FindString("momentum",InSIMCHistname)[0], '=')[1]) << endl;
+  cout << th = stod(split(FindString("angle",InSIMCHistname)[0], '=')[1]) << endl;
+  cout << stod(split(FindString("momentum",InSIMCHistname)[0], '=')[1]) << endl;
+  cout << th = stod(split(FindString("angle",InSIMCHistname)[0], '=')[1]) << endl;
   
   cout << "Ngen: " << simc_nevents << endl;
-  cout << "normfac: " << simc_normfactor << endl;
+  cout << "normfac: " << simc << endl;
+  cout << "Ein: " << Ein << endl;
+  cout << "kf: " << kf << endl;
+  cout << "e_th: " << e_th << endl;
+  cout << "Pk: " << Pk << endl;
+  cout << "h_th: " << h_th << endl;  
   
-  ReadTree();
-  EventLoop();
-  WriteHist();
+  //ReadTree();
+  //EventLoop();
+  //WriteHist();
   
 }
 
@@ -82,7 +98,107 @@ void recon_hcana::EventLoop(){
     }	 
 
     tree->GetEntry(i);
-    x=x*2;
+
+    //--------Calculated Kinematic Varibales----------------
+
+    //Convert MeV to GeV
+    Ein = Ein / 1000.;     //incident beam energy
+    kf = kf / 1000.;       //final electron momentum
+    Pf = Pf / 1000.;       //final proton momentum
+
+    ki = sqrt(Ein*Ein - me*me);        //initial electron momentum
+
+    //redefine
+    Ep = sqrt(MP*MP + Pf*Pf);
+    En = sqrt(MN*MN + Pm*Pm);
+
+    Kp = Ep - MP;                                                                    
+    Kn = En - MN;
+
+    //Em = nu - Kp - Kn;
+
+    M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
+    MM2 = M_recoil * M_recoil;
+
+    //-----If H(e,e'p)
+    if(reaction=="heep"){
+    M_recoil = sqrt(Em*Em - Pm*Pm);
+    MM2 = Em*Em - Pm*Pm;
+    }
+    //----------
+
+    W2 = W*W;
+
+    //Use hcana formula to re-define HMS/SHMS Ztarget
+    htar_z = ((h_ytar + h_yMisPoint)-xBPM*(cos(h_th*dtr)-h_yptar*sin(h_th*dtr)))/(-sin(h_th*dtr)-h_yptar*cos(h_th*dtr));
+    etar_z = ((e_ytar - e_yMisPoint)-xBPM*(cos(e_th*dtr)-e_yptar*sin(e_th*dtr)))/(-sin(e_th*dtr)-e_yptar*cos(e_th*dtr));
+
+    ztar_diff = htar_z - etar_z;
+
+    X = Q2 / (2.*MP*nu);                           
+    th_q = acos( (ki - kf*cos(theta_e))/q );       
+
+    //Define Dipole Exit
+    xdip_hms = h_xfp - 147.48*h_xpfp;
+    ydip_hms = h_yfp - 147.48*h_ypfp;
+
+    xdip_shms = e_xfp - 307.*e_xpfp;
+    ydip_shms = e_yfp - 307.*e_ypfp;
+
+    //---------------------------------------------------
+
+    //---------Calculate Pmx, Pmy, Pmz in the Lab, and in the q-system----------------
+
+    //Calculate electron final momentum 3-vector
+    SetCentralAngles(e_th, e_ph);
+    TransportToLab(kf, e_xptar, e_yptar, kf_vec);
+
+    //Calculate 4-Vectors
+    fP0.SetXYZM(0.0, 0.0, ki, me);  //set initial e- 4-momentum
+    fP1.SetXYZM(kf_vec.X(), kf_vec.Y(), kf_vec.Z(), me);  //set final e- 4-momentum
+    fA.SetXYZM(0.0, 0.0, 0.0, tgt_mass );  //Set initial target at rest
+    fQ = fP0 - fP1;
+    fA1 = fA + fQ;   //final target (sum of final hadron four momenta)
+
+    //Get Detected Particle 4-momentum
+    SetCentralAngles(h_th, h_ph);
+    TransportToLab(Pf, h_xptar, h_yptar, Pf_vec);
+    fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
+    fB = fA1 - fX;                 //4-MOMENTUM OF UNDETECTED PARTICLE 
+
+    Pmx_lab = fB.X();
+    Pmy_lab = fB.Y(); 
+    Pmz_lab = fB.Z(); 
+
+    //Pm = sqrt(Pmx_lab*Pmx_lab + Pmy_lab*Pmy_lab + Pmz_lab*Pmz_lab);
+
+    //--------Rotate the recoil system from +z to +q-------
+    qvec = fQ.Vect();
+    kfvec = fP1.Vect();
+
+    rot_to_q.SetZAxis( qvec, kfvec).Invert();
+
+    xq = fX.Vect();
+    bq = fB.Vect();
+
+    xq *= rot_to_q;
+    bq *= rot_to_q;
+
+    //Calculate Angles of q relative to x(detected proton) and b(recoil neutron)
+    th_pq = xq.Theta();   //"theta_pq"                                       
+    ph_pq   = xq.Phi();     //"out-of-plane angle", "phi_pq"                                                                    
+    th_nq = bq.Theta();   // theta_nq                                                                                                     
+    ph_nq   = bq.Phi();     //phi_nq
+
+
+
+    p_miss_q = -bq;
+
+    //Missing Momentum Components in the q-frame
+    Pmz_q = p_miss_q.Z();   //parallel component to +z
+    Pmx_q = p_miss_q.X();   //in-plane perpendicular component to +z
+    Pmy_q = p_miss_q.Y();   //out-of-plane component (Oop)
+    
     newTree->Fill();  
   }
   
@@ -99,6 +215,56 @@ void recon_hcana::WriteHist(){
 
   cout << "Ending WriteHist() . . . " << endl;
 }
+//---------------AUXILIARY FUNCTIONS TO CALCULATE Pmx, Pmy, Pmz in SIMC (same as HCANA) -------------------
+
+//_____________________________________________________
+void recon_hcana::GeoToSph( Double_t  th_geo, Double_t  ph_geo, Double_t& th_sph, Double_t& ph_sph)
+{
+  
+  // Convert geographical to spherical angles. Units are rad.
+  
+  static const Double_t twopi = 2.0*TMath::Pi();
+  Double_t ct = cos(th_geo), cp = cos(ph_geo);
+  Double_t tmp = ct*cp;
+  th_sph = acos( tmp );
+  tmp = sqrt(1.0 - tmp*tmp);
+  ph_sph = (fabs(tmp) < 1e-6 ) ? 0.0 : acos( sqrt(1.0-ct*ct)*cp/tmp );
+  if( th_geo/twopi-floor(th_geo/twopi) > 0.5 ) ph_sph = TMath::Pi() - ph_sph;
+  if( ph_geo/twopi-floor(ph_geo/twopi) > 0.5 ) ph_sph = -ph_sph;
+}
+
+//_______________________________________________________________
+void recon_hcana::SetCentralAngles(Double_t th_cent=0, Double_t ph_cent=0)
+{
+  
+  fThetaGeo = TMath::DegToRad()*th_cent; fPhiGeo = TMath::DegToRad()*ph_cent;
+  GeoToSph( fThetaGeo, fPhiGeo, fThetaSph, fPhiSph );
+  fSinThGeo = TMath::Sin( fThetaGeo ); fCosThGeo = TMath::Cos( fThetaGeo );
+  fSinPhGeo = TMath::Sin( fPhiGeo );   fCosPhGeo = TMath::Cos( fPhiGeo );
+  Double_t st, ct, sp, cp;
+  st = fSinThSph = TMath::Sin( fThetaSph ); ct = fCosThSph = TMath::Cos( fThetaSph );
+  sp = fSinPhSph = TMath::Sin( fPhiSph );   cp = fCosPhSph = TMath::Cos( fPhiSph );
+  
+  Double_t norm = TMath::Sqrt(ct*ct + st*st*cp*cp);
+  TVector3 nx( st*st*sp*cp/norm, -norm, st*ct*sp/norm );
+  TVector3 ny( ct/norm,          0.0,   -st*cp/norm   );
+  TVector3 nz( st*cp,            st*sp, ct            );
+  
+  fToLabRot.SetToIdentity().RotateAxes( nx, ny, nz );
+}
+
+//____________________________________________________________________________________
+void recon_hcana::TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TVector3& pvect) 
+{
+  TVector3 v( xptar, yptar, 1.0 );
+  v *= p/TMath::Sqrt( 1.0+xptar*xptar+yptar*yptar );
+  pvect = fToLabRot * v;
+}
+
+//------------------------------------------------------------------------------------------
+
+
+//----------------------------------UTILITIES FUNCTIONS--------------------------------------
 
 vector <string> recon_hcana::FindString(TString keyword, TString fname)
 {

@@ -27,7 +27,7 @@ class recon_hcana
   string getString(char x);
   vector <string> FindString(TString keyword, TString fname);
   vector <string> split(string str, char del=':');
-  vector <string> num_split(string str);
+  vector <double> num_split(string str);
   
   void buildFileName(){
 

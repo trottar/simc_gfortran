@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 13:18:16 trottar"
+ * Time-stamp: "2023-02-09 13:35:35 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -152,20 +152,20 @@ void recon_hcana::EventLoop(){
     Ep = sqrt(MP*MP + Pf*Pf);
     En = sqrt(MN*MN + Pm*Pm);
 
-    cout << "Em: " << Em << endl;
-    cout << "Pm: " << Pm << endl;
-    cout << "Ep: " << Ep << endl;
-    cout << "En: " << En << endl;
+    // cout << "Em: " << Em << endl;
+    // cout << "Pm: " << Pm << endl;
+    // cout << "Ep: " << Ep << endl;
+    // cout << "En: " << En << endl;
     
     Kp = Ep - MP;                                                                    
     Kn = En - MN;
 
-    cout << "Kp: " << Kp << endl;
-    cout << "Kn: " << Kn << endl;
+    // cout << "Kp: " << Kp << endl;
+    // cout << "Kn: " << Kn << endl;
     
     Em = nu - Kp - Kn;
 
-    cout << "Em: " << Em << endl;
+    // cout << "Em: " << Em << endl;
     
     M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
     MM2 = M_recoil * M_recoil;
@@ -177,7 +177,7 @@ void recon_hcana::EventLoop(){
     }
     //----------
 
-    cout << "MM2: " << MM2 << endl;
+    // cout << "MM2: " << MM2 << endl;
     
     W2 = W*W;
 
@@ -194,13 +194,13 @@ void recon_hcana::EventLoop(){
 
 
     if ((kf_vec.X() != kf_vec.X()) || (kf_vec.Y() != kf_vec.Y()) || (kf_vec.Z() != kf_vec.Z())){
-      cout << "ERROR in kf_vec for " << i << endl;
+      // cout << "ERROR in kf_vec for " << i << endl;
       continue;
     }
     
-    cout << "kf_vec.X(): " << kf_vec.X() << endl;
-    cout << "kf_vec.Y(): " << kf_vec.Y() << endl;
-    cout << "kf_vec.Z(): " << kf_vec.Z() << endl;
+    // cout << "kf_vec.X(): " << kf_vec.X() << endl;
+    // cout << "kf_vec.Y(): " << kf_vec.Y() << endl;
+    // cout << "kf_vec.Z(): " << kf_vec.Z() << endl;
     
     //Calculate 4-Vectors
     fP0.SetXYZM(0.0, 0.0, ki, me);  //set initial e- 4-momentum
@@ -214,7 +214,7 @@ void recon_hcana::EventLoop(){
     TransportToLab(Pf, ssxptar, ssyptar, Pf_vec);
 
     if ((Pf_vec.X() != Pf_vec.X()) || (Pf_vec.Y() != Pf_vec.Y()) || (Pf_vec.Z() != Pf_vec.Z())){
-      cout << "ERROR in Pf_vec for " << i << endl;
+      // cout << "ERROR in Pf_vec for " << i << endl;
       continue;
     }
     
@@ -225,9 +225,9 @@ void recon_hcana::EventLoop(){
     Pmy_lab = fB.Y(); 
     Pmz_lab = fB.Z(); 
   
-    cout << "Pmx_lab: " << Pmx_lab << endl;
-    cout << "Pmy_lab: " << Pmy_lab << endl;
-    cout << "Pmz_lab: " << Pmz_lab << endl;
+    // cout << "Pmx_lab: " << Pmx_lab << endl;
+    // cout << "Pmy_lab: " << Pmy_lab << endl;
+    // cout << "Pmz_lab: " << Pmz_lab << endl;
     
     //Pm = sqrt(Pmx_lab*Pmx_lab + Pmy_lab*Pmy_lab + Pmz_lab*Pmz_lab);
 
@@ -263,10 +263,10 @@ void recon_hcana::EventLoop(){
 
     Pm = p_miss_q.Mag();
 
-    cout << "Pmx: " << Pmx << endl;
-    cout << "Pmy: " << Pmy << endl;
-    cout << "Pmz: " << Pmz << endl;
-    cout << "Pm: " << Pm << endl;
+    // cout << "Pmx: " << Pmx << endl;
+    // cout << "Pmy: " << Pmy << endl;
+    // cout << "Pmz: " << Pmz << endl;
+    // cout << "Pm: " << Pm << endl;
     
     newTree->Fill();  
   }
@@ -300,10 +300,10 @@ void recon_hcana::GeoToSph( Double_t  th_geo, Double_t  ph_geo, Double_t& th_sph
   if( th_geo/twopi-floor(th_geo/twopi) > 0.5 ) ph_sph = TMath::Pi() - ph_sph;
   if( ph_geo/twopi-floor(ph_geo/twopi) > 0.5 ) ph_sph = -ph_sph;
   
-  cout << "th_geo: " << th_geo << endl;
-  cout << "ph_geo: " << ph_geo << endl;
-  cout << "th_sph: " << th_sph << endl;
-  cout << "ph_sph: " << ph_sph << endl;
+  // cout << "th_geo: " << th_geo << endl;
+  // cout << "ph_geo: " << ph_geo << endl;
+  // cout << "th_sph: " << th_sph << endl;
+  // cout << "ph_sph: " << ph_sph << endl;
 }
 
 //_______________________________________________________________
@@ -311,8 +311,8 @@ void recon_hcana::SetCentralAngles(Double_t th_cent=0, Double_t ph_cent=0){
   
   fThetaGeo = TMath::DegToRad()*th_cent; fPhiGeo = TMath::DegToRad()*ph_cent;
   
-  cout << "th_cent: " << th_cent << endl;
-  cout << "ph_cent: " << ph_cent << endl;
+  // cout << "th_cent: " << th_cent << endl;
+  // cout << "ph_cent: " << ph_cent << endl;
     
   GeoToSph( fThetaGeo, fPhiGeo, fThetaSph, fPhiSph );
   fSinThGeo = TMath::Sin( fThetaGeo ); fCosThGeo = TMath::Cos( fThetaGeo );
@@ -323,15 +323,15 @@ void recon_hcana::SetCentralAngles(Double_t th_cent=0, Double_t ph_cent=0){
   
   Double_t norm = TMath::Sqrt(ct*ct + st*st*cp*cp);
   
-  cout << "norm: " << norm << endl;
+  // cout << "norm: " << norm << endl;
   
   TVector3 nx( st*st*sp*cp/norm, -norm, st*ct*sp/norm );
   TVector3 ny( ct/norm,          0.0,   -st*cp/norm   );
   TVector3 nz( st*cp,            st*sp, ct            );
 
-  cout << "nx.X(): " << nx.X() << endl;
-  cout << "nx.Y(): " << nx.Y() << endl;
-  cout << "nx.Z(): " << nx.Z() << endl;
+  // cout << "nx.X(): " << nx.X() << endl;
+  // cout << "nx.Y(): " << nx.Y() << endl;
+  // cout << "nx.Z(): " << nx.Z() << endl;
   
   fToLabRot.SetToIdentity().RotateAxes( nx, ny, nz );
 }
@@ -342,15 +342,15 @@ void recon_hcana::TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TV
   TVector3 v( xptar, yptar, 1.0 );
   v *= p/TMath::Sqrt( 1.0+xptar*xptar+yptar*yptar );
 
-  cout << "v.X(): " << v.X() << endl;
-  cout << "v.Y(): " << v.Y() << endl;
-  cout << "v.Z(): " << v.Z() << endl;
+  // cout << "v.X(): " << v.X() << endl;
+  // cout << "v.Y(): " << v.Y() << endl;
+  // cout << "v.Z(): " << v.Z() << endl;
   
   pvect = fToLabRot * v;
 
-  cout << "pvect.X(): " << pvect.X() << endl;
-  cout << "pvect.Y(): " << pvect.Y() << endl;
-  cout << "pvect.Z(): " << pvect.Z() << endl;  
+  // cout << "pvect.X(): " << pvect.X() << endl;
+  // cout << "pvect.Y(): " << pvect.Y() << endl;
+  // cout << "pvect.Z(): " << pvect.Z() << endl;  
 }
 
 //------------------------------------------------------------------------------------------

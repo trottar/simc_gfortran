@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 20:51:17 trottar"
+ * Time-stamp: "2023-02-08 20:56:13 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -336,8 +336,16 @@ vector <string> recon_hcana::split(string str, char del=':')
       }
 
     }
-    parse_word.push_back(temp1);
-    parse_word.push_back(temp2);
+    istringstream stream(temp1);
+    double value;
+    while (stream >> value) {
+      parse_word.push_back(value);
+    } 
+    istringstream stream(temp2);
+    double value;
+    while (stream >> value) {
+      parse_word.push_back(value);
+    }
     
     return parse_word;
 }

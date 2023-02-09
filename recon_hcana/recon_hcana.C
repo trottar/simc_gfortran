@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 21:47:48 trottar"
+ * Time-stamp: "2023-02-08 21:55:48 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -122,12 +122,12 @@ void recon_hcana::EventLoop(){
     // Progress bar
     if(i%1000==0) {	    
       int barWidth = 25;
-      progress = ((double)i/(double)nentries);	    
+      progress = ((float)i/(float)nentries);	    
       // cout<<i<<"/"<<nentries<<endl;
       // cout << progress << endl;
       cout << "[";
-      double pos = barWidth * progress;
-      for (double i = 0.; i < barWidth; ++i) {
+      float pos = barWidth * progress;
+      for (float i = 0.; i < barWidth; ++i) {
 	if (i < pos) cout << "=";
 	else if (i == pos) cout << ">";
 	else cout << " ";
@@ -235,6 +235,14 @@ void recon_hcana::EventLoop(){
     Pmz_q = p_miss_q.Z();   //parallel component to +z
     Pmx_q = p_miss_q.X();   //in-plane perpendicular component to +z
     Pmy_q = p_miss_q.Y();   //out-of-plane component (Oop)
+
+    // Redefine variables
+    Pmz = p_miss_q.Z();   //parallel component to +z
+    Pmx = p_miss_q.X();   //in-plane perpendicular component to +z
+    Pmy = p_miss_q.Y();   //out-of-plane component (Oop)
+
+    Pm = p_miss_q.Mag();
+    Em = p_miss_q.E();
     
     newTree->Fill();  
   }
@@ -255,13 +263,13 @@ void recon_hcana::WriteHist(){
 //---------------AUXILIARY FUNCTIONS TO CALCULATE Pmx, Pmy, Pmz in SIMC (same as HCANA) -------------------
 
 //_____________________________________________________
-void recon_hcana::GeoToSph( Double_t  th_geo, Double_t  ph_geo, Double_t& th_sph, Double_t& ph_sph){
+void recon_hcana::GeoToSph( Float_t  th_geo, Float_t  ph_geo, Float_t& th_sph, Float_t& ph_sph){
   
   // Convert geographical to spherical angles. Units are rad.
   
-  static const Double_t twopi = 2.0*TMath::Pi();
-  Double_t ct = cos(th_geo), cp = cos(ph_geo);
-  Double_t tmp = ct*cp;
+  static const Float_t twopi = 2.0*TMath::Pi();
+  Float_t ct = cos(th_geo), cp = cos(ph_geo);
+  Float_t tmp = ct*cp;
   th_sph = acos( tmp );
   tmp = sqrt(1.0 - tmp*tmp);
   ph_sph = (fabs(tmp) < 1e-6 ) ? 0.0 : acos( sqrt(1.0-ct*ct)*cp/tmp );
@@ -270,17 +278,17 @@ void recon_hcana::GeoToSph( Double_t  th_geo, Double_t  ph_geo, Double_t& th_sph
 }
 
 //_______________________________________________________________
-void recon_hcana::SetCentralAngles(Double_t th_cent=0, Double_t ph_cent=0){
+void recon_hcana::SetCentralAngles(Float_t th_cent=0, Float_t ph_cent=0){
   
   fThetaGeo = TMath::DegToRad()*th_cent; fPhiGeo = TMath::DegToRad()*ph_cent;
   GeoToSph( fThetaGeo, fPhiGeo, fThetaSph, fPhiSph );
   fSinThGeo = TMath::Sin( fThetaGeo ); fCosThGeo = TMath::Cos( fThetaGeo );
   fSinPhGeo = TMath::Sin( fPhiGeo );   fCosPhGeo = TMath::Cos( fPhiGeo );
-  Double_t st, ct, sp, cp;
+  Float_t st, ct, sp, cp;
   st = fSinThSph = TMath::Sin( fThetaSph ); ct = fCosThSph = TMath::Cos( fThetaSph );
   sp = fSinPhSph = TMath::Sin( fPhiSph );   cp = fCosPhSph = TMath::Cos( fPhiSph );
   
-  Double_t norm = TMath::Sqrt(ct*ct + st*st*cp*cp);
+  Float_t norm = TMath::Sqrt(ct*ct + st*st*cp*cp);
   TVector3 nx( st*st*sp*cp/norm, -norm, st*ct*sp/norm );
   TVector3 ny( ct/norm,          0.0,   -st*cp/norm   );
   TVector3 nz( st*cp,            st*sp, ct            );
@@ -289,7 +297,7 @@ void recon_hcana::SetCentralAngles(Double_t th_cent=0, Double_t ph_cent=0){
 }
 
 //____________________________________________________________________________________
-void recon_hcana::TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TVector3& pvect) {
+void recon_hcana::TransportToLab( Float_t p, Float_t xptar, Float_t yptar, TVector3& pvect) {
   
   TVector3 v( xptar, yptar, 1.0 );
   v *= p/TMath::Sqrt( 1.0+xptar*xptar+yptar*yptar );
@@ -378,11 +386,11 @@ vector <string> recon_hcana::split(string str, char del=':'){
     return parse_word;
 }
 
-vector <double> recon_hcana::num_split(string str){
+vector <float> recon_hcana::num_split(string str){
 
   istringstream stream(str);
-  vector<double> values;
-  double value;
+  vector<float> values;
+  float value;
   while (stream >> value) {
     values.push_back(value);
     if (stream.fail()) break;

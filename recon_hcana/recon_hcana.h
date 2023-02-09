@@ -66,50 +66,50 @@ class recon_hcana
 
   Int_t nentries;
 
-  Float_t hsdelta;
-  Float_t hsyptar;
-  Float_t hsxptar;
-  Float_t hsytar;
-  Float_t hsxfp;
-  Float_t hsxpfp;
-  Float_t hsyfp;
-  Float_t hsypfp;
-  Float_t hsdeltai;
-  Float_t hsyptari;
-  Float_t hsxptari;
-  Float_t hsytari;
-  Float_t ssdelta;
-  Float_t ssyptar;
-  Float_t ssxptar;
-  Float_t ssytar;
-  Float_t ssxfp;
-  Float_t ssxpfp;
-  Float_t ssyfp;
-  Float_t ssypfp;
-  Float_t ssdeltai;
-  Float_t ssyptari;
-  Float_t ssxptari;
-  Float_t ssytari;
-  Float_t q;
-  Float_t nu;
-  Float_t Q2;
-  Float_t W;
-  Float_t epsilon;
-  Float_t Em;
-  Float_t Pm;
-  Float_t thetapq;
-  Float_t phipq;
-  Float_t corrsing;
-  Float_t Pmx;
-  Float_t Pmy;
-  Float_t Pmz;
-  Float_t PmPar;
-  Float_t PmPer;
-  Float_t PmOop;
-  Float_t fry;
-  Float_t radphot;
-  Float_t sigcc;
-  Float_t Weight;
+  Double_t hsdelta;
+  Double_t hsyptar;
+  Double_t hsxptar;
+  Double_t hsytar;
+  Double_t hsxfp;
+  Double_t hsxpfp;
+  Double_t hsyfp;
+  Double_t hsypfp;
+  Double_t hsdeltai;
+  Double_t hsyptari;
+  Double_t hsxptari;
+  Double_t hsytari;
+  Double_t ssdelta;
+  Double_t ssyptar;
+  Double_t ssxptar;
+  Double_t ssytar;
+  Double_t ssxfp;
+  Double_t ssxpfp;
+  Double_t ssyfp;
+  Double_t ssypfp;
+  Double_t ssdeltai;
+  Double_t ssyptari;
+  Double_t ssxptari;
+  Double_t ssytari;
+  Double_t q;
+  Double_t nu;
+  Double_t Q2;
+  Double_t W;
+  Double_t epsilon;
+  Double_t Em;
+  Double_t Pm;
+  Double_t thetapq;
+  Double_t phipq;
+  Double_t corrsing;
+  Double_t Pmx;
+  Double_t Pmy;
+  Double_t Pmz;
+  Double_t PmPar;
+  Double_t PmPer;
+  Double_t PmOop;
+  Double_t fry;
+  Double_t radphot;
+  Double_t sigcc;
+  Double_t Weight;
   
   TString InSIMCFilename;
   TString InSIMCHistname;
@@ -125,20 +125,14 @@ class recon_hcana
 
   //Primary Kinematics (electron kinematics) (USED BY DATA AND SIMC)
   Double_t theta_e;              //Central electron arm angle relative to +z (hall coord. system)
-  Double_t W;                    //Invariant Mass W (should be proton mass in H(e,e'p))
   Double_t W2;                    //Invariant mass squared
-  Double_t Q2;                   //Four-momentum trasfer
   Double_t X;                    //B-jorken X  scaling variable
-  Double_t nu;                   //Energy Transfer
-  Double_t q;                  //magnitude of the 3-vector q
   Double_t th_q;                 //angle between q and +z (hall coord. system)
 
   //Secondary Kinematics (USED BY DATA AND SIMC)
   Double_t Ein;                  //single beam energy value (SIMC Uses this energy. If not corr. for energy loss, it should be same as in input file)
   Double_t Ep;                     //proton energy
-  Double_t Em;                    //Standard Missing Energy for H(e,e'p)
   Double_t Em_nuc;                //Nuclear definition of Missing Energy (Used for D(e,e'p): B.E. of deuteron)
-  Double_t Pm;                    //Missing Momentum (should be zero for H(e,e'p). Should be neutron momentum for D(e,e'p))
   Double_t Pmx_lab;               //X-Component of Missing Momentum (in Lab(or Hall) frame. +X: beam left, +Y: up, +Z: downstream beam) 
   Double_t Pmy_lab;
   Double_t Pmz_lab;
@@ -201,7 +195,6 @@ class recon_hcana
   Double_t xdip_shms, ydip_shms;  
 
   //Light-Cone Momentum Variables
-  Double_t PmPar;     //parallel component of recoil momentum relative to q-vector
   Double_t PmPerp;    //transverse component of recoil momentum relative to q-vector
   Double_t alpha_n;   //light-cone momentum fraction of the recoil neutron
   Double_t alpha;     //momentum fraction of struck nucleon (normalized such that: alpha + alpha_n = 2)

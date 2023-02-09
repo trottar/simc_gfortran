@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 12:55:30 trottar"
+ * Time-stamp: "2023-02-09 12:58:53 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -287,12 +287,21 @@ void recon_hcana::GeoToSph( Float_t  th_geo, Float_t  ph_geo, Float_t& th_sph, F
   ph_sph = (fabs(tmp) < 1e-6 ) ? 0.0 : acos( sqrt(1.0-ct*ct)*cp/tmp );
   if( th_geo/twopi-floor(th_geo/twopi) > 0.5 ) ph_sph = TMath::Pi() - ph_sph;
   if( ph_geo/twopi-floor(ph_geo/twopi) > 0.5 ) ph_sph = -ph_sph;
+  
+  cout << "th_geo: " << th_geo << endl;
+  cout << "ph_geo: " << ph_geo << endl;
+  cout << "th_sph: " << th_sph << endl;
+  cout << "ph_sph: " << ph_sph << endl;
 }
 
 //_______________________________________________________________
 void recon_hcana::SetCentralAngles(Float_t th_cent=0, Float_t ph_cent=0){
   
   fThetaGeo = TMath::DegToRad()*th_cent; fPhiGeo = TMath::DegToRad()*ph_cent;
+  
+  cout << "th_cent: " << th_cent << endl;
+  cout << "ph_cent: " << ph_cent << endl;
+    
   GeoToSph( fThetaGeo, fPhiGeo, fThetaSph, fPhiSph );
   fSinThGeo = TMath::Sin( fThetaGeo ); fCosThGeo = TMath::Cos( fThetaGeo );
   fSinPhGeo = TMath::Sin( fPhiGeo );   fCosPhGeo = TMath::Cos( fPhiGeo );

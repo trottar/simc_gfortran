@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 22:06:48 trottar"
+ * Time-stamp: "2023-02-08 22:07:34 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -117,6 +117,14 @@ void recon_hcana::ReadTree(){
 void recon_hcana::EventLoop(){
 
   cout << "Calling EventLoop() . . . " << endl;
+
+  
+  cout << "Ein: " << Ein << endl;
+  cout << "kf: " << kf << endl;
+  cout << "e_th: " << e_th << endl;
+  cout << "Pf: " << Pf << endl;
+  cout << "h_th: " << h_th << endl;  
+
   
   for (Int_t i=0;i<nentries;i++) {
     

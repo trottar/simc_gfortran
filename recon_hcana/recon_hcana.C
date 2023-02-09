@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 23:11:22 trottar"
+ * Time-stamp: "2023-02-08 23:13:10 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -192,6 +192,10 @@ void recon_hcana::EventLoop(){
     SetCentralAngles(e_th, e_ph);
     TransportToLab(kf, hsxptar, hsyptar, kf_vec);
 
+    cout << "kf_vec.X(): " << kf_vec.X() << endl;
+    cout << "kf_vec.Y(): " << kf_vec.Y() << endl;
+    cout << "kf_vec.Z(): " << kf_vec.Z() << endl;
+    
     //Calculate 4-Vectors
     fP0.SetXYZM(0.0, 0.0, ki, me);  //set initial e- 4-momentum
     fP1.SetXYZM(kf_vec.X(), kf_vec.Y(), kf_vec.Z(), me);  //set final e- 4-momentum

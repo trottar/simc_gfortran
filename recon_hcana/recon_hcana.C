@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 13:13:14 trottar"
+ * Time-stamp: "2023-02-09 13:18:16 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -287,13 +287,13 @@ void recon_hcana::WriteHist(){
 //---------------AUXILIARY FUNCTIONS TO CALCULATE Pmx, Pmy, Pmz in SIMC (same as HCANA) -------------------
 
 //_____________________________________________________
-void recon_hcana::GeoToSph( Float_t  th_geo, Float_t  ph_geo, Float_t& th_sph, Float_t& ph_sph){
+void recon_hcana::GeoToSph( Double_t  th_geo, Double_t  ph_geo, Double_t& th_sph, Double_t& ph_sph){
   
   // Convert geographical to spherical angles. Units are rad.
   
-  static const Float_t twopi = 2.0*TMath::Pi();
-  Float_t ct = cos(th_geo), cp = cos(ph_geo);
-  Float_t tmp = ct*cp;
+  static const Double_t twopi = 2.0*TMath::Pi();
+  Double_t ct = cos(th_geo), cp = cos(ph_geo);
+  Double_t tmp = ct*cp;
   th_sph = acos( tmp );
   tmp = sqrt(1.0 - tmp*tmp);
   ph_sph = (fabs(tmp) < 1e-6 ) ? 0.0 : acos( sqrt(1.0-ct*ct)*cp/tmp );
@@ -307,7 +307,7 @@ void recon_hcana::GeoToSph( Float_t  th_geo, Float_t  ph_geo, Float_t& th_sph, F
 }
 
 //_______________________________________________________________
-void recon_hcana::SetCentralAngles(Float_t th_cent=0, Float_t ph_cent=0){
+void recon_hcana::SetCentralAngles(Double_t th_cent=0, Double_t ph_cent=0){
   
   fThetaGeo = TMath::DegToRad()*th_cent; fPhiGeo = TMath::DegToRad()*ph_cent;
   
@@ -317,11 +317,11 @@ void recon_hcana::SetCentralAngles(Float_t th_cent=0, Float_t ph_cent=0){
   GeoToSph( fThetaGeo, fPhiGeo, fThetaSph, fPhiSph );
   fSinThGeo = TMath::Sin( fThetaGeo ); fCosThGeo = TMath::Cos( fThetaGeo );
   fSinPhGeo = TMath::Sin( fPhiGeo );   fCosPhGeo = TMath::Cos( fPhiGeo );
-  Float_t st, ct, sp, cp;
+  Double_t st, ct, sp, cp;
   st = fSinThSph = TMath::Sin( fThetaSph ); ct = fCosThSph = TMath::Cos( fThetaSph );
   sp = fSinPhSph = TMath::Sin( fPhiSph );   cp = fCosPhSph = TMath::Cos( fPhiSph );
   
-  Float_t norm = TMath::Sqrt(ct*ct + st*st*cp*cp);
+  Double_t norm = TMath::Sqrt(ct*ct + st*st*cp*cp);
   
   cout << "norm: " << norm << endl;
   
@@ -337,7 +337,7 @@ void recon_hcana::SetCentralAngles(Float_t th_cent=0, Float_t ph_cent=0){
 }
 
 //____________________________________________________________________________________
-void recon_hcana::TransportToLab( Float_t p, Float_t xptar, Float_t yptar, TVector3& pvect) {
+void recon_hcana::TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TVector3& pvect) {
   
   TVector3 v( xptar, yptar, 1.0 );
   v *= p/TMath::Sqrt( 1.0+xptar*xptar+yptar*yptar );

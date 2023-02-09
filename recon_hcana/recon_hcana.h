@@ -20,9 +20,9 @@ class recon_hcana
   void grabHistData(TString InSIMCHistname);
 
   //Auxiliary Function Prototypes (obtained from hcana) to calculate Pmx, Pmy, Pmz in the Lab/q-frame correctly
-  void GeoToSph( Float_t  th_geo, Float_t  ph_geo, Float_t& th_sph, Float_t& ph_sph);
-  void SetCentralAngles(Float_t th_cent, Float_t ph_cent);
-  void TransportToLab( Float_t p, Float_t xptar, Float_t yptar, TVector3& pvect ); 
+  void GeoToSph( Double_t  th_geo, Double_t  ph_geo, Double_t& th_sph, Double_t& ph_sph);
+  void SetCentralAngles(Double_t th_cent, Double_t ph_cent);
+  void TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TVector3& pvect ); 
   
   //Utilities Functions for String Parsing
   string getString(char x);
@@ -67,57 +67,57 @@ class recon_hcana
 
   Int_t nentries;
 
-  Float_t hsdelta;
-  Float_t hsyptar;
-  Float_t hsxptar;
-  Float_t hsytar;
-  Float_t hsxfp;
-  Float_t hsxpfp;
-  Float_t hsyfp;
-  Float_t hsypfp;
-  Float_t hsdeltai;
-  Float_t hsyptari;
-  Float_t hsxptari;
-  Float_t hsytari;
-  Float_t ssdelta;
-  Float_t ssyptar;
-  Float_t ssxptar;
-  Float_t ssytar;
-  Float_t ssxfp;
-  Float_t ssxpfp;
-  Float_t ssyfp;
-  Float_t ssypfp;
-  Float_t ssdeltai;
-  Float_t ssyptari;
-  Float_t ssxptari;
-  Float_t ssytari;
-  Float_t q;
-  Float_t nu;
-  Float_t Q2;
-  Float_t W;
-  Float_t epsilon;
-  Float_t Em;
-  Float_t Pm;
-  Float_t thetapq;
-  Float_t phipq;
-  Float_t corrsing;
-  Float_t Pmx;
-  Float_t Pmy;
-  Float_t Pmz;
-  Float_t PmPar;
-  Float_t PmPer;
-  Float_t PmOop;
-  Float_t fry;
-  Float_t radphot;
-  Float_t sigcc;
-  Float_t Weight;
+  Double_t hsdelta;
+  Double_t hsyptar;
+  Double_t hsxptar;
+  Double_t hsytar;
+  Double_t hsxfp;
+  Double_t hsxpfp;
+  Double_t hsyfp;
+  Double_t hsypfp;
+  Double_t hsdeltai;
+  Double_t hsyptari;
+  Double_t hsxptari;
+  Double_t hsytari;
+  Double_t ssdelta;
+  Double_t ssyptar;
+  Double_t ssxptar;
+  Double_t ssytar;
+  Double_t ssxfp;
+  Double_t ssxpfp;
+  Double_t ssyfp;
+  Double_t ssypfp;
+  Double_t ssdeltai;
+  Double_t ssyptari;
+  Double_t ssxptari;
+  Double_t ssytari;
+  Double_t q;
+  Double_t nu;
+  Double_t Q2;
+  Double_t W;
+  Double_t epsilon;
+  Double_t Em;
+  Double_t Pm;
+  Double_t thetapq;
+  Double_t phipq;
+  Double_t corrsing;
+  Double_t Pmx;
+  Double_t Pmy;
+  Double_t Pmz;
+  Double_t PmPar;
+  Double_t PmPer;
+  Double_t PmOop;
+  Double_t fry;
+  Double_t radphot;
+  Double_t sigcc;
+  Double_t Weight;
   
   TString InSIMCFilename;
   TString InSIMCHistname;
   TString InSIMCRootname;
 
   Int_t simc_nevents;
-  Float_t simc_normfactor;
+  Double_t simc_normfactor;
 
   // Progress bar
   float progress=0.0;
@@ -125,91 +125,91 @@ class recon_hcana
   TString reaction = "heep";
 
   //Primary Kinematics (electron kinematics) (USED BY DATA AND SIMC)
-  Float_t theta_e;              //Central electron arm angle relative to +z (hall coord. system)
-  Float_t W2;                    //Invariant mass squared
-  Float_t X;                    //B-jorken X  scaling variable
-  Float_t th_q;                 //angle between q and +z (hall coord. system)
+  Double_t theta_e;              //Central electron arm angle relative to +z (hall coord. system)
+  Double_t W2;                    //Invariant mass squared
+  Double_t X;                    //B-jorken X  scaling variable
+  Double_t th_q;                 //angle between q and +z (hall coord. system)
 
   //Secondary Kinematics (USED BY DATA AND SIMC)
-  Float_t Ein;                  //single beam energy value (SIMC Uses this energy. If not corr. for energy loss, it should be same as in input file)
-  Float_t Ep;                     //proton energy
-  Float_t Em_nuc;                //Nuclear definition of Missing Energy (Used for D(e,e'p): B.E. of deuteron)
-  Float_t Pmx_lab;               //X-Component of Missing Momentum (in Lab(or Hall) frame. +X: beam left, +Y: up, +Z: downstream beam) 
-  Float_t Pmy_lab;
-  Float_t Pmz_lab;
-  Float_t Pmx_q;                 //X-Component of Missing Momentum (in frame where +z_lab is rotated to +z_q. Pmz_q is along +z(parallel to q))
-  Float_t Pmy_q;
-  Float_t Pmz_q;
-  Float_t Kp;                    //Kinetic Energy of detected particle (proton)
-  Float_t Kn;                    //Kinetic Energy of recoil system (neutron)
-  Float_t M_recoil;              //Missing Mass (neutron Mass)
-  Float_t MM2;                   //Missing Mass Squared
-  Float_t E_recoil;              //Recoil Energy of the system (neutron total energy)
-  Float_t En;                    //Same as above
-  Float_t th_pq;                  //Polar angle of detected particle with q   ----> th_pq
-  Float_t th_nq;                  //Polar angle of recoil system with q (rad)  ---> th_nq (neutreon-q angle. IMPORTANT in D(e,e'p))
-  Float_t ph_pq;                  //Azimuth angle of detected particle with q    ----> phi_pq angle between proton and q-vector
-  Float_t ph_nq;                  //Azimuth of recoil system with scattering plane (rad) ----> phi_nq angle between neutron and q-vector
-  Float_t xangle;                //Angle of detected particle with scattered electron (Used to determine hadron angle)
-  Float_t theta_p;               //to be calculated separately (in data)
+  Double_t Ein;                  //single beam energy value (SIMC Uses this energy. If not corr. for energy loss, it should be same as in input file)
+  Double_t Ep;                     //proton energy
+  Double_t Em_nuc;                //Nuclear definition of Missing Energy (Used for D(e,e'p): B.E. of deuteron)
+  Double_t Pmx_lab;               //X-Component of Missing Momentum (in Lab(or Hall) frame. +X: beam left, +Y: up, +Z: downstream beam) 
+  Double_t Pmy_lab;
+  Double_t Pmz_lab;
+  Double_t Pmx_q;                 //X-Component of Missing Momentum (in frame where +z_lab is rotated to +z_q. Pmz_q is along +z(parallel to q))
+  Double_t Pmy_q;
+  Double_t Pmz_q;
+  Double_t Kp;                    //Kinetic Energy of detected particle (proton)
+  Double_t Kn;                    //Kinetic Energy of recoil system (neutron)
+  Double_t M_recoil;              //Missing Mass (neutron Mass)
+  Double_t MM2;                   //Missing Mass Squared
+  Double_t E_recoil;              //Recoil Energy of the system (neutron total energy)
+  Double_t En;                    //Same as above
+  Double_t th_pq;                  //Polar angle of detected particle with q   ----> th_pq
+  Double_t th_nq;                  //Polar angle of recoil system with q (rad)  ---> th_nq (neutreon-q angle. IMPORTANT in D(e,e'p))
+  Double_t ph_pq;                  //Azimuth angle of detected particle with q    ----> phi_pq angle between proton and q-vector
+  Double_t ph_nq;                  //Azimuth of recoil system with scattering plane (rad) ----> phi_nq angle between neutron and q-vector
+  Double_t xangle;                //Angle of detected particle with scattered electron (Used to determine hadron angle)
+  Double_t theta_p;               //to be calculated separately (in data)
 
   //Electron Arm Focal Plane / Reconstructed Quantities (USED BY DATA AND SIMC)
-  Float_t e_xfp;
-  Float_t e_xpfp;
-  Float_t e_yfp;
-  Float_t e_ypfp;
+  Double_t e_xfp;
+  Double_t e_xpfp;
+  Double_t e_yfp;
+  Double_t e_ypfp;
   
-  Float_t e_ytar;
-  Float_t e_yptar;
-  Float_t e_xptar;
-  Float_t e_delta;
-  Float_t kf;                        //final electron momentum
-  Float_t ki;                        //initial electron momentum
+  Double_t e_ytar;
+  Double_t e_yptar;
+  Double_t e_xptar;
+  Double_t e_delta;
+  Double_t kf;                        //final electron momentum
+  Double_t ki;                        //initial electron momentum
 
   //Hadron Arm Focal Plane / Reconstructed Quantities (USED BY DATA AND SIMC)
-  Float_t h_xfp;
-  Float_t h_xpfp;
-  Float_t h_yfp;
-  Float_t h_ypfp;
+  Double_t h_xfp;
+  Double_t h_xpfp;
+  Double_t h_yfp;
+  Double_t h_ypfp;
   
-  Float_t h_ytar;
-  Float_t h_yptar;
-  Float_t h_xptar;
-  Float_t h_delta;
-  Float_t Pf;                 //final proton momentum
+  Double_t h_ytar;
+  Double_t h_yptar;
+  Double_t h_xptar;
+  Double_t h_delta;
+  Double_t Pf;                 //final proton momentum
   
   //Target Quantities (tarx, tary, tarz) in Hall Coord. System (USED BY DATA AND SIMC)
-  Float_t tar_x; //For SIMC ONLY (It is the same for HMS/SHMS)
+  Double_t tar_x; //For SIMC ONLY (It is the same for HMS/SHMS)
 
-  Float_t  htar_x;
-  Float_t  htar_y;
-  Float_t  htar_z;
+  Double_t  htar_x;
+  Double_t  htar_y;
+  Double_t  htar_z;
   
-  Float_t  etar_x;
-  Float_t  etar_y;
-  Float_t  etar_z;
+  Double_t  etar_x;
+  Double_t  etar_y;
+  Double_t  etar_z;
 
-  Float_t ztar_diff;
+  Double_t ztar_diff;
 
   //X,Y Projection to Dipole Exit in HMS/SHMS
-  Float_t xdip_hms, ydip_hms;
-  Float_t xdip_shms, ydip_shms;  
+  Double_t xdip_hms, ydip_hms;
+  Double_t xdip_shms, ydip_shms;  
 
   //Light-Cone Momentum Variables
-  Float_t PmPerp;    //transverse component of recoil momentum relative to q-vector
-  Float_t alpha_n;   //light-cone momentum fraction of the recoil neutron
-  Float_t alpha;     //momentum fraction of struck nucleon (normalized such that: alpha + alpha_n = 2)
+  Double_t PmPerp;    //transverse component of recoil momentum relative to q-vector
+  Double_t alpha_n;   //light-cone momentum fraction of the recoil neutron
+  Double_t alpha;     //momentum fraction of struck nucleon (normalized such that: alpha + alpha_n = 2)
 
   //----------Variables Used in Auxiliary Functions--------------------------------------
 
   TRotation       fToLabRot;              //Rotation matrix from TRANSPORT to lab
-  Float_t        fThetaGeo;              //In-plane geographic central angle (rad)
-  Float_t        fPhiGeo;                //Out-of-plane geographic central angle (rad)
-  Float_t        fThetaSph, fPhiSph;     //Central angles in spherical coords. (rad)
-  Float_t        fSinThGeo, fCosThGeo;   //Sine and cosine of central angles
-  Float_t        fSinPhGeo, fCosPhGeo;   // in geographical coordinates
-  Float_t        fSinThSph, fCosThSph;   //Sine and cosine of central angles in 
-  Float_t        fSinPhSph, fCosPhSph;   // spherical coordinates  
+  Double_t        fThetaGeo;              //In-plane geographic central angle (rad)
+  Double_t        fPhiGeo;                //Out-of-plane geographic central angle (rad)
+  Double_t        fThetaSph, fPhiSph;     //Central angles in spherical coords. (rad)
+  Double_t        fSinThGeo, fCosThGeo;   //Sine and cosine of central angles
+  Double_t        fSinPhGeo, fCosPhGeo;   // in geographical coordinates
+  Double_t        fSinThSph, fCosThSph;   //Sine and cosine of central angles in 
+  Double_t        fSinPhSph, fCosPhSph;   // spherical coordinates  
 
   //Declare Neccessary Variables to Determine the 4-Momentum of Recoil System
   TLorentzVector fP0;           // Beam 4-momentum
@@ -232,38 +232,38 @@ class recon_hcana
   TVector3 p_miss_q;   //recoil system in q-frame
 
   //Leaf Variables
-  Float_t fTheta_xq;
-  Float_t fPhi_xq;
-  Float_t fTheta_bq;
-  Float_t fPhi_bq;  
+  Double_t fTheta_xq;
+  Double_t fPhi_xq;
+  Double_t fTheta_bq;
+  Double_t fPhi_bq;  
 
   //Set Constants
-  Float_t pi; 
-  Float_t dtr;
-  Float_t MP = 0.938272;     //proton mass
-  Float_t MD = 1.87561;      //deuteron mass
-  Float_t MN = 0.939566;     //neutron mass
-  Float_t me = 0.00051099;   //electron mass
-  Float_t MAL = 25.131710;   //aluminum mass
-  Float_t tgt_mass;
+  Double_t pi; 
+  Double_t dtr;
+  Double_t MP = 0.938272;     //proton mass
+  Double_t MD = 1.87561;      //deuteron mass
+  Double_t MN = 0.939566;     //neutron mass
+  Double_t me = 0.00051099;   //electron mass
+  Double_t MAL = 25.131710;   //aluminum mass
+  Double_t tgt_mass;
 
   //Set Varibales to be read from REPORT_FILE
-  Float_t e_th=0.;    //electron arm central angle
-  Float_t e_ph=0.;    
-  Float_t h_th=0.;    //hadron arm central angle
-  Float_t h_ph=0.;
+  Double_t e_th=0.;    //electron arm central angle
+  Double_t e_ph=0.;    
+  Double_t h_th=0.;    //hadron arm central angle
+  Double_t h_ph=0.;
 
-  Float_t xBPM;  //in cm
-  Float_t yBPM;  //in cm
+  Double_t xBPM;  //in cm
+  Double_t yBPM;  //in cm
   
-  Float_t e_xMisPoint;
-  Float_t e_yMisPoint;
-  Float_t h_xMisPoint;
-  Float_t h_yMisPoint;
+  Double_t e_xMisPoint;
+  Double_t e_yMisPoint;
+  Double_t h_xMisPoint;
+  Double_t h_yMisPoint;
 
   //Central Spec. Momenta
-  Float_t e_Pcen;
-  Float_t h_Pcen;
+  Double_t e_Pcen;
+  Double_t h_Pcen;
   
 };
 

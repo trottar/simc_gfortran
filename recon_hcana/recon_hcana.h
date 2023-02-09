@@ -12,8 +12,10 @@ class recon_hcana
   
  public:
 
+  TString reaction = "heep";
+  
   //Consructor / Destructor
-  recon_hcana();
+  recon_hcana(TString reaction);
   ~recon_hcana();
   
   void grabHistData(TString InSIMCHistname);
@@ -33,7 +35,7 @@ class recon_hcana
 
     if (reaction = "heep"){
       
-      string kinematics = "10p6";
+      TString kinematics = "10p6";
       InSIMCFilename = "../OUTPUTS/Heep_Coin_" + kinematics;
       
     }else{

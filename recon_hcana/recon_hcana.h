@@ -147,7 +147,18 @@ class recon_hcana
   Double_t PmPar;     //parallel component of recoil momentum relative to q-vector
   Double_t PmPerp;    //transverse component of recoil momentum relative to q-vector
   Double_t alpha_n;   //light-cone momentum fraction of the recoil neutron
-  Double_t alpha;     //momentum fraction of struck nucleon (normalized such that: alpha + alpha_n = 2)  
+  Double_t alpha;     //momentum fraction of struck nucleon (normalized such that: alpha + alpha_n = 2)
+
+  //----------Variables Used in Auxiliary Functions--------------------------------------
+
+  TRotation       fToLabRot;              //Rotation matrix from TRANSPORT to lab
+  Double_t        fThetaGeo;              //In-plane geographic central angle (rad)
+  Double_t        fPhiGeo;                //Out-of-plane geographic central angle (rad)
+  Double_t        fThetaSph, fPhiSph;     //Central angles in spherical coords. (rad)
+  Double_t        fSinThGeo, fCosThGeo;   //Sine and cosine of central angles
+  Double_t        fSinPhGeo, fCosPhGeo;   // in geographical coordinates
+  Double_t        fSinThSph, fCosThSph;   //Sine and cosine of central angles in 
+  Double_t        fSinPhSph, fCosPhSph;   // spherical coordinates  
 
   //Declare Neccessary Variables to Determine the 4-Momentum of Recoil System
   TLorentzVector fP0;           // Beam 4-momentum

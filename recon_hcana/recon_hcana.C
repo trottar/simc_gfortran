@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 22:15:05 trottar"
+ * Time-stamp: "2023-02-08 22:16:02 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -138,13 +138,6 @@ void recon_hcana::EventLoop(){
     }	 
 
     tree->GetEntry(i);
-
-    cout << "Ein: " << Ein << endl;
-    cout << "kf: " << kf << endl;
-    cout << "e_th: " << e_th << endl;
-    cout << "Pf: " << Pf << endl;
-    cout << "h_th: " << h_th << endl;  
-
 
     //--------Calculated Kinematic Varibales----------------
     

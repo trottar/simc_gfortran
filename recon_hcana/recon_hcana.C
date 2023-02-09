@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 21:58:44 trottar"
+ * Time-stamp: "2023-02-08 22:05:18 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -58,7 +58,8 @@ void recon_hcana::ReadTree(){
 
   f = new TFile(InSIMCRootname,"UPDATE");
   tree = (TTree*)f->Get("h10");
-  tree->GetListOfBranches()->Print();
+  
+  //tree->GetListOfBranches()->Print();
 
   nentries = tree->GetEntries();
 
@@ -145,6 +146,12 @@ void recon_hcana::EventLoop(){
     kf = kf / 1000.;       //final electron momentum
     Pf = Pf / 1000.;       //final proton momentum
 
+    cout << "Ein: " << Ein << endl;
+    cout << "kf: " << kf << endl;
+    cout << "e_th: " << e_th << endl;
+    cout << "Pf: " << Pf << endl;
+    cout << "h_th: " << h_th << endl;  
+    
     ki = sqrt(Ein*Ein - me*me);        //initial electron momentum
 
     //redefine

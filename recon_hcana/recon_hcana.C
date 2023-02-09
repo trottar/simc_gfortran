@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 13:10:33 trottar"
+ * Time-stamp: "2023-02-09 13:11:36 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -194,7 +194,7 @@ void recon_hcana::EventLoop(){
 
 
     if ((kf_vec.X() != kf_vec.X()) || (kf_vec.Y() != kf_vec.Y()) || (kf_vec.Z() != kf_vec.Z())){
-      break;
+      continue;
     }
     
     cout << "kf_vec.X(): " << kf_vec.X() << endl;
@@ -213,7 +213,7 @@ void recon_hcana::EventLoop(){
     TransportToLab(Pf, ssxptar, ssyptar, Pf_vec);
 
     if ((Pf_vec.X() != Pf_vec.X()) || (Pf_vec.Y() != Pf_vec.Y()) || (Pf_vec.Z() != Pf_vec.Z())){
-      break;
+      continue;
     }
     
     fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle

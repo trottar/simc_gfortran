@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 22:47:37 trottar"
+ * Time-stamp: "2023-02-08 23:08:24 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -177,6 +177,8 @@ void recon_hcana::EventLoop(){
     }
     //----------
 
+    cout << "MM2: " << MM2 << endl;
+    
     W2 = W*W;
 
     X = Q2 / (2.*MP*nu);
@@ -235,11 +237,16 @@ void recon_hcana::EventLoop(){
     Pmy_q = p_miss_q.Y();   //out-of-plane component (Oop)
 
     // Redefine variables
-    Pmz = p_miss_q.Z();   //parallel component to +z
     Pmx = p_miss_q.X();   //in-plane perpendicular component to +z
     Pmy = p_miss_q.Y();   //out-of-plane component (Oop)
+    Pmz = p_miss_q.Z();   //parallel component to +z
 
     Pm = p_miss_q.Mag();
+
+    cout << "Pmx: " << Pmx << endl;
+    cout << "Pmy: " << Pmy << endl;
+    cout << "Pmz: " << Pmz << endl;
+    cout << "Pm: " << Pm << endl;
     
     newTree->Fill();  
   }

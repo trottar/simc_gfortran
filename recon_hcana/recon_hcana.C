@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 22:39:31 trottar"
+ * Time-stamp: "2023-02-08 22:47:37 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -160,8 +160,13 @@ void recon_hcana::EventLoop(){
     Kp = Ep - MP;                                                                    
     Kn = En - MN;
 
-    //Em = nu - Kp - Kn;
+    cout << "Kp: " << Kp << endl;
+    cout << "Kn: " << Kn << endl;
+    
+    Em = nu - Kp - Kn;
 
+    cout << "Em: " << Em << endl;
+    
     M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
     MM2 = M_recoil * M_recoil;
 

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 22:37:19 trottar"
+ * Time-stamp: "2023-02-08 22:38:19 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -147,14 +147,14 @@ void recon_hcana::EventLoop(){
     //--------Calculated Kinematic Varibales----------------
         
     ki = sqrt(Ein*Ein - me*me);        //initial electron momentum
-
-
-    cout << "ki: " << ki << endl;
     
     //redefine
     Ep = sqrt(MP*MP + Pf*Pf);
     En = sqrt(MN*MN + Pm*Pm);
 
+    cout << "Ep: " << Ep << endl;
+    cout << "En: " << En << endl;
+    
     Kp = Ep - MP;                                                                    
     Kn = En - MN;
 

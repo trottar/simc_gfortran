@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 22:08:36 trottar"
+ * Time-stamp: "2023-02-08 22:15:05 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -149,9 +149,9 @@ void recon_hcana::EventLoop(){
     //--------Calculated Kinematic Varibales----------------
     
     //Convert MeV to GeV
-    Ein = Ein / 1000.;     //incident beam energy
-    kf = kf / 1000.;       //final electron momentum
-    Pf = Pf / 1000.;       //final proton momentum
+    //Ein = Ein / 1000.;     //incident beam energy
+    //kf = kf / 1000.;       //final electron momentum
+    //Pf = Pf / 1000.;       //final proton momentum
     
     ki = sqrt(Ein*Ein - me*me);        //initial electron momentum
 

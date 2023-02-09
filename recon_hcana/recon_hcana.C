@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 22:16:02 trottar"
+ * Time-stamp: "2023-02-08 22:20:43 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -168,22 +168,6 @@ void recon_hcana::EventLoop(){
     //----------
 
     W2 = W*W;
-
-    //Use hcana formula to re-define HMS/SHMS Ztarget
-    htar_z = ((h_ytar + h_yMisPoint)-xBPM*(cos(h_th*dtr)-h_yptar*sin(h_th*dtr)))/(-sin(h_th*dtr)-h_yptar*cos(h_th*dtr));
-    etar_z = ((e_ytar - e_yMisPoint)-xBPM*(cos(e_th*dtr)-e_yptar*sin(e_th*dtr)))/(-sin(e_th*dtr)-e_yptar*cos(e_th*dtr));
-
-    ztar_diff = htar_z - etar_z;
-
-    X = Q2 / (2.*MP*nu);                           
-    th_q = acos( (ki - kf*cos(theta_e))/q );       
-
-    //Define Dipole Exit
-    xdip_hms = h_xfp - 147.48*h_xpfp;
-    ydip_hms = h_yfp - 147.48*h_ypfp;
-
-    xdip_shms = e_xfp - 307.*e_xpfp;
-    ydip_shms = e_yfp - 307.*e_ypfp;
 
     //---------------------------------------------------
 

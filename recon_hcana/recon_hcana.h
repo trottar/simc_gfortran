@@ -29,10 +29,7 @@ class recon_hcana
   vector <string> split(string str, char del=':');
   vector <double> num_split(string str);
   
-
   void buildFileName(){
-
-    TString reaction = "heep";
 
     if (reaction == "heep"){
       
@@ -54,6 +51,8 @@ class recon_hcana
       transform(phi_setting.begin(), phi_setting.end(), phi_setting.begin(), [](unsigned char c) { return std::tolower(c); });
       
       InSIMCFilename = "../OUTPUTS/Prod_Coin_" + kinematics_split[0] + phi_setting + "_" + kinematics_split[1];
+
+    }
 
   }
 

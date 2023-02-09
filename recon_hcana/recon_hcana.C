@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 23:08:24 trottar"
+ * Time-stamp: "2023-02-08 23:11:22 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -209,6 +209,10 @@ void recon_hcana::EventLoop(){
     Pmy_lab = fB.Y(); 
     Pmz_lab = fB.Z(); 
 
+    cout << "Pmx_lab: " << Pmx_lab << endl;
+    cout << "Pmy_lab: " << Pmy_lab << endl;
+    cout << "Pmz_lab: " << Pmz_lab << endl;
+    
     //Pm = sqrt(Pmx_lab*Pmx_lab + Pmy_lab*Pmy_lab + Pmz_lab*Pmz_lab);
 
     //--------Rotate the recoil system from +z to +q-------

@@ -12,6 +12,8 @@ class recon_hcana
   
  public:
 
+  TString reaction = "heep";
+  
   //Consructor / Destructor
   recon_hcana();
   ~recon_hcana();
@@ -29,7 +31,7 @@ class recon_hcana
   vector <string> split(string str, char del=':');
   vector <double> num_split(string str);
   
-  void buildFileName(string reaction){
+  void buildFileName(TString reaction){
 
     if (reaction = "heep"){
       

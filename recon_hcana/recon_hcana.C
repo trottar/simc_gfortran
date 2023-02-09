@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-08 22:20:43 trottar"
+ * Time-stamp: "2023-02-08 22:29:41 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -118,6 +118,11 @@ void recon_hcana::EventLoop(){
 
   cout << "Calling EventLoop() . . . " << endl;
   
+  //Convert MeV to GeV
+  Ein = Ein / 1000.;     //incident beam energy
+  kf = kf / 1000.;       //final electron momentum
+  Pf = Pf / 1000.;       //final proton momentum
+
   for (Int_t i=0;i<nentries;i++) {
     
     // Progress bar
@@ -140,12 +145,7 @@ void recon_hcana::EventLoop(){
     tree->GetEntry(i);
 
     //--------Calculated Kinematic Varibales----------------
-    
-    //Convert MeV to GeV
-    //Ein = Ein / 1000.;     //incident beam energy
-    //kf = kf / 1000.;       //final electron momentum
-    //Pf = Pf / 1000.;       //final proton momentum
-    
+        
     ki = sqrt(Ein*Ein - me*me);        //initial electron momentum
 
     //redefine
@@ -169,13 +169,16 @@ void recon_hcana::EventLoop(){
 
     W2 = W*W;
 
+    X = Q2 / (2.*MP*nu);
+    th_q = acos( (ki - kf*cos(theta_e))/q );
+    
     //---------------------------------------------------
 
     //---------Calculate Pmx, Pmy, Pmz in the Lab, and in the q-system----------------
 
     //Calculate electron final momentum 3-vector
     SetCentralAngles(e_th, e_ph);
-    TransportToLab(kf, e_xptar, e_yptar, kf_vec);
+    TransportToLab(kf, hsxptar, hsyptar, kf_vec);
 
     //Calculate 4-Vectors
     fP0.SetXYZM(0.0, 0.0, ki, me);  //set initial e- 4-momentum
@@ -186,7 +189,7 @@ void recon_hcana::EventLoop(){
 
     //Get Detected Particle 4-momentum
     SetCentralAngles(h_th, h_ph);
-    TransportToLab(Pf, h_xptar, h_yptar, Pf_vec);
+    TransportToLab(Pf, ssxptar, ssyptar, Pf_vec);
     fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
     fB = fA1 - fX;                 //4-MOMENTUM OF UNDETECTED PARTICLE 
 

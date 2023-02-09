@@ -29,21 +29,31 @@ class recon_hcana
   vector <string> split(string str, char del=':');
   vector <double> num_split(string str);
   
+
   void buildFileName(){
 
-    string kinematics = "Q5p5W3p02_highe";
-    string phi_setting = "Right";
-    vector<string> kinematics_split;
-    stringstream kinematics_stream(kinematics);
-    string kinematics_part;
+    TString reaction = "heep";
 
-    while (getline(kinematics_stream, kinematics_part, '_')) {
-      kinematics_split.push_back(kinematics_part);
-    }
+    if (reaction = "heep"){
+      
+      TString kinematics = "10p6";
+      InSIMCFilename = "../OUTPUTS/Heep_Coin_" + kinematics;
+      
+    }else{
 
-    transform(phi_setting.begin(), phi_setting.end(), phi_setting.begin(), [](unsigned char c) { return std::tolower(c); });
+      string kinematics = "Q5p5W3p02_highe";
+      string phi_setting = "Right";
+      vector<string> kinematics_split;
+      stringstream kinematics_stream(kinematics);
+      string kinematics_part;
+      
+      while (getline(kinematics_stream, kinematics_part, '_')) {
+	kinematics_split.push_back(kinematics_part);
+      }
 
-    InSIMCFilename = "../OUTPUTS/Prod_Coin_" + kinematics_split[0] + phi_setting + "_" + kinematics_split[1];
+      transform(phi_setting.begin(), phi_setting.end(), phi_setting.begin(), [](unsigned char c) { return std::tolower(c); });
+      
+      InSIMCFilename = "../OUTPUTS/Prod_Coin_" + kinematics_split[0] + phi_setting + "_" + kinematics_split[1];
 
   }
 

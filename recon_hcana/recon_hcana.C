@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 19:28:02 trottar"
+ * Time-stamp: "2023-02-09 19:35:36 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -107,8 +107,6 @@ void recon_hcana::ReadTree(){
   tree->SetBranchAddress("radphot", &radphot);
   tree->SetBranchAddress("sigcc", &sigcc);
   tree->SetBranchAddress("Weight", &Weight);  
-
-  tree->SetName("old_h10");
 
   newTree = new TTree("h10", "A modified version of the original tree");
   //newTree = tree->CloneTree();
@@ -331,8 +329,8 @@ void recon_hcana::WriteHist(){
   cout << "Calling WriteHist() . . . " << endl;
   
   //tree->Write("",TObject::kOverwrite);
+  f->Delete("h10");
   newTree->Write();
-  f->Delete("old_h10;*");
   f->Close();
 
   cout << "Ending WriteHist() . . . " << endl;

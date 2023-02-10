@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 19:35:36 trottar"
+ * Time-stamp: "2023-02-09 19:45:56 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -57,7 +57,17 @@ void recon_hcana::ReadTree(){
   cout << "Calling ReadTree() . . . " << endl;
 
   f = new TFile(InSIMCRootname,"UPDATE");
+  if (!f || f->IsZombie()) {
+      cerr << "Error: failed to open file " << InSIMCRootname << endl;
+      return;
+   }
+  
   tree = (TTree*)f->Get("h10");
+  if (!tree) {
+    cerr << "Error: failed to get tree h10 from file " << InSIMCRootname << endl;
+    file->Close();
+    return;
+   }
   
   //tree->GetListOfBranches()->Print();
 
@@ -329,8 +339,7 @@ void recon_hcana::WriteHist(){
   cout << "Calling WriteHist() . . . " << endl;
   
   //tree->Write("",TObject::kOverwrite);
-  f->Delete("h10");
-  newTree->Write();
+  newTree->Write("h10",TObject::kOverwrite);
   f->Close();
 
   cout << "Ending WriteHist() . . . " << endl;

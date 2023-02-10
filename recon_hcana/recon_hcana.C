@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 21:09:59 trottar"
+ * Time-stamp: "2023-02-09 21:15:08 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -73,54 +73,6 @@ void recon_hcana::ReadTree(){
 
   nentries = tree->GetEntries();
 
-  tree->SetBranchAddress("hsdelta", &hsdelta);
-  tree->SetBranchAddress("hsyptar", &hsyptar);
-  tree->SetBranchAddress("hsxptar", &hsxptar);
-  tree->SetBranchAddress("hsytar", &hsytar);
-  tree->SetBranchAddress("hsxfp", &hsxfp);
-  tree->SetBranchAddress("hsxpfp", &hsxpfp);
-  tree->SetBranchAddress("hsyfp", &hsyfp);
-  tree->SetBranchAddress("hsypfp", &hsypfp);
-  tree->SetBranchAddress("hsdeltai", &hsdeltai);
-  tree->SetBranchAddress("hsyptari", &hsyptari);
-  tree->SetBranchAddress("hsxptari", &hsxptari);
-  tree->SetBranchAddress("hsytari", &hsytari);
-  tree->SetBranchAddress("ssdelta", &ssdelta);
-  tree->SetBranchAddress("ssyptar", &ssyptar);
-  tree->SetBranchAddress("ssxptar", &ssxptar);
-  tree->SetBranchAddress("ssytar", &ssytar);
-  tree->SetBranchAddress("ssxfp", &ssxfp);
-  tree->SetBranchAddress("ssxpfp", &ssxpfp);
-  tree->SetBranchAddress("ssyfp", &ssyfp);
-  tree->SetBranchAddress("ssypfp", &ssypfp);
-  tree->SetBranchAddress("ssdeltai", &ssdeltai);
-  tree->SetBranchAddress("ssyptari", &ssyptari);
-  tree->SetBranchAddress("ssxptari", &ssxptari);
-  tree->SetBranchAddress("ssytari", &ssytari);
-  tree->SetBranchAddress("q", &q);
-  tree->SetBranchAddress("nu", &nu);
-  tree->SetBranchAddress("Q2", &Q2);
-  tree->SetBranchAddress("W", &W);
-  tree->SetBranchAddress("epsilon", &epsilon);
-  tree->SetBranchAddress("Em", &Em);
-  tree->SetBranchAddress("Pm", &Pm);
-  tree->SetBranchAddress("thetapq", &thetapq);
-  tree->SetBranchAddress("phipq", &phipq);
-  tree->SetBranchAddress("corrsing", &corrsing);
-  tree->SetBranchAddress("Pmx", &Pmx);
-  tree->SetBranchAddress("Pmy", &Pmy);
-  tree->SetBranchAddress("Pmz", &Pmz);
-  tree->SetBranchAddress("PmPar", &PmPar);
-  tree->SetBranchAddress("PmPer", &PmPer);
-  tree->SetBranchAddress("PmOop", &PmOop);
-  tree->SetBranchAddress("fry", &fry);
-  tree->SetBranchAddress("radphot", &radphot);
-  tree->SetBranchAddress("sigcc", &sigcc);
-  tree->SetBranchAddress("Weight", &Weight);  
-
-  newTree = tree->CloneTree();
-
-  /*
   newTree = new TTree("h10", "A modified version of the original tree");
 
   newTree->Branch("hsdelta", &hsdelta, "hsdelta/D");
@@ -167,7 +119,53 @@ void recon_hcana::ReadTree(){
   newTree->Branch("radphot", &radphot, "radphot/D");
   newTree->Branch("sigcc", &sigcc, "sigcc/D");
   newTree->Branch("Weight", &Weight, "Weight/D");
-  */
+  
+  tree->SetBranchAddress("hsdelta", &hsdelta);
+  tree->SetBranchAddress("hsyptar", &hsyptar);
+  tree->SetBranchAddress("hsxptar", &hsxptar);
+  tree->SetBranchAddress("hsytar", &hsytar);
+  tree->SetBranchAddress("hsxfp", &hsxfp);
+  tree->SetBranchAddress("hsxpfp", &hsxpfp);
+  tree->SetBranchAddress("hsyfp", &hsyfp);
+  tree->SetBranchAddress("hsypfp", &hsypfp);
+  tree->SetBranchAddress("hsdeltai", &hsdeltai);
+  tree->SetBranchAddress("hsyptari", &hsyptari);
+  tree->SetBranchAddress("hsxptari", &hsxptari);
+  tree->SetBranchAddress("hsytari", &hsytari);
+  tree->SetBranchAddress("ssdelta", &ssdelta);
+  tree->SetBranchAddress("ssyptar", &ssyptar);
+  tree->SetBranchAddress("ssxptar", &ssxptar);
+  tree->SetBranchAddress("ssytar", &ssytar);
+  tree->SetBranchAddress("ssxfp", &ssxfp);
+  tree->SetBranchAddress("ssxpfp", &ssxpfp);
+  tree->SetBranchAddress("ssyfp", &ssyfp);
+  tree->SetBranchAddress("ssypfp", &ssypfp);
+  tree->SetBranchAddress("ssdeltai", &ssdeltai);
+  tree->SetBranchAddress("ssyptari", &ssyptari);
+  tree->SetBranchAddress("ssxptari", &ssxptari);
+  tree->SetBranchAddress("ssytari", &ssytari);
+  tree->SetBranchAddress("q", &q);
+  tree->SetBranchAddress("nu", &nu);
+  tree->SetBranchAddress("Q2", &Q2);
+  tree->SetBranchAddress("W", &W);
+  tree->SetBranchAddress("epsilon", &epsilon);
+  tree->SetBranchAddress("Em", &Em);
+  tree->SetBranchAddress("Pm", &Pm);
+  tree->SetBranchAddress("thetapq", &thetapq);
+  tree->SetBranchAddress("phipq", &phipq);
+  tree->SetBranchAddress("corrsing", &corrsing);
+  tree->SetBranchAddress("Pmx", &Pmx);
+  tree->SetBranchAddress("Pmy", &Pmy);
+  tree->SetBranchAddress("Pmz", &Pmz);
+  tree->SetBranchAddress("PmPar", &PmPar);
+  tree->SetBranchAddress("PmPer", &PmPer);
+  tree->SetBranchAddress("PmOop", &PmOop);
+  tree->SetBranchAddress("fry", &fry);
+  tree->SetBranchAddress("radphot", &radphot);
+  tree->SetBranchAddress("sigcc", &sigcc);
+  tree->SetBranchAddress("Weight", &Weight);  
+
+  //newTree = tree->CloneTree();
   
   cout << "Ending ReadTree() . . . " << endl;
 

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 21:19:11 trottar"
+ * Time-stamp: "2023-02-09 21:22:26 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -68,57 +68,12 @@ void recon_hcana::ReadTree(){
     f->Close();
     return;
    }
+
+  newTree = new TTree("h10", "A modified version of the original tree");
   
   //tree->GetListOfBranches()->Print();
 
   nentries = tree->GetEntries();
-
-  newTree = new TTree("h10", "A modified version of the original tree");
-
-  newTree->Branch("hsdelta", &hsdelta, "hsdelta/F");
-  newTree->Branch("hsyptar", &hsyptar, "hsyptar/F");
-  newTree->Branch("hsxptar", &hsxptar, "hsxptar/F");
-  newTree->Branch("hsytar", &hsytar, "hsytar/F");
-  newTree->Branch("hsxfp", &hsxfp, "hsxfp/F");
-  newTree->Branch("hsxpfp", &hsxpfp, "hsxpfp/F");
-  newTree->Branch("hsyfp", &hsyfp, "hsyfp/F");
-  newTree->Branch("hsypfp", &hsypfp, "hsypfp/F");
-  newTree->Branch("hsdeltai", &hsdeltai, "hsdeltai/F");
-  newTree->Branch("hsyptari", &hsyptari, "hsyptari/F");
-  newTree->Branch("hsxptari", &hsxptari, "hsxptari/F");
-  newTree->Branch("hsytari", &hsytari, "hsytari/F");
-  newTree->Branch("ssdelta", &ssdelta, "ssdelta/F");
-  newTree->Branch("ssyptar", &ssyptar, "ssyptar/F");
-  newTree->Branch("ssxptar", &ssxptar, "ssxptar/F");
-  newTree->Branch("ssytar", &ssytar, "ssytar/F");
-  newTree->Branch("ssxfp", &ssxfp, "ssxfp/F");
-  newTree->Branch("ssxpfp", &ssxpfp, "ssxpfp/F");
-  newTree->Branch("ssyfp", &ssyfp, "ssyfp/F");
-  newTree->Branch("ssypfp", &ssypfp, "ssypfp/F");
-  newTree->Branch("ssdeltai", &ssdeltai, "ssdeltai/F");
-  newTree->Branch("ssyptari", &ssyptari, "ssyptari/F");
-  newTree->Branch("ssxptari", &ssxptari, "ssxptari/F");
-  newTree->Branch("ssytari", &ssytari, "ssytari/F");
-  newTree->Branch("q", &q, "q/F");
-  newTree->Branch("nu", &nu, "nu/F");
-  newTree->Branch("Q2", &Q2, "Q2/F");
-  newTree->Branch("W", &W, "W/F");
-  newTree->Branch("epsilon", &epsilon, "epsilon/F");
-  newTree->Branch("Em", &Em, "Em/F");
-  newTree->Branch("Pm", &Pm, "Pm/F");
-  newTree->Branch("thetapq", &thetapq, "thetapq/F");
-  newTree->Branch("phipq", &phipq, "phipq/F");
-  newTree->Branch("corrsing", &corrsing, "corrsing/F");
-  newTree->Branch("Pmx", &Pmx, "Pmx/F");
-  newTree->Branch("Pmy", &Pmy, "Pmy/F");
-  newTree->Branch("Pmz", &Pmz, "Pmz/F");
-  newTree->Branch("PmPar", &PmPar, "PmPar/F");
-  newTree->Branch("PmPer", &PmPer, "PmPer/F");
-  newTree->Branch("PmOop", &PmOop, "PmOop/F");
-  newTree->Branch("fry", &fry, "fry/F");
-  newTree->Branch("radphot", &radphot, "radphot/F");
-  newTree->Branch("sigcc", &sigcc, "sigcc/F");
-  newTree->Branch("Weight", &Weight, "Weight/F");
   
   tree->SetBranchAddress("hsdelta", &hsdelta);
   tree->SetBranchAddress("hsyptar", &hsyptar);
@@ -165,6 +120,51 @@ void recon_hcana::ReadTree(){
   tree->SetBranchAddress("sigcc", &sigcc);
   tree->SetBranchAddress("Weight", &Weight);  
 
+  newTree->Branch("hsdelta", &hsdelta, "hsdelta/F");
+  newTree->Branch("hsyptar", &hsyptar, "hsyptar/F");
+  newTree->Branch("hsxptar", &hsxptar, "hsxptar/F");
+  newTree->Branch("hsytar", &hsytar, "hsytar/F");
+  newTree->Branch("hsxfp", &hsxfp, "hsxfp/F");
+  newTree->Branch("hsxpfp", &hsxpfp, "hsxpfp/F");
+  newTree->Branch("hsyfp", &hsyfp, "hsyfp/F");
+  newTree->Branch("hsypfp", &hsypfp, "hsypfp/F");
+  newTree->Branch("hsdeltai", &hsdeltai, "hsdeltai/F");
+  newTree->Branch("hsyptari", &hsyptari, "hsyptari/F");
+  newTree->Branch("hsxptari", &hsxptari, "hsxptari/F");
+  newTree->Branch("hsytari", &hsytari, "hsytari/F");
+  newTree->Branch("ssdelta", &ssdelta, "ssdelta/F");
+  newTree->Branch("ssyptar", &ssyptar, "ssyptar/F");
+  newTree->Branch("ssxptar", &ssxptar, "ssxptar/F");
+  newTree->Branch("ssytar", &ssytar, "ssytar/F");
+  newTree->Branch("ssxfp", &ssxfp, "ssxfp/F");
+  newTree->Branch("ssxpfp", &ssxpfp, "ssxpfp/F");
+  newTree->Branch("ssyfp", &ssyfp, "ssyfp/F");
+  newTree->Branch("ssypfp", &ssypfp, "ssypfp/F");
+  newTree->Branch("ssdeltai", &ssdeltai, "ssdeltai/F");
+  newTree->Branch("ssyptari", &ssyptari, "ssyptari/F");
+  newTree->Branch("ssxptari", &ssxptari, "ssxptari/F");
+  newTree->Branch("ssytari", &ssytari, "ssytari/F");
+  newTree->Branch("q", &q, "q/F");
+  newTree->Branch("nu", &nu, "nu/F");
+  newTree->Branch("Q2", &Q2, "Q2/F");
+  newTree->Branch("W", &W, "W/F");
+  newTree->Branch("epsilon", &epsilon, "epsilon/F");
+  newTree->Branch("Em", &Em, "Em/F");
+  newTree->Branch("Pm", &Pm, "Pm/F");
+  newTree->Branch("thetapq", &thetapq, "thetapq/F");
+  newTree->Branch("phipq", &phipq, "phipq/F");
+  newTree->Branch("corrsing", &corrsing, "corrsing/F");
+  newTree->Branch("Pmx", &Pmx, "Pmx/F");
+  newTree->Branch("Pmy", &Pmy, "Pmy/F");
+  newTree->Branch("Pmz", &Pmz, "Pmz/F");
+  newTree->Branch("PmPar", &PmPar, "PmPar/F");
+  newTree->Branch("PmPer", &PmPer, "PmPer/F");
+  newTree->Branch("PmOop", &PmOop, "PmOop/F");
+  newTree->Branch("fry", &fry, "fry/F");
+  newTree->Branch("radphot", &radphot, "radphot/F");
+  newTree->Branch("sigcc", &sigcc, "sigcc/F");
+  newTree->Branch("Weight", &Weight, "Weight/F");
+  
   //newTree = tree->CloneTree();
   
   cout << "Ending ReadTree() . . . " << endl;

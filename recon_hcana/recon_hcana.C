@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 19:45:56 trottar"
+ * Time-stamp: "2023-02-09 19:46:35 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -65,7 +65,7 @@ void recon_hcana::ReadTree(){
   tree = (TTree*)f->Get("h10");
   if (!tree) {
     cerr << "Error: failed to get tree h10 from file " << InSIMCRootname << endl;
-    file->Close();
+    f->Close();
     return;
    }
   

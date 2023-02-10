@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-09 19:08:18 trottar"
+ * Time-stamp: "2023-02-09 19:28:02 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -107,11 +107,56 @@ void recon_hcana::ReadTree(){
   tree->SetBranchAddress("radphot", &radphot);
   tree->SetBranchAddress("sigcc", &sigcc);
   tree->SetBranchAddress("Weight", &Weight);  
-  
-  newTree = tree->CloneTree();
 
-  //tree->SetName("old_h10");
-  newTree->SetName("old_h10");
+  tree->SetName("old_h10");
+
+  newTree = new TTree("h10", "A modified version of the original tree");
+  //newTree = tree->CloneTree();
+
+  newTree->Branch("hsdelta", &hsdelta, "hsdelta/D");
+  newTree->Branch("hsyptar", &hsyptar, "hsyptar/D");
+  newTree->Branch("hsxptar", &hsxptar, "hsxptar/D");
+  newTree->Branch("hsytar", &hsytar, "hsytar/D");
+  newTree->Branch("hsxfp", &hsxfp, "hsxfp/D");
+  newTree->Branch("hsxpfp", &hsxpfp, "hsxpfp/D");
+  newTree->Branch("hsyfp", &hsyfp, "hsyfp/D");
+  newTree->Branch("hsypfp", &hsypfp, "hsypfp/D");
+  newTree->Branch("hsdeltai", &hsdeltai, "hsdeltai/D");
+  newTree->Branch("hsyptari", &hsyptari, "hsyptari/D");
+  newTree->Branch("hsxptari", &hsxptari, "hsxptari/D");
+  newTree->Branch("hsytari", &hsytari, "hsytari/D");
+  newTree->Branch("ssdelta", &ssdelta, "ssdelta/D");
+  newTree->Branch("ssyptar", &ssyptar, "ssyptar/D");
+  newTree->Branch("ssxptar", &ssxptar, "ssxptar/D");
+  newTree->Branch("ssytar", &ssytar, "ssytar/D");
+  newTree->Branch("ssxfp", &ssxfp, "ssxfp/D");
+  newTree->Branch("ssxpfp", &ssxpfp, "ssxpfp/D");
+  newTree->Branch("ssyfp", &ssyfp, "ssyfp/D");
+  newTree->Branch("ssypfp", &ssypfp, "ssypfp/D");
+  newTree->Branch("ssdeltai", &ssdeltai, "ssdeltai/D");
+  newTree->Branch("ssyptari", &ssyptari, "ssyptari/D");
+  newTree->Branch("ssxptari", &ssxptari, "ssxptari/D");
+  newTree->Branch("ssytari", &ssytari, "ssytari/D");
+  newTree->Branch("q", &q, "q/D");
+  newTree->Branch("nu", &nu, "nu/D");
+  newTree->Branch("Q2", &Q2, "Q2/D");
+  newTree->Branch("W", &W, "W/D");
+  newTree->Branch("epsilon", &epsilon, "epsilon/D");
+  newTree->Branch("Em", &Em, "Em/D");
+  newTree->Branch("Pm", &Pm, "Pm/D");
+  newTree->Branch("thetapq", &thetapq, "thetapq/D");
+  newTree->Branch("phipq", &phipq, "phipq/D");
+  newTree->Branch("corrsing", &corrsing, "corrsing/D");
+  newTree->Branch("Pmx", &Pmx, "Pmx/D");
+  newTree->Branch("Pmy", &Pmy, "Pmy/D");
+  newTree->Branch("Pmz", &Pmz, "Pmz/D");
+  newTree->Branch("PmPar", &PmPar, "PmPar/D");
+  newTree->Branch("PmPer", &PmPer, "PmPer/D");
+  newTree->Branch("PmOop", &PmOop, "PmOop/D");
+  newTree->Branch("fry", &fry, "fry/D");
+  newTree->Branch("radphot", &radphot, "radphot/D");
+  newTree->Branch("sigcc", &sigcc, "sigcc/D");
+  newTree->Branch("Weight", &Weight, "Weight/D");
   
   cout << "Ending ReadTree() . . . " << endl;
 
@@ -286,7 +331,7 @@ void recon_hcana::WriteHist(){
   cout << "Calling WriteHist() . . . " << endl;
   
   //tree->Write("",TObject::kOverwrite);
-  newTree->Write("h10;*",TObject::kOverwrite);
+  newTree->Write();
   f->Delete("old_h10;*");
   f->Close();
 

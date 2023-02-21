@@ -163,6 +163,7 @@ class recon_hcana
   Double_t e_yptar;
   Double_t e_xptar;
   Double_t e_delta;
+  Double_t k0;                        //final electron momentum
   Double_t kf;                        //final electron momentum
   Double_t ki;                        //initial electron momentum
 

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-21 16:08:48 trottar"
+ * Time-stamp: "2023-02-21 16:14:42 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -34,7 +34,7 @@ recon_hcana::recon_hcana() {
   simc_normfactor = stod(split(FindString("normfac",InSIMCHistname)[0], '=')[1]);
   Ein = stod(split(FindString("Ebeam",InSIMCHistname)[0], '=')[1]);
   k0 = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0];
-  kf = k0*(1+hsdelta/100)
+  kf = k0*(1+hsdelta/100);
   e_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[0];
   Pf = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[1];
   h_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[1];

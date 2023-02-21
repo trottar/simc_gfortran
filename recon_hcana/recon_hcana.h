@@ -163,7 +163,7 @@ class recon_hcana
   Double_t e_yptar;
   Double_t e_xptar;
   Double_t e_delta;
-  Double_t kf0;                        //final electron momentum
+  Double_t kf0;
   Double_t kf;                        //final electron momentum
   Double_t ki;                        //initial electron momentum
 
@@ -177,6 +177,7 @@ class recon_hcana
   Double_t h_yptar;
   Double_t h_xptar;
   Double_t h_delta;
+  Double_t Pf0;
   Double_t Pf;                 //final proton momentum
   
   //Target Quantities (tarx, tary, tarz) in Hall Coord. System (USED BY DATA AND SIMC)
@@ -246,7 +247,7 @@ class recon_hcana
   Double_t MN = 0.939566;     //neutron mass
   Double_t me = 0.00051099;   //electron mass
   Double_t MAL = 25.131710;   //aluminum mass
-  Double_t tgt_mass;
+  Double_t tgt_mass = MP;
 
   //Set Varibales to be read from REPORT_FILE
   Double_t e_th=0.;    //electron arm central angle

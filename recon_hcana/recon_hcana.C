@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-21 16:22:25 trottar"
+ * Time-stamp: "2023-02-21 16:43:28 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -35,7 +35,7 @@ recon_hcana::recon_hcana() {
   Ein = stod(split(FindString("Ebeam",InSIMCHistname)[0], '=')[1]);
   kf0 = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0];
   e_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[0];
-  Pf = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[1];
+  Pf0 = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[1];
   h_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[1];
 
   cout << "Ngen: " << simc_nevents << endl;
@@ -43,7 +43,7 @@ recon_hcana::recon_hcana() {
   cout << "Ein: " << Ein << endl;
   cout << "kf: " << kf0 << endl;
   cout << "e_th: " << e_th << endl;
-  cout << "Pf: " << Pf << endl;
+  cout << "Pf: " << Pf0 << endl;
   cout << "h_th: " << h_th << endl;  
   
   ReadTree();
@@ -178,7 +178,7 @@ void recon_hcana::EventLoop(){
   //Convert MeV to GeV
   Ein = Ein / 1000.;     //incident beam energy
   kf0 = kf0 / 1000.;       //final electron momentum
-  Pf = Pf / 1000.;       //final proton momentum
+  Pf0 = Pf0 / 1000.;       //final proton momentum
 
   for (Int_t i=0;i<nentries;i++) {
     
@@ -204,6 +204,7 @@ void recon_hcana::EventLoop(){
     //--------Calculated Kinematic Varibales----------------
 
     kf = kf0*(1+hsdelta/100); // Corrected final electron momentum 
+    Pf = Pf0*(1+ssdelta/100); // Corrected final proton momentum 
     
     ki = sqrt(Ein*Ein - me*me);        //initial electron momentum
     
@@ -226,16 +227,6 @@ void recon_hcana::EventLoop(){
 
     // cout << "Em: " << Em << endl;
     
-    M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
-    MM2 = M_recoil * M_recoil;
-
-    //-----If H(e,e'p)
-    if(reaction=="heep"){
-      M_recoil = sqrt(Em*Em - Pm*Pm);
-      MM2 = Em*Em - Pm*Pm;
-    }
-    //----------
-
     // cout << "MM2: " << MM2 << endl;
     
     W2 = W*W;
@@ -288,8 +279,18 @@ void recon_hcana::EventLoop(){
     Pmy_lab = fB.Y(); 
     Pmz_lab = fB.Z(); 
   
-
     Em = nu + fA.M() - fX.E();
+
+    M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
+    MM2 = M_recoil * M_recoil;
+
+    //-----If H(e,e'p)
+    if(reaction=="heep"){
+      M_recoil = sqrt(Em*Em - Pm*Pm);
+      MM2 = Em*Em - Pm*Pm;
+    }
+    //----------
+
     
     // cout << "Pmx_lab: " << Pmx_lab << endl;
     // cout << "Pmy_lab: " << Pmy_lab << endl;

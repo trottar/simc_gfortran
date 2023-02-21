@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-21 15:54:55 trottar"
+ * Time-stamp: "2023-02-21 16:01:42 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -287,7 +287,7 @@ void recon_hcana::EventLoop(){
     Pmz_lab = fB.Z(); 
   
 
-    Em = nu + fA->M() - fX.E();
+    Em = nu + fA.M() - fX.E();
     
     // cout << "Pmx_lab: " << Pmx_lab << endl;
     // cout << "Pmy_lab: " << Pmy_lab << endl;

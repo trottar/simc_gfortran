@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-21 16:43:28 trottar"
+ * Time-stamp: "2023-02-21 18:48:08 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -281,6 +281,8 @@ void recon_hcana::EventLoop(){
   
     Em = nu + fA.M() - fX.E();
 
+    Pm = sqrt(Pmx_lab*Pmx_lab + Pmy_lab*Pmy_lab + Pmz_lab*Pmz_lab);
+    
     M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
     MM2 = M_recoil * M_recoil;
 
@@ -295,8 +297,6 @@ void recon_hcana::EventLoop(){
     // cout << "Pmx_lab: " << Pmx_lab << endl;
     // cout << "Pmy_lab: " << Pmy_lab << endl;
     // cout << "Pmz_lab: " << Pmz_lab << endl;
-    
-    //Pm = sqrt(Pmx_lab*Pmx_lab + Pmy_lab*Pmy_lab + Pmz_lab*Pmz_lab);
 
     //--------Rotate the recoil system from +z to +q-------
     qvec = fQ.Vect();

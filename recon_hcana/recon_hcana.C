@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-21 16:17:45 trottar"
+ * Time-stamp: "2023-02-21 16:22:25 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -33,7 +33,7 @@ recon_hcana::recon_hcana() {
   simc_nevents = stod(split(FindString("Ngen",InSIMCHistname)[0], '=')[1]);
   simc_normfactor = stod(split(FindString("normfac",InSIMCHistname)[0], '=')[1]);
   Ein = stod(split(FindString("Ebeam",InSIMCHistname)[0], '=')[1]);
-  k0 = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0];
+  kf0 = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0];
   e_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[0];
   Pf = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[1];
   h_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[1];
@@ -41,7 +41,7 @@ recon_hcana::recon_hcana() {
   cout << "Ngen: " << simc_nevents << endl;
   cout << "normfac: " << simc_normfactor << endl;
   cout << "Ein: " << Ein << endl;
-  cout << "kf: " << kf << endl;
+  cout << "kf: " << kf0 << endl;
   cout << "e_th: " << e_th << endl;
   cout << "Pf: " << Pf << endl;
   cout << "h_th: " << h_th << endl;  
@@ -174,12 +174,10 @@ void recon_hcana::ReadTree(){
 void recon_hcana::EventLoop(){
 
   cout << "Calling EventLoop() . . . " << endl;
-
-  kf = k0*(1+hsdelta/100); // Corrected final electron momentum 
   
   //Convert MeV to GeV
   Ein = Ein / 1000.;     //incident beam energy
-  kf = kf / 1000.;       //final electron momentum
+  kf0 = kf0 / 1000.;       //final electron momentum
   Pf = Pf / 1000.;       //final proton momentum
 
   for (Int_t i=0;i<nentries;i++) {
@@ -204,7 +202,9 @@ void recon_hcana::EventLoop(){
     tree->GetEntry(i);
 
     //--------Calculated Kinematic Varibales----------------
-        
+
+    kf = kf0*(1+hsdelta/100); // Corrected final electron momentum 
+    
     ki = sqrt(Ein*Ein - me*me);        //initial electron momentum
     
     //redefine

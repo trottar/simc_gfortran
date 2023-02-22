@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-21 19:10:50 trottar"
+ * Time-stamp: "2023-02-21 20:02:27 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -204,7 +204,6 @@ void recon_hcana::EventLoop(){
     //--------Calculated Kinematic Varibales----------------
 
     kf = kf0*(1+hsdelta/100); // Corrected final electron momentum 
-    Pf = Pf0*(1+ssdelta/100); // Corrected final proton momentum 
     
     ki = sqrt(Ein*Ein - me*me);        //initial electron momentum
     
@@ -270,6 +269,7 @@ void recon_hcana::EventLoop(){
 
     //Get Detected Particle 4-momentum
     SetCentralAngles(h_th, h_ph);
+    Pf = Pf0*(1+ssdelta/100); // Corrected final proton momentum 
     TransportToLab(Pf, ssxptar, ssyptar, Pf_vec);
     
     fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle

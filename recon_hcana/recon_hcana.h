@@ -247,7 +247,6 @@ class recon_hcana
   Double_t MAL = 25.131710;   //aluminum mass
   Double_t tgt_mass = MP;
 
-  //Set Varibales to be read from REPORT_FILE
   Double_t e_th=0.;    //electron arm central angle
   Double_t e_ph=0.;    
   Double_t h_th=0.;    //hadron arm central angle

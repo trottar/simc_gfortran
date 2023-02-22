@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-21 21:16:44 trottar"
+ * Time-stamp: "2023-02-21 21:40:47 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -255,7 +255,7 @@ void recon_hcana::EventLoop(){
 
     //Calculate electron final momentum 3-vector
     SetCentralAngles(e_th, e_ph);
-    TransportToLab(kf, hsxptar, hsyptar, kf_vec);
+    TransportToLab(kf, hsyptar, hsxptar, kf_vec);
 
     // cout << "kf_vec.X(): " << kf_vec.X() << endl;
     // cout << "kf_vec.Y(): " << kf_vec.Y() << endl;
@@ -270,7 +270,7 @@ void recon_hcana::EventLoop(){
 
     //Get Detected Particle 4-momentum
     SetCentralAngles(h_th, h_ph);
-    TransportToLab(Pf, ssxptar, ssyptar, Pf_vec);
+    TransportToLab(Pf, ssyptar, ssxptar, Pf_vec);
     
     fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
     fB = fA1 - fX;                 //4-MOMENTUM OF UNDETECTED PARTICLE 
@@ -279,7 +279,7 @@ void recon_hcana::EventLoop(){
     Pmy_lab = fB.Y(); 
     Pmz_lab = fB.Z();
 
-    nu = (fP0.E() - fP1.E());
+    nu = fQ.E()
   
     Em = nu + fA.M() - fX.E();   
     
@@ -288,6 +288,12 @@ void recon_hcana::EventLoop(){
     // cout << "Pmz_lab: " << Pmz_lab << endl;
 
     //--------Rotate the recoil system from +z to +q-------
+    // Angles of X and B wrt q-vector 
+    // xq and bq are the 3-momentum vectors of X and B expressed in
+    // the coordinate system where q is the z-axis and the x-axis
+    // lies in the scattering plane (defined by q and e') and points
+    // in the direction of e', so the out-of-plane angle lies within
+    // -90<phi_xq<90deg if X is detected on the downstream/forward side of q
     rot_to_q.SetZAxis( fQ.Vect(), fP1.Vect()).Invert();
 
     xq = fX.Vect();
@@ -305,7 +311,7 @@ void recon_hcana::EventLoop(){
     thetapq = th_pq;
     phipq = ph_pq;
     
-    p_miss = bq;
+    p_miss = -bq;
 
     //Missing Momentum Components in the q-frame
     Pm = p_miss.Mag(); //=fB.P()

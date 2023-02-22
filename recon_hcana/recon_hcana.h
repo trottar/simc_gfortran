@@ -146,8 +146,6 @@ class recon_hcana
   Double_t MM2;                   //Missing Mass Squared
   Double_t E_recoil;              //Recoil Energy of the system (neutron total energy)
   Double_t En;                    //Same as above
-  Double_t thetapq;                  //Polar angle of detected particle with q   ----> th_pq
-  Double_t phipq;                  //Azimuth angle of detected particle with q    ----> phi_pq angle between proton and q-vector
   Double_t th_pq;                  //Polar angle of detected particle with q   ----> th_pq
   Double_t th_nq;                  //Polar angle of recoil system with q (rad)  ---> th_nq (neutreon-q angle. IMPORTANT in D(e,e'p))
   Double_t ph_pq;                  //Azimuth angle of detected particle with q    ----> phi_pq angle between proton and q-vector

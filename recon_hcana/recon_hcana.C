@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-21 18:48:08 trottar"
+ * Time-stamp: "2023-02-21 19:10:50 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -274,35 +274,15 @@ void recon_hcana::EventLoop(){
     
     fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
     fB = fA1 - fX;                 //4-MOMENTUM OF UNDETECTED PARTICLE 
-
-    Pmx_lab = fB.X();
-    Pmy_lab = fB.Y(); 
-    Pmz_lab = fB.Z(); 
-  
-    Em = nu + fA.M() - fX.E();
-
-    Pm = sqrt(Pmx_lab*Pmx_lab + Pmy_lab*Pmy_lab + Pmz_lab*Pmz_lab);
     
-    M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
-    MM2 = M_recoil * M_recoil;
-
-    //-----If H(e,e'p)
-    if(reaction=="heep"){
-      M_recoil = sqrt(Em*Em - Pm*Pm);
-      MM2 = Em*Em - Pm*Pm;
-    }
-    //----------
-
-    
-    // cout << "Pmx_lab: " << Pmx_lab << endl;
-    // cout << "Pmy_lab: " << Pmy_lab << endl;
-    // cout << "Pmz_lab: " << Pmz_lab << endl;
-
     //--------Rotate the recoil system from +z to +q-------
-    qvec = fQ.Vect();
-    kfvec = fP1.Vect();
-
-    rot_to_q.SetZAxis( qvec, kfvec).Invert();
+    // Angles of X and B wrt q-vector 
+    // xq and bq are the 3-momentum vectors of X and B expressed in
+    // the coordinate system where q is the z-axis and the x-axis
+    // lies in the scattering plane (defined by q and e') and points
+    // in the direction of e', so the out-of-plane angle lies within
+    // -90<phi_xq<90deg if X is detected on the downstream/forward side of q.
+    rot_to_q.SetZAxis( fQ.Vect(), fP1.Vect()).Invert();
 
     xq = fX.Vect();
     bq = fB.Vect();
@@ -316,20 +296,33 @@ void recon_hcana::EventLoop(){
     th_nq = bq.Theta();   // theta_nq                                                                                                     
     ph_nq   = bq.Phi();     //phi_nq
 
-    p_miss_q = -bq;
+    thetapq = th_pq;
+    phipq = ph_pq;
+    
+    p_miss = -bq;
 
     //Missing Momentum Components in the q-frame
-    Pmz_q = p_miss_q.Z();   //parallel component to +z
-    Pmx_q = p_miss_q.X();   //in-plane perpendicular component to +z
-    Pmy_q = p_miss_q.Y();   //out-of-plane component (Oop)
-
+    Pm = p_miss.Mag(); //=fB.P()
+    
     // Redefine variables
-    Pmx = p_miss_q.X();   //in-plane perpendicular component to +z
-    Pmy = p_miss_q.Y();   //out-of-plane component (Oop)
-    Pmz = p_miss_q.Z();   //parallel component to +z
+    Pmx = p_miss.X();   //in-plane perpendicular component to +z
+    Pmy = p_miss.Y();   //out-of-plane component (Oop)
+    Pmz = p_miss.Z();   //parallel component to +z
 
-    Pm = p_miss_q.Mag();
+    Em = nu + fA.M() - fX.E();
+    
+    //M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
+    M_recoil = fB.M(); //recoil mass (neutron missing mass)
+    MM2 = M_recoil * M_recoil;
 
+    //-----If H(e,e'p)
+    if(reaction=="heep"){
+      //M_recoil = sqrt(Em*Em - Pm*Pm);
+      M_recoil = fB.M(); //recoil mass (neutron missing mass)
+      MM2 = Em*Em - Pm*Pm;
+    }
+    //----------
+    
     // cout << "Pmx: " << Pmx << endl;
     // cout << "Pmy: " << Pmy << endl;
     // cout << "Pmz: " << Pmz << endl;

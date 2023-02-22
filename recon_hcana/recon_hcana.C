@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-21 20:41:17 trottar"
+ * Time-stamp: "2023-02-21 20:44:29 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -275,9 +275,9 @@ void recon_hcana::EventLoop(){
     fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
     fB = fA1 - fX;                 //4-MOMENTUM OF UNDETECTED PARTICLE 
 
-    Pmx = fB.X();
-    Pmy = fB.Y(); 
-    Pmz = fB.Z(); 
+    Pmx_lab = fB.X();
+    Pmy_lab = fB.Y(); 
+    Pmz_lab = fB.Z(); 
   
     Em = nu + fA.M() - fX.E();   
     
@@ -309,9 +309,9 @@ void recon_hcana::EventLoop(){
     Pm = p_miss.Mag(); //=fB.P()
     
     // Redefine variables
-    //Pmx = p_miss.X();   //in-plane perpendicular component to +z
-    //Pmy = p_miss.Y();   //out-of-plane component (Oop)
-    //Pmz = p_miss.Z();   //parallel component to +z
+    Pmx = p_miss.X();   //in-plane perpendicular component to +z
+    Pmy = p_miss.Y();   //out-of-plane component (Oop)
+    Pmz = p_miss.Z();   //parallel component to +z
 
     //M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
     M_recoil = fB.M(); //recoil mass (neutron missing mass)

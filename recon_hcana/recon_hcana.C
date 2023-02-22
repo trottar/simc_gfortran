@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-21 21:11:28 trottar"
+ * Time-stamp: "2023-02-21 21:16:44 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -298,14 +298,14 @@ void recon_hcana::EventLoop(){
 
     //Calculate Angles of q relative to x(detected proton) and b(recoil neutron)
     th_pq = xq.Theta();   //"theta_pq"                                       
-    ph_pq   = xq.Phi();     //"out-of-plane angle", "phi_pq"                                                                    
+    ph_pq   = xq.Phi();   //"out-of-plane angle", "phi_pq"                                                                    
     th_nq = bq.Theta();   // theta_nq                                                                                                     
-    ph_nq   = bq.Phi();     //phi_nq
+    ph_nq   = bq.Phi();   //phi_nq
 
     thetapq = th_pq;
     phipq = ph_pq;
     
-    p_miss = -bq;
+    p_miss = bq;
 
     //Missing Momentum Components in the q-frame
     Pm = p_miss.Mag(); //=fB.P()

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-21 20:02:27 trottar"
+ * Time-stamp: "2023-02-21 20:41:17 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -204,6 +204,7 @@ void recon_hcana::EventLoop(){
     //--------Calculated Kinematic Varibales----------------
 
     kf = kf0*(1+hsdelta/100); // Corrected final electron momentum 
+    Pf = Pf0*(1+ssdelta/100); // Corrected final proton momentum 
     
     ki = sqrt(Ein*Ein - me*me);        //initial electron momentum
     
@@ -269,19 +270,22 @@ void recon_hcana::EventLoop(){
 
     //Get Detected Particle 4-momentum
     SetCentralAngles(h_th, h_ph);
-    Pf = Pf0*(1+ssdelta/100); // Corrected final proton momentum 
     TransportToLab(Pf, ssxptar, ssyptar, Pf_vec);
     
     fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
     fB = fA1 - fX;                 //4-MOMENTUM OF UNDETECTED PARTICLE 
+
+    Pmx = fB.X();
+    Pmy = fB.Y(); 
+    Pmz = fB.Z(); 
+  
+    Em = nu + fA.M() - fX.E();   
     
+    // cout << "Pmx_lab: " << Pmx_lab << endl;
+    // cout << "Pmy_lab: " << Pmy_lab << endl;
+    // cout << "Pmz_lab: " << Pmz_lab << endl;
+
     //--------Rotate the recoil system from +z to +q-------
-    // Angles of X and B wrt q-vector 
-    // xq and bq are the 3-momentum vectors of X and B expressed in
-    // the coordinate system where q is the z-axis and the x-axis
-    // lies in the scattering plane (defined by q and e') and points
-    // in the direction of e', so the out-of-plane angle lies within
-    // -90<phi_xq<90deg if X is detected on the downstream/forward side of q.
     rot_to_q.SetZAxis( fQ.Vect(), fP1.Vect()).Invert();
 
     xq = fX.Vect();
@@ -305,12 +309,10 @@ void recon_hcana::EventLoop(){
     Pm = p_miss.Mag(); //=fB.P()
     
     // Redefine variables
-    Pmx = p_miss.X();   //in-plane perpendicular component to +z
-    Pmy = p_miss.Y();   //out-of-plane component (Oop)
-    Pmz = p_miss.Z();   //parallel component to +z
+    //Pmx = p_miss.X();   //in-plane perpendicular component to +z
+    //Pmy = p_miss.Y();   //out-of-plane component (Oop)
+    //Pmz = p_miss.Z();   //parallel component to +z
 
-    Em = nu + fA.M() - fX.E();
-    
     //M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
     M_recoil = fB.M(); //recoil mass (neutron missing mass)
     MM2 = M_recoil * M_recoil;

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-02-21 21:41:36 trottar"
+ * Time-stamp: "2023-03-02 10:42:22 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -34,7 +34,7 @@ recon_hcana::recon_hcana() {
   simc_normfactor = stod(split(FindString("normfac",InSIMCHistname)[0], '=')[1]);
   Ein = stod(split(FindString("Ebeam",InSIMCHistname)[0], '=')[1]);
   kf0 = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[0];
-  e_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[0];
+  e_th = -num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[0]; // Negative sign for HMS spec
   Pf0 = num_split(split(FindString("momentum",InSIMCHistname)[0], '=')[1])[1];
   h_th = num_split(split(FindString("angle",InSIMCHistname)[0], '=')[1])[1];
 
@@ -203,8 +203,8 @@ void recon_hcana::EventLoop(){
 
     //--------Calculated Kinematic Varibales----------------
 
-    kf = kf0*(1+hsdelta/100); // Corrected final electron momentum 
-    Pf = Pf0*(1+ssdelta/100); // Corrected final proton momentum 
+    kf = kf0*(1.0+hsdelta/100); // Corrected final electron momentum 
+    Pf = Pf0*(1.0+ssdelta/100); // Corrected final proton momentum 
     
     ki = sqrt(Ein*Ein - me*me);        //initial electron momentum
     
@@ -255,7 +255,7 @@ void recon_hcana::EventLoop(){
 
     //Calculate electron final momentum 3-vector
     SetCentralAngles(e_th, e_ph);
-    TransportToLab(kf, hsyptar, hsxptar, kf_vec);
+    TransportToLab(kf, hsxptar, hsyptar, kf_vec);
 
     // cout << "kf_vec.X(): " << kf_vec.X() << endl;
     // cout << "kf_vec.Y(): " << kf_vec.Y() << endl;
@@ -270,7 +270,7 @@ void recon_hcana::EventLoop(){
 
     //Get Detected Particle 4-momentum
     SetCentralAngles(h_th, h_ph);
-    TransportToLab(Pf, ssyptar, ssxptar, Pf_vec);
+    TransportToLab(Pf, ssxptar, ssyptar, Pf_vec);
     
     fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
     fB = fA1 - fX;                 //4-MOMENTUM OF UNDETECTED PARTICLE 

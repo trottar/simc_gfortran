@@ -245,7 +245,7 @@ class recon_hcana
   Double_t MN = 0.939566;     //neutron mass
   Double_t me = 0.00051099;   //electron mass
   Double_t MAL = 25.131710;   //aluminum mass
-  Double_t tgt_mass = MP;
+  Double_t tgt_mass = MP;  // Manually set target mass to proton for LH2
 
   Double_t e_th=0.;    //electron arm central angle
   Double_t e_ph=0.;    

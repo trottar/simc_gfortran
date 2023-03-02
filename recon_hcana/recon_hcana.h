@@ -35,6 +35,11 @@ class recon_hcana
     if (reaction == "heep"){
       
       TString kinematics = "10p6";
+      //TString kinematics = "8p2";
+      //TString kinematics = "6p2";
+      //TString kinematics = "4p9";
+      //TString kinematics = "3p8";
+      
       InSIMCFilename = "../OUTPUTS/Heep_Coin_" + kinematics;
       
     }else{

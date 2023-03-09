@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-03-02 10:42:22 trottar"
+ * Time-stamp: "2023-03-08 20:28:35 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -229,7 +229,7 @@ void recon_hcana::EventLoop(){
     
     // cout << "MM2: " << MM2 << endl;
     
-    W2 = W*W;
+    //W2 = W*W;
 
     /*
     //Use hcana formula to re-define HMS/SHMS Ztarget
@@ -266,6 +266,22 @@ void recon_hcana::EventLoop(){
     fP1.SetXYZM(kf_vec.X(), kf_vec.Y(), kf_vec.Z(), me);  //set final e- 4-momentum
     fA.SetXYZM(0.0, 0.0, 0.0, tgt_mass );  //Set initial target at rest
     fQ = fP0 - fP1;
+   
+    fQ3mag     = fQ.P();
+    
+    fScatAngle = fP0.Angle( fP1.Vect());    
+
+    fMp.SetXYZM(0.0, 0.0, 0.0, MP);
+
+    fMp1 = fMp + fQ;
+
+    // Redefine higher order variables
+    W2 = fMp1.M2();
+    if (W2>0)  W = TMath::Sqrt(W2);
+    q = fQ;    
+    Q2 = -fQ.M2();
+    epsilon = 1.0 / ( 1.0 + 2.0*fQ3mag*fQ3mag/fQ2*TMath::Power( TMath::Tan(fScatAngle/2.0), 2.0 ));
+    
     fA1 = fA + fQ;   //final target (sum of final hadron four momenta)
 
     //Get Detected Particle 4-momentum
@@ -331,6 +347,14 @@ void recon_hcana::EventLoop(){
       M_recoil = fB.M(); //recoil mass (neutron missing mass)
       MM2 = Em*Em - Pm*Pm;
     }
+
+    /*
+    s = (*pQ+*pA).M2();
+    t = (*pQ-fX).M2();
+    u = (*pQ-fB).M2();
+    */
+    
+    
     //----------
     
     // cout << "Pmx: " << Pmx << endl;

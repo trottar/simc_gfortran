@@ -227,6 +227,13 @@ class recon_hcana
   TLorentzVector fX;            // Detected secondary particle 4-momentum (GeV)
   TLorentzVector fB;            // Recoil system 4-momentum (GeV)
 
+  TLorentzVector fMp;
+  TLorentzVector fMp1;
+  
+  TLorentzVector fQ3mag;
+
+  TLorentzVector fScatAngle;
+  
   TVector3 Pf_vec;
   TVector3 kf_vec;
 

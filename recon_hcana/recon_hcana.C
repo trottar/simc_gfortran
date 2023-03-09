@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-03-08 20:28:35 trottar"
+ * Time-stamp: "2023-03-08 20:31:42 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -267,7 +267,7 @@ void recon_hcana::EventLoop(){
     fA.SetXYZM(0.0, 0.0, 0.0, tgt_mass );  //Set initial target at rest
     fQ = fP0 - fP1;
    
-    fQ3mag     = fQ.P();
+    fQ3mag = fQ.P();
     
     fScatAngle = fP0.Angle( fP1.Vect());    
 

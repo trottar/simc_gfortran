@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-03-08 20:31:42 trottar"
+ * Time-stamp: "2023-03-08 20:35:11 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -266,8 +266,6 @@ void recon_hcana::EventLoop(){
     fP1.SetXYZM(kf_vec.X(), kf_vec.Y(), kf_vec.Z(), me);  //set final e- 4-momentum
     fA.SetXYZM(0.0, 0.0, 0.0, tgt_mass );  //Set initial target at rest
     fQ = fP0 - fP1;
-   
-    fQ3mag = fQ.P();
     
     fScatAngle = fP0.Angle( fP1.Vect());    
 
@@ -278,9 +276,9 @@ void recon_hcana::EventLoop(){
     // Redefine higher order variables
     W2 = fMp1.M2();
     if (W2>0)  W = TMath::Sqrt(W2);
-    q = fQ;    
+    q = fQ.P();
     Q2 = -fQ.M2();
-    epsilon = 1.0 / ( 1.0 + 2.0*fQ3mag*fQ3mag/fQ2*TMath::Power( TMath::Tan(fScatAngle/2.0), 2.0 ));
+    epsilon = 1.0 / ( 1.0 + 2.0*q*q/Q2*TMath::Power( TMath::Tan(fScatAngle/2.0), 2.0 ));
     
     fA1 = fA + fQ;   //final target (sum of final hadron four momenta)
 

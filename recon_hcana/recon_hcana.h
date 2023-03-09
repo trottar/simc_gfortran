@@ -230,8 +230,6 @@ class recon_hcana
   TLorentzVector fMp;
   TLorentzVector fMp1;
   
-  Double_t fQ3mag;
-
   Double_t fScatAngle;
   
   TVector3 Pf_vec;

@@ -62,40 +62,6 @@ class recon_hcana
 
   Int_t nentries;
 
-  Float_t hsdelta;
-  Float_t hsyptar;
-  Float_t hsxptar;
-  Float_t hsytar;
-  Float_t hsxfp;
-  Float_t hsxpfp;
-  Float_t hsyfp;
-  Float_t hsypfp;
-  Float_t hsdeltai;
-  Float_t hsyptari;
-  Float_t hsxptari;
-  Float_t hsytari;
-  Float_t ssdelta;
-  Float_t ssyptar;
-  Float_t ssxptar;
-  Float_t ssytar;
-  Float_t ssxfp;
-  Float_t ssxpfp;
-  Float_t ssyfp;
-  Float_t ssypfp;
-  Float_t ssdeltai;
-  Float_t ssyptari;
-  Float_t ssxptari;
-  Float_t ssytari;
-  Float_t q;
-  Float_t nu;
-  Float_t Q2;
-  Float_t W;
-  Float_t epsilon;
-  Float_t Em;
-  Float_t Pm;
-  Float_t thetapq;
-  Float_t phipq;
-  Float_t missmass;
   Float_t mmnuc;
   Float_t phad;
   Float_t t;
@@ -107,7 +73,6 @@ class recon_hcana
   Float_t pfermi;
   Float_t siglab;
   Float_t sigcm;
-  Float_t Weight;
   Float_t decdist;
   Float_t Mhadron;
   Float_t pdotqhat;

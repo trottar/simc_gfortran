@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-03-21 19:22:27 trottar"
+ * Time-stamp: "2023-03-21 19:25:05 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -21,8 +21,6 @@ using namespace std;
 recon_hcana::recon_hcana(TString filename, TString reaction_str) {
 
   ReadReaction(reaction_str);
-
-  cout << reaction << endl;
   
   buildFileName(filename);
 
@@ -61,6 +59,10 @@ recon_hcana::recon_hcana(TString filename, TString reaction_str) {
     ProductionReadTree();
     ProductionEventLoop();
   
+  }else{
+
+    cerr << "ERROR: Invalid reaction of type " << reaction << endl;
+    exit(EXIT_FAILURE);
   }
   
   WriteHist();

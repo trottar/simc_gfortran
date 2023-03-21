@@ -19,6 +19,7 @@ class recon_hcana
   
   void grabHistData(TString InSIMCHistname);
 
+  // Converts input to lower case letters
   void ReadReaction(TString& str){
 
     for (int i = 0; i < str.Length(); i++) {

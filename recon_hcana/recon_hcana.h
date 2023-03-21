@@ -33,7 +33,7 @@ class recon_hcana
   void buildFileName(TString filename){
         
     //InSIMCFilename = "../worksim/" + filename + ".root";
-    InSIMCFilename = "../OUTPUTS/" + filename + ".root"; 
+    InSIMCFilename = "../OUTPUTS/" + filename; 
     
   }
 

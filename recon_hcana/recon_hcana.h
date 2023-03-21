@@ -92,6 +92,7 @@ class recon_hcana
   Float_t sigcc;
   Float_t Weight;
 
+  TString reaction;
   TString InSIMCFilename;
   TString InSIMCHistname;
   TString InSIMCRootname;

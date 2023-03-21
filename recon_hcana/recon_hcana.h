@@ -14,7 +14,7 @@ class recon_hcana
  public:
 
   //Consructor / Destructor
-  recon_hcana();
+  recon_hcana(string arg1);
   ~recon_hcana();
   
   void grabHistData(TString InSIMCHistname);

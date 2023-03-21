@@ -30,7 +30,7 @@ class recon_hcana
   vector <string> split(string str, char del=':');
   vector <float> num_split(string str);
   
-  void buildFileName(TString filename, TString reaction){
+  void buildFileName(TString filename){
         
     //InSIMCFilename = "../worksim/" + filename;
     InSIMCFilename = "../OUTPUTS/" + filename; 
@@ -91,7 +91,7 @@ class recon_hcana
   Float_t radphot;
   Float_t sigcc;
   Float_t Weight;
-  
+
   TString InSIMCFilename;
   TString InSIMCHistname;
   TString InSIMCRootname;

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-03-21 19:27:54 trottar"
+ * Time-stamp: "2023-03-21 19:45:16 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -88,7 +88,7 @@ void recon_hcana::ProductionReadTree(){
 
   newTree = new TTree("h10", "A modified version of the original tree");
   
-  //tree->GetListOfBranches()->Print();
+  tree->GetListOfBranches()->Print();
 
   nentries = tree->GetEntries();
   

@@ -14,7 +14,7 @@ class recon_hcana
  public:
 
   //Consructor / Destructor
-  recon_hcana(TString reaction = "heep", TString filename);
+  recon_hcana(TString filename, TString reaction = "heep");
   ~recon_hcana();
   
   void grabHistData(TString InSIMCHistname);
@@ -30,7 +30,7 @@ class recon_hcana
   vector <string> split(string str, char del=':');
   vector <float> num_split(string str);
   
-  void buildFileName(TString reaction = "heep", TString filename){
+  void buildFileName(TString filename, TString reaction){
         
     //InSIMCFilename = "../worksim/" + filename;
     InSIMCFilename = "../OUTPUTS/" + filename; 

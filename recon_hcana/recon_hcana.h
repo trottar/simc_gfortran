@@ -14,7 +14,7 @@ class recon_hcana
  public:
 
   //Consructor / Destructor
-  recon_hcana(string arg1);
+  recon_hcana(TString filename);
   ~recon_hcana();
   
   void grabHistData(TString InSIMCHistname);
@@ -30,36 +30,11 @@ class recon_hcana
   vector <string> split(string str, char del=':');
   vector <float> num_split(string str);
   
-  void buildFileName(){
-
-    if (reaction == "heep"){
-      
-      TString kinematics = "10p6";
-      //TString kinematics = "8p2";
-      //TString kinematics = "6p2";
-      //TString kinematics = "4p9";
-      //TString kinematics = "3p8";
-      
-      InSIMCFilename = "../OUTPUTS/Heep_Coin_" + kinematics;
-      
-    }else{
-
-      string kinematics = "Q5p5W3p02_highe";
-      string phi_setting = "Right";
-      vector<string> kinematics_split;
-      stringstream kinematics_stream(kinematics);
-      string kinematics_part;
-      
-      while (getline(kinematics_stream, kinematics_part, '_')) {
-	kinematics_split.push_back(kinematics_part);
-      }
-
-      transform(phi_setting.begin(), phi_setting.end(), phi_setting.begin(), [](unsigned char c) { return std::tolower(c); });
-      
-      InSIMCFilename = "../OUTPUTS/Prod_Coin_" + kinematics_split[0] + phi_setting + "_" + kinematics_split[1];
-
-    }
-
+  void buildFileName(TString filename){
+        
+    //InSIMCFilename = "../worksim/" + filename + ".root";
+    InSIMCFilename = "../OUTPUTS/" + filename + ".root"; 
+    
   }
 
   void ReadTree();

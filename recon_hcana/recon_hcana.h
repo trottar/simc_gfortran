@@ -25,16 +25,7 @@ class recon_hcana
   void TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TVector3& pvect ); 
   
   //Utilities Functions for String Parsing
-  void tolower(TString& str){
-    for (int i = 0; i < str.Length(); i++) {
-      std::wcout << str[i];
-    }
-    std::wcout << std::endl;
-
-    cout << str << endl;
-    cout << str << endl;
-    cout << str << endl;
-  };
+  void tolower(TString& str);
   string getString(char x);
   vector <string> FindString(TString keyword, TString fname);
   vector <string> split(string str, char del=':');

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-03-21 19:03:39 trottar"
+ * Time-stamp: "2023-03-21 19:08:19 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -779,6 +779,18 @@ void recon_hcana::TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TV
 
 
 //----------------------------------UTILITIES FUNCTIONS--------------------------------------
+
+void recon_hcana::tolower(TString& str){
+  for (int i = 0; i < str.Length(); i++) {
+    std::wcout << str[i];
+  }
+  std::wcout << std::endl;
+
+  cout << str << endl;
+  cout << str << endl;
+  cout << str << endl;
+};
+
 
 vector <string> recon_hcana::FindString(TString keyword, TString fname){
 

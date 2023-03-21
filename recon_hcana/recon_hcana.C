@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-03-21 19:02:13 trottar"
+ * Time-stamp: "2023-03-21 19:03:39 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -67,9 +67,9 @@ recon_hcana::recon_hcana(TString filename, TString reaction) {
   
 }
 
-void recon_hcana::ReadTree(){
+void recon_hcana::ProductionReadTree(){
   
-  cout << "Calling ReadTree() . . . " << endl;
+  cout << "Calling ProductionReadTree() . . . " << endl;
 
   f = new TFile(InSIMCRootname,"UPDATE");
   if (!f || f->IsZombie()) {
@@ -182,9 +182,129 @@ void recon_hcana::ReadTree(){
   
   //newTree = tree->CloneTree();
   
-  cout << "Ending ReadTree() . . . " << endl;
+  cout << "Ending ProductionReadTree() . . . " << endl;
 
 }
+
+void recon_hcana::HeepReadTree(){
+  
+  cout << "Calling HeepReadTree() . . . " << endl;
+
+  f = new TFile(InSIMCRootname,"UPDATE");
+  if (!f || f->IsZombie()) {
+      cerr << "Error: failed to open file " << InSIMCRootname << endl;
+      return;
+   }
+  
+  tree = (TTree*)f->Get("h10");
+  if (!tree) {
+    cerr << "Error: failed to get tree h10 from file " << InSIMCRootname << endl;
+    f->Close();
+    return;
+   }
+
+  newTree = new TTree("h10", "A modified version of the original tree");
+  
+  //tree->GetListOfBranches()->Print();
+
+  nentries = tree->GetEntries();
+  
+  tree->SetBranchAddress("hsdelta", &hsdelta);
+  tree->SetBranchAddress("hsyptar", &hsyptar);
+  tree->SetBranchAddress("hsxptar", &hsxptar);
+  tree->SetBranchAddress("hsytar", &hsytar);
+  tree->SetBranchAddress("hsxfp", &hsxfp);
+  tree->SetBranchAddress("hsxpfp", &hsxpfp);
+  tree->SetBranchAddress("hsyfp", &hsyfp);
+  tree->SetBranchAddress("hsypfp", &hsypfp);
+  tree->SetBranchAddress("hsdeltai", &hsdeltai);
+  tree->SetBranchAddress("hsyptari", &hsyptari);
+  tree->SetBranchAddress("hsxptari", &hsxptari);
+  tree->SetBranchAddress("hsytari", &hsytari);
+  tree->SetBranchAddress("ssdelta", &ssdelta);
+  tree->SetBranchAddress("ssyptar", &ssyptar);
+  tree->SetBranchAddress("ssxptar", &ssxptar);
+  tree->SetBranchAddress("ssytar", &ssytar);
+  tree->SetBranchAddress("ssxfp", &ssxfp);
+  tree->SetBranchAddress("ssxpfp", &ssxpfp);
+  tree->SetBranchAddress("ssyfp", &ssyfp);
+  tree->SetBranchAddress("ssypfp", &ssypfp);
+  tree->SetBranchAddress("ssdeltai", &ssdeltai);
+  tree->SetBranchAddress("ssyptari", &ssyptari);
+  tree->SetBranchAddress("ssxptari", &ssxptari);
+  tree->SetBranchAddress("ssytari", &ssytari);
+  tree->SetBranchAddress("q", &q);
+  tree->SetBranchAddress("nu", &nu);
+  tree->SetBranchAddress("Q2", &Q2);
+  tree->SetBranchAddress("W", &W);
+  tree->SetBranchAddress("epsilon", &epsilon);
+  tree->SetBranchAddress("Em", &Em);
+  tree->SetBranchAddress("Pm", &Pm);
+  tree->SetBranchAddress("thetapq", &thetapq);
+  tree->SetBranchAddress("phipq", &phipq);
+  tree->SetBranchAddress("corrsing", &corrsing);
+  tree->SetBranchAddress("Pmx", &Pmx);
+  tree->SetBranchAddress("Pmy", &Pmy);
+  tree->SetBranchAddress("Pmz", &Pmz);
+  tree->SetBranchAddress("PmPar", &PmPar);
+  tree->SetBranchAddress("PmPer", &PmPer);
+  tree->SetBranchAddress("PmOop", &PmOop);
+  tree->SetBranchAddress("fry", &fry);
+  tree->SetBranchAddress("radphot", &radphot);
+  tree->SetBranchAddress("sigcc", &sigcc);
+  tree->SetBranchAddress("Weight", &Weight);  
+
+  newTree->Branch("hsdelta", &hsdelta, "hsdelta/F");
+  newTree->Branch("hsyptar", &hsyptar, "hsyptar/F");
+  newTree->Branch("hsxptar", &hsxptar, "hsxptar/F");
+  newTree->Branch("hsytar", &hsytar, "hsytar/F");
+  newTree->Branch("hsxfp", &hsxfp, "hsxfp/F");
+  newTree->Branch("hsxpfp", &hsxpfp, "hsxpfp/F");
+  newTree->Branch("hsyfp", &hsyfp, "hsyfp/F");
+  newTree->Branch("hsypfp", &hsypfp, "hsypfp/F");
+  newTree->Branch("hsdeltai", &hsdeltai, "hsdeltai/F");
+  newTree->Branch("hsyptari", &hsyptari, "hsyptari/F");
+  newTree->Branch("hsxptari", &hsxptari, "hsxptari/F");
+  newTree->Branch("hsytari", &hsytari, "hsytari/F");
+  newTree->Branch("ssdelta", &ssdelta, "ssdelta/F");
+  newTree->Branch("ssyptar", &ssyptar, "ssyptar/F");
+  newTree->Branch("ssxptar", &ssxptar, "ssxptar/F");
+  newTree->Branch("ssytar", &ssytar, "ssytar/F");
+  newTree->Branch("ssxfp", &ssxfp, "ssxfp/F");
+  newTree->Branch("ssxpfp", &ssxpfp, "ssxpfp/F");
+  newTree->Branch("ssyfp", &ssyfp, "ssyfp/F");
+  newTree->Branch("ssypfp", &ssypfp, "ssypfp/F");
+  newTree->Branch("ssdeltai", &ssdeltai, "ssdeltai/F");
+  newTree->Branch("ssyptari", &ssyptari, "ssyptari/F");
+  newTree->Branch("ssxptari", &ssxptari, "ssxptari/F");
+  newTree->Branch("ssytari", &ssytari, "ssytari/F");
+  newTree->Branch("q", &q, "q/F");
+  newTree->Branch("nu", &nu, "nu/F");
+  newTree->Branch("Q2", &Q2, "Q2/F");
+  newTree->Branch("W", &W, "W/F");
+  newTree->Branch("epsilon", &epsilon, "epsilon/F");
+  newTree->Branch("Em", &Em, "Em/F");
+  newTree->Branch("Pm", &Pm, "Pm/F");
+  newTree->Branch("thetapq", &thetapq, "thetapq/F");
+  newTree->Branch("phipq", &phipq, "phipq/F");
+  newTree->Branch("corrsing", &corrsing, "corrsing/F");
+  newTree->Branch("Pmx", &Pmx, "Pmx/F");
+  newTree->Branch("Pmy", &Pmy, "Pmy/F");
+  newTree->Branch("Pmz", &Pmz, "Pmz/F");
+  newTree->Branch("PmPar", &PmPar, "PmPar/F");
+  newTree->Branch("PmPer", &PmPer, "PmPer/F");
+  newTree->Branch("PmOop", &PmOop, "PmOop/F");
+  newTree->Branch("fry", &fry, "fry/F");
+  newTree->Branch("radphot", &radphot, "radphot/F");
+  newTree->Branch("sigcc", &sigcc, "sigcc/F");
+  newTree->Branch("Weight", &Weight, "Weight/F");
+  
+  //newTree = tree->CloneTree();
+  
+  cout << "Ending HeepReadTree() . . . " << endl;
+
+}
+
 
 void recon_hcana::ProductionEventLoop(){
 

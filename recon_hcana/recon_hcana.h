@@ -30,6 +30,10 @@ class recon_hcana
       std::wcout << str[i];
     }
     std::wcout << std::endl;
+
+    cout << str << endl;
+    cout << str << endl;
+    cout << str << endl;
   };
   string getString(char x);
   vector <string> FindString(TString keyword, TString fname);

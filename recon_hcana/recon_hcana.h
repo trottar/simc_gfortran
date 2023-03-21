@@ -14,7 +14,7 @@ class recon_hcana
  public:
 
   //Consructor / Destructor
-  recon_hcana(TString filename);
+  recon_hcana(TString reaction = "heep", TString filename);
   ~recon_hcana();
   
   void grabHistData(TString InSIMCHistname);
@@ -30,9 +30,9 @@ class recon_hcana
   vector <string> split(string str, char del=':');
   vector <float> num_split(string str);
   
-  void buildFileName(TString filename){
+  void buildFileName(TString reaction = "heep", TString filename){
         
-    //InSIMCFilename = "../worksim/" + filename + ".root";
+    //InSIMCFilename = "../worksim/" + filename;
     InSIMCFilename = "../OUTPUTS/" + filename; 
     
   }
@@ -101,8 +101,6 @@ class recon_hcana
 
   // Progress bar
   float progress=0.0;
-
-  TString reaction = "heep";
 
   //Primary Kinematics (electron kinematics) (USED BY DATA AND SIMC)
   Double_t theta_e;              //Central electron arm angle relative to +z (hall coord. system)

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-03-21 19:08:19 trottar"
+ * Time-stamp: "2023-03-21 19:09:01 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -20,7 +20,7 @@ using namespace std;
 
 recon_hcana::recon_hcana(TString filename, TString reaction) {
 
-  tolower(reaction);
+  //tolower(reaction);
   
   cout << reaction << endl;
   
@@ -785,10 +785,6 @@ void recon_hcana::tolower(TString& str){
     std::wcout << str[i];
   }
   std::wcout << std::endl;
-
-  cout << str << endl;
-  cout << str << endl;
-  cout << str << endl;
 };
 
 

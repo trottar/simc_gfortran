@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-03-21 18:40:58 trottar"
+ * Time-stamp: "2023-03-21 18:57:49 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -20,9 +20,8 @@ using namespace std;
 
 recon_hcana::recon_hcana(TString filename, TString reaction) {
 
-
-  reaction = reaction;
-
+  tolower(reaction);
+  
   cout << reaction << endl;
   
   buildFileName(filename);
@@ -33,7 +32,6 @@ recon_hcana::recon_hcana(TString filename, TString reaction) {
   cout << "InSIMCFilename: " << InSIMCFilename << endl;
   cout << "InSIMCHistname: " << InSIMCHistname << endl;
   cout << "InSIMCRootname: " << InSIMCRootname << endl;
-
 
   simc_nevents = stod(split(FindString("Ngen",InSIMCHistname)[0], '=')[1]);
   simc_normfactor = stod(split(FindString("normfac",InSIMCHistname)[0], '=')[1]);
@@ -50,9 +48,21 @@ recon_hcana::recon_hcana(TString filename, TString reaction) {
   cout << "e_th: " << e_th << endl;
   cout << "Pf: " << Pf0 << endl;
   cout << "h_th: " << h_th << endl;  
+
+  //-----If H(e,e'p)
+  if(reaction=="heep"){
+    
+    HeepReadTree();
+    HeepEventLoop();
+    
+    //-----If H(e,e'p)
+  }elif(reaction=="production"){
+    
+    ProductionReadTree();
+    ProductionEventLoop();
   
-  ReadTree();
-  EventLoop();
+  }
+  
   WriteHist();
   
 }
@@ -176,9 +186,9 @@ void recon_hcana::ReadTree(){
 
 }
 
-void recon_hcana::EventLoop(){
+void recon_hcana::ProductionEventLoop(){
 
-  cout << "Calling EventLoop() . . . " << endl;
+  cout << "Calling ProductionEventLoop() . . . " << endl;
   
   //Convert MeV to GeV
   Ein = Ein / 1000.;     //incident beam energy
@@ -368,7 +378,202 @@ void recon_hcana::EventLoop(){
     newTree->Fill();  
   }
   
-  cout << "Ending EventLoop() . . . " << endl;
+  cout << "Ending ProductionEventLoop() . . . " << endl;
+}
+
+void recon_hcana::HeepEventLoop(){
+
+  cout << "Calling HeepEventLoop() . . . " << endl;
+  
+  //Convert MeV to GeV
+  Ein = Ein / 1000.;     //incident beam energy
+  kf0 = kf0 / 1000.;       //final electron momentum
+  Pf0 = Pf0 / 1000.;       //final proton momentum
+
+  for (Int_t i=0;i<nentries;i++) {
+    
+    // Progress bar
+    if(i%1000==0) {	    
+      int barWidth = 25;
+      progress = ((float)i/(float)nentries);	    
+      // cout<<i<<"/"<<nentries<<endl;
+      // cout << progress << endl;
+      cout << "[";
+      float pos = barWidth * progress;
+      for (float i = 0.; i < barWidth; ++i) {
+	if (i < pos) cout << "=";
+	else if (i == pos) cout << ">";
+	else cout << " ";
+      }
+      cout << "] " << int(progress * 100.0) << " %\r";
+      cout.flush();
+    }	 
+
+    tree->GetEntry(i);
+
+    //--------Calculated Kinematic Varibales----------------
+
+    kf = kf0*(1.0+hsdelta/100); // Corrected final electron momentum 
+    Pf = Pf0*(1.0+ssdelta/100); // Corrected final proton momentum 
+    
+    ki = sqrt(Ein*Ein - me*me);        //initial electron momentum
+    
+    //redefine
+    Ep = sqrt(MP*MP + Pf*Pf);
+    En = sqrt(MN*MN + Pm*Pm);
+
+    // cout << "Em: " << Em << endl;
+    // cout << "Pm: " << Pm << endl;
+    // cout << "Ep: " << Ep << endl;
+    // cout << "En: " << En << endl;
+    
+    Kp = Ep - MP;
+    Kn = En - MN;
+
+    // cout << "Kp: " << Kp << endl;
+    // cout << "Kn: " << Kn << endl;
+    
+    //Em = nu - Kp - Kn;
+
+    // cout << "Em: " << Em << endl;
+    
+    // cout << "MM2: " << MM2 << endl;
+    
+    //W2 = W*W;
+
+    /*
+    //Use hcana formula to re-define HMS/SHMS Ztarget
+    htar_z = ((h_ytar + h_yMisPoint)-xBPM*(cos(h_th*dtr)-h_yptar*sin(h_th*dtr)))/(-sin(h_th*dtr)-h_yptar*cos(h_th*dtr));
+    etar_z = ((e_ytar - e_yMisPoint)-xBPM*(cos(e_th*dtr)-e_yptar*sin(e_th*dtr)))/(-sin(e_th*dtr)-e_yptar*cos(e_th*dtr));
+    
+    ztar_diff = htar_z - etar_z;
+	  
+    X = Q2 / (2.*MP*nu);                           
+    th_q = acos( (ki - kf*cos(theta_e))/q );       
+
+    //Define Dipole Exit
+    xdip_hms = h_xfp - 147.48*h_xpfp;
+    ydip_hms = h_yfp - 147.48*h_ypfp;
+	  
+    xdip_shms = e_xfp - 307.*e_xpfp;
+    ydip_shms = e_yfp - 307.*e_ypfp;
+    */
+    
+    //---------------------------------------------------
+
+    //---------Calculate Pmx, Pmy, Pmz in the Lab, and in the q-system----------------
+
+    //Calculate electron final momentum 3-vector
+    SetCentralAngles(e_th, e_ph);
+    TransportToLab(kf, hsxptar, hsyptar, kf_vec);
+
+    // cout << "kf_vec.X(): " << kf_vec.X() << endl;
+    // cout << "kf_vec.Y(): " << kf_vec.Y() << endl;
+    // cout << "kf_vec.Z(): " << kf_vec.Z() << endl;
+    
+    //Calculate 4-Vectors
+    fP0.SetXYZM(0.0, 0.0, ki, me);  //set initial e- 4-momentum
+    fP1.SetXYZM(kf_vec.X(), kf_vec.Y(), kf_vec.Z(), me);  //set final e- 4-momentum
+    fA.SetXYZM(0.0, 0.0, 0.0, tgt_mass );  //Set initial target at rest
+    fQ = fP0 - fP1;
+    
+    fScatAngle = fP0.Angle( fP1.Vect());    
+
+    fMp.SetXYZM(0.0, 0.0, 0.0, MP);
+
+    fMp1 = fMp + fQ;
+
+    // Redefine higher order variables
+    W2 = fMp1.M2();
+    if (W2>0)  W = TMath::Sqrt(W2);
+    q = fQ.P();
+    Q2 = -fQ.M2();
+    epsilon = 1.0 / ( 1.0 + 2.0*q*q/Q2*TMath::Power( TMath::Tan(fScatAngle/2.0), 2.0 ));
+    
+    fA1 = fA + fQ;   //final target (sum of final hadron four momenta)
+
+    //Get Detected Particle 4-momentum
+    SetCentralAngles(h_th, h_ph);
+    TransportToLab(Pf, ssxptar, ssyptar, Pf_vec);
+    
+    fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
+    fB = fA1 - fX;                 //4-MOMENTUM OF UNDETECTED PARTICLE 
+
+    Pmx_lab = fB.X();
+    Pmy_lab = fB.Y(); 
+    Pmz_lab = fB.Z();
+
+    nu = fQ.E();
+  
+    Em = nu + fA.M() - fX.E();   
+    
+    // cout << "Pmx_lab: " << Pmx_lab << endl;
+    // cout << "Pmy_lab: " << Pmy_lab << endl;
+    // cout << "Pmz_lab: " << Pmz_lab << endl;
+
+    //--------Rotate the recoil system from +z to +q-------
+    // Angles of X and B wrt q-vector 
+    // xq and bq are the 3-momentum vectors of X and B expressed in
+    // the coordinate system where q is the z-axis and the x-axis
+    // lies in the scattering plane (defined by q and e') and points
+    // in the direction of e', so the out-of-plane angle lies within
+    // -90<phi_xq<90deg if X is detected on the downstream/forward side of q
+    rot_to_q.SetZAxis( fQ.Vect(), fP1.Vect()).Invert();
+
+    xq = fX.Vect();
+    bq = fB.Vect();
+
+    xq *= rot_to_q;
+    bq *= rot_to_q;
+
+    //Calculate Angles of q relative to x(detected proton) and b(recoil neutron)
+    th_pq = xq.Theta();   //"theta_pq"                                       
+    ph_pq   = xq.Phi();   //"out-of-plane angle", "phi_pq"                                                                    
+    th_nq = bq.Theta();   // theta_nq                                                                                                     
+    ph_nq   = bq.Phi();   //phi_nq
+
+    thetapq = th_pq;
+    phipq = ph_pq;
+    
+    p_miss = -bq;
+
+    //Missing Momentum Components in the q-frame
+    Pm = p_miss.Mag(); //=fB.P()
+    
+    // Redefine variables
+    Pmx = p_miss.X();   //in-plane perpendicular component to +z
+    Pmy = p_miss.Y();   //out-of-plane component (Oop)
+    Pmz = p_miss.Z();   //parallel component to +z
+
+    //M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
+    M_recoil = fB.M(); //recoil mass (neutron missing mass)
+    MM2 = M_recoil * M_recoil;
+
+    //-----If H(e,e'p)
+    if(reaction=="heep"){
+      //M_recoil = sqrt(Em*Em - Pm*Pm);
+      M_recoil = fB.M(); //recoil mass (neutron missing mass)
+      MM2 = Em*Em - Pm*Pm;
+    }
+
+    /*
+    s = (*pQ+*pA).M2();
+    t = (*pQ-fX).M2();
+    u = (*pQ-fB).M2();
+    */
+    
+    
+    //----------
+    
+    // cout << "Pmx: " << Pmx << endl;
+    // cout << "Pmy: " << Pmy << endl;
+    // cout << "Pmz: " << Pmz << endl;
+    // cout << "Pm: " << Pm << endl;
+    
+    newTree->Fill();  
+  }
+  
+  cout << "Ending HeepEventLoop() . . . " << endl;
 }
 
 void recon_hcana::WriteHist(){

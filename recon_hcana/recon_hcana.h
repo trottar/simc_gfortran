@@ -25,6 +25,7 @@ class recon_hcana
   void TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TVector3& pvect ); 
   
   //Utilities Functions for String Parsing
+  void tolower(TString& str){ std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c){ return std::tolower(c); }) };
   string getString(char x);
   vector <string> FindString(TString keyword, TString fname);
   vector <string> split(string str, char del=':');
@@ -37,8 +38,12 @@ class recon_hcana
     
   }
 
-  void ReadTree();
-  void EventLoop();
+  void HeepReadTree();
+  void HeepEventLoop();
+
+  void ProductionReadTree();
+  void ProductionEventLoop();
+  
   void WriteHist();
 
   TFile *f;
@@ -92,7 +97,6 @@ class recon_hcana
   Float_t sigcc;
   Float_t Weight;
 
-  TString reaction;
   TString InSIMCFilename;
   TString InSIMCHistname;
   TString InSIMCRootname;

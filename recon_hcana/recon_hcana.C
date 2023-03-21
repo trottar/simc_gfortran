@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-03-21 19:26:41 trottar"
+ * Time-stamp: "2023-03-21 19:27:16 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -61,7 +61,7 @@ recon_hcana::recon_hcana(TString filename, TString reaction_str) {
   
   }else{
 
-    cerr << "ERROR: Invalid reaction of type " << reaction << "\n\tMust be heep or production" << endl;
+    cerr << "ERROR: Invalid reaction of type '" << reaction << "'\n\tMust be heep or production" << endl;
     exit(EXIT_FAILURE);
   }
   

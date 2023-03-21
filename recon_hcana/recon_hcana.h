@@ -19,13 +19,23 @@ class recon_hcana
   
   void grabHistData(TString InSIMCHistname);
 
+  void ReadReaction(TString str){
+
+    for (int i = 0; i < str.Length(); i++) {
+      std::wcout << str[i];
+    }
+    std::wcout << std::endl;
+
+    reaction = str;
+
+  }
+  
   //Auxiliary Function Prototypes (obtained from hcana) to calculate Pmx, Pmy, Pmz in the Lab/q-frame correctly
   void GeoToSph( Double_t  th_geo, Double_t  ph_geo, Double_t& th_sph, Double_t& ph_sph);
   void SetCentralAngles(Double_t th_cent, Double_t ph_cent);
   void TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TVector3& pvect ); 
   
   //Utilities Functions for String Parsing
-  TString tolower(TString& str);
   string getString(char x);
   vector <string> FindString(TString keyword, TString fname);
   vector <string> split(string str, char del=':');

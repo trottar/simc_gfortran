@@ -14,17 +14,16 @@ class recon_hcana
  public:
 
   //Consructor / Destructor
-  recon_hcana(TString filename, TString input_reaction = "heep");
+  recon_hcana(TString filename, TString reaction_str = "heep");
   ~recon_hcana();
   
   void grabHistData(TString InSIMCHistname);
 
-  void ReadReaction(TString str){
+  void ReadReaction(TString& str){
 
     for (int i = 0; i < str.Length(); i++) {
-      std::wcout << str[i];
+      str[i] = tolower(str[i]);
     }
-    std::wcout << std::endl;
 
     reaction = str;
 

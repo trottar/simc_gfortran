@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-03-21 19:18:28 trottar"
+ * Time-stamp: "2023-03-21 19:19:20 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -18,9 +18,9 @@
 
 using namespace std;
 
-recon_hcana::recon_hcana(TString filename, TString input_reaction) {
+recon_hcana::recon_hcana(TString filename, TString reaction_str) {
 
-  ReadReaction(input_reaction);
+  ReadReaction(reaction_str);
   
   buildFileName(filename);
 

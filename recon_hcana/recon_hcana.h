@@ -49,11 +49,10 @@ class recon_hcana
   }
 
   void HeepReadTree();
-  void HeepEventLoop();
 
   void ProductionReadTree();
-  void ProductionEventLoop();
-  
+
+  void EventLoop();  
   void WriteHist();
 
   TFile *f;
@@ -65,6 +64,8 @@ class recon_hcana
   Float_t mmnuc;
   Float_t phad;
   Float_t t;
+  Float_t u;
+  Float_t s;
   Float_t missmass;
   Float_t pmpar;
   Float_t pmper;

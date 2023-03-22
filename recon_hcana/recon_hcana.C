@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-03-21 19:55:55 trottar"
+ * Time-stamp: "2023-03-21 20:03:44 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -148,61 +148,61 @@ void recon_hcana::ProductionReadTree(){
   tree->SetBranchAddress("saghai", &saghai);
   tree->SetBranchAddress("factor", &factor);
   
-  newTree->SetBranchAddress("hsdelta", &hsdelta, "hsdelta/F");
-  newTree->SetBranchAddress("hsyptar", &hsyptar, "hsyptar/F");
-  newTree->SetBranchAddress("hsxptar", &hsxptar, "hsxptar/F");
-  newTree->SetBranchAddress("hsytar", &hsytar, "hsytar/F");
-  newTree->SetBranchAddress("hsxfp", &hsxfp, "hsxfp/F");
-  newTree->SetBranchAddress("hsxpfp", &hsxpfp, "hsxpfp/F");
-  newTree->SetBranchAddress("hsyfp", &hsyfp, "hsyfp/F");
-  newTree->SetBranchAddress("hsypfp", &hsypfp, "hsypfp/F");
-  newTree->SetBranchAddress("hsdeltai", &hsdeltai, "hsdeltai/F");
-  newTree->SetBranchAddress("hsyptari", &hsyptari, "hsyptari/F");
-  newTree->SetBranchAddress("hsxptari", &hsxptari, "hsxptari/F");
-  newTree->SetBranchAddress("hsytari", &hsytari, "hsytari/F");
-  newTree->SetBranchAddress("ssdelta", &ssdelta, "ssdelta/F");
-  newTree->SetBranchAddress("ssyptar", &ssyptar, "ssyptar/F");
-  newTree->SetBranchAddress("ssxptar", &ssxptar, "ssxptar/F");
-  newTree->SetBranchAddress("ssytar", &ssytar, "ssytar/F");
-  newTree->SetBranchAddress("ssxfp", &ssxfp, "ssxfp/F");
-  newTree->SetBranchAddress("ssxpfp", &ssxpfp, "ssxpfp/F");
-  newTree->SetBranchAddress("ssyfp", &ssyfp, "ssyfp/F");
-  newTree->SetBranchAddress("ssypfp", &ssypfp, "ssypfp/F");
-  newTree->SetBranchAddress("ssdeltai", &ssdeltai, "ssdeltai/F");
-  newTree->SetBranchAddress("ssyptari", &ssyptari, "ssyptari/F");
-  newTree->SetBranchAddress("ssxptari", &ssxptari, "ssxptari/F");
-  newTree->SetBranchAddress("ssytari", &ssytari, "ssytari/F");
-  newTree->SetBranchAddress("q", &q, "q/F");
-  newTree->SetBranchAddress("nu", &nu, "nu/F");
-  newTree->SetBranchAddress("Q2", &Q2, "Q2/F");
-  newTree->SetBranchAddress("W", &W, "W/F");
-  newTree->SetBranchAddress("epsilon", &epsilon, "epsilon/F");
-  newTree->SetBranchAddress("Em", &Em, "Em/F");
-  newTree->SetBranchAddress("Pm", &Pm, "Pm/F");
-  newTree->SetBranchAddress("thetapq", &thetapq, "thetapq/F");
-  newTree->SetBranchAddress("phipq", &phipq, "phipq/F");
-  newTree->SetBranchAddress("missmass", &missmass, "missmass/F");
-  newTree->SetBranchAddress("mmnuc", &mmnuc, "mmnuc/F");
-  newTree->SetBranchAddress("phad", &phad, "phad/F");
-  newTree->SetBranchAddress("t", &t, "t/F");
-  newTree->SetBranchAddress("pmpar", &pmpar, "pmpar/F");
-  newTree->SetBranchAddress("pmper", &pmper, "pmper/F");
-  newTree->SetBranchAddress("pmoop", &pmoop, "pmoop/F");
-  newTree->SetBranchAddress("fry", &fry, "fry/F");
-  newTree->SetBranchAddress("radphot", &radphot, "radphot/F");
-  newTree->SetBranchAddress("pfermi", &pfermi, "pfermi/F");
-  newTree->SetBranchAddress("siglab", &siglab, "siglab/F");
-  newTree->SetBranchAddress("sigcm", &sigcm, "sigcm/F");
-  newTree->SetBranchAddress("Weight", &Weight, "Weight/F");
-  newTree->SetBranchAddress("decdist", &decdist, "decdist/F");
-  newTree->SetBranchAddress("Mhadron", &Mhadron, "Mhadron/F");
-  newTree->SetBranchAddress("pdotqhat", &pdotqhat, "pdotqhat/F");
-  newTree->SetBranchAddress("Q2i", &Q2i, "Q2i/F");
-  newTree->SetBranchAddress("Wi", &Wi, "Wi/F");
-  newTree->SetBranchAddress("ti", &ti, "ti/F");
-  newTree->SetBranchAddress("phipqi", &phipqi, "phipqi/F");
-  newTree->SetBranchAddress("saghai", &saghai, "saghai/F");
-  newTree->SetBranchAddress("factor", &factor, "factor/F");
+  newTree->Branch("hsdelta", &hsdelta, "hsdelta/F");
+  newTree->Branch("hsyptar", &hsyptar, "hsyptar/F");
+  newTree->Branch("hsxptar", &hsxptar, "hsxptar/F");
+  newTree->Branch("hsytar", &hsytar, "hsytar/F");
+  newTree->Branch("hsxfp", &hsxfp, "hsxfp/F");
+  newTree->Branch("hsxpfp", &hsxpfp, "hsxpfp/F");
+  newTree->Branch("hsyfp", &hsyfp, "hsyfp/F");
+  newTree->Branch("hsypfp", &hsypfp, "hsypfp/F");
+  newTree->Branch("hsdeltai", &hsdeltai, "hsdeltai/F");
+  newTree->Branch("hsyptari", &hsyptari, "hsyptari/F");
+  newTree->Branch("hsxptari", &hsxptari, "hsxptari/F");
+  newTree->Branch("hsytari", &hsytari, "hsytari/F");
+  newTree->Branch("ssdelta", &ssdelta, "ssdelta/F");
+  newTree->Branch("ssyptar", &ssyptar, "ssyptar/F");
+  newTree->Branch("ssxptar", &ssxptar, "ssxptar/F");
+  newTree->Branch("ssytar", &ssytar, "ssytar/F");
+  newTree->Branch("ssxfp", &ssxfp, "ssxfp/F");
+  newTree->Branch("ssxpfp", &ssxpfp, "ssxpfp/F");
+  newTree->Branch("ssyfp", &ssyfp, "ssyfp/F");
+  newTree->Branch("ssypfp", &ssypfp, "ssypfp/F");
+  newTree->Branch("ssdeltai", &ssdeltai, "ssdeltai/F");
+  newTree->Branch("ssyptari", &ssyptari, "ssyptari/F");
+  newTree->Branch("ssxptari", &ssxptari, "ssxptari/F");
+  newTree->Branch("ssytari", &ssytari, "ssytari/F");
+  newTree->Branch("q", &q, "q/F");
+  newTree->Branch("nu", &nu, "nu/F");
+  newTree->Branch("Q2", &Q2, "Q2/F");
+  newTree->Branch("W", &W, "W/F");
+  newTree->Branch("epsilon", &epsilon, "epsilon/F");
+  newTree->Branch("Em", &Em, "Em/F");
+  newTree->Branch("Pm", &Pm, "Pm/F");
+  newTree->Branch("thetapq", &thetapq, "thetapq/F");
+  newTree->Branch("phipq", &phipq, "phipq/F");
+  newTree->Branch("missmass", &missmass, "missmass/F");
+  newTree->Branch("mmnuc", &mmnuc, "mmnuc/F");
+  newTree->Branch("phad", &phad, "phad/F");
+  newTree->Branch("t", &t, "t/F");
+  newTree->Branch("pmpar", &pmpar, "pmpar/F");
+  newTree->Branch("pmper", &pmper, "pmper/F");
+  newTree->Branch("pmoop", &pmoop, "pmoop/F");
+  newTree->Branch("fry", &fry, "fry/F");
+  newTree->Branch("radphot", &radphot, "radphot/F");
+  newTree->Branch("pfermi", &pfermi, "pfermi/F");
+  newTree->Branch("siglab", &siglab, "siglab/F");
+  newTree->Branch("sigcm", &sigcm, "sigcm/F");
+  newTree->Branch("Weight", &Weight, "Weight/F");
+  newTree->Branch("decdist", &decdist, "decdist/F");
+  newTree->Branch("Mhadron", &Mhadron, "Mhadron/F");
+  newTree->Branch("pdotqhat", &pdotqhat, "pdotqhat/F");
+  newTree->Branch("Q2i", &Q2i, "Q2i/F");
+  newTree->Branch("Wi", &Wi, "Wi/F");
+  newTree->Branch("ti", &ti, "ti/F");
+  newTree->Branch("phipqi", &phipqi, "phipqi/F");
+  newTree->Branch("saghai", &saghai, "saghai/F");
+  newTree->Branch("factor", &factor, "factor/F");
   
   //newTree = tree->CloneTree();
   

@@ -68,8 +68,6 @@ class recon_hcana
   Float_t pmpar;
   Float_t pmper;
   Float_t pmoop;
-  Float_t fry;
-  Float_t radphot;
   Float_t pfermi;
   Float_t siglab;
   Float_t sigcm;

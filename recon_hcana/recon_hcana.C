@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-04-19 13:21:56 trottar"
+ * Time-stamp: "2023-04-23 21:20:00 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -507,9 +507,9 @@ void recon_hcana::EventLoop(){
       MM2 = Em*Em - Pm*Pm;
     }
 
-    s = (*fQ+*fA).M2();
-    t = (*fQ-fX).M2();
-    u = (*fQ-fB).M2();
+    s = (fQ+fA).M2();
+    t = (fQ-fX).M2();
+    u = (fQ-fB).M2();
     
     
     //----------

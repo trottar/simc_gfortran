@@ -13,9 +13,10 @@ $1
 endofinput
 cd ../../
 rm worksim/$1.bin
+
 cd recon_hcana/
 if [[ $2 -eq "" ]]; then
     echo "No reaction provided, assuming heep" 
-    MAXEVENTS="heep"
+    REACTION="heep"
 fi
-root 'recon_hcana.C("$1", "$REACTION" )'
+root "recon_hcana.C(\"$1\", \"$REACTION\" )"

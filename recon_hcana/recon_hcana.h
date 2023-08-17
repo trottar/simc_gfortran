@@ -14,7 +14,8 @@ class recon_hcana
  public:
 
   //Consructor / Destructor
-  recon_hcana(TString filename, TString reaction_str = "heep");
+  //recon_hcana(TString filename, TString reaction_str = "heep");
+  recon_hcana(TString filename, TString reaction_str = "production");
   ~recon_hcana();
   
   void grabHistData(TString InSIMCHistname);

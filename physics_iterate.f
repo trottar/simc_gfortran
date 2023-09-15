@@ -92,9 +92,9 @@ c NOTE: phipq calculation in event.f reverted to original version.
 * p = -p_fermi, and any additional nucleons are at rest.
 * NOTE pfer, efer appear to be in MeV at this point.
 	efer = sqrt(pfer**2+targ%Mtar_struck**2)
-	if(doing_deutk.or.doing_hek) then
+	if(doing_deutkaon.or.doing_hekaon) then
 	  efer = targ%M-sqrt(mn**2+pfer**2)
-	  if(doing_hek)efer=efer-mp
+	  if(doing_hekaon)efer=efer-mp
 c	  mtar_offshell = sqrt(efer**2-pfer**2)
 	endif
 

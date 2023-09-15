@@ -336,8 +336,6 @@ c	write(6,*)' t ',t,t_old
 c	write(6,*)' s ',s,s_fer
 c	write(6,*)' thetacm ',thetacm*180./3.14159,thetacm_fer*180./3.14159
 c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.14159
-
-        print*,'________________________TEST!'
         
 *******************************************************************************
 * Read fit parameters when first called.
@@ -365,6 +363,8 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 
 	   end if		!first_call.
 
+        print*,'________________________TEST!'
+           
 * Models for sigL, sigT, sigLT, sigTT  for Deuterium.
 
 ***

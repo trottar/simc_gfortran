@@ -237,7 +237,8 @@ c OLD VERSION WHERE TARGET NUCLEON HAS FERMI MOMENTUM
 c     RLT (9/15/2023): Removed fermi motion variable thetacm??        
 c	ntup%thetacm_fer=thetacm_fer
 	phicm_fer = phicm
-	ntup%phicm_fer=phicm_fer
+c     RLT (9/15/2023): Removed fermi motion variable phicm??
+c	ntup%phicm_fer=phicm_fer
 
 *******************************************************************************
 c NEW VERSION WHERE TARGET NUCLEON IS AT REST (AS IN EXPERIMENTAL REPLAY)

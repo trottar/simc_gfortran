@@ -14,9 +14,7 @@ endofinput
 cd ../../
 rm worksim/$1.bin
 
-cd recon_hcana/
-if [[ $2 -eq "" ]]; then
-    echo "No reaction provided, assuming heep" 
-    REACTION="heep"
-fi
+REACTION=$2
+echo "Reaction selected: $2" 
+cd recon_hcana/    
 root "recon_hcana.C(\"$1\", \"$REACTION\" )"

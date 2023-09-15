@@ -113,7 +113,8 @@ c	  mtar_offshell = sqrt(efer**2-pfer**2)
 	epsi = 1./(1.+2*(1.+vertex%nu**2/vertex%Q2)*tan(vertex%e%theta/2.)**2)
 
 	s_fer = (vertex%nu+efer)**2-(vertex%q+pfer*tfcos)**2-(pfer*tfsin)**2
-	ntup%W_fer=sqrt(s_fer)/1.d3
+c     RLT (9/15/2023): Removed fermi motion variable W??
+c	ntup%W_fer=sqrt(s_fer)/1.d3 
 
 c GH:
 c calculate with target nucleon at rest (as in experimental replay)
@@ -122,7 +123,8 @@ c calculate with target nucleon at rest (as in experimental replay)
 	s_gev = s/1.d6
 
 	t_old = vertex%Q2-Mh2+2.*vertex%nu*vertex%p%E-2.*vertex%p%P*vertex%q*tcos
-	ntup%t_old=t_old/1.d6
+c     RLT (9/15/2023): Removed t_old since not defined (or used) elsewhere        
+c	ntup%t_old=t_old/1.d6
 
 c GH:
 c calculate t the same way as in experimental replay
@@ -232,7 +234,8 @@ c OLD VERSION WHERE TARGET NUCLEON HAS FERMI MOMENTUM
 	if(phicm.lt.0.) phicm = 2.*3.141592654+phicm
 
 	thetacm_fer = thetacm
-	ntup%thetacm_fer=thetacm_fer
+c     RLT (9/15/2023): Removed fermi motion variable thetacm??        
+c	ntup%thetacm_fer=thetacm_fer
 	phicm_fer = phicm
 	ntup%phicm_fer=phicm_fer
 
@@ -404,7 +407,9 @@ C--->Debug
 
 	  sig=sig/2./pi/1.d+06   !dsig/dtdphicm in microbarns/MeV**2/rad
 
-	  ntup%dsigdt = sig
+c     RLT (9/15/2023): Removed dsigdt because it is not defined in SIMC
+c                      and not used anywhere else in this script          
+c	  ntup%dsigdt = sig
 
 C--->Debug
 c	  write(*,*) 'sig =',sig

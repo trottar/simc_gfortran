@@ -79,8 +79,6 @@ c       Fit parameters.
 
 	data first_call/.true./
 *=====================================================================
-
-        print*,'Running physics_iterate.f for kaon...'
         
 * Initialize some stuff.
 	Q2_g = vertex%Q2/1.d6
@@ -362,8 +360,6 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 	      end do
 
 	   end if		!first_call.
-
-        print*,'________________________TEST!'
            
 * Models for sigL, sigT, sigLT, sigTT  for Deuterium.
 
@@ -491,9 +487,6 @@ c	write(6,*)'   ',sigl,sigt,siglt,sigtt,wfactor
 202	format(/11X,f5.1/)
 203	format(11X,f5.0)
 204	format(6(/9X,7f8.3))
-
-        
-        print*,'Script physics_iterate.f complete!'
         
 	return
 	end

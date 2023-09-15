@@ -80,6 +80,8 @@ c       Fit parameters.
 	data first_call/.true./
 *=====================================================================
 
+        print*,'Running physics_iterate.f for kaon...'
+        
 * Initialize some stuff.
 	Q2_g = vertex%Q2/1.d6
 c NOTE: phipq calculation in event.f reverted to original version.

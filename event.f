@@ -1916,12 +1916,9 @@ C If using Coulomb corrections, include focusing factor
 ! Apply survival probability to kaons if we're not modeling decay.
 
 	main%weight = main%SF_weight*main%jacobian*main%gen_weight*main%sigcc
-	main%weight = main%weight * tgtweight !correct for #/nucleons involved
-c       RLT (9/15/2023): Kaon decay not defined yet, so removing for now
+	main%weight = main%weight * tgtweight	!correct for #/nucleons involved
 	if ((doing_kaon.or.doing_semika) .and. .not.doing_decay)
-     >		main%weight = main%weight
-c	if ((doing_kaon.or.doing_semika) .and. .not.doing_decay)
-c     >		main%weight = main%weight*survivalprob
+     >		main%weight = main%weight*survivalprob
 	if (debug(5))write(6,*) 'gen_weight = ',main%gen_weight,
      >		main%jacobian,main%sigcc
 

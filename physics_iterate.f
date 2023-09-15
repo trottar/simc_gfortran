@@ -337,6 +337,8 @@ c	write(6,*)' s ',s,s_fer
 c	write(6,*)' thetacm ',thetacm*180./3.14159,thetacm_fer*180./3.14159
 c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.14159
 
+        print*,'________________________TEST!'
+        
 *******************************************************************************
 * Read fit parameters when first called.
 
@@ -490,7 +492,7 @@ c	write(6,*)'   ',sigl,sigt,siglt,sigtt,wfactor
 203	format(11X,f5.0)
 204	format(6(/9X,7f8.3))
 
-
+        
         print*,'Script physics_iterate.f complete!'
         
 	return

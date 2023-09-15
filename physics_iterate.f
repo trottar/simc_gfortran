@@ -338,7 +338,7 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 
 	      first_call=.false.
 
-	      if(doing_kplus) then
+	      if(doing_kaon) then
 		 open(88,file='par.pl',status='old')
 	      else
 		 open(88,file='par.mn',status='old')
@@ -350,7 +350,7 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 	      end do
  99	      close(88)
 
-	      print*,doing_kplus
+	      print*,doing_kaon
 	      do ipar=1,npar
 		 print*,fitpar(ipar),ipar
 	      end do
@@ -462,7 +462,7 @@ c	write(6,*)' jac ',davejac_fer,jacobian
 * DJG: Replace targ.Mtar_kaon in denominator of gammaflux with more general
 * DJG: efer-pfer*tfcos, for pfer =0 this reverts to old form
 
-	gtpr = alpha/2./(k**2)*vertex%e%E/vertex%Ein*(s_gev-mtar_gev**2)/2./
+	gtpr = alpha/2./(pi**2)*vertex%e%E/vertex%Ein*(s_gev-mtar_gev**2)/2./
      >		(targ%Mtar_struck)/Q2_g/(1.-epsi)
 
 	davesig = gtpr*sig*jacobian

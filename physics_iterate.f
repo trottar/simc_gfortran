@@ -490,5 +490,8 @@ c	write(6,*)'   ',sigl,sigt,siglt,sigtt,wfactor
 203	format(11X,f5.0)
 204	format(6(/9X,7f8.3))
 
+
+        print*,'Script physics_iterate.f complete!'
+        
 	return
 	end

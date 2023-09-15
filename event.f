@@ -1857,7 +1857,10 @@ c     >                     + 0.6*main%sigcc !(pi- Delta+)/(pi- p)
 	  endif
 
 	elseif (doing_kaon) then
-	  main%sigcc = peeK(vertex,main,survivalprob)
+c       RLT (9/15/2023): This has 3 arguments (for physics_kaon)
+c                        but physics_iterate takes 2
+c       main%sigcc = peeK(vertex,main,survivalprob)
+	  main%sigcc = peeK(vertex,main)
 	  main%sigcc_recon = 1.0
 	  if (which_kaon.eq.2 .or. which_kaon.eq.12) then  !OK for coherent???
 	    tgtweight = targ%N

@@ -341,7 +341,6 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 	   if(first_call) then
 
 	      first_call=.false.
-
 	      if(doing_kaon) then
 		 open(88,file='par.pl',status='old')
 	      else
@@ -356,6 +355,7 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 
 	      print*,doing_kaon
 	      do ipar=1,npar
+                 print*,'Initial parameterization...'
 		 print*,fitpar(ipar),ipar
 	      end do
 
@@ -364,7 +364,8 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 * Models for sigL, sigT, sigLT, sigTT  for Deuterium.
 
 ***
-* Parameterization revised for IT26, 12.11.09
+*       Parameterization revised for IT26, 12.11.09
+*       q2_set is dynamically changed with the set_ProdInput.sh script
 	   q2_set=2.45
 	   tav=(0.0735+0.028*log(q2_set))*q2_set
 	   ftav=(abs(t_gev)-tav)/tav

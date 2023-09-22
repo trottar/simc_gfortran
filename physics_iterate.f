@@ -477,9 +477,7 @@ c	write(6,*)' jac ',davejac_fer,jacobian
 	davesig = gtpr*sig*jacobian
 *******************************************************************************
 
-*	sigma_eek = davesig
-*       RLT (9/22/2023): testing without gamma
-	sigma_eek = sig
+	sigma_eek = davesig
 	peek = sigma_eek
 
 	ntup%sigcm = sigma_eek		!sig_cm

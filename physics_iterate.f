@@ -385,8 +385,7 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 ***	   
 *       tav=(0.0735+0.028*log(q2_set))*q2_set
 *       RLT (10/8/2023): Testing new tav parameterization
-*       tav=(0.1111855252497975 + 0.0066298940069152235*log(q2_set))*q2_set
-	   tav=(-0.178+0.315*log(Q2_g))*Q2_g
+	   tav=(0.1111855252497975 + 0.0066298940069152235*log(q2_set))*q2_set
 	   ftav=(abs(t_gev)-tav)/tav
 *       ft=t_gev/(abs(t_gev)+mkpl**2)**2
 *       RLT (9/21/2023): t_gev should be abs(t_gev)

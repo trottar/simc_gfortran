@@ -391,12 +391,8 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 *       RLT (9/21/2023): t_gev should be abs(t_gev)
 	   ft=abs(t_gev)/(abs(t_gev)+mkpl**2)**2
 
-*	   sigl=(fitpar(1)+fitpar(2)*log(Q2_g))
-*       1           *exp((fitpar(3)+fitpar(4)*log(Q2_g))*(abs(t_gev)-0.2))
-*       RLT (10/12/2023): Removed 0.2 to keep things as simple as possible for
-*                         initial start parameterization
 	   sigl=(fitpar(1)+fitpar(2)*log(Q2_g))
-     1           *exp((fitpar(3)+fitpar(4)*log(Q2_g))*(abs(t_gev)))
+     1           *exp((fitpar(3)+fitpar(4)*log(Q2_g))*(abs(t_gev)-0.2))
 	   sigt=fitpar(5)+fitpar(6)*log(Q2_g)
      1           +(fitpar(7)+fitpar(8)*log(Q2_g))*ftav
 

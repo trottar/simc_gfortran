@@ -30,7 +30,6 @@ c output filename
       treefilename='../../worksim/'//rawname(1:i-1)//'.root'
       
       read(io) NtupleSize
-      print *, "NtupleSize", NtupleSize
       call InitRootNT(treefilename,'RECREATE');
 
       write(6,*) 'Variables in output file:'

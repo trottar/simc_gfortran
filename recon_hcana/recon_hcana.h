@@ -116,6 +116,7 @@ class recon_hcana
   Float_t Em;
   Float_t Pm;
   Float_t thetapq;
+  Float_t thetacm;
   Float_t phipq;
   Float_t corrsing;
   Float_t Pmx;

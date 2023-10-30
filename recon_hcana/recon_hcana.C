@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-04-23 21:20:00 trottar"
+ * Time-stamp: "2023-10-30 09:52:51 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -127,6 +127,7 @@ void recon_hcana::ProductionReadTree(){
   tree->SetBranchAddress("Em", &Em);
   tree->SetBranchAddress("Pm", &Pm);
   tree->SetBranchAddress("thetapq", &thetapq);
+  tree->SetBranchAddress("thetacm", &thetacm);
   tree->SetBranchAddress("phipq", &phipq);
   tree->SetBranchAddress("missmass", &missmass);
   tree->SetBranchAddress("mmnuc", &mmnuc);
@@ -183,6 +184,7 @@ void recon_hcana::ProductionReadTree(){
   newTree->Branch("Em", &Em, "Em/F");
   newTree->Branch("Pm", &Pm, "Pm/F");
   newTree->Branch("thetapq", &thetapq, "thetapq/F");
+  newTree->Branch("thetacm", &thetacm, "thetacm/F");
   newTree->Branch("phipq", &phipq, "phipq/F");
   newTree->Branch("missmass", &missmass, "missmass/F");
   newTree->Branch("mmnuc", &mmnuc, "mmnuc/F");
@@ -268,6 +270,7 @@ void recon_hcana::HeepReadTree(){
   tree->SetBranchAddress("Em", &Em);
   tree->SetBranchAddress("Pm", &Pm);
   tree->SetBranchAddress("thetapq", &thetapq);
+  tree->SetBranchAddress("thetacm", &thetacm);
   tree->SetBranchAddress("phipq", &phipq);
   tree->SetBranchAddress("corrsing", &corrsing);
   tree->SetBranchAddress("Pmx", &Pmx);
@@ -313,6 +316,7 @@ void recon_hcana::HeepReadTree(){
   newTree->Branch("Em", &Em, "Em/F");
   newTree->Branch("Pm", &Pm, "Pm/F");
   newTree->Branch("thetapq", &thetapq, "thetapq/F");
+  newTree->Branch("thetacm", &thetacm, "thetacm/F");
   newTree->Branch("phipq", &phipq, "phipq/F");
   newTree->Branch("corrsing", &corrsing, "corrsing/F");
   newTree->Branch("Pmx", &Pmx, "Pmx/F");

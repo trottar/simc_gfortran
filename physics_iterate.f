@@ -435,6 +435,9 @@ C--->Debug
 
 	  sig=sig/2./pi/1.d+06   !dsig/dtdphicm in microbarns/MeV**2/rad
 
+c       RLT (10/30/2023): Testing this sig with the flux corrected one below
+	  ntup%sigcm = sig
+	  
 c     RLT (9/15/2023): Removed dsigdt because it is not defined in SIMC
 c                      and not used anywhere else in this script          
 c	  ntup%dsigdt = sig
@@ -504,7 +507,7 @@ c	write(6,*)' jac ',davejac_fer,jacobian
 	sigma_eek = davesig
 	peek = sigma_eek
 
-	ntup%sigcm = sigma_eek		!sig_cm
+c	ntup%sigcm = sigma_eek		!sig_cm
 
 c	write(6,*)' 1 ',jacobian,thetacm,phicm,pkcm
 c	write(6,*)'   ',efer,pfer

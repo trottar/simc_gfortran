@@ -113,6 +113,7 @@ class recon_hcana
   Float_t Q2;
   Float_t W;
   Float_t epsilon;
+  Float_t epscm;
   Float_t Em;
   Float_t Pm;
   Float_t thetapq;

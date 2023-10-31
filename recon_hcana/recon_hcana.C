@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-10-30 09:52:51 trottar"
+ * Time-stamp: "2023-10-31 14:14:02 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -124,6 +124,7 @@ void recon_hcana::ProductionReadTree(){
   tree->SetBranchAddress("Q2", &Q2);
   tree->SetBranchAddress("W", &W);
   tree->SetBranchAddress("epsilon", &epsilon);
+  tree->SetBranchAddress("epscm", &epscm);
   tree->SetBranchAddress("Em", &Em);
   tree->SetBranchAddress("Pm", &Pm);
   tree->SetBranchAddress("thetapq", &thetapq);
@@ -181,6 +182,7 @@ void recon_hcana::ProductionReadTree(){
   newTree->Branch("Q2", &Q2, "Q2/F");
   newTree->Branch("W", &W, "W/F");
   newTree->Branch("epsilon", &epsilon, "epsilon/F");
+  newTree->Branch("epscm", &epscm, "epscm/F");
   newTree->Branch("Em", &Em, "Em/F");
   newTree->Branch("Pm", &Pm, "Pm/F");
   newTree->Branch("thetapq", &thetapq, "thetapq/F");
@@ -267,6 +269,7 @@ void recon_hcana::HeepReadTree(){
   tree->SetBranchAddress("Q2", &Q2);
   tree->SetBranchAddress("W", &W);
   tree->SetBranchAddress("epsilon", &epsilon);
+  tree->SetBranchAddress("epscm", &epscm);
   tree->SetBranchAddress("Em", &Em);
   tree->SetBranchAddress("Pm", &Pm);
   tree->SetBranchAddress("thetapq", &thetapq);
@@ -313,6 +316,7 @@ void recon_hcana::HeepReadTree(){
   newTree->Branch("Q2", &Q2, "Q2/F");
   newTree->Branch("W", &W, "W/F");
   newTree->Branch("epsilon", &epsilon, "epsilon/F");
+  newTree->Branch("epscm", &epscm, "epscm/F");
   newTree->Branch("Em", &Em, "Em/F");
   newTree->Branch("Pm", &Pm, "Pm/F");
   newTree->Branch("thetapq", &thetapq, "thetapq/F");

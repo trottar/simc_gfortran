@@ -161,7 +161,9 @@ c	endif
 	    m = m+1
 	    NtupleTag(m) = 'factor'     ! 55
 	    m = m+1
-	    NtupleTag(m) = 'thetacm'	! 56
+	    NtupleTag(m) = 'thetacm' ! 56
+	    m = m+1	    
+	    NtupleTag(m) = 'epscm' ! 57
 	  endif
 	else if (doing_semi.or.doing_rho) then
 	  m = m+1

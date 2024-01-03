@@ -75,7 +75,9 @@ c Variables calculated in transformation to gamma-NUCLEON center of mass.
 *=====================================================================
 c       Fit parameters.
 	integer npar,ipar
-	parameter (npar=12)	!number of fit parameters for H, k+ and D, k-
+*       RLT (1/2/2023): Need to have 16 parameters (4 for L/T/LT/TT) for
+*                       the xfit_in_t.py script to work. LT/TT are zeros	
+	parameter (npar=16)	!number of fit parameters for H, k+ and D, k-
 	real*8 fitpar(npar),par,par_er
 	save fitpar
 	logical first_call
@@ -402,7 +404,10 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 
 	   siglt=(fitpar(9)*exp(fitpar(10)*abs(t_gev))
      1           +fitpar(11)/abs(t_gev))*sin(thetacm)
-	   sigtt=(fitpar(12)*Q2_g*exp(-Q2_g))*ft*sin(thetacm)**2
+*       RLT (1/2/2023): Need to have 16 parameters (4 for L/T/LT/TT) for
+*                       the xfit_in_t.py script to work. LT/TT are zeros
+*                       Therefore param 12 was also changed to 13      	   
+	   sigtt=(fitpar(13)*Q2_g*exp(-Q2_g))*ft*sin(thetacm)**2
 
 *       RLT (9/25/2023): There are two tav parameterizations in here.
 *                        I am only using the one above, for now.	   

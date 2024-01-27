@@ -58,7 +58,8 @@ c	real*8 pbeamcmx,pbeamcmy,pbeamcmz,ebeamcm,pbeamcm
 
 	real*8 dEcmdcos,dEcmdphi,dcoscmdcos,dcoscmdphi
 c	real*8 tmp
-	real*8 q2_set,tav,ftav,ft
+	real*8 q2_set,w_set
+	real*8 tav,ftav,ft
 
 	logical first
 
@@ -373,6 +374,7 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 *       Parameterization revised for IT26, 12.11.09
 *       q2_set is dynamically changed with the set_ProdInput.sh script
 	   q2_set=2.45
+	   w_set=2.45
 ***
 *       RLT (9/25/2023):
 *       tav is meant to be a simple equation to give roughly

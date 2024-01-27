@@ -372,7 +372,7 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 
 ***
 *       Parameterization revised for IT26, 12.11.09
-*       q2_set is dynamically changed with the set_ProdInput.sh script
+*       q2_set/w_set are dynamically changed with the set_ProdInput.sh script
 	   q2_set=2.45
 	   w_set=2.45
 ***

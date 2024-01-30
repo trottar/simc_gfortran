@@ -5,9 +5,10 @@
 * frame, calculates some of the kinematical variables (s,t, and CM quantities
 * in the 'main' structure), and returns the kaon cross section.
 *
-* RLT: (9/15/2023) Updated for kaon cross section
+*       RLT: (9/15/2023) Updated for kaon cross section
+*       RLT (1/30/2024): Updated comments of units (GeV**2 to MeV**2)
 *   output:
-*	peek		!d5sigma/dEe'dOmegae'Omegak	(microbarn/MeV/sr^2)
+*	peek		!d5sigma/dEe'dOmegae'Omegak	(microbarn/GeV/sr^2)
 
 	implicit none
 	include 'simulate.inc'
@@ -440,7 +441,9 @@ c 	  write(*,*) 'sigTT =',sigTT
 c 	  write(*,*) '-----------------------------------------------------'
 C--->Debug
 
-	  sig=sig/2./pi/1.d+06   !dsig/dtdphicm in microbarns/MeV**2/rad
+*       RLT (1/30/2024): Removed 1.d+06 because
+*                        units are GeV**2 not MeV**2	  
+	  sig=sig/2./pi   !dsig/dtdphicm in microbarns/GeV**2/rad
 
 c       RLT (10/30/2023): Testing this sig with the flux corrected one below
 	  ntup%sigcm = sig
@@ -455,10 +458,10 @@ c	  write(*,*) '====================================================='
 C--->Debug
 
 *******************************************************************************
-* sigma_eek is two-fold C.M. cross section: d2sigma/dt/dphi_cm [ub/MeV**2/rad]
+* sigma_eek is two-fold C.M. cross section: d2sigma/dt/dphi_cm [ub/GeV**2/rad]
 * Convert from dt dphi_cm --> dOmega_lab using 'jacobian' [ub/sr]
-* Convert to 5-fold by multiplying by flux factor, gtpr [1/MeV]
-* to give d5sigma/dOmega_k/dOmega_e/dE_e [ub/Mev/sr].
+* Convert to 5-fold by multiplying by flux factor, gtpr [1/GeV]
+* to give d5sigma/dOmega_k/dOmega_e/dE_e [ub/Gev/sr].
 *******************************************************************************
 *******************************************************************************
 c NEW VERSION WHERE TARGET NUCLEON IS AT REST (AS IN EXPERIMENTAL REPLAY)

@@ -270,6 +270,8 @@ class recon_hcana
   Double_t MD = 1.87561;      //deuteron mass
   Double_t MN = 0.939566;     //neutron mass
   Double_t me = 0.00051099;   //electron mass
+  Double_t mk = 0.493677;
+  Double_t mpi = 0.139570;
   Double_t MAL = 25.131710;   //aluminum mass
   Double_t tgt_mass = MP;  // Manually set target mass to proton for LH2
 

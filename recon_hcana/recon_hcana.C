@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2023-11-03 09:39:56 trottar"
+ * Time-stamp: "2024-02-06 11:34:58 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -503,16 +503,29 @@ void recon_hcana::EventLoop(){
     Pmx = p_miss.X();   //in-plane perpendicular component to +z
     Pmy = p_miss.Y();   //out-of-plane component (Oop)
     Pmz = p_miss.Z();   //parallel component to +z
-
-    //M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
-    M_recoil = fB.M(); //recoil mass (neutron missing mass)
-    MM2 = M_recoil * M_recoil;
-
+    
     //-----If H(e,e'p)
     if(reaction=="heep"){
       //M_recoil = sqrt(Em*Em - Pm*Pm);
       M_recoil = fB.M(); //recoil mass (neutron missing mass)
       MM2 = Em*Em - Pm*Pm;
+    }else{
+
+      //M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
+      M_recoil = fB.M(); //recoil mass (neutron missing mass)   
+
+      MMpi = sqrt(abs((pow(Em+(sqrt((MP*MP)+(pow((Pf_vec.Mag()), 2))))-(sqrt((MPi*MPi)+(pow((Pf_vec.Mag()), 2)))), 2)-(Pm*Pm))));
+      MMK = sqrt(abs((pow(Em+(sqrt((MP*MP)+(pow((Pf_vec.Mag()), 2))))-(sqrt((fMass_K*fMass_K)+(pow((Pf_vec.Mag()), 2)))), 2)-(Pm*Pm))));
+      MMp = sqrt(abs((Em*Em)-(Pm*Pm)));
+
+      // Pion missing mass
+      //missmass = MMpi;
+      // Kaon missing mass
+      missmass = MMK;
+      // Proton missing mass
+      //missmass = MMp;
+
+      MM2 = missmass * missmass;
     }
 
     s = (fQ+fA).M2();

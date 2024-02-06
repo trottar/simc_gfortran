@@ -161,6 +161,9 @@ class recon_hcana
   Double_t Kp;                    //Kinetic Energy of detected particle (proton)
   Double_t Kn;                    //Kinetic Energy of recoil system (neutron)
   Double_t M_recoil;              //Missing Mass (neutron Mass)
+  Double_t MMpi;                   //Pion Missing Mass
+  Double_t MMK;                   //Kaon Missing Mass
+  Double_t MMp;                   //Proton Missing Mass
   Double_t MM2;                   //Missing Mass Squared
   Double_t E_recoil;              //Recoil Energy of the system (neutron total energy)
   Double_t En;                    //Same as above

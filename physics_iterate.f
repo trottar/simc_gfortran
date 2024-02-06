@@ -441,10 +441,8 @@ c 	  write(*,*) 'sigTT =',sigTT
 c 	  write(*,*) '-----------------------------------------------------'
 C--->Debug
 
-*       RLT (1/30/2024): Removed 1.d+06 because
-*                        units are GeV**2 not MeV**2
-       sig=sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV**2/rad	  
-*	  sig=sig/2./pi   !dsig/dtdphicm in microbarns/GeV**2/rad
+*       RLT (2/6/2024): Removed 2./pi/1.d+06, because not needed. Already converted
+*       sig=sig/2./pi/1.d+06      !dsig/dtdphicm in microbarns/MeV**2/rad
 
 c       RLT (10/30/2023): Testing this sig with the flux corrected one below
 	  ntup%sigcm = sig

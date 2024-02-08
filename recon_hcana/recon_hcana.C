@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-06 12:11:31 trottar"
+ * Time-stamp: "2024-02-08 14:12:26 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -514,6 +514,7 @@ void recon_hcana::EventLoop(){
       //M_recoil = sqrt( pow(nu+MD-Ep,2) - Pm*Pm );  //recoil mass (neutron missing mass)
       M_recoil = fB.M(); //recoil mass (neutron missing mass)   
 
+      // Assumes LH2, will need different equations for LD2 (see hcana/src/THcSecondaryKin.cxx for calculations)
       MMpi = sqrt(abs((pow(Em+(sqrt((MP*MP)+(pow((Pf_vec.Mag()), 2))))-(sqrt((mpi*mpi)+(pow((Pf_vec.Mag()), 2)))), 2)-(Pm*Pm))));
       MMK = sqrt(abs((pow(Em+(sqrt((MP*MP)+(pow((Pf_vec.Mag()), 2))))-(sqrt((mk*mk)+(pow((Pf_vec.Mag()), 2)))), 2)-(Pm*Pm))));
       MMp = sqrt(abs((Em*Em)-(Pm*Pm)));

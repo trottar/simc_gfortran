@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-12 23:14:36 trottar"
+ * Time-stamp: "2024-02-12 23:18:52 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -540,7 +540,7 @@ void recon_hcana::EventLoop(){
     /**********************
      **** SHMS AEROGEL ****
      **********************/
-    paero_z_det = 231.0 // (cm), see PARAM/SHMS/AERO/KaonLT_PARAM/paero_geom.param
+    paero_z_det = 231.0; // (cm), see PARAM/SHMS/AERO/KaonLT_PARAM/paero_geom.param
     paero_x_det = ssxfp + paero_z_det*ssxpfp;
     paero_y_det = ssyfp + paero_z_det*ssypfp;
 
@@ -559,7 +559,7 @@ void recon_hcana::EventLoop(){
     /**********************
      **** SHMS HGCer ****
      **********************/
-    phgcer_z_det = 156.27 // (cm), see PARAM/SHMS/HGCER/KaonLT_PARAM/phgcer_geom.param
+    phgcer_z_det = 156.27; // (cm), see PARAM/SHMS/HGCER/KaonLT_PARAM/phgcer_geom.param
     phgcer_x_det = ssxfp + phgcer_z_det*ssxpfp;
     phgcer_y_det = ssyfp + phgcer_z_det*ssypfp;
 

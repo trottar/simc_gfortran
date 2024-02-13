@@ -287,6 +287,10 @@ class recon_hcana
   Double_t e_yMisPoint;
   Double_t h_xMisPoint;
   Double_t h_yMisPoint;
+  
+  //Central Spec. Momenta
+  Double_t e_Pcen;
+  Double_t h_Pcen;
 
   // Variable for geometric cuts
   Double_t paero_z_det;
@@ -295,10 +299,6 @@ class recon_hcana
   Double_t phgcer_z_det;
   Double_t phgcer_x_det;
   Double_t phgcer_y_det;
-  
-  //Central Spec. Momenta
-  Double_t e_Pcen;
-  Double_t h_Pcen;
   
 };
 

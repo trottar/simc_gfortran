@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-13 00:02:24 trottar"
+ * Time-stamp: "2024-02-13 00:05:29 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -211,6 +211,12 @@ void recon_hcana::ProductionReadTree(){
   newTree->Branch("phipqi", &phipqi, "phipqi/F");
   newTree->Branch("saghai", &saghai, "saghai/F");
   newTree->Branch("factor", &factor, "factor/F");
+  newTree->Branch("paero_z_det", &paero_z_det, "paero_z_det/F");
+  newTree->Branch("paero_x_det", &paero_x_det, "paero_x_det/F");
+  newTree->Branch("paero_y_det", &paero_y_det, "paero_y_det/F");  
+  newTree->Branch("phgcer_z_det", &phgcer_z_det, "phgcer_z_det/F");
+  newTree->Branch("phgcer_x_det", &phgcer_x_det, "phgcer_x_det/F");
+  newTree->Branch("phgcer_y_det", &phgcer_y_det, "phgcer_y_det/F");
   
   //newTree = tree->CloneTree();
   

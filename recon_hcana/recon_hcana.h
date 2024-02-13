@@ -293,12 +293,12 @@ class recon_hcana
   Double_t h_Pcen;
 
   // Variable for geometric cuts
-  Double_t paero_z_det;
-  Double_t paero_x_det;
-  Double_t paero_y_det;
-  Double_t phgcer_z_det;
-  Double_t phgcer_x_det;
-  Double_t phgcer_y_det;
+  Float_t paero_z_det;
+  Float_t paero_x_det;
+  Float_t paero_y_det;
+  Float_t phgcer_z_det;
+  Float_t phgcer_x_det;
+  Float_t phgcer_y_det;
   
 };
 

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-13 00:25:22 trottar"
+ * Time-stamp: "2024-02-13 00:39:50 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -217,6 +217,9 @@ void recon_hcana::ProductionReadTree(){
   newTree->Branch("phgcer_z_det", &phgcer_z_det, "phgcer_z_det/F");
   newTree->Branch("phgcer_x_det", &phgcer_x_det, "phgcer_x_det/F");
   newTree->Branch("phgcer_y_det", &phgcer_y_det, "phgcer_y_det/F");
+  newTree->Branch("pend_z_det", &pend_z_det, "pend_z_det/F");
+  newTree->Branch("pend_x_det", &pend_x_det, "pend_x_det/F");
+  newTree->Branch("pend_y_det", &pend_y_det, "pend_y_det/F");
   
   //newTree = tree->CloneTree();
   
@@ -542,11 +545,19 @@ void recon_hcana::EventLoop(){
 
 
     // Geometric cuts
-
+    
+    /*********************
+     **** End of SHMS ****
+     *********************/
+    // Variable to see geometric cuts at end of spectrometer
+    pend_z_det = 300.0; // Approx. end of SHMS
+    pend_x_det = ssxfp + paero_z_det*ssxpfp;
+    pend_y_det = ssyfp + paero_z_det*ssypfp;
+    
     /**********************
      **** SHMS AEROGEL ****
      **********************/
-    paero_z_det = 231.0; // (cm), see PARAM/SHMS/AERO/KaonLT_PARAM/paero_geom.param
+    paero_z_det = 231.0; // Front? of SHMS aerogel (cm), see PARAM/SHMS/AERO/KaonLT_PARAM/paero_geom.param
     paero_x_det = ssxfp + paero_z_det*ssxpfp;
     paero_y_det = ssyfp + paero_z_det*ssypfp;
 
@@ -565,7 +576,7 @@ void recon_hcana::EventLoop(){
     /**********************
      **** SHMS HGCer ****
      **********************/
-    phgcer_z_det = 156.27; // (cm), see PARAM/SHMS/HGCER/KaonLT_PARAM/phgcer_geom.param
+    phgcer_z_det = 156.27; // Front? of SHMS HGcer (cm), see PARAM/SHMS/HGCER/KaonLT_PARAM/phgcer_geom.param
     phgcer_x_det = ssxfp + phgcer_z_det*ssxpfp;
     phgcer_y_det = ssyfp + phgcer_z_det*ssypfp;
 
@@ -597,7 +608,7 @@ void recon_hcana::EventLoop(){
 
     if ((cutg->IsInside(phgcer_y_det, phgcer_x_det)) || !(paero_tray_cut)){
       cout << "Event outside geometric acceptance..." << endl;
-      //continue;
+      //continue; // Skip events outside geometric acceptance
     }
     
     //----------

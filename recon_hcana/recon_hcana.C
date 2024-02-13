@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-13 00:39:50 trottar"
+ * Time-stamp: "2024-02-13 00:46:41 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -607,8 +607,8 @@ void recon_hcana::EventLoop(){
     cutg->SetPoint(20, -25, 2);
 
     if ((cutg->IsInside(phgcer_y_det, phgcer_x_det)) || !(paero_tray_cut)){
-      cout << "Event outside geometric acceptance..." << endl;
-      //continue; // Skip events outside geometric acceptance
+      //cout << "Event outside geometric acceptance..." << endl;
+      continue; // Skip events outside geometric acceptance
     }
     
     //----------

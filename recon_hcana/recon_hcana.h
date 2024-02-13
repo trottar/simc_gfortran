@@ -34,8 +34,8 @@ class recon_hcana
   //Auxiliary Function Prototypes (obtained from hcana) to calculate Pmx, Pmy, Pmz in the Lab/q-frame correctly
   void GeoToSph( Double_t  th_geo, Double_t  ph_geo, Double_t& th_sph, Double_t& ph_sph);
   void SetCentralAngles(Double_t th_cent, Double_t ph_cent);
-  void TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TVector3& pvect ); 
-  
+  void TransportToLab( Double_t p, Double_t xptar, Double_t yptar, TVector3& pvect );
+
   //Utilities Functions for String Parsing
   string getString(char x);
   vector <string> FindString(TString keyword, TString fname);
@@ -288,6 +288,14 @@ class recon_hcana
   Double_t h_xMisPoint;
   Double_t h_yMisPoint;
 
+  // Variable for geometric cuts
+  Double_t aero_z_det;
+  Double_t aero_x_det;
+  Double_t aero_y_det;
+  Double_t hgcer_z_det;
+  Double_t hgcer_x_det;
+  Double_t hgcer_y_det;
+  
   //Central Spec. Momenta
   Double_t e_Pcen;
   Double_t h_Pcen;

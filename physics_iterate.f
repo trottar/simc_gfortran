@@ -6,9 +6,8 @@
 * in the 'main' structure), and returns the kaon cross section.
 *
 *       RLT: (9/15/2023) Updated for kaon cross section
-*       RLT (1/30/2024): Updated comments of units (GeV**2 to MeV**2)
 *   output:
-*	peek		!d5sigma/dEe'dOmegae'Omegak	(microbarn/GeV/sr^2)
+*	peek		!d5sigma/dEe'dOmegae'Omegak	(microbarn/MeV/sr^2)
 
 	implicit none
 	include 'simulate.inc'
@@ -457,10 +456,10 @@ c	  write(*,*) '====================================================='
 C--->Debug
 
 *******************************************************************************
-* sigma_eek is two-fold C.M. cross section: d2sigma/dt/dphi_cm [ub/GeV**2/rad]
+* sigma_eek is two-fold C.M. cross section: d2sigma/dt/dphi_cm [ub/MeV**2/rad]
 * Convert from dt dphi_cm --> dOmega_lab using 'jacobian' [ub/sr]
-* Convert to 5-fold by multiplying by flux factor, gtpr [1/GeV]
-* to give d5sigma/dOmega_k/dOmega_e/dE_e [ub/Gev/sr].
+* Convert to 5-fold by multiplying by flux factor, gtpr [1/MeV]
+* to give d5sigma/dOmega_k/dOmega_e/dE_e [ub/MeV/sr].
 *******************************************************************************
 *******************************************************************************
 c NEW VERSION WHERE TARGET NUCLEON IS AT REST (AS IN EXPERIMENTAL REPLAY)
@@ -510,6 +509,10 @@ c	write(6,*)' jac ',davejac_fer,jacobian
 	gtpr = alpha/2./(pi**2)*vertex%e%E/vertex%Ein*(s_gev-mtar_gev**2)/2./
      >		(targ%Mtar_struck)/Q2_g/(1.-epsi)
 
+*       RLT (2/8/2024):Comment above by Dave on units is slightly off
+* 	               gtpr units MeV (rest of units cancel out, not 1/MeV)
+* 	               sig units ub/MeV**2/rad
+* 	               davesig units ub/MeV/src
 	davesig = gtpr*sig*jacobian
 *******************************************************************************
 

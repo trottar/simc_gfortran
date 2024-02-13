@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-12 23:19:51 trottar"
+ * Time-stamp: "2024-02-12 23:20:27 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -589,7 +589,7 @@ void recon_hcana::EventLoop(){
     cutg->SetPoint(19, -25, 0.5);
     cutg->SetPoint(20, -25, 2);
 
-    if ((cutg->IsInside(evt.phgcer_y_det, evt.phgcer_x_det)) || !(paero_cut)){
+    if ((cutg->IsInside(phgcer_y_det, phgcer_x_det)) || !(paero_cut)){
       continue;
     }
     

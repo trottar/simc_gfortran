@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-12 23:20:27 trottar"
+ * Time-stamp: "2024-02-12 23:31:36 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -547,13 +547,13 @@ void recon_hcana::EventLoop(){
     // SHMS Aero Geom for n = All except 1.011 (see DEF-files/PRODUCTION/KaonLT_DEF/Offline_Physics_Coin_Cuts.def)
     // shmsAeroxposalln    P.aero.xAtAero > -55 && P.aero.xAtAero < 55
     // shmsAeroyposalln	   P.aero.yAtAero > -50 && P.aero.yAtAero < 50
-    bool paero_cut = (paero_x_det > -55.0) & (paero_x_det < 55.0) & (paero_y_det > -50) & (paero_y_det < 50);
+    bool paero_tray_cut = (paero_x_det > -55.0) & (paero_x_det < 55.0) & (paero_y_det > -50) & (paero_y_det < 50);
 
     /*
     // SHMS Aero Geom for n = 1.011 (DEF-files/PRODUCTION/KaonLT_DEF/Paero_1p011/Offline_Physics_Coin_Cuts.def)
     // shmsAeroxposalln    P.aero.xAtAero > -45 && P.aero.xAtAero < 45
     // shmsAeroyposalln	   P.aero.yAtAero > -30 && P.aero.yAtAero < 30
-    bool paero_cut = (paero_x_det > -45.0) & (paero_x_det < 45.0) & (paero_y_det > -30) & (paero_y_det < 30);
+    bool paero_tray_cut = (paero_x_det > -45.0) & (paero_x_det < 45.0) & (paero_y_det > -30) & (paero_y_det < 30);
     */
     
     /**********************
@@ -589,8 +589,9 @@ void recon_hcana::EventLoop(){
     cutg->SetPoint(19, -25, 0.5);
     cutg->SetPoint(20, -25, 2);
 
-    if ((cutg->IsInside(phgcer_y_det, phgcer_x_det)) || !(paero_cut)){
-      continue;
+    if ((cutg->IsInside(phgcer_y_det, phgcer_x_det)) || !(paero_tray_cut)){
+      //continue;
+      cout << "Event outside geometric acceptance..." << endl;
     }
     
     //----------

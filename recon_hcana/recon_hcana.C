@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-13 01:04:05 trottar"
+ * Time-stamp: "2024-02-13 18:03:01 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -585,8 +585,8 @@ void recon_hcana::EventLoop(){
 
     // SHMS HGCer hole cut
     TCutG *cutg = new TCutG("cutg", 21);
-    cutg->SetVarX("phgcer_y_det");
-    cutg->SetVarY("phgcer_x_det");
+    cutg->SetVarX("phgcer_x_det");
+    cutg->SetVarY("phgcer_y_det");
     cutg->SetPoint(0, -25, 2);
     cutg->SetPoint(1, -2, 2);
     cutg->SetPoint(2, -1, 2.5);
@@ -609,7 +609,7 @@ void recon_hcana::EventLoop(){
     cutg->SetPoint(19, -25, 0.5);
     cutg->SetPoint(20, -25, 2);
 
-    if ((cutg->IsInside(phgcer_y_det, phgcer_x_det)) || !(paero_tray_cut)){
+    if ((cutg->IsInside(phgcer_x_det, phgcer_y_det)) || !(paero_tray_cut)){
       //cout << "Event outside geometric acceptance..." << endl;
       continue; // Skip events outside geometric acceptance
     }

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-13 21:53:30 trottar"
+ * Time-stamp: "2024-02-13 21:55:59 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -567,7 +567,7 @@ void recon_hcana::EventLoop(){
     if (
 	(InSIMCFilename.Contains("Q4p4W2p74")) || // High and low epsilon
 	(InSIMCFilename.Contains("Q3p0W3p14")) || // High and low epsilon
-	(InSIMCFilename.Contains("Q5p5W3p02")) || // High and low epsilon
+	(InSIMCFilename.Contains("Q5p5W3p02"))    // High and low epsilon
 	){
       cout << "HERE!!!" << endl;
       // SHMS Aero Geom for n = 1.011 (DEF-files/PRODUCTION/KaonLT_DEF/Paero_1p011/Offline_Physics_Coin_Cuts.def)

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-13 21:45:44 trottar"
+ * Time-stamp: "2024-02-13 21:50:18 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -51,7 +51,7 @@ recon_hcana::recon_hcana(TString filename, TString reaction_str) {
   //-----If H(e,e'p)
   if(reaction=="heep"){
     
-    HeepReadTree();
+    HeepReadTree();    
   
   }
   
@@ -565,11 +565,10 @@ void recon_hcana::EventLoop(){
     paero_y_det = ssyfp + paero_z_det*ssypfp;
 
     if (
-	(filename.find("Q4p4W2p74") != std::string::npos) || // High and low epsilon
-	(filename.find("Q3p0W3p14") != std::string::npos) || // High and low epsilon
-	(filename.find("Q5p5W3p02") != std::string::npos) || // High and low epsilon
+	(InSIMCFilename.find("Q4p4W2p74") != std::string::npos) || // High and low epsilon
+	(InSIMCFilename.find("Q3p0W3p14") != std::string::npos) || // High and low epsilon
+	(InSIMCFilename.find("Q5p5W3p02") != std::string::npos) || // High and low epsilon
 	){
-
       cout << "HERE!!!" << endl;
       // SHMS Aero Geom for n = 1.011 (DEF-files/PRODUCTION/KaonLT_DEF/Paero_1p011/Offline_Physics_Coin_Cuts.def)
       // shmsAeroxposalln    P.aero.xAtAero > -45 && P.aero.xAtAero < 45

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-13 21:06:31 trottar"
+ * Time-stamp: "2024-02-13 21:45:44 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -20,7 +20,7 @@
 using namespace std;
 
 recon_hcana::recon_hcana(TString filename, TString reaction_str) {
-
+  
   ReadReaction(reaction_str);
   
   buildFileName(filename);
@@ -51,7 +51,7 @@ recon_hcana::recon_hcana(TString filename, TString reaction_str) {
   //-----If H(e,e'p)
   if(reaction=="heep"){
     
-    HeepReadTree();    
+    HeepReadTree();
   
   }
   
@@ -564,57 +564,35 @@ void recon_hcana::EventLoop(){
     paero_x_det = ssxfp + paero_z_det*ssxpfp;
     paero_y_det = ssyfp + paero_z_det*ssypfp;
 
-    // SHMS Aero Geom for n = All except 1.011 (see DEF-files/PRODUCTION/KaonLT_DEF/Offline_Physics_Coin_Cuts.def)
-    // shmsAeroxposalln    P.aero.xAtAero > -55 && P.aero.xAtAero < 55
-    // shmsAeroyposalln	   P.aero.yAtAero > -50 && P.aero.yAtAero < 50
-    bool paero_tray_cut = (paero_x_det > -55.0) & (paero_x_det < 55.0) & (paero_y_det > -50) & (paero_y_det < 50);
+    if (
+	(filename.find("Q4p4W2p74") != std::string::npos) || // High and low epsilon
+	(filename.find("Q3p0W3p14") != std::string::npos) || // High and low epsilon
+	(filename.find("Q5p5W3p02") != std::string::npos) || // High and low epsilon
+	){
 
-    /*
-    // SHMS Aero Geom for n = 1.011 (DEF-files/PRODUCTION/KaonLT_DEF/Paero_1p011/Offline_Physics_Coin_Cuts.def)
-    // shmsAeroxposalln    P.aero.xAtAero > -45 && P.aero.xAtAero < 45
-    // shmsAeroyposalln	   P.aero.yAtAero > -30 && P.aero.yAtAero < 30
-    bool paero_tray_cut = (paero_x_det > -45.0) & (paero_x_det < 45.0) & (paero_y_det > -30) & (paero_y_det < 30);
-    */
+      cout << "HERE!!!" << endl;
+      // SHMS Aero Geom for n = 1.011 (DEF-files/PRODUCTION/KaonLT_DEF/Paero_1p011/Offline_Physics_Coin_Cuts.def)
+      // shmsAeroxposalln    P.aero.xAtAero > -45 && P.aero.xAtAero < 45
+      // shmsAeroyposalln	   P.aero.yAtAero > -30 && P.aero.yAtAero < 30
+      bool paero_tray_cut = (paero_x_det > -45.0) & (paero_x_det < 45.0) & (paero_y_det > -30) & (paero_y_det < 30);
+      
+    }else{
+
+      // SHMS Aero Geom for n = All except 1.011 (see DEF-files/PRODUCTION/KaonLT_DEF/Offline_Physics_Coin_Cuts.def)
+      // shmsAeroxposalln    P.aero.xAtAero > -55 && P.aero.xAtAero < 55
+      // shmsAeroyposalln	   P.aero.yAtAero > -50 && P.aero.yAtAero < 50
+      bool paero_tray_cut = (paero_x_det > -55.0) & (paero_x_det < 55.0) & (paero_y_det > -50) & (paero_y_det < 50);
+
+    }
     
     /**********************
      **** SHMS HGCer ****
      **********************/
+    // HGCer Hole cut is now defined in lt_analysis script to be consistent with data procedure.
+    // These variables are used to apply such cut.
     phgcer_z_det = 156.27; // Front? of SHMS HGcer (units of cm), see PARAM/SHMS/HGCER/KaonLT_PARAM/phgcer_geom.param
     phgcer_x_det = ssxfp + phgcer_z_det*ssxpfp;
     phgcer_y_det = ssyfp + phgcer_z_det*ssypfp;
-
-    /*
-
-      HGCer Hole cut is now defined in lt_analysis script to be consistent with data procedure
-
-    // SHMS HGCer hole cut
-    TCutG *cutg = new TCutG("cutg", 21);
-    cutg->SetVarX("phgcer_y_det");
-    cutg->SetVarY("phgcer_x_det");
-    cutg->SetPoint(0, -25, 2);
-    cutg->SetPoint(1, -2, 2);
-    cutg->SetPoint(2, -1, 2.5);
-    cutg->SetPoint(3, 0, 3);
-    cutg->SetPoint(4, 1, 3);
-    cutg->SetPoint(5, 2, 3.3);
-    cutg->SetPoint(6, 3, 3.0);
-    cutg->SetPoint(7, 4, 2.5);
-    cutg->SetPoint(8, 5, 2);
-    cutg->SetPoint(9, 25, 2);
-    cutg->SetPoint(10, 25, 0.5);
-    cutg->SetPoint(11, 5, 0.5);
-    cutg->SetPoint(12, 4, 1);
-    cutg->SetPoint(13, 3, -1);
-    cutg->SetPoint(14, 2, -2);
-    cutg->SetPoint(15, 1, -2.3);
-    cutg->SetPoint(16, 0, -1.5);
-    cutg->SetPoint(17, -1, -1);
-    cutg->SetPoint(18, -2, 0.5);
-    cutg->SetPoint(19, -25, 0.5);
-    cutg->SetPoint(20, -25, 2);
-
-    if ((cutg->IsInside(phgcer_y_det, phgcer_x_det)) || !(paero_tray_cut)){
-    */
     
     if (!(paero_tray_cut)){
       //cout << "Event outside geometric acceptance..." << endl;

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-13 18:32:44 trottar"
+ * Time-stamp: "2024-02-13 19:55:25 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -583,6 +583,10 @@ void recon_hcana::EventLoop(){
     phgcer_x_det = ssxfp + phgcer_z_det*ssxpfp;
     phgcer_y_det = ssyfp + phgcer_z_det*ssypfp;
 
+    /*
+
+      HGCer Hole cut is now defined in lt_analysis script to be consistent with data procedure
+
     // SHMS HGCer hole cut
     TCutG *cutg = new TCutG("cutg", 21);
     cutg->SetVarX("phgcer_y_det");
@@ -610,6 +614,9 @@ void recon_hcana::EventLoop(){
     cutg->SetPoint(20, -25, 2);
 
     if ((cutg->IsInside(phgcer_y_det, phgcer_x_det)) || !(paero_tray_cut)){
+    */
+    
+    if ((!(paero_tray_cut)){
       //cout << "Event outside geometric acceptance..." << endl;
       continue; // Skip events outside geometric acceptance
     }

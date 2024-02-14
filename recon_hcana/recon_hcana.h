@@ -299,6 +299,7 @@ class recon_hcana
   Float_t paero_z_det;
   Float_t paero_x_det;
   Float_t paero_y_det;
+  bool paero_tray_cut;
   Float_t phgcer_z_det;
   Float_t phgcer_x_det;
   Float_t phgcer_y_det;

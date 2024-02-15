@@ -401,8 +401,11 @@ c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.141
 *                         initial start parameterization
 	   sigl=(fitpar(1)+fitpar(2)*log(Q2_g))
      1           *exp((fitpar(3)+fitpar(4)*log(Q2_g))*(abs(t_gev)))
-	   sigt=fitpar(5)+fitpar(6)*log(Q2_g)
-     1           +(fitpar(7)+fitpar(8)*log(Q2_g))*ftav
+*       RLT (2/15/2024): Removing t dependence from sigT because it seems
+*                        to be driving poor sep xsects results
+*       sigt=fitpar(5)+fitpar(6)*log(Q2_g)
+*       1           +(fitpar(7)+fitpar(8)*log(Q2_g))*ftav
+	   sigt=fitpar(5)+fitpar(6)*log(Q2_g)	   
 
 	   siglt=(fitpar(9)*exp(fitpar(10)*abs(t_gev))
      1           +fitpar(11)/abs(t_gev))*sin(thetacm)

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-04-03 17:20:07 trottar"
+ * Time-stamp: "2024-04-03 17:39:04 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -464,10 +464,14 @@ void recon_hcana::EventLoop(){
     //Get Detected Particle 4-momentum
     SetCentralAngles(h_th, h_ph);
     TransportToLab(Pf, ssxptar, ssyptar, Pf_vec);
-    
-    //fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
-    // Changes mass from MP to mk (kaon)
-    fX.SetVectM(Pf_vec, mk);       //SET FOUR VECTOR OF detected particle
+
+    if(reaction=="heep"){
+      fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
+    }else{
+      // For KaonLT, this is mk (kaon)
+      fX.SetVectM(Pf_vec, mk);       //SET FOUR VECTOR OF detected particle      
+    }
+      
     fB = fA1 - fX;                 //4-MOMENTUM OF UNDETECTED PARTICLE 
 
     Pmx_lab = fB.X();

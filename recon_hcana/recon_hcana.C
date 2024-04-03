@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-02-13 21:59:51 trottar"
+ * Time-stamp: "2024-04-03 17:20:07 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -465,7 +465,9 @@ void recon_hcana::EventLoop(){
     SetCentralAngles(h_th, h_ph);
     TransportToLab(Pf, ssxptar, ssyptar, Pf_vec);
     
-    fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
+    //fX.SetVectM(Pf_vec, MP);       //SET FOUR VECTOR OF detected particle
+    // Changes mass from MP to mk (kaon)
+    fX.SetVectM(Pf_vec, mk);       //SET FOUR VECTOR OF detected particle
     fB = fA1 - fX;                 //4-MOMENTUM OF UNDETECTED PARTICLE 
 
     Pmx_lab = fB.X();
@@ -497,7 +499,7 @@ void recon_hcana::EventLoop(){
 
     //Calculate Angles of q relative to x(detected proton) and b(recoil neutron)
     th_pq = xq.Theta();   //"theta_pq"                                       
-    ph_pq   = xq.Phi();   //"out-of-plane angle", "phi_pq"                                                                    
+    ph_pq   = xq.Phi();   //"out-of-plane angle", "phi_pq"
     th_nq = bq.Theta();   // theta_nq                                                                                                     
     ph_nq   = bq.Phi();   //phi_nq
 

@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-04-09 10:28:28 trottar"
+ * Time-stamp: "2024-04-10 18:42:49 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -529,7 +529,7 @@ void recon_hcana::EventLoop(){
 
       // Assumes LH2, will need different equations for LD2 (see hcana/src/THcSecondaryKin.cxx for calculations)
       // Missing Mass
-      missmass = sqrt(abs((Em*Em)-(Pm*Pm)))
+      missmass = sqrt(abs((Em*Em)-(Pm*Pm)));
 
       MM2 = missmass * missmass;
     }

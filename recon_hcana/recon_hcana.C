@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-04-10 18:42:49 trottar"
+ * Time-stamp: "2024-04-11 01:27:54 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -522,17 +522,10 @@ void recon_hcana::EventLoop(){
 
     M_recoil = fB.M(); //recoil mass (missing mass)
     
-    //-----If H(e,e'p)
-    if(reaction=="heep"){
-      MM2 = Em*Em - Pm*Pm;
-    }else{
+    // Missing Mass
+    missmass = sqrt(abs((Em*Em)-(Pm*Pm)));
 
-      // Assumes LH2, will need different equations for LD2 (see hcana/src/THcSecondaryKin.cxx for calculations)
-      // Missing Mass
-      missmass = sqrt(abs((Em*Em)-(Pm*Pm)));
-
-      MM2 = missmass * missmass;
-    }
+    MM2 = missmass * missmass;
 
     s = (fQ+fA).M2();
     t = (fQ-fX).M2();

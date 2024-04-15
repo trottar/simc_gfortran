@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-04-14 19:38:23 trottar"
+ * Time-stamp: "2024-04-14 20:35:11 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -434,12 +434,12 @@ void recon_hcana::EventLoop(){
 
     //Calculate electron final momentum 3-vector
     SetCentralAngles(e_th, e_ph);
-    //TransportToLab(kf, hsxptar, hsyptar, kf_vec);
+    TransportToLab(kf, hsxptar, hsyptar, kf_vec);
 
     // Testing with ss(x)yptar
     // Apply OOP offsets (p_oopcentral_offset = -0.00011)
-    ssxptar = ssxptar - 0.00011;
-    TransportToLab(kf, ssxptar, ssyptar, kf_vec);
+    //ssxptar = ssxptar - 0.00011;
+    //TransportToLab(kf, ssxptar, ssyptar, kf_vec);
 
     // cout << "kf_vec.X(): " << kf_vec.X() << endl;
     // cout << "kf_vec.Y(): " << kf_vec.Y() << endl;

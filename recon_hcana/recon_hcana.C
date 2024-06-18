@@ -1,7 +1,7 @@
 /*
  * Description:
  * ================================================================
- * Time-stamp: "2024-04-14 20:35:11 trottar"
+ * Time-stamp: "2024-06-06 16:29:53 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu, cyero@jlab.org>
@@ -469,7 +469,7 @@ void recon_hcana::EventLoop(){
     //Get Detected Particle 4-momentum
     SetCentralAngles(h_th, h_ph);
     // Apply OOP offsets (p_oopcentral_offset = -0.00011)
-    ssxptar = ssxptar - 0.00011;    
+    ssxptar = ssxptar - 0.00011;
     TransportToLab(Pf, ssxptar, ssyptar, Pf_vec);
 
     if(reaction=="heep"){

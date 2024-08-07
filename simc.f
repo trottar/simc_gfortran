@@ -7,10 +7,12 @@
 !		T. G. O'Neill (Argonne National Lab), and
 !		Seemingly Countless Others (Virtually Everywhere).
 !
+	USE structureModule
+	USE histoModule
 	implicit none
 !	include 'simulate_init.inc'
 	include 'simulate.inc'
-	include 'histograms_init.inc'
+!	include 'histograms_init.inc'
 	include 'radc.inc'
 	include 'hbook.inc'
 	include 'sos/struct_sos.inc'
@@ -622,8 +624,9 @@ c	  write(7,*) 'BP thingie in/out     ',shmsSTOP_BP_in,shmsSTOP_BP_out
 
 	subroutine inc(hist,val,weight)
 
+	USE histoModule
 	implicit none
-	include 'histograms.inc'
+c	include 'histograms.inc'
 
 	integer*4		ibin
 	real*8			val, weight
@@ -642,6 +645,7 @@ c	  write(7,*) 'BP thingie in/out     ',shmsSTOP_BP_in,shmsSTOP_BP_out
 	subroutine report(iun,timestring1,timestring2,central,contrib,
      >		sum_sigcc,aveerr,resol)
 
+	USE structureModule
 	implicit none
 	include 'simulate.inc'
 	include 'radc.inc'
@@ -1133,6 +1137,7 @@ c	  write(7,*) 'BP thingie in/out     ',shmsSTOP_BP_in,shmsSTOP_BP_out
 
 	subroutine calculate_central(central,vertex0)
 
+	USE structureModule
 	implicit none
 	include 'simulate.inc'
 	include 'radc.inc'
@@ -1291,6 +1296,7 @@ c	enddo
 
 	subroutine montecarlo(orig,main,recon,success)
 
+	USE structureModule
 	implicit none
 	include 'simulate.inc'
 
@@ -1452,7 +1458,7 @@ C DJG moved this to the last part of generate!!!
 	    call mc_hms(spec%p%P, spec%p%theta, delta_P_arm, x_P_arm,
      >		y_P_arm, z_P_arm, dx_P_arm, dy_P_arm, xfp, dxfp, yfp, dyfp,
      >		m2, mc_smear, mc_smear, doing_decay,
-     >		ntup%resfac, xtar_init_P, ok_P_arm, pathlen)
+     >		ntup%resfac, xtar_init_P, ok_P_arm, pathlen, using_HMScoll)
 	  else if (hadron_arm.eq.2) then
 	    call mc_sos(spec%p%P, spec%p%theta, delta_P_arm, x_P_arm,
      >		y_P_arm, z_P_arm, dx_P_arm, dy_P_arm, xfp, dxfp, yfp, dyfp,
@@ -1472,7 +1478,8 @@ C DJG moved this to the last part of generate!!!
 	    call mc_shms(spec%p%P, spec%p%theta, delta_P_arm, x_P_arm,
      >		y_P_arm, z_P_arm, dx_P_arm, dy_P_arm, xfp, dxfp, yfp, dyfp,
      >		m2, mc_smear, mc_smear, doing_decay,
-     >		ntup%resfac, xtar_init_P, ok_P_arm, pathlen, hadron_arm)
+     >		ntup%resfac, xtar_init_P, ok_P_arm, pathlen, hadron_arm, 
+     >    using_SHMScoll)
 	  endif
 
 
@@ -1636,7 +1643,7 @@ C	  recon%p%delta = (recon%p%P-spec%p%P)/spec%p%P*100.
 	    call mc_hms(spec%e%P, spec%e%theta, delta_E_arm, x_E_arm,
      >		y_E_arm, z_E_arm, dx_E_arm, dy_E_arm, xfp, dxfp, yfp, dyfp,
      >		me2, mc_smear, mc_smear, .false.,
-     >		tmpfact, xtar_init_E, ok_E_arm, pathlen)
+     >		tmpfact, xtar_init_E, ok_E_arm, pathlen,using_HMScoll)
 	  else if (electron_arm.eq.2) then
 	    call mc_sos(spec%e%P, spec%e%theta, delta_E_arm, x_E_arm,
      >		y_E_arm, z_E_arm, dx_E_arm, dy_E_arm, xfp, dxfp, yfp, dyfp,
@@ -1656,7 +1663,8 @@ C	  recon%p%delta = (recon%p%P-spec%p%P)/spec%p%P*100.
 	    call mc_shms(spec%e%P, spec%e%theta, delta_E_arm, x_E_arm,
      >		y_E_arm, z_E_arm, dx_E_arm, dy_E_arm, xfp, dxfp, yfp, dyfp,
      >		me2, mc_smear, mc_smear, .false.,
-     >		tmpfact, xtar_init_E, ok_E_arm, pathlen, electron_arm)
+     >		tmpfact, xtar_init_E, ok_E_arm, pathlen, electron_arm, 
+     >          using_SHMScoll)
 	  else if (electron_arm.eq.7 .or. electron_arm .eq. 8) then
              if (abs(spec%p%phi-pi/2) .eq. 10.) then
 	     zhadron = -recon%p%z*(cos(spec%p%theta)/tan(spec%p%theta+recon%p%yptar)+sin(spec%p%theta)) ! recon.p.z is really ytgt

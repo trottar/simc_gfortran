@@ -90,10 +90,12 @@ c	  targ%Coulomb%max = targ%Coulomb_constant * 3.0
 
 	subroutine limits_init(H)
 
+	USE structureModule
+	USE histoModule
 	implicit none
 	include 'simulate.inc'
 	include 'radc.inc'
-	include 'histograms.inc'
+c	include 'histograms.inc'
 	include 'sf_lookup.inc'		!need to know Em range of spec. fcn.
 
 	integer i
@@ -329,10 +331,14 @@ c	  targ%Coulomb%max = targ%Coulomb_constant * 3.0
 	else if (doing_heavy) then
 	  VERTEXedge%Pm%min=0.0
 	  VERTEXedge%Pm%max=0.0
-	  do i = 1, nrhoPm
-	    t1=max(abs(Pm_theory(i)%min),abs(Pm_theory(i)%max))
-	    VERTEXedge%Pm%max = max(VERTEXedge%Pm%max,t1)
-	  enddo
+	  if(use_benhar_sf) then
+	     VERTEXedge%Pm%max=790.0
+	  else
+	     do i = 1, nrhoPm
+		t1=max(abs(Pm_theory(i)%min),abs(Pm_theory(i)%max))
+		VERTEXedge%Pm%max = max(VERTEXedge%Pm%max,t1)
+	     enddo
+	  endif
 	  VERTEXedge%Em%min = E_Fermi
 	  VERTEXedge%Em%max = 1000.	!Need Egamma_tot_max for good limit.
 	else if (doing_hydpi .or. doing_hydkaon .or. doing_hyddelta .or. doing_hydrho) then
@@ -569,6 +575,7 @@ c	   gen%sumEgen%min = Ebeam_min - VERTEXedge%Trec%max - VERTEXedge%Trec_struck%
 
 	subroutine radc_init
 
+	USE structureModule
 	implicit none
 	include 'simulate.inc'
 	include 'radc.inc'
@@ -647,8 +654,9 @@ c	exponentiate = use_expon
 
 	subroutine radc_init_ev (main,vertex)
 
+	USE structureModule
 	implicit none
-	include 'structures.inc'
+c	include 'structures.inc'
 	include 'radc.inc'
 
 	integer		i
@@ -723,6 +731,7 @@ c	exponentiate = use_expon
 
 	subroutine basicrad_init_ev (e1,e2,e3)
 
+	USE structureModule
 	implicit none
 	include 'simulate.inc'
 	include 'radc.inc'
@@ -818,6 +827,7 @@ c	exponentiate = use_expon
 
 	subroutine theory_init(success)
 	
+	USE structureModule
 	implicit none
 	include 'simulate.inc'
 
@@ -921,6 +931,7 @@ C are a lot of different cases and something may have slipped through the cracks
 C may have happened here as well.
 C   
 
+      USE structureModule
       include 'simulate.inc'
       real*8 xmin,xmax
       type(contribtype)::	contrib

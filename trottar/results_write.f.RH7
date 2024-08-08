@@ -54,11 +54,12 @@
 	if (doing_hyd_elast .or. doing_deuterium .or. doing_heavy) then
 	  poftheta = Mp*Ebeam / (2*ebeam*sin(recon%e%theta/2.)**2 + Mp)
 	  corrsing = recon%e%P - poftheta
-	  Pm_Heepz = -(recon%Pmy*recon%uq%y+recon%Pmz*recon%uq%z)
-     >		/ sqrt(recon%uq%y**2+recon%uq%z**2)
-	  Pm_Heepy =  (recon%Pmz*recon%uq%y-recon%Pmy*recon%uq%z)
-     >		/ sqrt(recon%uq%y**2+recon%uq%z**2)
-	  Pm_Heepx =  -recon%Pmx
+!	  Pm_Heepz = (recon%Pmy*recon%uq%y+recon%Pmz*recon%uq%z)/ sqrt(recon%uq%y**2+recon%uq%z**2)
+!	  Pm_Heepx = recon%Pmx
+!	  Pm_Heepy = (recon%Pmz*recon%uq%y-recon%Pmy*recon%uq%z)/ sqrt(recon%uq%y**2+recon%uq%z**2)
+	  Pm_Heepx = recon%Pmx
+	  Pm_Heepy = recon%Pmy
+	  Pm_Heepz = recon%Pmz
 	endif
 
 	if(electron_arm.eq.1 .or. electron_arm.eq.3.or. electron_arm.eq.7)then !electron = right side.
@@ -163,11 +164,15 @@ c	  ntu(11) = vertex%p%xptar			!mr
 	     if (doing_kaon) then
 		ntu(62) = ntup%sigcm1 !sigcm - saghai model
 		ntu(63) = ntup%sigcm2 !sigcm - factorized.
+		ntu(64) = main%thetacm
+		ntu(65) = main%epsilon
 	     endif
 	  else
 	     if (doing_kaon) then
 		ntu(54) = ntup%sigcm1 !sigcm - saghai model
 		ntu(55) = ntup%sigcm2 !sigcm - factorized.
+		ntu(56) = main%thetacm
+		ntu(57) = main%epsilon
 	     endif
 	  endif
 	else if (doing_semi.or.doing_rho) then

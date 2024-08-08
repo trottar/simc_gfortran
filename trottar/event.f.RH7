@@ -141,7 +141,7 @@ c	include 'structures.inc'
 	type(event):: vertex, orig
 
 	real*8 nsig_max
-	parameter(nsig_max=3.0e0)      !max #/sigma for gaussian ran #s.
+	parameter(nsig_max=3.0e0) !max #/sigma for gaussian ran #s.
 
 
 ! Randomize the position of the interaction inside the available region.
@@ -380,7 +380,6 @@ C modified 5/15/06 for poinct
 
 	call complete_ev(main,vertex,success)
 
-
 	main%sigcc = 1.0
 
 	if (debug(2)) write(6,*)'gen: initial success =',success
@@ -450,6 +449,8 @@ C DJG spectrometer
 	real*8 grnd,rn		!random # generator.
 	integer i
 
+	real*8 :: RotToLab(3,3) ! rotation matrix	
+	
 	logical success
 	type(event_main):: main
 	type(event)::	vertex
@@ -555,8 +556,14 @@ c PB: from resmod507 in first call to semi_physics.f
      >	    write(6,*) 'cos(phi)=',vertex%up%x/sin(vertex%p%theta)
 	  vertex%p%phi = atan2(vertex%up%y,vertex%up%x)
 	  if (vertex%p%phi.lt.0.) vertex%p%phi=vertex%p%phi+2.*pi
-	  call spectrometer_angles(spec%p%theta,spec%p%phi,
-     &		vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
+!	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
+!	  write(6,*) 'vertex%p%P:',vertex%p%P
+!	  write(6,*) 'vertex%up%x:',vertex%up%x
+	  call spectrometer_angles(spec%p%theta,spec%p%phi,vertex%p%xptar,vertex%p%yptar,vertex%p%theta,vertex%p%phi)
+	 	
+!	  write(6,*) 'vertex%p%xptar:',vertex%p%xptar
+!	  write(6,*) 'vertex%p%P:',vertex%p%P
+!	  write(6,*) 'vertex%up%x:',vertex%up%x	  
 	  vertex%p%E = sqrt(vertex%p%P**2+Mh2)
 	  vertex%p%delta = (vertex%p%P - spec%p%P)*100./spec%p%P
 	  if (debug(4)) write(6,*)'comp_ev: at 6'
@@ -1062,7 +1069,7 @@ C DJG stinkin' Jacobian!
 	real*8 W2
 	real*8 oop_x,oop_y
 	real*8 mm,mmA,mm2,mmA2,t
-
+	
 	logical success
 	type(event)::	recon
 
@@ -1353,6 +1360,388 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	return
 	end
 
+!---------------------------------------------------------------------
+
+	subroutine complete_recon_hcana(recon,success)
+
+	implicit none
+	include 'simulate.inc'
+
+	real*8 p_new_x,p_new_y,new_x_x,new_x_y,new_x_z
+	real*8 new_y_x,new_y_y,new_y_z,dummy
+	real*8 targ_new_x,targ_new_y
+	real*8 px,py,pz,qx,qy,qz
+	real*8 targx,targy,targz
+	real*8 W2
+	real*8 oop_x,oop_y
+	real*8 mm,mmA,mm2,mmA2,t
+
+	type(event):: vertex
+!       Hcana varaibles
+	real*8 ki		! Initial proton momentum
+	real, dimension(3) :: kf_vec,Pf_vec,q_vec,kf1_vec
+	real, dimension(3) :: xq,bq
+	real, dimension(4) :: fQ,fP,fP1,fA,fA1,fX,fB
+	real*8 :: eRotToLab(3,3) ! e rotation matrix
+	real*8 :: pRotToLab(3,3) ! p rotation matrix
+	
+	logical success
+	type(event)::	recon
+
+!-----------------------------------------------------------------------
+! Calculate everything left in the /event/ structure, given
+!	recon.Ein, and the following for both recon.e AND recon.p:
+! delta,xptar,yptar, z,P,E,theta,phi (with E,P corrected for eloss, if desired).
+!
+! The SINGLE element of /event/ NOT computed here is sigcc (for (e,e'p)).
+!
+!-----------------------------------------------------------------------
+
+! Initialize
+
+	success = .false.
+
+	recon%Ein = Ebeam_vertex_ave	!lowered by most probable eloss (init.f)
+
+! ... unit vector components of outgoing e,p
+! ... z is DOWNSTREAM, x is DOWN and y is LEFT looking downstream.
+
+C Ebeam_vertex_ave has been shifted to account for Coulomb effects
+C In general, the Hall C analyzer does not correct for this
+C If you do NOT apply an energy shift in the ENGINE to account
+C for Coulomb corrections, make sure the line below is NOT commented out.
+	recon%Ein = Ebeam_vertex_ave - targ%Coulomb%ave
+
+	if (debug(4)) write(6,*)'comp_rec_ev: at 1'
+	recon%ue%x = sin(recon%e%theta)*cos(recon%e%phi)
+	recon%ue%y = sin(recon%e%theta)*sin(recon%e%phi)
+	recon%ue%z = cos(recon%e%theta)
+	recon%up%x = sin(recon%p%theta)*cos(recon%p%phi)
+	recon%up%y = sin(recon%p%theta)*sin(recon%p%phi)
+	recon%up%z = cos(recon%p%theta)
+	if (debug(4)) write(6,*)'comp_rec_ev: at 2'
+	
+! The q vector
+
+	if (debug(5)) write(6,*)'comp_rec_ev: Ein,E,uez=',recon%Ein,recon%e%E,recon%ue%z
+	recon%nu = recon%Ein - recon%e%E
+	recon%Q2 = 2*recon%Ein*recon%e%E*(1-recon%ue%z)
+	recon%q	= sqrt(recon%Q2 + recon%nu**2)
+	recon%uq%x = - recon%e%P*recon%ue%x / recon%q
+	recon%uq%y = - recon%e%P*recon%ue%y / recon%q
+	recon%uq%z =(recon%Ein - recon%e%P*recon%ue%z)/ recon%q
+
+c	if (doing_pion .or. doing_kaon .or. doing_delta .or. doing_rho .or. doing_semi) then
+c	   W2 = targ%mtar_struck**2 + 2.*targ%mtar_struck*recon%nu - recon%Q2
+c	else
+c	   W2 = targ%M**2 + 2.*targ%M*recon%nu - recon%Q2
+c	endif
+
+c Everyone else in the world calculates W using the proton mass.
+	W2 = mp**2 + 2.*mp*recon%nu - recon%Q2
+
+	recon%W = sqrt(abs(W2)) * W2/abs(W2) 
+	recon%xbj = recon%Q2/2./Mp/recon%nu
+	if (debug(4)) write(6,*)'comp_rec_ev: at 5'
+
+! Now complete the p side
+
+	if(doing_phsp)then
+	  recon%p%P=spec%p%P
+	  recon%p%E=sqrt(Mh2+recon%p%P**2)
+	  if (debug(4)) write(6,*)'comp_rec_ev: at 7.5',Mh2,recon%p%E
+	endif
+
+	ki = sqrt((recon%Ein)**2-me**2)
+!	ki = sqrt((recon%e%E)**2-me**2)
+
+!	write(6,*) 'recon%Ein:',recon%Ein
+!	write(6,*) 'recon%e%E:',recon%e%E
+!	write(6,*) 'recon%e%P:',recon%e%P
+!	write(6,*) 'spec%e%P:',spec%e%P
+!	write(6,*) '-recon%ue%y:',-recon%ue%y
+!	write(6,*) 'recon%p%E:',recon%p%E
+!	write(6,*) 'recon%p%P:',recon%p%P
+!	write(6,*) 'spec%p%P:',spec%p%P
+!	write(6,*) '-recon%up%y:',-recon%up%y	
+	
+	call SetCentralAngles(-spec%e%theta, 0.0, eRotToLab)
+!	write(6,*) 'e eRotToLab%:',eRotToLab
+	call TransportToLab(recon%e%P, recon%e%xptar, recon%e%yptar, eRotToLab, kf_vec)
+
+	fP = [0.0,0.0,ki,me]
+	fP1 = [kf_vec(1),kf_vec(2),kf_vec(3),me]
+	fA = [0.0,0.0,0.0,targ%M]
+
+!	write(6,*) 'me:',me
+!	write(6,*) 'mp:',mp
+!	write(6,*) 'targ%M:',targ%M
+	
+	fQ = fP-fP1
+	fA1 = fA+fQ
+	
+	call SetCentralAngles(spec%p%theta, 0.0, pRotToLab)
+!	write(6,*) 'p pRotToLab%:',pRotToLab
+	call TransportToLab(recon%p%P, recon%p%xptar, recon%p%yptar, pRotToLab, Pf_vec)
+
+!	write(6,*) 'Pf_vec:', Pf_vec
+	
+	fX = [Pf_vec(1),Pf_vec(2),Pf_vec(3),mp]
+	fB = fA1 - fX
+
+!	recon%Pmx = fB(1) ! Lab
+!	recon%Pmy = fB(2) ! Lab
+!	recon%Pmz = fB(3) ! Lab
+	
+	q_vec = [fQ(1),fQ(2),fQ(3)]
+	kf1_vec = [fP1(1),fP1(2),fP1(3)]
+
+!	write(6,*) 'kf1_vec:',kf1_vec
+!	write(6,*) 'q_vec:',q_vec
+	
+	xq = [fX(1),fX(2),fX(3)]
+	bq = [fB(1),fB(2),fB(3)]
+
+!	write(6,*) 'bq:', bq
+
+	call SetZAxis(q_vec,kf1_vec,xq)
+	call SetZAxis(q_vec,kf1_vec,bq)	
+	
+! Compute some pion/kaon stuff.
+
+	recon%epsilon=1./(1. + 2.*(1+recon%nu**2/recon%Q2)*tan(recon%e%theta/2.)**2)
+	recon%theta_pq=acos(min(1.0,recon%up%x*recon%uq%x+recon%up%y*recon%uq%y+recon%up%z*recon%uq%z))
+
+! CALCULATE ANGLE PHI BETWEEN SCATTERING PLANE AND REACTION PLANE.
+! Therefore, define a new system with the z axis parallel to q, and
+! the x axis inside the q-z-plane: z' = q, y' = q X z, x' = y' X q
+! this gives phi the way it is usually defined, i.e. phi=0 for in-plane
+! particles closer to the downstream beamline than q.
+! phi=90 is above the horizontal plane when q points to the right, and
+! below the horizontal plane when q points to the left.
+! Also take into account the different definitions of x, y and z in
+! replay and SIMC:
+! As seen looking downstream:		replay	SIMC	(old_simc)
+!				x	right	down	(left)
+!				y	down	left	(up)
+!				z	all have z pointing downstream
+!
+! SO: x_replay=-y_simc, y_replay=x_simc, z_replay= z_simc
+
+	qx = -recon%uq%y		!convert to 'replay' coord. system
+	qy =  recon%uq%x
+	qz =  recon%uq%z
+	px = -recon%up%y		!convert to 'replay' coord. system
+	py =  recon%up%x
+	pz =  recon%up%z
+
+	dummy=sqrt((qx**2+qy**2)*(qx**2+qy**2+qz**2))
+	new_x_x = -qx*qz/dummy
+	new_x_y = -qy*qz/dummy
+	new_x_z = (qx**2 + qy**2)/dummy
+
+	dummy   = sqrt(qx**2 + qy**2)
+	new_y_x =  qy/dummy
+	new_y_y = -qx/dummy
+	new_y_z =  0.0
+
+	p_new_x = px*new_x_x + py*new_x_y + pz*new_x_z
+	p_new_y = px*new_y_x + py*new_y_y + pz*new_y_z
+
+	if ((p_new_x**2+p_new_y**2).eq.0.) then
+	  recon%phi_pq = 0.0
+	else
+	  recon%phi_pq = acos(p_new_x/sqrt(p_new_x**2+p_new_y**2))
+	endif
+	if (p_new_y.lt.0.) then
+	  recon%phi_pq = 2*pi - recon%phi_pq
+	endif
+
+
+	if(using_tgt_field) then !calculate polarized-target specific azimuthal angles
+
+! CALCULATE ANGLE PHI BETWEEN SCATTERING PLANE AND TARGET POL.
+! Take into account the different definitions of x, y and z in
+! replay and SIMC:
+! As seen looking downstream:		replay	SIMC	(old_simc)
+!				x	right	down	(left)
+!				y	down	left	(up)
+!				z	all have z pointing downstream
+!
+! SO: x_replay=-y_simc, y_replay=x_simc, z_replay= z_simc
+
+	   qx = -recon%uq%y	!convert to 'replay' coord. system
+	   qy =  recon%uq%x
+	   qz =  recon%uq%z
+
+C In-plane target
+	   targx = -targ_pol*sin(abs(targ_Bangle)) ! 'replay' coordinates
+	   targy = 0.0
+	   targz = targ_pol*cos(abs(targ_Bangle)) 
+
+C out of plane target
+c	targx = 0.0       ! 'replay' coordinates
+c	targy = -targ_pol*sin(abs(targ_Bangle)) 
+c	targz = targ_pol*cos(abs(targ_Bangle)) 
+
+	   dummy=sqrt((qx**2+qy**2)*(qx**2+qy**2+qz**2))
+	   new_x_x = -qx*qz/dummy
+	   new_x_y = -qy*qz/dummy
+	   new_x_z = (qx**2 + qy**2)/dummy
+
+	   dummy   = sqrt(qx**2 + qy**2)
+	   new_y_x =  qy/dummy
+	   new_y_y = -qx/dummy
+	   new_y_z =  0.0
+
+	   p_new_x = targx*new_x_x + targy*new_x_y + targz*new_x_z
+	   p_new_y = targx*new_y_x + targy*new_y_y + targz*new_y_z
+	   
+
+	   recon%phi_targ = atan2(p_new_y,p_new_x)
+	   if(recon%phi_targ.lt.0.) recon%phi_targ = 2.*pi + recon%phi_targ
+
+
+! CALCULATE ANGLE BETA BETWEEN REACTION PLANE AND (TRANSVERSE) TARGET 
+! POLARIZATION.
+! Also take into account the different definitions of x, y and z in
+! replay and SIMC:
+! As seen looking downstream:		replay	SIMC	(old_simc)
+!				x	right	down	(left)
+!				y	down	left	(up)
+!				z	all have z pointing downstream
+!
+! SO: x_replay=-y_simc, y_replay=x_simc, z_replay= z_simc
+
+	   qx = -recon%uq%y	!convert to 'replay' coord. system
+	   qy =  recon%uq%x
+	   qz =  recon%uq%z
+
+	   targx = -targ_pol*sin(abs(targ_Bangle)) ! 'replay' coordinates
+	   targy = 0.0
+	   targz = targ_pol*cos(abs(targ_Bangle)) 
+
+c	targx = 0.0              ! 'replay' coordinates
+c	targy = -targ_pol*sin(abs(targ_Bangle))
+c	targz = targ_pol*cos(abs(targ_Bangle)) 
+
+
+	   px = -recon%up%y
+	   py =  recon%up%x
+	   pz =  recon%up%z
+
+	   dummy   = sqrt((qy*pz-qz*py)**2 + (qz*px-qx*pz)**2 + (qx*py-qy*px)**2)
+	   new_y_x =  (qy*pz-qz*py)/dummy
+	   new_y_y =  (qz*px-qx*pz)/dummy
+	   new_y_z =  (qx*py-qy*px)/dummy
+
+	   dummy   = sqrt((new_y_y*qz-new_y_z*qy)**2 + (new_y_z*qx-new_y_x*qz)**2
+     >  	+ (new_y_x*qy-new_y_y*qx)**2)
+
+	   new_x_x = (new_y_y*qz - new_y_z*qy)/dummy
+	   new_x_y = (new_y_z*qx - new_y_x*qz)/dummy
+	   new_x_z = (new_y_x*qy - new_y_y*qx)/dummy
+
+
+	   targ_new_x = targx*new_x_x + targy*new_x_y + targz*new_x_z
+	   targ_new_y = targx*new_y_x + targy*new_y_y + targz*new_y_z
+
+	   recon%beta = atan2(targ_new_y,targ_new_x)
+	   if(recon%beta.lt.0.) recon%beta = 2.*pi + recon%beta
+
+CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) angles
+	   recon%phi_s = recon%phi_pq-recon%phi_targ
+	   if(recon%phi_s .lt. 0.) recon%phi_s = 2*pi+recon%phi_s
+
+	   recon%phi_c = recon%phi_pq+recon%phi_targ
+	   if(recon%phi_c .gt. 2.*pi) recon%phi_c = recon%phi_c-2*pi
+	   if(recon%phi_c .lt. 0.) recon%phi_c = 2*pi+recon%phi_c
+
+	   dummy = sqrt((qx**2+qy**2+qz**2))*sqrt((targx**2+targy**2+targz**2))
+	   recon%theta_tarq = acos((qx*targx+qy*targy+qz*targz)/dummy)
+	endif !polarized-target specific stuff
+
+	if (debug(2)) then
+	  write(6,*)'comp_rec_ev: nu =',recon%nu
+	  write(6,*)'comp_rec_ev: Q2 =',recon%Q2
+	  write(6,*)'comp_rec_ev: theta_e =',recon%e%theta
+	  write(6,*)'comp_rec_ev: epsilon =',recon%epsilon
+	  write(6,*)'comp_rec_ev: theta_pq =',recon%theta_pq
+	  write(6,*)'comp_rec_ev: phi_pq =',recon%phi_pq
+	endif
+
+	if (debug(4)) write(6,*)'comp_rec_ev: at 8'
+	
+! Compute the Pm vector in in SIMC LAB system, with x down, and y to the left.
+! Computer Parallel, Perpendicular, and Out of Plane componenants.
+! Parallel is component along q_hat.  Out/plane is component along
+! (e_hat) x (q_hat)  (oop_x,oop_y are components of out/plane unit vector)
+! Perp. component is what's left: along (q_hat) x (oop_hat).
+! So looking along q, out of plane is down, perp. is left.
+
+!	recon%Pmx = recon%p%P*px - recon%q*qx
+!	recon%Pmy = recon%p%P*py - recon%q*qy
+!	recon%Pmz = recon%p%P*pz - recon%q*qz
+!	recon%Pmx = ((recon%p%P*py - recon%q*qy)*qx-(recon%p%P*px - recon%q*qx)*qy) / sqrt(qy**2+qx**2)
+!	recon%Pmy = ((recon%p%P*py - recon%q*qy)*qx+(recon%p%P*px - recon%q*qx)*qy) / sqrt(qy**2+qx**2)
+!	recon%Pmz = recon%p%P*pz - recon%q*qz
+! 	recon%Pmx = -recon%q*qx
+! 	recon%Pmy = -recon%q*qy
+! 	recon%Pmz = -recon%q*qz	
+	recon%Pmx = -bq(1) ! wrt q
+	recon%Pmy = -bq(2) ! wrt q
+	recon%Pmz = -bq(3) ! wrt q
+	recon%Pm = sqrt(recon%Pmx**2+recon%Pmy**2+recon%Pmz**2)
+
+!STILL NEED SIGN FOR PmPer!!!!!!
+
+	oop_x = qx	! oop_x = q_y *(z_hat x y_hat) = q_y *-(x_hat)
+	oop_y =  qy	! oop_y = q_x *(z_hat x x_hat) = q_x * (y_hat)
+	recon%PmPar = (recon%Pmx*qx + recon%Pmy*qy + recon%Pmz*qz)
+	recon%PmOop = (recon%Pmx*oop_x + recon%Pmy*oop_y) / sqrt(oop_x**2+oop_y**2)
+	recon%PmPer = sqrt( max(0.e0, recon%Pm**2 - recon%PmPar**2 - recon%PmOop**2 ) )
+
+	if (doing_pion .or. doing_kaon .or. doing_delta .or. doing_rho .or. doing_semi) then
+	  recon%Em = recon%nu + targ%Mtar_struck - recon%p%E
+          mm2 = recon%Em**2 - recon%Pm**2
+          mm  = sqrt(abs(mm2)) * abs(mm2)/mm2
+          mmA2= (recon%nu + targ%M - recon%p%E)**2 - recon%Pm**2
+          mmA = sqrt(abs(mmA2)) * abs(mmA2)/mmA2
+          t = recon%Q2 - Mh2
+     >      + 2*(recon%nu*recon%p%E - recon%p%P*recon%q*cos(recon%theta_pq))
+	  ntup%mm = mm
+	  ntup%mmA = mmA
+	  ntup%t = t
+	endif
+
+	if(doing_semi.or.doing_rho) then
+	   recon%zhad = recon%p%E/recon%nu
+	   recon%pt2 = recon%p%P**2*(1.0-cos(recon%theta_pq)**2)
+	endif
+
+! Calculate Trec, Em. Trec for (A-1) system (eep), or for struck nucleon (pi/K)
+! Note that there are other ways to calculate 'Em' for the pion/kaon case.
+! This Em for pi/kaon gives roughly E_m + E_rec + T_{A-1}  (I think)
+	if (doing_hyd_elast) then
+!       recon%Trec = 0.0
+!       recon%Em = recon%nu + targ%M - recon%p%E - recon%Trec
+	   recon%Em = recon%nu + fA(4) - fX(4)
+!       recon%Trec = sqrt(recon%Pm**2+targ%Mrec**2) - targ%Mrec
+!       recon%Em = recon%nu + targ%Mtar_struck - recon%p%E - recon%Trec
+	else if (doing_deuterium .or. doing_heavy) then
+	  recon%Trec = sqrt(recon%Pm**2+targ%Mrec**2) - targ%Mrec
+	  recon%Em = recon%nu + targ%Mtar_struck - recon%p%E - recon%Trec
+	else if (doing_pion .or. doing_kaon .or. doing_delta .or. doing_rho) then
+	  recon%Em = recon%nu + targ%Mtar_struck - recon%p%E
+	endif
+
+	if (debug(5)) write(6,*) 'recon%Pm,recon%Trec,recon%Em',recon%Pm,recon%Trec,recon%Em
+	if (debug(4)) write(6,*)'comp_rec_ev: at 10'
+
+	success=.true.
+	return
+	end
+	
 !------------------------------------------------------------------------
 
 	subroutine complete_main(force_sigcc,main,vertex,vertex0,recon,success)
@@ -1489,7 +1878,10 @@ c     >                     + 0.6*main%sigcc !(pi- Delta+)/(pi- p)
 	  endif
 
 	elseif (doing_kaon) then
-	  main%sigcc = peeK(vertex,main,survivalprob)
+c       RLT (9/15/2023): This has 3 arguments (for physics_kaon)
+c                        but physics_iterate takes 2
+c       main%sigcc = peeK(vertex,main,survivalprob)
+	  main%sigcc = peeK(vertex,main)
 	  main%sigcc_recon = 1.0
 	  if (which_kaon.eq.2 .or. which_kaon.eq.12) then  !OK for coherent???
 	    tgtweight = targ%N
@@ -1546,7 +1938,7 @@ C If using Coulomb corrections, include focusing factor
 
 	main%weight = main%SF_weight*main%jacobian*main%gen_weight*main%sigcc
 	main%weight = main%weight * tgtweight	!correct for #/nucleons involved
-	if ((doing_kaon.or.doing_semika) .and. .not.doing_decay) 
+	if ((doing_kaon.or.doing_semika) .and. .not.doing_decay)
      >		main%weight = main%weight*survivalprob
 	if (debug(5))write(6,*) 'gen_weight = ',main%gen_weight,
      >		main%jacobian,main%sigcc
@@ -1602,8 +1994,6 @@ C If using Coulomb corrections, include focusing factor
 	return
 	end
 
-
-
 	subroutine spectrometer_angles(theta0,phi0,dx,dy,theta,phi)
 
 !Generate spectrometer angles from physics angles in lab frame.
@@ -1630,8 +2020,215 @@ C If using Coulomb corrections, include focusing factor
 	dx = x / cos_dtheta
 	dy = sqrt(1/cos_dtheta**2-1.-dx**2)
 
+!	write(6,*) 'spec dx:',dx
+
 	y_event = y/cos_dtheta	!projected to plane perp. to spectrometer.
 	if (y_event .lt. y0) dy = -dy
+
+	return
+	end
+	
+	subroutine SetCentralAngles(theta,phi,rotmat)
+	
+!       Declare variables
+	real*8 theta,phi	!physics angles for event.
+	real*8 norm
+	real, dimension(3,3) :: rotmat ! rotation matrix
+	real*8 thetaGeo, phiGeo ! Geographical angles
+	real*8 thetaSph, phiSph ! Spherical Coordinates
+	
+	include 'constants.inc'
+
+! 	Convert deg to rad
+	thetaGeo = theta*pi/180
+	phiGeo = phi*pi/180
+
+	
+	call GeoToSph(thetaGeo, phiGeo, thetaSph, phiSph)
+
+	norm = sqrt((cos(thetaSph)**2)+(sin(thetaSph)**2)*(cos(phiSph)**2))
+
+!	write(6,*) 'cent norm:', norm
+	
+!       Calculate the rotation matrix
+	rotmat(1,1) = ((sin(thetaSph)**2)*sin(phiSph)*cos(phiSph))/norm
+	rotmat(1,2) = cos(thetaSph)/norm
+	rotmat(1,3) = sin(thetaSph)*cos(phiSph)
+	rotmat(2,1) = -norm
+	rotmat(2,2) = 0.0
+	rotmat(2,3) = sin(thetaSph)*sin(phiSph)
+	rotmat(3,1) = sin(thetaSph)*cos(thetaSph)*sin(phiSph)/norm
+	rotmat(3,2) = -sin(thetaSph)*cos(phiSph)/norm
+	rotmat(3,3) = cos(thetaSph)
+
+!	write(6,*) 'cent rotmat:',rotmat
+
+	return
+	end
+
+	subroutine GeoToSph(th_geo, ph_geo, th_sph, ph_sph)
+
+!       Convert geographical to spherical angles. Units are rad.
+!       th_geo and ph_geo can be anything.
+!       th_sph is in [0,pi], ph_sph in [-pi,pi].
+!       https://hallaweb.jlab.org/podd/doc/html_v15/src/THaAnalysisObject.cxx.html#qBvmFB
+
+	
+!       Declare variables
+	real*8 th_geo, ph_geo ! Geographical angles
+	real*8 th_sph, ph_sph ! Spherical Coordinates
+	real*8 ct, cp
+	real*8 tmp
+
+	include 'constants.inc'
+	
+	ct = cos(th_geo)
+	cp = cos(ph_geo)
+
+	tmp = ct*cp
+
+	th_sph = acos(tmp)
+
+	tmp = sqrt(1.0 - tmp*tmp)
+
+	if (abs(tmp) < 1.0D-6) then
+	   ph_sph = 0.0
+	else
+	   ph_sph = acos(sqrt(1.0-ct*ct)*cp/tmp)
+	endif
+
+	if (th_geo/twopi-floor(th_geo/twopi) > 0.5) then
+	   ph_sph = pi-ph_sph
+	endif
+
+	if (ph_geo/twopi-floor(ph_geo/twopi) > 0.5) then
+	   ph_sph = -ph_sph
+	endif
+	
+	return
+	end
+	
+	subroutine TransportToLab(pmag,dx,dy,rotmat,v)
+	
+!       Declare variables
+	real, dimension(3) :: pf ! normalized inal proton momentum, vector
+	real*8 pfx,pfy,pfz	! normalized final proton momentum
+	real*8 pmag		! proton magnitude
+	real*8 dx,dy,dz		! dx/dy (xptar/yptar) for event after rotation
+	real, dimension(3,3) :: rotmat ! rotation matrix
+	real, dimension(3) :: v	! intermediate variables.
+
+	include 'constants.inc'
+
+	dz = 1.0
+	
+	pfx = pmag*dx/sqrt(dx**2+dy**2+dz**2)
+	pfy = pmag*dy/sqrt(dx**2+dy**2+dz**2)
+	pfz = pmag*dz/sqrt(dx**2+dy**2+dz**2)
+
+	pf = [pfx,pfy,pfz]
+
+	do i = 1, 3
+	   v(i) = sum(rotmat(i,:) * pf)
+	end do
+	
+!	write(6,*) 'pf:',pf
+!	write(6,*) 'v:',v
+!	write(6,*) 'sqrt(dx**2+dy**2+dz**2):',sqrt(dx**2+dy**2+dz**2)
+!	write(6,*) 'pfx:',pfx
+!	write(6,*) 'rotmat:',rotmat
+		
+!	write(6,*) 'before dx:',dx
+!	dx = v(1)
+!	write(6,*) 'after dx:',dx
+!	dy = v(2)
+!	dz = v(3)
+	
+	return
+	end
+	
+	subroutine SetZAxis(axis, zxPlane, rot_vec)
+
+	real, dimension(3) :: axis, zxPlane, rot_vec
+	real, dimension(3) :: xAxis, yAxis, zAxis
+	real, dimension(3,3) :: mat, inv_mat
+	real*8 det
+
+!	write(6,*) 'axis:',axis
+!	write(6,*) 'zxPlane:',zxPlane
+	
+	xAxis = zxPlane
+	yAxis = [0.0,0.0,0.0]
+	zAxis = axis
+
+	call MakeBasis(xAxis,yAxis,zAxis)	
+
+	mat(1,1) = xAxis(1)
+	mat(1,2) = yAxis(1)
+	mat(1,3) = zAxis(1)
+	mat(2,1) = xAxis(2)
+	mat(2,2) = yAxis(2)
+	mat(2,3) = zAxis(2)
+	mat(3,1) = xAxis(3)
+	mat(3,2) = yAxis(3)
+	mat(3,3) = zAxis(3)
+	
+	det = mat(1,1)*(mat(2,2)*mat(3,3) - mat(3,2)*mat(2,3))
+     >      - mat(1,2)*(mat(2,1)*mat(3,3) - mat(3,1)*mat(2,3)) 
+     >      + mat(1,3)*(mat(2,1)*mat(3,2) - mat(3,1)*mat(2,2))
+
+	inv_mat(1,1) = (mat(2,2)*mat(3,3) - mat(3,2)*mat(2,3))/det
+	inv_mat(1,2) = (mat(1,3)*mat(3,2) - mat(3,3)*mat(1,2))/det
+	inv_mat(1,3) = (mat(1,2)*mat(2,3) - mat(2,2)*mat(1,3))/det
+	inv_mat(2,1) = (mat(2,3)*mat(3,1) - mat(3,3)*mat(2,1))/det
+	inv_mat(2,2) = (mat(1,1)*mat(3,3) - mat(3,1)*mat(1,3))/det
+	inv_mat(2,3) = (mat(1,3)*mat(2,1) - mat(2,3)*mat(1,1))/det
+	inv_mat(3,1) = (mat(2,1)*mat(3,2) - mat(3,1)*mat(2,2))/det
+	inv_mat(3,2) = (mat(1,2)*mat(3,1) - mat(3,2)*mat(1,1))/det
+	inv_mat(3,3) = (mat(1,1)*mat(2,2) - mat(2,1)*mat(1,2))/det	
+
+!	write(6,*) 'xAxis:',xAxis
+!	write(6,*) 'yAxis:',yAxis
+!	write(6,*) 'zAxis:',zAxis
+!	write(6,*) 'mat:',mat
+!	write(6,*) 'inv_mat:',inv_mat
+!	write(6,*) 'before rot_vec:',rot_vec
+	do i = 1, 3
+	   rot_vec(i) = sum(inv_mat(i,:) * rot_vec)
+	end do
+!	write(6,*) 'after rot_vec:',rot_vec
+
+	return
+	end
+
+	subroutine MakeBasis(xAxis,yAxis,zAxis)
+	
+	real, dimension(3) :: xAxis, yAxis, zAxis
+	real*8 cross_x,cross_y,cross_z
+	real*8 xmag,ymax,zmag
+
+
+	zmag = sqrt(zAxis(1)**2+zAxis(2)**2+zAxis(3)**2)
+	zAxis = zAxis*(1.0/zmag)
+
+	xmag = sqrt(xAxis(1)**2+xAxis(2)**2+xAxis(3)**2)
+
+!       (z cross x)/xmag
+	cross_x = (zAxis(2)*xAxis(3)-zAxis(3)*xAxis(2))/xmag
+	cross_y = (zAxis(3)*xAxis(1)-zAxis(1)*xAxis(3))/xmag
+	cross_z = (zAxis(1)*xAxis(2)-zAxis(2)*xAxis(1))/xmag
+
+	yAxis = [cross_x,cross_y,cross_z]
+	
+	ymag = sqrt(yAxis(1)**2+yAxis(2)**2+yAxis(3)**2)
+	yAxis = yAxis*(1.0/ymag)
+
+!       y cross z
+	cross_x = yAxis(2)*zAxis(3)-yAxis(3)*zAxis(2)
+	cross_y = yAxis(3)*zAxis(1)-yAxis(1)*zAxis(3)
+	cross_z = yAxis(1)*zAxis(2)-yAxis(2)*zAxis(1)
+	
+	xAxis = [cross_x,cross_y,cross_z]
 
 	return
 	end

@@ -36,6 +36,10 @@ c	real*8 efer			!energy of target particle
 	real*8 pkx,pky,pkz		!kaon momentum in lab.
 	real*8 zero
 
+*       RLT (7/11/2024): Redefined functional forms of L, T, LT, TT
+*       that incorporates Q2-dep based of pi FF
+	real Qdep_L, Qdep_T
+	
 	real*8 s,s_gev,t,t_gev,Q2_g			!t,s, Q2 in (GeV/c)**2
 	real*8 mtar_gev
 

@@ -151,6 +151,7 @@ void recon_hcana::ProductionReadTree(){
   tree->SetBranchAddress("Wi", &Wi);
   tree->SetBranchAddress("ti", &ti);
   tree->SetBranchAddress("phipqi", &phipqi);
+  tree->SetBranchAddress("thetapqi", &thetapqi);
   tree->SetBranchAddress("saghai", &saghai);
   tree->SetBranchAddress("factor", &factor);
   
@@ -209,6 +210,7 @@ void recon_hcana::ProductionReadTree(){
   newTree->Branch("Wi", &Wi, "Wi/F");
   newTree->Branch("ti", &ti, "ti/F");
   newTree->Branch("phipqi", &phipqi, "phipqi/F");
+  newTree->Branch("thetapqi", &thetapqi, "thetapqi/F");
   newTree->Branch("saghai", &saghai, "saghai/F");
   newTree->Branch("factor", &factor, "factor/F");
   newTree->Branch("paero_z_det", &paero_z_det, "paero_z_det/F");
@@ -526,7 +528,15 @@ void recon_hcana::EventLoop(){
      ****** -pi to pi ******
      ***********************/
     phipqi = TMath::ATan2(TMath::Sin(phipqi), TMath::Cos(phipqi));
-    
+ 
+    /***********************
+     *** Define thetapqi ***
+     *****  as thetacm  ****
+     ****** for naming *****
+     ***** consistency *****
+     ***********************/
+    thetapqi = thetacm
+   
     newTree->Fill();  
   }
   

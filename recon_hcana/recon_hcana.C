@@ -614,7 +614,7 @@ void recon_hcana::EventLoop(){
      ****** for naming *****
      ***** consistency *****
      ***********************/
-    thetapqi = thetacm
+    thetapqi = thetacm;
     
     newTree->Fill();  
   }

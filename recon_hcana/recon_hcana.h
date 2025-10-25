@@ -80,6 +80,7 @@ class recon_hcana
   Float_t Wi;
   Float_t ti;
   Float_t phipqi;
+  Float_t phicm;
   Float_t thetapqi;
   Float_t saghai;
   Float_t factor;

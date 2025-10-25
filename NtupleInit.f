@@ -142,7 +142,7 @@ c	endif
 	  m = m+1
 	  NtupleTag(m) = 'thetacm' ! 54
 	  m = m+1
-	  NtupleTag(m) = 'epsiloni'	! 55
+	  NtupleTag(m) = 'epscm'	! 55
 	  if(using_tgt_field) then
 	     m = m+1
 	     NtupleTag(m) = 'th_tarq' ! 56

@@ -131,6 +131,7 @@ void recon_hcana::ProductionReadTree(){
   tree->SetBranchAddress("thetapq", &thetapq);
   tree->SetBranchAddress("thetacm", &thetacm);
   tree->SetBranchAddress("phipq", &phipq);
+  tree->SetBranchAddress("phicm", &phicm);
   tree->SetBranchAddress("missmass", &missmass);
   tree->SetBranchAddress("mmnuc", &mmnuc);
   tree->SetBranchAddress("phad", &phad);
@@ -150,10 +151,6 @@ void recon_hcana::ProductionReadTree(){
   tree->SetBranchAddress("Q2i", &Q2i);
   tree->SetBranchAddress("Wi", &Wi);
   tree->SetBranchAddress("ti", &ti);
-  tree->SetBranchAddress("phipqi", &phipqi);
-  tree->SetBranchAddress("thetapqi", &thetapqi);
-  tree->SetBranchAddress("saghai", &saghai);
-  tree->SetBranchAddress("factor", &factor);
   
   newTree->Branch("hsdelta", &hsdelta, "hsdelta/F");
   newTree->Branch("hsyptar", &hsyptar, "hsyptar/F");
@@ -190,6 +187,7 @@ void recon_hcana::ProductionReadTree(){
   newTree->Branch("thetapq", &thetapq, "thetapq/F");
   newTree->Branch("thetacm", &thetacm, "thetacm/F");
   newTree->Branch("phipq", &phipq, "phipq/F");
+  newTree->Branch("phicm", &phicm, "phicm/F");
   newTree->Branch("missmass", &missmass, "missmass/F");
   newTree->Branch("mmnuc", &mmnuc, "mmnuc/F");
   newTree->Branch("phad", &phad, "phad/F");
@@ -209,10 +207,6 @@ void recon_hcana::ProductionReadTree(){
   newTree->Branch("Q2i", &Q2i, "Q2i/F");
   newTree->Branch("Wi", &Wi, "Wi/F");
   newTree->Branch("ti", &ti, "ti/F");
-  newTree->Branch("phipqi", &phipqi, "phipqi/F");
-  newTree->Branch("thetapqi", &thetapqi, "thetapqi/F");
-  newTree->Branch("saghai", &saghai, "saghai/F");
-  newTree->Branch("factor", &factor, "factor/F");
   newTree->Branch("paero_z_det", &paero_z_det, "paero_z_det/F");
   newTree->Branch("paero_x_det", &paero_x_det, "paero_x_det/F");
   newTree->Branch("paero_y_det", &paero_y_det, "paero_y_det/F");  
@@ -523,19 +517,12 @@ void recon_hcana::EventLoop(){
     // cout << "Pmz: " << Pmz << endl;
     // cout << "Pm: " << Pm << endl;
 
+
     /***********************
      *** Shift Vertex Phi***
      ****** -pi to pi ******
      ***********************/
-    phipqi = TMath::ATan2(TMath::Sin(phipqi), TMath::Cos(phipqi));
- 
-    /***********************
-     *** Define thetapqi ***
-     *****  as thetacm  ****
-     ****** for naming *****
-     ***** consistency *****
-     ***********************/
-    thetapqi = thetacm;
+    phicm = TMath::ATan2(TMath::Sin(phicm), TMath::Cos(phicm));
    
     newTree->Fill();  
   }

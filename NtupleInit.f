@@ -161,38 +161,12 @@ c	endif
 	     m = m+1
 	     NtupleTag(m) = 'phici' ! 63
 	  endif
-c	  if (doing_kaon) then
-c	    m = m+1
-c	    NtupleTag(m) = 'saghai'	! 54
-c	    m = m+1
-c	    NtupleTag(m) = 'factor'	! 55
-c	 endif
-	 if(doing_pizero) then
-	     m = m+1
-	     NtupleTag(m) = 'xcal_gamma1'
-	     m = m+1
-	     NtupleTag(m) = 'ycal_gamma1'
-	     m = m+1
-	     NtupleTag(m) = 'Egamma1'
-	     m = m+1
-	     NtupleTag(m) = 'Pgamma1x'
-	     m = m+1
-	     NtupleTag(m) = 'Pgamma1y'
-	     m = m+1
-	     NtupleTag(m) = 'Pgamma1z'
-	     m = m+1
-	     NtupleTag(m) = 'xcal_gamma2'
-	     m = m+1
-	     NtupleTag(m) = 'ycal_gamma2'
-	     m = m+1
-	     NtupleTag(m) = 'Egamma2'
-	     m = m+1
-	     NtupleTag(m) = 'Pgamma2x'
-	     m = m+1
-	     NtupleTag(m) = 'Pgamma2y'
-	     m = m+1
-	     NtupleTag(m) = 'Pgamma2z'
-	  endif
+	  if (doing_kaon) then
+	    m = m+1
+	    NtupleTag(m) = 'saghai'	! 54
+	    m = m+1
+	    NtupleTag(m) = 'factor'	! 55
+	 endif
 	else if (doing_semi.or.doing_rho) then
 	  m = m+1
 	  NtupleTag(m) = 'missmass'	! 34 <- Wprime for semi-inclusive folks
@@ -263,33 +237,6 @@ c	 endif
 	     NtupleTag(m) = 'Mrho' ! 57 or 65
 	     m = m+1
 	     NtupleTag(m) = 'Thrho' ! 58 or 66
-	  endif
-
-	  if(doing_pizero) then
-	     m = m+1
-	     NtupleTag(m) = 'xcal_gamma1'
-	     m = m+1
-	     NtupleTag(m) = 'ycal_gamma1'
-	     m = m+1
-	     NtupleTag(m) = 'Egamma1'
-	     m = m+1
-	     NtupleTag(m) = 'Pgamma1x'
-	     m = m+1
-	     NtupleTag(m) = 'Pgamma1y'
-	     m = m+1
-	     NtupleTag(m) = 'Pgamma1z'
-	     m = m+1
-	     NtupleTag(m) = 'xcal_gamma2'
-	     m = m+1
-	     NtupleTag(m) = 'ycal_gamma2'
-	     m = m+1
-	     NtupleTag(m) = 'Egamma2'
-	     m = m+1
-	     NtupleTag(m) = 'Pgamma2x'
-	     m = m+1
-	     NtupleTag(m) = 'Pgamma2y'
-	     m = m+1
-	     NtupleTag(m) = 'Pgamma2z'
 	  endif
 	     
 	else if (doing_hyd_elast .or. doing_deuterium .or. doing_heavy) then

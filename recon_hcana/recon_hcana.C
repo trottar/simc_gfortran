@@ -600,12 +600,6 @@ void recon_hcana::EventLoop(){
     // cout << "Pmz: " << Pmz << endl;
     // cout << "Pm: " << Pm << endl;
 
-    /***********************
-     *** Shift Vertex Phi***
-     ****** -pi to pi ******
-     ***********************/
-    phicm = TMath::ATan2(TMath::Sin(phicm), TMath::Cos(phicm));
-
     newTree->Fill();  
   }
   

@@ -339,7 +339,8 @@ c NEW VERSION WHERE TARGET NUCLEON IS AT REST (AS IN EXPERIMENTAL REPLAY)
 	pkcm_newz = pkcmx*new_z_x + pkcmy*new_z_y + pkcmz*new_z_z
 
 	phicm = atan2(pkcm_newy,pkcm_newx)
-	if(phicm.lt.0.) phicm = 2.*3.141592654+phicm
+c	RLT (10/26/2025): Keep -pi to pi to match hcana
+c	if(phicm.lt.0.) phicm = 2.*3.141592654+phicm
 
 	main%thetacm = thetacm
 	main%phicm = phicm
@@ -348,8 +349,9 @@ c	write(6,*)'  '
 c 	write(6,*)' pfer ',pfer
 c	write(6,*)' t ',t,t_old
 c	write(6,*)' s ',s,s_fer
-c	write(6,*)' thetacm ',thetacm*180./3.14159,thetacm_fer*180./3.14159
-c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.14159
+	write(6,*)' phipq ',phipq*180./3.14159
+	write(6,*)' phicm ',phicm*180./3.14159	
+	write(6,*)' thetacm ',thetacm*180./3.14159
         
 *******************************************************************************
 * Read fit parameters when first called.

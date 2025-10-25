@@ -151,6 +151,8 @@ void recon_hcana::ProductionReadTree(){
   tree->SetBranchAddress("Q2i", &Q2i);
   tree->SetBranchAddress("Wi", &Wi);
   tree->SetBranchAddress("ti", &ti);
+  tree->SetBranchAddress("saghai", &saghai);
+  tree->SetBranchAddress("factor", &factor);
   
   newTree->Branch("hsdelta", &hsdelta, "hsdelta/F");
   newTree->Branch("hsyptar", &hsyptar, "hsyptar/F");
@@ -207,6 +209,8 @@ void recon_hcana::ProductionReadTree(){
   newTree->Branch("Q2i", &Q2i, "Q2i/F");
   newTree->Branch("Wi", &Wi, "Wi/F");
   newTree->Branch("ti", &ti, "ti/F");
+  newTree->Branch("saghai", &saghai, "saghai/F");
+  newTree->Branch("factor", &factor, "factor/F");
   newTree->Branch("paero_z_det", &paero_z_det, "paero_z_det/F");
   newTree->Branch("paero_x_det", &paero_x_det, "paero_x_det/F");
   newTree->Branch("paero_y_det", &paero_y_det, "paero_y_det/F");  

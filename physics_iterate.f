@@ -247,7 +247,8 @@ c OLD VERSION WHERE TARGET NUCLEON HAS FERMI MOMENTUM
 	pkcm_newz = pkcmx*new_z_x + pkcmy*new_z_y + pkcmz*new_z_z
 
 	phicm = atan2(pkcm_newy,pkcm_newx)
-	if(phicm.lt.0.) phicm = 2.*3.141592654+phicm
+c 	RLT (10/26/20254): Keep -pi to pi to match hcana
+c	if(phicm.lt.0.) phicm = 2.*3.141592654+phicm
 
 	thetacm_fer = thetacm
 c     RLT (9/15/2023): Removed fermi motion variable thetacm??        
@@ -349,9 +350,9 @@ c	write(6,*)'  '
 c 	write(6,*)' pfer ',pfer
 c	write(6,*)' t ',t,t_old
 c	write(6,*)' s ',s,s_fer
-	write(6,*)' phipq ',phipq*180./3.14159
-	write(6,*)' phicm ',phicm*180./3.14159	
-	write(6,*)' thetacm ',thetacm*180./3.14159
+c	write(6,*)' phipq ',phipq*180./3.14159
+c	write(6,*)' phicm ',phicm*180./3.14159	
+c	write(6,*)' thetacm ',thetacm*180./3.14159
         
 *******************************************************************************
 * Read fit parameters when first called.

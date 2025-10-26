@@ -163,13 +163,8 @@ c	  ntu(11) = vertex%p%xptar			!mr
 	     ntu(62) = vertex%phi_s
 	     ntu(63) = vertex%phi_c
 	     if (doing_kaon) then
-		ntu(62) = ntup%sigcm1 !sigcm - saghai model
-		ntu(63) = ntup%sigcm2 !sigcm - factorized.
-	     endif
-	  else
-	     if (doing_kaon) then
-		ntu(54) = ntup%sigcm1 !sigcm - saghai model
-		ntu(55) = ntup%sigcm2 !sigcm - factorized.
+		ntu(64) = ntup%sigcm1 !sigcm - saghai model
+		ntu(65) = ntup%sigcm2 !sigcm - factorized.
 	     endif
 	  endif
 	else if (doing_semi.or.doing_rho) then

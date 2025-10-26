@@ -350,9 +350,9 @@ c	write(6,*)'  '
 c 	write(6,*)' pfer ',pfer
 c	write(6,*)' t ',t,t_old
 c	write(6,*)' s ',s,s_fer
-	write(6,*)' phipq ',phipq*180./3.14159
-	write(6,*)' phicm ',phicm*180./3.14159	
-	write(6,*)' thetacm ',thetacm*180./3.14159, main%thetacm*180./3.14159
+c	write(6,*)' phipq ',phipq*180./3.14159
+c	write(6,*)' phicm ',phicm*180./3.14159	
+c	write(6,*)' thetacm ',thetacm*180./3.14159, main%thetacm*180./3.14159
         
 *******************************************************************************
 * Read fit parameters when first called.

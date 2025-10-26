@@ -90,7 +90,28 @@ c       Fit parameters.
 
 	data first_call/.true./
 *=====================================================================
-        
+
+c       RLT (10/26/2025): Copied from Junaid's file
+
+* Calculate velocity of PHOTON-NUCLEON C.M. system in the lab frame. Use beta
+* and gamma of the cm system (bstar and gstar) to transform particles into
+* c.m. frame.  Define z along the direction of q, and x to be along the
+* direction of the pion momentum perpendicular to q.
+
+	call transform_to_cm(vertex,main,
+     &		gstar,bstar,bstarx,bstary,bstarz,
+     &		nustar,qstar,qstarx,qstary,qstarz,
+     &		epicm,ppicm,ppicmx,ppicmy,ppicmz,
+     &		ebeamcm,pbeamcm,pbeamcmx,pbeamcmy,pbeamcmz,
+     &		etarcm,ptarcm,ptarcmx,ptarcmy,ptarcmz,
+     &		thetacm,phicm,phiqn,jacobian,jac_old)
+
+	main%thetacm = thetacm
+	main%phicm = phicm
+	main%pcm = ppicm
+	main%davejac = jacobian
+	main%johnjac = jac_old		!approx. assuming collinear boost.
+	
 * Initialize some stuff.
 	Q2_g = vertex%Q2/1.d6
 c NOTE: phipq calculation in event.f reverted to original version.

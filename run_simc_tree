@@ -1,0 +1,19 @@
+source /apps/root/6.22.06/setroot_CUE.bash
+make clean
+make
+./simc << endofinput 2> "log/$1.log"
+$1
+endofinput
+cd util/root_tree
+make clean
+make
+./make_root_tree << endofinput
+$1
+endofinput
+cd ../../
+mv worksim/$1.root OUTPUTS
+
+#REACTION=$2
+#echo "Reaction selected: $2" 
+#cd recon_hcana/    
+#root -q -l "recon_hcana.C(\"$1\", \"$REACTION\" )"

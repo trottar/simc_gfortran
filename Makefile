@@ -29,8 +29,8 @@ OBJ1	= target.o brem.o gauss1.o NtupleInit.o NtupleClose.o enerloss_new.o
 #OBJ2	= radc.o init.o dbase.o physics_kaon.o physics_pion.o physics_delta.o physics_proton.o loren.o sf_lookup.o
 # RLT (9/15/2023): Replaced physics_kaon with physics_iterate
 OBJ2	= radc.o init.o dbase.o physics_iterate.o physics_pion.o physics_delta.o physics_proton.o loren.o sf_lookup.o
-OBJ3    = semi_physics.o rho_physics.o rho_decay.o generate_rho.o trg_track.o semi_dilution.o F1F2IN21_v1.0.o f1f2in21_mod.o
-OBJ4	= results_write.o event.o call_ranlux.o jacobians.o
+OBJ3    = semi_physics.o rho_physics.o rho_decay.o generate_rho.o trg_track.o semi_dilution.o
+OBJ4	= results_write.o event.o call_ranlux.o jacobians.o F1F2IN21_v1.0.o
 OBJ5	= $(A)musc.o $(A)musc_ext.o $(A)project.o $(A)transp.o
 OBJ6	= $(A)rotate_haxis.o $(A)rotate_vaxis.o $(A)locforunt.o
 OBJ7	= $(H)mc_hms.o $(H)mc_hms_hut.o $(H)mc_hms_recon.o $(H)pion_coll_absorb.o $(H)mc_hms_coll.o
@@ -42,7 +42,7 @@ OBJC    = $(T)Ctq5Pdf.o
 OBJD    = $(C)mc_calo.o $(C)mc_calo_recon.o
 OBJCH   = $(CH)lfit.o $(CH)ranlux.o $(CH)fint.o $(CH)kerset.o $(CH)abend.o
 OBJF   = $(D)fdss.o
-MODULES	= modules.f histograms_module.f
+MODULES	= modules.f histograms_module.f f1f2in21_mod.f
  
 my_objs	=  $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4) $(OBJ5) $(OBJ6) $(OBJ7) $(OBJ8) $(OBJ9) $(OBJA) $(OBJB) $(OBJC) $(OBJD) $(OBJCH) $(OBJF)
 

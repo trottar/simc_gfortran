@@ -525,7 +525,7 @@ c PB: from resmod507 in first call to semi_physics.f
 ! The q vector
 
 	if (debug(5)) write(6,*)'comp_ev: Ein,E,uez=',vertex%Ein,vertex%e%E,vertex%ue%z
-
+	
 	vertex%nu = vertex%Ein - vertex%e%E
 	vertex%Q2 = 2*vertex%Ein*vertex%e%E*(1.-vertex%ue%z)
 	vertex%q = sqrt(vertex%Q2 + vertex%nu**2)
@@ -1462,6 +1462,15 @@ C-- Keep QE deuterium on deForest
 
 	elseif (doing_heavy) then
 
+C---    Guard against NaN kinematics (e.g., SHMS bug)
+	  if (vertex%Ein .ne. vertex%Ein .or.
+       >      vertex%nu  .ne. vertex%nu  .or.
+       >      vertex%Q2  .ne. vertex%Q2) then
+	     main%sigcc       = 0.d0
+	     main%sigcc_recon = 0.d0
+	     return
+	  endif
+	  
 C-- Use inclusive F1F2IN21 model for A>2 (e.g. 3He)
 C   IMPORTANT:
 C     - vertex%Ein, vertex%e%E, vertex%nu are in MeV

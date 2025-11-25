@@ -123,7 +123,7 @@ C-------------------------------------------------------------
 
 	open(unit=99, file=filename, status='old', err=210)
 
-    200  read(99,'(A)', end=210) line
+ 200	read(99,'(A)', end=210) line
 C     Skip comment lines beginning with ! or #
 	if (line(1:1) .eq. '!' .or. line(1:1) .eq. '#') goto 200
 
@@ -136,7 +136,7 @@ C     Skip comment lines beginning with ! or #
 
 	goto 200
 
-    210  close(99)
+ 210	close(99)
 
 C--   Push this into the module so the rest of SIMC sees it
 	call SET_F1F2_MODEL(f1f2_model_id)

@@ -1355,27 +1355,27 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 
 !------------------------------------------------------------------------
 
-subroutine complete_main(force_sigcc,main,vertex,vertex0,recon,success)
+	subroutine complete_main(force_sigcc,main,vertex,vertex0,recon,success)
 
-	USE structureModule
-	USE F1F2IN21_MOD
-	implicit none
-	include 'simulate.inc'
+		USE structureModule
+		USE F1F2IN21_MOD
+		implicit none
+		include 'simulate.inc'
 
-	integer		i, iPm1
-	real*8		a, b, r, frac, peepi, peeK, peedelta, peerho, peepiX
-	real*8		survivalprob, semi_dilution
-	real*8		weight, width, sigep, deForest, tgtweight
+		integer		i, iPm1
+		real*8		a, b, r, frac, peepi, peeK, peedelta, peerho, peepiX
+		real*8		survivalprob, semi_dilution
+		real*8		weight, width, sigep, deForest, tgtweight
 
-C-- F1F2 / inclusive cross section helpers
-	real*8		F1_v, F2_v, F1_r, F2_r
-	real*8		Q2g_v, W2g_v, Q2g_r, W2g_r
-	real*8		Ei_g, Ef_g, nu_g, Mp_g, theta_e
-	real*8		alpha_em, sin2, cos2, sigma_mott, W1, W2
+	C-- F1F2 / inclusive cross section helpers
+		real*8		F1_v, F2_v, F1_r, F2_r
+		real*8		Q2g_v, W2g_v, Q2g_r, W2g_r
+		real*8		Ei_g, Ef_g, nu_g, Mp_g, theta_e
+		real*8		alpha_em, sin2, cos2, sigma_mott, W1, W2
 
-	logical		force_sigcc, success
-	type(event_main):: main
-	type(event)::	vertex, vertex0, recon
+		logical		force_sigcc, success
+		type(event_main):: main
+		type(event)::	vertex, vertex0, recon
 	
 !-----------------------------------------------------------------------
 ! Calculate everything left in the /main/ structure that hasn't been
@@ -1536,8 +1536,7 @@ C--- Recon kinematics (analysis-side)
 
 	    main%sigcc_recon = sigma_mott * ( W2 + 2.d0*W1 *
      >                                     tan(theta_e/2.d0)**2 )
-	 endif
-	 
+	  endif
 	  if (main%sigcc .ne. main%sigcc) then
 	     write(6,*) 'NaN in sigcc:'
 	     write(6,*) '  Q2(MeV^2)=', vertex%Q2

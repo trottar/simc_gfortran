@@ -1367,7 +1367,7 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 		real*8		survivalprob, semi_dilution
 		real*8		weight, width, sigep, deForest, tgtweight
 
-	C-- F1F2 / inclusive cross section helpers
+C--     F1F2 / inclusive cross section helpers
 		real*8		F1_v, F2_v, F1_r, F2_r
 		real*8		Q2g_v, W2g_v, Q2g_r, W2g_r
 		real*8		Ei_g, Ef_g, nu_g, Mp_g, theta_e

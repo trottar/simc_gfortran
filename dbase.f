@@ -37,9 +37,10 @@
 
 	USE structureModule
 	USE histoModule
+	USE F1F2IN21_MOD
 	implicit none
 	include 'radc.inc'
-c	include 'histograms.inc'
+    c   include 'histograms.inc'
 	include 'simulate.inc'
 
 	real*8 dum1,dum2,dum3,dum4,dum5,dum6,dum7
@@ -48,9 +49,11 @@ c	include 'histograms.inc'
 	integer*4 iread, iq2, iang
 	integer*4 i, j, k, ii
 	integer*4 ierr, thload, thbook
+	integer*4 f1f2_model_id
 	logical success
 	character filename*80,tmpfile*80
 	character dbase_file*60 !needs to be shorter than filename
+	character*256 line
 
 	type (histograms):: H
 
@@ -94,11 +97,11 @@ c	include 'histograms.inc'
 
 ! ... read the secondary dbase file.
 
-	if (extra_dbase_file.ne.' ') then	!new filename from dbase file
+	if (extra_dbase_file.ne.' ') then !new filename from dbase file
 	  write(filename,'(a)') 'input/'//extra_dbase_file
 	  i=index(filename,'.')
 	  j=index(filename,'/')
-	  if(i.eq.0) then		!add .inp if not included in filename
+	  if(i.eq.0) then           !add .inp if not included in filename
 	    i=index(filename,' ')
 	    i f(i+2.le.len(filename)) write(filename(i:),'(''.inp'')')
 	  endif
@@ -107,7 +110,37 @@ c	include 'histograms.inc'
 	  if (ierr.ne.0) stop ' Loading problem!  Not going to try again...wouldnt be prudent.'
 	  ierr = thbook()
 	  if (ierr.ne.0) stop ' Booking problem!  Not going to try again...wouldnt be prudent'
-	endif	!extra dbase input file
+	endif  !extra dbase input file
+
+C-------------------------------------------------------------
+C  Read optional F1F2_MODEL flag from the main dbase file
+C  Example usage in your .inp/.dbase:
+C     F1F2_MODEL = 21
+C  If not present, default = 21 (F1F2IN21 Christy/Bosted)
+C-------------------------------------------------------------
+	f1f2_model_id = 21
+	call INIT_F1F2_MODEL
+
+	open(unit=99, file=filename, status='old', err=210)
+
+    200  read(99,'(A)', end=210) line
+C     Skip comment lines beginning with ! or #
+	if (line(1:1) .eq. '!' .or. line(1:1) .eq. '#') goto 200
+
+	if (index(line,'F1F2_MODEL').gt.0) then
+	   k = index(line,'=')
+	   if (k.gt.0) then
+	      read(line(k+1:),*,err=200) f1f2_model_id
+	   endif
+	endif
+
+	goto 200
+
+    210  close(99)
+
+C--   Push this into the module so the rest of SIMC sees it
+	call SET_F1F2_MODEL(f1f2_model_id)
+
 c
 	   if (random_seed .eq. -1) random_seed=time()	   
 	write(*,*) 'Use random seed = ',random_seed

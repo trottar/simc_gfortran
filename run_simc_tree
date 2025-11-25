@@ -1,4 +1,3 @@
-source /apps/root/6.22.06/setroot_CUE.bash
 make clean
 make
 ./simc << endofinput 2> "log/$1.log"

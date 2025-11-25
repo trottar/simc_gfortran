@@ -1355,20 +1355,20 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 
 !------------------------------------------------------------------------
 
-	subroutine complete_main(force_sigcc,main,vertex,vertex0,recon,success)
+      subroutine complete_main(force_sigcc,main,vertex,vertex0,recon,success)
 
-	USE structureModule
-	implicit none
-	include 'simulate.inc'
+      USE structureModule
+      implicit none
+      include 'simulate.inc'
 
-	integer		i, iPm1
-	real*8		a, b, r, frac, peepi, peeK, peedelta, peerho, peepiX
-	real*8		survivalprob, semi_dilution
-	real*8		weight, width, sigep, deForest, tgtweight
-	logical		force_sigcc, success
-	type(event_main):: main
-	type(event)::	vertex, vertex0, recon
-
+      integer         i, iPm1
+      real*8          a, b, r, frac, peepi, peeK, peedelta, peerho, peepiX
+      real*8          survivalprob, semi_dilution
+      real*8          weight, width, sigep, deForest, tgtweight
+      logical         force_sigcc, success
+      type(event_main):: main
+      type(event)::    vertex, vertex0, recon
+	
 !-----------------------------------------------------------------------
 ! Calculate everything left in the /main/ structure that hasn't been
 ! required up til now. This routine is called ONLY after we
@@ -1445,10 +1445,90 @@ CDJG Calculate the "Collins" (phi_pq+phi_targ) and "Sivers"(phi_pq-phi_targ) ang
 	  main%sigcc = sigep(vertex)
 	  main%sigcc_recon = sigep(recon)
 
-	elseif (doing_deuterium.or.doing_heavy) then
+	elseif (doing_deuterium) then
+
+C-- Keep QE deuterium on deForest
 	  main%sigcc       = deForest(vertex)
 	  main%sigcc_recon = deForest(recon)
 
+	elseif (doing_heavy) then
+
+C-- Use inclusive F1F2IN21 model for A>2 (e.g. 3He)
+C   IMPORTANT:
+C     - vertex%Ein, vertex%e%E, vertex%nu are in MeV
+C     - vertex%Q2 is in MeV^2
+C     - Mp is in MeV
+C     - F1F2IN21 expects Q2 and W2 in GeV^2
+C     - We use standard Hand/Rosenbluth formula:
+C         d2σ/dΩdE' = σ_Mott [ W2 + 2 W1 tan^2(θ/2) ]
+C         with W1 = F1 / M, W2 = F2 / ν
+
+	  alpha_em = 1.0d0/137.035999d0
+	  Mp_g     = Mp / 1000.d0
+
+C--- Vertex kinematics (generated)
+	  Ei_g    = vertex%Ein / 1000.d0
+	  Ef_g    = vertex%e%E  / 1000.d0
+	  theta_e = vertex%e%theta
+	  Q2g_v   = vertex%Q2 / 1.0d6
+	  nu_g    = vertex%nu / 1000.d0
+	  W2g_v   = Mp_g*Mp_g + 2.d0*Mp_g*nu_g - Q2g_v
+
+	  if (Q2g_v.le.0.d0 .or. W2g_v.le.0.d0 .or.
+     >        Ei_g.le.0.d0  .or. nu_g.le.0.d0) then
+
+	    main%sigcc = 0.d0
+
+	  else
+
+	    call GET_F1F2(targ%Z, targ%A, Q2g_v, W2g_v, F1_v, F2_v)
+
+	    sin2 = sin(theta_e/2.d0)**2
+	    cos2 = cos(theta_e/2.d0)**2
+
+C--- Mott in GeV units, converted to mb/sr (0.3894e3 factor)
+	    sigma_mott = (alpha_em*alpha_em * cos2) /
+     >                   (4.d0 * Ei_g*Ei_g * sin2*sin2)
+	    sigma_mott = sigma_mott * 0.3894d3
+
+C--- W1,W2 structure functions from F1,F2
+	    W1 = F1_v / Mp_g
+	    W2 = F2_v / nu_g
+
+	    main%sigcc = sigma_mott * ( W2 + 2.d0*W1 *
+     >                                   tan(theta_e/2.d0)**2 )
+	  endif
+
+C--- Recon kinematics (analysis-side)
+	  Ei_g    = recon%Ein / 1000.d0
+	  Ef_g    = recon%e%E  / 1000.d0
+	  theta_e = recon%e%theta
+	  Q2g_r   = recon%Q2 / 1.0d6
+	  nu_g    = recon%nu / 1000.d0
+	  W2g_r   = Mp_g*Mp_g + 2.d0*Mp_g*nu_g - Q2g_r
+
+	  if (Q2g_r.le.0.d0 .or. W2g_r.le.0.d0 .or.
+     >        Ei_g.le.0.d0  .or. nu_g.le.0.d0) then
+
+	    main%sigcc_recon = 0.d0
+
+	  else
+
+	    call GET_F1F2(targ%Z, targ%A, Q2g_r, W2g_r, F1_r, F2_r)
+
+	    sin2 = sin(theta_e/2.d0)**2
+	    cos2 = cos(theta_e/2.d0)**2
+
+	    sigma_mott = (alpha_em*alpha_em * cos2) /
+     >                   (4.d0 * Ei_g*Ei_g * sin2*sin2)
+	    sigma_mott = sigma_mott * 0.3894d3
+
+	    W1 = F1_r / Mp_g
+	    W2 = F2_r / nu_g
+
+	    main%sigcc_recon = sigma_mott * ( W2 + 2.d0*W1 *
+     >                                     tan(theta_e/2.d0)**2 )
+	  endif
 	  if (main%sigcc .ne. main%sigcc) then
 	     write(6,*) 'NaN in sigcc:'
 	     write(6,*) '  Q2(MeV^2)=', vertex%Q2

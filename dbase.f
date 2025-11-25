@@ -40,7 +40,7 @@
 	USE F1F2IN21_MOD
 	implicit none
 	include 'radc.inc'
-    c   include 'histograms.inc'
+c   include 'histograms.inc'
 	include 'simulate.inc'
 
 	real*8 dum1,dum2,dum3,dum4,dum5,dum6,dum7

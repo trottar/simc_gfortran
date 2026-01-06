@@ -247,8 +247,7 @@ c OLD VERSION WHERE TARGET NUCLEON HAS FERMI MOMENTUM
 	pkcm_newz = pkcmx*new_z_x + pkcmy*new_z_y + pkcmz*new_z_z
 
 	phicm = atan2(pkcm_newy,pkcm_newx)
-c 	RLT (10/26/20254): Keep -pi to pi to match hcana
-c	if(phicm.lt.0.) phicm = 2.*3.141592654+phicm
+	if(phicm.lt.0.) phicm = 2.*3.141592654+phicm
 
 	thetacm_fer = thetacm
 c     RLT (9/15/2023): Removed fermi motion variable thetacm??        
@@ -340,8 +339,7 @@ c NEW VERSION WHERE TARGET NUCLEON IS AT REST (AS IN EXPERIMENTAL REPLAY)
 	pkcm_newz = pkcmx*new_z_x + pkcmy*new_z_y + pkcmz*new_z_z
 
 	phicm = atan2(pkcm_newy,pkcm_newx)
-c	RLT (10/26/2025): Keep -pi to pi to match hcana
-c	if(phicm.lt.0.) phicm = 2.*3.141592654+phicm
+	if(phicm.lt.0.) phicm = 2.*3.141592654+phicm
 
 	main%thetacm = thetacm
 	main%phicm = phicm
@@ -350,9 +348,8 @@ c	write(6,*)'  '
 c 	write(6,*)' pfer ',pfer
 c	write(6,*)' t ',t,t_old
 c	write(6,*)' s ',s,s_fer
-c	write(6,*)' phipq ',phipq*180./3.14159
-c	write(6,*)' phicm ',phicm*180./3.14159	
-c	write(6,*)' thetacm ',thetacm*180./3.14159, main%thetacm*180./3.14159
+c	write(6,*)' thetacm ',thetacm*180./3.14159,thetacm_fer*180./3.14159
+c	write(6,*)' phicm ',phicm*180./3.14159,phicm_fer*180./3.14159,phipq*180./3.14159
         
 *******************************************************************************
 * Read fit parameters when first called.
@@ -415,13 +412,14 @@ c	write(6,*)' thetacm ',thetacm*180./3.14159, main%thetacm*180./3.14159
 	   Qdep_TT=Q2_g*(exp(-Q2_g))
 
 c 	Best for Q2=4.4, W=2.74 (No Q2 dependence), after CS xsect fit
-	   sigL=(fitpar(1)*ft)*exp(-fitpar(2)*(abs(t_gev)))
+       sigL=(fitpar(1)*ft)*exp(-abs(fitpar(2)*t_gev))
 
-	   sigT=(fitpar(5) / abs(t_gev)**fitpar(6)) * exp(-abs(fitpar(7) * t_gev))
-	   
-	   siglt=(fitpar(9) / abs(t_gev))	   
+       sigT=(fitpar(5))*exp(-abs(fitpar(6)*t_gev))
 
-	   sigtt=(fitpar(13) / abs(t_gev)**fitpar(14)) * exp(-abs(fitpar(15) * t_gev))
+       siglt=(fitpar(9))*exp(-abs(fitpar(10)*t_gev))*(sin(theta_cm)**2)
+
+       sigtt=(fitpar(13))*exp(-abs(fitpar(14)*t_gev))*(sin(theta_cm)**2)
+
 
 	   sig219=(sigt+main%epsilon*sigl+main%epsilon*cos(2.*phicm)*sigtt
      >		+sqrt(2.0*main%epsilon*(1.+main%epsilon))*cos(phicm)*siglt)/1.d0
